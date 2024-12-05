@@ -423,27 +423,34 @@
     },
     "properties": {
       "q1": {
-        "type": "string",
+        "type": "array",
         "title": "What type of output does the application derive?",
-        "enum": [
-          "An estimated score, ranking or probability",
-          "An estimated label or classification (such as yes/no, high/low) or allocation to groups\n(for instance, for routing, communication purposes or risk classification)",
-          "A recommendation",
-          "A decision",
-          "Content, such as written text, video, audio or images",
-          "A dashboard or graph with straight-forward data visualisation\n(if on this dashboard one of the above options are displayed, select this option)",
-          "Another type of output"
-        ]
+        "items": {
+          "type": "string",
+          "enum": [
+            "An estimated score, ranking or probability",
+            "An estimated label or classification (such as yes/no, high/low) or allocation to groups\n(for instance, for routing, communication purposes or risk classification)",
+            "A recommendation",
+            "A decision",
+            "Content, such as written text, video, audio or images",
+            "A dashboard or graph with straight-forward data visualisation\n(if on this dashboard one of the above options are displayed, select this option)",
+            "Another type of output"
+          ]
+        },
+        "minItems": 1,
+        "uniqueItems": true
       }
     },
-    "required": ["q1"],
     "dependencies": {
       "q1": {
         "oneOf": [
           {
             "properties": {
               "q1": {
-                "enum": ["Another type of output"]
+                "maxItems": 1,
+                "contains": {
+                  "enum": ["Another type of output"]
+                }
               },
               "q1_option6": {
                 "type": "string",
@@ -459,9 +466,12 @@
           {
             "properties": {
               "q1": {
-                "enum": [
-                  "A dashboard or graph with straight-forward data visualisation\n(if on this dashboard one of the above options are displayed, select this option)"
-                ]
+                "maxItems": 1,
+                "contains": {
+                  "enum": [
+                    "A dashboard or graph with straight-forward data visualisation\n(if on this dashboard one of the above options are displayed, select this option)"
+                  ]
+                }
               },
               "output": {
                 "$ref": "#/definitions/outputNoAI"
@@ -471,12 +481,36 @@
           {
             "properties": {
               "q1": {
-                "enum": [
-                  "An estimated score, ranking or probability",
-                  "An estimated label or classification (such as yes/no, high/low) or allocation to groups\n(for instance, for routing, communication purposes or risk classification)",
-                  "A recommendation",
-                  "A decision",
-                  "Content, such as written text, video, audio or images"
+                "anyOf": [
+                  {
+                    "contains": {
+                      "enum": ["An estimated score, ranking or probability"]
+                    }
+                  },
+                  {
+                    "contains": {
+                      "enum": [
+                        "An estimated label or classification (such as yes/no, high/low) or allocation to groups\n(for instance, for routing, communication purposes or risk classification)"
+                      ]
+                    }
+                  },
+                  {
+                    "contains": {
+                      "enum": ["A recommendation"]
+                    }
+                  },
+                  {
+                    "contains": {
+                      "enum": ["A decision"]
+                    }
+                  },
+                  {
+                    "contains": {
+                      "enum": [
+                        "Content, such as written text, video, audio or images"
+                      ]
+                    }
+                  }
                 ]
               },
               "q2": {
@@ -636,7 +670,7 @@
   },
   "uiSchema": {
     "q1": {
-      "ui:widget": "radio"
+      "ui:widget": "checkboxes"
     },
     "q2": {
       "ui:widget": "radio",
