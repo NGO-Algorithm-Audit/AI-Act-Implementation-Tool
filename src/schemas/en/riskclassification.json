@@ -3126,12 +3126,12 @@
     "2.3.2": {
       "ui:widget": "radio",
       "ui:enableMarkdownInDescription": true,
-      "ui:description": "Think of ChatGPT, telephone AI customer service, and assistance tools such as co-pilot."
+      "ui:description": "National security purposes mean preventing and punishing activities that can seriously destabilize the constitutional, political, economic, or social structures of a country. Think of direct threats to society, the population, or the state itself, such as terrorist activities.\n\n**Note:** When the application is also used for other activities or purposes, such as regular prevention, detection, and investigation of criminal offenses, choose 'no'."
     },
     "2.10": {
       "ui:widget": "radio",
       "ui:enableMarkdownInDescription": true,
-      "ui:description": "National security purposes mean preventing and punishing activities that can seriously destabilize the constitutional, political, economic, or social structures of a country. Think of direct threats to society, the population, or the state itself, such as terrorist activities.\n\n**Note:** When the application is also used for other activities or purposes, such as regular prevention, detection, and investigation of criminal offenses, choose 'no'."
+      "ui:description": "Personal means that the application is not used on behalf of an organization.\nNon-professional means that no money is made and that the application is not used for someone's profession or company, or for business or freelance activities. Volunteer work is not a personal non-professional activity.\n\n**Note:** If the application is also used for professional activities, select 'no'.\nFor example, if a person uses a ChatGPT personally, but also occasionally for work, then this is not purely personal, non-professional use."
     },
     "50.1": {
       "ui:widget": "radio",
