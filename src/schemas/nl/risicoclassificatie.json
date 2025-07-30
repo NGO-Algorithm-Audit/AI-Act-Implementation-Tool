@@ -26,7 +26,7 @@
       "outputForbiddenExcept": {
         "type": "string",
         "title": "Uitslag",
-        "default": "Op basis van uw antwoorden voldoet uw toepassing (gedeeltelijk) aan de definitie van verboden AI-systeem volgens de AI-verordening, maar geldt er mogelijk ook een een uitzondering. Bepaal in overleg met relevante juridische experts of er daadwerkelijk een uitzondering geldt. Zo niet, bepaal dan voor deze casus in overleg in welke categorie het valt."    
+        "default": "Op basis van uw antwoorden voldoet uw toepassing (gedeeltelijk) aan de definitie van verboden AI-systeem volgens de AI-verordening, maar geldt er mogelijk ook een uitzondering. Bepaal in overleg met relevante juridische experts of er daadwerkelijk een uitzondering geldt. Zo niet, bepaal dan voor deze casus in overleg in welke categorie het valt."    
       },
       "outputTransparency": {
         "type": "string",
