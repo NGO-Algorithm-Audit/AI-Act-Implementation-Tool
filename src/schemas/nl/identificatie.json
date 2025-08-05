@@ -26,6 +26,11 @@
       "outputAlgoAndADM": {
         "type": "string",
         "title": "Uitslag",
+        "default": "Op basis van uw antwoorden is uw toepassing:\n- geen AI-systeem volgens de AI-verordening;\n- wel een impactvol algoritme; en\n- mogelijk geautomatiseerde besluitivorming volgens artikel 22 van de AVG.\n\nVervolgstappen:\n- Neem het algoritme op in het Algoritmeregister\n - Zorg dat wordt voldaan aan intern geldend algoritmebeleid.\n- Bepaal in overleg met relevante juridische experts of er daadwerkelijk sprake is van geautomatiseerde besluitvorming."
+      },
+      "outputAlgoAndADMAndAI": {
+        "type": "string",
+        "title": "Uitslag",
         "default": "Op basis van uw antwoorden is uw toepassing:\n- een AI-systeem volgens de AI-verordening;\n- een impactvol algoritme; en\n- mogelijk geautomatiseerde besluitivorming volgens artikel 22 van de AVG.\n\nVervolgstappen:\n- Vul de AI risicoclassificatie vragenlijst in om te bepalen aan welke vereisten uit de AI-verordening de toepassing moet voldoen.\n- Neem het algoritme op in het Algoritmeregister.\n- Zorg dat wordt voldaan aan intern geldend algoritmebeleid.\n- Bepaal in overleg met relevante juridische experts of er daadwerkelijk sprake is van geautomatiseerde besluitvorming."
       },
       "outputIntermediateAISystem": {
