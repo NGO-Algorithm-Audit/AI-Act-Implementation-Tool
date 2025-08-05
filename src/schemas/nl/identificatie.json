@@ -23,6 +23,11 @@
         "title": "Uitslag",
         "default": "Op basis van uw antwoorden is uw toepassing een impactvol algoritme. Het algoritme moet worden opgenomen in de het Algoritmeregister en het moet voldoen aan intern geldend algoritmebeleid. \nOp basis van uw antwoorden is uw toepassing ook een AI-systeem volgens de AI-verordening. Vul de volgende vragenlijst in om te bepalen Vul de volgende vragenlijst in om te bepalen of de toepassing moet voldoen aan aanvullende eisen volgens de AI-verordening."
       },
+      "outputAlgoAndADM": {
+        "type": "string",
+        "title": "Uitslag",
+        "default": "Op basis van uw antwoorden is uw toepassing:\n- een AI-systeem volgens de AI-verordening;\n- een impactvol algoritme; en\n- mogelijk geautomatiseerde besluitivorming volgens artikel 22 van de AVG.\n\nVervolgstappen:\n- Vul de AI risicoclassificatie vragenlijst in om te bepalen aan welke vereisten uit de AI-verordening de toepassing moet voldoen.\n- Neem het algoritme op in het Algoritmeregister.\n- Zorg dat wordt voldaan aan intern geldend algoritmebeleid.\n- Bepaal in overleg met relevante juridische experts of er daadwerkelijk sprake is van geautomatiseerde besluitvorming."
+      },
       "outputIntermediateAISystem": {
         "type": "string",
         "title": "Uitslag",
@@ -76,6 +81,74 @@
                     "enum": [
                       "De uitkomst van het proces wordt direct bepaald door de toepassing (hier is geen menselijke tussenkomst voor nodig). Nadat het proces is voltooid, kunnen mensen nog wel de resultaten controleren of analyseren.",
                       "De uitkomst van het proces wordt sterk beïnvloed door de toepassing. Bijvoorbeeld doordat werkvoorschriften bepalen wat het gevolg is van een bepaalde uitkomst van de toepassing. Een medewerker kan in sommige gevallen andere keuzes maken, maar meestal bepaalt het resultaat van het systeem wat het eindresultaat van het proces zal zijn.",
+                      "De uitkomst van het proces wordt deels beïnvloed door de toepassing. Het resultaat van de toepassing is belangrijk voor het eindresultaat, maar de uiteindelijke beslissing wordt genomen door een medewerker. Deze medewerker heeft de juiste informatie, ervaring/kunde, mandaat en beschikbare tijd om de beslissing te maken.",
+                      "De toepassing bepaalt (mede) het procesverloop, maar de uitkomst van het proces wordt volledig door een medewerker bepaald. Bijvoorbeeld wanneer de uitkomst van de toepassing een risicoscore aan de hand waarvan een controle proces wordt gestart of een meer insentieve dossierevalutie plaatsvindt, maar de controle of evaluatie daarna volledig door een medewerker wordt uitgevoerd."
+                    ]
+                  },
+                  "output": { "$ref": "#/definitions/outputAlgorithm" }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "effectADM": {
+        "title": "Effect",
+        "type": "object",
+        "properties": {
+          "q7": {
+            "type": "string",
+            "title": "Welke van de volgende opties beschrijft het effect van de toepassing op de uitkomst het beste?",
+            "enum": [
+              "De uitkomst van het proces wordt direct bepaald door de toepassing (hier is geen menselijke tussenkomst voor nodig). Nadat het proces is voltooid, kunnen mensen nog wel de resultaten controleren of analyseren.",
+              "De uitkomst van het proces wordt sterk beïnvloed door de toepassing. Bijvoorbeeld doordat werkvoorschriften bepalen wat het gevolg is van een bepaalde uitkomst van de toepassing. Een medewerker kan in sommige gevallen andere keuzes maken, maar meestal bepaalt het resultaat van het systeem wat het eindresultaat van het proces zal zijn.",
+              "De uitkomst van het proces wordt deels beïnvloed door de toepassing. Het resultaat van de toepassing is belangrijk voor het eindresultaat, maar de uiteindelijke beslissing wordt genomen door een medewerker. Deze medewerker heeft de juiste informatie, ervaring/kunde, mandaat en beschikbare tijd om de beslissing te maken.",
+              "De toepassing bepaalt (mede) het procesverloop, maar de uitkomst van het proces wordt volledig door een medewerker bepaald. Bijvoorbeeld wanneer de uitkomst van de toepassing een risicoscore aan de hand waarvan een controle proces wordt gestart of een meer insentieve dossierevalutie plaatsvindt, maar de controle of evaluatie daarna volledig door een medewerker wordt uitgevoerd.",
+              "Het procesverloop en uitkomst van het proces wordt volledig door een mens bepaald. Het resultaat van de toepassing is slechts één van de factoren en is niet doorslaggevend in de keuze.",
+              "Een ander soort effect"
+            ]
+          }
+        },
+        "required": ["q7"],
+        "dependencies": {
+          "q7": {
+            "oneOf": [
+              {
+                "properties": {
+                  "q7": {
+                    "enum": [
+                      "Het procesverloop en uitkomst van het proces wordt volledig door een mens bepaald. Het resultaat van de toepassing is slechts één van de factoren en is niet doorslaggevend in de keuze."
+                    ]
+                  },
+                  "output": { "$ref": "#/definitions/outputNoAI" }
+                }
+              },
+              {
+                "properties": {
+                  "q7": { "enum": ["Een ander soort effect"] },
+                  "q7_option5": {
+                    "type": "string",
+                    "title": "Beschrijf het effect van de toepassing op het proces"
+                  },
+                  "output": { "$ref": "#/definitions/outputNoAI" }
+                },
+                "required": ["q7_option5"]
+              },
+              {
+                "properties": {
+                  "q7": {
+                    "enum": [
+                      "De uitkomst van het proces wordt direct bepaald door de toepassing (hier is geen menselijke tussenkomst voor nodig). Nadat het proces is voltooid, kunnen mensen nog wel de resultaten controleren of analyseren.",
+                      "De uitkomst van het proces wordt sterk beïnvloed door de toepassing. Bijvoorbeeld doordat werkvoorschriften bepalen wat het gevolg is van een bepaalde uitkomst van de toepassing. Een medewerker kan in sommige gevallen andere keuzes maken, maar meestal bepaalt het resultaat van het systeem wat het eindresultaat van het proces zal zijn."
+                    ]
+                  },
+                  "output": { "$ref": "#/definitions/outputAlgoAndADM" }
+                }
+              },
+              {
+                "properties": {
+                  "q7": {
+                    "enum": [
                       "De uitkomst van het proces wordt deels beïnvloed door de toepassing. Het resultaat van de toepassing is belangrijk voor het eindresultaat, maar de uiteindelijke beslissing wordt genomen door een medewerker. Deze medewerker heeft de juiste informatie, ervaring/kunde, mandaat en beschikbare tijd om de beslissing te maken.",
                       "De toepassing bepaalt (mede) het procesverloop, maar de uitkomst van het proces wordt volledig door een medewerker bepaald. Bijvoorbeeld wanneer de uitkomst van de toepassing een risicoscore aan de hand waarvan een controle proces wordt gestart of een meer insentieve dossierevalutie plaatsvindt, maar de controle of evaluatie daarna volledig door een medewerker wordt uitgevoerd."
                     ]
@@ -546,7 +619,9 @@
           {
             "properties": {
               "q2": {
-                "enum": ["Nee, het ontwerp van de toepassing is niet gebaseerd op data-analyse."]
+                "enum": [
+                  "Nee, het ontwerp van de toepassing is niet gebaseerd op data-analyse."
+                ]
               },
               "q3": {
                 "type": "string",
