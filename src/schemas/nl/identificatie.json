@@ -370,7 +370,8 @@
                       "Beslissing over aanvragen en verzoeken zonder directe financiële gevolgen, \nzoals bijvoorbeeld toekenning van een aanvraag van diensten of vergunningtoekenning",
                       "Beslissing over controle, onderzoek of verzoek tot aanvullende informatieverschaffing",
                       "Beslissing over toewijzing van scholen",
-                      "Beslissingen over te geven advies of het (proactief) aanbieden van diensten of voorzieningen"
+                      "Beslissingen over te geven advies of het (proactief) aanbieden van diensten of voorzieningen",
+                      "Een andere beslissing met rechtsgevolgen zoals bijvoorbeeld vergunning toekenning of het aangaan van een overeenkomst"
                     ]
                   },
                   "effect": { "$ref": "#/definitions/effect" }
