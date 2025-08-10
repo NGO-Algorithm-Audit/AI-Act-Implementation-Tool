@@ -1,4 +1,4 @@
-{
+export const identificationSchema = {
   "JSONSchema": {
     "title": "Identification of AI systems and high-impact algorithms",
     "type": "object",
