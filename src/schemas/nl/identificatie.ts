@@ -903,21 +903,62 @@ export const identificationSchema = {
                           "Wordt de output van het algoritme gedeeld met andere organisaties?",
                         enum: ["ja", "nee"],
                       },
-                      q10: {
-                        type: "string",
-                        title:
-                          "Wordt de output van het algoritme langer opgeslagen dan de doorlooptijd van het primaire proces waarvoor het algoritme wordt ingezet?",
-                        enum: ["ja", "nee"],
-                      },
-                      outputIntermediate: {
-                        type: "string",
-                        title: "Volgende stap",
-                        default:
-                          "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
-                      },
-                      impact: { $ref: "#/definitions/impact" },
                     },
-                    required: ["q9", "q10"],
+                    required: ["q9"],
+                    dependencies: {
+                      q9: {
+                        oneOf: [
+                          {
+                            properties: {
+                              q9: {
+                                enum: ["ja"],
+                              },
+                            },
+                          },
+                          {
+                            properties: {
+                              q9: {
+                                enum: ["nee"],
+                              },
+                              q10: {
+                                type: "string",
+                                title:
+                                  "Wordt de output van het algoritme langer opgeslagen dan de doorlooptijd van het primaire proces waarvoor het algoritme wordt ingezet?",
+                                enum: ["ja", "nee"],
+                              },
+                            },
+                            required: ["q10"],
+                            dependencies: {
+                              q10: {
+                                oneOf: [
+                                  {
+                                    properties: {
+                                      q10: {
+                                        enum: ["ja"],
+                                      },
+                                    },
+                                  },
+                                  {
+                                    properties: {
+                                      q10: {
+                                        enum: ["nee"],
+                                      },
+                                      outputIntermediate: {
+                                        type: "string",
+                                        title: "Volgende stap",
+                                        default:
+                                          "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
+                                      },
+                                      impact: { $ref: "#/definitions/impact" },
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          },
+                        ],
+                      },
+                    },
                   },
                 ],
               },
