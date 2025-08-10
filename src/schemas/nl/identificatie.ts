@@ -884,7 +884,19 @@ export const identificationSchema = {
               q8: {
                 type: "string",
                 title:
-                  "Gaat de output van het algoritme over een individuele burger of een casus die een individuele burger aangaat",
+                  "Gaat de output van het algoritme over een individuele burger of een casus die een individuele burger aangaat?",
+                enum: ["ja", "nee"],
+              },
+              q9: {
+                type: "string",
+                title:
+                  "Wordt de output van het algoritme gedeeld met andere organisaties?",
+                enum: ["ja", "nee"],
+              },
+              q10: {
+                type: "string",
+                title:
+                  "Wordt de output van het algoritme langer opgeslagen dan de doorlooptijd van het primaire proces waarvoor het algoritme wordt ingezet?",
                 enum: ["ja", "nee"],
               },
               outputIntermediate: {
@@ -895,7 +907,7 @@ export const identificationSchema = {
               },
               impact: { $ref: "#/definitions/impact" },
             },
-            required: ["q3_no", "q8"],
+            required: ["q3_no", "q8", "q9", "q10"],
           },
         ],
       },
@@ -950,6 +962,12 @@ Voorbeelden van informatie die niet over indiviuen gaat zijn:
 - Output over financieel beleid en de invloed van beleid
 
 Denk bij individuen ook aan ondernemingen waarbij de ondernemer persoonlijk aansprakelijk is (zzp, eenmanszaak, vof, maatschap)`,
+    },
+    q9: {
+      "ui:widget": "radio",
+    },
+    q10: {
+      "ui:widget": "radio",
     },
     outputIntermediate: {
       "ui:widget": "textarea",
