@@ -887,27 +887,41 @@ export const identificationSchema = {
                   "Gaat de output van het algoritme over een individuele burger of een casus die een individuele burger aangaat?",
                 enum: ["ja", "nee"],
               },
-              q9: {
-                type: "string",
-                title:
-                  "Wordt de output van het algoritme gedeeld met andere organisaties?",
-                enum: ["ja", "nee"],
-              },
-              q10: {
-                type: "string",
-                title:
-                  "Wordt de output van het algoritme langer opgeslagen dan de doorlooptijd van het primaire proces waarvoor het algoritme wordt ingezet?",
-                enum: ["ja", "nee"],
-              },
-              outputIntermediate: {
-                type: "string",
-                title: "Volgende stap",
-                default:
-                  "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
-              },
-              impact: { $ref: "#/definitions/impact" },
             },
-            required: ["q3_no", "q8", "q9", "q10"],
+            required: ["q3_no", "q8"],
+            dependencies: {
+              q8: {
+                oneOf: [
+                  {
+                    properties: {
+                      q8: {
+                        enum: ["ja"],
+                      },
+                      q9: {
+                        type: "string",
+                        title:
+                          "Wordt de output van het algoritme gedeeld met andere organisaties?",
+                        enum: ["ja", "nee"],
+                      },
+                      q10: {
+                        type: "string",
+                        title:
+                          "Wordt de output van het algoritme langer opgeslagen dan de doorlooptijd van het primaire proces waarvoor het algoritme wordt ingezet?",
+                        enum: ["ja", "nee"],
+                      },
+                      outputIntermediate: {
+                        type: "string",
+                        title: "Volgende stap",
+                        default:
+                          "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
+                      },
+                      impact: { $ref: "#/definitions/impact" },
+                    },
+                    required: ["q9", "q10"],
+                  },
+                ],
+              },
+            },
           },
         ],
       },
