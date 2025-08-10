@@ -881,6 +881,12 @@ export const identificationSchema = {
                   "Geef een korte beschrijving van het ontwerp van de toepassing.",
                 default: "",
               },
+              q8: {
+                type: "string",
+                title:
+                  "Gaat de output van het algoritme over een individuele burger of een casus die een individuele burger aangaat",
+                enum: ["ja", "nee"],
+              },
               outputIntermediate: {
                 type: "string",
                 title: "Volgende stap",
@@ -889,7 +895,7 @@ export const identificationSchema = {
               },
               impact: { $ref: "#/definitions/impact" },
             },
-            required: ["q3_no"],
+            required: ["q3_no", "q8"],
           },
         ],
       },
@@ -931,6 +937,19 @@ export const identificationSchema = {
       "ui:widget": "radio",
       "ui:description":
         "Kies bij twijfel de bovenste van de opties waarover u twijfelt.",
+    },
+    q8: {
+      "ui:widget": "radio",
+      "ui:description": `Voorbeelden van output over een individuele burger zijn:
+- een inschatting van een eigenschap 
+
+Voorbeelden van informatie die niet over indiviuen gaat zijn:
+- Output over groepen, waarin de individuen niet los van de groep een uitput krijgen toegekent
+- Een output over fysieke zaken die niet aan een indivue gekoppelt zijn, zoals 
+-Output over sectoren, wijken
+- Output over financieel beleid en de invloed van beleid
+
+Denk bij individuen ook aan ondernemingen waarbij de ondernemer persoonlijk aansprakelijk is (zzp, eenmanszaak, vof, maatschap)`,
     },
     outputIntermediate: {
       "ui:widget": "textarea",
