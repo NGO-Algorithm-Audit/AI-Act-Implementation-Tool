@@ -1,4 +1,4 @@
-import { q5 } from "./identificatie/q5";
+import { q5, q5Dependencies } from "./identificatie/q5";
 
 export const identificationSchema = {
   JSONSchema: {
@@ -349,101 +349,7 @@ export const identificationSchema = {
               },
             ],
           },
-          q5: {
-            oneOf: [
-              {
-                properties: {
-                  q5: {
-                    enum: ["Overige of andere beslissingen"],
-                  },
-                  q5_option8: {
-                    type: "string",
-                    title: "Beschrijf het soort beslissing",
-                    default: "",
-                  },
-                  output: { $ref: "#/definitions/outputNoAI" },
-                },
-                required: ["q5_option8"],
-              },
-              {
-                properties: {
-                  q5: {
-                    enum: [
-                      "Beslissing over formele klachten en bezwaren",
-                      "Beslissing met directe financiële gevolgen voor burger of ambtenaar, \nzoals bijvoorbeeld beslissingen over een arbeidscontract, uitkering, toeslag, subsidie, boete, terugbetaling of mogelijkheid tot betalingsregeling",
-                      "Beslissing over toewijzing van scholen",
-                      "Een andere beslissing met rechtsgevolgen zoals bijvoorbeeld vergunning toekenning of het aangaan van een overeenkomst",
-                    ],
-                  },
-                  effect: { $ref: "#/definitions/effectADM" },
-                },
-              },
-              {
-                properties: {
-                  q5: {
-                    enum: [
-                      "Beslissing over controle, onderzoek of verzoek tot aanvullende informatieverschaffing",
-                    ],
-                  },
-                  q5_option5: {
-                    type: "string",
-                    title:
-                      "Is de controle of het onderzoek bijzonder ingrijpend voor de betrokkene?",
-                    enum: [
-                      "Ja, omdat de controle of het onderzoek wordt uitgevoerd moet de betrokkene langer wachten op een uitkering of toeslag of komt de betrokkenen niet in aanmerking voor een voorschot",
-                      "Ja, omdat de controle of het onderzoek wordt uitgevoerd komt de betrokkene niet in aanmerking voor een betalingsregeling",
-                      "Ja, omdat de controle of het onderzoek is ingrijpend, bijvoorbeeld omdat een fysieke controle plaatsvind (bijv. een huisbezoek) of omdat het onderzoek op een andere manier een grote invloed heeft op het (prive) leven van de betrokkene.",
-                      "Ja, de controle is om een andere reden bijzonder ingrijpend voor de betrokkene",
-                      "Nee",
-                    ],
-                  },
-                },
-              },
-              {
-                properties: {
-                  q5: {
-                    enum: [
-                      "Beslissing over prioritering van aanvragen, verzoeken, klachten en bezwaren",
-                      "Beslissingen over te geven advies of het (proactief) aanbieden van diensten of voorzieningen",
-                    ],
-                  },
-                  effect: { $ref: "#/definitions/effect" },
-                },
-              },
-            ],
-          },
-          q5_option5: {
-            oneOf: [
-              {
-                properties: {
-                  q5_option5: {
-                    enum: [
-                      "Ja, omdat de controle of het onderzoek wordt uitgevoerd moet de betrokkene langer wachten op een uitkering of toeslag of komt de betrokkenen niet in aanmerking voor een voorschot",
-                      "Ja, omdat de controle of het onderzoek wordt uitgevoerd komt de betrokkene niet in aanmerking voor een betalingsregeling",
-                      "Ja, omdat de controle of het onderzoek is ingrijpend, bijvoorbeeld omdat een fysieke controle plaatsvind (bijv. een huisbezoek) of omdat het onderzoek op een andere manier een grote invloed heeft op het (prive) leven van de betrokkene.",
-                      "Ja, de controle is om een andere reden bijzonder ingrijpend voor de betrokkene",
-                    ],
-                  },
-                  "q5-option5-controle": {
-                    type: "string",
-                    title:
-                      "Beschrijf het gevolg van de controle voor de betrokkene",
-                    default: "",
-                  },
-                  effect: { $ref: "#/definitions/effectADM" },
-                },
-                required: ["q5-option5-controle"],
-              },
-              {
-                properties: {
-                  q5_option5: {
-                    enum: ["Nee"],
-                  },
-                  effect: { $ref: "#/definitions/effect" },
-                },
-              },
-            ],
-          },
+          ...q5Dependencies(),
           q6: {
             oneOf: [
               {
@@ -854,75 +760,103 @@ export const identificationSchema = {
                   "Geef een korte beschrijving van het ontwerp van de toepassing.",
                 default: "",
               },
-              q8: {
+              aiCont: {
                 type: "string",
-                title:
-                  "Gaat de output van het algoritme over een individuele burger of een casus die een individuele burger aangaat?",
-                enum: ["ja", "nee"],
+                title: `'Deze toepassing is waarschijnlijk een AI-systeem volgens de AI-verordening.  In de volgende vragen wordt bepaald of sprake zou kunnen zijn van geautomatiseerde besluitvorming (AVG artikel 22) en of deze toepassing een impactvol algoritme is. U kunt ook hier stoppen. Vink dan "vragenlijst stoppen" aan.`,
+                enum: ["Vragenlijst stoppen, ga naar conclusies", "Doorgaan"],
               },
             },
-            required: ["q3_no", "q8"],
+            required: ["q3_no", "aiCont"],
             dependencies: {
-              q8: {
+              aiCont: {
                 oneOf: [
                   {
                     properties: {
-                      q8: {
-                        enum: ["ja"],
+                      aiCont: {
+                        enum: ["Vragenlijst stoppen, ga naar conclusies"],
                       },
-                      q9: {
+                      output: { $ref: "#/definitions/outputNoAI" },
+                    },
+                  },
+                  {
+                    properties: {
+                      aiCont: {
+                        enum: ["Doorgaan"],
+                      },
+                      q8: {
                         type: "string",
                         title:
-                          "Wordt de output van het algoritme gedeeld met andere organisaties?",
+                          "Gaat de output van het algoritme over een individuele burger of een casus die een individuele burger aangaat?",
                         enum: ["ja", "nee"],
                       },
                     },
-                    required: ["q9"],
                     dependencies: {
-                      q9: {
+                      q8: {
                         oneOf: [
                           {
                             properties: {
-                              q9: {
+                              q8: {
                                 enum: ["ja"],
                               },
-                            },
-                          },
-                          {
-                            properties: {
                               q9: {
-                                enum: ["nee"],
-                              },
-                              q10: {
                                 type: "string",
                                 title:
-                                  "Wordt de output van het algoritme langer opgeslagen dan de doorlooptijd van het primaire proces waarvoor het algoritme wordt ingezet?",
+                                  "Wordt de output van het algoritme gedeeld met andere organisaties?",
                                 enum: ["ja", "nee"],
                               },
                             },
-                            required: ["q10"],
+                            required: ["q9"],
                             dependencies: {
-                              q10: {
+                              q9: {
                                 oneOf: [
                                   {
                                     properties: {
-                                      q10: {
+                                      q9: {
                                         enum: ["ja"],
                                       },
                                     },
                                   },
                                   {
                                     properties: {
-                                      q10: {
+                                      q9: {
                                         enum: ["nee"],
                                       },
-                                      outputIntermediate: {
+                                      q10: {
                                         type: "string",
-                                        title: "Volgende stap",
-                                        default:
-                                          "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
+                                        title:
+                                          "Wordt de output van het algoritme langer opgeslagen dan de doorlooptijd van het primaire proces waarvoor het algoritme wordt ingezet?",
+                                        enum: ["ja", "nee"],
                                       },
-                                      impact: { $ref: "#/definitions/impact" },
+                                    },
+                                    required: ["q10"],
+                                    dependencies: {
+                                      q10: {
+                                        oneOf: [
+                                          {
+                                            properties: {
+                                              q10: {
+                                                enum: ["ja"],
+                                              },
+                                            },
+                                          },
+                                          {
+                                            properties: {
+                                              q10: {
+                                                enum: ["nee"],
+                                              },
+                                              outputIntermediate: {
+                                                type: "string",
+                                                title: "Volgende stap",
+                                                default:
+                                                  "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
+                                              },
+                                              impact: {
+                                                $ref: "#/definitions/impact",
+                                              },
+                                            },
+                                          },
+                                        ],
+                                      },
                                     },
                                   },
                                 ],
@@ -954,6 +888,9 @@ export const identificationSchema = {
       "ui:widget": "radio",
       "ui:description":
         "Een voorbeeld van in wet- of regelgeving vastgestelde regels is een regelgebaseerd algoritme dat bij aanvraag voor een bijstandsuitkering geautomatiseerd aangeeft wanneer niet is voldaan inkomens- en vermogenseisen. De regels in het algoritme zijn in dat geval een letterlijke implementatie van normen gespecificeerd in de Participatiewet.\nWanneer een norm open is gedefninieerd in wet- of regelgeving en deze verder worden gespecificeerd in de toepassing, is de toepassing geen een-op-een automatisering van wet- of regelgeving.\n\nVoorbeelden van door mensen opgestelde regels zijn een regelgebaseerd algoritme waarbij een werkinstructie is vertaald naar een algoritme, een risicoprofiel waarbij de regels met de hand zijn opgesteld op basis van ervaring van medewerkers of wettelijke normen die verder gespecificeerd zijn in regels.\n\nOp logica- en kennis-gebaseerde benaderingen worden ook wel symbolische AI-systemen genoemd (symbolic AI). Onder deze  vorm van AI-systemen vallen kennisrepresentatie, inductief (logisch) programmeren, kennisbanken, inferentie- en deductiemachines, (symbolisch) redeneren. Deze technologie wordt bijvoorbeeld ingezet in expert systemen.",
+    },
+    aiCont: {
+      "ui:widget": "radio",
     },
     q4: {
       "ui:widget": "radio",
