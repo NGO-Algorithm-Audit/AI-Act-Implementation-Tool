@@ -1,4 +1,5 @@
 import { AICont } from "./identificatie/AICont";
+import { AIContDoorgaan } from "./identificatie/AICont-doorgaan";
 import { noAICont } from "./identificatie/noAICont";
 import { noAIContDoorgaan } from "./identificatie/noAICont-doorgaan";
 import { q5, q5Dependencies } from "./identificatie/q5";
@@ -769,6 +770,7 @@ export const identificationSchema = {
                       output: { $ref: "#/definitions/outputNoAI" },
                     },
                   },
+                  { ...AIContDoorgaan },
                 ],
               },
             },
