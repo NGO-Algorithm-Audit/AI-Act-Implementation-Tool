@@ -665,21 +665,24 @@ export const identificationSchema = {
                   "Ja, de toepassing bevat componenten die zijn afgeleid uit data. Er is sprake van het fitten of leren van een model of automatische variabele selectie met behulp van statistiek, optimalisatie, simulatie, machine learning of een vergelijkbare techniek.",
                 ],
               },
-              q2_yes2: {
-                type: "string",
-                title: "Geef een beschrijving van de gebruikte methode.",
-                default: "",
-              },
-              outputIntermediate: {
-                type: "string",
-                title:
-                  "Deze toepassing is waarschijnlijk een AI-systeem volgens de AI-verordening. Mogelijk is dit systeem ook een impactvol algoritme, vul daarvoor de volgende vragen in.",
-                default:
-                  "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
-              },
-              impact: { $ref: "#/definitions/impactAI" },
+              AICont,
             },
-            required: ["q2_yes2"],
+            required: ["AICont"],
+            dependencies: {
+              AICont: {
+                oneOf: [
+                  {
+                    properties: {
+                      AICont: {
+                        enum: ["Vragenlijst stoppen, ga naar conclusies"],
+                      },
+                      output: { $ref: "#/definitions/outputNoAI" },
+                    },
+                  },
+                  { ...AIContDoorgaan },
+                ],
+              },
+            },
           },
           {
             properties: {
