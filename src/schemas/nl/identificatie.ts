@@ -760,19 +760,19 @@ export const identificationSchema = {
                   "Geef een korte beschrijving van het ontwerp van de toepassing.",
                 default: "",
               },
-              aiCont: {
+              noAICont: {
                 type: "string",
-                title: `'Deze toepassing is waarschijnlijk een AI-systeem volgens de AI-verordening.  In de volgende vragen wordt bepaald of sprake zou kunnen zijn van geautomatiseerde besluitvorming (AVG artikel 22) en of deze toepassing een impactvol algoritme is. U kunt ook hier stoppen. Vink dan "vragenlijst stoppen" aan.`,
+                title: `Deze toepassing is waarschijnlijk geen AI-systeem volgens de AI-verordening.  In de volgende vragen wordt bepaald of sprake zou kunnen zijn van geautomatiseerde besluitvorming (AVG artikel 22) en of deze toepassing een impactvol algoritme is. U kunt ook hier stoppen. Vink dan "vragenlijst stoppen" aan.`,
                 enum: ["Vragenlijst stoppen, ga naar conclusies", "Doorgaan"],
               },
             },
-            required: ["q3_no", "aiCont"],
+            required: ["q3_no", "noAICont"],
             dependencies: {
-              aiCont: {
+              noAICont: {
                 oneOf: [
                   {
                     properties: {
-                      aiCont: {
+                      noAICont: {
                         enum: ["Vragenlijst stoppen, ga naar conclusies"],
                       },
                       output: { $ref: "#/definitions/outputNoAI" },
@@ -780,7 +780,7 @@ export const identificationSchema = {
                   },
                   {
                     properties: {
-                      aiCont: {
+                      noAICont: {
                         enum: ["Doorgaan"],
                       },
                       q8: {
@@ -889,7 +889,7 @@ export const identificationSchema = {
       "ui:description":
         "Een voorbeeld van in wet- of regelgeving vastgestelde regels is een regelgebaseerd algoritme dat bij aanvraag voor een bijstandsuitkering geautomatiseerd aangeeft wanneer niet is voldaan inkomens- en vermogenseisen. De regels in het algoritme zijn in dat geval een letterlijke implementatie van normen gespecificeerd in de Participatiewet.\nWanneer een norm open is gedefninieerd in wet- of regelgeving en deze verder worden gespecificeerd in de toepassing, is de toepassing geen een-op-een automatisering van wet- of regelgeving.\n\nVoorbeelden van door mensen opgestelde regels zijn een regelgebaseerd algoritme waarbij een werkinstructie is vertaald naar een algoritme, een risicoprofiel waarbij de regels met de hand zijn opgesteld op basis van ervaring van medewerkers of wettelijke normen die verder gespecificeerd zijn in regels.\n\nOp logica- en kennis-gebaseerde benaderingen worden ook wel symbolische AI-systemen genoemd (symbolic AI). Onder deze  vorm van AI-systemen vallen kennisrepresentatie, inductief (logisch) programmeren, kennisbanken, inferentie- en deductiemachines, (symbolisch) redeneren. Deze technologie wordt bijvoorbeeld ingezet in expert systemen.",
     },
-    aiCont: {
+    noAICont: {
       "ui:widget": "radio",
     },
     q4: {
