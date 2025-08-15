@@ -1,3 +1,4 @@
+import { AICont } from "./identificatie/AICont";
 import { noAICont } from "./identificatie/noAICont";
 import { noAIContDoorgaan } from "./identificatie/noAICont-doorgaan";
 import { q5, q5Dependencies } from "./identificatie/q5";
@@ -754,14 +755,22 @@ export const identificationSchema = {
                   "Ja, logica- en kennis-gebaseerde benaderingen van AI waarbij uitkomsten worden afgeleid uit gecodeerde kennis of uit een symbolische weergave van de op te lossen taak",
                 ],
               },
-              outputIntermediate: {
-                type: "string",
-                title:
-                  "Deze toepassing is een AI-systeem volgens de AI-verordening. Mogelijk is dit systeem ook een impactvol algoritme, vul daarvoor de volgende vragen in.",
-                default:
-                  "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
+              AICont,
+            },
+            required: ["AICont"],
+            dependencies: {
+              AICont: {
+                oneOf: [
+                  {
+                    properties: {
+                      AICont: {
+                        enum: ["Vragenlijst stoppen, ga naar conclusies"],
+                      },
+                      output: { $ref: "#/definitions/outputNoAI" },
+                    },
+                  },
+                ],
               },
-              impact: { $ref: "#/definitions/impactAI" },
             },
           },
           {
@@ -811,6 +820,9 @@ export const identificationSchema = {
       "ui:widget": "radio",
       "ui:description":
         "Een voorbeeld van in wet- of regelgeving vastgestelde regels is een regelgebaseerd algoritme dat bij aanvraag voor een bijstandsuitkering geautomatiseerd aangeeft wanneer niet is voldaan inkomens- en vermogenseisen. De regels in het algoritme zijn in dat geval een letterlijke implementatie van normen gespecificeerd in de Participatiewet.\nWanneer een norm open is gedefninieerd in wet- of regelgeving en deze verder worden gespecificeerd in de toepassing, is de toepassing geen een-op-een automatisering van wet- of regelgeving.\n\nVoorbeelden van door mensen opgestelde regels zijn een regelgebaseerd algoritme waarbij een werkinstructie is vertaald naar een algoritme, een risicoprofiel waarbij de regels met de hand zijn opgesteld op basis van ervaring van medewerkers of wettelijke normen die verder gespecificeerd zijn in regels.\n\nOp logica- en kennis-gebaseerde benaderingen worden ook wel symbolische AI-systemen genoemd (symbolic AI). Onder deze  vorm van AI-systemen vallen kennisrepresentatie, inductief (logisch) programmeren, kennisbanken, inferentie- en deductiemachines, (symbolisch) redeneren. Deze technologie wordt bijvoorbeeld ingezet in expert systemen.",
+    },
+    AICont: {
+      "ui:widget": "radio",
     },
     noAICont: {
       "ui:widget": "radio",
