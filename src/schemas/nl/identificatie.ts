@@ -1,3 +1,5 @@
+import { noAICont } from "./identificatie/noAICont";
+import { noAIContDoorgaan } from "./identificatie/noAICont-doorgaan";
 import { q5, q5Dependencies } from "./identificatie/q5";
 
 export const identificationSchema = {
@@ -635,21 +637,24 @@ export const identificationSchema = {
                   "Ja, keuzes over ontwerp zijn handmatig gemaakt, maar inzichten uit data-analyse hebben geholpen bij het ontwerp.",
                 ],
               },
-              q2_yes1: {
-                type: "string",
-                title:
-                  "Beschrijf hoe het algoritme tot stand gekomen is. Op welke manier heeft data-analyse bijgedragen aan het ontwerp van het algoritme?",
-                default: "",
-              },
-              outputIntermediate: {
-                type: "string",
-                title: "Volgende stap",
-                default:
-                  "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
-              },
-              impact: { $ref: "#/definitions/impact" },
+              noAICont,
             },
-            required: ["q2_yes1"],
+            required: ["noAICont"],
+            dependencies: {
+              noAICont: {
+                oneOf: [
+                  {
+                    properties: {
+                      noAICont: {
+                        enum: ["Vragenlijst stoppen, ga naar conclusies"],
+                      },
+                      output: { $ref: "#/definitions/outputNoAI" },
+                    },
+                  },
+                  { ...noAIContDoorgaan },
+                ],
+              },
+            },
           },
           {
             properties: {
@@ -723,13 +728,23 @@ export const identificationSchema = {
                   "Ja, automatisering van regels, maar deze zijn niet expliciet vastgesteld in wet- of regelgeving of formeel beleid",
                 ],
               },
-              outputIntermediate: {
-                type: "string",
-                title: "Volgende stap",
-                default:
-                  "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
+              noAICont,
+            },
+            required: ["noAICont"],
+            dependencies: {
+              noAICont: {
+                oneOf: [
+                  {
+                    properties: {
+                      noAICont: {
+                        enum: ["Vragenlijst stoppen, ga naar conclusies"],
+                      },
+                      output: { $ref: "#/definitions/outputNoAI" },
+                    },
+                  },
+                  { ...noAIContDoorgaan },
+                ],
               },
-              impact: { $ref: "#/definitions/impact" },
             },
           },
           {
@@ -760,11 +775,7 @@ export const identificationSchema = {
                   "Geef een korte beschrijving van het ontwerp van de toepassing.",
                 default: "",
               },
-              noAICont: {
-                type: "string",
-                title: `Deze toepassing is waarschijnlijk geen AI-systeem volgens de AI-verordening.  In de volgende vragen wordt bepaald of sprake zou kunnen zijn van geautomatiseerde besluitvorming (AVG artikel 22) en of deze toepassing een impactvol algoritme is. U kunt ook hier stoppen. Vink dan "vragenlijst stoppen" aan.`,
-                enum: ["Vragenlijst stoppen, ga naar conclusies", "Doorgaan"],
-              },
+              noAICont,
             },
             required: ["q3_no", "noAICont"],
             dependencies: {
@@ -778,95 +789,7 @@ export const identificationSchema = {
                       output: { $ref: "#/definitions/outputNoAI" },
                     },
                   },
-                  {
-                    properties: {
-                      noAICont: {
-                        enum: ["Doorgaan"],
-                      },
-                      q8: {
-                        type: "string",
-                        title:
-                          "Gaat de output van het algoritme over een individuele burger of een casus die een individuele burger aangaat?",
-                        enum: ["ja", "nee"],
-                      },
-                    },
-                    dependencies: {
-                      q8: {
-                        oneOf: [
-                          {
-                            properties: {
-                              q8: {
-                                enum: ["ja"],
-                              },
-                              q9: {
-                                type: "string",
-                                title:
-                                  "Wordt de output van het algoritme gedeeld met andere organisaties?",
-                                enum: ["ja", "nee"],
-                              },
-                            },
-                            required: ["q9"],
-                            dependencies: {
-                              q9: {
-                                oneOf: [
-                                  {
-                                    properties: {
-                                      q9: {
-                                        enum: ["ja"],
-                                      },
-                                    },
-                                  },
-                                  {
-                                    properties: {
-                                      q9: {
-                                        enum: ["nee"],
-                                      },
-                                      q10: {
-                                        type: "string",
-                                        title:
-                                          "Wordt de output van het algoritme langer opgeslagen dan de doorlooptijd van het primaire proces waarvoor het algoritme wordt ingezet?",
-                                        enum: ["ja", "nee"],
-                                      },
-                                    },
-                                    required: ["q10"],
-                                    dependencies: {
-                                      q10: {
-                                        oneOf: [
-                                          {
-                                            properties: {
-                                              q10: {
-                                                enum: ["ja"],
-                                              },
-                                            },
-                                          },
-                                          {
-                                            properties: {
-                                              q10: {
-                                                enum: ["nee"],
-                                              },
-                                              outputIntermediate: {
-                                                type: "string",
-                                                title: "Volgende stap",
-                                                default:
-                                                  "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
-                                              },
-                                              impact: {
-                                                $ref: "#/definitions/impact",
-                                              },
-                                            },
-                                          },
-                                        ],
-                                      },
-                                    },
-                                  },
-                                ],
-                              },
-                            },
-                          },
-                        ],
-                      },
-                    },
-                  },
+                  { ...noAIContDoorgaan },
                 ],
               },
             },
