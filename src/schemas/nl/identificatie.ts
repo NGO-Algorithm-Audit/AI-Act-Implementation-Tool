@@ -353,7 +353,13 @@ export const identificationSchema = {
               },
             ],
           },
-          ...q5Dependencies(),
+          ...q5Dependencies(
+            "#/definitions/outputNoAI",
+            "#/definitions/effectADM",
+            "#/definitions/effect",
+            "#/definitions/effectADM",
+            "#/definitions/effect"
+          ),
           q6: {
             oneOf: [
               {
@@ -431,57 +437,64 @@ export const identificationSchema = {
               },
             ],
           },
-          q5: {
-            oneOf: [
-              {
-                properties: {
-                  q5: {
-                    enum: ["Overige of andere beslissingen"],
-                  },
-                  q5_option8: {
-                    type: "string",
-                    title: "Beschrijf het soort beslissing",
-                    default: "",
-                  },
-                  output: { $ref: "#/definitions/outputAI" },
-                },
-                required: ["q5_option8"],
-              },
-              {
-                properties: {
-                  q5: {
-                    enum: [
-                      "Beslissing over controle, onderzoek of verzoek tot aanvullende informatieverschaffing",
-                    ],
-                  },
-                  q5_option5: {
-                    type: "string",
-                    title:
-                      "Is de controle of het onderzoek bijzonder ingrijpend voor de betrokkene?",
-                    default: "",
-                  },
-                  output: { $ref: "#/definitions/effect" },
-                },
-                required: ["q5_option5"],
-              },
-              {
-                properties: {
-                  q5: {
-                    enum: [
-                      "Beslissing over prioritering van aanvragen, verzoeken, klachten en bezwaren",
-                      "Beslissing over formele klachten en bezwaren",
-                      "Beslissing met directe financiële gevolgen voor burger of ambtenaar, \nzoals bijvoorbeeld beslissingen over een arbeidscontract, uitkering, toeslag, subsidie, boete, terugbetaling of mogelijkheid tot betalingsregeling",
-                      "Beslissing over aanvragen en verzoeken zonder directe financiële gevolgen, \nzoals bijvoorbeeld toekenning van een aanvraag van diensten of vergunningtoekenning",
-                      "Beslissing over controle, onderzoek of verzoek tot aanvullende informatieverschaffing",
-                      "Beslissing over toewijzing van scholen",
-                      "Beslissingen over te geven advies of het (proactief) aanbieden van diensten of voorzieningen",
-                    ],
-                  },
-                  effect: { $ref: "#/definitions/effectAI" },
-                },
-              },
-            ],
-          },
+          ...q5Dependencies(
+            "#/definitions/outputAI",
+            "#/definitions/effectAIADM",
+            "#/definitions/effectAIADM",
+            "#/definitions/effectAIADM",
+            "#/definitions/effectAI"
+          ),
+          // q5: {
+          //   oneOf: [
+          //     {
+          //       properties: {
+          //         q5: {
+          //           enum: ["Overige of andere beslissingen"],
+          //         },
+          //         q5_option8: {
+          //           type: "string",
+          //           title: "Beschrijf het soort beslissing",
+          //           default: "",
+          //         },
+          //         output: { $ref: "#/definitions/outputAI" },
+          //       },
+          //       required: ["q5_option8"],
+          //     },
+          //     {
+          //       properties: {
+          //         q5: {
+          //           enum: [
+          //             "Beslissing over controle, onderzoek of verzoek tot aanvullende informatieverschaffing",
+          //           ],
+          //         },
+          //         q5_option5: {
+          //           type: "string",
+          //           title:
+          //             "Is de controle of het onderzoek bijzonder ingrijpend voor de betrokkene?",
+          //           default: "",
+          //         },
+          //         output: { $ref: "#/definitions/effect" },
+          //       },
+          //       required: ["q5_option5"],
+          //     },
+          //     {
+          //       properties: {
+          //         q5: {
+          //           enum: [
+          //             "Beslissing over prioritering van aanvragen, verzoeken, klachten en bezwaren",
+          //             "Beslissing over formele klachten en bezwaren",
+          //             "Beslissing met directe financiële gevolgen voor burger of ambtenaar, \nzoals bijvoorbeeld beslissingen over een arbeidscontract, uitkering, toeslag, subsidie, boete, terugbetaling of mogelijkheid tot betalingsregeling",
+          //             "Beslissing over aanvragen en verzoeken zonder directe financiële gevolgen, \nzoals bijvoorbeeld toekenning van een aanvraag van diensten of vergunningtoekenning",
+          //             "Beslissing over controle, onderzoek of verzoek tot aanvullende informatieverschaffing",
+          //             "Beslissing over toewijzing van scholen",
+          //             "Beslissingen over te geven advies of het (proactief) aanbieden van diensten of voorzieningen",
+          //           ],
+          //         },
+          //         effect: { $ref: "#/definitions/effectAI" },
+          //       },
+          //     },
+          //   ],
+          // },
           q6: {
             oneOf: [
               {

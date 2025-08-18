@@ -13,7 +13,13 @@ export const q5 = {
     "Een andere beslissing met rechtsgevolgen zoals bijvoorbeeld vergunning toekenning of het aangaan van een overeenkomst",
   ],
 };
-export const q5Dependencies = () => ({
+export const q5Dependencies = (
+  output: string,
+  effect1: string,
+  effect2: string,
+  effect3: string,
+  effect4: string
+) => ({
   q5: {
     oneOf: [
       {
@@ -26,7 +32,9 @@ export const q5Dependencies = () => ({
             title: "Beschrijf het soort beslissing",
             default: "",
           },
-          output: { $ref: "#/definitions/outputNoAI" },
+          output: {
+            $ref: output, //"#/definitions/outputNoAI"
+          },
         },
         required: ["q5_option8"],
       },
@@ -40,7 +48,7 @@ export const q5Dependencies = () => ({
               "Een andere beslissing met rechtsgevolgen zoals bijvoorbeeld vergunning toekenning of het aangaan van een overeenkomst",
             ],
           },
-          effect: { $ref: "#/definitions/effectADM" },
+          effect: { $ref: effect1 }, //"#/definitions/effectADM"
         },
       },
       {
@@ -72,7 +80,7 @@ export const q5Dependencies = () => ({
               "Beslissingen over te geven advies of het (proactief) aanbieden van diensten of voorzieningen",
             ],
           },
-          effect: { $ref: "#/definitions/effect" },
+          effect: { $ref: effect2 }, //"#/definitions/effect"
         },
       },
     ],
@@ -94,7 +102,7 @@ export const q5Dependencies = () => ({
             title: "Beschrijf het gevolg van de controle voor de betrokkene",
             default: "",
           },
-          effect: { $ref: "#/definitions/effectADM" },
+          effect: { $ref: effect3 }, //"#/definitions/effectADM"
         },
         required: ["q5-option5-controle"],
       },
@@ -103,7 +111,7 @@ export const q5Dependencies = () => ({
           q5_option5: {
             enum: ["Nee"],
           },
-          effect: { $ref: "#/definitions/effect" },
+          effect: { $ref: effect4 }, //"#/definitions/effect"
         },
       },
     ],
