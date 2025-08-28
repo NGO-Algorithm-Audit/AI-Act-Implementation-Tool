@@ -34,6 +34,18 @@ export const noAIContDoorgaan = {
                     q9: {
                       enum: ["ja"],
                     },
+                    additionalOutputText: {
+                      default: `Let op: Het langdurig opslaan of delen met derden van de output van een algoritme kan leiden tot aanmerkelijke (onvoorziene) gevolgen voor een betrokkene. Hierdoor kan in juridische zin sprake zijn van geautomatiseerde besluitvorming (art 22) ook wanneer het primaire gebruik van het algoritme dit niet is. Bepaal in overleg met relevante juridische experts of door opslag of delen van de uitkomsten indirect sprake kan zijn van geautomatiseerde besluitvorming (art 22). Zie ook https://www.autoriteitpersoonsgegevens.nl/documenten/advies-geautomatiseerde-besluitvorming`,
+                    },
+                    outputIntermediate: {
+                      type: "string",
+                      title: "Volgende stap",
+                      default:
+                        "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
+                    },
+                    impact: {
+                      $ref: "#/definitions/impact",
+                    },
                   },
                 },
                 {
@@ -56,6 +68,18 @@ export const noAIContDoorgaan = {
                           properties: {
                             q10: {
                               enum: ["ja"],
+                            },
+                            additionalOutputText: {
+                              default: `Let op: Het langdurig opslaan of delen met derden van de output van een algoritme kan leiden tot aanmerkelijke (onvoorziene) gevolgen voor een betrokkene. Hierdoor kan in juridische zin sprake zijn van geautomatiseerde besluitvorming (art 22) ook wanneer het primaire gebruik van het algoritme dit niet is. Bepaal in overleg met relevante juridische experts of door opslag of delen van de uitkomsten indirect sprake kan zijn van geautomatiseerde besluitvorming (art 22). Zie ook https://www.autoriteitpersoonsgegevens.nl/documenten/advies-geautomatiseerde-besluitvorming`,
+                            },
+                            outputIntermediate: {
+                              type: "string",
+                              title: "Volgende stap",
+                              default:
+                                "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
+                            },
+                            impact: {
+                              $ref: "#/definitions/impact",
                             },
                           },
                         },

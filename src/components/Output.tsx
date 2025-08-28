@@ -34,7 +34,7 @@ export default function Output({
 
   // Enrich the data with the output.
   data = { ...data, output: output.default };
-
+  console.log("data", data);
   return (
     <>
       <Card bg={"light"} className="mb-4">
@@ -44,6 +44,9 @@ export default function Output({
           <Alert variant="primary" className={type === "error" ? "mb-0" : ""}>
             {output?.default}
           </Alert>
+          {data?.additionalOutputText && (
+            <Alert variant="info">{data?.additionalOutputText}</Alert>
+          )}
           {type === "output" && (
             <>
               <Card.Text>{t("save output")}</Card.Text>

@@ -840,5 +840,8 @@ Denk bij individuen ook aan ondernemingen waarbij de ondernemer persoonlijk aans
       "ui:widget": "textarea",
       "ui:classNames": "intermediate-output",
     },
+    additionalOutputText: {
+      "ui:widget": "hidden",
+    },
   },
 };
