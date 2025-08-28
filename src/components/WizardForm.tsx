@@ -226,9 +226,9 @@ const WizardForm = ({
   const currentStepSchema = getCurrentStepSchema(validator, schema, data);
 
   // Get visible fields for step calculation
-  const resolvedSchema = retrieveSchema(validator, schema, schema, data);
-  const flattenedSchema = flattenSchema(resolvedSchema, schema);
-  const visibleFields = getVisibleFields(flattenedSchema);
+  // const resolvedSchema = retrieveSchema(validator, schema, schema, data);
+  // const flattenedSchema = flattenSchema(resolvedSchema, schema);
+  // const visibleFields = getVisibleFields(flattenedSchema);
 
   const questions = Object.keys(
     getCurrentStepSchema(validator, schema, data)?.properties ?? {}
