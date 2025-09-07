@@ -16,6 +16,22 @@ export const AIContDoorgaan = {
         {
           properties: {
             q8: {
+              enum: ["nee"],
+            },
+            outputIntermediate: {
+              type: "string",
+              title: "Volgende stap",
+              default:
+                "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
+            },
+            impact: {
+              $ref: "#/definitions/impactAI",
+            },
+          },
+        },
+        {
+          properties: {
+            q8: {
               enum: ["ja"],
             },
             q9: {
