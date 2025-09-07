@@ -20,5 +20,6 @@
   "error message": "Er is een fout opgetreden. Er is geen uitkomst gevonden.",
   "required field": "Dit veld is verplicht",
   "no forms": "Geen formulieren beschikbaar",
-  "no forms title": "Geen formulier titel beschikbaar"
+  "no forms title": "Geen formulier titel beschikbaar",
+  "disclaimer": "Let op: Controleer altijd de uitkomsten van deze tool met behulp van juridische expertise, de wettekst en aanvullende relevante bronnen. Deze tool bevat interpretaties van complexe juridische definities, zoals begrepen door Stichting Algorithm Audit. De interpretatie van deze definities is nog niet uitgekristalliseerd en er zullen nog meerder jaren, aanvullende guidance en verschillende rechtszaken nodig zijn, voordat er een gedeelde universele interpretatie bestaat. Daarnaast gaan bij het vertalen van juridische definities naar begrijpelijke taal ook soms nuance verloren. Aan de uitkomsten van deze tool kunnen geen rechten worden ontleend."
 }

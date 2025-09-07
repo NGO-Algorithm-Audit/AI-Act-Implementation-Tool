@@ -20,5 +20,6 @@
   "error message": "An error occurred. No output was found.",
   "required field": "This field is required",
   "no forms": "No forms available",
-  "no forms title": "No form title available"
+  "no forms title": "No form title available",
+  "disclaimer": "Note: Always verify the outcomes of this tool using legal expertise, the legal text and additional relevant sources. This tool contains interpretations of complex legal definitions, as understood by Stichting Algorithm Audit. The interpretation of these definitions has not yet crystallized and many more years, additional guidance and various court cases will be needed before there is a shared universal interpretation. In addition, nuance is sometimes lost when translating legal definitions into understandable language. No rights can be derived from the outcomes of this tool."
 }

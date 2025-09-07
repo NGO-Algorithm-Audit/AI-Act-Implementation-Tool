@@ -50,6 +50,7 @@ export default function Output({
           {type === "output" && (
             <>
               <Card.Text>{t("save output")}</Card.Text>
+              
               <CodeBlock
                 style={a11yLight}
                 code={dictionaryToCsv(data)}
@@ -64,6 +65,9 @@ export default function Output({
                 title="JSON"
                 wrapLongLines={false}
               />
+              <Alert variant="warning" className="mt-3 mb-3">
+                <small>{t("disclaimer")}</small>
+              </Alert>
             </>
           )}
         </Card.Body>
