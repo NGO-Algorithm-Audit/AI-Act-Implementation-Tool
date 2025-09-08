@@ -304,7 +304,7 @@ const WizardForm = ({
               )}
             </div>
 
-            {/* <div>property (enable for testing!): {questions[0]}</div> */}
+            <div>id: {questions[0]}</div>
           </Form>
         )}
       </Card.Body>
