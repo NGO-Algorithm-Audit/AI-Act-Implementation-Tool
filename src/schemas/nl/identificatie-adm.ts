@@ -19,32 +19,66 @@ export const identificationSchema = {
       outputAI: {
         type: "string",
         title: "Uitslag",
-        default:
-          "Op basis van uw antwoorden is uw toepassing een AI-systeem volgens de AI-verordening. Vul de volgende vragenlijst in om te bepalen aan welke vereisten uit de AI-verordening de toepassing moet voldoen.",
+        default: `Op basis van uw antwoorden is uw toepassing:
+- wel een AI-systeem volgens de AI-verordening;
+- geen impactvol algoritme; en
+- geen geautomatiseerde besluitivorming.
+
+Vervolgstappen:
+Vul de AI risicoclassificatie vragenlijst in om te bepalen aan welke vereisten uit de AI-verordening de toepassing moet voldoen.`,
       },
       outputAlgorithm: {
         type: "string",
         title: "Uitslag",
-        default:
-          "Op basis van uw antwoorden is uw toepassing een impactvol algoritme. Het algoritme moet worden opgenomen in de het Algoritmeregister en het moet voldoen aan intern geldend algoritmebeleid.",
+        default: `Op basis van uw antwoorden is uw toepassing:
+- wel een impactvol algoritme;
+- geen geautomatiseerde besluitvorming; en
+- geen AI-systeem volgens de AI-verordening.
+
+
+Vervolgstappen:
+- Neem algoritme op in het Algoritmeregister.
+- Zorg dat wordt voldaan aan intern geldend algoritmebeleid.`,
       },
       outputAlgorithmAndAI: {
         type: "string",
         title: "Uitslag",
-        default:
-          "Op basis van uw antwoorden is uw toepassing een impactvol algoritme. Het algoritme moet worden opgenomen in de het Algoritmeregister en het moet voldoen aan intern geldend algoritmebeleid. \nOp basis van uw antwoorden is uw toepassing ook een AI-systeem volgens de AI-verordening. Vul de volgende vragenlijst in om te bepalen Vul de volgende vragenlijst in om te bepalen of de toepassing moet voldoen aan aanvullende eisen volgens de AI-verordening.",
+        default: `Op basis van uw antwoorden is uw toepassing:
+- wel een AI-systeem volgens de AI-verordening;
+- wel een impactvol algoritme; en
+- geen geautomatiseerde besluitvorming.
+
+Vervolgstappen:
+- Vul de AI risicoclassificatie vragenlijst in om te bepalen aan welke vereisten uit de AI-verordening de toepassing moet voldoen.
+- Neem het algoritme op in het Algoritmeregister.
+- Zorg dat wordt voldaan aan intern geldend algoritmebeleid.`,
       },
       outputAlgoAndADM: {
         type: "string",
         title: "Uitslag",
-        default:
-          "Op basis van uw antwoorden is uw toepassing:\n- geen AI-systeem volgens de AI-verordening;\n- wel een impactvol algoritme; en\n- mogelijk geautomatiseerde besluitivorming volgens artikel 22 van de AVG.\n\nVervolgstappen:\n- Neem het algoritme op in het Algoritmeregister\n - Zorg dat wordt voldaan aan intern geldend algoritmebeleid.\n- Bepaal in overleg met relevante juridische experts of er daadwerkelijk sprake is van geautomatiseerde besluitvorming.",
+        default: `Op basis van uw antwoorden is uw toepassing:
+- geen AI-systeem volgens de AI-verordening;
+- wel een impactvol algoritme; en
+- mogelijk geautomatiseerde besluitvorming volgens artikel 22 van de AVG.
+
+Vervolgstappen:
+- Neem het algoritme op in het Algoritmeregister 
+- Zorg dat wordt voldaan aan intern geldend algoritmebeleid.
+- Bepaal in overleg met relevante juridische experts of er daadwerkelijk sprake is van geautomatiseerde besluitvorming.`,
       },
       outputAlgoAndADMAndAI: {
         type: "string",
         title: "Uitslag",
-        default:
-          "Op basis van uw antwoorden is uw toepassing:\n- een AI-systeem volgens de AI-verordening;\n- een impactvol algoritme; en\n- mogelijk geautomatiseerde besluitivorming volgens artikel 22 van de AVG.\n\nVervolgstappen:\n- Vul de AI risicoclassificatie vragenlijst in om te bepalen aan welke vereisten uit de AI-verordening de toepassing moet voldoen.\n- Neem het algoritme op in het Algoritmeregister.\n- Zorg dat wordt voldaan aan intern geldend algoritmebeleid.\n- Bepaal in overleg met relevante juridische experts of er daadwerkelijk sprake is van geautomatiseerde besluitvorming.",
+        default: `Op basis van uw antwoorden is uw toepassing:
+- een AI-systeem volgens de AI-verordening;
+- een impactvol algoritme; en
+- mogelijk geautomatiseerde besluitivorming volgens artikel 22 van de AVG.
+
+Vervolgstappen:
+- Vul de AI risicoclassificatie vragenlijst in om te bepalen aan welke vereisten uit de AI-verordening de toepassing moet voldoen.
+- Neem het algoritme op in het Algoritmeregister.
+- Zorg dat wordt voldaan aan intern geldend algoritmebeleid.
+- Bepaal in overleg met relevante juridische experts of er daadwerkelijk sprake is van geautomatiseerde besluitvorming.`,
       },
       outputIntermediateAISystem: {
         type: "string",
