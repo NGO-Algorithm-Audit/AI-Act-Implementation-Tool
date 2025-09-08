@@ -6,7 +6,8 @@ import { q5, q5Dependencies } from "./identificatie/q5";
 
 export const identificationSchema = {
   JSONSchema: {
-    title: "Identificatie AI-systeem en impactvolle algoritmes",
+    title:
+      "[beta] Identificatie AI-systeem, impactvolle algoritmes en geautomatiseerde besluitvorming",
     type: "object",
     definitions: {
       outputNoAI: {
@@ -839,6 +840,7 @@ Denk bij individuen ook aan ondernemingen waarbij de ondernemer persoonlijk aans
     outputIntermediate: {
       "ui:widget": "textarea",
       "ui:classNames": "intermediate-output",
+      "ui:enableMarkdownInDescription": true,
     },
     additionalOutputText: {
       "ui:widget": "hidden",
