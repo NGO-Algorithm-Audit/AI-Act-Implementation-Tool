@@ -5,6 +5,7 @@ import { dictionaryToCsv } from "../utils/dictionaryToCsv";
 import { FormProps } from "@rjsf/core";
 import { RJSFSchema } from "@rjsf/utils";
 import { useTranslation } from "react-i18next";
+import Markdown from "markdown-to-jsx";
 
 export default function Output({
   id,
@@ -34,7 +35,6 @@ export default function Output({
 
   // Enrich the data with the output.
   data = { ...data, output: output.default };
-  console.log("data", data);
   return (
     <>
       <Card bg={"light"} className="mb-4">
@@ -42,7 +42,7 @@ export default function Output({
           <Card.Title>{output?.title}</Card.Title>
 
           <Alert variant="primary" className={type === "error" ? "mb-0" : ""}>
-            {output?.default}
+            <Markdown>{output?.default}</Markdown>
           </Alert>
           {data?.additionalOutputText && (
             <Alert variant="info">{data?.additionalOutputText}</Alert>
@@ -50,7 +50,7 @@ export default function Output({
           {type === "output" && (
             <>
               <Card.Text>{t("save output")}</Card.Text>
-              
+
               <CodeBlock
                 style={a11yLight}
                 code={dictionaryToCsv(data)}
