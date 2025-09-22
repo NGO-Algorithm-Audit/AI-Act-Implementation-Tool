@@ -86,6 +86,12 @@ Vervolgstappen:
         default:
           "Deze toepassing is een AI-systeem volgens de AI-verordening. Mogelijk is dit systeem ook een impactvol algoritme, vul daarvoor de volgende vragen in.",
       },
+      outputAIStop: {
+        type: "string",
+        title: "Uitslag",
+        default:
+          "Op basis van uw antwoorden is uw toepassing een AI-systeem volgens de AI-verordening. ",
+      },
       effect: {
         title: "Effect",
         type: "object",
@@ -673,7 +679,7 @@ Vervolgstappen:
                       AICont: {
                         enum: ["Vragenlijst stoppen, ga naar conclusies"],
                       },
-                      output: { $ref: "#/definitions/outputNoAI" },
+                      output: { $ref: "#/definitions/outputAIStop" },
                     },
                   },
                   { ...AIContDoorgaan },
