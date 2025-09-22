@@ -2632,8 +2632,7 @@
       "ui:description": "Denk aan monitoren van productiviteit of snelheid  of andere prestaties."
     },
     "III.5.1": {
-      "ui:widget": "radio",
-      "ui:description": "Het gaat hier om alle processen rondom uitkeringen of toeslagen, zoals aanvraag, administratie, uitvoering, handhaving, terugvordering en bezwaar. Dit omvat ook kwijtschelding van boetes, terugbetalingen, of het toekennen van een betalingsregeling.\n\nKies ook 'ja' wanneer de toepassing slechts een kleine rol speelt in het proces."
+      "ui:widget": "radio"
     },
     "III.5.2": {
       "ui:widget": "radio",
