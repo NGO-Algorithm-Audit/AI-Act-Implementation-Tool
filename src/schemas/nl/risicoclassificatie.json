@@ -306,14 +306,15 @@
               {
                 "properties": {
                   "III.1.4": {
-                    "enum": ["Ja"]
-                  }
+                    "enum": ["Nee"]
+                  },
+                  "infra": { "$ref": "#/definitions/infra" }
                 }
               },
               {
                 "properties": {
                   "III.1.4": {
-                    "enum": ["Nee"]
+                    "enum": ["Ja"]
                   },
                   "III.1.3": {
                     "type": "string",
