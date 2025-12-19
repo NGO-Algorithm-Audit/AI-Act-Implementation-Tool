@@ -5,7 +5,6 @@ import { noAIContDoorgaan } from "./identificatie/noAICont-doorgaan";
 import { noAIandAlgCont } from "./identificatie/noAIandAlgCont";
 import { noAIandAlgContDoorgaan } from "./identificatie/noAIandAlgCont-doorgaan";
 import { q5, q5Dependencies } from "./identificatie/q5";
-import { q5_1_op_1, q5_1_op_1Dependencies } from "./identificatie/q5_1_op_1";
 
 export const identificationSchema = {
   JSONSchema: {
@@ -141,6 +140,8 @@ Vervolgstappen:
                 properties: {
                   q7: {
                     enum: [
+                      "De uitkomst van het proces wordt deels beïnvloed door de toepassing. Het resultaat van de toepassing is belangrijk voor het eindresultaat, maar de uiteindelijke beslissing wordt genomen door een medewerker. Deze medewerker heeft de juiste informatie, ervaring/kunde, mandaat en beschikbare tijd om de beslissing te maken.",
+                      "De toepassing bepaalt (mede) het procesverloop, maar de uitkomst van het proces wordt volledig door een medewerker bepaald. Bijvoorbeeld wanneer de uitkomst van de toepassing een risicoscore aan de hand waarvan een controle proces wordt gestart of een meer insentieve dossierevalutie plaatsvindt, maar de controle of evaluatie daarna volledig door een medewerker wordt uitgevoerd.",
                       "Het procesverloop en uitkomst van het proces wordt volledig door een mens bepaald. Het resultaat van de toepassing is slechts één van de factoren en is niet doorslaggevend in de keuze.",
                     ],
                   },
@@ -165,11 +166,9 @@ Vervolgstappen:
                     enum: [
                       "De uitkomst van het proces wordt direct bepaald door de toepassing (hier is geen menselijke tussenkomst voor nodig). Nadat het proces is voltooid, kunnen mensen nog wel de resultaten controleren of analyseren.",
                       "De uitkomst van het proces wordt sterk beïnvloed door de toepassing. Bijvoorbeeld doordat werkvoorschriften bepalen wat het gevolg is van een bepaalde uitkomst van de toepassing. Een medewerker kan in sommige gevallen andere keuzes maken, maar meestal bepaalt het resultaat van het systeem wat het eindresultaat van het proces zal zijn.",
-                      "De uitkomst van het proces wordt deels beïnvloed door de toepassing. Het resultaat van de toepassing is belangrijk voor het eindresultaat, maar de uiteindelijke beslissing wordt genomen door een medewerker. Deze medewerker heeft de juiste informatie, ervaring/kunde, mandaat en beschikbare tijd om de beslissing te maken.",
-                      "De toepassing bepaalt (mede) het procesverloop, maar de uitkomst van het proces wordt volledig door een medewerker bepaald. Bijvoorbeeld wanneer de uitkomst van de toepassing een risicoscore aan de hand waarvan een controle proces wordt gestart of een meer insentieve dossierevalutie plaatsvindt, maar de controle of evaluatie daarna volledig door een medewerker wordt uitgevoerd.",
                     ],
                   },
-                  output: { $ref: "#/definitions/outputAlgo" },
+                  output: { $ref: "#/definitions/outputADM" },
                 },
               },
             ],
@@ -458,9 +457,9 @@ Vervolgstappen:
                   q4: {
                     enum: ["Ja"],
                   },
-                  q5_1_op_1,
+                  q5
                 },
-                required: ["q5_1_op_1"],
+                required: ["q5"],
               },
               {
                 properties: {
@@ -472,48 +471,13 @@ Vervolgstappen:
               },
             ],
           },
-          ...q5_1_op_1Dependencies(
+          ...q5Dependencies(
             "#/definitions/outputNone",
             "#/definitions/automation",
             "#/definitions/outputNone",
             "#/definitions/automation",
             "#/definitions/outputNone"
           ),
-          q6: {
-            oneOf: [
-              {
-                properties: {
-                  q6: {
-                    enum: ["Ja"],
-                  },
-                  effect: { $ref: "#/definitions/effect" },
-                },
-              },
-              {
-                properties: {
-                  q6: {
-                    enum: ["Ik weet het niet zeker"],
-                  },
-                  q6_unsure: {
-                    type: "string",
-                    title:
-                      "Geef een korte beschrijving van het proces en hoe dit burgers of ambtenaren raakt.",
-                    default: "",
-                  },
-                  effect: { $ref: "#/definitions/effect" },
-                },
-                required: ["q6_unsure"],
-              },
-              {
-                properties: {
-                  q6: {
-                    enum: ["Nee"],
-                  },
-                  output: { $ref: "#/definitions/outputNone" }, // wordt outputNone
-                },
-              },
-            ],
-          },
         },
       },
       impact: {
@@ -742,6 +706,33 @@ Vervolgstappen:
           {
             properties: {
               q1: {
+                minItems: 2,
+                maxItems:2,
+                allOf: [
+                  {
+                    contains: {
+                      enum: ["Een dashboard of grafiek, met enkel rechtstreekse datavisualisatie.\nWanneer in dit dashboard een van de eerdere opties wordt weergeven, kies dan de eerdere optie."],
+                    },
+                  },
+                  {
+                    contains: {
+                      enum: ["Een ander soort output"],
+                    },
+                  },
+                ],
+              },
+              q1_option6: {
+                type: "string",
+                title: "Geef een beschrijving van de output",
+                default: "",
+              },
+              output: { $ref: "#/definitions/outputNone" }, // wordt outputNone
+            },
+            required: ["q1_option6"],
+          },
+          {
+            properties: {
+              q1: {
                 anyOf: [
                   {
                     contains: {
@@ -829,6 +820,11 @@ Vervolgstappen:
                 enum: [
                   "Ja, de toepassing bevat componenten die zijn afgeleid uit data. Er is sprake van het fitten of leren van een model of automatische variabele selectie met behulp van statistiek, optimalisatie, simulatie, machine learning of een vergelijkbare techniek.",
                 ],
+              },
+              q2_yes2: {
+                type: "string",
+                title: "Beschrijf de methode",
+                default: "",
               },
               AICont,
             },
@@ -1032,15 +1028,6 @@ Vervolgstappen:
       "ui:widget": "radio",
     },
     "q5-option5-controle": {
-      "ui:widget": "textarea",
-    },
-    q5_1_op_1: {
-      "ui:widget": "radio",
-    },
-    q5_1_op_1_option5: {
-      "ui:widget": "radio",
-    },
-    "q5_1_op_1-option5-controle": {
       "ui:widget": "textarea",
     },
     q6: {
