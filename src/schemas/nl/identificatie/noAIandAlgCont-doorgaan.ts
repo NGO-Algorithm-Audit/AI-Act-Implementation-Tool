@@ -24,8 +24,8 @@ export const noAIandAlgContDoorgaan = {
               default:
                 "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
             },
-            impact: {
-              $ref: "#/definitions/impact",
+            decision: {
+              $ref: "#/definitions/decision",
             },
           },
         },
@@ -59,8 +59,8 @@ export const noAIandAlgContDoorgaan = {
                       default:
                         "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
                     },
-                    impact: {
-                      $ref: "#/definitions/impact",
+                    decision: {
+                      $ref: "#/definitions/decision",
                     },
                   },
                 },
@@ -94,8 +94,8 @@ export const noAIandAlgContDoorgaan = {
                               default:
                                 "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
                             },
-                            impact: {
-                              $ref: "#/definitions/impact",
+                            decision: {
+                              $ref: "#/definitions/decision",
                             },
                           },
                         },
@@ -110,8 +110,8 @@ export const noAIandAlgContDoorgaan = {
                               default:
                                 "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
                             },
-                            impact: {
-                              $ref: "#/definitions/impact",
+                            decision: {
+                              $ref: "#/definitions/decision",
                             },
                           },
                         },

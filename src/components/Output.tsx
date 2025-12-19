@@ -35,6 +35,23 @@ export default function Output({
 
   // Enrich the data with the output.
   data = { ...data, output: output.default };
+    // --- Export-only key mapping (keeps UI/form logic intact) ---
+  const exportData: any = { ...data };
+
+  // Map new q5_1_op_1 keys back to old q5 keys
+  if ("q5_1_op_1" in exportData) exportData.q5 = exportData.q5_1_op_1;
+  if ("q5_1_op_1_option5" in exportData)
+    exportData.q5_option5 = exportData.q5_1_op_1_option5;
+  if ("q5_1_op_1_option8" in exportData)
+    exportData.q5_option8 = exportData.q5_1_op_1_option8;
+  if ("q5_1_op_1-option5-controle" in exportData)
+    exportData["q5-option5-controle"] = exportData["q5_1_op_1-option5-controle"];
+
+  // Remove the new keys so users only see q5, q5_option5, etc.
+  delete exportData.q5_1_op_1;
+  delete exportData.q5_1_op_1_option5;
+  delete exportData.q5_1_op_1_option8;
+  delete exportData["q5_1_op_1-option5-controle"];
   return (
     <>
       <Card bg={"light"} className="mb-4">
@@ -53,14 +70,14 @@ export default function Output({
 
               <CodeBlock
                 style={a11yLight}
-                code={dictionaryToCsv(data)}
+                code={dictionaryToCsv(exportData)}
                 language={"typescript"}
                 title={"CSV"}
                 wrapLongLines={false}
               />
               <CodeBlock
                 style={a11yLight}
-                code={JSON.stringify(data, null, 2)}
+                code={JSON.stringify(exportData, null, 2)}
                 language={"json"}
                 title="JSON"
                 wrapLongLines={false}
