@@ -7,10 +7,10 @@ export const q5 = {
     "Beslissing over formele klachten en bezwaren",
     "Beslissing met directe financiële gevolgen voor burger of ambtenaar, \nzoals bijvoorbeeld beslissingen over een arbeidscontract, uitkering, toeslag, subsidie, boete, terugbetaling of mogelijkheid tot betalingsregeling",
     "Beslissing over controle, onderzoek of verzoek tot aanvullende informatieverschaffing",
-    "Beslissing over toewijzing van scholen",
-    "Beslissingen over te geven advies of het (proactief) aanbieden van diensten of voorzieningen",
-    "Overige of andere beslissingen",
+    "Beslissing over toewijzing van scholen of kinderopvang",
+    "Beslissingen of een persoon in aanmerking komt voor een dienst of voorziening",
     "Een andere beslissing met rechtsgevolgen zoals bijvoorbeeld vergunning toekenning of het aangaan van een overeenkomst",
+    "Overige of andere beslissingen",
   ],
 };
 export const q5Dependencies = (
@@ -33,7 +33,7 @@ export const q5Dependencies = (
             default: "",
           },
           output: {
-            $ref: output, //"#/definitions/outputNoAI"
+            $ref: output, //"#/definitions/outputNone" OR //"#/definitions/outputAI"
           },
         },
         required: ["q5_option8"],
@@ -44,11 +44,12 @@ export const q5Dependencies = (
             enum: [
               "Beslissing over formele klachten en bezwaren",
               "Beslissing met directe financiële gevolgen voor burger of ambtenaar, \nzoals bijvoorbeeld beslissingen over een arbeidscontract, uitkering, toeslag, subsidie, boete, terugbetaling of mogelijkheid tot betalingsregeling",
-              "Beslissing over toewijzing van scholen",
+              "Beslissing over toewijzing van scholen of kinderopvang",
+              "Beslissingen of een persoon in aanmerking komt voor een dienst of voorziening",
               "Een andere beslissing met rechtsgevolgen zoals bijvoorbeeld vergunning toekenning of het aangaan van een overeenkomst",
             ],
           },
-          effect: { $ref: effect1 }, //"#/definitions/effectADM"
+          effect: { $ref: effect1 }, //"#/definitions/effectADM" OR //"#/definitions/effectAIADM"
         },
       },
       {
@@ -63,9 +64,10 @@ export const q5Dependencies = (
             title:
               "Is de controle of het onderzoek bijzonder ingrijpend voor de betrokkene?",
             enum: [
-              "Ja, omdat de controle of het onderzoek wordt uitgevoerd moet de betrokkene langer wachten op een uitkering of toeslag of komt de betrokkenen niet in aanmerking voor een voorschot",
+              "Ja, omdat de controle of het onderzoek wordt uitgevoerd moet de betrokkene langer wachten op een uitkering, toeslag, teruggaaf of komt de betrokkenen niet in aanmerking voor een voorschot",
               "Ja, omdat de controle of het onderzoek wordt uitgevoerd komt de betrokkene niet in aanmerking voor een betalingsregeling",
-              "Ja, omdat de controle of het onderzoek is ingrijpend, bijvoorbeeld omdat een fysieke controle plaatsvind (bijv. een huisbezoek) of omdat het onderzoek op een andere manier een grote invloed heeft op het (prive) leven van de betrokkene.",
+              "Ja, omdat de controle of het onderzoek wordt uitgevoerd moet de betrokkene langer wachten om in aanmerking te komen voor een dienst, voorziening of vergunning, of wordt een dienst, voorziening of vergunning (tijdelijk) ontzegd",
+              "Ja, omdat de controle of het onderzoek is ingrijpend, bijvoorbeeld omdat een fysieke controle plaatsvind (bijv. een huisbezoek) of omdat het onderzoek op een andere manier een grote invloed heeft op het (prive) leven van de betrokkene",
               "Ja, de controle is om een andere reden bijzonder ingrijpend voor de betrokkene",
               "Nee",
             ],
@@ -77,10 +79,9 @@ export const q5Dependencies = (
           q5: {
             enum: [
               "Beslissing over prioritering van aanvragen, verzoeken, klachten en bezwaren",
-              "Beslissingen over te geven advies of het (proactief) aanbieden van diensten of voorzieningen",
             ],
           },
-          effect: { $ref: effect2 }, //"#/definitions/effect"
+          effect: { $ref: effect2 }, //"#/definitions/effect" OR //"#/definitions/effectAI"
         },
       },
     ],
@@ -91,8 +92,9 @@ export const q5Dependencies = (
         properties: {
           q5_option5: {
             enum: [
-              "Ja, omdat de controle of het onderzoek wordt uitgevoerd moet de betrokkene langer wachten op een uitkering of toeslag of komt de betrokkenen niet in aanmerking voor een voorschot",
+              "Ja, omdat de controle of het onderzoek wordt uitgevoerd moet de betrokkene langer wachten op een uitkering, toeslag, teruggaaf of komt de betrokkenen niet in aanmerking voor een voorschot",
               "Ja, omdat de controle of het onderzoek wordt uitgevoerd komt de betrokkene niet in aanmerking voor een betalingsregeling",
+              "Ja, omdat de controle of het onderzoek wordt uitgevoerd moet de betrokkene langer wachten om in aanmerking te komen voor een dienst, voorziening of vergunning, of wordt een dienst, voorziening of vergunning (tijdelijk) ontzegd",
               "Ja, omdat de controle of het onderzoek is ingrijpend, bijvoorbeeld omdat een fysieke controle plaatsvind (bijv. een huisbezoek) of omdat het onderzoek op een andere manier een grote invloed heeft op het (prive) leven van de betrokkene.",
               "Ja, de controle is om een andere reden bijzonder ingrijpend voor de betrokkene",
             ],
@@ -102,7 +104,7 @@ export const q5Dependencies = (
             title: "Beschrijf het gevolg van de controle voor de betrokkene",
             default: "",
           },
-          effect: { $ref: effect3 }, //"#/definitions/effectADM"
+          effect: { $ref: effect3 }, //"#/definitions/effectADM" OR //"#/definitions/effectAIADM"
         },
         required: ["q5-option5-controle"],
       },
@@ -111,7 +113,7 @@ export const q5Dependencies = (
           q5_option5: {
             enum: ["Nee"],
           },
-          effect: { $ref: effect4 }, //"#/definitions/effect"
+          effect: { $ref: effect4 }, //"#/definitions/effect" OR //"#/definitions/effectAI"
         },
       },
     ],

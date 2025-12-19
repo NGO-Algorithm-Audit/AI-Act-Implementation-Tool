@@ -2,6 +2,8 @@ import { AICont } from "./identificatie/AICont";
 import { AIContDoorgaan } from "./identificatie/AICont-doorgaan";
 import { noAICont } from "./identificatie/noAICont";
 import { noAIContDoorgaan } from "./identificatie/noAICont-doorgaan";
+import { noAIandAlgCont } from "./identificatie/noAIandAlgCont";
+import { noAIandAlgContDoorgaan } from "./identificatie/noAIandAlgCont-doorgaan";
 import { q5, q5Dependencies } from "./identificatie/q5";
 
 export const identificationSchema = {
@@ -10,12 +12,6 @@ export const identificationSchema = {
       "[beta] Identificatie AI-systeem, impactvolle algoritmes en geautomatiseerde besluitvorming",
     type: "object",
     definitions: {
-      outputNoAI: {
-        type: "string",
-        title: "Uitslag",
-        default:
-          "Op basis van uw antwoorden is uw toepassing geen AI-systeem of impactvol algoritme.",
-      },
       outputAI: {
         type: "string",
         title: "Uitslag",
@@ -27,7 +23,7 @@ export const identificationSchema = {
 Vervolgstappen:
 Vul de AI risicoclassificatie vragenlijst in om te bepalen aan welke vereisten uit de AI-verordening de toepassing moet voldoen.`,
       },
-      outputAlgorithm: {
+      outputAlgo: {
         type: "string",
         title: "Uitslag",
         default: `Op basis van uw antwoorden is uw toepassing:
@@ -40,7 +36,7 @@ Vervolgstappen:
 - Neem algoritme op in het Algoritmeregister.
 - Zorg dat wordt voldaan aan intern geldend algoritmebeleid.`,
       },
-      outputAlgorithmAndAI: {
+      outputAlgoandAI: {
         type: "string",
         title: "Uitslag",
         default: `Op basis van uw antwoorden is uw toepassing:
@@ -53,7 +49,7 @@ Vervolgstappen:
 - Neem het algoritme op in het Algoritmeregister.
 - Zorg dat wordt voldaan aan intern geldend algoritmebeleid.`,
       },
-      outputAlgoAndADM: {
+      outputAlgoandADM: {
         type: "string",
         title: "Uitslag",
         default: `Op basis van uw antwoorden is uw toepassing:
@@ -66,7 +62,7 @@ Vervolgstappen:
 - Zorg dat wordt voldaan aan intern geldend algoritmebeleid.
 - Bepaal in overleg met relevante juridische experts of er daadwerkelijk sprake is van geautomatiseerde besluitvorming.`,
       },
-      outputAlgoAndADMAndAI: {
+      outputAlgoADMandAI: {
         type: "string",
         title: "Uitslag",
         default: `Op basis van uw antwoorden is uw toepassing:
@@ -80,17 +76,32 @@ Vervolgstappen:
 - Zorg dat wordt voldaan aan intern geldend algoritmebeleid.
 - Bepaal in overleg met relevante juridische experts of er daadwerkelijk sprake is van geautomatiseerde besluitvorming.`,
       },
-      outputIntermediateAISystem: {
-        type: "string",
-        title: "Uitslag",
-        default:
-          "Deze toepassing is een AI-systeem volgens de AI-verordening. Mogelijk is dit systeem ook een impactvol algoritme, vul daarvoor de volgende vragen in.",
-      },
       outputAIStop: {
         type: "string",
         title: "Uitslag",
         default:
           "Op basis van uw antwoorden is uw toepassing een AI-systeem volgens de AI-verordening. ",
+      },
+      outputNoAIStop: {
+        type: "string",
+        title: "Uitslag",
+        default:
+          "Op basis van uw antwoorden is uw toepassing geen AI-systeem volgens de AI-verordening.",
+      },
+      outputNoAIandAlgoStop: {
+        type: "string",
+        title: "Uitslag",
+        default:
+          "Op basis van uw antwoorden is uw toepassing geen AI-systeem of impactvol algoritme.",
+      },
+      outputNone: {
+        type: "string",
+        title: "Uitslag",
+        default:
+          `Op basis van uw antwoorden is uw toepassing:
+- geen impactvol algoritme;
+- geen geautomatiseerde besluitvorming; en
+- geen AI-systeem volgens de AI-verordening.`,
       },
       effect: {
         title: "Effect",
@@ -121,7 +132,7 @@ Vervolgstappen:
                       "Het procesverloop en uitkomst van het proces wordt volledig door een mens bepaald. Het resultaat van de toepassing is slechts één van de factoren en is niet doorslaggevend in de keuze.",
                     ],
                   },
-                  output: { $ref: "#/definitions/outputNoAI" },
+                  output: { $ref: "#/definitions/outputNone" }, //wordt outputNone
                 },
               },
               {
@@ -132,7 +143,7 @@ Vervolgstappen:
                     title:
                       "Beschrijf het effect van de toepassing op het proces",
                   },
-                  output: { $ref: "#/definitions/outputNoAI" },
+                  output: { $ref: "#/definitions/outputNone" }, //wordt outputNone
                 },
                 required: ["q7_option5"],
               },
@@ -146,7 +157,7 @@ Vervolgstappen:
                       "De toepassing bepaalt (mede) het procesverloop, maar de uitkomst van het proces wordt volledig door een medewerker bepaald. Bijvoorbeeld wanneer de uitkomst van de toepassing een risicoscore aan de hand waarvan een controle proces wordt gestart of een meer insentieve dossierevalutie plaatsvindt, maar de controle of evaluatie daarna volledig door een medewerker wordt uitgevoerd.",
                     ],
                   },
-                  output: { $ref: "#/definitions/outputAlgorithm" },
+                  output: { $ref: "#/definitions/outputAlgo" },
                 },
               },
             ],
@@ -182,7 +193,7 @@ Vervolgstappen:
                       "Het procesverloop en uitkomst van het proces wordt volledig door een mens bepaald. Het resultaat van de toepassing is slechts één van de factoren en is niet doorslaggevend in de keuze.",
                     ],
                   },
-                  output: { $ref: "#/definitions/outputNoAI" },
+                  output: { $ref: "#/definitions/outputNone" }, //wordt outputNone
                 },
               },
               {
@@ -193,7 +204,7 @@ Vervolgstappen:
                     title:
                       "Beschrijf het effect van de toepassing op het proces",
                   },
-                  output: { $ref: "#/definitions/outputNoAI" },
+                  output: { $ref: "#/definitions/outputNone" }, //wordt outputNone
                 },
                 required: ["q7_option5"],
               },
@@ -205,7 +216,7 @@ Vervolgstappen:
                       "De uitkomst van het proces wordt sterk beïnvloed door de toepassing. Bijvoorbeeld doordat werkvoorschriften bepalen wat het gevolg is van een bepaalde uitkomst van de toepassing. Een medewerker kan in sommige gevallen andere keuzes maken, maar meestal bepaalt het resultaat van het systeem wat het eindresultaat van het proces zal zijn.",
                     ],
                   },
-                  output: { $ref: "#/definitions/outputAlgoAndADM" },
+                  output: { $ref: "#/definitions/outputAlgoandADM" },
                 },
               },
               {
@@ -216,7 +227,7 @@ Vervolgstappen:
                       "De toepassing bepaalt (mede) het procesverloop, maar de uitkomst van het proces wordt volledig door een medewerker bepaald. Bijvoorbeeld wanneer de uitkomst van de toepassing een risicoscore aan de hand waarvan een controle proces wordt gestart of een meer insentieve dossierevalutie plaatsvindt, maar de controle of evaluatie daarna volledig door een medewerker wordt uitgevoerd.",
                     ],
                   },
-                  output: { $ref: "#/definitions/outputAlgorithm" },
+                  output: { $ref: "#/definitions/outputAlgo" },
                 },
               },
             ],
@@ -252,7 +263,7 @@ Vervolgstappen:
                       "Het procesverloop en uitkomst van het proces wordt volledig door een mens bepaald. Het resultaat van de toepassing is slechts één van de factoren en is niet doorslaggevend in de keuze.",
                     ],
                   },
-                  output: { $ref: "#/definitions/outputNoAI" },
+                  output: { $ref: "#/definitions/outputAI" }, //fixed naar outputAI
                 },
               },
               {
@@ -263,7 +274,7 @@ Vervolgstappen:
                     title:
                       "Beschrijf het effect van de toepassing op het proces",
                   },
-                  output: { $ref: "#/definitions/outputNoAI" },
+                  output: { $ref: "#/definitions/outputAI" }, //fixed naar outputAI
                 },
                 required: ["q7_option5"],
               },
@@ -275,7 +286,7 @@ Vervolgstappen:
                       "De uitkomst van het proces wordt sterk beïnvloed door de toepassing. Bijvoorbeeld doordat werkvoorschriften bepalen wat het gevolg is van een bepaalde uitkomst van de toepassing. Een medewerker kan in sommige gevallen andere keuzes maken, maar meestal bepaalt het resultaat van het systeem wat het eindresultaat van het proces zal zijn.",
                     ],
                   },
-                  output: { $ref: "#/definitions/outputAlgoAndADMAndAI" },
+                  output: { $ref: "#/definitions/outputAlgoADMandAI" },
                 },
               },
               {
@@ -286,7 +297,7 @@ Vervolgstappen:
                       "De toepassing bepaalt (mede) het procesverloop, maar de uitkomst van het proces wordt volledig door een medewerker bepaald. Bijvoorbeeld wanneer de uitkomst van de toepassing een risicoscore aan de hand waarvan een controle proces wordt gestart of een meer insentieve dossierevalutie plaatsvindt, maar de controle of evaluatie daarna volledig door een medewerker wordt uitgevoerd.",
                     ],
                   },
-                  output: { $ref: "#/definitions/outputAlgorithmAndAI" },
+                  output: { $ref: "#/definitions/outputAlgoandAI" },
                 },
               },
             ],
@@ -347,7 +358,7 @@ Vervolgstappen:
                       "De toepassing bepaalt (mede) het procesverloop, maar de uitkomst van het proces wordt volledig door een medewerker bepaald. Bijvoorbeeld wanneer de uitkomst van de toepassing een risicoscore aan de hand waarvan een controle proces wordt gestart of een meer insentieve dossierevalutie plaatsvindt, maar de controle of evaluatie daarna volledig door een medewerker wordt uitgevoerd.",
                     ],
                   },
-                  output: { $ref: "#/definitions/outputAlgorithmAndAI" },
+                  output: { $ref: "#/definitions/outputAlgoandAI" },
                 },
               },
             ],
@@ -395,7 +406,7 @@ Vervolgstappen:
             ],
           },
           ...q5Dependencies(
-            "#/definitions/outputNoAI",
+            "#/definitions/outputNone",
             "#/definitions/effectADM",
             "#/definitions/effect",
             "#/definitions/effectADM",
@@ -431,7 +442,7 @@ Vervolgstappen:
                   q6: {
                     enum: ["Nee"],
                   },
-                  output: { $ref: "#/definitions/outputNoAI" },
+                  output: { $ref: "#/definitions/outputNone" }, // wordt outputNone
                 },
               },
             ],
@@ -560,7 +571,7 @@ Vervolgstappen:
                 title: "Geef een beschrijving van de output",
                 default: "",
               },
-              output: { $ref: "#/definitions/outputNoAI" },
+              output: { $ref: "#/definitions/outputNone" }, // wordt outputNone
             },
             required: ["q1_option6"],
           },
@@ -574,7 +585,7 @@ Vervolgstappen:
                   ],
                 },
               },
-              output: { $ref: "#/definitions/outputNoAI" },
+              output: { $ref: "#/definitions/outputNone" }, // wordt outputNone
             },
           },
           {
@@ -653,7 +664,7 @@ Vervolgstappen:
                       noAICont: {
                         enum: ["Vragenlijst stoppen, ga naar conclusies"],
                       },
-                      output: { $ref: "#/definitions/outputNoAI" },
+                      output: { $ref: "#/definitions/outputNoAIStop" }, //wordt outputNoAIStop
                     },
                   },
                   { ...noAIContDoorgaan },
@@ -725,9 +736,24 @@ Vervolgstappen:
                   "Welk formeel beleid, wet- of regelgeving? Welk artikel, lid of paragraaf van deze regelgeving?",
                 default: "",
               },
-              output: { $ref: "#/definitions/outputNoAI" },
+              noAIandAlgCont,
             },
-            required: ["q3_yes1"],
+            required: ["q3_yes1", "noAIandAlgCont"],
+            dependencies: {
+              noAIandAlgCont: {
+                oneOf: [
+                  {
+                    properties: {
+                      noAIandAlgCont: {
+                        enum: ["Vragenlijst stoppen, ga naar conclusies"],
+                      },
+                      output: { $ref: "#/definitions/outputNoAIandAlgoStop" },
+                    },
+                  },
+                  { ...noAIandAlgContDoorgaan },
+                ],
+              },
+            },
           },
           {
             properties: {
@@ -747,7 +773,7 @@ Vervolgstappen:
                       noAICont: {
                         enum: ["Vragenlijst stoppen, ga naar conclusies"],
                       },
-                      output: { $ref: "#/definitions/outputNoAI" },
+                      output: { $ref: "#/definitions/outputNoAIStop" }, //wordt outputNoAIStop
                     },
                   },
                   { ...noAIContDoorgaan },
@@ -773,7 +799,7 @@ Vervolgstappen:
                       AICont: {
                         enum: ["Vragenlijst stoppen, ga naar conclusies"],
                       },
-                      output: { $ref: "#/definitions/outputNoAI" },
+                      output: { $ref: "#/definitions/outputAIStop" }, //wordt outputAIStop
                     },
                   },
                   { ...AIContDoorgaan },
@@ -803,7 +829,7 @@ Vervolgstappen:
                       noAICont: {
                         enum: ["Vragenlijst stoppen, ga naar conclusies"],
                       },
-                      output: { $ref: "#/definitions/outputNoAI" },
+                      output: { $ref: "#/definitions/outputAIStop" }, //wordt outputAIStop
                     },
                   },
                   { ...noAIContDoorgaan },
@@ -822,12 +848,16 @@ Vervolgstappen:
     q2: {
       "ui:widget": "radio",
       "ui:description":
-        "Data omvat alle vormen van elektronische gegevens. Tekst, afbeeldingen, audio zijn ook data.\n\nVerschillende vormen van algoritmes kunnen uit data worden afgeleid. Bij regel-gebasseerde algoritmes kunnen drempelwaardes voor (uitval)regels of weegfactoren voor beslissingen uit data worden berekend.\nOok klassieke statistische modellen, zoals regressiemodellen, worden afgeleid uit data. Machine learning wordt gebruikt om een model te leren uit data. Large language modellen zoals ChatGPT maken gebruik van machine learning.",
+        "Data omvat alle vormen van elektronische gegevens. Tekst, afbeeldingen, audio zijn ook data.\n\nToepassingen kunnen met de hand worden ontworpen. Maar ook wanneer deze handmatig is opgesteld, wordt het ontwerp soms gebaseerd op data-analyse. Zo kunnen drempelwaardes voor (uitval)regels berekend worden uit data of criteria gekozen worden aan de hand van berekende correlaties.\n\nHet komt ook voor dat componenten (e.g. modellen en algoritmes) meer automatisch uit data worden afgeleid. Bijvoorbeeld door een statistisch model te fitten op data of d.m.v. machine learning een model  of regelgebaseerd algoritme te leren uit data. Ook vormen van simulatie en optimalising kunnen gebruikt worden om een model af te leiden uit data.\n\nLarge language modellen zoals ChatGPT zijn ook afgeleid (geleerd) uit grote hoeveelheden tekstuele data.",
     },
     q3: {
       "ui:widget": "radio",
-      "ui:description":
-        "Een voorbeeld van in wet- of regelgeving vastgestelde regels is een regelgebaseerd algoritme dat bij aanvraag voor een bijstandsuitkering geautomatiseerd aangeeft wanneer niet is voldaan inkomens- en vermogenseisen. De regels in het algoritme zijn in dat geval een letterlijke implementatie van normen gespecificeerd in de Participatiewet.\nWanneer een norm open is gedefninieerd in wet- of regelgeving en deze verder worden gespecificeerd in de toepassing, is de toepassing geen een-op-een automatisering van wet- of regelgeving.\n\nVoorbeelden van door mensen opgestelde regels zijn een regelgebaseerd algoritme waarbij een werkinstructie is vertaald naar een algoritme, een risicoprofiel waarbij de regels met de hand zijn opgesteld op basis van ervaring van medewerkers of wettelijke normen die verder gespecificeerd zijn in regels.\n\nOp logica- en kennis-gebaseerde benaderingen worden ook wel symbolische AI-systemen genoemd (symbolic AI). Onder deze  vorm van AI-systemen vallen kennisrepresentatie, inductief (logisch) programmeren, kennisbanken, inferentie- en deductiemachines, (symbolisch) redeneren. Deze technologie wordt bijvoorbeeld ingezet in expert systemen.",
+      "ui:enableMarkdownInDescription": true,
+      "ui:description": `Een voorbeeld van in wet- of regelgeving vastgestelde regels is een regelgebaseerd algoritme dat bij aanvraag voor een bijstandsuitkering geautomatiseerd aangeeft wanneer niet is voldaan inkomens- en vermogenseisen. De regels in het algoritme zijn in dat geval een letterlijke implementatie van normen gespecificeerd in de Participatiewet.\nWanneer een norm open is gedefninieerd in wet- of regelgeving en deze verder worden gespecificeerd in de toepassing, is de toepassing **geen** een-op-een automatisering van wet- of regelgeving.\n\nVoorbeelden van door mensen opgestelde regels zijn:
+- een regelgebaseerd algoritme waarbij een werkinstructie is vertaald naar een algoritme
+- een risicoprofiel waarbij de regels met de hand zijn opgesteld op basis van ervaring van medewerkers
+- open wettelijke normen die verder gespecificeerd zijn in regels
+\n\nOp logica- en kennis-gebaseerde benaderingen worden ook wel symbolische AI-systemen genoemd (symbolic AI). Onder deze  vorm van AI-systemen vallen kennisrepresentatie, inductief (logisch) programmeren, kennisbanken, inferentie- en deductiemachines, (symbolisch) redeneren. Deze technologie wordt bijvoorbeeld ingezet in expert systemen.`,
     },
     AICont: {
       "ui:widget": "radio",
@@ -835,11 +865,14 @@ Vervolgstappen:
     noAICont: {
       "ui:widget": "radio",
     },
+    noAIandAlgCont: {
+      "ui:widget": "radio",
+    },
     q4: {
       "ui:widget": "radio",
       "ui:enableMarkdownInDescription": true,
       "ui:description":
-        "Denk aan prioritering, opvolging van een vraag of een verzoek van een burger. Bijvoorbeeld wel/geen verzoek aan een burger om aanvullende informatie aan te leveren, wel/geen selectie voor controle of inspectie, wel/niet (proactief) aanbieden van specifieke voorziening bij bijstand etc.\n\n**Let op: een beslissing is veel breder dan een formeel besluit zoals gedefinieerd in de Algemene wet bestuursrecht Art. 1:3.**",
+        "Denk aan prioritering van de opvolging vraag of verzoek van een burger, wel/geen verzoek aan burger om aanvullende informatie aan te leveren, wel/geen selectie voor controle of inspectie, wel/niet of een persoon in aanmerking komt voor diensten of voorzieningen etc.\n\n**Let op: een beslissing is veel breder dan een formeel besluit zoals gedefinieerd in de Algemene wet bestuursrecht Art. 1:3.**",
     },
     q5: {
       "ui:widget": "radio",
@@ -861,7 +894,10 @@ Vervolgstappen:
     q8: {
       "ui:widget": "radio",
       "ui:description": `Voorbeelden van output over een individuele burger zijn:
-- een inschatting van een eigenschap 
+- Een inschatting van een eigenschap
+
+Voorbeelden van casus die een individuele burger aangaat zijn:
+- Zaken die aan een individu gekoppeld zijn, zoals een transactie of een aanvraag
 
 Voorbeelden van informatie die niet over indiviuen gaat zijn:
 - Output over groepen, waarin de individuen niet los van de groep een uitput krijgen toegekent
