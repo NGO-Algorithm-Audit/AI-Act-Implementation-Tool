@@ -1,6 +1,6 @@
-export const AIContDoorgaan = {
+export const saving_sharing_ADM = {
   properties: {
-    AICont: {
+    noAIandAlgCont: {
       enum: ["Doorgaan"],
     },
     q8: {
@@ -25,7 +25,7 @@ export const AIContDoorgaan = {
                 "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
             },
             impact: {
-              $ref: "#/definitions/impactAI",
+              $ref: "#/definitions/impact_ADM",
             },
           },
         },
@@ -60,7 +60,7 @@ export const AIContDoorgaan = {
                         "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
                     },
                     impact: {
-                      $ref: "#/definitions/impactAI",
+                      $ref: "#/definitions/impact_ADM",
                     },
                   },
                 },
@@ -95,7 +95,7 @@ export const AIContDoorgaan = {
                                 "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
                             },
                             impact: {
-                              $ref: "#/definitions/impactAI",
+                              $ref: "#/definitions/impact_ADM",
                             },
                           },
                         },
@@ -111,7 +111,7 @@ export const AIContDoorgaan = {
                                 "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
                             },
                             impact: {
-                              $ref: "#/definitions/impactAI",
+                              $ref: "#/definitions/impact_ADM",
                             },
                           },
                         },

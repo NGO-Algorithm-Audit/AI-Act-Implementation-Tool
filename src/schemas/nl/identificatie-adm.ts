@@ -1,9 +1,9 @@
 import { AICont } from "./identificatie/AICont";
-import { AIContDoorgaan } from "./identificatie/AICont-doorgaan";
+import { saving_sharing_AIAlgoADM } from "./identificatie/saving_sharing_AIAlgoADM";
 import { noAICont } from "./identificatie/noAICont";
-import { noAIContDoorgaan } from "./identificatie/noAICont-doorgaan";
+import { saving_sharing_AlgoADM } from "./identificatie/saving_sharing_AlgoADM";
 import { noAIandAlgCont } from "./identificatie/noAIandAlgCont";
-import { noAIandAlgContDoorgaan } from "./identificatie/noAIandAlgCont-doorgaan";
+import { saving_sharing_ADM } from "./identificatie/saving_sharing_ADM";
 import { q5, q5Dependencies } from "./identificatie/q5";
 
 export const identificationSchema = {
@@ -114,7 +114,7 @@ Vervolgstappen:
 - geen geautomatiseerde besluitvorming; en
 - geen AI-systeem volgens de AI-verordening.`,
       },
-      automation: {
+      automation_ADM: {
         title: "Effect",
         type: "object",
         properties: {
@@ -175,7 +175,7 @@ Vervolgstappen:
           },
         },
       },
-      effect: {
+      automation_Algo: {
         title: "Effect",
         type: "object",
         properties: {
@@ -236,7 +236,7 @@ Vervolgstappen:
           },
         },
       },
-      effectADM: {
+      automation_AlgoADM: {
         title: "Effect",
         type: "object",
         properties: {
@@ -306,7 +306,7 @@ Vervolgstappen:
           },
         },
       },
-      effectAIADM: {
+      automation_AIAlgoADM: {
         title: "Effect",
         type: "object",
         properties: {
@@ -376,8 +376,8 @@ Vervolgstappen:
           },
         },
       },
-      effectAI: {
-        title: "EffectAI",
+      automation_AIAlgo: {
+        title: "Effect",
         type: "object",
         properties: {
           q7: {
@@ -437,8 +437,8 @@ Vervolgstappen:
           },
         },
       },
-      decision: {
-        title: "decision",
+      impact_ADM: {
+        title: "Impact",
         type: "object",
         properties: {
           q4: {
@@ -473,15 +473,15 @@ Vervolgstappen:
           },
           ...q5Dependencies(
             "#/definitions/outputNone",
-            "#/definitions/automation",
+            "#/definitions/automation_ADM",
             "#/definitions/outputNone",
-            "#/definitions/automation",
+            "#/definitions/automation_ADM",
             "#/definitions/outputNone"
           ),
         },
       },
-      impact: {
-        title: "impact",
+      impact_AlgoADM: {
+        title: "Impact",
         type: "object",
         properties: {
           q4: {
@@ -522,10 +522,10 @@ Vervolgstappen:
           },
           ...q5Dependencies(
             "#/definitions/outputNone",
-            "#/definitions/effectADM",
-            "#/definitions/effect",
-            "#/definitions/effectADM",
-            "#/definitions/effect"
+            "#/definitions/automation_AlgoADM",
+            "#/definitions/automation_Algo",
+            "#/definitions/automation_AlgoADM",
+            "#/definitions/automation_Algo"
           ),
           q6: {
             oneOf: [
@@ -534,7 +534,7 @@ Vervolgstappen:
                   q6: {
                     enum: ["Ja"],
                   },
-                  effect: { $ref: "#/definitions/effect" },
+                  effect: { $ref: "#/definitions/automation_Algo" },
                 },
               },
               {
@@ -548,7 +548,7 @@ Vervolgstappen:
                       "Geef een korte beschrijving van het proces en hoe dit burgers of ambtenaren raakt.",
                     default: "",
                   },
-                  effect: { $ref: "#/definitions/effect" },
+                  effect: { $ref: "#/definitions/automation_Algo" },
                 },
                 required: ["q6_unsure"],
               },
@@ -564,8 +564,8 @@ Vervolgstappen:
           },
         },
       },
-      impactAI: {
-        title: "impactAI",
+      impact_AIAlgoADM: {
+        title: "Impact",
         type: "object",
         properties: {
           q4: {
@@ -606,10 +606,10 @@ Vervolgstappen:
           },
           ...q5Dependencies(
             "#/definitions/outputAI",
-            "#/definitions/effectAIADM",
-            "#/definitions/effectAI",
-            "#/definitions/effectAIADM",
-            "#/definitions/effectAI"
+            "#/definitions/automation_AIAlgoADM",
+            "#/definitions/automation_AIAlgo",
+            "#/definitions/automation_AIAlgoADM",
+            "#/definitions/automation_AIAlgo"
           ),
           q6: {
             oneOf: [
@@ -618,7 +618,7 @@ Vervolgstappen:
                   q6: {
                     enum: ["Ja"],
                   },
-                  effect: { $ref: "#/definitions/effectAI" },
+                  effect: { $ref: "#/definitions/automation_AIAlgo" },
                 },
               },
               {
@@ -632,7 +632,7 @@ Vervolgstappen:
                       "Geef een korte beschrijving van het proces en hoe dit burgers of ambtenaren raakt.",
                     default: "",
                   },
-                  effect: { $ref: "#/definitions/effectAI" },
+                  effect: { $ref: "#/definitions/automation_AIAlgo" },
                 },
                 required: ["q6_unsure"],
               },
@@ -809,7 +809,7 @@ Vervolgstappen:
                       output: { $ref: "#/definitions/outputNoAIStop" }, //wordt outputNoAIStop
                     },
                   },
-                  { ...noAIContDoorgaan },
+                  { ...saving_sharing_AlgoADM },
                 ],
               },
             },
@@ -840,7 +840,7 @@ Vervolgstappen:
                       output: { $ref: "#/definitions/outputAIStop" },
                     },
                   },
-                  { ...AIContDoorgaan },
+                  { ...saving_sharing_AIAlgoADM },
                 ],
               },
             },
@@ -897,7 +897,7 @@ Vervolgstappen:
                       output: { $ref: "#/definitions/outputNoAIandAlgoStop" },
                     },
                   },
-                  { ...noAIandAlgContDoorgaan },
+                  { ...saving_sharing_ADM },
                 ],
               },
             },
@@ -923,7 +923,7 @@ Vervolgstappen:
                       output: { $ref: "#/definitions/outputNoAIStop" }, //wordt outputNoAIStop
                     },
                   },
-                  { ...noAIContDoorgaan },
+                  { ...saving_sharing_AlgoADM },
                 ],
               },
             },
@@ -949,7 +949,7 @@ Vervolgstappen:
                       output: { $ref: "#/definitions/outputAIStop" }, //wordt outputAIStop
                     },
                   },
-                  { ...AIContDoorgaan },
+                  { ...saving_sharing_AIAlgoADM },
                 ],
               },
             },
@@ -979,7 +979,7 @@ Vervolgstappen:
                       output: { $ref: "#/definitions/outputAIStop" }, //wordt outputAIStop
                     },
                   },
-                  { ...noAIContDoorgaan },
+                  { ...saving_sharing_AlgoADM },
                 ],
               },
             },

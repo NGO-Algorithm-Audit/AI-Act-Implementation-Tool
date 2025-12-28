@@ -1,6 +1,6 @@
-export const noAIandAlgContDoorgaan = {
+export const saving_sharing_AIAlgoADM = {
   properties: {
-    noAIandAlgCont: {
+    AICont: {
       enum: ["Doorgaan"],
     },
     q8: {
@@ -24,8 +24,8 @@ export const noAIandAlgContDoorgaan = {
               default:
                 "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
             },
-            decision: {
-              $ref: "#/definitions/decision",
+            impact: {
+              $ref: "#/definitions/impact_AIAlgoADM",
             },
           },
         },
@@ -59,8 +59,8 @@ export const noAIandAlgContDoorgaan = {
                       default:
                         "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
                     },
-                    decision: {
-                      $ref: "#/definitions/decision",
+                    impact: {
+                      $ref: "#/definitions/impact_AIAlgoADM",
                     },
                   },
                 },
@@ -94,8 +94,8 @@ export const noAIandAlgContDoorgaan = {
                               default:
                                 "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
                             },
-                            decision: {
-                              $ref: "#/definitions/decision",
+                            impact: {
+                              $ref: "#/definitions/impact_AIAlgoADM",
                             },
                           },
                         },
@@ -110,8 +110,8 @@ export const noAIandAlgContDoorgaan = {
                               default:
                                 "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
                             },
-                            decision: {
-                              $ref: "#/definitions/decision",
+                            impact: {
+                              $ref: "#/definitions/impact_AIAlgoADM",
                             },
                           },
                         },

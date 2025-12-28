@@ -1,4 +1,4 @@
-export const noAIContDoorgaan = {
+export const saving_sharing_AlgoADM = {
   properties: {
     noAICont: {
       enum: ["Doorgaan"],
@@ -25,7 +25,7 @@ export const noAIContDoorgaan = {
                 "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
             },
             impact: {
-              $ref: "#/definitions/impact",
+              $ref: "#/definitions/impact_AlgoADM",
             },
           },
         },
@@ -60,7 +60,7 @@ export const noAIContDoorgaan = {
                         "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
                     },
                     impact: {
-                      $ref: "#/definitions/impact",
+                      $ref: "#/definitions/impact_AlgoADM",
                     },
                   },
                 },
@@ -95,7 +95,7 @@ export const noAIContDoorgaan = {
                                 "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
                             },
                             impact: {
-                              $ref: "#/definitions/impact",
+                              $ref: "#/definitions/impact_AlgoADM",
                             },
                           },
                         },
@@ -111,7 +111,7 @@ export const noAIContDoorgaan = {
                                 "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
                             },
                             impact: {
-                              $ref: "#/definitions/impact",
+                              $ref: "#/definitions/impact_AlgoADM",
                             },
                           },
                         },
