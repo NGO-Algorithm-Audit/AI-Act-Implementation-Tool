@@ -115,7 +115,7 @@ Vervolgstappen:
 - geen AI-systeem volgens de AI-verordening.`,
       },
       automation_ADM: {
-        title: "Effect",
+        title: "Automation",
         type: "object",
         properties: {
           q7: {
@@ -176,7 +176,7 @@ Vervolgstappen:
         },
       },
       automation_Algo: {
-        title: "Effect",
+        title: "Automation",
         type: "object",
         properties: {
           q7: {
@@ -237,7 +237,7 @@ Vervolgstappen:
         },
       },
       automation_AlgoADM: {
-        title: "Effect",
+        title: "Automation",
         type: "object",
         properties: {
           q7: {
@@ -307,7 +307,7 @@ Vervolgstappen:
         },
       },
       automation_AIAlgoADM: {
-        title: "Effect",
+        title: "Automation",
         type: "object",
         properties: {
           q7: {
@@ -377,7 +377,7 @@ Vervolgstappen:
         },
       },
       automation_AIAlgo: {
-        title: "Effect",
+        title: "Automation",
         type: "object",
         properties: {
           q7: {
@@ -534,7 +534,7 @@ Vervolgstappen:
                   q6: {
                     enum: ["Ja"],
                   },
-                  effect: { $ref: "#/definitions/automation_Algo" },
+                  automation: { $ref: "#/definitions/automation_Algo" },
                 },
               },
               {
@@ -548,7 +548,7 @@ Vervolgstappen:
                       "Geef een korte beschrijving van het proces en hoe dit burgers of ambtenaren raakt.",
                     default: "",
                   },
-                  effect: { $ref: "#/definitions/automation_Algo" },
+                  automation: { $ref: "#/definitions/automation_Algo" },
                 },
                 required: ["q6_unsure"],
               },
@@ -618,7 +618,7 @@ Vervolgstappen:
                   q6: {
                     enum: ["Ja"],
                   },
-                  effect: { $ref: "#/definitions/automation_AIAlgo" },
+                  automation: { $ref: "#/definitions/automation_AIAlgo" },
                 },
               },
               {
@@ -632,7 +632,7 @@ Vervolgstappen:
                       "Geef een korte beschrijving van het proces en hoe dit burgers of ambtenaren raakt.",
                     default: "",
                   },
-                  effect: { $ref: "#/definitions/automation_AIAlgo" },
+                  automation: { $ref: "#/definitions/automation_AIAlgo" },
                 },
                 required: ["q6_unsure"],
               },

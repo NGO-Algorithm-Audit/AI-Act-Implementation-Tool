@@ -15,16 +15,16 @@ export const q5 = {
 };
 
 export const q5Dependencies = (
-  output: string,
-  effect1: string,
-  effect2: string,
-  effect3: string,
-  effect4: string
+  string1: string,
+  string2: string,
+  string3: string,
+  string4: string,
+  string5: string
 ) => {
   // If the $ref points to a definition whose name contains "output",
-  // emit { output: { $ref: ... } } else emit { effect: { $ref: ... } }.
+  // emit { output: { $ref: ... } } else emit { automation: { $ref: ... } }.
   const refToProp = (ref: string) => {
-    const key = ref.includes("output") ? "output" : "effect";
+    const key = ref.includes("output") ? "output" : "automation";
     return { [key]: { $ref: ref } };
   };
 
@@ -41,9 +41,7 @@ export const q5Dependencies = (
               title: "Beschrijf het soort beslissing",
               default: "",
             },
-            output: {
-              $ref: output,
-            },
+            ...refToProp(string1),
           },
           required: ["q5_option8"],
         },
@@ -58,7 +56,7 @@ export const q5Dependencies = (
                 "Een andere beslissing met rechtsgevolgen zoals bijvoorbeeld vergunning toekenning of het aangaan van een overeenkomst",
               ],
             },
-            ...refToProp(effect1),
+            ...refToProp(string2),
           },
         },
         {
@@ -90,7 +88,7 @@ export const q5Dependencies = (
                 "Beslissing over prioritering van aanvragen, verzoeken, klachten en bezwaren",
               ],
             },
-            ...refToProp(effect2),
+            ...refToProp(string3),
           },
         },
       ],
@@ -113,7 +111,7 @@ export const q5Dependencies = (
               title: "Beschrijf het gevolg van de controle voor de betrokkene",
               default: "",
             },
-            ...refToProp(effect3),
+            ...refToProp(string4),
           },
           required: ["q5-option5-controle"],
         },
@@ -122,7 +120,7 @@ export const q5Dependencies = (
             q5_option5: {
               enum: ["Nee"],
             },
-            ...refToProp(effect4),
+            ...refToProp(string5),
           },
         },
       ],
