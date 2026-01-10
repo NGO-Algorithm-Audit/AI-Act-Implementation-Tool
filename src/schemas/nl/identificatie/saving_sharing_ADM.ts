@@ -1,6 +1,6 @@
 export const saving_sharing_ADM = {
   properties: {
-    noAIandAlgCont: {
+    noAIandAlgoCont: {
       enum: ["Doorgaan"],
     },
     q8: {

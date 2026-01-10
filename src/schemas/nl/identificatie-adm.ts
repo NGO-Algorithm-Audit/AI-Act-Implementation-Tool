@@ -2,7 +2,7 @@ import { AICont } from "./identificatie/AICont";
 import { saving_sharing_AIAlgoADM } from "./identificatie/saving_sharing_AIAlgoADM";
 import { noAICont } from "./identificatie/noAICont";
 import { saving_sharing_AlgoADM } from "./identificatie/saving_sharing_AlgoADM";
-import { noAIandAlgCont } from "./identificatie/noAIandAlgCont";
+import { noAIandAlgoCont } from "./identificatie/noAIandAlgoCont";
 import { saving_sharing_ADM } from "./identificatie/saving_sharing_ADM";
 import { q5, q5Dependencies } from "./identificatie/q5";
 
@@ -883,15 +883,15 @@ Vervolgstappen:
                   "Welk formeel beleid, wet- of regelgeving? Welk artikel, lid of paragraaf van deze regelgeving?",
                 default: "",
               },
-              noAIandAlgCont,
+              noAIandAlgoCont,
             },
-            required: ["q3_yes1", "noAIandAlgCont"],
+            required: ["q3_yes1", "noAIandAlgoCont"],
             dependencies: {
-              noAIandAlgCont: {
+              noAIandAlgoCont: {
                 oneOf: [
                   {
                     properties: {
-                      noAIandAlgCont: {
+                      noAIandAlgoCont: {
                         enum: ["Vragenlijst stoppen, ga naar conclusies"],
                       },
                       output: { $ref: "#/definitions/outputNoAIandAlgoStop" },
@@ -1012,7 +1012,7 @@ Vervolgstappen:
     noAICont: {
       "ui:widget": "radio",
     },
-    noAIandAlgCont: {
+    noAIandAlgoCont: {
       "ui:widget": "radio",
     },
     q4: {
