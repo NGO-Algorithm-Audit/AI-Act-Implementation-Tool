@@ -1,6 +1,6 @@
 {
   "JSONSchema": {
-    "title": "Identificatie AI-systeem en impactvolle algoritmes",
+    "title": "1A - Identificatie van AI-systemen en impactvolle algoritmes",
     "type": "object",
     "definitions": {
       "outputNoAI": {
@@ -546,7 +546,9 @@
           {
             "properties": {
               "q2": {
-                "enum": ["Nee, het ontwerp van de toepassing is niet gebaseerd op data-analyse."]
+                "enum": [
+                  "Nee, het ontwerp van de toepassing is niet gebaseerd op data-analyse."
+                ]
               },
               "q3": {
                 "type": "string",
