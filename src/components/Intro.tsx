@@ -53,6 +53,7 @@ export default function ({
           </p>
           <p>
             {t("feedback")}{" "}
+            
             <a
               href="https://github.com/NGO-Algorithm-Audit/AI-Act-Implementation-Tool"
               target="_blank"
