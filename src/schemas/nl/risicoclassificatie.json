@@ -1,6 +1,6 @@
 {
   "JSONSchema": {
-    "title": "Risicoclassificatie AI-systemen",
+    "title": "2 - Risicoclassificatie van AI-systemen",
     "type": "object",
     "definitions": {
       "outputLow": {

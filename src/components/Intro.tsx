@@ -42,7 +42,14 @@ export default function ({
             {t("description3")}
             {/* third sentence */}
             {t("description4")}
+            <a
+              href="https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32016R0679"
+              target="_blank"
+            >
+              {t("Art_22_link")}
+            </a>
             {t("description5")}
+            {t("description6")}
           </p>
           <p>
             {t("feedback")}{" "}
