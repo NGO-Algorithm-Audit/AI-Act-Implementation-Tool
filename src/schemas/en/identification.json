@@ -578,7 +578,7 @@
               },
               "q3": {
                 "type": "string",
-                "title": "Is the application an automation of human-defined rules ? ",
+                "title": "Is the application an automation of human-defined rules? ",
                 "enum": [
                   "Yes, the application is a straightforward automation of rules defined in law, regulation, or formal policy",
                   "Yes, automatisation of rules, but these are not explicitly defined in law, regulation, or formal policy",
