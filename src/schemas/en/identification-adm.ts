@@ -514,8 +514,8 @@ export const identificationSchema = {
                 "title": "Is the design of the application based on data?",
                 "enum": [
                   "Yes, design choices were made manually, but insights from data analysis helped inform the design",
-                  "Yes, the application contains components derived from data. There is fitting or learning of a model or automatic variable selection using statistics, optimization, simulation, machine learning or a similar technique.",
-                  "No, the design is not based on data analyses."
+                  "Yes, the application contains components derived from data. There is fitting or learning of a model or automatic variable selection using statistics, optimization, simulation, machine learning or a similar technique",
+                  "No, the design is not based on data analyses"
                 ]
               }
             },
@@ -552,7 +552,7 @@ export const identificationSchema = {
             "properties": {
               "q2": {
                 "enum": [
-                  "Yes, the application contains components derived from data. There is fitting or learning of a model or automatic variable selection using statistics, optimization, simulation, machine learning or a similar technique."
+                  "Yes, the application contains components derived from data. There is fitting or learning of a model or automatic variable selection using statistics, optimization, simulation, machine learning or a similar technique"
                 ]
               },
               "q2_yes2": {
@@ -574,7 +574,7 @@ export const identificationSchema = {
           {
             "properties": {
               "q2": {
-                "enum": ["No, the design is not based on data analyses."]
+                "enum": ["No, the design is not based on data analyses"]
               },
               "q3": {
                 "type": "string",
