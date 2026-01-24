@@ -685,7 +685,7 @@ export const identificationSchema = {
     "q4": {
       "ui:widget": "radio",
       "ui:enableMarkdownInDescription": true,
-      "ui:description": "Consider prioritization, follow-up on a question or request from a citizen. For example, whether or not to request additional information from a citizen, whether or not to select for inspection or control, whether or not to (proactively) offer a specific provision in the context of social assistance, etc.\n\n**Note: A decision is much broader than a formal decision as defined in the National Administrative Law.**"
+      "ui:description": "Consider prioritization, follow-up on a question or request from a citizen. For example, whether or not to request additional information from a citizen, whether or not to select for inspection or control, whether or not to (proactively) offer a specific provision in the context of social assistance, etc.\n\n**Note: A decision is much broader than a formal decision as defined in Dutch Public Administrative Law.**"
     },
     "q5": {
       "ui:widget": "radio"
