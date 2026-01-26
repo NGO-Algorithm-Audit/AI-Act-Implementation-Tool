@@ -514,8 +514,8 @@
                 "title": "Is the design of the application based on data?",
                 "enum": [
                   "Yes, design choices were made manually, but insights from data analysis helped inform the design",
-                  "Yes, the application contains components derived from data. There is fitting or learning of a model or automatic variable selection using statistics, optimization, simulation, machine learning or a similar technique.",
-                  "No, the design is not based on data analyses."
+                  "Yes, the application contains components derived from data. There is fitting or learning of a model or automatic variable selection using statistics, optimization, simulation, machine learning or a similar technique",
+                  "No, the design is not based on data analyses"
                 ]
               }
             },
@@ -552,7 +552,7 @@
             "properties": {
               "q2": {
                 "enum": [
-                  "Yes, the application contains components derived from data. There is fitting or learning of a model or automatic variable selection using statistics, optimization, simulation, machine learning or a similar technique."
+                  "Yes, the application contains components derived from data. There is fitting or learning of a model or automatic variable selection using statistics, optimization, simulation, machine learning or a similar technique"
                 ]
               },
               "q2_yes2": {
@@ -574,11 +574,11 @@
           {
             "properties": {
               "q2": {
-                "enum": ["No, the design is not based on data analyses."]
+                "enum": ["No, the design is not based on data analyses"]
               },
               "q3": {
                 "type": "string",
-                "title": "Is the application an automation of human-defined rules ? ",
+                "title": "Is the application an automation of human-defined rules? ",
                 "enum": [
                   "Yes, the application is a straightforward automation of rules defined in law, regulation, or formal policy",
                   "Yes, automatisation of rules, but these are not explicitly defined in law, regulation, or formal policy",
@@ -680,12 +680,12 @@
     },
     "q3": {
       "ui:widget": "radio",
-      "ui:description": "An example of rules established in laws or regulations is a rule-based algorithm that automatically determines whether the income and asset requirements are met when applying for social assistance. In this case, the rules in the algorithm are a direct implementation of norms set, for instance, in the Dutch Participation Act.\n\nWhen a standard is not clearly defined in legislation and is interpreted, the application is not a one-to-one automation of the law or regulation.\n\nExamples of rules created by humans include a rule-based algorithm where a work instruction is translated into a decision rule, a risk profile where the rules are manually created based on employees' experience, or legal standards that are further specified into rules.\n\nLogic- and knowledge-based approaches are also known as symbolic AI systems. These types of AI systems include knowledge representation, inductive (logical) programming, knowledge bases, inference and deduction machines, and (symbolic) reasoning. These forms of technology are rare."
+      "ui:description": "An example of rules established in laws or regulations is a rule-based algorithm that automatically determines whether the income and asset requirements are met when applying for social assistance. In this case, the rules in the algorithm are a direct implementation of norms set, for instance, in the Dutch Participation Act.\n\nWhen a standard is not clearly defined in legislation and is interpreted, the application is not a one-to-one automation of the law or regulation.\n\nExamples of rules created by humans include a rule-based algorithm where a work instruction is translated into a decision rule, a risk profile where the rules are manually created based on employees' experience, or legal standards that are further specified into rules.\n\nLogic- and knowledge-based approaches are also known as 'symbolic AI systems'. These types of AI systems include knowledge representation, inductive (logical) programming, knowledge bases, inference and deduction machines, and (symbolic) reasoning. These forms of technology are rare."
     },
     "q4": {
       "ui:widget": "radio",
       "ui:enableMarkdownInDescription": true,
-      "ui:description": "Consider prioritization, follow-up on a question or request from a citizen. For example, whether or not to request additional information from a citizen, whether or not to select for inspection or control, whether or not to (proactively) offer a specific provision in the context of social assistance, etc.\n\n**Note: A decision is much broader than a formal decision as defined in the National Administrative Law.**"
+      "ui:description": "The following situations may be regarded as playing an important role in the preparation of a decision and are therefore considered to form part of the decision itself: prioritization, follow-up on a question or request from a citizen, request additional information from a citizen, select for inspection or control, (proactively) offer a specific provision in the context of social assistance etc.\n\n**Note:** A decision is much broader than a formal decision as defined in Dutch Public Administration Law."
     },
     "q5": {
       "ui:widget": "radio"
