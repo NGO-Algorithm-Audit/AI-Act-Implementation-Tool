@@ -571,7 +571,7 @@ Vervolgstappen:
           q4: {
             type: "string",
             title:
-              "Worden in het proces beslissingen genomen voor individuele burgers?",
+              "Worden in het proces beslissingen genomen voor een individuele burger, organisatie of medewerker?",
             enum: ["Ja", "Nee"],
           },
         },
