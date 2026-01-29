@@ -273,7 +273,7 @@
         "properties": {
           "q4": {
             "type": "string",
-            "title": "Worden in het proces beslissingen genomen voor individuele burgers?",
+            "title": "Worden in het proces beslissingen genomen voor een individuele burger, organisatie of medewerker?",
             "enum": ["Ja", "Nee"]
           }
         },
