@@ -5,11 +5,11 @@ export const q5 = {
   enum: [
     "Beslissing over prioritering van aanvragen, verzoeken, klachten en bezwaren",
     "Beslissing over formele klachten en bezwaren",
-    "Beslissing met directe financiële gevolgen voor burger of ambtenaar, \nzoals bijvoorbeeld beslissingen over een arbeidscontract, uitkering, toeslag, subsidie, boete, terugbetaling of mogelijkheid tot betalingsregeling",
+    "Beslissing met directe financiële gevolgen voor burger of ambtenaar, zoals beslissingen over een arbeidscontract, uitkering, toeslag, subsidie, boete, terugbetaling of mogelijkheid tot betalingsregeling",
     "Beslissing over controle, onderzoek of verzoek tot aanvullende informatieverschaffing",
     "Beslissing over toewijzing van scholen of kinderopvang",
     "Beslissingen of een persoon in aanmerking komt voor een dienst of voorziening",
-    "Een andere beslissing met rechtsgevolgen zoals bijvoorbeeld vergunning toekenning of het aangaan van een overeenkomst",
+    "Een andere beslissing met rechtsgevolgen, zoals vergunning toekenning of het aangaan van een overeenkomst",
     "Overige of andere beslissingen",
   ],
 };
@@ -43,10 +43,10 @@ export const q5Dependencies = (
           q5: {
             enum: [
               "Beslissing over formele klachten en bezwaren",
-              "Beslissing met directe financiële gevolgen voor burger of ambtenaar, \nzoals bijvoorbeeld beslissingen over een arbeidscontract, uitkering, toeslag, subsidie, boete, terugbetaling of mogelijkheid tot betalingsregeling",
+              "Beslissing met directe financiële gevolgen voor burger of ambtenaar, zoals beslissingen over een arbeidscontract, uitkering, toeslag, subsidie, boete, terugbetaling of mogelijkheid tot betalingsregeling",
               "Beslissing over toewijzing van scholen of kinderopvang",
               "Beslissingen of een persoon in aanmerking komt voor een dienst of voorziening",
-              "Een andere beslissing met rechtsgevolgen zoals bijvoorbeeld vergunning toekenning of het aangaan van een overeenkomst",
+              "Een andere beslissing met rechtsgevolgen, zoals vergunning toekenning of het aangaan van een overeenkomst",
             ],
           },
           effect: { $ref: effect1 }, //"#/definitions/effectADM" OR //"#/definitions/effectAIADM"
