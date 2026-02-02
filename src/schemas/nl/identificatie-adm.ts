@@ -9,7 +9,7 @@ import { q5, q5Dependencies } from "./identificatie/q5";
 export const identificationSchema = {
   JSONSchema: {
     title:
-      "1B - [BETA] Identificatie van AI-systemen, impactvolle algoritmes en volledig geautomatiseerde besluitvorming",
+      "1B - [BETA] Identificatie van AI-systemen, impactvolle algoritmes en volledig geautomatiseerde besluitvorming (sADM)",
     type: "object",
     definitions: {
       outputAI: {
