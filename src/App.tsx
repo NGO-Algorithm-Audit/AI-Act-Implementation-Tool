@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { t } from "i18next";
 import { identificationSchema as nlIdentificationSchema } from "./schemas/nl/identificatie-adm";
-//import { identificationSchema as enIdentificationSchema } from "./schemas/en/identification-adm";
+import { identificationSchema as enIdentificationSchema } from "./schemas/en/identification-adm";
 
 export default function App() {
   const { i18n } = useTranslation();
@@ -67,7 +67,7 @@ export default function App() {
         forms[language] = dataObject;
       }
       forms.nl.push(nlIdentificationSchema);
-      //forms.en.push(enIdentificationSchema);
+      forms.en.push(enIdentificationSchema);
 
       setForms(forms);
     };

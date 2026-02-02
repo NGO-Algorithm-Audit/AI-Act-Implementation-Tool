@@ -43,7 +43,7 @@ export default function ({
             {/* third sentence */}
             {t("description4")}
             <a
-              href="https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32016R0679"
+              href="https://eur-lex.europa.eu/eli/reg/2016/679/oj"
               target="_blank"
             >
               {t("Art_22_link")}
