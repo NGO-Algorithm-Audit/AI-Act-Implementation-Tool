@@ -1,9 +1,9 @@
 import { AICont } from "./identificatie/AICont";
-import { saving_sharing_AIAlgoADM } from "./identificatie/saving_sharing_AIAlgoADM";
+import { saving_sharing_AIAlgosADM } from "./identificatie/saving_sharing_AIAlgosADM";
 import { noAICont } from "./identificatie/noAICont";
-import { saving_sharing_AlgoADM } from "./identificatie/saving_sharing_AlgoADM";
+import { saving_sharing_AlgosADM } from "./identificatie/saving_sharing_AlgosADM";
 import { noAIandAlgoCont } from "./identificatie/noAIandAlgoCont";
-import { saving_sharing_ADM } from "./identificatie/saving_sharing_ADM";
+import { saving_sharing_sADM } from "./identificatie/saving_sharing_sADM";
 import { q5, q5Dependencies } from "./identificatie/q5";
 
 export const identificationSchema = {
@@ -17,8 +17,8 @@ export const identificationSchema = {
         title: "Uitslag",
         default: `Op basis van uw antwoorden is uw toepassing:
 - wel een AI-systeem volgens de AI-verordening;
-- geen impactvol algoritme; en
-- geen geautomatiseerde besluitivorming.
+- geen impactvol algoritme;
+- geen volledig geautomatiseerde besluitvorming (sADM).
 
 Vervolgstappen:
 Vul de AI risicoclassificatie vragenlijst in om te bepalen aan welke vereisten uit de AI-verordening de toepassing moet voldoen.`,
@@ -28,7 +28,7 @@ Vul de AI risicoclassificatie vragenlijst in om te bepalen aan welke vereisten u
         title: "Uitslag",
         default: `Op basis van uw antwoorden is uw toepassing:
 - wel een impactvol algoritme;
-- geen geautomatiseerde besluitvorming; en
+- geen volledig geautomatiseerde besluitvorming (sADM);
 - geen AI-systeem volgens de AI-verordening.
 
 
@@ -36,56 +36,56 @@ Vervolgstappen:
 - Neem algoritme op in het Algoritmeregister.
 - Zorg dat wordt voldaan aan intern geldend algoritmebeleid.`,
       },
-      outputADM: {
+      outputsADM: {
         type: "string",
         title: "Uitslag",
         default: `Op basis van uw antwoorden is uw toepassing:
 - geen impactvol algoritme;
 - geen AI-systeem volgens de AI-verordening;
-- mogelijk geautomatiseerde besluitvorming volgens artikel 22 van de AVG.
+- mogelijk volledig geautomatiseerde besluitvorming (sADM) volgens artikel 22 van de AVG.
 
 Vervolgstappen:
-- Bepaal in overleg met relevante juridische experts of er daadwerkelijk sprake is van geautomatiseerde besluitvorming.`,
+- Bepaal in overleg met relevante juridische experts of er daadwerkelijk sprake is van sADM.`,
       },
       outputAlgoandAI: {
         type: "string",
         title: "Uitslag",
         default: `Op basis van uw antwoorden is uw toepassing:
 - wel een AI-systeem volgens de AI-verordening;
-- wel een impactvol algoritme; en
-- geen geautomatiseerde besluitvorming.
+- wel een impactvol algoritme;
+- geen volledig geautomatiseerde besluitvorming (sADM).
 
 Vervolgstappen:
 - Vul de AI risicoclassificatie vragenlijst in om te bepalen aan welke vereisten uit de AI-verordening de toepassing moet voldoen.
 - Neem het algoritme op in het Algoritmeregister.
 - Zorg dat wordt voldaan aan intern geldend algoritmebeleid.`,
       },
-      outputAlgoandADM: {
+      outputAlgoandsADM: {
         type: "string",
         title: "Uitslag",
         default: `Op basis van uw antwoorden is uw toepassing:
 - geen AI-systeem volgens de AI-verordening;
-- wel een impactvol algoritme; en
-- mogelijk geautomatiseerde besluitvorming volgens artikel 22 van de AVG.
+- wel een impactvol algoritme;
+- mogelijk volledig geautomatiseerde besluitvorming (sADM) volgens artikel 22 van de AVG.
 
 Vervolgstappen:
 - Neem het algoritme op in het Algoritmeregister 
 - Zorg dat wordt voldaan aan intern geldend algoritmebeleid.
-- Bepaal in overleg met relevante juridische experts of er daadwerkelijk sprake is van geautomatiseerde besluitvorming.`,
+- Bepaal in overleg met relevante juridische experts of er daadwerkelijk sprake is van sADM.`,
       },
-      outputAlgoADMandAI: {
+      outputAlgosADMandAI: {
         type: "string",
         title: "Uitslag",
         default: `Op basis van uw antwoorden is uw toepassing:
 - een AI-systeem volgens de AI-verordening;
-- een impactvol algoritme; en
-- mogelijk geautomatiseerde besluitivorming volgens artikel 22 van de AVG.
+- een impactvol algoritme;
+- mogelijk volledig geautomatiseerde besluitvorming (sADM) volgens artikel 22 van de AVG.
 
 Vervolgstappen:
 - Vul de AI risicoclassificatie vragenlijst in om te bepalen aan welke vereisten uit de AI-verordening de toepassing moet voldoen.
 - Neem het algoritme op in het Algoritmeregister.
 - Zorg dat wordt voldaan aan intern geldend algoritmebeleid.
-- Bepaal in overleg met relevante juridische experts of er daadwerkelijk sprake is van geautomatiseerde besluitvorming.`,
+- Bepaal in overleg met relevante juridische experts of er daadwerkelijk sprake is van sADM.`,
       },
       outputAIStop: {
         type: "string",
@@ -111,10 +111,10 @@ Vervolgstappen:
         default:
           `Op basis van uw antwoorden is uw toepassing:
 - geen impactvol algoritme;
-- geen geautomatiseerde besluitvorming; en
+- geen volledig geautomatiseerde besluitvorming (sADM);
 - geen AI-systeem volgens de AI-verordening.`,
       },
-      automation_ADM: {
+      automation_sADM: {
         title: "Automation",
         type: "object",
         properties: {
@@ -168,7 +168,7 @@ Vervolgstappen:
                       "De uitkomst van het proces wordt sterk beïnvloed door de toepassing. Bijvoorbeeld doordat werkvoorschriften bepalen wat het gevolg is van een bepaalde uitkomst van de toepassing. Een medewerker kan in sommige gevallen andere keuzes maken, maar meestal bepaalt het resultaat van het systeem wat het eindresultaat van het proces zal zijn.",
                     ],
                   },
-                  output: { $ref: "#/definitions/outputADM" },
+                  output: { $ref: "#/definitions/outputsADM" },
                 },
               },
             ],
@@ -236,7 +236,7 @@ Vervolgstappen:
           },
         },
       },
-      automation_AlgoADM: {
+      automation_AlgosADM: {
         title: "Automation",
         type: "object",
         properties: {
@@ -288,7 +288,7 @@ Vervolgstappen:
                       "De uitkomst van het proces wordt sterk beïnvloed door de toepassing. Bijvoorbeeld doordat werkvoorschriften bepalen wat het gevolg is van een bepaalde uitkomst van de toepassing. Een medewerker kan in sommige gevallen andere keuzes maken, maar meestal bepaalt het resultaat van het systeem wat het eindresultaat van het proces zal zijn.",
                     ],
                   },
-                  output: { $ref: "#/definitions/outputAlgoandADM" },
+                  output: { $ref: "#/definitions/outputAlgoandsADM" },
                 },
               },
               {
@@ -306,7 +306,7 @@ Vervolgstappen:
           },
         },
       },
-      automation_AIAlgoADM: {
+      automation_AIAlgosADM: {
         title: "Automation",
         type: "object",
         properties: {
@@ -358,7 +358,7 @@ Vervolgstappen:
                       "De uitkomst van het proces wordt sterk beïnvloed door de toepassing. Bijvoorbeeld doordat werkvoorschriften bepalen wat het gevolg is van een bepaalde uitkomst van de toepassing. Een medewerker kan in sommige gevallen andere keuzes maken, maar meestal bepaalt het resultaat van het systeem wat het eindresultaat van het proces zal zijn.",
                     ],
                   },
-                  output: { $ref: "#/definitions/outputAlgoADMandAI" },
+                  output: { $ref: "#/definitions/outputAlgosADMandAI" },
                 },
               },
               {
@@ -437,14 +437,14 @@ Vervolgstappen:
           },
         },
       },
-      impact_ADM: {
+      impact_sADM: {
         title: "Impact",
         type: "object",
         properties: {
           q4: {
             type: "string",
             title:
-              "Wordt in het proces een beslissing genomen voor individuele burgers of ambtenaren?",
+              "Wordt in het proces een beslissing genomen voor een individuele burger, organisatie of medewerker?",
             enum: ["Ja", "Nee"],
           },
         },
@@ -473,21 +473,21 @@ Vervolgstappen:
           },
           ...q5Dependencies(
             "#/definitions/outputNone",
-            "#/definitions/automation_ADM",
+            "#/definitions/automation_sADM",
             "#/definitions/outputNone",
-            "#/definitions/automation_ADM",
+            "#/definitions/automation_sADM",
             "#/definitions/outputNone"
           ),
         },
       },
-      impact_AlgoADM: {
+      impact_AlgosADM: {
         title: "Impact",
         type: "object",
         properties: {
           q4: {
             type: "string",
             title:
-              "Wordt in het proces een beslissing genomen voor individuele burgers of ambtenaren?",
+              "Wordt in het proces een beslissing genomen voor een individuele burger, organisatie of medewerker?",
             enum: ["Ja", "Nee"],
           },
         },
@@ -522,9 +522,9 @@ Vervolgstappen:
           },
           ...q5Dependencies(
             "#/definitions/outputNone",
-            "#/definitions/automation_AlgoADM",
+            "#/definitions/automation_AlgosADM",
             "#/definitions/automation_Algo",
-            "#/definitions/automation_AlgoADM",
+            "#/definitions/automation_AlgosADM",
             "#/definitions/automation_Algo"
           ),
           q6: {
@@ -564,14 +564,14 @@ Vervolgstappen:
           },
         },
       },
-      impact_AIAlgoADM: {
+      impact_AIAlgosADM: {
         title: "Impact",
         type: "object",
         properties: {
           q4: {
             type: "string",
             title:
-              "Worden in het proces beslissingen genomen voor een individuele burger, organisatie of medewerker?",
+              "Wordt in het proces een beslissing genomen voor een individuele burger, organisatie of medewerker?",
             enum: ["Ja", "Nee"],
           },
         },
@@ -606,9 +606,9 @@ Vervolgstappen:
           },
           ...q5Dependencies(
             "#/definitions/outputAI",
-            "#/definitions/automation_AIAlgoADM",
+            "#/definitions/automation_AIAlgosADM",
             "#/definitions/automation_AIAlgo",
-            "#/definitions/automation_AIAlgoADM",
+            "#/definitions/automation_AIAlgosADM",
             "#/definitions/automation_AIAlgo"
           ),
           q6: {
@@ -809,7 +809,7 @@ Vervolgstappen:
                       output: { $ref: "#/definitions/outputNoAIStop" }, //wordt outputNoAIStop
                     },
                   },
-                  { ...saving_sharing_AlgoADM },
+                  { ...saving_sharing_AlgosADM },
                 ],
               },
             },
@@ -840,7 +840,7 @@ Vervolgstappen:
                       output: { $ref: "#/definitions/outputAIStop" },
                     },
                   },
-                  { ...saving_sharing_AIAlgoADM },
+                  { ...saving_sharing_AIAlgosADM },
                 ],
               },
             },
@@ -857,9 +857,9 @@ Vervolgstappen:
                 title:
                   "Is de toepassing automatisering van door mensen opgestelde regels?",
                 enum: [
-                  "Ja, een-op-een automatisering van in wet- of regelgeving of formeel beleid vastgestelde regels",
-                  "Ja, automatisering van regels, maar deze zijn niet expliciet vastgesteld in wet- of regelgeving of formeel beleid",
-                  "Ja, logica- en kennis-gebaseerde benaderingen van AI waarbij uitkomsten worden afgeleid uit gecodeerde kennis of uit een symbolische weergave van de op te lossen taak",
+                  "Ja, een-op-een automatisering van in wet- of regelgeving of formeel beleid vastgestelde regels.",
+                  "Ja, automatisering van regels, maar deze zijn niet expliciet vastgesteld in wet- of regelgeving of formeel beleid.",
+                  "Ja, logica- en kennis-gebaseerde benaderingen van AI waarbij uitkomsten worden afgeleid uit gecodeerde kennis of uit een symbolische weergave van de op te lossen taak.",
                   "Nee",
                 ],
               },
@@ -874,7 +874,7 @@ Vervolgstappen:
             properties: {
               q3: {
                 enum: [
-                  "Ja, een-op-een automatisering van in wet- of regelgeving of formeel beleid vastgestelde regels",
+                  "Ja, een-op-een automatisering van in wet- of regelgeving of formeel beleid vastgestelde regels.",
                 ],
               },
               q3_yes1: {
@@ -897,7 +897,7 @@ Vervolgstappen:
                       output: { $ref: "#/definitions/outputNoAIandAlgoStop" },
                     },
                   },
-                  { ...saving_sharing_ADM },
+                  { ...saving_sharing_sADM },
                 ],
               },
             },
@@ -906,7 +906,7 @@ Vervolgstappen:
             properties: {
               q3: {
                 enum: [
-                  "Ja, automatisering van regels, maar deze zijn niet expliciet vastgesteld in wet- of regelgeving of formeel beleid",
+                  "Ja, automatisering van regels, maar deze zijn niet expliciet vastgesteld in wet- of regelgeving of formeel beleid.",
                 ],
               },
               noAICont,
@@ -923,7 +923,7 @@ Vervolgstappen:
                       output: { $ref: "#/definitions/outputNoAIStop" }, //wordt outputNoAIStop
                     },
                   },
-                  { ...saving_sharing_AlgoADM },
+                  { ...saving_sharing_AlgosADM },
                 ],
               },
             },
@@ -932,7 +932,7 @@ Vervolgstappen:
             properties: {
               q3: {
                 enum: [
-                  "Ja, logica- en kennis-gebaseerde benaderingen van AI waarbij uitkomsten worden afgeleid uit gecodeerde kennis of uit een symbolische weergave van de op te lossen taak",
+                  "Ja, logica- en kennis-gebaseerde benaderingen van AI waarbij uitkomsten worden afgeleid uit gecodeerde kennis of uit een symbolische weergave van de op te lossen taak.",
                 ],
               },
               AICont,
@@ -949,7 +949,7 @@ Vervolgstappen:
                       output: { $ref: "#/definitions/outputAIStop" }, //wordt outputAIStop
                     },
                   },
-                  { ...saving_sharing_AIAlgoADM },
+                  { ...saving_sharing_AIAlgosADM },
                 ],
               },
             },
@@ -979,7 +979,7 @@ Vervolgstappen:
                       output: { $ref: "#/definitions/outputAIStop" }, //wordt outputAIStop
                     },
                   },
-                  { ...saving_sharing_AlgoADM },
+                  { ...saving_sharing_AlgosADM },
                 ],
               },
             },
@@ -1024,10 +1024,10 @@ Vervolgstappen:
     q5: {
       "ui:widget": "radio",
     },
-    q5_option5: {
+    q5_1: {
       "ui:widget": "radio",
     },
-    "q5-option5-controle": {
+    "q5_1-controle": {
       "ui:widget": "textarea",
     },
     q6: {
@@ -1048,11 +1048,11 @@ Voorbeelden van casus die een individuele burger aangaat zijn:
 
 Voorbeelden van informatie die niet over indiviuen gaat zijn:
 - Output over groepen, waarin de individuen niet los van de groep een uitput krijgen toegekent
-- Een output over fysieke zaken die niet aan een indivue gekoppelt zijn, zoals 
+- Een output over fysieke zaken die niet aan een individuen gekoppelt zijn, zoals 
 -Output over sectoren, wijken
-- Output over financieel beleid en de invloed van beleid
+- Output over beleid en de invloed van beleid
 
-Denk bij individuen ook aan ondernemingen waarbij de ondernemer persoonlijk aansprakelijk is (zzp, eenmanszaak, vof, maatschap)`,
+Denk bij individuen ook aan ondernemingen waarbij de ondernemer persoonlijk aansprakelijk is (zzp, eenmanszaak, vof, maatschap).`,
     },
     q9: {
       "ui:widget": "radio",
