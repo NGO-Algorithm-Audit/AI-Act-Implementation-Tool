@@ -19,8 +19,9 @@ export const identificationSchema = {
 - an AI system according to the AI Act;
 - not a high-impact algorithm;
 - not solely automated decision-making (sADM).
+
 Next steps:
-Complete the AI risk classification questionnaire to determine which requirements of the AI Act the application must meet.`,
+- Complete the AI risk classification questionnaire to determine which requirements of the AI Act the application must meet.`,
       },
       outputAlgo: {
         type: "string",
@@ -51,6 +52,7 @@ Next steps:
 - an AI system according to the AI Act;
 - a high-impact algorithm;
 - not solely automated decision-making (sADM).
+
 Next steps:
 - Complete the AI risk classification questionnaire to determine which requirements of the AI Act the application must meet.
 - Include the algorithm in the Algorithm Register.
@@ -541,7 +543,7 @@ Next steps:
                   q6_unsure: {
                     type: "string",
                     title:
-                      "Geef een korte beschrijving van het proces en hoe dit burgers of ambtenaren raakt.",
+                      "Provide a brief description of the process and how it affects citizens, organisations or civil servants.",
                     default: "",
                   },
                   automation: { $ref: "#/definitions/automation_Algo" },
@@ -567,7 +569,7 @@ Next steps:
           q4: {
             type: "string",
             title:
-              "Worden in het proces beslissingen genomen voor een individuele burger, organisatie of medewerker?",
+              "Is a decision made in the process for individual citizens, organizations, or employees?",
             enum: ["Yes", "No"],
           },
         },
@@ -991,12 +993,12 @@ Next steps:
     q2: {
       "ui:widget": "radio",
       "ui:description":
-        "Data includes all forms of electronic information. Text, images, and audio are also data.\n\nApplications can be designed manually. However, even when designed manually, the design is sometimes based on data analysis. For example, threshold values for (failure) rules can be calculated from data, or criteria can be selected based on calculated correlations.\n\nIt also happens that components (e.g., models and algorithms) are derived more automatically from data. For example, by fitting a statistical model to data or using machine learning to teach a model or rule-based algorithm from data. Forms of simulation and optimization can also be used to derive a model from data.\n\nLarge language models such as ChatGPT are also derived (learned) from large amounts of textual data.",
+        "Data includes all forms of electronic information. Text, images, and audio are also data.\n\nApplications can be designed manually. However, even when designed manually, the design is sometimes based on data analysis. For example, threshold values for (failure) rules can be calculated from data, or criteria can be selected based on calculated correlations.\n\nIt also happens that components (e.g., models and algorithms) are derived more automatically from data. For example, by fitting a statistical model to data or using machine learning to learn a model or rule-based algorithm from data. Forms of simulation and optimization can also be used to derive a model from data.\n\nLarge language models such as ChatGPT are also derived (learned) from large amounts of textual data.",
     },
     q3: {
       "ui:widget": "radio",
       "ui:enableMarkdownInDescription": true,
-      "ui:description": `An example of rules laid down in legislation or regulations is a rule-based algorithm that automatically indicates when income and asset requirements are not met when applying for social assistance benefits.  In this case, the rules in the algorithm are a literal implementation of the standards in the Participation Act.\nWhen a standard is openly defined in legislation or regulations and is further specified in the application, the application is **not** a one-to-one automation of legislation or regulations.\n\nExamples of rules drawn up by humans are:
+      "ui:description": `An example of rules laid down in legislation or regulations is a rule-based algorithm that automatically indicates when income and asset requirements are not met when applying for social assistance benefits.  In this case, the rules in the algorithm are a literal implementation of the standards in the Dutch Participation Act.\nWhen a standard is openly defined in legislation or regulations and is further specified in the application, the application is **not** a one-to-one automation of legislation or regulations.\n\nExamples of rules drawn up by humans are:
 - a rule-based algorithm in which a work instruction has been translated into an algorithm
 - a risk profile in which the rules have been drawn up manually based on the experience of employees
 - open legal standards that are further specified in rules

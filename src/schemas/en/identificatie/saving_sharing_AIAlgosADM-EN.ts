@@ -72,7 +72,7 @@ export const saving_sharing_AIAlgosADM = {
                     q10: {
                       type: "string",
                       title:
-                        "Is the output of the algorithm stored for longer than the turnaround time of the primary process for which the algorithm is used?",
+                        "Is the output of the algorithm stored for longer than the duration of the primary process for which the algorithm is used?",
                       enum: ["Yes", "No"],
                     },
                   },
