@@ -239,7 +239,9 @@ const WizardForm = ({
   return (
     <Card style={{ minHeight: "300px" }}>
       <Card.Header className="d-flex flex-row justify-content-between">
-        <Card.Title className="my-1">{schema.title}</Card.Title>
+        <div className="d-flex flex-row align-items-center gap-2">
+          <Card.Title className="my-1">{schema.title}</Card.Title>
+        </div>
         <button
           type="button"
           onClick={() => onCancel(id)}
@@ -304,7 +306,10 @@ const WizardForm = ({
               )}
             </div>
 
-            <div>id: {questions[0]}</div>
+            {/* tag with question ID */}
+            <div style={{ display: "inline-block", marginTop: "8px" }}>
+              <span className="badge badge-secondary">{questions[0]}</span>
+            </div>
           </Form>
         )}
       </Card.Body>

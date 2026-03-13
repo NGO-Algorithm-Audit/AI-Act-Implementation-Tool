@@ -75,3 +75,8 @@ a {
 body {
   background-color: var(--host-body-bg, #{$body-bg});
 }
+
+.badge-secondary {
+  background-color: #005AA7;
+  color: #fff;
+}
