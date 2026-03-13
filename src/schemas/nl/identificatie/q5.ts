@@ -66,16 +66,16 @@ export const q5Dependencies = (
                 "Beslissing over controle, onderzoek of verzoek tot aanvullende informatieverschaffing",
               ],
             },
-            q5_option5: {
+            q5_1: {
               type: "string",
               title:
                 "Is de controle of het onderzoek bijzonder ingrijpend voor de betrokkene?",
               enum: [
-                "Ja, omdat de controle of het onderzoek wordt uitgevoerd moet de betrokkene langer wachten op een uitkering, toeslag, teruggaaf of komt de betrokkenen niet in aanmerking voor een voorschot",
-                "Ja, omdat de controle of het onderzoek wordt uitgevoerd komt de betrokkene niet in aanmerking voor een betalingsregeling",
-                "Ja, omdat de controle of het onderzoek wordt uitgevoerd moet de betrokkene langer wachten om in aanmerking te komen voor een dienst, voorziening of vergunning, of wordt een dienst, voorziening of vergunning (tijdelijk) ontzegd",
-                "Ja, omdat de controle of het onderzoek is ingrijpend, bijvoorbeeld omdat een fysieke controle plaatsvind (bijv. een huisbezoek) of omdat het onderzoek op een andere manier een grote invloed heeft op het (prive) leven van de betrokkene",
-                "Ja, de controle is om een andere reden bijzonder ingrijpend voor de betrokkene",
+                "Ja, omdat de controle of het onderzoek wordt uitgevoerd moet de betrokkene langer wachten op een uitkering, toeslag, teruggaaf of komt de betrokkenen niet in aanmerking voor een voorschot.",
+                "Ja, omdat de controle of het onderzoek wordt uitgevoerd komt de betrokkene niet in aanmerking voor een betalingsregeling.",
+                "Ja, omdat de controle of het onderzoek wordt uitgevoerd moet de betrokkene langer wachten om in aanmerking te komen voor een dienst, voorziening of vergunning, of wordt een dienst, voorziening of vergunning (tijdelijk) ontzegd.",
+                "Ja, omdat de controle of het onderzoek is ingrijpend, bijvoorbeeld omdat een fysieke controle plaatsvind (bijv. een huisbezoek) of omdat het onderzoek op een andere manier een grote invloed heeft op het (prive) leven van de betrokkene.",
+                "Ja, de controle is om een andere reden bijzonder ingrijpend voor de betrokkene.",
                 "Nee",
               ],
             },
@@ -93,31 +93,31 @@ export const q5Dependencies = (
         },
       ],
     },
-    q5_option5: {
+    q5_1: {
       oneOf: [
         {
           properties: {
-            q5_option5: {
+            q5_1: {
               enum: [
-                "Ja, omdat de controle of het onderzoek wordt uitgevoerd moet de betrokkene langer wachten op een uitkering, toeslag, teruggaaf of komt de betrokkenen niet in aanmerking voor een voorschot",
-                "Ja, omdat de controle of het onderzoek wordt uitgevoerd komt de betrokkene niet in aanmerking voor een betalingsregeling",
-                "Ja, omdat de controle of het onderzoek wordt uitgevoerd moet de betrokkene langer wachten om in aanmerking te komen voor een dienst, voorziening of vergunning, of wordt een dienst, voorziening of vergunning (tijdelijk) ontzegd",
+                "Ja, omdat de controle of het onderzoek wordt uitgevoerd moet de betrokkene langer wachten op een uitkering, toeslag, teruggaaf of komt de betrokkenen niet in aanmerking voor een voorschot.",
+                "Ja, omdat de controle of het onderzoek wordt uitgevoerd komt de betrokkene niet in aanmerking voor een betalingsregeling.",
+                "Ja, omdat de controle of het onderzoek wordt uitgevoerd moet de betrokkene langer wachten om in aanmerking te komen voor een dienst, voorziening of vergunning, of wordt een dienst, voorziening of vergunning (tijdelijk) ontzegd.",
                 "Ja, omdat de controle of het onderzoek is ingrijpend, bijvoorbeeld omdat een fysieke controle plaatsvind (bijv. een huisbezoek) of omdat het onderzoek op een andere manier een grote invloed heeft op het (prive) leven van de betrokkene.",
-                "Ja, de controle is om een andere reden bijzonder ingrijpend voor de betrokkene",
+                "Ja, de controle is om een andere reden bijzonder ingrijpend voor de betrokkene.",
               ],
             },
-            "q5-option5-controle": {
+            "q5_1-controle": {
               type: "string",
               title: "Beschrijf het gevolg van de controle voor de betrokkene",
               default: "",
             },
             ...refToProp(string4),
           },
-          required: ["q5-option5-controle"],
+          required: ["q5_1-controle"],
         },
         {
           properties: {
-            q5_option5: {
+            q5_1: {
               enum: ["Nee"],
             },
             ...refToProp(string5),

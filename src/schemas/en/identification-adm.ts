@@ -1,705 +1,1070 @@
+import { AICont } from "./identificatie/AICont-EN";
+import { saving_sharing_AIAlgosADM } from "./identificatie/saving_sharing_AIAlgosADM-EN";
+import { noAICont } from "./identificatie/noAICont-EN";
+import { saving_sharing_AlgosADM } from "./identificatie/saving_sharing_AlgosADM-EN";
+import { noAIandAlgoCont } from "./identificatie/noAIandAlgoCont-EN";
+import { saving_sharing_sADM } from "./identificatie/saving_sharing_sADM-EN";
+import { q5, q5Dependencies } from "./identificatie/q5-EN";
+
 export const identificationSchema = {
-  "JSONSchema": {
-    "title": "Identification of AI systems and high-impact algorithms",
-    "type": "object",
-    "definitions": {
-      "outputNoAI": {
-        "type": "string",
-        "title": "Result",
-        "default": "Based on your answers, your application is not an AI system or high-impact algorithm."
+  JSONSchema: {
+    title:
+      "1 - Identification of AI systems, impactful algorithms and solely automated decision-making (sADM)",
+    type: "object",
+    definitions: {
+      outputAI: {
+        type: "string",
+        title: "Result",
+        default: `Based on your answers, your application is:
+- an AI system according to the AI Act;
+- not a high-impact algorithm;
+- not solely automated decision-making (sADM).
+
+Next steps:
+- Complete the AI risk classification questionnaire to determine which requirements of the AI Act the application must meet.`,
       },
-      "outputAI": {
-        "type": "string",
-        "title": "Result",
-        "default": "Based on your answers, your application is an AI system under the AI Act. Complete the following questionnaire to determine which requirements of the AI Act your application must comply with."
+      outputAlgo: {
+        type: "string",
+        title: "Result",
+        default: `Based on your answers, your application is:
+- a high-impact algorithm;
+- not solely automated decision-making (sADM);
+- not an AI system according to the AI Act.
+
+Next steps:
+- Include the algorithm to the Algorithm Register.
+- Ensure compliance with internally applicable algorithm policy.`,
       },
-      "outputAlgorithm": {
-        "type": "string",
-        "title": "Result",
-        "default": "Based on your answers, your application is a high-impact algorithm. It is advised to implement policies and processes to mitigate the risks that stem from these systems. High-impact algorithms emplyed by Dutch government must be registered in the Dutch algorithm register and adhere to internal algorithm policies."
+      outputsADM: {
+        type: "string",
+        title: "Result",
+        default: `Based on your answers, your application is:
+- not a high-impact algorithm;
+- not an AI system according to the AI Act;
+- possibly solely automated decision-making (sADM) according to Article 22 of the GDPR.
+Next steps:
+- Consult with relevant legal experts to determine whether sADM is actually involved.`,
       },
-      "outputAlgorithmAndAI": {
-        "type": "string",
-        "title": "Result",
-        "default": "Based on your answers, your application is a high-impact algorithm. It is advised to implement policies and processes to mitigate the risks that stem from these systems. High-impact algorithms emplyed by Dutch government must be registered in the Dutch algorithm register and adhere to internal algorithm policies.\n\nYour application is based on your answers most likely also an AI system according to the AI Act. Complete the following questionnaire to determine which requirements of the AI Act your application must comply with."
+      outputAlgoandAI: {
+        type: "string",
+        title: "Result",
+        default: `Based on your answers, your application is:
+- an AI system according to the AI Act;
+- a high-impact algorithm;
+- not solely automated decision-making (sADM).
+
+Next steps:
+- Complete the AI risk classification questionnaire to determine which requirements of the AI Act the application must meet.
+- Include the algorithm in the Algorithm Register.
+- Ensure compliance with internally applicable algorithm policy.`,
       },
-      "outputIntermediateAISystem": {
-        "type": "string",
-        "title": "Result",
-        "default": "Based on your answers, your application is an AI system according to the AI Act. It may also qualify as a high-impact algorithm. Complete the following questionnaire to find out."
+      outputAlgoandsADM: {
+        type: "string",
+        title: "Result",
+        default: `Based on your answers, your application is:
+- not an AI system according to the AI Act;
+- a high-impact algorithm;
+- possibly solely automated decision-making (sADM) according to Article 22 of the GDPR.
+
+Next steps:
+- Include the algorithm in the Algorithm Register.
+- Ensure compliance with internally applicable algorithm policy.
+- Consult with relevant legal experts to determine whether sADM is actually involved.`,
       },
-      "effect": {
-        "title": "Effect",
-        "type": "object",
-        "properties": {
-          "q7": {
-            "type": "string",
-            "title": "Which of the following options best describes your application's impact on the outcome of the process?",
-            "enum": [
-              "The outcome of the process is directly determined by the application without human intervention. Once the proces is complete, a human analyst may review and evaluate the results.",
-              "The outcome of the process is heavily influenced by the application. For instance, because work instructions determine what the effect is of certain outtput of the application. A human analyst can deviate from the outcome, but most often does the output of the application determines the outcome of the process.",
-              "The outcome of the process is partly influenced by the application. The output of the application is important for the outcome, but the ultimate decision is taken by a human analyst. This analyst has sufficient information, knowledge/experience, mandate and available time to take the decision.",
-              "The application determines the process flow, but the outcome of the process is fully determined by a human. For example, when the output of the application is a riskscore which determines whether an investigation is launched or a case should be processed with more scrutiny, but the investigation or processing of the case is performed fully manually.",
-              "The process flow and outcome of the process is fully determined by a human and is influenced by multiple factors. The output of the application is one of many factors and is not decisive in the decision.",
-              "Another type of output"
-            ]
-          }
-        },
-        "required": ["q7"],
-        "dependencies": {
-          "q7": {
-            "oneOf": [
-              {
-                "properties": {
-                  "q7": {
-                    "enum": [
-                      "The process flow and outcome of the process is fully determined by a human and is influenced by multiple factors. The output of the application is one of many factors and is not decisive in the decision."
-                    ]
-                  },
-                  "output": { "$ref": "#/definitions/outputNoAI" }
-                }
-              },
-              {
-                "properties": {
-                  "q7": { "enum": ["Another type of output"] },
-                  "q7_option5": {
-                    "type": "string",
-                    "title": "Describe the effect of the application on the process"
-                  },
-                  "output": { "$ref": "#/definitions/outputNoAI" }
-                },
-                "required": ["q7_option5"]
-              },
-              {
-                "properties": {
-                  "q7": {
-                    "enum": [
-                      "The outcome of the process is directly determined by the application without human intervention. Once the proces is complete, a human analyst may review and evaluate the results.",
-                      "The outcome of the process is heavily influenced by the application. For instance, because work instructions determine what the effect is of certain outtput of the application. A human analyst can deviate from the outcome, but most often does the output of the application determines the outcome of the process.",
-                      "The outcome of the process is partly influenced by the application. The output of the application is important for the outcome, but the ultimate decision is taken by a human analyst. This analyst has sufficient information, knowledge/experience, mandate and available time to take the decision.",
-                      "The application determines the process flow, but the outcome of the process is fully determined by a human. For example, when the output of the application is a riskscore which determines whether an investigation is launched or a case should be processed with more scrutiny, but the investigation or processing of the case is performed fully manually."
-                    ]
-                  },
-                  "output": { "$ref": "#/definitions/outputAlgorithm" }
-                }
-              }
-            ]
-          }
-        }
+      outputAlgosADMandAI: {
+        type: "string",
+        title: "Result",
+        default: `Based on your answers, your application is:
+- an AI system according to the AI Act;
+- a high-impact algorithm;
+- possibly solely automated decision-making (sADM) according to Article 22 of the GDPR.
+
+Next steps:
+- Complete the AI risk classification questionnaire to determine which requirements of the AI Act the application must meet.
+- Include the algorithm in the Algorithm Register.
+- Ensure compliance with internally applicable algorithm policy.
+- Consult with relevant legal experts to determine whether sADM is actually involved.`,
       },
-      "effectAI": {
-        "title": "EffectAI",
-        "type": "object",
-        "properties": {
-          "q7": {
-            "type": "string",
-            "title": "Which of the following options best describes the effect of your application on the outcome of the application?",
-            "enum": [
-              "The outcome of the process is directly determined by the application without human intervention. Once the proces is complete, a human analyst may review and evaluate the results.",
-              "The outcome of the process is heavily influenced by the application. For instance, because work instructions determine what the effect is of certain outtput of the application. A human analyst can deviate from the outcome, but most often does the output of the application determines the outcome of the process.",
-              "The outcome of the process is partly influenced by the application. The output of the application is important for the outcome, but the ultimate decision is taken by a human analyst. This analyst has sufficient information, knowledge/experience, mandate and available time to take the decision.",
-              "The application determines the process flow, but the outcome of the process is fully determined by a human. For example, when the output of the application is a riskscore which determines whether an investigation is launched or a case should be processed with more scrutiny, but the investigation or processing of the case is performed fully manually.",
-              "The process flow and outcome of the process is fully determined by a human and is influenced by multiple factors. The output of the application is one of many factors and is not decisive in the decision.",
-              "Another type of output"
-            ]
-          }
-        },
-        "required": ["q7"],
-        "dependencies": {
-          "q7": {
-            "oneOf": [
-              {
-                "properties": {
-                  "q7": {
-                    "enum": [
-                      "The process flow and outcome of the process is fully determined by a human and is influenced by multiple factors. The output of the application is one of many factors and is not decisive in the decision."
-                    ]
-                  },
-                  "output": { "$ref": "#/definitions/outputAI" }
-                }
-              },
-              {
-                "properties": {
-                  "q7": { "enum": ["Another type of output"] },
-                  "q7_option5": {
-                    "type": "string",
-                    "title": "Describe the effect of the application on the process"
-                  },
-                  "output": { "$ref": "#/definitions/outputAI" }
-                },
-                "required": ["q7_option5"]
-              },
-              {
-                "properties": {
-                  "q7": {
-                    "enum": [
-                      "The outcome of the process is directly determined by the application without human intervention. Once the proces is complete, a human analyst may review and evaluate the results.",
-                      "The outcome of the process is heavily influenced by the application. For instance, because work instructions determine what the effect is of certain outtput of the application. A human analyst can deviate from the outcome, but most often does the output of the application determines the outcome of the process.",
-                      "The outcome of the process is partly influenced by the application. The output of the application is important for the outcome, but the ultimate decision is taken by a human analyst. This analyst has sufficient information, knowledge/experience, mandate and available time to take the decision.",
-                      "The application determines the process flow, but the outcome of the process is fully determined by a human. For example, when the output of the application is a riskscore which determines whether an investigation is launched or a case should be processed with more scrutiny, but the investigation or processing of the case is performed fully manually."
-                    ]
-                  },
-                  "output": { "$ref": "#/definitions/outputAlgorithmAndAI" }
-                }
-              }
-            ]
-          }
-        }
+      outputAIStop: {
+        type: "string",
+        title: "Result",
+        default:
+          "Based on your answers, your application is an AI system according to the AI Act.",
       },
-      "impact": {
-        "title": "impact",
-        "type": "object",
-        "properties": {
-          "q4": {
-            "type": "string",
-            "title": "Is in the process a decision made for individual citizens or civil servants?",
-            "enum": ["Yes", "No"]
-          }
-        },
-        "required": ["q4"],
-        "dependencies": {
-          "q4": {
-            "oneOf": [
-              {
-                "properties": {
-                  "q4": {
-                    "enum": ["Yes"]
-                  },
-                  "q5": {
-                    "type": "string",
-                    "title": "What type of decision is taken in the process?\n\nSelect the option that most closely resembles the type of decision.",
-                    "enum": [
-                      "Decision on the prioritization of applications, requests, complaints, and objections.",
-                      "Decision on formal complaints and objections",
-                      "Decision with direct financial consequences for a citizen or civil servant,\nsuch as decisions regarding benefits, allowances, subsidies, fines, refunds, or the possibility of a payment plan",
-                      "Decision on applications and requests without direct financial consequences,\nsuch as the approval of a service request or the granting of a permit",
-                      "Decision on inspection, investigation, or requests for additional information",
-                      "Decision on school assignments.",
-                      "Decisions on providing advice or (proactively) offering services or provisions.",
-                      "Other type of decisions"
-                    ]
-                  }
-                },
-                "required": ["q5"]
-              },
-              {
-                "properties": {
-                  "q4": {
-                    "enum": ["No"]
-                  },
-                  "q6": {
-                    "type": "string",
-                    "title": "Does the process contribute to how a governmental institution categorizes or approaches (groups of) citizens or civil servants?",
-                    "enum": ["Yes", "I am not sure", "No"]
-                  }
-                },
-                "required": ["q6"]
-              }
-            ]
+      outputNoAIStop: {
+        type: "string",
+        title: "Result",
+        default:
+          "Based on your answers, your application is not an AI system.",
+      },
+      outputNoAIandAlgoStop: {
+        type: "string",
+        title: "Result",
+        default:
+          "Based on your answers, your application is neither an AI system nor a high-impact algorithm.",
+      },
+      outputNone: {
+        type: "string",
+        title: "Result",
+        default:
+          `Based on your answers, your application is:
+- not a high-impact algorithm;
+- not solely automated decision-making (sADM);
+- not an AI system according to the AI Act.`,
+      },
+      automation_sADM: {
+        title: "Automation",
+        type: "object",
+        properties: {
+          q7: {
+            type: "string",
+            title:
+              "Which of the following options best describes the effect of the application on the outcome?",
+            enum: [
+              "The outcome of the process is directly determined by the application (no human intervention is required). Once the process is complete, people can still check or analyze the results.",
+              "The outcome of the process is strongly influenced by the application. For example, because work instructions determine the consequence of a particular outcome of the application. In some cases, an employee can make different choices, but usually the result of the system determines the final outcome of the process.",
+              "The outcome of the process is partly influenced by the application. The result of the application is important for the end result, but the final decision is made by an employee. This employee has the right information, experience/skills, mandate, and available time to make the decision.",
+              "The application (partly) determines the course of the process, but the outcome of the process is entirely determined by an employee. For example, when the outcome of the application is a risk score on the basis of which a control process is started or a more intensive file evaluation takes place, but the control or evaluation is then carried out entirely by an employee.",
+              "The course of the process and the outcome of the process are determined entirely by a human being and depend on several factors. The result of the application is only one of the factors and is not decisive in decisions.",
+              "Another type of effect",
+            ],
           },
-          "q5": {
-            "oneOf": [
-              {
-                "properties": {
-                  "q5": {
-                    "enum": ["Other type of decisions"]
-                  },
-                  "q5_option8": {
-                    "type": "string",
-                    "title": "Describe the type of decision",
-                    "default": ""
-                  },
-                  "output": {
-                    "$ref": "#/definitions/outputNoAI"
-                  }
-                },
-                "required": ["q5_option8"]
-              },
-              {
-                "properties": {
-                  "q5": {
-                    "enum": [
-                      "Decision on the prioritization of applications, requests, complaints, and objections.",
-                      "Decision on formal complaints and objections",
-                      "Decision with direct financial consequences for a citizen or civil servant,\nsuch as decisions regarding benefits, allowances, subsidies, fines, refunds, or the possibility of a payment plan",
-                      "Decision on applications and requests without direct financial consequences,\nsuch as the approval of a service request or the granting of a permit",
-                      "Decision on inspection, investigation, or requests for additional information",
-                      "Decision on school assignments.",
-                      "Decisions on providing advice or (proactively) offering services or provisions."
-                    ]
-                  },
-                  "effect": {
-                    "$ref": "#/definitions/effect"
-                  }
-                }
-              }
-            ]
-          },
-          "q6": {
-            "oneOf": [
-              {
-                "properties": {
-                  "q6": {
-                    "enum": ["Yes"]
-                  },
-                  "effect": {
-                    "$ref": "#/definitions/effect"
-                  }
-                }
-              },
-              {
-                "properties": {
-                  "q6": {
-                    "enum": ["I am not sure"]
-                  },
-                  "q6_unsure": {
-                    "type": "string",
-                    "title": "Give a short description of the process and how this affects citizens or civil servants.",
-                    "default": ""
-                  },
-                  "effect": {
-                    "$ref": "#/definitions/effect"
-                  }
-                },
-                "required": ["q6_unsure"]
-              },
-              {
-                "properties": {
-                  "q6": {
-                    "enum": ["No"]
-                  },
-                  "output": {
-                    "$ref": "#/definitions/outputNoAI"
-                  }
-                }
-              }
-            ]
-          }
-        }
-      },
-      "impactAI": {
-        "title": "impactAI",
-        "type": "object",
-        "properties": {
-          "q4": {
-            "type": "string",
-            "title": "Is in the process a decision made about a individual citizens?",
-            "enum": ["Yes", "No"]
-          }
         },
-        "required": ["q4"],
-        "dependencies": {
-          "q4": {
-            "oneOf": [
+        required: ["q7"],
+        dependencies: {
+          q7: {
+            oneOf: [
               {
-                "properties": {
-                  "q4": {
-                    "enum": ["Yes"]
+                properties: {
+                  q7: {
+                    enum: [
+                      "The outcome of the process is partly influenced by the application. The result of the application is important for the end result, but the final decision is made by an employee. This employee has the right information, experience/skills, mandate, and available time to make the decision.",
+                      "The application (partly) determines the course of the process, but the outcome of the process is entirely determined by an employee. For example, when the outcome of the application is a risk score on the basis of which a control process is started or a more intensive file evaluation takes place, but the control or evaluation is then carried out entirely by an employee.",
+                      "The course of the process and the outcome of the process are determined entirely by a human being and depend on several factors. The result of the application is only one of the factors and is not decisive in decisions.",
+                    ],
                   },
-                  "q5": {
-                    "type": "string",
-                    "title": "What type of decision is made in this process?\n\nSelect the option that most closely resembles the type of decision.",
-                    "enum": [
-                      "Decision on the prioritization of applications, requests, complaints, and objections",
-                      "Decision on formal complaints and objections",
-                      "Decision with direct financial consequences for a citizen or civil servant,\nsuch as decisions regarding benefits, allowances, subsidies, fines, refunds, or the possibility of a payment plan",
-                      "Decision on applications and requests without direct financial consequences,\nsuch as the approval of a service request or the granting of a permit",
-                      "Decision on inspection, investigation, or requests for additional information",
-                      "Decision on school assignments.",
-                      "Decisions on providing advice or (proactively) offering services or provisions.",
-                      "Other type of decisions"
-                    ]
-                  }
+                  output: { $ref: "#/definitions/outputNone" }, //wordt outputNone
                 },
-                "required": ["q5"]
               },
               {
-                "properties": {
-                  "q4": {
-                    "enum": ["No"]
+                properties: {
+                  q7: { enum: ["Another type of effect"] },
+                  q7_option5: {
+                    type: "string",
+                    title:
+                      "Describe the effect of the application on the process",
                   },
-                  "q6": {
-                    "type": "string",
-                    "title": "Does the process contribute to how a governmental institution categorizes or approaches (groups of) citizens or civil servants?",
-                    "enum": ["Yes", "I am not sure", "No"]
-                  }
+                  output: { $ref: "#/definitions/outputNone" }, //wordt outputNone
                 },
-                "required": ["q6"]
-              }
-            ]
+                required: ["q7_option5"],
+              },
+              {
+                properties: {
+                  q7: {
+                    enum: [
+                      "The outcome of the process is directly determined by the application (no human intervention is required). Once the process is complete, people can still check or analyze the results.",
+                      "The outcome of the process is strongly influenced by the application. For example, because work instructions determine the consequence of a particular outcome of the application. In some cases, an employee can make different choices, but usually the result of the system determines the final outcome of the process.",
+                    ],
+                  },
+                  output: { $ref: "#/definitions/outputsADM" },
+                },
+              },
+            ],
           },
-          "q5": {
-            "oneOf": [
-              {
-                "properties": {
-                  "q5": {
-                    "enum": ["Other or other type of decision"]
-                  },
-                  "q5_option8": {
-                    "type": "string",
-                    "title": "Describe the type of decision",
-                    "default": ""
-                  },
-                  "output": {
-                    "$ref": "#/definitions/outputAI"
-                  }
-                },
-                "required": ["q5_option8"]
-              },
-              {
-                "properties": {
-                  "q5": {
-                    "enum": [
-                      "Decision on the prioritization of applications, requests, complaints, and objections.",
-                      "Decision on formal complaints and objections",
-                      "Decision with direct financial consequences for a citizen or civil servant,\nsuch as decisions regarding benefits, allowances, subsidies, fines, refunds, or the possibility of a payment plan",
-                      "Decision on applications and requests without direct financial consequences,\nsuch as the approval of a service request or the granting of a permit",
-                      "Decision on inspection, investigation, or requests for additional information",
-                      "Decision on school assignments.",
-                      "Decisions on providing advice or (proactively) offering services or provisions."
-                    ]
-                  },
-                  "effect": {
-                    "$ref": "#/definitions/effectAI"
-                  }
-                }
-              }
-            ]
+        },
+      },
+      automation_Algo: {
+        title: "Automation",
+        type: "object",
+        properties: {
+          q7: {
+            type: "string",
+            title:
+              "Which of the following options best describes the effect of the application on the outcome?",
+            enum: [
+              "The outcome of the process is directly determined by the application (no human intervention is required). Once the process is complete, people can still check or analyze the results.",
+              "The outcome of the process is strongly influenced by the application. For example, because work instructions determine the consequence of a particular outcome of the application. In some cases, an employee can make different choices, but usually the result of the system determines the final outcome of the process.",
+              "The outcome of the process is partly influenced by the application. The result of the application is important for the end result, but the final decision is made by an employee. This employee has the right information, experience/skills, mandate, and available time to make the decision.",
+              "The application (partly) determines the course of the process, but the outcome of the process is entirely determined by an employee. For example, when the outcome of the application is a risk score on the basis of which a control process is started or a more intensive file evaluation takes place, but the control or evaluation is then carried out entirely by an employee.",
+              "The course of the process and the outcome of the process are determined entirely by a human being and depend on several factors. The result of the application is only one of the factors and is not decisive in decisions.",
+              "Another type of effect",
+            ],
           },
-          "q6": {
-            "oneOf": [
+        },
+        required: ["q7"],
+        dependencies: {
+          q7: {
+            oneOf: [
               {
-                "properties": {
-                  "q6": {
-                    "enum": ["Yes"]
+                properties: {
+                  q7: {
+                    enum: [
+                      "The course of the process and the outcome of the process are determined entirely by a human being and depend on several factors. The result of the application is only one of the factors and is not decisive in decisions.",
+                    ],
                   },
-                  "effect": {
-                    "$ref": "#/definitions/effectAI"
-                  }
-                }
-              },
-              {
-                "properties": {
-                  "q6": {
-                    "enum": ["I am not sure"]
-                  },
-                  "q6_unsure": {
-                    "type": "string",
-                    "title": "Give a short description of the process and how this affects citizens or civil servants.",
-                    "default": ""
-                  },
-                  "effect": {
-                    "$ref": "#/definitions/effectAI"
-                  }
+                  output: { $ref: "#/definitions/outputNone" }, //wordt outputNone
                 },
-                "required": ["q6_unsure"]
               },
               {
-                "properties": {
-                  "q6": {
-                    "enum": ["No"]
+                properties: {
+                  q7: { enum: ["Another type of effect"] },
+                  q7_option5: {
+                    type: "string",
+                    title:
+                      "Describe the effect of the application on the process",
                   },
-                  "output": {
-                    "$ref": "#/definitions/outputAI"
-                  }
-                }
-              }
-            ]
-          }
-        }
-      }
+                  output: { $ref: "#/definitions/outputNone" }, //wordt outputNone
+                },
+                required: ["q7_option5"],
+              },
+              {
+                properties: {
+                  q7: {
+                    enum: [
+                      "The outcome of the process is directly determined by the application (no human intervention is required). Once the process is complete, people can still check or analyze the results.",
+                      "The outcome of the process is strongly influenced by the application. For example, because work instructions determine the consequence of a particular outcome of the application. In some cases, an employee can make different choices, but usually the result of the system determines the final outcome of the process.",
+                      "The outcome of the process is partly influenced by the application. The result of the application is important for the end result, but the final decision is made by an employee. This employee has the right information, experience/skills, mandate, and available time to make the decision.",
+                      "The application (partly) determines the course of the process, but the outcome of the process is entirely determined by an employee. For example, when the outcome of the application is a risk score on the basis of which a control process is started or a more intensive file evaluation takes place, but the control or evaluation is then carried out entirely by an employee.",
+                    ],
+                  },
+                  output: { $ref: "#/definitions/outputAlgo" },
+                },
+              },
+            ],
+          },
+        },
+      },
+      automation_AlgosADM: {
+        title: "Automation",
+        type: "object",
+        properties: {
+          q7: {
+            type: "string",
+            title:
+              "Which of the following options best describes the effect of the application on the outcome?",
+            enum: [
+              "The outcome of the process is directly determined by the application (no human intervention is required). Once the process is complete, people can still check or analyze the results.",
+              "The outcome of the process is strongly influenced by the application. For example, because work instructions determine the consequence of a particular outcome of the application. In some cases, an employee can make different choices, but usually the result of the system determines the final outcome of the process.",
+              "The outcome of the process is partly influenced by the application. The result of the application is important for the end result, but the final decision is made by an employee. This employee has the right information, experience/skills, mandate, and available time to make the decision.",
+              "The application (partly) determines the course of the process, but the outcome of the process is entirely determined by an employee. For example, when the outcome of the application is a risk score on the basis of which a control process is started or a more intensive file evaluation takes place, but the control or evaluation is then carried out entirely by an employee.",
+              "The course of the process and the outcome of the process are determined entirely by a human being and depend on several factors. The result of the application is only one of the factors and is not decisive in decisions.",
+              "Another type of effect",
+            ],
+          },
+        },
+        required: ["q7"],
+        dependencies: {
+          q7: {
+            oneOf: [
+              {
+                properties: {
+                  q7: {
+                    enum: [
+                      "The course of the process and the outcome of the process are determined entirely by a human being and depend on several factors. The result of the application is only one of the factors and is not decisive in decisions.",
+                    ],
+                  },
+                  output: { $ref: "#/definitions/outputNone" }, //wordt outputNone
+                },
+              },
+              {
+                properties: {
+                  q7: { enum: ["Another type of effect"] },
+                  q7_option5: {
+                    type: "string",
+                    title:
+                      "Describe the effect of the application on the process",
+                  },
+                  output: { $ref: "#/definitions/outputNone" }, //wordt outputNone
+                },
+                required: ["q7_option5"],
+              },
+              {
+                properties: {
+                  q7: {
+                    enum: [
+                      "The outcome of the process is directly determined by the application (no human intervention is required). Once the process is complete, people can still check or analyze the results.",
+                      "The outcome of the process is strongly influenced by the application. For example, because work instructions determine the consequence of a particular outcome of the application. In some cases, an employee can make different choices, but usually the result of the system determines the final outcome of the process.",
+                    ],
+                  },
+                  output: { $ref: "#/definitions/outputAlgoandsADM" },
+                },
+              },
+              {
+                properties: {
+                  q7: {
+                    enum: [
+                      "The outcome of the process is partly influenced by the application. The result of the application is important for the end result, but the final decision is made by an employee. This employee has the right information, experience/skills, mandate, and available time to make the decision.",
+                      "The application (partly) determines the course of the process, but the outcome of the process is entirely determined by an employee. For example, when the outcome of the application is a risk score on the basis of which a control process is started or a more intensive file evaluation takes place, but the control or evaluation is then carried out entirely by an employee.",
+                    ],
+                  },
+                  output: { $ref: "#/definitions/outputAlgo" },
+                },
+              },
+            ],
+          },
+        },
+      },
+      automation_AIAlgosADM: {
+        title: "Automation",
+        type: "object",
+        properties: {
+          q7: {
+            type: "string",
+            title:
+              "Which of the following options best describes the effect of the application on the outcome?",
+            enum: [
+              "The outcome of the process is directly determined by the application (no human intervention is required). Once the process is complete, people can still check or analyze the results.",
+              "The outcome of the process is strongly influenced by the application. For example, because work instructions determine the consequence of a particular outcome of the application. In some cases, an employee can make different choices, but usually the result of the system determines the final outcome of the process.",
+              "The outcome of the process is partly influenced by the application. The result of the application is important for the end result, but the final decision is made by an employee. This employee has the right information, experience/skills, mandate, and available time to make the decision.",
+              "The application (partly) determines the course of the process, but the outcome of the process is entirely determined by an employee. For example, when the outcome of the application is a risk score on the basis of which a control process is started or a more intensive file evaluation takes place, but the control or evaluation is then carried out entirely by an employee.",
+              "The course of the process and the outcome of the process are determined entirely by a human being and depend on several factors. The result of the application is only one of the factors and is not decisive in decisions.",
+              "Another type of effect",
+            ],
+          },
+        },
+        required: ["q7"],
+        dependencies: {
+          q7: {
+            oneOf: [
+              {
+                properties: {
+                  q7: {
+                    enum: [
+                      "The course of the process and the outcome of the process are determined entirely by a human being and depend on several factors. The result of the application is only one of the factors and is not decisive in decisions.",
+                    ],
+                  },
+                  output: { $ref: "#/definitions/outputAI" }, //fixed naar outputAI
+                },
+              },
+              {
+                properties: {
+                  q7: { enum: ["Another type of effect"] },
+                  q7_option5: {
+                    type: "string",
+                    title:
+                      "Describe the effect of the application on the process",
+                  },
+                  output: { $ref: "#/definitions/outputAI" }, //fixed naar outputAI
+                },
+                required: ["q7_option5"],
+              },
+              {
+                properties: {
+                  q7: {
+                    enum: [
+                      "The outcome of the process is directly determined by the application (no human intervention is required). Once the process is complete, people can still check or analyze the results.",
+                      "The outcome of the process is strongly influenced by the application. For example, because work instructions determine the consequence of a particular outcome of the application. In some cases, an employee can make different choices, but usually the result of the system determines the final outcome of the process.",
+                    ],
+                  },
+                  output: { $ref: "#/definitions/outputAlgosADMandAI" },
+                },
+              },
+              {
+                properties: {
+                  q7: {
+                    enum: [
+                      "The outcome of the process is partly influenced by the application. The result of the application is important for the end result, but the final decision is made by an employee. This employee has the right information, experience/skills, mandate, and available time to make the decision.",
+                      "The application (partly) determines the course of the process, but the outcome of the process is entirely determined by an employee. For example, when the outcome of the application is a risk score on the basis of which a control process is started or a more intensive file evaluation takes place, but the control or evaluation is then carried out entirely by an employee.",
+                    ],
+                  },
+                  output: { $ref: "#/definitions/outputAlgoandAI" },
+                },
+              },
+            ],
+          },
+        },
+      },
+      automation_AIAlgo: {
+        title: "Automation",
+        type: "object",
+        properties: {
+          q7: {
+            type: "string",
+            title:
+              "Which of the following options best describes the effect of the application on the outcome?",
+            enum: [
+              "The outcome of the process is directly determined by the application (no human intervention is required). Once the process is complete, people can still check or analyze the results.",
+              "The outcome of the process is strongly influenced by the application. For example, because work instructions determine the consequence of a particular outcome of the application. In some cases, an employee can make different choices, but usually the result of the system determines the final outcome of the process.",
+              "The outcome of the process is partly influenced by the application. The result of the application is important for the end result, but the final decision is made by an employee. This employee has the right information, experience/skills, mandate, and available time to make the decision.",
+              "The application (partly) determines the course of the process, but the outcome of the process is entirely determined by an employee. For example, when the outcome of the application is a risk score on the basis of which a control process is started or a more intensive file evaluation takes place, but the control or evaluation is then carried out entirely by an employee.",
+              "The course of the process and the outcome of the process are determined entirely by a human being and depend on several factors. The result of the application is only one of the factors and is not decisive in decisions.",
+              "Another type of effect",
+            ],
+          },
+        },
+        required: ["q7"],
+        dependencies: {
+          q7: {
+            oneOf: [
+              {
+                properties: {
+                  q7: {
+                    enum: [
+                      "The course of the process and the outcome of the process are determined entirely by a human being and depend on several factors. The result of the application is only one of the factors and is not decisive in decisions.",
+                    ],
+                  },
+                  output: { $ref: "#/definitions/outputAI" },
+                },
+              },
+              {
+                properties: {
+                  q7: { enum: ["Another type of effect"] },
+                  q7_option5: {
+                    type: "string",
+                    title:
+                      "Describe the effect of the application on the process",
+                  },
+                  output: { $ref: "#/definitions/outputAI" },
+                },
+                required: ["q7_option5"],
+              },
+              {
+                properties: {
+                  q7: {
+                    enum: [
+                      "The outcome of the process is directly determined by the application (no human intervention is required). Once the process is complete, people can still check or analyze the results.",
+                      "The outcome of the process is strongly influenced by the application. For example, because work instructions determine the consequence of a particular outcome of the application. In some cases, an employee can make different choices, but usually the result of the system determines the final outcome of the process.",
+                      "The outcome of the process is partly influenced by the application. The result of the application is important for the end result, but the final decision is made by an employee. This employee has the right information, experience/skills, mandate, and available time to make the decision.",
+                      "The application (partly) determines the course of the process, but the outcome of the process is entirely determined by an employee. For example, when the outcome of the application is a risk score on the basis of which a control process is started or a more intensive file evaluation takes place, but the control or evaluation is then carried out entirely by an employee.",
+                    ],
+                  },
+                  output: { $ref: "#/definitions/outputAlgoandAI" },
+                },
+              },
+            ],
+          },
+        },
+      },
+      impact_sADM: {
+        title: "Impact",
+        type: "object",
+        properties: {
+          q4: {
+            type: "string",
+            title:
+              "Is a decision made in the process for individual citizens, organizations, or employees?",
+            enum: ["Yes", "No"],
+          },
+        },
+        required: ["q4"],
+        dependencies: {
+          q4: {
+            oneOf: [
+              {
+                properties: {
+                  q4: {
+                    enum: ["Yes"],
+                  },
+                  q5
+                },
+                required: ["q5"],
+              },
+              {
+                properties: {
+                  q4: {
+                    enum: ["No"],
+                  },
+                  output: { $ref: "#/definitions/outputNone" },
+                },
+              },
+            ],
+          },
+          ...q5Dependencies(
+            "#/definitions/outputNone",
+            "#/definitions/automation_sADM",
+            "#/definitions/outputNone",
+            "#/definitions/automation_sADM",
+            "#/definitions/outputNone"
+          ),
+        },
+      },
+      impact_AlgosADM: {
+        title: "Impact",
+        type: "object",
+        properties: {
+          q4: {
+            type: "string",
+            title:
+              "Is a decision made in the process for individual citizens, organizations, or employees?",
+            enum: ["Yes", "No"],
+          },
+        },
+        required: ["q4"],
+        dependencies: {
+          q4: {
+            oneOf: [
+              {
+                properties: {
+                  q4: {
+                    enum: ["Yes"],
+                  },
+                  q5,
+                },
+                required: ["q5"],
+              },
+              {
+                properties: {
+                  q4: {
+                    enum: ["No"],
+                  },
+                  q6: {
+                    type: "string",
+                    title:
+                      "Does the process contribute to how the government categorizes or approaches groups of citizens, organizations, or civil servants?",
+                    enum: ["Yes", "I am not sure", "No"],
+                  },
+                },
+                required: ["q6"],
+              },
+            ],
+          },
+          ...q5Dependencies(
+            "#/definitions/outputNone",
+            "#/definitions/automation_AlgosADM",
+            "#/definitions/automation_Algo",
+            "#/definitions/automation_AlgosADM",
+            "#/definitions/automation_Algo"
+          ),
+          q6: {
+            oneOf: [
+              {
+                properties: {
+                  q6: {
+                    enum: ["Yes"],
+                  },
+                  automation: { $ref: "#/definitions/automation_Algo" },
+                },
+              },
+              {
+                properties: {
+                  q6: {
+                    enum: ["I am not sure"],
+                  },
+                  q6_unsure: {
+                    type: "string",
+                    title:
+                      "Provide a brief description of the process and how it affects citizens, organisations or civil servants.",
+                    default: "",
+                  },
+                  automation: { $ref: "#/definitions/automation_Algo" },
+                },
+                required: ["q6_unsure"],
+              },
+              {
+                properties: {
+                  q6: {
+                    enum: ["No"],
+                  },
+                  output: { $ref: "#/definitions/outputNone" }, // wordt outputNone
+                },
+              },
+            ],
+          },
+        },
+      },
+      impact_AIAlgosADM: {
+        title: "Impact",
+        type: "object",
+        properties: {
+          q4: {
+            type: "string",
+            title:
+              "Is a decision made in the process for individual citizens, organizations, or employees?",
+            enum: ["Yes", "No"],
+          },
+        },
+        required: ["q4"],
+        dependencies: {
+          q4: {
+            oneOf: [
+              {
+                properties: {
+                  q4: {
+                    enum: ["Yes"],
+                  },
+                  q5,
+                },
+                required: ["q5"],
+              },
+              {
+                properties: {
+                  q4: {
+                    enum: ["No"],
+                  },
+                  q6: {
+                    type: "string",
+                    title:
+                      "Does the process contribute to how the government categorizes or approaches groups of citizens, organizations, or civil servants?",
+                    enum: ["Yes", "I am not sure", "No"],
+                  },
+                },
+                required: ["q6"],
+              },
+            ],
+          },
+          ...q5Dependencies(
+            "#/definitions/outputAI",
+            "#/definitions/automation_AIAlgosADM",
+            "#/definitions/automation_AIAlgo",
+            "#/definitions/automation_AIAlgosADM",
+            "#/definitions/automation_AIAlgo"
+          ),
+          q6: {
+            oneOf: [
+              {
+                properties: {
+                  q6: {
+                    enum: ["Yes"],
+                  },
+                  automation: { $ref: "#/definitions/automation_AIAlgo" },
+                },
+              },
+              {
+                properties: {
+                  q6: {
+                    enum: ["I am not sure"],
+                  },
+                  q6_unsure: {
+                    type: "string",
+                    title:
+                      "Provide a brief description of the process and how it affects citizens, organisations or civil servants.",
+                    default: "",
+                  },
+                  automation: { $ref: "#/definitions/automation_AIAlgo" },
+                },
+                required: ["q6_unsure"],
+              },
+              {
+                properties: {
+                  q6: {
+                    enum: ["No"],
+                  },
+                  output: { $ref: "#/definitions/outputAI" },
+                },
+              },
+            ],
+          },
+        },
+      },
     },
-    "properties": {
-      "q1": {
-        "type": "array",
-        "title": "What type of output does the application derive?",
-        "items": {
-          "type": "string",
-          "enum": [
-            "An estimated score, ranking or probability",
-            "An estimated label or classification, such as yes/no, high/low or allocation to groups\nfor instance, for routing, communication purposes or risk classification.",
+    properties: {
+      q1: {
+        type: "array",
+        title: "What is the outcome of the application?",
+        items: {
+          type: "string",
+          enum: [
+            "An estimated score, ranking, or probability",
+            "An estimated label or classification such as yes/no, high/low, or a division into groups. \nFor example, for routing, communication campaigns, or risk classification.",
             "A recommendation",
             "A decision",
-            "Content, such as written text, video, audio or images",
-            "Object recognition, facial recognition or voice recognition",
-            "A dashboard or graph with straight-forward data visualisation\nIf one of the above options are displayed on this dashboard, select this option.",
-            "Another type of output"
-          ]
+            "Content, such as written text, video, audio, or images",
+            "Object recognition, facial recognition, or voice recognition",
+            "A dashboard or graph, with only direct data visualization. \nIf one of the previous options is displayed in this dashboard, choose the previous option.",
+            "Another type of output",
+          ],
         },
-        "minItems": 1,
-        "uniqueItems": true
-      }
+        minItems: 1,
+        uniqueItems: true,
+      },
     },
-    "dependencies": {
-      "q1": {
-        "oneOf": [
+    dependencies: {
+      q1: {
+        oneOf: [
           {
-            "properties": {
-              "q1": {
-                "maxItems": 1,
-                "contains": {
-                  "enum": ["Another type of output"]
-                }
+            properties: {
+              q1: {
+                maxItems: 1,
+                contains: {
+                  enum: ["Another type of output"],
+                },
               },
-              "q1_option6": {
-                "type": "string",
-                "title": "Give a description of the output",
-                "default": ""
+              q1_option6: {
+                type: "string",
+                title: "Provide a description of the output",
+                default: "",
               },
-              "output": {
-                "$ref": "#/definitions/outputNoAI"
-              }
+              output: { $ref: "#/definitions/outputNone" }, // wordt outputNone
             },
-            "required": ["q1_option6"]
+            required: ["q1_option6"],
           },
           {
-            "properties": {
-              "q1": {
-                "maxItems": 1,
-                "contains": {
-                  "enum": [
-                    "A dashboard or graph with straight-forward data visualisation\nIf one of the above options are displayed on this dashboard, select this option."
-                  ]
-                }
+            properties: {
+              q1: {
+                maxItems: 1,
+                contains: {
+                  enum: [
+                    "A dashboard or graph, with only direct data visualization. \nIf one of the previous options is displayed in this dashboard, choose the previous option.",
+                  ],
+                },
               },
-              "output": {
-                "$ref": "#/definitions/outputNoAI"
-              }
-            }
+              output: { $ref: "#/definitions/outputNone" }, // wordt outputNone
+            },
           },
           {
-            "properties": {
-              "q1": {
-                "anyOf": [
+            properties: {
+              q1: {
+                minItems: 2,
+                maxItems:2,
+                allOf: [
                   {
-                    "contains": {
-                      "enum": ["An estimated score, ranking or probability"]
-                    }
+                    contains: {
+                      enum: ["A dashboard or graph, with only direct data visualization. \nIf one of the previous options is displayed in this dashboard, choose the previous option."],
+                    },
                   },
                   {
-                    "contains": {
-                      "enum": [
-                        "An estimated label or classification, such as yes/no, high/low or allocation to groups\nfor instance, for routing, communication purposes or risk classification."
-                      ]
-                    }
+                    contains: {
+                      enum: ["Another type of output"],
+                    },
                   },
-                  {
-                    "contains": {
-                      "enum": ["A recommendation"]
-                    }
-                  },
-                  {
-                    "contains": {
-                      "enum": ["A decision"]
-                    }
-                  },
-                  {
-                    "contains": {
-                      "enum": [
-                        "Content, such as written text, video, audio or images"
-                      ]
-                    }
-                  },
-                  {
-                    "contains": {
-                      "enum": [
-                        "Object recognition, facial recognition or voice recognition"
-                      ]
-                    }
-                  }
-                ]
+                ],
               },
-              "q2": {
-                "type": "string",
-                "title": "Is the design of the application based on data?",
-                "enum": [
-                  "Yes, design choices were made manually, but insights from data analysis helped inform the design",
-                  "Yes, the application contains components derived from data. There is fitting or learning of a model or automatic variable selection using statistics, optimization, simulation, machine learning or a similar technique",
-                  "No, the design is not based on data analyses"
-                ]
-              }
+              q1_option6: {
+                type: "string",
+                title: "Provide a description of the output",
+                default: "",
+              },
+              output: { $ref: "#/definitions/outputNone" }, // wordt outputNone
             },
-            "required": ["q2"]
-          }
-        ]
+            required: ["q1_option6"],
+          },
+          {
+            properties: {
+              q1: {
+                anyOf: [
+                  {
+                    contains: {
+                      enum: ["An estimated score, ranking, or probability"],
+                    },
+                  },
+                  {
+                    contains: {
+                      enum: [
+                        "An estimated label or classification such as yes/no, high/low, or a division into groups. \nFor example, for routing, communication campaigns, or risk classification.",
+                      ],
+                    },
+                  },
+                  {
+                    contains: {
+                      enum: ["A recommendation"],
+                    },
+                  },
+                  {
+                    contains: {
+                      enum: ["A decision"],
+                    },
+                  },
+                  {
+                    contains: {
+                      enum: [
+                        "Content, such as written text, video, audio, or images",
+                      ],
+                    },
+                  },
+                  {
+                    contains: {
+                      enum: [
+                        "Object recognition, facial recognition, or voice recognition",
+                      ],
+                    },
+                  },
+                ],
+              },
+              q2: {
+                type: "string",
+                title: "Is the design of the application based on data?",
+                enum: [
+                  "Yes, design choices were made manually, but insights from data analysis helped with the design.",
+                  "Yes, the application contains components derived from data. This involves fitting or learning a model or automatic variable selection using statistics, optimization, simulation, machine learning, or a similar technique.",
+                  "No, the design of the application is not based on data analysis.",
+                ],
+              },
+            },
+            required: ["q2"],
+          },
+        ],
       },
-      "q2": {
-        "oneOf": [
+      q2: {
+        oneOf: [
           {
-            "properties": {
-              "q2": {
-                "enum": [
-                  "Yes, design choices were made manually, but insights from data analysis helped inform the design"
-                ]
+            properties: {
+              q2: {
+                enum: [
+                  "Yes, design choices were made manually, but insights from data analysis helped with the design.",
+                ],
               },
-              "q2_yes1": {
-                "type": "string",
-                "title": "Explain how the algorithm was developed and the role data analysis played in influencing its design.",
-                "default": ""
-              },
-              "outputIntermediate": {
-                "type": "string",
-                "title": "Next step",
-                "default": "The following questions pertain to the process in which the application is used. For answering these questions, focus on how the application is integrated into the overall process.\n\nFor these questions, the application's role in the decision-making process is not relevant."
-              },
-              "impact": {
-                "$ref": "#/definitions/impact"
-              }
+              noAICont,
             },
-            "required": ["q2_yes1"]
+            required: ["noAICont"],
+            dependencies: {
+              noAICont: {
+                oneOf: [
+                  {
+                    properties: {
+                      noAICont: {
+                        enum: ["Stop questionnaire, go to conclusions"],
+                      },
+                      output: { $ref: "#/definitions/outputNoAIStop" }, //wordt outputNoAIStop
+                    },
+                  },
+                  { ...saving_sharing_AlgosADM },
+                ],
+              },
+            },
           },
           {
-            "properties": {
-              "q2": {
-                "enum": [
-                  "Yes, the application contains components derived from data. There is fitting or learning of a model or automatic variable selection using statistics, optimization, simulation, machine learning or a similar technique"
-                ]
+            properties: {
+              q2: {
+                enum: [
+                  "Yes, the application contains components derived from data. This involves fitting or learning a model or automatic variable selection using statistics, optimization, simulation, machine learning, or a similar technique.",
+                ],
               },
-              "q2_yes2": {
-                "type": "string",
-                "title": "Describe the used method.",
-                "default": ""
+              q2_yes2: {
+                type: "string",
+                title: "Describe the method",
+                default: "",
               },
-              "outputIntermediate": {
-                "type": "string",
-                "title": "Based on your answers, your application is probably an AI system according to the AI Act. It may also qualify as a high-impact algorithm. Complete the following questionnaire to find out.",
-                "default": "The following questions pertain to the process in which the application is used. For answering these questions, focus on how the application is integrated into the overall process.\n\nFor these questions, the application's role in the decision-making process is not relevant."
-              },
-              "impact": {
-                "$ref": "#/definitions/impactAI"
-              }
+              AICont,
             },
-            "required": ["q2_yes2"]
+            required: ["AICont"],
+            dependencies: {
+              AICont: {
+                oneOf: [
+                  {
+                    properties: {
+                      AICont: {
+                        enum: ["Stop questionnaire, go to conclusions"],
+                      },
+                      output: { $ref: "#/definitions/outputAIStop" },
+                    },
+                  },
+                  { ...saving_sharing_AIAlgosADM },
+                ],
+              },
+            },
           },
           {
-            "properties": {
-              "q2": {
-                "enum": ["No, the design is not based on data analyses"]
+            properties: {
+              q2: {
+                enum: [
+                  "No, the design of the application is not based on data analysis.",
+                ],
               },
-              "q3": {
-                "type": "string",
-                "title": "Is the application an automation of human-defined rules? ",
-                "enum": [
-                  "Yes, the application is a straightforward automation of rules defined in law, regulation, or formal policy",
-                  "Yes, automatisation of rules, but these are not explicitly defined in law, regulation, or formal policy",
-                  "Yes, logic- and knowledge-based approaches in which output are infered from encoded knowledge or symbolic representation",
-                  "No"
-                ]
-              }
+              q3: {
+                type: "string",
+                title:
+                  "Is the application an automation of rules defined by humans? ",
+                enum: [
+                  "Yes, one-to-one automation of rules laid down in legislation or regulations or in formal policy.",
+                  "Yes, automation of rules, but these are not explicitly laid down in legislation or regulations or formal policy.",
+                  "Yes, logic- and knowledge-based approaches to AI in which outcomes are derived from encoded knowledge or from a symbolic representation of the task to be solved.",
+                  "No",
+                ],
+              },
             },
-            "required": ["q3"]
-          }
-        ]
+            required: ["q3"],
+          },
+        ],
       },
-      "q3": {
-        "oneOf": [
+      q3: {
+        oneOf: [
           {
-            "properties": {
-              "q3": {
-                "enum": [
-                  "Yes, the application is a straightforward automation of rules defined in law, regulation, or formal policy"
-                ]
+            properties: {
+              q3: {
+                enum: [
+                  "Yes, one-to-one automation of rules laid down in legislation or regulations or in formal policy.",
+                ],
               },
-              "q3_yes1": {
-                "type": "string",
-                "title": "Which official law, regulation or policy? Which article, clause or paragraph of the regulation?",
-                "default": ""
+              q3_yes1: {
+                type: "string",
+                title:
+                  "Which formal policy, law, or regulation? Which article, paragraph, or section of this regulation?",
+                default: "",
               },
-              "output": {
-                "$ref": "#/definitions/outputNoAI"
-              }
+              noAIandAlgoCont,
             },
-            "required": ["q3_yes1"]
-          },
-          {
-            "properties": {
-              "q3": {
-                "enum": [
-                  "Yes, automatisation of rules, but these are not explicitly defined in law, regulation, or formal policy"
-                ]
+            required: ["q3_yes1", "noAIandAlgoCont"],
+            dependencies: {
+              noAIandAlgoCont: {
+                oneOf: [
+                  {
+                    properties: {
+                      noAIandAlgoCont: {
+                        enum: ["Stop questionnaire, go to conclusions"],
+                      },
+                      output: { $ref: "#/definitions/outputNoAIandAlgoStop" },
+                    },
+                  },
+                  { ...saving_sharing_sADM },
+                ],
               },
-              "outputIntermediate": {
-                "type": "string",
-                "title": "Next step",
-                "default": "The following questions pertain to the process in which the application is used. For answering these questions, focus on how the application is integrated into the overall process.\n\nFor these questions, the application's role in the decision-making process is not relevant."
-              },
-              "impact": {
-                "$ref": "#/definitions/impact"
-              }
-            }
-          },
-          {
-            "properties": {
-              "q3": {
-                "enum": [
-                  "Yes, logic- and knowledge-based approaches in which output are infered from encoded knowledge or symbolic representation"
-                ]
-              },
-              "outputIntermediate": {
-                "type": "string",
-                "title": "Your application is an AI system according to the AI Act. It may also qualify as a high-impact algorithm. Complete the following questionnaire to find out.",
-                "default": "The following questions pertain to the process in which the application is used. For answering these questions, focus on how the application is integrated into the overall process.\n\nFor these questions, the application's role in the decision-making process is not relevant."
-              },
-              "impact": {
-                "$ref": "#/definitions/impactAI"
-              }
-            }
-          },
-          {
-            "properties": {
-              "q3": {
-                "enum": ["No"]
-              },
-              "q3_no": {
-                "type": "string",
-                "title": "Give a description of the design of the application.",
-                "default": ""
-              },
-              "outputIntermediate": {
-                "type": "string",
-                "title": "Next step",
-                "default": "The following questions pertain to the process in which the application is used. For answering these questions, focus on how the application is integrated into the overall process.\n\nFor these questions, the application's role in the decision-making process is not relevant."
-              },
-              "impact": {
-                "$ref": "#/definitions/impact"
-              }
             },
-            "required": ["q3_no"]
-          }
-        ]
-      }
-    }
+          },
+          {
+            properties: {
+              q3: {
+                enum: [
+                  "Yes, automation of rules, but these are not explicitly laid down in legislation or regulations or formal policy.",
+                ],
+              },
+              noAICont,
+            },
+            required: ["noAICont"],
+            dependencies: {
+              noAICont: {
+                oneOf: [
+                  {
+                    properties: {
+                      noAICont: {
+                        enum: ["Stop questionnaire, go to conclusions"],
+                      },
+                      output: { $ref: "#/definitions/outputNoAIStop" }, //wordt outputNoAIStop
+                    },
+                  },
+                  { ...saving_sharing_AlgosADM },
+                ],
+              },
+            },
+          },
+          {
+            properties: {
+              q3: {
+                enum: [
+                  "Yes, logic- and knowledge-based approaches to AI in which outcomes are derived from encoded knowledge or from a symbolic representation of the task to be solved.",
+                ],
+              },
+              AICont,
+            },
+            required: ["AICont"],
+            dependencies: {
+              AICont: {
+                oneOf: [
+                  {
+                    properties: {
+                      AICont: {
+                        enum: ["Stop questionnaire, go to conclusions"],
+                      },
+                      output: { $ref: "#/definitions/outputAIStop" }, //wordt outputAIStop
+                    },
+                  },
+                  { ...saving_sharing_AIAlgosADM },
+                ],
+              },
+            },
+          },
+          {
+            properties: {
+              q3: {
+                enum: ["No"],
+              },
+              q3_no: {
+                type: "string",
+                title:
+                  "Provide a brief description of the design of the application.",
+                default: "",
+              },
+              noAICont,
+            },
+            required: ["q3_no", "noAICont"],
+            dependencies: {
+              noAICont: {
+                oneOf: [
+                  {
+                    properties: {
+                      noAICont: {
+                        enum: ["Stop questionnaire, go to conclusions"],
+                      },
+                      output: { $ref: "#/definitions/outputAIStop" }, //wordt outputAIStop
+                    },
+                  },
+                  { ...saving_sharing_AlgosADM },
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
   },
-  "uiSchema": {
-    "q1": {
-      "ui:widget": "checkboxes"
+  uiSchema: {
+    q1: {
+      "ui:widget": "checkboxes",
     },
-    "q2": {
+    q2: {
       "ui:widget": "radio",
-      "ui:description": "Data encompasses all forms of electronic information, including text, images, and audio. Various types of algorithms can be derived from data. In rule-based algorithms, thresholds for (decision) rules or weighting factors for decisions can be calculated from data. Classical statistical models, such as regression models, are also derived from data. Machine learning is used to train a model from data. Large language models, such as ChatGPT, utilize machine learning."
+      "ui:description":
+        "Data includes all forms of electronic information. Text, images, and audio are also data.\n\nApplications can be designed manually. However, even when designed manually, the design is sometimes based on data analysis. For example, threshold values for (failure) rules can be calculated from data, or criteria can be selected based on calculated correlations.\n\nIt also happens that components (e.g., models and algorithms) are derived more automatically from data. For example, by fitting a statistical model to data or using machine learning to learn a model or rule-based algorithm from data. Forms of simulation and optimization can also be used to derive a model from data.\n\nLarge language models such as ChatGPT are also derived (learned) from large amounts of textual data.",
     },
-    "q3": {
-      "ui:widget": "radio",
-      "ui:description": "An example of rules established in laws or regulations is a rule-based algorithm that automatically determines whether the income and asset requirements are met when applying for social assistance. In this case, the rules in the algorithm are a direct implementation of norms set, for instance, in the Dutch Participation Act.\n\nWhen a standard is not clearly defined in legislation and is interpreted, the application is not a one-to-one automation of the law or regulation.\n\nExamples of rules created by humans include a rule-based algorithm where a work instruction is translated into a decision rule, a risk profile where the rules are manually created based on employees' experience, or legal standards that are further specified into rules.\n\nLogic- and knowledge-based approaches are also known as 'symbolic AI systems'. These types of AI systems include knowledge representation, inductive (logical) programming, knowledge bases, inference and deduction machines, and (symbolic) reasoning. These forms of technology are rare."
-    },
-    "q4": {
+    q3: {
       "ui:widget": "radio",
       "ui:enableMarkdownInDescription": true,
-      "ui:description": "The following situations may be regarded as playing an important role in the preparation of a decision and are therefore considered to form part of the decision itself: prioritization, follow-up on a question or request from a citizen, request additional information from a citizen, select for inspection or control, (proactively) offer a specific provision in the context of social assistance etc.\n\n**Note:** A decision is much broader than a formal decision as defined in Dutch Public Administration Law."
+      "ui:description": `An example of rules laid down in legislation or regulations is a rule-based algorithm that automatically indicates when income and asset requirements are not met when applying for social assistance benefits.  In this case, the rules in the algorithm are a literal implementation of the standards in the Dutch Participation Act.\nWhen a standard is openly defined in legislation or regulations and is further specified in the application, the application is **not** a one-to-one automation of legislation or regulations.\n\nExamples of rules drawn up by humans are:
+- a rule-based algorithm in which a work instruction has been translated into an algorithm
+- a risk profile in which the rules have been drawn up manually based on the experience of employees
+- open legal standards that are further specified in rules
+\n\nLogic and knowledge-based approaches are also referred to as symbolic AI. This form of AI includes knowledge representation, inductive (logical) programming, knowledge bases, inference and deduction engines, and (symbolic) reasoning. This technology is often used in expert systems.`,
     },
-    "q5": {
-      "ui:widget": "radio"
-    },
-    "q6": {
-      "ui:widget": "radio"
-    },
-    "q7": {
+    AICont: {
       "ui:widget": "radio",
-      "ui:description": "If in doubt, choose the top option among those you are unsure about."
     },
-    "outputIntermediate": {
+    noAICont: {
+      "ui:widget": "radio",
+    },
+    noAIandAlgoCont: {
+      "ui:widget": "radio",
+    },
+    q4: {
+      "ui:widget": "radio",
+      "ui:enableMarkdownInDescription": true,
+      "ui:description":
+        "Consider prioritizing the follow-up to a citizen's question or request, whether or not to ask a citizen to provide additional information, whether or not to select someone for a check or inspection, whether or not a person is eligible for services or facilities, etc.\n\n**Note: A decision is much broader than a formal decision as defined in Dutch Public Administration Law.**",
+    },
+    q5: {
+      "ui:widget": "radio",
+    },
+    q5_1: {
+      "ui:widget": "radio",
+    },
+    "q5_1-controle": {
       "ui:widget": "textarea",
-      "ui:classNames": "intermediate-output"
-    }
-  }
-}
+    },
+    q6: {
+      "ui:widget": "radio",
+    },
+    q7: {
+      "ui:widget": "radio",
+      "ui:description":
+        "If in doubt, choose the top option from those you are unsure about.",
+    },
+    q8: {
+      "ui:widget": "radio",
+      "ui:description": `Examples of output about an individual citizen are:
+- an assessment of a characteristic
+
+Examples of cases concerning an individual citizen are:
+- matters linked to an individual, such as a transaction or an application
+
+Examples of information that does not concern individuals are:
+- Output about groups, in which the individuals are not assigned an output separately from the group
+- Output about physical matters that are not linked to an individual, such as infrastructure
+- Output about sectors, neighborhoods
+- Output about policy and the influence of policy
+
+When considering individuals, also consider businesses in which the entrepreneur is personally liable (self-employed, sole proprietorship, general partnership, professional partnership).`,
+    },
+    q9: {
+      "ui:widget": "radio",
+    },
+    q10: {
+      "ui:widget": "radio",
+    },
+    outputIntermediate: {
+      "ui:widget": "textarea",
+      "ui:classNames": "intermediate-output",
+      "ui:enableMarkdownInDescription": true,
+    },
+    additionalOutputText: {
+      "ui:widget": "hidden",
+    },
+  },
+};

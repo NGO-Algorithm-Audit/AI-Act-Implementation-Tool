@@ -1,6 +1,6 @@
 {
   "JSONSchema": {
-    "title": "Identification of AI systems and high-impact algorithms",
+    "title": "1A - Identification of AI systems and high-impact algorithms",
     "type": "object",
     "definitions": {
       "outputNoAI": {

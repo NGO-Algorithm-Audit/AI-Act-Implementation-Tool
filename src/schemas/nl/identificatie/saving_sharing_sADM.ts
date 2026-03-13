@@ -1,4 +1,4 @@
-export const saving_sharing_ADM = {
+export const saving_sharing_sADM = {
   properties: {
     noAIandAlgoCont: {
       enum: ["Doorgaan"],
@@ -25,7 +25,7 @@ export const saving_sharing_ADM = {
                 "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
             },
             impact: {
-              $ref: "#/definitions/impact_ADM",
+              $ref: "#/definitions/impact_sADM",
             },
           },
         },
@@ -51,7 +51,7 @@ export const saving_sharing_ADM = {
                       enum: ["Ja"],
                     },
                     additionalOutputText: {
-                      default: `Let op: Het langdurig opslaan of delen met derden van de output van een algoritme kan leiden tot aanmerkelijke (onvoorziene) gevolgen voor een betrokkene. Hierdoor kan in juridische zin sprake zijn van geautomatiseerde besluitvorming (art 22) ook wanneer het primaire gebruik van het algoritme dit niet is. Bepaal in overleg met relevante juridische experts of door opslag of delen van de uitkomsten indirect sprake kan zijn van geautomatiseerde besluitvorming (art 22). Zie ook https://www.autoriteitpersoonsgegevens.nl/documenten/advies-geautomatiseerde-besluitvorming`,
+                      default: `Let op: Het langdurig opslaan of delen met derden van de output van een algoritme kan leiden tot aanmerkelijke (onvoorziene) gevolgen voor een betrokkene. Hierdoor kan in juridische zin sprake zijn van sADM volgens AVG artikel 22 ook wanneer het primaire gebruik van het algoritme dit niet is. Bepaal in overleg met relevante juridische experts of door opslag of delen van de uitkomsten indirect sprake kan zijn van sADM. Zie ook https://www.autoriteitpersoonsgegevens.nl/documenten/advies-geautomatiseerde-besluitvorming`,
                     },
                     outputIntermediate: {
                       type: "string",
@@ -60,7 +60,7 @@ export const saving_sharing_ADM = {
                         "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
                     },
                     impact: {
-                      $ref: "#/definitions/impact_ADM",
+                      $ref: "#/definitions/impact_sADM",
                     },
                   },
                 },
@@ -86,7 +86,7 @@ export const saving_sharing_ADM = {
                               enum: ["Ja"],
                             },
                             additionalOutputText: {
-                              default: `Let op: Het langdurig opslaan of delen met derden van de output van een algoritme kan leiden tot aanmerkelijke (onvoorziene) gevolgen voor een betrokkene. Hierdoor kan in juridische zin sprake zijn van geautomatiseerde besluitvorming (art 22) ook wanneer het primaire gebruik van het algoritme dit niet is. Bepaal in overleg met relevante juridische experts of door opslag of delen van de uitkomsten indirect sprake kan zijn van geautomatiseerde besluitvorming (art 22). Zie ook https://www.autoriteitpersoonsgegevens.nl/documenten/advies-geautomatiseerde-besluitvorming`,
+                              default: `Let op: Het langdurig opslaan of delen met derden van de output van een algoritme kan leiden tot aanmerkelijke (onvoorziene) gevolgen voor een betrokkene. Hierdoor kan in juridische zin sprake zijn van sADM volgens AVG artikel 22 ook wanneer het primaire gebruik van het algoritme dit niet is. Bepaal in overleg met relevante juridische experts of door opslag of delen van de uitkomsten indirect sprake kan zijn van sADM. Zie ook https://www.autoriteitpersoonsgegevens.nl/documenten/advies-geautomatiseerde-besluitvorming`,
                             },
                             outputIntermediate: {
                               type: "string",
@@ -95,7 +95,7 @@ export const saving_sharing_ADM = {
                                 "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
                             },
                             impact: {
-                              $ref: "#/definitions/impact_ADM",
+                              $ref: "#/definitions/impact_sADM",
                             },
                           },
                         },
@@ -111,7 +111,7 @@ export const saving_sharing_ADM = {
                                 "De volgende vragen gaan over het proces waarin de toepassing gebruikt wordt. Focus hierbij op het proces. \nHet maakt voor deze vragen niet uit of de toepassing slechts een kleine voorbereidende rol in het besluitvormingsproces heeft.",
                             },
                             impact: {
-                              $ref: "#/definitions/impact_ADM",
+                              $ref: "#/definitions/impact_sADM",
                             },
                           },
                         },

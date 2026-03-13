@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { t } from "i18next";
 import { identificationSchema as nlIdentificationSchema } from "./schemas/nl/identificatie-adm";
-//import { identificationSchema as enIdentificationSchema } from "./schemas/en/identification-adm";
+import { identificationSchema as enIdentificationSchema } from "./schemas/en/identification-adm";
 
 export default function App() {
   const { i18n } = useTranslation();
@@ -66,8 +66,10 @@ export default function App() {
         dataObject.push(data);
         forms[language] = dataObject;
       }
-      forms.nl.push(nlIdentificationSchema);
-      //forms.en.push(enIdentificationSchema);
+      
+      // FIX: Use unshift instead of push to place TS schemas at the top
+      forms.nl.unshift(nlIdentificationSchema);
+      forms.en.unshift(enIdentificationSchema);
 
       setForms(forms);
     };
