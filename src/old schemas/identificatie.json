@@ -171,8 +171,8 @@
                     "enum": [
                       "Beslissing over prioritering van aanvragen, verzoeken, klachten en bezwaren",
                       "Beslissing over formele klachten en bezwaren",
-                      "Beslissing met directe financiële gevolgen voor burger of ambtenaar, \nzoals bijvoorbeeld beslissingen over uitkering, toeslag, subsidie, boete, terugbetaling of mogelijkheid tot betalingsregeling",
-                      "Beslissing over aanvragen en verzoeken zonder directe financiële gevolgen, \nzoals bijvoorbeeld toekenning van een aanvraag van diensten of vergunningtoekenning",
+                      "Beslissing met directe financiële gevolgen voor burger of ambtenaar, zoals beslissingen over uitkering, toeslag, subsidie, boete, terugbetaling of mogelijkheid tot betalingsregeling",
+                      "Beslissing over aanvragen en verzoeken zonder directe financiële gevolgen, zoals toekenning van een aanvraag van diensten of vergunningtoekenning",
                       "Beslissing over controle, onderzoek of verzoek tot aanvullende informatieverschaffing",
                       "Beslissing over toewijzing van scholen",
                       "Beslissingen over te geven advies of het (proactief) aanbieden van diensten of voorzieningen",
@@ -219,8 +219,8 @@
                     "enum": [
                       "Beslissing over prioritering van aanvragen, verzoeken, klachten en bezwaren",
                       "Beslissing over formele klachten en bezwaren",
-                      "Beslissing met directe financiële gevolgen voor burger of ambtenaar, \nzoals bijvoorbeeld beslissingen over uitkering, toeslag, subsidie, boete, terugbetaling of mogelijkheid tot betalingsregeling",
-                      "Beslissing over aanvragen en verzoeken zonder directe financiële gevolgen, \nzoals bijvoorbeeld toekenning van een aanvraag van diensten of vergunningtoekenning",
+                      "Beslissing met directe financiële gevolgen voor burger of ambtenaar, zoals beslissingen over uitkering, toeslag, subsidie, boete, terugbetaling of mogelijkheid tot betalingsregeling",
+                      "Beslissing over aanvragen en verzoeken zonder directe financiële gevolgen, zoals toekenning van een aanvraag van diensten of vergunningtoekenning",
                       "Beslissing over controle, onderzoek of verzoek tot aanvullende informatieverschaffing",
                       "Beslissing over toewijzing van scholen",
                       "Beslissingen over te geven advies of het (proactief) aanbieden van diensten of voorzieningen"
@@ -292,8 +292,8 @@
                     "enum": [
                       "Beslissing over prioritering van aanvragen, verzoeken, klachten en bezwaren",
                       "Beslissing over formele klachten en bezwaren",
-                      "Beslissing met directe financiële gevolgen voor burger of ambtenaar, \nzoals bijvoorbeeld beslissingen over uitkering, toeslag, subsidie, boete, terugbetaling of mogelijkheid tot betalingsregeling",
-                      "Beslissing over aanvragen en verzoeken zonder directe financiële gevolgen, \nzoals bijvoorbeeld toekenning van een aanvraag van diensten of vergunningtoekenning",
+                      "Beslissing met directe financiële gevolgen voor burger of ambtenaar, zoals beslissingen over uitkering, toeslag, subsidie, boete, terugbetaling of mogelijkheid tot betalingsregeling",
+                      "Beslissing over aanvragen en verzoeken zonder directe financiële gevolgen, zoals toekenning van een aanvraag van diensten of vergunningtoekenning",
                       "Beslissing over controle, onderzoek of verzoek tot aanvullende informatieverschaffing",
                       "Beslissing over toewijzing van scholen",
                       "Beslissingen over te geven advies of het (proactief) aanbieden van diensten of voorzieningen",
@@ -340,8 +340,8 @@
                     "enum": [
                       "Beslissing over prioritering van aanvragen, verzoeken, klachten en bezwaren",
                       "Beslissing over formele klachten en bezwaren",
-                      "Beslissing met directe financiële gevolgen voor burger of ambtenaar, \nzoals bijvoorbeeld beslissingen over uitkering, toeslag, subsidie, boete, terugbetaling of mogelijkheid tot betalingsregeling",
-                      "Beslissing over aanvragen en verzoeken zonder directe financiële gevolgen, \nzoals bijvoorbeeld toekenning van een aanvraag van diensten of vergunningtoekenning",
+                      "Beslissing met directe financiële gevolgen voor burger of ambtenaar, zoals beslissingen over uitkering, toeslag, subsidie, boete, terugbetaling of mogelijkheid tot betalingsregeling",
+                      "Beslissing over aanvragen en verzoeken zonder directe financiële gevolgen, zoals toekenning van een aanvraag van diensten of vergunningtoekenning",
                       "Beslissing over controle, onderzoek of verzoek tot aanvullende informatieverschaffing",
                       "Beslissing over toewijzing van scholen",
                       "Beslissingen over te geven advies of het (proactief) aanbieden van diensten of voorzieningen"

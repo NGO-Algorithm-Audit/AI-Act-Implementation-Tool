@@ -1047,10 +1047,10 @@ Voorbeelden van casus die een individuele burger aangaat zijn:
 - Zaken die aan een individu gekoppeld zijn, zoals een transactie of een aanvraag
 
 Voorbeelden van informatie die niet over indiviuen gaat zijn:
-- Output over groepen, waarin de individuen niet los van de groep een uitput krijgen toegekend
-- Een output over fysieke zaken die niet aan een individuen gekoppeld zijn, zoals 
--Output over sectoren, wijken
-- Output over beleid en de invloed van beleid
+- Output over groepen, waarbij individuen geen eigen output krijgen toegekend
+- Output over fysieke zaken die niet aan een individu gekoppeld zijn
+- Output over sectoren, wijken
+- Output over financieel beleid en de invloed van beleid
 
 Denk bij individuen ook aan ondernemingen waarbij de ondernemer persoonlijk aansprakelijk is (zzp, eenmanszaak, vof, maatschap).`,
     },
