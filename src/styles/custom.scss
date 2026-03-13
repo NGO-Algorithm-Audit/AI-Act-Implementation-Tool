@@ -67,7 +67,7 @@ a {
   }
 
   small {
-    margin-top: 24px;
+    margin-top: 0px;
   }
 }
 
@@ -112,4 +112,13 @@ body {
   &:hover {
     opacity: 1;
   }
+}
+
+.enum-option-description {
+  display: block;
+  font-style: italic;
+  color: #6c757d;
+  margin-top: 0rem;
+  margin-left: 0.1rem;
+  line-height: 1.3;
 }

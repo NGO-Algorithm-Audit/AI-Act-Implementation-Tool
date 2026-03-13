@@ -660,7 +660,7 @@ Next steps:
             "A decision",
             "Content, such as written text, video, audio, or images",
             "Object recognition, facial recognition, or voice recognition",
-            "A dashboard or graph, with only direct data visualization. \nIf one of the previous options is displayed in this dashboard, choose the previous option.",
+            "A dashboard or graph, with only direct data visualization.",
             "Another type of output",
           ],
         },
@@ -694,7 +694,7 @@ Next steps:
                 maxItems: 1,
                 contains: {
                   enum: [
-                    "A dashboard or graph, with only direct data visualization. \nIf one of the previous options is displayed in this dashboard, choose the previous option.",
+                    "A dashboard or graph, with only direct data visualization.",
                   ],
                 },
               },
@@ -709,7 +709,7 @@ Next steps:
                 allOf: [
                   {
                     contains: {
-                      enum: ["A dashboard or graph, with only direct data visualization. \nIf one of the previous options is displayed in this dashboard, choose the previous option."],
+                      enum: ["A dashboard or graph, with only direct data visualization."],
                     },
                   },
                   {
@@ -1000,6 +1000,16 @@ Next steps:
         null,
         null,
         null,
+        null,
+      ],
+      "ui:enumDescriptions": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        "If one of the previous options is displayed in this dashboard, choose the previous option.",
         null,
       ],
     },

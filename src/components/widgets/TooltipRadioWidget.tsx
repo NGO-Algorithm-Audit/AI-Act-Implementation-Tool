@@ -29,6 +29,8 @@ export default function TooltipRadioWidget<
   const { enumOptions, enumDisabled, inline } = options;
   const enumTooltips: (string | null | undefined)[] =
     (uiSchema?.["ui:enumTooltips"] as (string | null | undefined)[]) ?? [];
+  const enumDescriptions: (string | null | undefined)[] =
+    (uiSchema?.["ui:enumDescriptions"] as (string | null | undefined)[]) ?? [];
 
   const _onChange = (nextValue: string) => onChange(nextValue);
   const _onBlur = ({ target: { value } }: React.FocusEvent<HTMLInputElement>) =>
@@ -46,25 +48,29 @@ export default function TooltipRadioWidget<
             Array.isArray(enumDisabled) &&
             enumDisabled.indexOf(option.value) !== -1;
           const tooltip = enumTooltips[index];
+          const description = enumDescriptions[index];
 
-          const label = tooltip ? (
+          const label = (
             <>
               {option.label}
-              <OverlayTrigger
-                placement="right"
-                overlay={
-                  <Tooltip id={`${optionId(id, index)}-tooltip`}>
-                    {tooltip}
-                  </Tooltip>
-                }
-              >
-                <span className="enum-tooltip-icon" aria-label="More info">
-                  {" "}ⓘ
-                </span>
-              </OverlayTrigger>
+              {tooltip && (
+                <OverlayTrigger
+                  placement="right"
+                  overlay={
+                    <Tooltip id={`${optionId(id, index)}-tooltip`}>
+                      {tooltip}
+                    </Tooltip>
+                  }
+                >
+                  <span className="enum-tooltip-icon" aria-label="More info">
+                    {" "}ⓘ
+                  </span>
+                </OverlayTrigger>
+              )}
+              {description && (
+                <small className="enum-option-description">{description}</small>
+              )}
             </>
-          ) : (
-            option.label
           );
 
           return (
