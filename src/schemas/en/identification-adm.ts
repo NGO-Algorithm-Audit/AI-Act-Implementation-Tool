@@ -9,7 +9,7 @@ import { q5, q5Dependencies } from "./identificatie/q5-EN";
 export const identificationSchema = {
   JSONSchema: {
     title:
-      "1 - Identification of AI systems, impactful algorithms and solely automated decision-making (sADM)",
+      "1 - Identification of AI systems, solely automated decision-making (sADM) and impactful algorithms",
     type: "object",
     definitions: {
       outputAI: {
@@ -655,12 +655,12 @@ Next steps:
           type: "string",
           enum: [
             "An estimated score, ranking, or probability",
-            "An estimated label or classification such as yes/no, high/low, or a division into groups. \nFor example, for routing, communication campaigns, or risk classification.",
+            "An estimated label or classification (such as yes/no, high/low or a division into groups).",
             "A recommendation",
             "A decision",
             "Content, such as written text, video, audio, or images",
             "Object recognition, facial recognition, or voice recognition",
-            "A dashboard or graph, with only direct data visualization. \nIf one of the previous options is displayed in this dashboard, choose the previous option.",
+            "A dashboard or graph, with only direct data visualization.",
             "Another type of output",
           ],
         },
@@ -694,7 +694,7 @@ Next steps:
                 maxItems: 1,
                 contains: {
                   enum: [
-                    "A dashboard or graph, with only direct data visualization. \nIf one of the previous options is displayed in this dashboard, choose the previous option.",
+                    "A dashboard or graph, with only direct data visualization.",
                   ],
                 },
               },
@@ -709,7 +709,7 @@ Next steps:
                 allOf: [
                   {
                     contains: {
-                      enum: ["A dashboard or graph, with only direct data visualization. \nIf one of the previous options is displayed in this dashboard, choose the previous option."],
+                      enum: ["A dashboard or graph, with only direct data visualization."],
                     },
                   },
                   {
@@ -740,7 +740,7 @@ Next steps:
                   {
                     contains: {
                       enum: [
-                        "An estimated label or classification such as yes/no, high/low, or a division into groups. \nFor example, for routing, communication campaigns, or risk classification.",
+                        "An estimated label or classification (such as yes/no, high/low or a division into groups).",
                       ],
                     },
                   },
@@ -989,11 +989,38 @@ Next steps:
   uiSchema: {
     q1: {
       "ui:widget": "checkboxes",
+      "ui:badges": [
+        { label: "Art. 3 AI Act", color: "#F37962", url: "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3" },
+      ],
+      "ui:enumTooltips": [
+        null,
+        "For example, for routing, communication campaigns, or risk classification.",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+      ],
+      "ui:enumDescriptions": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        "If one of the previous options is displayed in this dashboard, choose the previous option.",
+        null,
+      ],
     },
     q2: {
       "ui:widget": "radio",
       "ui:description":
         "Data includes all forms of electronic information. Text, images, and audio are also data.\n\nApplications can be designed manually. However, even when designed manually, the design is sometimes based on data analysis. For example, threshold values for (failure) rules can be calculated from data, or criteria can be selected based on calculated correlations.\n\nIt also happens that components (e.g., models and algorithms) are derived more automatically from data. For example, by fitting a statistical model to data or using machine learning to learn a model or rule-based algorithm from data. Forms of simulation and optimization can also be used to derive a model from data.\n\nLarge language models such as ChatGPT are also derived (learned) from large amounts of textual data.",
+      "ui:badges": [
+        { label: "Art. 3 AI Act", color: "#F37962", url: "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3" },
+        { label: "Recital 12 AI Act", color: "#F37962", url: "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-12" },
+      ],
     },
     q3: {
       "ui:widget": "radio",
@@ -1003,6 +1030,11 @@ Next steps:
 - a risk profile in which the rules have been drawn up manually based on the experience of employees
 - open legal standards that are further specified in rules
 \n\nLogic and knowledge-based approaches are also referred to as symbolic AI. This form of AI includes knowledge representation, inductive (logical) programming, knowledge bases, inference and deduction engines, and (symbolic) reasoning. This technology is often used in expert systems.`,
+       "ui:badges": [
+        { label: "Art. 3 AI Act", color: "#F37962", url: "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3" },
+        { label: "Recital 12 AI Act", color: "#F37962", url: "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-12" },
+        { label: "Algorithm Register Guidelines", color: "#F37962", url: "https://www.digitaleoverheid.nl/document/handreiking-algoritmeregister/" },
+      ],
     },
     AICont: {
       "ui:widget": "radio",

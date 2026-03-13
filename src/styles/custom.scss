@@ -67,11 +67,58 @@ a {
   }
 
   small {
-    margin-top: 24px;
+    margin-top: 0px;
   }
 }
 
 // Body background using CSS variables
 body {
   background-color: var(--host-body-bg, #{$body-bg});
+}
+
+.badge-secondary {
+  background-color: #005AA7;
+  color: #fff;
+}
+
+.question-badge {
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+  color: #fff;
+  margin-left: 0.4rem;
+}
+
+.question-badge-link {
+  text-decoration: none;
+
+  &:hover .question-badge {
+    filter: brightness(0.85);
+  }
+}
+
+.enum-tooltip-icon {
+  cursor: help;
+  color: #005AA7;
+  font-size: 0.9em;
+  opacity: 0.8;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.enum-option-description {
+  display: block;
+  font-style: italic;
+  color: #6c757d;
+  margin-top: 0rem;
+  margin-left: 0.1rem;
+  line-height: 1.3;
 }

@@ -31,27 +31,31 @@ export default function ({
             >
               {t("AI_Act_link")}
             </a>
+            {t("description1_1")}
             {/* second sentence */}
             {t("description2")}
-            <a
-              href="https://algoritmes.pleio.nl/attachment/entity/f1a35292-7ea6-4e47-93fa-b3358e9ab2e0"
-              target="_blank"
-            >
-              {t("Handreiking_link")}
-            </a>
-            {t("description3")}
-            {/* third sentence */}
-            {t("description4")}
             <a
               href="https://eur-lex.europa.eu/eli/reg/2016/679/oj"
               target="_blank"
             >
               {t("Art_22_link")}
             </a>
-            {t("description5")}
-            {t("description6")}
+
+            {/* third sentence */}
+                        {t("description3")}
+            <a
+              href="https://algoritmes.pleio.nl/attachment/entity/f1a35292-7ea6-4e47-93fa-b3358e9ab2e0"
+              target="_blank"
+            >
+              {t("Handreiking_link")}
+            </a>
+            {t("description4")}
           </p>
           <p>
+            {t("description5")}
+          </p>
+          <p>
+            {t("description6")}
             {t("feedback")}{" "}
             
             <a

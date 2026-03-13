@@ -4,7 +4,15 @@ import { GenericObjectType, retrieveSchema, RJSFSchema } from "@rjsf/utils";
 import { useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import Output from "./Output";
+import QuestionBadge from "./QuestionBadge";
+import TooltipCheckboxesWidget from "./widgets/TooltipCheckboxesWidget";
+import TooltipRadioWidget from "./widgets/TooltipRadioWidget";
 import { useTranslation } from "react-i18next";
+
+const tooltipWidgets = {
+  CheckboxesWidget: TooltipCheckboxesWidget,
+  RadioWidget: TooltipRadioWidget,
+};
 
 const WizardForm = ({
   id,
@@ -239,7 +247,9 @@ const WizardForm = ({
   return (
     <Card style={{ minHeight: "300px" }}>
       <Card.Header className="d-flex flex-row justify-content-between">
-        <Card.Title className="my-1">{schema.title}</Card.Title>
+        <div className="d-flex flex-row align-items-center gap-2">
+          <Card.Title className="my-1">{schema.title}</Card.Title>
+        </div>
         <button
           type="button"
           onClick={() => onCancel(id)}
@@ -276,6 +286,7 @@ const WizardForm = ({
           <Form
             schema={currentStepSchema as RJSFSchema}
             uiSchema={uiSchema}
+            widgets={tooltipWidgets}
             formData={
               data[questions[0]]
                 ? {
@@ -304,7 +315,22 @@ const WizardForm = ({
               )}
             </div>
 
-            <div>id: {questions[0]}</div>
+            {/* tag with question ID */}
+            <div style={{ display: "inline-block", marginTop: "8px" }}>
+              <span className="badge badge-secondary">ID: {questions[0]}</span>
+              {(uiSchema?.[questions[0]]?.["ui:badges"] as {
+                label: string;
+                color?: string;
+                url?: string;
+              }[] | undefined)?.map((badge, i) => (
+                <QuestionBadge
+                  key={i}
+                  label={badge.label}
+                  color={badge.color}
+                  href={badge.url}
+                />
+              ))}
+            </div>
           </Form>
         )}
       </Card.Body>
