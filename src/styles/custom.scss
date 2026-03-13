@@ -94,3 +94,11 @@ body {
   color: #fff;
   margin-left: 0.4rem;
 }
+
+.question-badge-link {
+  text-decoration: none;
+
+  &:hover .question-badge {
+    filter: brightness(0.85);
+  }
+}

@@ -990,12 +990,16 @@ Next steps:
     q1: {
       "ui:widget": "checkboxes",
       "ui:badge": "Art. 3 AI Act",
-       "ui:badgeColor": "#F37962"
+       "ui:badgeColor": "#F37962",
+       "ui:badgeUrl": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3"
     },
     q2: {
       "ui:widget": "radio",
       "ui:description":
         "Data includes all forms of electronic information. Text, images, and audio are also data.\n\nApplications can be designed manually. However, even when designed manually, the design is sometimes based on data analysis. For example, threshold values for (failure) rules can be calculated from data, or criteria can be selected based on calculated correlations.\n\nIt also happens that components (e.g., models and algorithms) are derived more automatically from data. For example, by fitting a statistical model to data or using machine learning to learn a model or rule-based algorithm from data. Forms of simulation and optimization can also be used to derive a model from data.\n\nLarge language models such as ChatGPT are also derived (learned) from large amounts of textual data.",
+        "ui:badge": "Art. 3 AI Act",
+        "ui:badgeColor": "#F37962",
+        "ui:badgeUrl": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3"
     },
     q3: {
       "ui:widget": "radio",
@@ -1005,6 +1009,9 @@ Next steps:
 - a risk profile in which the rules have been drawn up manually based on the experience of employees
 - open legal standards that are further specified in rules
 \n\nLogic and knowledge-based approaches are also referred to as symbolic AI. This form of AI includes knowledge representation, inductive (logical) programming, knowledge bases, inference and deduction engines, and (symbolic) reasoning. This technology is often used in expert systems.`,
+       "ui:badge": "Art. 3 AI Act",
+       "ui:badgeColor": "#F37962",
+       "ui:badgeUrl": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3"
     },
     AICont: {
       "ui:widget": "radio",

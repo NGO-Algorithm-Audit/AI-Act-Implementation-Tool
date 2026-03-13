@@ -309,11 +309,12 @@ const WizardForm = ({
 
             {/* tag with question ID */}
             <div style={{ display: "inline-block", marginTop: "8px" }}>
-              <span className="badge badge-secondary">{questions[0]}</span>
+              <span className="badge badge-secondary">ID: {questions[0]}</span>
               {uiSchema?.[questions[0]]?.["ui:badge"] && (
                 <QuestionBadge
                   label={uiSchema[questions[0]]["ui:badge"]}
                   color={uiSchema[questions[0]]["ui:badgeColor"]}
+                  href={uiSchema[questions[0]]["ui:badgeUrl"]}
                 />
               )}
             </div>
