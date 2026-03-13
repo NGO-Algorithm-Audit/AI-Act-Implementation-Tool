@@ -318,13 +318,18 @@ const WizardForm = ({
             {/* tag with question ID */}
             <div style={{ display: "inline-block", marginTop: "8px" }}>
               <span className="badge badge-secondary">ID: {questions[0]}</span>
-              {uiSchema?.[questions[0]]?.["ui:badge"] && (
+              {(uiSchema?.[questions[0]]?.["ui:badges"] as {
+                label: string;
+                color?: string;
+                url?: string;
+              }[] | undefined)?.map((badge, i) => (
                 <QuestionBadge
-                  label={uiSchema[questions[0]]["ui:badge"]}
-                  color={uiSchema[questions[0]]["ui:badgeColor"]}
-                  href={uiSchema[questions[0]]["ui:badgeUrl"]}
+                  key={i}
+                  label={badge.label}
+                  color={badge.color}
+                  href={badge.url}
                 />
-              )}
+              ))}
             </div>
           </Form>
         )}

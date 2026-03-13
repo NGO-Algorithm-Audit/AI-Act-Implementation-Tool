@@ -991,9 +991,9 @@ Vervolgstappen:
   uiSchema: {
     q1: {
       "ui:widget": "checkboxes",
-      "ui:badge": "Art. 3 AI-verordening",
-      "ui:badgeColor": "#F37962",
-      "ui:badgeUrl": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3",
+      "ui:badges": [
+        { label: "Art. 3 AI-verordening", color: "#F37962", url: "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3" },
+      ],
       "ui:enumTooltips": [
         null,
         "Bijvoorbeeld ten behoeve van routering, communicatiecampagnes of risicoclassificatie.",
@@ -1009,9 +1009,10 @@ Vervolgstappen:
       "ui:widget": "radio",
       "ui:description":
         "Data omvat alle vormen van elektronische gegevens. Tekst, afbeeldingen, audio zijn ook data.\n\nToepassingen kunnen met de hand worden ontworpen. Maar ook wanneer deze handmatig is opgesteld, wordt het ontwerp soms gebaseerd op data-analyse. Zo kunnen drempelwaardes voor (uitval)regels berekend worden uit data of criteria gekozen worden aan de hand van berekende correlaties.\n\nHet komt ook voor dat componenten (e.g. modellen en algoritmes) meer automatisch uit data worden afgeleid. Bijvoorbeeld door een statistisch model te fitten op data of d.m.v. machine learning een model  of regelgebaseerd algoritme te leren uit data. Ook vormen van simulatie en optimalising kunnen gebruikt worden om een model af te leiden uit data.\n\nLarge language modellen zoals ChatGPT zijn ook afgeleid (geleerd) uit grote hoeveelheden tekstuele data.",
-      "ui:badge": "Art. 3 AI Act",
-      "ui:badgeColor": "#F37962",
-      "ui:badgeUrl": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3",
+      "ui:badges": [
+        { label: "Art. 3 AI Act", color: "#F37962", url: "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3" },
+        { label: "Recital 12 AI Act", color: "#F37962", url: "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-12" },
+      ],
     },
     q3: {
       "ui:widget": "radio",
@@ -1021,9 +1022,11 @@ Vervolgstappen:
 - een risicoprofiel waarbij de regels met de hand zijn opgesteld op basis van ervaring van medewerkers
 - open wettelijke normen die verder gespecificeerd zijn in regels
 \n\nOp logica- en kennis-gebaseerde benaderingen worden ook wel symbolische AI-systemen genoemd (symbolic AI). Onder deze  vorm van AI-systemen vallen kennisrepresentatie, inductief (logisch) programmeren, kennisbanken, inferentie- en deductiemachines, (symbolisch) redeneren. Deze technologie wordt bijvoorbeeld ingezet in expert systemen.`,
-    },
-    AICont: {
-      "ui:widget": "radio",
+      "ui:badges": [
+        { label: "Art. 3 AI Act", color: "#F37962", url: "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3" },
+        { label: "Recital 12 AI Act", color: "#F37962", url: "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-12" },
+        { label: "Handreiking Algoritmeregister", color: "#F37962", url: "https://www.digitaleoverheid.nl/document/handreiking-algoritmeregister/" },
+      ],
     },
     noAICont: {
       "ui:widget": "radio",
