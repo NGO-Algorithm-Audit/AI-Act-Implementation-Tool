@@ -66,8 +66,10 @@ export default function App() {
         dataObject.push(data);
         forms[language] = dataObject;
       }
-      forms.nl.push(nlIdentificationSchema);
-      forms.en.push(enIdentificationSchema);
+      
+      // FIX: Use unshift instead of push to place TS schemas at the top
+      forms.nl.unshift(nlIdentificationSchema);
+      forms.en.unshift(enIdentificationSchema);
 
       setForms(forms);
     };
