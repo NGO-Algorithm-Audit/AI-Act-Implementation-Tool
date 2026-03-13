@@ -657,7 +657,7 @@ Vervolgstappen:
           type: "string",
           enum: [
             "Een ingeschatte score, rangschikking of kans",
-            "Een ingeschat label of classificatie zoals ja/nee, hoog/laag of een indeling in groepen.",
+            "Een ingeschat label of classificatie, zoals ja/nee, hoog/laag of een indeling in groepen.",
             "Een aanbeveling",
             "Een beslissing",
             "Content, zoals geschreven tekst, video, audio of afbeeldingen",
@@ -742,7 +742,7 @@ Vervolgstappen:
                   {
                     contains: {
                       enum: [
-                        "Een ingeschat label of classificatie zoals ja/nee, hoog/laag of een indeling in groepen.",
+                        "Een ingeschat label of classificatie, zoals ja/nee, hoog/laag of een indeling in groepen.",
                       ],
                     },
                   },
