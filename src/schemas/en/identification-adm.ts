@@ -660,7 +660,7 @@ Next steps:
             "A decision",
             "Content, such as written text, video, audio, or images",
             "Object recognition, facial recognition, or voice recognition",
-            "A dashboard or graph, with only direct data visualization.",
+            "A dashboard or graph, with only direct data visualization. \nIf one of the previous options is displayed in this dashboard, choose the previous option.",
             "Another type of output",
           ],
         },
@@ -694,7 +694,7 @@ Next steps:
                 maxItems: 1,
                 contains: {
                   enum: [
-                    "A dashboard or graph, with only direct data visualization.",
+                    "A dashboard or graph, with only direct data visualization. \nIf one of the previous options is displayed in this dashboard, choose the previous option.",
                   ],
                 },
               },
@@ -990,8 +990,8 @@ Next steps:
     q1: {
       "ui:widget": "checkboxes",
       "ui:badge": "Art. 3 AI Act",
-       "ui:badgeColor": "#F37962",
-       "ui:badgeUrl": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3",
+      "ui:badgeColor": "#F37962",
+      "ui:badgeUrl": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3",
       "ui:enumTooltips": [
         null,
         "For example, for routing, communication campaigns, or risk classification.",
@@ -999,7 +999,7 @@ Next steps:
         null,
         null,
         null,
-        "If one of the previous options is displayed in this dashboard, choose the previous option.",
+        null,
         null,
       ],
     },
