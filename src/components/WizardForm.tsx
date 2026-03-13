@@ -5,7 +5,14 @@ import { useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import Output from "./Output";
 import QuestionBadge from "./QuestionBadge";
+import TooltipCheckboxesWidget from "./widgets/TooltipCheckboxesWidget";
+import TooltipRadioWidget from "./widgets/TooltipRadioWidget";
 import { useTranslation } from "react-i18next";
+
+const tooltipWidgets = {
+  CheckboxesWidget: TooltipCheckboxesWidget,
+  RadioWidget: TooltipRadioWidget,
+};
 
 const WizardForm = ({
   id,
@@ -279,6 +286,7 @@ const WizardForm = ({
           <Form
             schema={currentStepSchema as RJSFSchema}
             uiSchema={uiSchema}
+            widgets={tooltipWidgets}
             formData={
               data[questions[0]]
                 ? {

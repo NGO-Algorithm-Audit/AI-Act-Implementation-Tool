@@ -102,3 +102,14 @@ body {
     filter: brightness(0.85);
   }
 }
+
+.enum-tooltip-icon {
+  cursor: help;
+  color: #005AA7;
+  font-size: 0.9em;
+  opacity: 0.8;
+
+  &:hover {
+    opacity: 1;
+  }
+}

@@ -655,12 +655,12 @@ Next steps:
           type: "string",
           enum: [
             "An estimated score, ranking, or probability",
-            "An estimated label or classification such as yes/no, high/low, or a division into groups. \nFor example, for routing, communication campaigns, or risk classification.",
+            "An estimated label or classification (such as yes/no, high/low or a division into groups).",
             "A recommendation",
             "A decision",
             "Content, such as written text, video, audio, or images",
             "Object recognition, facial recognition, or voice recognition",
-            "A dashboard or graph, with only direct data visualization. \nIf one of the previous options is displayed in this dashboard, choose the previous option.",
+            "A dashboard or graph, with only direct data visualization.",
             "Another type of output",
           ],
         },
@@ -694,7 +694,7 @@ Next steps:
                 maxItems: 1,
                 contains: {
                   enum: [
-                    "A dashboard or graph, with only direct data visualization. \nIf one of the previous options is displayed in this dashboard, choose the previous option.",
+                    "A dashboard or graph, with only direct data visualization.",
                   ],
                 },
               },
@@ -740,7 +740,7 @@ Next steps:
                   {
                     contains: {
                       enum: [
-                        "An estimated label or classification such as yes/no, high/low, or a division into groups. \nFor example, for routing, communication campaigns, or risk classification.",
+                        "An estimated label or classification (such as yes/no, high/low or a division into groups).",
                       ],
                     },
                   },
@@ -991,7 +991,17 @@ Next steps:
       "ui:widget": "checkboxes",
       "ui:badge": "Art. 3 AI Act",
        "ui:badgeColor": "#F37962",
-       "ui:badgeUrl": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3"
+       "ui:badgeUrl": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3",
+      "ui:enumTooltips": [
+        null,
+        "For example, for routing, communication campaigns, or risk classification.",
+        null,
+        null,
+        null,
+        null,
+        "If one of the previous options is displayed in this dashboard, choose the previous option.",
+        null,
+      ],
     },
     q2: {
       "ui:widget": "radio",
