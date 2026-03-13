@@ -989,6 +989,8 @@ Next steps:
   uiSchema: {
     q1: {
       "ui:widget": "checkboxes",
+      "ui:badge": "Art. 3 AI Act",
+       "ui:badgeColor": "#F37962"
     },
     q2: {
       "ui:widget": "radio",

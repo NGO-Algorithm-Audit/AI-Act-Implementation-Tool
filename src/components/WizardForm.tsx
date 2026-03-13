@@ -4,6 +4,7 @@ import { GenericObjectType, retrieveSchema, RJSFSchema } from "@rjsf/utils";
 import { useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import Output from "./Output";
+import QuestionBadge from "./QuestionBadge";
 import { useTranslation } from "react-i18next";
 
 const WizardForm = ({
@@ -309,6 +310,12 @@ const WizardForm = ({
             {/* tag with question ID */}
             <div style={{ display: "inline-block", marginTop: "8px" }}>
               <span className="badge badge-secondary">{questions[0]}</span>
+              {uiSchema?.[questions[0]]?.["ui:badge"] && (
+                <QuestionBadge
+                  label={uiSchema[questions[0]]["ui:badge"]}
+                  color={uiSchema[questions[0]]["ui:badgeColor"]}
+                />
+              )}
             </div>
           </Form>
         )}
