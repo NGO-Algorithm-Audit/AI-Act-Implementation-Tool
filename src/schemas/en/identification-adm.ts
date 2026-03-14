@@ -1034,6 +1034,7 @@ Next steps:
         { label: "Art. 3 AI Act", color: "#F37962", url: "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3" },
         { label: "Recital 12 AI Act", color: "#F37962", url: "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-12" },
         { label: "Algorithm Register Guidelines", color: "#F37962", url: "https://www.digitaleoverheid.nl/document/handreiking-algoritmeregister/" },
+        { label: "Solely automated decision-making", color: "#F37962", url: "https://gdpr-info.eu/art-22-gdpr/" },
       ],
     },
     AICont: {
@@ -1050,23 +1051,38 @@ Next steps:
       "ui:enableMarkdownInDescription": true,
       "ui:description":
         "Consider prioritizing the follow-up to a citizen's question or request, whether or not to ask a citizen to provide additional information, whether or not to select someone for a check or inspection, whether or not a person is eligible for services or facilities, etc.\n\n**Note: A decision is much broader than a formal decision as defined in Dutch Public Administration Law.**",
+      "ui:badges": [
+        { label: "Algorithm Register Guidelines", color: "#F37962", url: "https://www.digitaleoverheid.nl/document/handreiking-algoritmeregister/" },
+      ],
     },
     q5: {
       "ui:widget": "radio",
+      "ui:badges": [
+        { label: "Algorithm Register Guidelines", color: "#F37962", url: "https://www.digitaleoverheid.nl/document/handreiking-algoritmeregister/" },
+      ],
     },
     q5_1: {
       "ui:widget": "radio",
+      "ui:badges": [
+        { label: "Algorithm Register Guidelines", color: "#F37962", url: "https://www.digitaleoverheid.nl/document/handreiking-algoritmeregister/" },
+      ],
     },
     "q5_1-controle": {
       "ui:widget": "textarea",
     },
     q6: {
       "ui:widget": "radio",
+      "ui:badges": [
+        { label: "Algorithm Register Guidelines", color: "#F37962", url: "https://www.digitaleoverheid.nl/document/handreiking-algoritmeregister/" },
+      ],
     },
     q7: {
       "ui:widget": "radio",
       "ui:description":
         "If in doubt, choose the top option from those you are unsure about.",
+      "ui:badges": [
+        { label: "Algorithm Register Guidelines", color: "#F37962", url: "https://www.digitaleoverheid.nl/document/handreiking-algoritmeregister/" },
+      ],
     },
     q8: {
       "ui:widget": "radio",
@@ -1083,12 +1099,21 @@ Examples of information that does not concern individuals are:
 - Output about policy and the influence of policy
 
 When considering individuals, also consider businesses in which the entrepreneur is personally liable (self-employed, sole proprietorship, general partnership, professional partnership).`,
+      "ui:badges": [
+        { label: "Solely automated decision-making", color: "#F37962", url: "https://gdpr-info.eu/art-22-gdpr/" },
+      ],
     },
     q9: {
       "ui:widget": "radio",
+      "ui:badges": [
+        { label: "Solely automated decision-making", color: "#F37962", url: "https://gdpr-info.eu/art-22-gdpr/" },
+      ],
     },
     q10: {
       "ui:widget": "radio",
+      "ui:badges": [
+        { label: "Solely automated decision-making", color: "#F37962", url: "https://gdpr-info.eu/art-22-gdpr/" },
+      ],
     },
     outputIntermediate: {
       "ui:widget": "textarea",

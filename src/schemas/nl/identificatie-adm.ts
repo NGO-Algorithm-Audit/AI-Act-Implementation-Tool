@@ -1026,6 +1026,7 @@ Vervolgstappen:
         { label: "Art. 3 AI Act", color: "#F37962", url: "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3" },
         { label: "Recital 12 AI Act", color: "#F37962", url: "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-12" },
         { label: "Handreiking Algoritmeregister", color: "#F37962", url: "https://www.digitaleoverheid.nl/document/handreiking-algoritmeregister/" },
+        { label: "Volledig geautomatiseerde besluitvorming", color: "#F37962", url: "https://gdpr-info.eu/art-22-gdpr/" },
       ],
     },
     noAICont: {
@@ -1039,23 +1040,38 @@ Vervolgstappen:
       "ui:enableMarkdownInDescription": true,
       "ui:description":
         "Denk aan prioritering van de opvolging vraag of verzoek van een burger, wel/geen verzoek aan burger om aanvullende informatie aan te leveren, wel/geen selectie voor controle of inspectie, wel/niet of een persoon in aanmerking komt voor diensten of voorzieningen etc.\n\n**Let op: een beslissing is veel breder dan een formeel besluit zoals gedefinieerd in de Algemene wet bestuursrecht Art. 1:3.**",
+      "ui:badges": [
+        { label: "Handreiking Algoritmeregister", color: "#F37962", url: "https://www.digitaleoverheid.nl/document/handreiking-algoritmeregister/" },
+      ],
     },
     q5: {
       "ui:widget": "radio",
+      "ui:badges": [
+        { label: "Handreiking Algoritmeregister", color: "#F37962", url: "https://www.digitaleoverheid.nl/document/handreiking-algoritmeregister/" },
+      ],
     },
     q5_1: {
       "ui:widget": "radio",
+      "ui:badges": [
+        { label: "Handreiking Algoritmeregister", color: "#F37962", url: "https://www.digitaleoverheid.nl/document/handreiking-algoritmeregister/" },
+      ],
     },
     "q5_1-controle": {
       "ui:widget": "textarea",
     },
     q6: {
       "ui:widget": "radio",
+      "ui:badges": [
+        { label: "Handreiking Algoritmeregister", color: "#F37962", url: "https://www.digitaleoverheid.nl/document/handreiking-algoritmeregister/" },
+      ],
     },
     q7: {
       "ui:widget": "radio",
       "ui:description":
         "Kies bij twijfel de bovenste van de opties waarover u twijfelt.",
+      "ui:badges": [
+        { label: "Handreiking Algoritmeregister", color: "#F37962", url: "https://www.digitaleoverheid.nl/document/handreiking-algoritmeregister/" },
+      ],
     },
     q8: {
       "ui:widget": "radio",
@@ -1072,12 +1088,21 @@ Voorbeelden van informatie die niet over indiviuen gaat zijn:
 - Output over financieel beleid en de invloed van beleid
 
 Denk bij individuen ook aan ondernemingen waarbij de ondernemer persoonlijk aansprakelijk is (zzp, eenmanszaak, vof, maatschap).`,
+      "ui:badges": [
+        { label: "Volledig geautomatiseerde besluitvorming", color: "#F37962", url: "https://gdpr-info.eu/art-22-gdpr/" },
+      ],
     },
     q9: {
       "ui:widget": "radio",
+      "ui:badges": [
+        { label: "Volledig geautomatiseerde besluitvorming", color: "#F37962", url: "https://gdpr-info.eu/art-22-gdpr/" },
+      ],
     },
     q10: {
       "ui:widget": "radio",
+      "ui:badges": [
+        { label: "Volledig geautomatiseerde besluitvorming", color: "#F37962", url: "https://gdpr-info.eu/art-22-gdpr/" },
+      ],
     },
     outputIntermediate: {
       "ui:widget": "textarea",
