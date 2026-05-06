@@ -7,11 +7,18 @@ import Output from "./Output";
 import QuestionBadge from "./QuestionBadge";
 import TooltipCheckboxesWidget from "./widgets/TooltipCheckboxesWidget";
 import TooltipRadioWidget from "./widgets/TooltipRadioWidget";
+import IntroWidget from "./widgets/IntroWidget";
 import { useTranslation } from "react-i18next";
+
+function PlainTextWidget({ value }: { value: string }) {
+  return <p style={{ whiteSpace: "pre-wrap", marginBottom: 0 }}>{value}</p>;
+}
 
 const tooltipWidgets = {
   CheckboxesWidget: TooltipCheckboxesWidget,
   RadioWidget: TooltipRadioWidget,
+  PlainTextWidget,
+  IntroWidget,
 };
 
 const WizardForm = ({

@@ -1,6 +1,6 @@
 {
   "JSONSchema": {
-    "title": "2 - Risk classification of AI systems",
+    "title": "Risk classification – Prohibited, high-risk, exception etc.",
     "type": "object",
     "definitions": {
       "outputLow": {
