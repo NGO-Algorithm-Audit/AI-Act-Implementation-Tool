@@ -1,0 +1,207 @@
+{
+  "JSONSchema": {
+    "title": "Aanbieder, gebruiksverantwoordelijke, importeur, distributeur etc.",
+    "type": "object",
+    "definitions": {
+      "outputResult": {
+        "type": "string",
+        "title": "Resultaten",
+        "default": "",
+        "roleStatus": true
+      },
+      "q13block": {
+        "title": "q13block",
+        "type": "object",
+        "properties": {
+          "q13": {
+            "type": "string",
+            "title": "Is het AI-systeem al in gebruik?",
+            "enum": [
+              "In gebruik",
+              "In ontwikkeling"
+            ]
+          }
+        },
+        "required": ["q13"],
+        "dependencies": {
+          "q13": {
+            "oneOf": [
+              {
+                "properties": {
+                  "q13": { "enum": ["In gebruik"] },
+                  "output": { "$ref": "#/definitions/outputResult" }
+                }
+              },
+              {
+                "properties": {
+                  "q13": { "enum": ["In ontwikkeling"] },
+                  "output": { "$ref": "#/definitions/outputResult" }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "q12bblock": {
+        "title": "q12bblock",
+        "type": "object",
+        "properties": {
+          "q12b": {
+            "type": "string",
+            "title": "Geldt een van de volgende scenario's voor jouw AI-systeem?",
+            "enum": [
+              "De naam of het handelsmerk van uw organisatie staat op het AI-systeem.",
+              "Er is een substantiële wijziging aangebracht aan het AI-systeem.",
+              "Het beoogde doel van het AI-systeem is door uw organisatie aangepast.",
+              "Geen van bovenstaande."
+            ]
+          }
+        },
+        "required": ["q12b"],
+        "dependencies": {
+          "q12b": {
+            "oneOf": [
+              {
+                "properties": {
+                  "q12b": { "enum": ["De naam of het handelsmerk van uw organisatie staat op het AI-systeem."] },
+                  "q13block": { "$ref": "#/definitions/q13block" }
+                }
+              },
+              {
+                "properties": {
+                  "q12b": { "enum": ["Er is een substantiële wijziging aangebracht aan het AI-systeem."] },
+                  "q13block": { "$ref": "#/definitions/q13block" }
+                }
+              },
+              {
+                "properties": {
+                  "q12b": { "enum": ["Het beoogde doel van het AI-systeem is door uw organisatie aangepast."] },
+                  "q13block": { "$ref": "#/definitions/q13block" }
+                }
+              },
+              {
+                "properties": {
+                  "q12b": { "enum": ["Geen van bovenstaande."] },
+                  "q13block": { "$ref": "#/definitions/q13block" }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "properties": {
+      "intro": {
+        "type": "string",
+        "title": "",
+        "default": ""
+      },
+      "q12": {
+        "type": "string",
+        "title": "Hoe is het AI-systeem ontwikkeld of hoe wordt deze gebruikt?",
+        "enum": [
+          "We ontwikkelen en gebruiken het AI-systeem zelf.",
+          "We ontwikkelen het AI-systeem alleen.",
+          "We ontwikkelen het AI-systeem en anderen gebruiken deze ook.",
+          "We gebruiken een extern ontwikkeld AI-systeem.",
+          "We importeren het AI-systeem van een leverancier buiten de EU.",
+          "We kopen het AI-systeem van een leverancier binnen de EU en verkopen het.",
+          "Wij vertegenwoordigen een persoon of entiteit van buiten de EU om verplichtingen onder de AI-verordening uit te voeren.",
+          "U bent een natuurlijk persoon die een AI-systeem gebruikt voor uitsluitend persoonlijke, niet-professionele activiteiten."
+        ]
+      }
+    },
+    "required": ["q12"],
+    "dependencies": {
+      "q12": {
+        "oneOf": [
+          {
+            "properties": {
+              "q12": { "enum": ["We ontwikkelen en gebruiken het AI-systeem zelf."] },
+              "q13block": { "$ref": "#/definitions/q13block" }
+            }
+          },
+          {
+            "properties": {
+              "q12": { "enum": ["We ontwikkelen het AI-systeem alleen."] },
+              "q13block": { "$ref": "#/definitions/q13block" }
+            }
+          },
+          {
+            "properties": {
+              "q12": { "enum": ["We ontwikkelen het AI-systeem en anderen gebruiken deze ook."] },
+              "q13block": { "$ref": "#/definitions/q13block" }
+            }
+          },
+          {
+            "properties": {
+              "q12": { "enum": ["We gebruiken een extern ontwikkeld AI-systeem."] },
+              "q12bblock": { "$ref": "#/definitions/q12bblock" }
+            }
+          },
+          {
+            "properties": {
+              "q12": { "enum": ["We importeren het AI-systeem van een leverancier buiten de EU."] },
+              "q13block": { "$ref": "#/definitions/q13block" }
+            }
+          },
+          {
+            "properties": {
+              "q12": { "enum": ["We kopen het AI-systeem van een leverancier binnen de EU en verkopen het."] },
+              "q13block": { "$ref": "#/definitions/q13block" }
+            }
+          },
+          {
+            "properties": {
+              "q12": { "enum": ["Wij vertegenwoordigen een persoon of entiteit van buiten de EU om verplichtingen onder de AI-verordening uit te voeren."] },
+              "q13block": { "$ref": "#/definitions/q13block" }
+            }
+          },
+          {
+            "properties": {
+              "q12": { "enum": ["U bent een natuurlijk persoon die een AI-systeem gebruikt voor uitsluitend persoonlijke, niet-professionele activiteiten."] },
+              "output": { "$ref": "#/definitions/outputResult" }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "uiSchema": {
+    "intro": {
+      "ui:id": "start",
+      "ui:widget": "RoleStatusIntroWidget",
+      "ui:options": { "label": false },
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "In deze vragenlijst:\n- Een 'Aanbieder verder in de AI-waardeketen' is gelijk aan een 'Aanbieder'. Alleen wanneer een AI-model wordt gebruikt, is dit onderscheid relevant (zie [Art. 3(68) AI-verordening](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3)). Of er een AI-model wordt gebruikt, wordt bepaald in vragenlijst Risicocategorie.\n- Een 'Productfabrikant' is gelijk aan een 'Aanbieder'. Productfabrikant zijn is alleen relevant indien: (i) het AI-systeem met een hoog risico betrekking heeft op producten waarop de wetgeving in Bijlage I, sectie A van toepassing is; (ii) het systeem samen met het product in de handel wordt gebracht of in gebruik wordt gesteld; en (iii) onder de naam of het merk van de productfabrikant. In dit geval wordt de productfabrikant beschouwd als de aanbieder van het hoog-risico AI-systeem (zie [art. 25(3) AI-verordening](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-25))."
+    },
+    "q12": {
+      "ui:widget": "radio",
+      "ui:id": "Q1",
+      "ui:badges": [
+        { "label": "Art. 2 AI-verordening - Reikwijdte", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-2" },
+        { "label": "Art. 3 AI-verordening - Definities", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3" }
+      ]
+    },
+    "q12b": {
+      "ui:widget": "radio",
+      "ui:id": "Q2",
+      "ui:badges": [
+        { "label": "Art. 3(23) AI-verordening - Definities", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3" },
+        { "label": "Art. 25 AI-verordening - Verantwoordelijkheden in de AI-waardeketen", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-25" },
+        { "label": "Art. 43(4) AI-verordening - Conformiteitsbeoordeling", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-43" },
+        { "label": "Overweging 84 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-84" }
+      ]
+    },
+    "q13": {
+      "ui:widget": "radio",
+      "ui:id": "Q3",
+      "ui:description": "Een AI-systeem wordt als 'in gebruik' beschouwd zodra het daadwerkelijk wordt toegepast, ook in de vorm van een pilot of testen. Het systeem is 'in gebruik' als het systeem effect heeft op werkprocessen.",
+      "ui:badges": [
+        { "label": "Art. 111 AI-verordening - Overgangsmaatregelen", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-111" },
+        { "label": "Art. 113 AI-verordening - Inwerkingtreding en toepassing", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-113" },
+        { "label": "Overweging 177-179 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-177" }
+      ]
+    }
+  }
+}

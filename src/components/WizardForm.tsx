@@ -17,10 +17,12 @@ import Markdown from "markdown-to-jsx";
 const MD_INLINE_OPTS = { forceInline: true } as const;
 import Output from "./Output";
 import OutputIdentification from "./OutputIdentification";
+import OutputRoleStatus from "./OutputRoleStatus";
 import QuestionBadge from "./QuestionBadge";
 import TooltipCheckboxesWidget from "./widgets/TooltipCheckboxesWidget";
 import TooltipRadioWidget from "./widgets/TooltipRadioWidget";
 import IntroWidget from "./widgets/IntroWidget";
+import RoleStatusIntroWidget from "./widgets/RoleStatusIntroWidget";
 import { useTranslation } from "react-i18next";
 
 function PlainTextWidget({ value }: { value: string }) {
@@ -198,6 +200,7 @@ const tooltipWidgets = {
   RadioWidget: TooltipRadioWidget,
   PlainTextWidget,
   IntroWidget,
+  RoleStatusIntroWidget,
 };
 
 const WizardForm = ({
@@ -435,11 +438,17 @@ const WizardForm = ({
       <Card.Header className="d-flex flex-row justify-content-between align-items-center">
         <div className="d-flex flex-row align-items-center gap-2">
           {(() => {
-            const isRiskClassification = /^(Risk category|Risicocategorie)/i.test(
-              String(schema?.title ?? "")
+            const title = String(schema?.title ?? "");
+            const isRiskCategory = /^(Risk category|Risicocategorie|Prohibited|Verboden)/i.test(
+              title
             );
-            const tag = isRiskClassification
+            const isRoleAndStatus = /^(Role and status|Rol en status|Deployer|Aanbieder)/i.test(
+              title
+            );
+            const tag = isRiskCategory
               ? t("questionnaire 2 name")
+              : isRoleAndStatus
+              ? t("questionnaire 3 name")
               : t("questionnaire 1 name");
             return (
               <span
@@ -483,6 +492,20 @@ const WizardForm = ({
             const mergedData = { ...data, ...hiddenFieldsWithDefaults };
             const hasClassification =
               !!(firstQuestion as any)?.classification;
+            const hasRoleStatus = !!(firstQuestion as any)?.roleStatus;
+            if (hasRoleStatus) {
+              return (
+                <OutputRoleStatus
+                  id={id}
+                  type={questions[0] as "output" | "error"}
+                  output={firstQuestion as Record<string, any>}
+                  step={step}
+                  handlePrev={handlePrev}
+                  onSubmit={onSubmit}
+                  data={mergedData}
+                />
+              );
+            }
             return hasClassification ? (
               <OutputIdentification
                 id={id}
@@ -546,11 +569,17 @@ const WizardForm = ({
                   (uiSchema?.[questions[0]]?.["ui:id"] as string | undefined) ??
                   questions[0];
                 const displaySuffix = rawSuffix.replace(/^q/, "Q");
-                const isRiskClassification = /^(Risk category|Risicocategorie)/i.test(
-                  String(schema?.title ?? "")
+                const title = String(schema?.title ?? "");
+                const isRiskCategory = /^(Risk category|Risicocategorie)/i.test(
+                  title
                 );
-                const questionnaireName = isRiskClassification
+                const isRoleAndStatus = /^(Role and status|Rol en status|Deployer|Aanbieder)/i.test(
+                  title
+                );
+                const questionnaireName = isRiskCategory
                   ? t("questionnaire 2 name")
+                  : isRoleAndStatus
+                  ? t("questionnaire 3 name")
                   : t("questionnaire 1 name");
                 return (
                   <span className="badge badge-secondary me-1">

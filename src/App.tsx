@@ -67,6 +67,10 @@ export default function App() {
         forms[language] = dataObject;
       }
       
+      // Reverse so Role and status comes before Risk category
+      forms.nl.reverse();
+      forms.en.reverse();
+
       // FIX: Use unshift instead of push to place TS schemas at the top
       forms.nl.unshift(nlIdentificationSchema);
       forms.en.unshift(enIdentificationSchema);

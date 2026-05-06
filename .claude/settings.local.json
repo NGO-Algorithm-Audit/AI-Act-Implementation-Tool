@@ -51,7 +51,17 @@
       "Bash(cp \"/Users/jurriaan/Github repos/ClassifyMyAI/src/schemas/shared/identification-factory.ts\" \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/schemas/shared/identification-factory.ts\")",
       "Bash(cp \"/Users/jurriaan/Github repos/ClassifyMyAI/src/schemas/shared/identification-types.ts\" \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/schemas/shared/identification-types.ts\")",
       "Bash(cp \"/Users/jurriaan/Github repos/ClassifyMyAI/src/schemas/en/translations.ts\" \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/schemas/en/translations.ts\")",
-      "Bash(cp \"/Users/jurriaan/Github repos/ClassifyMyAI/src/schemas/nl/translations.ts\" \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/schemas/nl/translations.ts\")"
+      "Bash(cp \"/Users/jurriaan/Github repos/ClassifyMyAI/src/schemas/nl/translations.ts\" \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/schemas/nl/translations.ts\")",
+      "Bash(awk '/^  \"JSONSchema\": {/{flag=1;next} flag && /^  }/{flag=0;exit} flag' \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/schemas/en/riskclassification.json\")",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/schemas/en/riskclassification.json', 'utf8'\\)\\); console.log\\('en OK'\\)\")",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/schemas/nl/risicoclassificatie.json', 'utf8'\\)\\); console.log\\('nl OK'\\)\")",
+      "Bash(yarn tsc *)",
+      "Bash(yarn build *)",
+      "Bash(lsof -ti:5193)",
+      "Bash(xargs kill)",
+      "Bash(ls node_modules/puppeteer node_modules/playwright)",
+      "Bash(node -e \"console.log\\(process.version\\)\")",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('./src/schemas/en/roleandstatus.json','utf8'\\)\\); JSON.parse\\(require\\('fs'\\).readFileSync\\('./src/schemas/nl/rolenstatus.json','utf8'\\)\\); console.log\\('JSON OK'\\)\")"
     ]
   }
 }

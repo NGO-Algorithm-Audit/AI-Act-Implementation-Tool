@@ -82,9 +82,14 @@ export default function ({
                   className="badge me-2"
                   style={{ backgroundColor: "#005AA7", color: "#fff" }}
                 >
-                  {form.id === 0
-                    ? t("questionnaire 1 name")
-                    : t("questionnaire 2 name")}
+                  {(() => {
+                    const title = String(form.title ?? "");
+                    if (/^(Risk category|Risicocategorie|Prohibited|Verboden)/i.test(title))
+                      return t("questionnaire 2 name");
+                    if (/^(Role and status|Rol en status|Deployer|Aanbieder)/i.test(title))
+                      return t("questionnaire 3 name");
+                    return t("questionnaire 1 name");
+                  })()}
                 </span>
                 <span style={{ marginLeft: "8px" }}>{form.title}</span>
               </p>
