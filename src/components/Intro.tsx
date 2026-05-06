@@ -74,6 +74,8 @@ export default function ({
             <ListGroup.Item
               key={form.id}
               className="d-flex flex-row justify-content-between align-items-center"
+              onClick={() => onStart(form.id)}
+              style={{ cursor: "pointer" }}
             >
               <p className="m-0 mr-4">
                 <span
@@ -86,7 +88,13 @@ export default function ({
                 </span>
                 <span style={{ marginLeft: "8px" }}>{form.title}</span>
               </p>
-              <Button variant="primary" onClick={() => onStart(form.id)}>
+              <Button
+                variant="primary"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onStart(form.id);
+                }}
+              >
                 {t("startButton")}
               </Button>
             </ListGroup.Item>

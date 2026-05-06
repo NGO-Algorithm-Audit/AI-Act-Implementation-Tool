@@ -1,6 +1,7 @@
 import Form from "@rjsf/bootstrap-4";
 import { FormProps } from "@rjsf/core";
 import {
+  DescriptionFieldProps,
   FieldTemplateProps,
   GenericObjectType,
   getTemplate,
@@ -9,7 +10,8 @@ import {
   RJSFSchema,
 } from "@rjsf/utils";
 import { useState } from "react";
-import { Button, Card } from "react-bootstrap";
+import { Alert, Button, Card } from "react-bootstrap";
+import { t as i18nT } from "i18next";
 import Output from "./Output";
 import QuestionBadge from "./QuestionBadge";
 import TooltipCheckboxesWidget from "./widgets/TooltipCheckboxesWidget";
@@ -19,6 +21,77 @@ import { useTranslation } from "react-i18next";
 
 function PlainTextWidget({ value }: { value: string }) {
   return <p style={{ whiteSpace: "pre-wrap", marginBottom: 0 }}>{value}</p>;
+}
+
+function UserGuidanceAlert({ text }: { text: string }) {
+  const sections = String(text)
+    .split("\n\n")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  return (
+    <Alert
+      style={{
+        color: "#6d2c91",
+        backgroundColor: "#f5eefa",
+        borderColor: "#d9b3f0",
+      }}
+      className="py-2 px-3 mt-3"
+    >
+      <small
+        style={{
+          fontWeight: "bold",
+          display: "block",
+          marginBottom: "2px",
+        }}
+      >
+        {i18nT("user guidance title")}
+      </small>
+      {sections.map((section, i) => {
+        if (section.includes("\n- ")) {
+          const parts = section.split("\n- ");
+          const intro = parts[0];
+          const bullets = parts.slice(1);
+          return (
+            <div key={i}>
+              {intro && (
+                <small style={{ display: "block", whiteSpace: "pre-wrap" }}>
+                  {intro}
+                </small>
+              )}
+              <ul className="mb-0 ps-3" style={{ fontSize: "0.875em" }}>
+                {bullets.map((b, j) => (
+                  <li key={j}>{b}</li>
+                ))}
+              </ul>
+            </div>
+          );
+        }
+        return (
+          <small
+            key={i}
+            style={{ whiteSpace: "pre-wrap", display: "block" }}
+          >
+            {section}
+          </small>
+        );
+      })}
+    </Alert>
+  );
+}
+
+function DescriptionFieldTemplate({
+  description,
+  uiSchema,
+}: DescriptionFieldProps) {
+  const uiOptions = getUiOptions(uiSchema ?? {});
+  const isPlain = uiOptions["descriptionStyle"] === "plain";
+  if (isPlain) {
+    const alertText = uiOptions["alertDescription"] as string | undefined;
+    if (!alertText) return null;
+    return <UserGuidanceAlert text={alertText} />;
+  }
+  if (!description) return null;
+  return <UserGuidanceAlert text={String(description)} />;
 }
 
 function FieldTemplate({
@@ -83,13 +156,8 @@ function FieldTemplate({
           </small>
         )}
         {children}
-        {!isPlainDescription && displayLabel && rawDescription && (
-          <small
-            className={`form-text ${rawErrors.length > 0 ? "text-danger" : "text-muted"}`}
-          >
-            {description}
-          </small>
-        )}
+        {isPlainDescription && uiOptions["alertDescription"] && description}
+        {!isPlainDescription && displayLabel && description}
         {errors}
         {help}
       </div>
@@ -339,7 +407,7 @@ const WizardForm = ({
       <Card.Header className="d-flex flex-row justify-content-between align-items-center">
         <div className="d-flex flex-row align-items-center gap-2">
           {(() => {
-            const isRiskClassification = /^(Risk classification|Risicoclassificatie)/i.test(
+            const isRiskClassification = /^(Risk category|Risicocategorie)/i.test(
               String(schema?.title ?? "")
             );
             const tag = isRiskClassification
@@ -400,7 +468,7 @@ const WizardForm = ({
             schema={currentStepSchema as RJSFSchema}
             uiSchema={uiSchema}
             widgets={tooltipWidgets}
-            templates={{ FieldTemplate }}
+            templates={{ FieldTemplate, DescriptionFieldTemplate }}
             formData={
               data[questions[0]]
                 ? {
@@ -436,7 +504,7 @@ const WizardForm = ({
                   (uiSchema?.[questions[0]]?.["ui:id"] as string | undefined) ??
                   questions[0];
                 const displaySuffix = rawSuffix.replace(/^q/, "Q");
-                const isRiskClassification = /^(Risk classification|Risicoclassificatie)/i.test(
+                const isRiskClassification = /^(Risk category|Risicocategorie)/i.test(
                   String(schema?.title ?? "")
                 );
                 const questionnaireName = isRiskClassification
