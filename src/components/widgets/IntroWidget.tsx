@@ -3,12 +3,11 @@ import { Alert, Table, OverlayTrigger, Tooltip } from "react-bootstrap";
 import aiGeneratedSvgRaw from "../../assets/ai-generated.svg?raw";
 
 const BADGE_ROWS: { color: string; textKey: string; conceptTextKey: string; conceptUrl: string; linkParenOnly?: boolean }[] = [
-  { color: "#c9a84c", textKey: "badge ai system",   conceptTextKey: "intro concept ai",        conceptUrl: "https://ai-act-service-desk.ec.europa.eu/" },
-  { color: "#9333EA", textKey: "badge genai",        conceptTextKey: "intro concept genai",     conceptUrl: "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50", linkParenOnly: true },
+  { color: "#c9a84c", textKey: "badge ai system",   conceptTextKey: "intro concept ai",        conceptUrl: "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3", linkParenOnly: true },
   { color: "#fd7e14", textKey: "badge algo",         conceptTextKey: "intro concept algo",      conceptUrl: "https://aienalgoritmes.pleio.nl/wiki/view/19bb6e9e-7a97-43d5-bef3-b1d66e59f4ff/handreiking-algoritmeregister" },
-  { color: "#198754", textKey: "category gdpr",      conceptTextKey: "intro concept gdpr",      conceptUrl: "https://gdpr-info.eu/",           linkParenOnly: true },
-  { color: "#6B8A9E", textKey: "badge sadm",         conceptTextKey: "intro concept sadm",      conceptUrl: "https://gdpr-info.eu/art-22-gdpr/",    linkParenOnly: true },
-  { color: "#4F46E5", textKey: "badge profiling",    conceptTextKey: "intro concept profiling", conceptUrl: "https://gdpr-info.eu/art-4-gdpr/",     linkParenOnly: true },
+  { color: "#198754", textKey: "category gdpr",      conceptTextKey: "intro concept gdpr",      conceptUrl: "https://gdpr-info.eu/art-4-gdpr/",     linkParenOnly: true },
+  { color: "#4f46e5", textKey: "badge profiling",    conceptTextKey: "intro concept profiling", conceptUrl: "https://gdpr-info.eu/art-4-gdpr/",     linkParenOnly: true },
+  { color: "#6b8a9e", textKey: "badge sadm",         conceptTextKey: "intro concept sadm",      conceptUrl: "https://gdpr-info.eu/art-22-gdpr/",    linkParenOnly: true },
 ];
 
 const SVG_COLOR = "#8B4513";

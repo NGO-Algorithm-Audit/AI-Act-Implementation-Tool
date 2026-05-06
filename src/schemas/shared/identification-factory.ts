@@ -83,14 +83,8 @@ const buildQ5Dependencies = (
         {
           properties: {
             q5_1: { enum: yesOptions },
-            "q5_1-controle": {
-              type: "string",
-              title: t.q5_1ControlDescription,
-              default: "",
-            },
             ...refToProp(string4, nsLookup[string4]),
           },
-          required: ["q5_1-controle"],
         },
         {
           properties: {
@@ -653,7 +647,7 @@ export const createIdentificationSchema = (t: IdentificationTranslations) => {
                 q2: {
                   type: "string",
                   title: t.q2Title,
-                  enum: [o2.dataInspired, o2.dataDerived, o2.genAI, o2.noData],
+                  enum: [o2.dataInspired, o2.dataDerived, o2.noData],
                 },
               },
               required: ["q2"],
@@ -681,16 +675,6 @@ export const createIdentificationSchema = (t: IdentificationTranslations) => {
                 ...saving_sharing_AIAlgosADM.properties,
               },
               required: ["q2_yes2", ...saving_sharing_AIAlgosADM.required],
-              dependencies: saving_sharing_AIAlgosADM.dependencies,
-            },
-            // Q2 = genAI → q2_genAI textarea → Q8
-            {
-              properties: {
-                q2: { enum: [o2.genAI] },
-                q2_genAI: { type: "string", title: t.q2DescribeGenAI, default: "" },
-                ...saving_sharing_AIAlgosADM.properties,
-              },
-              required: ["q2_genAI", ...saving_sharing_AIAlgosADM.required],
               dependencies: saving_sharing_AIAlgosADM.dependencies,
             },
             // Q2 = no data → Q3
@@ -780,7 +764,6 @@ export const createIdentificationSchema = (t: IdentificationTranslations) => {
       },
       q2_yes1: { "ui:id": "q2.1", "ui:widget": "textarea" },
       q2_yes2: { "ui:id": "q2.1", "ui:widget": "textarea" },
-      q2_genAI: { "ui:id": "q2.1", "ui:widget": "textarea" },
       q3: {
         "ui:id": "q3",
         "ui:widget": "radio",
@@ -802,7 +785,6 @@ export const createIdentificationSchema = (t: IdentificationTranslations) => {
       q5: { "ui:id": "q9", "ui:widget": "radio", "ui:badges": t.q5Badges, ...(t.q5EnumDescriptions ? { "ui:enumDescriptions": t.q5EnumDescriptions } : {}) },
       q5_option8: { "ui:id": "q9.1", "ui:widget": "textarea" },
       q5_1: { "ui:id": "q10", "ui:widget": "radio", "ui:badges": t.q5_1Badges },
-      "q5_1-controle": { "ui:id": "q10.1", "ui:widget": "textarea" },
       q6: { "ui:id": "q11", "ui:widget": "radio", "ui:badges": t.q6Badges },
       q6_unsure: { "ui:id": "q11.1", "ui:widget": "textarea" },
       q7: {

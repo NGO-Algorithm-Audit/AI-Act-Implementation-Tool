@@ -324,7 +324,23 @@ const WizardForm = ({
 
             {/* tag with question ID */}
             <div style={{ display: "inline-block", marginTop: "8px" }}>
-              <span className="badge badge-secondary">ID: {questions[0]}</span>
+              {(() => {
+                const rawSuffix =
+                  (uiSchema?.[questions[0]]?.["ui:id"] as string | undefined) ??
+                  questions[0];
+                const displaySuffix = rawSuffix.replace(/^q/, "Q");
+                const isRiskClassification = /^(Risk classification|Risicoclassificatie)/i.test(
+                  String(schema?.title ?? "")
+                );
+                const questionnaireName = isRiskClassification
+                  ? t("questionnaire 2 name")
+                  : t("questionnaire 1 name");
+                return (
+                  <span className="badge badge-secondary me-1">
+                    id: {questionnaireName} {displaySuffix}
+                  </span>
+                );
+              })()}
               {(uiSchema?.[questions[0]]?.["ui:badges"] as {
                 label: string;
                 color?: string;

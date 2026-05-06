@@ -37,12 +37,10 @@ export interface IdentificationTranslations {
   q2Options: {
     dataInspired: string;
     dataDerived: string;
-    genAI: string;
     noData: string;
   };
   q2DescribeInsights: string;
   q2DescribeMethod: string;
-  q2DescribeGenAI: string;
   q2Description: string;
   q2Badges: Badge[];
   q2EnumTooltips: (string | null)[];
@@ -66,6 +64,7 @@ export interface IdentificationTranslations {
   q4Title: string;
   q4Options: { yes: string; no: string };
   q4Description: string;
+  q4DescriptionPublicSectorNote: string;
   q4Badges: Badge[];
 
   // Q5
@@ -94,11 +93,11 @@ export interface IdentificationTranslations {
     yes5: string;
     no: string;
   };
-  q5_1ControlDescription: string;
   q5_1Badges: Badge[];
 
   // Q6
   q6Title: string;
+  q6TitleGeneric: string;
   q6Options: { yes: string; unsure: string; no: string };
   q6UnsureDescription: string;
   q6Badges: Badge[];

@@ -47,7 +47,11 @@
       "Bash(grep -v -E \"^\\\\\"#|^\\\\\"\\\\\\\\$|^\\\\\"intro\")",
       "Bash(cat vite.config.ts)",
       "Bash(cat vite.config.js)",
-      "Bash(echo \"exit: $?\")"
+      "Bash(echo \"exit: $?\")",
+      "Bash(cp \"/Users/jurriaan/Github repos/ClassifyMyAI/src/schemas/shared/identification-factory.ts\" \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/schemas/shared/identification-factory.ts\")",
+      "Bash(cp \"/Users/jurriaan/Github repos/ClassifyMyAI/src/schemas/shared/identification-types.ts\" \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/schemas/shared/identification-types.ts\")",
+      "Bash(cp \"/Users/jurriaan/Github repos/ClassifyMyAI/src/schemas/en/translations.ts\" \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/schemas/en/translations.ts\")",
+      "Bash(cp \"/Users/jurriaan/Github repos/ClassifyMyAI/src/schemas/nl/translations.ts\" \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/schemas/nl/translations.ts\")"
     ]
   }
 }

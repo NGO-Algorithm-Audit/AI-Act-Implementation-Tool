@@ -16,8 +16,7 @@ const B_SADM = `<span class="badge badge-secondary" style="background-color:#6B8
 const B_GDPR = `<span class="badge badge-secondary" style="background-color:#198754;font-size:0.85rem;padding:3.2px 5.12px;margin-left:0">AVG</span>`;
 
 export const nlTranslations: IdentificationTranslations = {
-  schemaTitle:
-    "Identificatie – AI-verordening, AVG en impactvolle algoritmes",
+  schemaTitle: "AI-verordening, AVG en impactvolle algoritmes",
 
   // Q1
   q1Title: "Wat is de uitkomst van de toepassing?",
@@ -27,7 +26,7 @@ export const nlTranslations: IdentificationTranslations = {
     label: "Een ingeschat label of classificatie (zoals ja/nee, hoog/laag of een indeling in groepen).",
     recommendation: "Een aanbeveling.",
     decision: "Een beslissing.",
-    content: "Content, zoals geschreven tekst, video, audio of afbeeldingen.",
+    content: "Content, zoals geschreven tekst, video, audio, afbeeldingen of machine-leesbare data.",
     recognition: "Objectherkenning, gezichtsherkenning of stemherkenning.",
     dashboard: "Een dashboard of grafiek, met enkel rechtstreekse datavisualisatie.",
     other: "Een ander soort output.",
@@ -41,7 +40,7 @@ export const nlTranslations: IdentificationTranslations = {
     "Bijvoorbeeld ten behoeve van routering, communicatiecampagnes of risicoclassificatie.",
     null,
     null,
-    null,
+    "Hieronder valt ook de output van een 'AI-agent'.",
     null,
     null,
     null,
@@ -64,14 +63,12 @@ export const nlTranslations: IdentificationTranslations = {
       "Ja, keuzes over ontwerp zijn handmatig gemaakt, maar inzichten uit data-analyse hebben geholpen bij het ontwerp.",
     dataDerived:
       "Ja, de toepassing bevat componenten die zijn afgeleid uit data. Er is sprake van het fitten of leren van een model of automatische variabele selectie met behulp van statistiek, optimalisatie, simulatie, machine learning of een vergelijkbare techniek.",
-    genAI: "Generatieve of interactieve AI wordt gebruikt voor de toepassing.",
-    noData: "Nee, het ontwerp van de toepassing is niet gebaseerd op data-analyse.",
+    noData: "Nee, het ontwerp van de toepassing is niet gebaseerd op data.",
   },
   q2DescribeInsights: "Beschrijf hoe inzichten uit data-analyse hebben geholpen bij het ontwerp van de toepassing.",
   q2DescribeMethod: "Beschrijf de methode",
-  q2DescribeGenAI: "Beschrijf hoe de generatieve of interactieve AI-toepassing werkt en geef aan welk model wordt gebruikt.",
   q2Description:
-    "Data omvat alle vormen van elektronische gegevens. Tekst, afbeeldingen, audio zijn ook data.\n\nToepassingen kunnen met de hand worden ontworpen. Maar ook wanneer deze handmatig is opgesteld, wordt het ontwerp soms gebaseerd op data-analyse. Zo kunnen drempelwaardes voor (uitval)regels berekend worden uit data of criteria gekozen worden aan de hand van berekende correlaties.\n\nHet komt ook voor dat componenten (zoals modellen en algoritmes) meer automatisch uit data worden afgeleid. Bijvoorbeeld door een statistisch model te fitten op data of d.m.v. machine learning een model  of regelgebaseerd algoritme te leren uit data. Ook vormen van simulatie en optimalising kunnen gebruikt worden om een model af te leiden uit data.",
+    "Data omvat alle vormen van elektronische gegevens. Tekst, afbeeldingen, audio zijn ook data.\n\nToepassingen kunnen met de hand worden ontworpen. Maar ook wanneer deze handmatig is opgesteld, wordt het ontwerp soms gebaseerd op data-analyse. Zo kunnen drempelwaardes voor (uitval)regels berekend worden uit data of criteria gekozen worden aan de hand van berekende correlaties.\n\nHet komt ook voor dat componenten (zoals modellen en algoritmes) meer automatisch uit data worden afgeleid. Bijvoorbeeld door een statistisch model te fitten op data of d.m.v. machine learning een model of regelgebaseerd algoritme te leren uit data. Ook vormen van simulatie en optimalising kunnen gebruikt worden om een model af te leiden uit data.",
   q2Badges: [
     { label: nlJson["article art3 label"], color: "#F37962", url: AI_ACT_ART3_URL },
     { label: nlJson["article recital12 label"], color: "#F37962", url: AI_ACT_RECITAL12_URL },
@@ -79,7 +76,6 @@ export const nlTranslations: IdentificationTranslations = {
   q2EnumTooltips: [
     null,
     null,
-    "Generatieve AI verwijst naar AI-systemen die nieuwe content kunnen genereren, zoals tekst, afbeeldingen, audio of code. Bekende voorbeelden van generatieve AI-modellen zijn ChatGPT, Claude en Gemini etc. Interactieve AI verwijst naar AI-systemen die in staat zijn om te reageren op gebruikersinput, zoals chatbots of virtuele assistenten.",
     null,
   ],
 
@@ -118,10 +114,12 @@ export const nlTranslations: IdentificationTranslations = {
 
   // Q4
   q4Title:
-    "Wordt in het proces een beslissing genomen voor een individuele burger, organisatie of medewerker?",
+    "Wordt in het proces een beslissing genomen voor individuen (consument of burger), organisaties of medewerkers?",
   q4Options: { yes: "Ja.", no: "Nee." },
   q4Description:
-    "Bijvoorbeeld:\n- Prioritering van vragen of verzoeken van burgers\n- Bepalen of aanvullende informatie van een burger nodig is\n- Selecteren van personen voor controles of inspecties\n- Beoordelen of een persoon in aanmerking komt voor diensten of voorzieningen\n\n**Let op:** een beslissing is veel breder dan een formeel besluit zoals gedefinieerd in de Algemene wet bestuursrecht Art. 1:3. De term 'beslissing' wordt ook gebruikt in de context van Art. 22 AVG.",
+    "Bijvoorbeeld:\n- Prioritering van vragen of verzoeken van burgers\n- Bepalen of aanvullende informatie van een burger nodig is\n- Selecteren van personen voor controles of inspecties\n- Beoordelen of een persoon in aanmerking komt voor diensten of voorzieningen",
+  q4DescriptionPublicSectorNote:
+    "**Let op:** een beslissing is veel breder dan een formeel besluit zoals gedefinieerd in de Algemene wet bestuursrecht Art. 1:3. De term 'beslissing' wordt ook gebruikt in de context van Art. 22 AVG.",
   q4Badges: [
     { label: "Impactvol algoritme", color: "#fd7e14", url: ALGO_REGISTER_URL },
     { label: nlJson["article gdpr art22 label"], color: "#F37962", url: SADM_URL },
@@ -170,7 +168,6 @@ export const nlTranslations: IdentificationTranslations = {
     yes5: "Ja, de controle is om een andere reden bijzonder ingrijpend voor de betrokkene.",
     no: "Nee.",
   },
-  q5_1ControlDescription: "Beschrijf het gevolg van de controle voor de betrokkene",
   q5_1Badges: [
     { label: "Impactvol algoritme", color: "#fd7e14", url: ALGO_REGISTER_URL },
   ],
@@ -178,6 +175,8 @@ export const nlTranslations: IdentificationTranslations = {
   // Q6
   q6Title:
     "Draagt het proces bij aan hoe de overheid (groepen) burgers of ambtenaren categoriseert of benadert?",
+  q6TitleGeneric:
+    "Draagt het proces bij aan hoe de organisatie (groepen) consumenten, organisaties of medewerkers categoriseert of benadert?",
   q6Options: { yes: "Ja.", unsure: "Ik weet het niet zeker.", no: "Nee." },
   q6UnsureDescription:
     "Geef een korte beschrijving van het proces en hoe dit burgers of ambtenaren raakt.",
@@ -210,12 +209,12 @@ export const nlTranslations: IdentificationTranslations = {
   ],
 
   // Q8
-  q8Title: "Worden persoonsgegevens verwerkt door de applicatie?",
+  q8Title: "Worden persoonsgegevens verwerkt door de toepassing?",
   q8Options: { yes: "Ja.", no: "Nee." },
   q8Description: "Persoonsgegevens zijn alle informatie waarmee een specifiek individu direct of indirect geïdentificeerd kan worden, zoals een naam, e-mailadres, ID-nummer of locatiegegevens.",
   q8AlertDescription: "Voorbeelden van niet-persoonsgegevens zijn:\n- Groepsstatistieken waarbij geen individu kan worden onderscheiden\n- Geanonimiseerde gegevens\n- Output over fysieke zaken die niet aan een individu zijn gekoppeld, zoals sensormetingen, weergegevens, machine- en operationele gegevens, gegevens over stedenbouw en infrastructuur\n- Financiële gegevens van bedrijven\n- Gegevens over stadswijken en buurten.\n\nMerk op: ondernemingen waarbij de ondernemer persoonlijk aansprakelijk is (zzp'er, eenmanszaak, vennootschap onder firma, maatschap) worden beschouwd als persoonsgegevens.",
   q8Badges: [
-    { label: "AVG", color: "#198754", url: GDPR_URL },
+    { label: "Persoonsgegevens", color: "#198754", url: GDPR_URL },
   ],
 
   // Q8b

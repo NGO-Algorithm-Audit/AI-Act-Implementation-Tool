@@ -16,8 +16,7 @@ const B_SADM = `<span class="badge badge-secondary" style="background-color:#6B8
 const B_GDPR = `<span class="badge badge-secondary" style="background-color:#198754;font-size:0.85rem;padding:3.2px 5.12px;margin-left:0">GDPR</span>`;
 
 export const enTranslations: IdentificationTranslations = {
-  schemaTitle:
-    "Identification – AI Act, GDPR and high-impact algorithms",
+  schemaTitle: "AI Act, GDPR and high-impact algorithms",
 
   // Q1
   q1Title: "What is the outcome of the application?",
@@ -27,7 +26,7 @@ export const enTranslations: IdentificationTranslations = {
     label: "An estimated label or classification (such as yes/no, high/low or a division into groups).",
     recommendation: "A recommendation.",
     decision: "A decision.",
-    content: "Content, such as written text, video, audio, or images.",
+    content: "Content, such as written text, video, audio, images or machine-readable data.",
     recognition: "Object recognition, facial recognition, or voice recognition.",
     dashboard: "A dashboard or graph, with only direct data visualization.",
     other: "Another type of output.",
@@ -41,7 +40,7 @@ export const enTranslations: IdentificationTranslations = {
     "For example, for routing, communication campaigns, or risk classification.",
     null,
     null,
-    null,
+    "This includes output of an 'AI agent'.",
     null,
     null,
     null,
@@ -64,12 +63,10 @@ export const enTranslations: IdentificationTranslations = {
       "Yes, design choices were made manually, but insights from data analysis helped with the design.",
     dataDerived:
       "Yes, the application contains components derived from data. This involves fitting or learning a model or automatic variable selection using statistics, optimization, simulation, machine learning, or a similar technique.",
-    genAI: "Generative or interactive AI is used for the application.",
-    noData: "No, the design of the application is not based on data analysis.",
+    noData: "No, the design of the application is not based on data.",
   },
   q2DescribeInsights: "Describe how insights from data analysis helped with application design.",
   q2DescribeMethod: "Describe the method",
-  q2DescribeGenAI: "Describe the working of the generative or interactive AI application and specify which model is being used.",
   q2Description:
     "Data includes all forms of electronic information. Text, images, and audio are also data.\n\nApplications can be designed manually. However, even when designed manually, the design is sometimes based on data analysis. For example, threshold values for (failure) rules can be calculated from data, or criteria can be selected based on calculated correlations.\n\nIt also happens that components (e.g., models and algorithms) are derived more automatically from data. For example, by fitting a statistical model to data or using machine learning to learn a model or rule-based algorithm from data. Simulation and optimization can also be used to derive a model from data.",
   q2Badges: [
@@ -79,7 +76,6 @@ export const enTranslations: IdentificationTranslations = {
   q2EnumTooltips: [
     null,
     null,
-    "Generative AI refers to AI systems that can generate new content, such as text, images, audio or code. Well-known examples of generative AI models are ChatGPT, Claude and Gemini etc. Interactive AI refers to AI systems that can interact with users in a dynamic way, such as chatbots and virtual assistants.",
     null,
   ],
 
@@ -118,10 +114,12 @@ export const enTranslations: IdentificationTranslations = {
 
   // Q4
   q4Title:
-    "Is a decision made in the process for individual citizens, organizations, or employees?",
+    "Is a decision made in the process for individuals (consumer or citizen), organizations, or employees?",
   q4Options: { yes: "Yes.", no: "No." },
   q4Description:
-    "For instance:\n- Prioritising citizen queries or requests\n- Determining whether additional information is needed from a citizen\n- Selecting individuals for checks or inspections\n- Assessing eligibility for services or facilities.\n\n**Note:** A decision is much broader than a formal decision as defined in Dutch Public Administration Law. The notion of 'decision' is also used in the context of Art. 22 GDPR.",
+    "For instance:\n- Prioritising citizen queries or requests\n- Determining whether additional information is needed from a citizen\n- Selecting individuals for checks or inspections\n- Assessing eligibility for services or facilities.",
+  q4DescriptionPublicSectorNote:
+    "**Note:** A decision is much broader than a formal decision as defined in Dutch Public Administration Law. The notion of 'decision' is also used in the context of Art. 22 GDPR.",
   q4Badges: [
     { label: "High-impact algorithm", color: "#fd7e14", url: ALGO_REGISTER_URL },
     { label: enJson["article gdpr art22 label"], color: "#F37962", url: SADM_URL },
@@ -169,7 +167,6 @@ export const enTranslations: IdentificationTranslations = {
     yes5: "Yes, the check is particularly intrusive for the person concerned for another reason.",
     no: "No.",
   },
-  q5_1ControlDescription: "Describe the consequences of the check for the person concerned.",
   q5_1Badges: [
     { label: "High-impact algorithm", color: "#fd7e14", url: ALGO_REGISTER_URL },
   ],
@@ -177,6 +174,8 @@ export const enTranslations: IdentificationTranslations = {
   // Q6
   q6Title:
     "Does the process contribute to how the government categorizes or approaches groups of citizens, organizations, or civil servants?",
+  q6TitleGeneric:
+    "Does the process contribute to how the organization categorizes or approaches groups of consumers, organizations or employees?",
   q6Options: { yes: "Yes.", unsure: "I am not sure.", no: "No." },
   q6UnsureDescription:
     "Provide a brief description of the process and how it affects citizens, organisations or civil servants.",
@@ -214,7 +213,7 @@ export const enTranslations: IdentificationTranslations = {
   q8Description: "Personal data are any information that can identify a specific individual, directly or indirectly, such as a name, email address, ID number, or location data.",
   q8AlertDescription: "Examples of non-personal data are:\n- Group statistics where no individual can be singled out\n- Anonymised data\n- Output about physical matters that are not linked to an individual, such as sensor readings, weather data, machine and operational data, urban planning and infrastructure data\n- Financial records about companies\n- Data about city districts and neighborhoods\n\nNote: businesses in which the entrepreneur is personally liable (self-employed, sole proprietorship, general partnership, professional partnership) are considered as personal data.",
   q8Badges: [
-    { label: "GDPR", color: "#198754", url: GDPR_URL },
+    { label: "Personal data", color: "#198754", url: GDPR_URL },
   ],
 
   // Q8b

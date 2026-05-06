@@ -75,7 +75,17 @@ export default function ({
               key={form.id}
               className="d-flex flex-row justify-content-between align-items-center"
             >
-              <p className="m-0 mr-4">{form.title}</p>
+              <p className="m-0 mr-4">
+                <span
+                  className="badge me-2"
+                  style={{ backgroundColor: "#005AA7", color: "#fff" }}
+                >
+                  {form.id === 0
+                    ? t("questionnaire 1 name")
+                    : t("questionnaire 2 name")}
+                </span>
+                <span style={{ marginLeft: "8px" }}>{form.title}</span>
+              </p>
               <Button variant="primary" onClick={() => onStart(form.id)}>
                 {t("startButton")}
               </Button>
