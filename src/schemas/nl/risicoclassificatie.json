@@ -1,6 +1,6 @@
 {
   "JSONSchema": {
-    "title": "Risicocategorie – Verboden, hoog-risico, uitzondering etc.",
+    "title": "Verboden, hoog-risico, uitzondering etc.",
     "type": "object",
     "definitions": {
       "outputLow": {
