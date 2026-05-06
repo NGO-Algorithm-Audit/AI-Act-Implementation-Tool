@@ -1,6 +1,13 @@
 import Form from "@rjsf/bootstrap-4";
 import { FormProps } from "@rjsf/core";
-import { GenericObjectType, retrieveSchema, RJSFSchema } from "@rjsf/utils";
+import {
+  FieldTemplateProps,
+  GenericObjectType,
+  getTemplate,
+  getUiOptions,
+  retrieveSchema,
+  RJSFSchema,
+} from "@rjsf/utils";
 import { useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import Output from "./Output";
@@ -12,6 +19,82 @@ import { useTranslation } from "react-i18next";
 
 function PlainTextWidget({ value }: { value: string }) {
   return <p style={{ whiteSpace: "pre-wrap", marginBottom: 0 }}>{value}</p>;
+}
+
+function FieldTemplate({
+  id,
+  children,
+  displayLabel,
+  rawErrors = [],
+  errors,
+  help,
+  description,
+  rawDescription,
+  label,
+  hidden,
+  required,
+  schema,
+  uiSchema,
+  registry,
+  classNames,
+  style,
+  disabled,
+  onDropPropertyClick,
+  onKeyChange,
+  readonly,
+}: FieldTemplateProps) {
+  const uiOptions = getUiOptions(uiSchema);
+  const WrapIfAdditionalTemplate = getTemplate(
+    "WrapIfAdditionalTemplate",
+    registry,
+    uiOptions
+  );
+  if (hidden) return <div className="hidden">{children}</div>;
+  const isPlainDescription = uiOptions["descriptionStyle"] === "plain";
+  return (
+    <WrapIfAdditionalTemplate
+      classNames={classNames}
+      style={style}
+      disabled={disabled}
+      id={id}
+      label={label}
+      onDropPropertyClick={onDropPropertyClick}
+      onKeyChange={onKeyChange}
+      readonly={readonly}
+      required={required}
+      schema={schema}
+      uiSchema={uiSchema}
+      registry={registry}
+    >
+      <div className="form-group">
+        {displayLabel && (
+          <label
+            htmlFor={id}
+            className={rawErrors.length > 0 ? "text-danger" : ""}
+            style={isPlainDescription ? { marginBottom: 0 } : undefined}
+          >
+            {label}
+            {required ? "*" : null}
+          </label>
+        )}
+        {isPlainDescription && rawDescription && (
+          <small className="form-text text-muted d-block mb-2">
+            {rawDescription}
+          </small>
+        )}
+        {children}
+        {!isPlainDescription && displayLabel && rawDescription && (
+          <small
+            className={`form-text ${rawErrors.length > 0 ? "text-danger" : "text-muted"}`}
+          >
+            {description}
+          </small>
+        )}
+        {errors}
+        {help}
+      </div>
+    </WrapIfAdditionalTemplate>
+  );
 }
 
 const tooltipWidgets = {
@@ -253,17 +336,40 @@ const WizardForm = ({
 
   return (
     <Card style={{ minHeight: "300px" }}>
-      <Card.Header className="d-flex flex-row justify-content-between">
+      <Card.Header className="d-flex flex-row justify-content-between align-items-center">
         <div className="d-flex flex-row align-items-center gap-2">
-          <Card.Title className="my-1">{schema.title}</Card.Title>
+          {(() => {
+            const isRiskClassification = /^(Risk classification|Risicoclassificatie)/i.test(
+              String(schema?.title ?? "")
+            );
+            const tag = isRiskClassification
+              ? t("questionnaire 2 name")
+              : t("questionnaire 1 name");
+            return (
+              <span
+                className="badge"
+                style={{
+                  fontSize: "0.85rem",
+                  whiteSpace: "nowrap",
+                  backgroundColor: "#005AA7",
+                  color: "#fff",
+                }}
+              >
+                {tag}
+              </span>
+            );
+          })()}
+          <Card.Title className="my-1" style={{ marginLeft: "8px" }}>
+            {schema.title}
+          </Card.Title>
         </div>
         <button
           type="button"
           onClick={() => onCancel(id)}
-          className="close ml-4"
-          aria-label="Close"
+          className="btn btn-outline-secondary btn-sm ml-4"
+          aria-label="Back"
         >
-          <span aria-hidden="true">&times;</span>
+          ← {t("back to overview")}
         </button>
       </Card.Header>
       <Card.Body className="d-flex flex-column justify-content-between">
@@ -294,6 +400,7 @@ const WizardForm = ({
             schema={currentStepSchema as RJSFSchema}
             uiSchema={uiSchema}
             widgets={tooltipWidgets}
+            templates={{ FieldTemplate }}
             formData={
               data[questions[0]]
                 ? {
