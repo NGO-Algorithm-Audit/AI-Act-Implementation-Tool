@@ -12,6 +12,9 @@ import {
 import { useState } from "react";
 import { Alert, Button, Card } from "react-bootstrap";
 import { t as i18nT } from "i18next";
+import Markdown from "markdown-to-jsx";
+
+const MD_INLINE_OPTS = { forceInline: true } as const;
 import Output from "./Output";
 import OutputIdentification from "./OutputIdentification";
 import QuestionBadge from "./QuestionBadge";
@@ -29,6 +32,8 @@ function UserGuidanceAlert({ text }: { text: string }) {
     .split("\n\n")
     .map((s) => s.trim())
     .filter(Boolean);
+  const noInlineBullets = sections.every((s) => !s.includes("\n- "));
+  const renderAsBulletList = sections.length > 1 && noInlineBullets;
   return (
     <Alert
       style={{
@@ -47,35 +52,50 @@ function UserGuidanceAlert({ text }: { text: string }) {
       >
         {i18nT("user guidance title")}
       </small>
-      {sections.map((section, i) => {
-        if (section.includes("\n- ")) {
-          const parts = section.split("\n- ");
-          const intro = parts[0];
-          const bullets = parts.slice(1);
+      {renderAsBulletList ? (
+        <ul
+          className="mb-0 ps-3"
+          style={{ fontSize: "0.875em" }}
+        >
+          {sections.map((section, i) => (
+            <li key={i} style={{ whiteSpace: "pre-wrap" }}>
+              <Markdown options={MD_INLINE_OPTS}>{section}</Markdown>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        sections.map((section, i) => {
+          if (section.includes("\n- ")) {
+            const parts = section.split("\n- ");
+            const intro = parts[0];
+            const bullets = parts.slice(1);
+            return (
+              <div key={i}>
+                {intro && (
+                  <small style={{ display: "block", whiteSpace: "pre-wrap" }}>
+                    <Markdown options={MD_INLINE_OPTS}>{intro}</Markdown>
+                  </small>
+                )}
+                <ul className="mb-0 ps-3" style={{ fontSize: "0.875em" }}>
+                  {bullets.map((b, j) => (
+                    <li key={j}>
+                      <Markdown options={MD_INLINE_OPTS}>{b}</Markdown>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          }
           return (
-            <div key={i}>
-              {intro && (
-                <small style={{ display: "block", whiteSpace: "pre-wrap" }}>
-                  {intro}
-                </small>
-              )}
-              <ul className="mb-0 ps-3" style={{ fontSize: "0.875em" }}>
-                {bullets.map((b, j) => (
-                  <li key={j}>{b}</li>
-                ))}
-              </ul>
-            </div>
+            <small
+              key={i}
+              style={{ whiteSpace: "pre-wrap", display: "block" }}
+            >
+              <Markdown options={MD_INLINE_OPTS}>{section}</Markdown>
+            </small>
           );
-        }
-        return (
-          <small
-            key={i}
-            style={{ whiteSpace: "pre-wrap", display: "block" }}
-          >
-            {section}
-          </small>
-        );
-      })}
+        })
+      )}
     </Alert>
   );
 }
@@ -91,8 +111,15 @@ function DescriptionFieldTemplate({
     if (!alertText) return null;
     return <UserGuidanceAlert text={alertText} />;
   }
-  if (!description) return null;
-  return <UserGuidanceAlert text={String(description)} />;
+  // Prefer the raw `ui:description` string from uiSchema. When
+  // `enableMarkdownInDescription: true` is set, RJSF wraps the description in a
+  // <Markdown> element before passing it as the `description` prop, so falling
+  // back to String(description) would yield "[object Object]".
+  const rawDescription =
+    (uiOptions["description"] as string | undefined) ??
+    (typeof description === "string" ? description : undefined);
+  if (!rawDescription) return null;
+  return <UserGuidanceAlert text={rawDescription} />;
 }
 
 function FieldTemplate({
@@ -153,7 +180,7 @@ function FieldTemplate({
         )}
         {isPlainDescription && rawDescription && (
           <small className="form-text text-muted d-block mb-2">
-            {rawDescription}
+            <Markdown options={MD_INLINE_OPTS}>{rawDescription}</Markdown>
           </small>
         )}
         {children}
