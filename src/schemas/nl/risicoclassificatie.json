@@ -1,6 +1,6 @@
 {
   "JSONSchema": {
-    "title": "2 - Risicoclassificatie van AI-systemen",
+    "title": "Risicocategorie – Verboden, hoog-risico, uitzondering etc.",
     "type": "object",
     "definitions": {
       "outputLow": {

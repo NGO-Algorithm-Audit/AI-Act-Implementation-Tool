@@ -1,17 +1,175 @@
 import Form from "@rjsf/bootstrap-4";
 import { FormProps } from "@rjsf/core";
-import { GenericObjectType, retrieveSchema, RJSFSchema } from "@rjsf/utils";
+import {
+  DescriptionFieldProps,
+  FieldTemplateProps,
+  GenericObjectType,
+  getTemplate,
+  getUiOptions,
+  retrieveSchema,
+  RJSFSchema,
+} from "@rjsf/utils";
 import { useState } from "react";
-import { Button, Card } from "react-bootstrap";
+import { Alert, Button, Card } from "react-bootstrap";
+import { t as i18nT } from "i18next";
 import Output from "./Output";
 import QuestionBadge from "./QuestionBadge";
 import TooltipCheckboxesWidget from "./widgets/TooltipCheckboxesWidget";
 import TooltipRadioWidget from "./widgets/TooltipRadioWidget";
+import IntroWidget from "./widgets/IntroWidget";
 import { useTranslation } from "react-i18next";
+
+function PlainTextWidget({ value }: { value: string }) {
+  return <p style={{ whiteSpace: "pre-wrap", marginBottom: 0 }}>{value}</p>;
+}
+
+function UserGuidanceAlert({ text }: { text: string }) {
+  const sections = String(text)
+    .split("\n\n")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  return (
+    <Alert
+      style={{
+        color: "#6d2c91",
+        backgroundColor: "#f5eefa",
+        borderColor: "#d9b3f0",
+      }}
+      className="py-2 px-3 mt-3"
+    >
+      <small
+        style={{
+          fontWeight: "bold",
+          display: "block",
+          marginBottom: "2px",
+        }}
+      >
+        {i18nT("user guidance title")}
+      </small>
+      {sections.map((section, i) => {
+        if (section.includes("\n- ")) {
+          const parts = section.split("\n- ");
+          const intro = parts[0];
+          const bullets = parts.slice(1);
+          return (
+            <div key={i}>
+              {intro && (
+                <small style={{ display: "block", whiteSpace: "pre-wrap" }}>
+                  {intro}
+                </small>
+              )}
+              <ul className="mb-0 ps-3" style={{ fontSize: "0.875em" }}>
+                {bullets.map((b, j) => (
+                  <li key={j}>{b}</li>
+                ))}
+              </ul>
+            </div>
+          );
+        }
+        return (
+          <small
+            key={i}
+            style={{ whiteSpace: "pre-wrap", display: "block" }}
+          >
+            {section}
+          </small>
+        );
+      })}
+    </Alert>
+  );
+}
+
+function DescriptionFieldTemplate({
+  description,
+  uiSchema,
+}: DescriptionFieldProps) {
+  const uiOptions = getUiOptions(uiSchema ?? {});
+  const isPlain = uiOptions["descriptionStyle"] === "plain";
+  if (isPlain) {
+    const alertText = uiOptions["alertDescription"] as string | undefined;
+    if (!alertText) return null;
+    return <UserGuidanceAlert text={alertText} />;
+  }
+  if (!description) return null;
+  return <UserGuidanceAlert text={String(description)} />;
+}
+
+function FieldTemplate({
+  id,
+  children,
+  displayLabel,
+  rawErrors = [],
+  errors,
+  help,
+  description,
+  rawDescription,
+  label,
+  hidden,
+  required,
+  schema,
+  uiSchema,
+  registry,
+  classNames,
+  style,
+  disabled,
+  onDropPropertyClick,
+  onKeyChange,
+  readonly,
+}: FieldTemplateProps) {
+  const uiOptions = getUiOptions(uiSchema);
+  const WrapIfAdditionalTemplate = getTemplate(
+    "WrapIfAdditionalTemplate",
+    registry,
+    uiOptions
+  );
+  if (hidden) return <div className="hidden">{children}</div>;
+  const isPlainDescription = uiOptions["descriptionStyle"] === "plain";
+  return (
+    <WrapIfAdditionalTemplate
+      classNames={classNames}
+      style={style}
+      disabled={disabled}
+      id={id}
+      label={label}
+      onDropPropertyClick={onDropPropertyClick}
+      onKeyChange={onKeyChange}
+      readonly={readonly}
+      required={required}
+      schema={schema}
+      uiSchema={uiSchema}
+      registry={registry}
+    >
+      <div className="form-group">
+        {displayLabel && (
+          <label
+            htmlFor={id}
+            className={rawErrors.length > 0 ? "text-danger" : ""}
+            style={isPlainDescription ? { marginBottom: 0 } : undefined}
+          >
+            {label}
+            {required ? "*" : null}
+          </label>
+        )}
+        {isPlainDescription && rawDescription && (
+          <small className="form-text text-muted d-block mb-2">
+            {rawDescription}
+          </small>
+        )}
+        {children}
+        {isPlainDescription && uiOptions["alertDescription"] && description}
+        {!isPlainDescription && displayLabel && description}
+        {errors}
+        {help}
+      </div>
+    </WrapIfAdditionalTemplate>
+  );
+}
 
 const tooltipWidgets = {
   CheckboxesWidget: TooltipCheckboxesWidget,
   RadioWidget: TooltipRadioWidget,
+  PlainTextWidget,
+  IntroWidget,
 };
 
 const WizardForm = ({
@@ -246,17 +404,40 @@ const WizardForm = ({
 
   return (
     <Card style={{ minHeight: "300px" }}>
-      <Card.Header className="d-flex flex-row justify-content-between">
+      <Card.Header className="d-flex flex-row justify-content-between align-items-center">
         <div className="d-flex flex-row align-items-center gap-2">
-          <Card.Title className="my-1">{schema.title}</Card.Title>
+          {(() => {
+            const isRiskClassification = /^(Risk category|Risicocategorie)/i.test(
+              String(schema?.title ?? "")
+            );
+            const tag = isRiskClassification
+              ? t("questionnaire 2 name")
+              : t("questionnaire 1 name");
+            return (
+              <span
+                className="badge"
+                style={{
+                  fontSize: "0.85rem",
+                  whiteSpace: "nowrap",
+                  backgroundColor: "#005AA7",
+                  color: "#fff",
+                }}
+              >
+                {tag}
+              </span>
+            );
+          })()}
+          <Card.Title className="my-1" style={{ marginLeft: "8px" }}>
+            {schema.title}
+          </Card.Title>
         </div>
         <button
           type="button"
           onClick={() => onCancel(id)}
-          className="close ml-4"
-          aria-label="Close"
+          className="btn btn-outline-secondary btn-sm ml-4"
+          aria-label="Back"
         >
-          <span aria-hidden="true">&times;</span>
+          ← {t("back to overview")}
         </button>
       </Card.Header>
       <Card.Body className="d-flex flex-column justify-content-between">
@@ -287,6 +468,7 @@ const WizardForm = ({
             schema={currentStepSchema as RJSFSchema}
             uiSchema={uiSchema}
             widgets={tooltipWidgets}
+            templates={{ FieldTemplate, DescriptionFieldTemplate }}
             formData={
               data[questions[0]]
                 ? {
@@ -317,7 +499,23 @@ const WizardForm = ({
 
             {/* tag with question ID */}
             <div style={{ display: "inline-block", marginTop: "8px" }}>
-              <span className="badge badge-secondary">ID: {questions[0]}</span>
+              {(() => {
+                const rawSuffix =
+                  (uiSchema?.[questions[0]]?.["ui:id"] as string | undefined) ??
+                  questions[0];
+                const displaySuffix = rawSuffix.replace(/^q/, "Q");
+                const isRiskClassification = /^(Risk category|Risicocategorie)/i.test(
+                  String(schema?.title ?? "")
+                );
+                const questionnaireName = isRiskClassification
+                  ? t("questionnaire 2 name")
+                  : t("questionnaire 1 name");
+                return (
+                  <span className="badge badge-secondary me-1">
+                    id: {questionnaireName} {displaySuffix}
+                  </span>
+                );
+              })()}
               {(uiSchema?.[questions[0]]?.["ui:badges"] as {
                 label: string;
                 color?: string;
