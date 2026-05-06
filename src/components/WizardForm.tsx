@@ -13,6 +13,7 @@ import { useState } from "react";
 import { Alert, Button, Card } from "react-bootstrap";
 import { t as i18nT } from "i18next";
 import Output from "./Output";
+import OutputIdentification from "./OutputIdentification";
 import QuestionBadge from "./QuestionBadge";
 import TooltipCheckboxesWidget from "./widgets/TooltipCheckboxesWidget";
 import TooltipRadioWidget from "./widgets/TooltipRadioWidget";
@@ -442,27 +443,41 @@ const WizardForm = ({
       </Card.Header>
       <Card.Body className="d-flex flex-column justify-content-between">
         {questions[0] === "output" || questions[0] === "error" ? (
-          <Output
-            id={id}
-            type={questions[0] as "output" | "error"}
-            output={firstQuestion}
-            step={step}
-            handlePrev={handlePrev}
-            onSubmit={onSubmit}
-            data={(() => {
-              // Ensure hidden fields with defaults are included in final data
-              const resolvedSchema = retrieveSchema(
-                validator,
-                schema,
-                schema,
-                data
-              );
-              const flattenedSchema = flattenSchema(resolvedSchema, schema);
-              const hiddenFieldsWithDefaults =
-                getHiddenFieldsWithDefaults(flattenedSchema);
-              return { ...data, ...hiddenFieldsWithDefaults };
-            })()}
-          />
+          (() => {
+            const resolvedSchema = retrieveSchema(
+              validator,
+              schema,
+              schema,
+              data
+            );
+            const flattenedSchema = flattenSchema(resolvedSchema, schema);
+            const hiddenFieldsWithDefaults =
+              getHiddenFieldsWithDefaults(flattenedSchema);
+            const mergedData = { ...data, ...hiddenFieldsWithDefaults };
+            const hasClassification =
+              !!(firstQuestion as any)?.classification;
+            return hasClassification ? (
+              <OutputIdentification
+                id={id}
+                type={questions[0] as "output" | "error"}
+                output={firstQuestion as Record<string, any>}
+                step={step}
+                handlePrev={handlePrev}
+                onSubmit={onSubmit}
+                data={mergedData}
+              />
+            ) : (
+              <Output
+                id={id}
+                type={questions[0] as "output" | "error"}
+                output={firstQuestion}
+                step={step}
+                handlePrev={handlePrev}
+                onSubmit={onSubmit}
+                data={mergedData}
+              />
+            );
+          })()
         ) : (
           <Form
             schema={currentStepSchema as RJSFSchema}
