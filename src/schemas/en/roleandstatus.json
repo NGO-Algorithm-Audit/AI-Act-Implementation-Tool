@@ -1,0 +1,207 @@
+{
+  "JSONSchema": {
+    "title": "Deployer, provider, importer, distributor etc.",
+    "type": "object",
+    "definitions": {
+      "outputResult": {
+        "type": "string",
+        "title": "Results",
+        "default": "",
+        "roleStatus": true
+      },
+      "q13block": {
+        "title": "q13block",
+        "type": "object",
+        "properties": {
+          "q13": {
+            "type": "string",
+            "title": "Is the AI system already in use?",
+            "enum": [
+              "In use",
+              "In development"
+            ]
+          }
+        },
+        "required": ["q13"],
+        "dependencies": {
+          "q13": {
+            "oneOf": [
+              {
+                "properties": {
+                  "q13": { "enum": ["In use"] },
+                  "output": { "$ref": "#/definitions/outputResult" }
+                }
+              },
+              {
+                "properties": {
+                  "q13": { "enum": ["In development"] },
+                  "output": { "$ref": "#/definitions/outputResult" }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "q12bblock": {
+        "title": "q12bblock",
+        "type": "object",
+        "properties": {
+          "q12b": {
+            "type": "string",
+            "title": "Does one of the following scenarios apply to your AI system?",
+            "enum": [
+              "The name or trademark of your organization is put on the AI system.",
+              "A substantial modification has been made to the AI system.",
+              "The intended purpose of the AI system is modified by your organization.",
+              "None of the above."
+            ]
+          }
+        },
+        "required": ["q12b"],
+        "dependencies": {
+          "q12b": {
+            "oneOf": [
+              {
+                "properties": {
+                  "q12b": { "enum": ["The name or trademark of your organization is put on the AI system."] },
+                  "q13block": { "$ref": "#/definitions/q13block" }
+                }
+              },
+              {
+                "properties": {
+                  "q12b": { "enum": ["A substantial modification has been made to the AI system."] },
+                  "q13block": { "$ref": "#/definitions/q13block" }
+                }
+              },
+              {
+                "properties": {
+                  "q12b": { "enum": ["The intended purpose of the AI system is modified by your organization."] },
+                  "q13block": { "$ref": "#/definitions/q13block" }
+                }
+              },
+              {
+                "properties": {
+                  "q12b": { "enum": ["None of the above."] },
+                  "q13block": { "$ref": "#/definitions/q13block" }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "properties": {
+      "intro": {
+        "type": "string",
+        "title": "",
+        "default": ""
+      },
+      "q12": {
+        "type": "string",
+        "title": "How is the AI system developed or deployed?",
+        "enum": [
+          "We develop and use the AI system ourselves.",
+          "We only develop the AI system.",
+          "We develop the AI system and others also use it.",
+          "We use an externally developed AI system.",
+          "We import the AI system from a supplier outside the EU.",
+          "We buy the AI system from a supplier within the EU and resell it.",
+          "We represent a non-EU person or entity to carry out AI Act obligations.",
+          "You are a natural person using an AI system for purely personal non-professional activity."
+        ]
+      }
+    },
+    "required": ["q12"],
+    "dependencies": {
+      "q12": {
+        "oneOf": [
+          {
+            "properties": {
+              "q12": { "enum": ["We develop and use the AI system ourselves."] },
+              "q13block": { "$ref": "#/definitions/q13block" }
+            }
+          },
+          {
+            "properties": {
+              "q12": { "enum": ["We only develop the AI system."] },
+              "q13block": { "$ref": "#/definitions/q13block" }
+            }
+          },
+          {
+            "properties": {
+              "q12": { "enum": ["We develop the AI system and others also use it."] },
+              "q13block": { "$ref": "#/definitions/q13block" }
+            }
+          },
+          {
+            "properties": {
+              "q12": { "enum": ["We use an externally developed AI system."] },
+              "q12bblock": { "$ref": "#/definitions/q12bblock" }
+            }
+          },
+          {
+            "properties": {
+              "q12": { "enum": ["We import the AI system from a supplier outside the EU."] },
+              "q13block": { "$ref": "#/definitions/q13block" }
+            }
+          },
+          {
+            "properties": {
+              "q12": { "enum": ["We buy the AI system from a supplier within the EU and resell it."] },
+              "q13block": { "$ref": "#/definitions/q13block" }
+            }
+          },
+          {
+            "properties": {
+              "q12": { "enum": ["We represent a non-EU person or entity to carry out AI Act obligations."] },
+              "q13block": { "$ref": "#/definitions/q13block" }
+            }
+          },
+          {
+            "properties": {
+              "q12": { "enum": ["You are a natural person using an AI system for purely personal non-professional activity."] },
+              "output": { "$ref": "#/definitions/outputResult" }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "uiSchema": {
+    "intro": {
+      "ui:id": "start",
+      "ui:widget": "RoleStatusIntroWidget",
+      "ui:options": { "label": false },
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "In this questionnaire:\n- A 'Downstream provider' equals a 'Provider'. Only in case an AI model is used, this distinction is relevant (see [Art. 3(68) AI Act](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3)). Whether an AI model is used, is determined in questionnaire Risk category.\n- A 'Product manufacturer' equals a 'Provider'. Being a product manufacturer is only relevant if: (i) the high-risk AI system relates to products for which the laws in Annex I Section A apply; (ii) the system is placed on the market or put into service together with the product; and (iii) under the name or trademark of the product manufacturer. In this case the product manufacturer is considered to be the provider of the high-risk AI system (see [Art. 25(3) AI Act](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-25))."
+    },
+    "q12": {
+      "ui:widget": "radio",
+      "ui:id": "Q1",
+      "ui:badges": [
+        { "label": "Art. 2 AI Act - Scope", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-2" },
+        { "label": "Art. 3 AI Act - Definitions", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3" }
+      ]
+    },
+    "q12b": {
+      "ui:widget": "radio",
+      "ui:id": "Q2",
+      "ui:badges": [
+        { "label": "Art. 3(23) AI Act - Definitions", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3" },
+        { "label": "Art. 25 AI Act - Responsibilities along the AI value chain", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-25" },
+        { "label": "Art. 43(4) AI Act - Conformity assessment", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-43" },
+        { "label": "Recital 84 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-84" }
+      ]
+    },
+    "q13": {
+      "ui:widget": "radio",
+      "ui:id": "Q3",
+      "ui:description": "An AI system is considered 'in use' as soon as it is actually applied, including in a pilot or testing. A system is 'in use' if it has effect on work processes.",
+      "ui:badges": [
+        { "label": "Art. 111 AI Act - Transitional provisions", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-111" },
+        { "label": "Art. 113 AI Act - Entry into force and application", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-113" },
+        { "label": "Recital 177-179 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-177" }
+      ]
+    }
+  }
+}
