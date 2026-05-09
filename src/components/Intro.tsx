@@ -1,4 +1,4 @@
-import { Card, Button, ListGroup } from "react-bootstrap";
+import { Alert, Card, Button, ListGroup } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
 
@@ -16,6 +16,9 @@ export default function ({
   return (
     <Card style={{ minHeight: "300px" }}>
       <Card.Body className="d-flex flex-column justify-content-between">
+        <Alert variant="success" className="mb-3">
+          {t("intro banner")}
+        </Alert>
         <div className="d-flex flex-row justify-content-between align-items-top mb-2">
           <Card.Title>{t("cardTitle")}</Card.Title>
           {!activeLanguage && <LanguageSwitcher />}
