@@ -18,11 +18,13 @@ const MD_INLINE_OPTS = { forceInline: true } as const;
 import Output from "./Output";
 import OutputIdentification from "./OutputIdentification";
 import OutputRoleStatus from "./OutputRoleStatus";
+import OutputRiskClassification from "./OutputRiskClassification";
 import QuestionBadge from "./QuestionBadge";
 import TooltipCheckboxesWidget from "./widgets/TooltipCheckboxesWidget";
 import TooltipRadioWidget from "./widgets/TooltipRadioWidget";
 import IntroWidget from "./widgets/IntroWidget";
 import RoleStatusIntroWidget from "./widgets/RoleStatusIntroWidget";
+import RiskClassificationIntroWidget from "./widgets/RiskClassificationIntroWidget";
 import { useTranslation } from "react-i18next";
 
 function PlainTextWidget({ value }: { value: string }) {
@@ -201,6 +203,7 @@ const tooltipWidgets = {
   PlainTextWidget,
   IntroWidget,
   RoleStatusIntroWidget,
+  RiskClassificationIntroWidget,
 };
 
 const WizardForm = ({
@@ -211,11 +214,15 @@ const WizardForm = ({
   onSubmit,
   onCancel,
   validator,
+  aiAct2Roles,
+  onStartQuestionnaire,
 }: {
   id: number;
   schema: FormProps<any, RJSFSchema, any>["schema"];
   uiSchema: FormProps<any, RJSFSchema, any>["uiSchema"];
   formData: FormProps<any, RJSFSchema, any>["formData"];
+  aiAct2Roles?: string[] | null;
+  onStartQuestionnaire?: (key: string) => void;
   onSubmit: (
     index: number,
     data: FormProps<any, RJSFSchema, any>["formData"]
@@ -390,11 +397,29 @@ const WizardForm = ({
     const currentSchema = getCurrentStepSchema(validator, schema, data);
     const currentField = Object.keys(currentSchema.properties)[0];
 
+    const fieldValue = formData[currentField];
+    const fieldSchema = currentSchema.properties?.[currentField];
+    const isArrayField = fieldSchema?.type === "array";
+    const minItems = fieldSchema?.minItems ?? 0;
+    const isEmpty = isArrayField
+      ? !Array.isArray(fieldValue) || fieldValue.length < Math.max(minItems, 1)
+      : fieldValue === undefined || fieldValue === "";
+
     if (
-      currentSchema.required?.includes(currentField) &&
-      (formData[currentField] === undefined || formData[currentField] === "")
+      (currentSchema.required?.includes(currentField) ||
+        (isArrayField && minItems >= 1)) &&
+      isEmpty
     ) {
       errors[currentField].addError(t("required field"));
+    }
+
+    if (isArrayField && Array.isArray(fieldValue) && fieldValue.length >= 2) {
+      const NOTA = ["None of the above", "Geen van de bovenstaande"];
+      const hasNOTA = fieldValue.some((v) => NOTA.includes(v));
+      const hasOther = fieldValue.some((v) => !NOTA.includes(v));
+      if (hasNOTA && hasOther) {
+        errors[currentField].addError(t("invalid answer combination"));
+      }
     }
 
     return errors;
@@ -493,6 +518,7 @@ const WizardForm = ({
             const hasClassification =
               !!(firstQuestion as any)?.classification;
             const hasRoleStatus = !!(firstQuestion as any)?.roleStatus;
+            const hasRiskOutcome = !!(firstQuestion as any)?.riskOutcome;
             if (hasRoleStatus) {
               return (
                 <OutputRoleStatus
@@ -503,6 +529,36 @@ const WizardForm = ({
                   handlePrev={handlePrev}
                   onSubmit={onSubmit}
                   data={mergedData}
+                />
+              );
+            }
+            if (hasRiskOutcome) {
+              const title = String(schema?.title ?? "");
+              const isRiskCategory = /^(Risk category|Risicocategorie|Prohibited|Verboden)/i.test(
+                title
+              );
+              const questionnaireName = isRiskCategory
+                ? (t("questionnaire 2 name") as string)
+                : undefined;
+              const handleJumpToField = (fieldKey: string) => {
+                const visibleFields = getVisibleFields(flattenedSchema);
+                const idx = visibleFields.indexOf(fieldKey);
+                if (idx >= 0) setStep(idx);
+              };
+              return (
+                <OutputRiskClassification
+                  id={String(id)}
+                  type={questions[0] as "output" | "error"}
+                  output={firstQuestion as Record<string, any>}
+                  step={step}
+                  handlePrev={handlePrev}
+                  onSubmit={(_idx, payload) => onSubmit(id, payload)}
+                  onStartQuestionnaire={onStartQuestionnaire}
+                  onJumpToField={handleJumpToField}
+                  data={mergedData}
+                  uiSchema={uiSchema}
+                  questionnaireName={questionnaireName}
+                  aiAct2Roles={aiAct2Roles}
                 />
               );
             }

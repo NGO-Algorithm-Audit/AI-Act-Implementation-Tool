@@ -8,6 +8,7 @@ import "./i18n/config";
 
 // Import our custom styles.
 import "./styles/custom.scss";
+import "./styles/colors_and_type.css";
 import ThemeHandler from "./components/ThemeHandler";
 
 ReactDOM.createRoot(document.getElementById("AIActImplementationTool")!).render(

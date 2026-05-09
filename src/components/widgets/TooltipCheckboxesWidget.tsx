@@ -23,7 +23,6 @@ export default function TooltipCheckboxesWidget<
   value,
   autofocus,
   readonly,
-  required,
   onChange,
   onBlur,
   onFocus,
@@ -35,7 +34,12 @@ export default function TooltipCheckboxesWidget<
   const enumDescriptions: (string | null | undefined)[] =
     (uiSchema?.["ui:enumDescriptions"] as (string | null | undefined)[]) ?? [];
 
-  const checkboxesValues = Array.isArray(value) ? value : [value];
+  const validEnumValues = new Set(
+    Array.isArray(enumOptions) ? enumOptions.map((o) => o.value) : []
+  );
+  const checkboxesValues = (Array.isArray(value) ? value : []).filter(
+    (v) => v !== undefined && v !== null && validEnumValues.has(v)
+  );
 
   const _onChange =
     (index: number) =>
@@ -99,7 +103,6 @@ export default function TooltipCheckboxesWidget<
               key={option.value}
               inline={inline as boolean}
               custom
-              required={required}
               checked={checked}
               className="bg-transparent border-0"
               type="checkbox"
