@@ -9,7 +9,7 @@ import {
   retrieveSchema,
   RJSFSchema,
 } from "@rjsf/utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Alert, Button, Card } from "react-bootstrap";
 import { t as i18nT } from "i18next";
 import Markdown from "markdown-to-jsx";
@@ -216,6 +216,8 @@ const WizardForm = ({
   validator,
   aiAct2Roles,
   onStartQuestionnaire,
+  initialFieldKey,
+  onInitialFieldConsumed,
 }: {
   id: number;
   schema: FormProps<any, RJSFSchema, any>["schema"];
@@ -223,6 +225,8 @@ const WizardForm = ({
   formData: FormProps<any, RJSFSchema, any>["formData"];
   aiAct2Roles?: string[] | null;
   onStartQuestionnaire?: (key: string) => void;
+  initialFieldKey?: string | null;
+  onInitialFieldConsumed?: () => void;
   onSubmit: (
     index: number,
     data: FormProps<any, RJSFSchema, any>["formData"]
@@ -234,10 +238,116 @@ const WizardForm = ({
   const [step, setStep] = useState(0);
   const [data, setData] = useState(formData || {});
 
+  // On first mount, if a search result handed us an initialFieldKey, advance
+  // step to that question. Many target fields (e.g. art50.nudify a.k.a. Q11)
+  // sit behind an `allOf.if/then` or `dependencies.oneOf` gate — RJSF only
+  // expands them when the gating answer is already in data. So we walk the
+  // schema once to discover the target, collect a minimum data patch that
+  // satisfies the gates along the way, and seed `data` with it.
+  // flattenSchema/getVisibleFields are const arrows declared below; they
+  // exist by the time this effect callback runs.
+  useEffect(() => {
+    if (!initialFieldKey) return;
+
+    const inferSatisfyingValue = (propSchema: any): any => {
+      if (!propSchema || typeof propSchema !== "object") return undefined;
+      if (propSchema.const !== undefined) return propSchema.const;
+      if (Array.isArray(propSchema.enum) && propSchema.enum.length > 0)
+        return propSchema.enum[0];
+      if (propSchema.contains) {
+        const c = propSchema.contains;
+        if (Array.isArray(c.enum) && c.enum.length > 0) return [c.enum[0]];
+        if (c.const !== undefined) return [c.const];
+      }
+      return undefined;
+    };
+
+    const followRef = (ref: string): any => {
+      if (typeof ref !== "string" || !ref.startsWith("#/")) return null;
+      const parts = ref.slice(2).split("/");
+      let cur: any = schema;
+      for (const p of parts) {
+        if (cur && typeof cur === "object") cur = cur[p];
+        else return null;
+      }
+      return cur;
+    };
+
+    const seen = new WeakSet<object>();
+    const findPath = (node: any): Record<string, any> | null => {
+      if (!node || typeof node !== "object" || seen.has(node)) return null;
+      seen.add(node);
+      if (typeof node.$ref === "string") {
+        const target = followRef(node.$ref);
+        if (target) return findPath(target);
+      }
+      if (node.properties && typeof node.properties === "object") {
+        if (node.properties[initialFieldKey]) return {};
+        for (const v of Object.values(node.properties)) {
+          const r = findPath(v);
+          if (r) return r;
+        }
+      }
+      if (Array.isArray(node.allOf)) {
+        for (const sub of node.allOf) {
+          if (!sub || typeof sub !== "object") continue;
+          const branch = sub.then ?? sub;
+          const r = findPath(branch);
+          if (r) {
+            if (sub.if?.properties && typeof sub.if.properties === "object") {
+              for (const [k, vs] of Object.entries(sub.if.properties)) {
+                if (r[k] !== undefined) continue;
+                const val = inferSatisfyingValue(vs);
+                if (val !== undefined) r[k] = val;
+              }
+            }
+            return r;
+          }
+        }
+      }
+      if (node.dependencies && typeof node.dependencies === "object") {
+        for (const [depKey, dep] of Object.entries(node.dependencies)) {
+          const oneOf = (dep as any)?.oneOf;
+          if (!Array.isArray(oneOf)) continue;
+          for (const branch of oneOf) {
+            const r = findPath(branch);
+            if (r) {
+              const branchProp = (branch as any).properties?.[depKey];
+              if (branchProp && r[depKey] === undefined) {
+                const val = inferSatisfyingValue(branchProp);
+                if (val !== undefined) r[depKey] = val;
+              }
+              return r;
+            }
+          }
+        }
+      }
+      // Don't walk `definitions` directly — they're reached via $ref so the
+      // dependency-trigger from the call site is captured in the path.
+      return null;
+    };
+
+    const patch = findPath(schema as any) ?? {};
+    const seededData = { ...data, ...patch };
+
+    const flattenedSchema = flattenSchema(schema, schema, seededData);
+    const visibleFields = getVisibleFields(flattenedSchema);
+    const idx = visibleFields.indexOf(initialFieldKey);
+    if (idx >= 0) {
+      if (Object.keys(patch).length > 0) setData(seededData);
+      setStep(idx);
+    }
+    onInitialFieldConsumed?.();
+    // run once on mount; later prop changes are intentionally ignored
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const flattenSchema = (
     resolvedSchema: any,
-    rootSchema: any
+    rootSchema: any,
+    dataOverride?: any
   ): GenericObjectType => {
+    const effectiveData = dataOverride ?? data;
     const flattenedProperties: any = {};
     const requiredFields: string[] = [];
 
@@ -248,17 +358,69 @@ const WizardForm = ({
         requiredFields.push(...schemaObject.required);
       }
 
-      // Handle regular properties
+      const dependencies = schemaObject.dependencies || {};
+      const handledDependencies = new Set<string>();
+
+      // Resolve and inline a dependency for `key` against current data, if it
+      // matches. Called immediately after adding `key` so dependent fields
+      // appear in the correct position in the visible-fields order (e.g.
+      // art6.thirdParty must come right after annexI, not after III.1).
+      const applyDependency = (key: string) => {
+        const dependency = dependencies[key];
+        if (!dependency || handledDependencies.has(key)) return;
+        handledDependencies.add(key);
+        const fieldValue = effectiveData[key];
+        if (fieldValue === undefined || fieldValue === null) return;
+        if (Array.isArray(fieldValue) && fieldValue.length === 0) return;
+        if (!dependency.oneOf) return;
+
+        // Match by membership in the branch's enum (not first element only),
+        // so multi-value branches like Annex I Section A/B work.
+        const matchingSchema = dependency.oneOf.find((oneOfSchema: any) => {
+          const branchEnum = oneOfSchema.properties?.[key]?.enum;
+          if (!Array.isArray(branchEnum)) return false;
+          if (Array.isArray(fieldValue)) {
+            return fieldValue.some((v) => branchEnum.includes(v));
+          }
+          return branchEnum.includes(fieldValue);
+        });
+        if (!matchingSchema) return;
+
+        const resolvedDependencySchema = retrieveSchema(
+          validator,
+          matchingSchema,
+          rootSchema,
+          effectiveData
+        );
+        if (resolvedDependencySchema.required) {
+          requiredFields.push(...resolvedDependencySchema.required);
+        }
+        Object.entries(resolvedDependencySchema.properties || {}).forEach(
+          ([depKey, depValue]) => {
+            if (depKey === key) return;
+            const dv = depValue as any;
+            if (dv && typeof dv === "object" && "properties" in dv) {
+              const r = retrieveSchema(validator, dv, rootSchema, effectiveData);
+              addProperties(r);
+            } else {
+              flattenedProperties[depKey] = depValue;
+            }
+            applyDependency(depKey);
+          }
+        );
+      };
+
+      // Walk regular properties; expand each property's dependency immediately
+      // after it lands so dependency-injected fields keep their natural slot.
       Object.entries(schemaObject.properties || {}).forEach(
         ([key, value]: [string, any]) => {
           if (value && typeof value === "object") {
             if ("properties" in value) {
-              // If it's a nested object with properties, resolve and add its properties
               const resolvedNestedSchema = retrieveSchema(
                 validator,
                 value,
                 rootSchema,
-                data
+                effectiveData
               );
               addProperties(resolvedNestedSchema);
             } else {
@@ -267,45 +429,13 @@ const WizardForm = ({
           } else {
             flattenedProperties[key] = value;
           }
+          applyDependency(key);
         }
       );
 
-      // Handle dependencies
-      Object.entries(schemaObject.dependencies || {}).forEach(
-        ([key, dependency]: [string, any]) => {
-          if (data[key] && dependency.oneOf) {
-            // Find matching schema in oneOf array
-            const matchingSchema = dependency.oneOf.find((oneOfSchema: any) => {
-              const enumValue = oneOfSchema.properties?.[key]?.enum?.[0];
-              return enumValue === data[key];
-            });
-
-            if (matchingSchema) {
-              // Resolve the matching schema
-              const resolvedDependencySchema = retrieveSchema(
-                validator,
-                matchingSchema,
-                rootSchema,
-                data
-              );
-
-              // Add required fields from the dependency schema
-              if (resolvedDependencySchema.required) {
-                requiredFields.push(...resolvedDependencySchema.required);
-              }
-
-              // Add properties from the resolved dependency schema
-              Object.entries(resolvedDependencySchema.properties || {}).forEach(
-                ([depKey, depValue]) => {
-                  if (depKey !== key) {
-                    flattenedProperties[depKey] = depValue;
-                  }
-                }
-              );
-            }
-          }
-        }
-      );
+      // Catch any dependencies whose key wasn't a property of this object
+      // (rare; preserves previous behaviour for completeness).
+      Object.keys(dependencies).forEach((key) => applyDependency(key));
     };
 
     // Start with the main schema
@@ -351,20 +481,15 @@ const WizardForm = ({
   };
 
   const getCurrentStepSchema = (
-    validator: FormProps<any, RJSFSchema, any>["validator"],
+    _validator: FormProps<any, RJSFSchema, any>["validator"],
     schema: FormProps<any, RJSFSchema, any>["schema"],
     currentData: FormProps<any, RJSFSchema, any>["formData"]
   ): GenericObjectType => {
-    // First resolve the schema with the full root schema
-    const resolvedSchema = retrieveSchema(
-      validator,
-      schema,
-      schema,
-      currentData
-    );
-
-    // Then flatten it while maintaining access to the root schema for nested references
-    const flattenedSchema = flattenSchema(resolvedSchema, schema);
+    // Pass the raw schema (not retrieveSchema-resolved) so flattenSchema's own
+    // applyDependency can place dependency-injected fields in their correct
+    // slot — e.g. art6.thirdParty must come right after annexI, not appended
+    // after III.1 (which is what RJSF's top-level retrieveSchema produces).
+    const flattenedSchema = flattenSchema(schema, schema, currentData);
 
     // Get visible fields only
     const visibleFields = getVisibleFields(flattenedSchema);
@@ -426,9 +551,8 @@ const WizardForm = ({
   };
 
   const handleNext = (formData: typeof data) => {
-    // Get the flattened schema to access hidden fields
-    const resolvedSchema = retrieveSchema(validator, schema, schema, data);
-    const flattenedSchema = flattenSchema(resolvedSchema, schema);
+    // Flatten using the raw schema so dependency ordering stays stable.
+    const flattenedSchema = flattenSchema(schema, schema, data);
 
     // Get hidden fields with their default values
     const hiddenFieldsWithDefaults =
@@ -505,13 +629,7 @@ const WizardForm = ({
       <Card.Body className="d-flex flex-column justify-content-between">
         {questions[0] === "output" || questions[0] === "error" ? (
           (() => {
-            const resolvedSchema = retrieveSchema(
-              validator,
-              schema,
-              schema,
-              data
-            );
-            const flattenedSchema = flattenSchema(resolvedSchema, schema);
+            const flattenedSchema = flattenSchema(schema, schema, data);
             const hiddenFieldsWithDefaults =
               getHiddenFieldsWithDefaults(flattenedSchema);
             const mergedData = { ...data, ...hiddenFieldsWithDefaults };

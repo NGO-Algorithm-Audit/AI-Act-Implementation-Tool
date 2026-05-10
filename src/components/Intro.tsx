@@ -1,14 +1,17 @@
 import { Alert, Card, Button, ListGroup } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
+import SearchBar from "./SearchBar";
 
 export default function ({
   forms,
   onStart,
+  onStartQuestionnaire,
   activeLanguage = false,
 }: {
   forms: { id: number; title: string }[];
   onStart: (index: number) => void;
+  onStartQuestionnaire?: (key: string) => void;
   activeLanguage?: boolean;
 }) {
   const { t } = useTranslation();
@@ -16,9 +19,17 @@ export default function ({
   return (
     <Card style={{ minHeight: "300px" }}>
       <Card.Body className="d-flex flex-column justify-content-between">
-        <Alert variant="success" className="mb-3">
+        <Alert
+          className="mb-3"
+          style={{
+            backgroundColor: "#f0f0f0",
+            borderColor: "#dddddd",
+            color: "#212529",
+          }}
+        >
           {t("intro banner")}
         </Alert>
+        <SearchBar onStartQuestionnaire={onStartQuestionnaire} />
         <div className="d-flex flex-row justify-content-between align-items-top mb-2">
           <Card.Title>{t("cardTitle")}</Card.Title>
           {!activeLanguage && <LanguageSwitcher />}
