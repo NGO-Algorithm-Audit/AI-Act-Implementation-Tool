@@ -1,24 +1,62 @@
-import { Card, Button, ListGroup } from "react-bootstrap";
+import { Alert, Card, Button, ListGroup } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
+import SearchBar from "./SearchBar";
 
 export default function ({
   forms,
   onStart,
+  onStartQuestionnaire,
   activeLanguage = false,
 }: {
   forms: { id: number; title: string }[];
   onStart: (index: number) => void;
+  onStartQuestionnaire?: (key: string) => void;
   activeLanguage?: boolean;
 }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const fullscreenUrl = `https://ai-documentation.s3.eu-central-1.amazonaws.com/index.html?lang=${
+    i18n.language?.startsWith("nl") ? "nl" : "en"
+  }`;
 
   return (
     <Card style={{ minHeight: "300px" }}>
       <Card.Body className="d-flex flex-column justify-content-between">
+        <Alert
+          className="mb-3"
+          style={{
+            backgroundColor: "#f0f0f0",
+            borderColor: "#dddddd",
+            color: "#212529",
+          }}
+        >
+          {t("intro banner")}
+          <a
+            href="https://digital-strategy.ec.europa.eu/en/library/draft-guidelines-implementation-transparency-obligations-certain-ai-systems-under-article-50-ai-act"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t("intro banner draft guidelines link")}
+          </a>
+          {t("intro banner 2")}
+        </Alert>
+        <SearchBar onStartQuestionnaire={onStartQuestionnaire} />
         <div className="d-flex flex-row justify-content-between align-items-top mb-2">
           <Card.Title>{t("cardTitle")}</Card.Title>
-          {!activeLanguage && <LanguageSwitcher />}
+          <div className="d-flex flex-row align-items-center">
+            <Button
+              variant="outline-secondary"
+              size="sm"
+              onClick={() =>
+                window.open(fullscreenUrl, "_blank", "noopener,noreferrer")
+              }
+              aria-label={t("fullscreen mode")}
+              title={t("fullscreen mode")}
+            >
+              ⛶
+            </Button>
+            {!activeLanguage && <LanguageSwitcher />}
+          </div>
         </div>
 
         <div className="mb-4"> 

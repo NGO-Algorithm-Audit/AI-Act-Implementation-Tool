@@ -61,7 +61,23 @@
       "Bash(xargs kill)",
       "Bash(ls node_modules/puppeteer node_modules/playwright)",
       "Bash(node -e \"console.log\\(process.version\\)\")",
-      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('./src/schemas/en/roleandstatus.json','utf8'\\)\\); JSON.parse\\(require\\('fs'\\).readFileSync\\('./src/schemas/nl/rolenstatus.json','utf8'\\)\\); console.log\\('JSON OK'\\)\")"
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('./src/schemas/en/roleandstatus.json','utf8'\\)\\); JSON.parse\\(require\\('fs'\\).readFileSync\\('./src/schemas/nl/rolenstatus.json','utf8'\\)\\); console.log\\('JSON OK'\\)\")",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('src/schemas/en/riskclassification.json'\\)\\)\")",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('src/schemas/nl/risicoclassificatie.json'\\)\\)\")",
+      "Bash(curl -s http://localhost:5173/ -o /dev/null -w \"%{http_code}\\\\n\")",
+      "Bash(curl -s \"http://localhost:5173/src/schemas/en/riskclassification.json\" -o /dev/null -w \"%{http_code} %{size_download}\\\\n\")",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('src/i18n/en/translation.json'\\)\\)\")",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('src/i18n/nl/translation.json'\\)\\)\")",
+      "Bash(awk '/^    \"annexI\": \\\\{/,/^    \\\\},/' \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/schemas/en/riskclassification.json\")",
+      "Bash(awk '/^    \"annexI\": \\\\{/,/^    \\\\},/' \"/Users/jurriaan/Github repos/ClassifyMyAI/src/schemas/en/riskclassification.json\")",
+      "Bash(cp \"/Users/jurriaan/Github repos/ClassifyMyAI/src/components/NextStepsSection.tsx\" \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/components/NextStepsSection.tsx\")",
+      "Bash(cp \"/Users/jurriaan/Github repos/ClassifyMyAI/src/components/ObligationsSection.tsx\" \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/components/ObligationsSection.tsx\")",
+      "Bash(cp \"/Users/jurriaan/Github repos/ClassifyMyAI/src/components/RolesOverviewSection.tsx\" \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/components/RolesOverviewSection.tsx\")",
+      "Bash(cp \"/Users/jurriaan/Github repos/ClassifyMyAI/src/components/OutputRiskClassification.tsx\" \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/components/OutputRiskClassification.tsx\")",
+      "Bash(grep -hoE 't\\\\\\(`[^`]+`\\\\\\)' \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/components/OutputRiskClassification.tsx\" \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/components/NextStepsSection.tsx\" \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/components/ObligationsSection.tsx\" \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/components/RolesOverviewSection.tsx\")",
+      "Bash(command -v python3)",
+      "Bash(grep -n '\"\\\\$ref\"\\\\|\"infra\"' '/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/schemas/en/riskclassification.json')",
+      "Bash(node *)"
     ]
   }
 }

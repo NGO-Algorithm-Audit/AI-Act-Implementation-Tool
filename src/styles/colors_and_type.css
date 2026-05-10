@@ -1,0 +1,235 @@
+/* =====================================================================
+   ClassifyMyAI — Colors & Type
+   =====================================================================
+   A compliance-first, emerald-accented design vocabulary built on top of
+   Bootstrap 4/5. The app is a civic tool (EU AI Act questionnaires) so
+   everything is quiet, white-backgrounded, and uses color as *semantics*
+   (risk levels, questionnaire categories, roles) rather than decoration.
+   ===================================================================== */
+
+:root {
+  /* ------------------------------------------------------------------
+     BRAND / PRIMARY (Algorithm Audit blue)
+     ClassifyMyAI ships an emerald palette here; this repo overrides it
+     with the Algorithm Audit blue family so the ported Risk-category
+     result page (headings, badges, accordion fills) matches this app's
+     theme instead of ClassifyMyAI's.
+     ------------------------------------------------------------------ */
+  --cma-primary-50:  #deecf7;   /* accordion closed bg (matches --host-body-bg) */
+  --cma-primary-100: #cfe1f0;
+  --cma-primary-200: #b8d6ee;   /* accordion open bg */
+  --cma-primary-300: #8ab8df;
+  --cma-primary-400: #4f93cb;
+  --cma-primary-500: #2477b8;
+  --cma-primary-600: #005aa7;   /* PRIMARY. Buttons, badges, focus rings */
+  --cma-primary-700: #003366;   /* PRIMARY-DARK. Section headings, hover */
+  --cma-primary-800: #00274d;
+  --cma-primary-900: #001833;
+
+  /* NOTE: ClassifyMyAI's source has --host-primary/--host-body-bg aliases
+     pointing at the emerald palette here. They are intentionally omitted
+     in this repo so the existing Algorithm Audit blue theme (defined in
+     styles/variables.css and consumed by custom.scss) wins. The ported
+     result-page components reference --cma-* directly, so the alias is
+     not needed. */
+
+  /* ------------------------------------------------------------------
+     NEUTRALS  (Bootstrap-compatible gray ramp)
+     ------------------------------------------------------------------ */
+  --cma-white:    #ffffff;
+  --cma-bg:       #ffffff;     /* page / card body background */
+  --cma-surface:  #f4f6f9;     /* side-nav, subtle page sections */
+  --cma-muted-bg: #f8f9fa;     /* disabled tile, striped row */
+
+  --cma-border:        #dee2e6;   /* card borders, dividers */
+  --cma-border-strong: #adb5bd;   /* inactive picker tile border */
+
+  --cma-text:         #212529;   /* body copy */
+  --cma-text-muted:   #6c757d;   /* help text, small, captions */
+  --cma-text-subtle:  #adb5bd;   /* disabled labels */
+  --cma-text-heading: #0f172a;   /* logo wordmark, heavy headings */
+
+  /* ------------------------------------------------------------------
+     SEMANTIC — used across badges, alerts, and risk categories
+     These colors are NOT decorative; they carry meaning. Keep stable.
+     ------------------------------------------------------------------ */
+  /* Risk classification (four-tier) */
+  --cma-risk-unacceptable: #dc2626;   /* red 600 — prohibited */
+  --cma-risk-high:         #d97706;   /* amber 600 — high risk */
+  --cma-risk-limited:      #2563eb;   /* blue  600 — limited risk / transparency */
+  --cma-risk-low:          #0d9488;   /* teal  600 — minimal / low risk */
+  --cma-risk-exception:    #6c757d;   /* gray  — exception / N/A */
+
+  /* Identification badges (what TYPE of system) */
+  --cma-cat-ai-system:   #c9a84c;   /* mustard — "AI system" */
+  --cma-cat-gdpr:        #198754;   /* green — "GDPR / personal data" */
+  --cma-cat-genai:       #FFBF00;   /* amber — "Generative AI" */
+  --cma-cat-algo:        #fd7e14;   /* orange — "Algorithm (non-AI)" */
+  --cma-cat-sadm:        #6b8a9e;   /* slate-blue — "Solely automated decision" */
+  --cma-cat-profiling:   #4f46e5;   /* indigo — "Profiling" */
+
+  /* Role badges (AI Act roles) */
+  --cma-role-provider:      #6f42c1;   /* "Aanbieder" / provider */
+  --cma-role-deployer:      #0891b2;   /* "Gebruiksverantwoordelijke" / deployer */
+  --cma-role-importer:      #65a30d;   /* "Importeur" */
+  --cma-role-distributor:   #92400e;   /* "Distributeur" */
+
+  /* System status */
+  --cma-status-in-use:         #2563eb;
+  --cma-status-in-development: #8b5cf6;
+
+  /* Legal source badges (inline article references) */
+  --cma-source-legal: #f37962;        /* coral — "Art. 6", "Annex III" */
+
+  /* Generic feedback */
+  --cma-success: var(--cma-primary-600);
+  --cma-warning: #d97706;
+  --cma-danger:  #dc2626;
+  --cma-info:    #2563eb;
+
+  /* ------------------------------------------------------------------
+     TYPOGRAPHY
+     The app ships Bootstrap's default system stack. The ClassifyMyAI
+     wordmark is the only explicit "Helvetica Neue" touch. Keep the UI
+     reading like a civic document — no display fonts inside the app.
+     ------------------------------------------------------------------ */
+  --cma-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                   "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+                   "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --cma-font-wordmark: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --cma-font-mono: SFMono-Regular, Menlo, Monaco, Consolas,
+                   "Liberation Mono", "Courier New", monospace;
+
+  /* Type scale (Bootstrap-ish; tuned to the tool's compact info density) */
+  --cma-fs-xs:    0.75rem;   /* 12px — .badge, enum-option-description */
+  --cma-fs-sm:    0.85rem;   /* 13.6px — help text, step labels */
+  --cma-fs-base:  1rem;      /* 16px — body */
+  --cma-fs-md:    1.05rem;   /* 16.8px — h6 section headers in app */
+  --cma-fs-lg:    1.25rem;   /* 20px — card titles */
+  --cma-fs-xl:    1.5rem;    /* 24px — H2 */
+  --cma-fs-2xl:   2rem;      /* 32px — H1 */
+
+  /* Weights — rely on 400/500/600/700. No 800/900. */
+  --cma-fw-regular:  400;
+  --cma-fw-medium:   500;
+  --cma-fw-semibold: 600;
+  --cma-fw-bold:     700;
+  --cma-fw-light:    300;    /* only used in the wordmark */
+
+  --cma-lh-tight:  1.2;
+  --cma-lh-snug:   1.35;
+  --cma-lh-normal: 1.5;
+  --cma-lh-relaxed: 1.65;
+
+  /* ------------------------------------------------------------------
+     SPACING, RADII, ELEVATION
+     ------------------------------------------------------------------ */
+  --cma-space-1:  4px;
+  --cma-space-2:  8px;
+  --cma-space-3:  12px;
+  --cma-space-4:  16px;
+  --cma-space-5:  24px;
+  --cma-space-6:  32px;
+  --cma-space-7:  48px;
+
+  --cma-radius-sm:  0.375rem;   /* 6px — badges, small buttons, tiles */
+  --cma-radius-md:  0.5rem;     /* 8px — picker cards */
+  --cma-radius-lg:  0.75rem;    /* 12px — occasional hero cards */
+  --cma-radius-pill: 999px;     /* pill badges */
+
+  /* Shadows are VERY subtle — this tool is quiet. */
+  --cma-shadow-none:  none;
+  --cma-shadow-xs:    0 1px 2px rgba(0, 0, 0, 0.04);
+  --cma-shadow-sm:    0 2px 6px rgba(0, 0, 0, 0.08);
+  --cma-shadow-md:    0 4px 12px rgba(0, 0, 0, 0.10);
+  --cma-shadow-focus: 0 0 0 3px rgba(16, 185, 129, 0.15);   /* primary tint */
+
+  /* Borders */
+  --cma-border-width: 1px;
+  --cma-border-width-strong: 2px;
+}
+
+/* =====================================================================
+   SEMANTIC TYPE STYLES
+   Plain class-based recipes. Use these in HTML artifacts; they match
+   the live app's behavior (H6 in #047857 as section headers, etc).
+   ===================================================================== */
+
+.cma-body,
+.cma-h1, .cma-h2, .cma-h3, .cma-h4, .cma-h5, .cma-h6,
+.cma-p, .cma-small, .cma-muted, .cma-caption, .cma-code {
+  font-family: var(--cma-font-sans);
+  color: var(--cma-text);
+}
+
+.cma-h1 {
+  font-size: var(--cma-fs-2xl);
+  font-weight: var(--cma-fw-bold);
+  line-height: var(--cma-lh-tight);
+  color: var(--cma-text-heading);
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--cma-space-4);
+}
+.cma-h2 {
+  font-size: var(--cma-fs-xl);
+  font-weight: var(--cma-fw-bold);
+  line-height: var(--cma-lh-tight);
+  color: var(--cma-text-heading);
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--cma-space-4);
+}
+.cma-h3 {
+  font-size: var(--cma-fs-lg);
+  font-weight: var(--cma-fw-semibold);
+  line-height: var(--cma-lh-snug);
+  color: var(--cma-text);
+  margin: 0 0 var(--cma-space-3);
+}
+.cma-h4 {
+  font-size: var(--cma-fs-md);
+  font-weight: var(--cma-fw-semibold);
+  color: var(--cma-text);
+  margin: 0 0 var(--cma-space-2);
+}
+/* Section header — the app's signature "emerald-700 bold H6" */
+.cma-h6,
+.cma-section-header {
+  font-size: var(--cma-fs-md);
+  font-weight: var(--cma-fw-bold);
+  color: var(--cma-primary-700);
+  line-height: var(--cma-lh-snug);
+  margin: 0 0 var(--cma-space-2);
+}
+
+.cma-p,
+.cma-body {
+  font-size: var(--cma-fs-base);
+  line-height: var(--cma-lh-normal);
+}
+.cma-small { font-size: var(--cma-fs-sm); line-height: var(--cma-lh-normal); }
+.cma-muted { font-size: var(--cma-fs-sm); color: var(--cma-text-muted); }
+.cma-caption {
+  font-size: var(--cma-fs-xs);
+  color: var(--cma-text-muted);
+  letter-spacing: 0.02em;
+}
+.cma-code {
+  font-family: var(--cma-font-mono);
+  font-size: 0.9em;
+  background: var(--cma-muted-bg);
+  padding: 0.1em 0.35em;
+  border-radius: var(--cma-radius-sm);
+  color: var(--cma-text);
+}
+
+/* Wordmark — ONLY used on the logo itself */
+.cma-wordmark {
+  font-family: var(--cma-font-wordmark);
+  letter-spacing: -0.03em;
+  color: var(--cma-text-heading);
+  font-weight: var(--cma-fw-light);
+}
+.cma-wordmark-accent {
+  color: var(--cma-primary-500);
+  font-weight: var(--cma-fw-bold);
+}

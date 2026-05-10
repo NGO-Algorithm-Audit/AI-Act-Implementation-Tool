@@ -1,3 +1,4 @@
+import React from "react";
 import { Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 import {
   ariaDescribedByIds,
@@ -8,6 +9,28 @@ import {
   StrictRJSFSchema,
   WidgetProps,
 } from "@rjsf/utils";
+
+function renderLabel(text: string): React.ReactNode {
+  const parts = String(text).split(/(\[[^\]]+\]\([^)]+\))/g);
+  if (parts.length === 1) return text;
+  return parts.map((part, i) => {
+    const m = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (m) {
+      return (
+        <a
+          key={i}
+          href={m[2]}
+          target="_blank"
+          rel="noreferrer"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {m[1]}
+        </a>
+      );
+    }
+    return <React.Fragment key={i}>{part}</React.Fragment>;
+  });
+}
 
 export default function TooltipRadioWidget<
   T = any,
@@ -31,6 +54,8 @@ export default function TooltipRadioWidget<
     (uiSchema?.["ui:enumTooltips"] as (string | null | undefined)[]) ?? [];
   const enumDescriptions: (string | null | undefined)[] =
     (uiSchema?.["ui:enumDescriptions"] as (string | null | undefined)[]) ?? [];
+  const optionHeaders: Record<string, string> =
+    (uiSchema?.["ui:optionHeaders"] as Record<string, string> | undefined) ?? {};
 
   const _onChange = (nextValue: string) => onChange(nextValue);
   const _onBlur = ({ target: { value } }: React.FocusEvent<HTMLInputElement>) =>
@@ -52,7 +77,7 @@ export default function TooltipRadioWidget<
 
           const label = (
             <>
-              {option.label}
+              {renderLabel(option.label)}
               {tooltip && (
                 <OverlayTrigger
                   placement="right"
@@ -73,24 +98,39 @@ export default function TooltipRadioWidget<
             </>
           );
 
+          const header = optionHeaders[String(index)];
+
           return (
-            <Form.Check
-              inline={inline as boolean}
-              label={label}
-              id={optionId(id, index)}
-              key={index}
-              name={id}
-              type="radio"
-              disabled={disabled || itemDisabled || readonly}
-              checked={checked}
-              required={required}
-              value={String(index)}
-              autoFocus={autofocus && index === 0}
-              onChange={() => _onChange(option.value)}
-              onBlur={_onBlur}
-              onFocus={_onFocus}
-              aria-describedby={ariaDescribedByIds<T>(id)}
-            />
+            <React.Fragment key={index}>
+              {header && (
+                <div
+                  style={{
+                    fontWeight: 600,
+                    color: "#005AA7",
+                    marginTop: "8px",
+                    marginBottom: "4px",
+                  }}
+                >
+                  {header}
+                </div>
+              )}
+              <Form.Check
+                inline={inline as boolean}
+                label={label}
+                id={optionId(id, index)}
+                name={id}
+                type="radio"
+                disabled={disabled || itemDisabled || readonly}
+                checked={checked}
+                required={required}
+                value={String(index)}
+                autoFocus={autofocus && index === 0}
+                onChange={() => _onChange(option.value)}
+                onBlur={_onBlur}
+                onFocus={_onFocus}
+                aria-describedby={ariaDescribedByIds<T>(id)}
+              />
+            </React.Fragment>
           );
         })}
     </Form.Group>
