@@ -73,8 +73,14 @@ function walkSchemaForIndex(
     if (typeof node.description === "string" && node.description.trim().length > 4) {
       out.push({ text: node.description, fieldKind: "description", questionId, propertyKey: localPropertyKey });
     }
-    if (Array.isArray(node.enum)) {
-      node.enum.forEach((opt) => {
+    const itemsEnum = (node.items as { enum?: unknown } | undefined)?.enum;
+    const enumCandidates = Array.isArray(node.enum)
+      ? node.enum
+      : Array.isArray(itemsEnum)
+      ? itemsEnum
+      : null;
+    if (enumCandidates) {
+      enumCandidates.forEach((opt) => {
         if (typeof opt === "string" && opt.trim().length > 1) {
           out.push({ text: stripMarkdown(opt), fieldKind: "option", questionId, propertyKey: localPropertyKey });
         }

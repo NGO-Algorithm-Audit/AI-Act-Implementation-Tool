@@ -31,6 +31,14 @@ export default function ({
           }}
         >
           {t("intro banner")}
+          <a
+            href="https://digital-strategy.ec.europa.eu/en/library/draft-guidelines-implementation-transparency-obligations-certain-ai-systems-under-article-50-ai-act"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t("intro banner draft guidelines link")}
+          </a>
+          {t("intro banner 2")}
         </Alert>
         <SearchBar onStartQuestionnaire={onStartQuestionnaire} />
         <div className="d-flex flex-row justify-content-between align-items-top mb-2">

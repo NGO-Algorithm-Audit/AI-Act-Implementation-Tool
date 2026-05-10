@@ -721,9 +721,17 @@ const WizardForm = ({
             className="d-flex flex-column justify-content-between flex-grow-1"
           >
             <div className="d-flex flex-row justify-content-between flex-row-reverse">
-              <Button variant="primary" type="submit">
-                {t("next")}
-              </Button>
+              {(() => {
+                const isRiskIntroWithoutRole =
+                  questions[0] === "intro" &&
+                  (uiSchema?.intro as { "ui:widget"?: string } | undefined)?.["ui:widget"] === "RiskClassificationIntroWidget" &&
+                  (!aiAct2Roles || aiAct2Roles.length === 0);
+                return isRiskIntroWithoutRole ? null : (
+                  <Button variant="primary" type="submit">
+                    {t("next")}
+                  </Button>
+                );
+              })()}
               {step > 0 && (
                 <Button
                   type="button"

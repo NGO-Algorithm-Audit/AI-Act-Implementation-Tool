@@ -174,6 +174,7 @@ export default function App() {
           <Col xs={12} className="">
             {activeForm ? (
               <WizardForm
+                key={activeFormIndex}
                 id={activeFormIndex}
                 schema={activeForm.JSONSchema}
                 uiSchema={activeForm.uiSchema}

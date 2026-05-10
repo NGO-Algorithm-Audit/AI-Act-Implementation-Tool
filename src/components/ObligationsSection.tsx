@@ -37,9 +37,11 @@ function StepItem({ text }: { text: string }) {
 export default function ObligationsSection({
   roles,
   annexIArt6Branch,
+  footer,
 }: {
   roles: string[];
   annexIArt6Branch?: "A" | "B";
+  footer?: React.ReactNode;
 }) {
   const { t } = useTranslation();
 
@@ -73,6 +75,7 @@ export default function ObligationsSection({
               <p className="mt-2 mb-0">{renderLinks(t("riskcat result annex i secB sectoral"))}</p>
             </>
           )}
+          {footer}
         </div>
       </div>
     );
@@ -176,6 +179,7 @@ export default function ObligationsSection({
             <div className="mt-2">{t("aiact2 result deployer source prefix")} <SourceBadge label={t("article art26 deployer label")} url={t("article art26 deployer url")} /></div>
           </>
         ) : null}
+        {footer}
       </div>
     </div>
   );
