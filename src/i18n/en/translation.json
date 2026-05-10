@@ -425,5 +425,6 @@
   "ai1 intro role present middle": ", based on questionnaire",
   "ai1 intro role present suffix": ".",
   "ai1 intro role missing prefix": "Obligations depend on the role you have in relation to the AI system. Fill in questionnaire",
-  "ai1 intro role missing suffix": "first."
+  "ai1 intro role missing suffix": "first.",
+  "fullscreen mode": "Open in full-screen mode"
 }

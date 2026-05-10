@@ -14,7 +14,10 @@ export default function ({
   onStartQuestionnaire?: (key: string) => void;
   activeLanguage?: boolean;
 }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const fullscreenUrl = `https://ai-documentation.s3.eu-central-1.amazonaws.com/index.html?lang=${
+    i18n.language?.startsWith("nl") ? "nl" : "en"
+  }`;
 
   return (
     <Card style={{ minHeight: "300px" }}>
@@ -32,7 +35,20 @@ export default function ({
         <SearchBar onStartQuestionnaire={onStartQuestionnaire} />
         <div className="d-flex flex-row justify-content-between align-items-top mb-2">
           <Card.Title>{t("cardTitle")}</Card.Title>
-          {!activeLanguage && <LanguageSwitcher />}
+          <div className="d-flex flex-row align-items-center">
+            <Button
+              variant="outline-secondary"
+              size="sm"
+              onClick={() =>
+                window.open(fullscreenUrl, "_blank", "noopener,noreferrer")
+              }
+              aria-label={t("fullscreen mode")}
+              title={t("fullscreen mode")}
+            >
+              ⛶
+            </Button>
+            {!activeLanguage && <LanguageSwitcher />}
+          </div>
         </div>
 
         <div className="mb-4"> 
