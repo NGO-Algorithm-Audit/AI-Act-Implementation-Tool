@@ -375,14 +375,24 @@ const WizardForm = ({
         if (!dependency.oneOf) return;
 
         // Match by membership in the branch's enum (not first element only),
-        // so multi-value branches like Annex I Section A/B work.
+        // so multi-value branches like Annex I Section A/B work. Fall back to
+        // full AJV validation when the branch uses richer JSON-Schema patterns
+        // (contains / anyOf / allOf / maxItems) — e.g. Q1's array-of-checkboxes
+        // branches that have no flat `enum` on the gating property.
         const matchingSchema = dependency.oneOf.find((oneOfSchema: any) => {
-          const branchEnum = oneOfSchema.properties?.[key]?.enum;
-          if (!Array.isArray(branchEnum)) return false;
-          if (Array.isArray(fieldValue)) {
-            return fieldValue.some((v) => branchEnum.includes(v));
+          const branchProp = oneOfSchema.properties?.[key];
+          if (!branchProp) return false;
+          if (Array.isArray(branchProp.enum)) {
+            if (Array.isArray(fieldValue)) {
+              return fieldValue.some((v) => branchProp.enum.includes(v));
+            }
+            return branchProp.enum.includes(fieldValue);
           }
-          return branchEnum.includes(fieldValue);
+          try {
+            return validator.isValid(branchProp, fieldValue, rootSchema);
+          } catch {
+            return false;
+          }
         });
         if (!matchingSchema) return;
 
