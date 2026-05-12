@@ -77,7 +77,9 @@
       "Bash(grep -hoE 't\\\\\\(`[^`]+`\\\\\\)' \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/components/OutputRiskClassification.tsx\" \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/components/NextStepsSection.tsx\" \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/components/ObligationsSection.tsx\" \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/components/RolesOverviewSection.tsx\")",
       "Bash(command -v python3)",
       "Bash(grep -n '\"\\\\$ref\"\\\\|\"infra\"' '/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/schemas/en/riskclassification.json')",
-      "Bash(node *)"
+      "Bash(node *)",
+      "Bash(cp \"/Users/jurriaan/Github repos/ClassifyMyAI/src/schemas/en/riskclassification.json\" \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/schemas/en/riskclassification.json\")",
+      "Bash(cp \"/Users/jurriaan/Github repos/ClassifyMyAI/src/schemas/nl/risicoclassificatie.json\" \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/schemas/nl/risicoclassificatie.json\")"
     ]
   }
 }
