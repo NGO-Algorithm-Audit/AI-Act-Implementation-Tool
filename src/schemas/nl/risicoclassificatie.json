@@ -248,10 +248,19 @@
                       "Nee"
                     ]
                   },
-                  "infra": {
-                    "$ref": "#/definitions/infra"
+                  "cybersec": {
+                    "type": "string",
+                    "title": "Wordt het systeem uitsluitend gebruikt om cybersecurity en de bescherming van persoonsgegevens mogelijk te maken?",
+                    "description": "Dit verwijst naar AI-systemen die uitsluitend bedoeld zijn om IT-systemen te beschermen of persoonsgegevens te beveiligen. Bijvoorbeeld: tools die malware detecteren, indringers blokkeren, phishing filteren, toegang beheren, gegevens anonimiseren of datalekken signaleren.",
+                    "enum": [
+                      "Ja",
+                      "Nee"
+                    ]
                   }
-                }
+                },
+                "required": [
+                  "cybersec"
+                ]
               }
             ]
           },
@@ -276,10 +285,19 @@
                       "Nee"
                     ]
                   },
-                  "infra": {
-                    "$ref": "#/definitions/infra"
+                  "cybersec": {
+                    "type": "string",
+                    "title": "Wordt het systeem uitsluitend gebruikt om cybersecurity en de bescherming van persoonsgegevens mogelijk te maken?",
+                    "description": "Dit verwijst naar AI-systemen die uitsluitend bedoeld zijn om IT-systemen te beschermen of persoonsgegevens te beveiligen. Bijvoorbeeld: tools die malware detecteren, indringers blokkeren, phishing filteren, toegang beheren, gegevens anonimiseren of datalekken signaleren.",
+                    "enum": [
+                      "Ja",
+                      "Nee"
+                    ]
                   }
-                }
+                },
+                "required": [
+                  "cybersec"
+                ]
               }
             ]
           },
@@ -304,8 +322,45 @@
                       "Nee"
                     ]
                   },
+                  "cybersec": {
+                    "type": "string",
+                    "title": "Wordt het systeem uitsluitend gebruikt om cybersecurity en de bescherming van persoonsgegevens mogelijk te maken?",
+                    "description": "Dit verwijst naar AI-systemen die uitsluitend bedoeld zijn om IT-systemen te beschermen of persoonsgegevens te beveiligen. Bijvoorbeeld: tools die malware detecteren, indringers blokkeren, phishing filteren, toegang beheren, gegevens anonimiseren of datalekken signaleren.",
+                    "enum": [
+                      "Ja",
+                      "Nee"
+                    ]
+                  }
+                },
+                "required": [
+                  "cybersec"
+                ]
+              }
+            ]
+          },
+          "cybersec": {
+            "oneOf": [
+              {
+                "properties": {
+                  "cybersec": {
+                    "enum": [
+                      "Ja"
+                    ]
+                  },
                   "infra": {
                     "$ref": "#/definitions/infra"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "cybersec": {
+                    "enum": [
+                      "Nee"
+                    ]
+                  },
+                  "exceptionHigh": {
+                    "$ref": "#/definitions/exceptionHigh"
                   }
                 }
               }
@@ -1608,6 +1663,21 @@
       },
       "ui:id": "q9"
     },
+    "cybersec": {
+      "ui:widget": "radio",
+      "ui:description": "Dit verwijst naar AI-systemen die uitsluitend bedoeld zijn om IT-systemen te beschermen of persoonsgegevens te beveiligen. Bijvoorbeeld: tools die malware detecteren, indringers blokkeren, phishing filteren, toegang beheren, gegevens anonimiseren of datalekken signaleren.",
+      "ui:descriptionStyle": "plain",
+      "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-54",
+      "ui:id-badge-label": "Overweging 54 AI-verordening - Uitzondering cybersecurity en bescherming van persoonsgegevens",
+      "ui:badges": [
+        { "label": "Overweging 54 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-54" }
+      ],
+      "ui:id-summary": {
+        "Ja": "Het AI-systeem wordt uitsluitend gebruikt om cybersecurity en de bescherming van persoonsgegevens mogelijk te maken",
+        "Nee": "Het AI-systeem wordt niet uitsluitend gebruikt voor cybersecurity en de bescherming van persoonsgegevens"
+      },
+      "ui:id": "q10"
+    },
     "art50": {
       "ui:widget": "checkboxes",
       "ui:description": "Selecteer alle scenario's die van toepassing zijn.",
@@ -1626,7 +1696,7 @@
         "Het genereert of manipuleert beeld-, audio-, video- of tekstinhoud van algemeen belang.": "Openbaarmakingsverplichtingen voor deepfakes of AI-gegenereerde tekst van algemeen belang van Art. 50(4) zijn van toepassing",
         "Geen van de bovenstaande": "Geen transparantieverplichtingen op grond van artikel 50 vastgesteld"
       },
-      "ui:id": "q10"
+      "ui:id": "q11"
     },
     "art50.nudify": {
       "ui:widget": "radio",
@@ -1638,7 +1708,7 @@
         "Ja": "Het AI-systeem wordt gebruikt voor het genereren van niet-consensuele nepnaaktbeelden (nudification) — verboden",
         "Nee": "Het AI-systeem wordt niet gebruikt voor het genereren van niet-consensuele nepnaaktbeelden"
       },
-      "ui:id": "q11"
+      "ui:id": "q12"
     },
     "annexIIIGate": {
       "ui:widget": "radio",
@@ -1662,7 +1732,7 @@
         "Verkiezingen of democratische processen": "Het AI-systeem wordt gebruikt in verkiezingen of democratische processen",
         "Geen van de bovenstaande": "Het AI-systeem valt niet binnen een domein van Bijlage III"
       },
-      "ui:id": "q12"
+      "ui:id": "q13"
     },
     "III.2.4": {
       "ui:widget": "radio",
@@ -1677,7 +1747,7 @@
         "Ja": "Het AI-systeem vervult een veiligheidsfunctie binnen kritieke infrastructuur",
         "Nee": "Het AI-systeem vervult geen veiligheidsfunctie binnen kritieke infrastructuur"
       },
-      "ui:id": "q13"
+      "ui:id": "q14"
     },
     "III.2.5": {
       "ui:widget": "radio",
@@ -1691,7 +1761,7 @@
         "Ja": "Het AI-systeem is een cybersecuritysysteem",
         "Nee": "Het AI-systeem is geen cybersecuritysysteem"
       },
-      "ui:id": "q14"
+      "ui:id": "q15"
     },
     "III.3.uses": {
       "ui:widget": "radio",
@@ -1708,7 +1778,7 @@
         "Monitoren en detecteren van ongeoorloofd gedrag van leerlingen, studenten of stagiairs (bijv. plagiaat detectie, proctoring, anti-cheat software)": "Het AI-systeem monitort en detecteert ongeoorloofd gedrag van leerlingen, studenten of stagiairs (bijv. plagiaatdetectie, proctoring, anti-cheat software)",
         "Geen van de bovenstaande": "Het AI-systeem wordt niet gebruikt voor een van de genoemde onderwijscontexten"
       },
-      "ui:id": "q15"
+      "ui:id": "q16"
     },
     "III.4.uses": {
       "ui:widget": "radio",
@@ -1727,7 +1797,7 @@
         "Bepalen van de taakverdeling onder werknemers": "Het AI-systeem bepaalt de taakverdeling onder werknemers",
         "Geen van de bovenstaande": "Het AI-systeem wordt niet gebruikt voor een van de genoemde arbeidstaken"
       },
-      "ui:id": "q16"
+      "ui:id": "q17"
     },
     "III.4.8": {
       "ui:widget": "radio",
@@ -1741,7 +1811,7 @@
         "Ja": "Het AI-systeem wordt gebruikt in processen waarbij activiteiten, gedrag of prestaties van medewerkers worden verwerkt",
         "Nee": "Het AI-systeem verwerkt geen activiteiten, gedrag of prestaties van medewerkers"
       },
-      "ui:id": "q17"
+      "ui:id": "q18"
     },
     "III.4.9": {
       "ui:widget": "radio",
@@ -1755,7 +1825,7 @@
         "Ja": "Gedrag of prestaties van medewerkers worden geëvalueerd of gemonitord in dit of gerelateerde processen",
         "Nee": "Gedrag of prestaties van medewerkers worden niet geëvalueerd of gemonitord"
       },
-      "ui:id": "q18"
+      "ui:id": "q19"
     },
     "III.5.decision": {
       "ui:widget": "radio",
@@ -1769,7 +1839,7 @@
         "Ja": "Het AI-systeem beoordeelt de toegang tot publieke diensten, voorzieningen of uitkeringen",
         "Nee": "Het AI-systeem beoordeelt geen toegang tot publieke diensten, voorzieningen of uitkeringen"
       },
-      "ui:id": "q19"
+      "ui:id": "q20"
     },
     "III.5.private": {
       "ui:widget": "radio",
@@ -1785,7 +1855,7 @@
         "Beoordelen van noodoproepen, inzetten of prioriteren van hulpdiensten, of triage bij urgente medische zorg": "Het AI-systeem beoordeelt noodoproepen, zet hulpdiensten in of prioriteert deze, of triaget bij urgente medische zorg",
         "Geen van de bovenstaande": "Het AI-systeem wordt niet gebruikt voor een van de genoemde financiële of nooddienstdoeleinden"
       },
-      "ui:id": "q20"
+      "ui:id": "q21"
     },
     "III.6-5.d": {
       "ui:widget": "radio",
@@ -1805,7 +1875,7 @@
         "Ja": "Het AI-systeem beoordeelt het risico dat iemand een strafbaar feit zal (opnieuw) plegen",
         "Nee": "Het AI-systeem beoordeelt geen risico op (recidiverend) strafbaar gedrag"
       },
-      "ui:id": "q21"
+      "ui:id": "q22"
     },
     "III.6.uses": {
       "ui:widget": "radio",
@@ -1823,7 +1893,7 @@
         "Beoordelen van persoonlijkheidskenmerken, eigenschappen of eerder crimineel gedrag van personen of groepen": "Het AI-systeem beoordeelt persoonlijkheidskenmerken, eigenschappen of eerder crimineel gedrag van personen of groepen",
         "Geen van de bovenstaande": "Het AI-systeem wordt niet gebruikt voor een van de genoemde wetshandhavingstaken"
       },
-      "ui:id": "q22"
+      "ui:id": "q23"
     },
     "III.7.uses": {
       "ui:widget": "radio",
@@ -1845,7 +1915,7 @@
         "Verwerken van asiel-, visum- of verblijfsvergunningaanvragen, of behandelen van klachten met betrekking tot de toelatingscriteria van de aanvrager": "Het AI-systeem verwerkt asiel-, visum- of verblijfsvergunningaanvragen, of behandelt klachten over de toelatingscriteria",
         "Geen van de bovenstaande": "Het AI-systeem wordt niet gebruikt voor een van de genoemde migratie- of grensbeheertaken"
       },
-      "ui:id": "q23"
+      "ui:id": "q24"
     },
     "III.7.4": {
       "ui:widget": "radio",
@@ -1858,7 +1928,7 @@
         "Ja": "Het AI-systeem wordt gebruikt voor het detecteren, herkennen of identificeren van personen in migratie of grensbeheer",
         "Nee": "Het AI-systeem wordt niet gebruikt voor het detecteren, herkennen of identificeren van personen"
       },
-      "ui:id": "q24"
+      "ui:id": "q25"
     },
     "III.7.5": {
       "ui:widget": "radio",
@@ -1872,7 +1942,7 @@
         "Ja": "Het AI-systeem wordt uitsluitend gebruikt om een paspoort of ander reisdocument te verifiëren",
         "Nee": "Het AI-systeem wordt gebruikt voor identificatie die verder gaat dan paspoortverificatie"
       },
-      "ui:id": "q25"
+      "ui:id": "q26"
     },
     "III.8.2": {
       "ui:widget": "radio",
@@ -1886,7 +1956,7 @@
         "Ja": "Het AI-systeem wordt uitsluitend gebruikt ter ondersteuning van administratieve activiteiten die de rechtspraak in individuele zaken niet beïnvloeden",
         "Nee": "Het AI-systeem wordt gebruikt voor meer dan ondersteunende administratieve activiteiten in de rechtspraak"
       },
-      "ui:id": "q26"
+      "ui:id": "q27"
     },
     "III.8.elections": {
       "ui:widget": "radio",
@@ -1898,7 +1968,7 @@
         "Ja": "Het AI-systeem wordt gebruikt in verkiezingen of referenda op een manier die de uitkomst of het stemgedrag van mensen kan beïnvloeden",
         "Nee": "Het AI-systeem wordt niet gebruikt op een manier die verkiezingen of stemgedrag kan beïnvloeden"
       },
-      "ui:id": "q27"
+      "ui:id": "q28"
     },
     "5.a": {
       "ui:widget": "radio",
@@ -1909,7 +1979,7 @@
         "Ja": "Het AI-systeem gebruikt subliminale of manipulatieve technieken die werken zonder bewustzijn van de gebruiker",
         "Nee": "Het AI-systeem gebruikt geen subliminale of manipulatieve technieken"
       },
-      "ui:id": "q28"
+      "ui:id": "q29"
     },
     "5.a.4": {
       "ui:widget": "radio",
@@ -1920,7 +1990,7 @@
         "Ja": "Het AI-systeem kan potentieel negatieve gevolgen hebben voor de gebruiker of andere mensen",
         "Nee": "Het AI-systeem heeft geen potentieel negatieve gevolgen voor de gebruiker of andere mensen"
       },
-      "ui:id": "q29"
+      "ui:id": "q30"
     },
     "5.c": {
       "ui:widget": "radio",
@@ -1932,7 +2002,7 @@
         "Ja": "Het AI-systeem evalueert, scoort of classificeert personen op een manier die tot nadelige behandeling kan leiden",
         "Nee": "Het AI-systeem evalueert, scoort of classificeert personen niet op een manier die tot nadelige behandeling kan leiden"
       },
-      "ui:id": "q30"
+      "ui:id": "q31"
     },
     "5.c.treat": {
       "ui:widget": "radio",
@@ -1943,7 +2013,7 @@
         "Ja": "De nadelige behandeling vindt plaats in een niet-gerelateerde context of is onevenredig ten opzichte van het gedrag of kenmerk waarop zij is gebaseerd",
         "Nee": "De nadelige behandeling is niet in een niet-gerelateerde context en ook niet onevenredig"
       },
-      "ui:id": "q31"
+      "ui:id": "q32"
     },
     "exceptions": {
       "ui:widget": "radio",
@@ -1982,7 +2052,7 @@
         "Ja": "Profilering wordt gebruikt — het AI-systeem evalueert of voorspelt automatisch kenmerken, gedrag of persoonlijke aspecten",
         "Nee": "Profilering wordt niet gebruikt"
       },
-      "ui:id": "q32"
+      "ui:id": "q33"
     },
     "6.2": {
       "ui:widget": "radio",
@@ -2005,7 +2075,7 @@
         "Ja, het AI-systeem wordt gebruikt in een voorbereidende stap, zonder de uitkomst te beïnvloeden.": "Het AI-systeem wordt uitsluitend gebruikt in een voorbereidende stap, zonder de uitkomst te beïnvloeden",
         "Nee": "Het AI-systeem is niet beperkt tot beperkte procedurele of voorbereidende taken"
       },
-      "ui:id": "q33"
+      "ui:id": "q34"
     },
     "intro": {
       "ui:id": "start",

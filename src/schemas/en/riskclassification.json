@@ -248,10 +248,19 @@
                       "No"
                     ]
                   },
-                  "infra": {
-                    "$ref": "#/definitions/infra"
+                  "cybersec": {
+                    "type": "string",
+                    "title": "Is the system used solely for the purpose of enabling cybersecurity and personal data protection measures?",
+                    "description": "This refers to AI systems whose only job is to defend IT systems or safeguard personal data. For example, tools that detect malware, block intrusions, filter phishing, control access, anonymize data or spot data leaks.",
+                    "enum": [
+                      "Yes",
+                      "No"
+                    ]
                   }
-                }
+                },
+                "required": [
+                  "cybersec"
+                ]
               }
             ]
           },
@@ -276,10 +285,19 @@
                       "No"
                     ]
                   },
-                  "infra": {
-                    "$ref": "#/definitions/infra"
+                  "cybersec": {
+                    "type": "string",
+                    "title": "Is the system used solely for the purpose of enabling cybersecurity and personal data protection measures?",
+                    "description": "This refers to AI systems whose only job is to defend IT systems or safeguard personal data. For example, tools that detect malware, block intrusions, filter phishing, control access, anonymize data or spot data leaks.",
+                    "enum": [
+                      "Yes",
+                      "No"
+                    ]
                   }
-                }
+                },
+                "required": [
+                  "cybersec"
+                ]
               }
             ]
           },
@@ -304,8 +322,45 @@
                       "No"
                     ]
                   },
+                  "cybersec": {
+                    "type": "string",
+                    "title": "Is the system used solely for the purpose of enabling cybersecurity and personal data protection measures?",
+                    "description": "This refers to AI systems whose only job is to defend IT systems or safeguard personal data. For example, tools that detect malware, block intrusions, filter phishing, control access, anonymize data or spot data leaks.",
+                    "enum": [
+                      "Yes",
+                      "No"
+                    ]
+                  }
+                },
+                "required": [
+                  "cybersec"
+                ]
+              }
+            ]
+          },
+          "cybersec": {
+            "oneOf": [
+              {
+                "properties": {
+                  "cybersec": {
+                    "enum": [
+                      "Yes"
+                    ]
+                  },
                   "infra": {
                     "$ref": "#/definitions/infra"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "cybersec": {
+                    "enum": [
+                      "No"
+                    ]
+                  },
+                  "exceptionHigh": {
+                    "$ref": "#/definitions/exceptionHigh"
                   }
                 }
               }
@@ -1608,6 +1663,21 @@
       },
       "ui:id": "q9"
     },
+    "cybersec": {
+      "ui:widget": "radio",
+      "ui:description": "This refers to AI systems whose only job is to defend IT systems or safeguard personal data. For example, tools that detect malware, block intrusions, filter phishing, control access, anonymize data or spot data leaks.",
+      "ui:descriptionStyle": "plain",
+      "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-54",
+      "ui:id-badge-label": "Recital 54 AI Act - Cybersecurity and personal-data-protection carve-out",
+      "ui:badges": [
+        { "label": "Recital 54 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-54" }
+      ],
+      "ui:id-summary": {
+        "Yes": "The AI system is used solely to enable cybersecurity and personal data protection measures",
+        "No": "The AI system is not used solely for cybersecurity and personal data protection"
+      },
+      "ui:id": "q10"
+    },
     "art50": {
       "ui:widget": "checkboxes",
       "ui:description": "Select all scenarios that apply.",
@@ -1626,7 +1696,7 @@
         "It generates or manipulates image, audio, video or public-interest text content.": "Art. 50(4) deep-fake or AI-generated public-interest text disclosure obligations apply",
         "None of the above": "No Article 50 transparency obligations identified"
       },
-      "ui:id": "q10"
+      "ui:id": "q11"
     },
     "art50.nudify": {
       "ui:widget": "radio",
@@ -1638,7 +1708,7 @@
         "Yes": "The AI system is used to generate non-consensual fake nude imagery (nudification) — prohibited",
         "No": "The AI system is not used to generate non-consensual fake nude imagery"
       },
-      "ui:id": "q11"
+      "ui:id": "q12"
     },
     "annexIIIGate": {
       "ui:widget": "radio",
@@ -1662,7 +1732,7 @@
         "Elections or democratic processes": "The AI system is used in elections or democratic processes",
         "None of the above": "The AI system does not fall within an Annex III domain"
       },
-      "ui:id": "q12"
+      "ui:id": "q13"
     },
     "III.2.4": {
       "ui:widget": "radio",
@@ -1677,7 +1747,7 @@
         "Yes": "The AI system fulfills a safety function in critical infrastructure",
         "No": "The AI system does not fulfill a safety function in critical infrastructure"
       },
-      "ui:id": "q13"
+      "ui:id": "q14"
     },
     "III.2.5": {
       "ui:widget": "radio",
@@ -1691,7 +1761,7 @@
         "Yes": "The AI system is a cybersecurity system",
         "No": "The AI system is not a cybersecurity system"
       },
-      "ui:id": "q14"
+      "ui:id": "q15"
     },
     "III.3.uses": {
       "ui:widget": "radio",
@@ -1708,7 +1778,7 @@
         "Monitoring and detecting unauthorized behavior of pupils, studentsor trainees (e.g., plagiarism detection, proctoring, anti-cheating software)": "The AI system monitors and detects unauthorized behavior of pupils, students or trainees (e.g., plagiarism detection, proctoring, anti-cheating software)",
         "None of the above": "The AI system is not used for any of the listed education contexts"
       },
-      "ui:id": "q15"
+      "ui:id": "q16"
     },
     "III.4.uses": {
       "ui:widget": "radio",
@@ -1727,7 +1797,7 @@
         "Determining the distribution of tasks among employees": "The AI system determines the distribution of tasks among employees",
         "None of the above": "The AI system is not used for any of the listed employment tasks"
       },
-      "ui:id": "q16"
+      "ui:id": "q17"
     },
     "III.4.8": {
       "ui:widget": "radio",
@@ -1741,7 +1811,7 @@
         "Yes": "The AI system is used in processes handling employee activity, behavior or performance data",
         "No": "The AI system does not process employee activity, behavior or performance data"
       },
-      "ui:id": "q17"
+      "ui:id": "q18"
     },
     "III.4.9": {
       "ui:widget": "radio",
@@ -1755,7 +1825,7 @@
         "Yes": "Employee behavior or performance is evaluated or monitored in this or related processes",
         "No": "Employee behavior or performance is not evaluated or monitored"
       },
-      "ui:id": "q18"
+      "ui:id": "q19"
     },
     "III.5.decision": {
       "ui:widget": "radio",
@@ -1769,7 +1839,7 @@
         "Yes": "The AI system assesses eligibility for public services, provisions or benefits",
         "No": "The AI system does not assess eligibility for public services, provisions or benefits"
       },
-      "ui:id": "q19"
+      "ui:id": "q20"
     },
     "III.5.private": {
       "ui:widget": "radio",
@@ -1785,7 +1855,7 @@
         "Evaluating emergency calls, deploying or prioritizing emergency servicesor triage of urgent medical care": "The AI system evaluates emergency calls, deploys or prioritizes emergency services, or triages urgent medical care",
         "None of the above": "The AI system is not used for any of the listed financial or emergency purposes"
       },
-      "ui:id": "q20"
+      "ui:id": "q21"
     },
     "III.6-5.d": {
       "ui:widget": "radio",
@@ -1805,7 +1875,7 @@
         "Yes": "The AI system assesses the risk that someone will (re)commit a criminal offense",
         "No": "The AI system does not assess the risk of (re)committing a criminal offense"
       },
-      "ui:id": "q21"
+      "ui:id": "q22"
     },
     "III.6.uses": {
       "ui:widget": "radio",
@@ -1824,7 +1894,7 @@
         "Assess personality traits, characteristicsor previous criminal behavior of individuals or groups": "The AI system assesses personality traits, characteristics or previous criminal behavior of individuals or groups",
         "None of the above": "The AI system is not used for any of the listed law-enforcement tasks"
       },
-      "ui:id": "q22"
+      "ui:id": "q23"
     },
     "III.7.uses": {
       "ui:widget": "radio",
@@ -1846,7 +1916,7 @@
         "Process asylum, visaor residence permit applicationsor handle complaints related to the eligibility of the applicant": "The AI system processes asylum, visa or residence permit applications, or handles eligibility-related complaints",
         "None of the above": "The AI system is not used for any of the listed migration or border-control tasks"
       },
-      "ui:id": "q23"
+      "ui:id": "q24"
     },
     "III.7.4": {
       "ui:widget": "radio",
@@ -1859,7 +1929,7 @@
         "Yes": "The AI system is used for detection, recognition or identification of individuals in migration or border control",
         "No": "The AI system is not used for detection, recognition or identification of individuals"
       },
-      "ui:id": "q24"
+      "ui:id": "q25"
     },
     "III.7.5": {
       "ui:widget": "radio",
@@ -1873,7 +1943,7 @@
         "Yes": "The AI system is used solely to verify a passport or other travel document",
         "No": "The AI system is used for identification beyond passport verification"
       },
-      "ui:id": "q25"
+      "ui:id": "q26"
     },
     "III.8.2": {
       "ui:widget": "radio",
@@ -1887,7 +1957,7 @@
         "Yes": "The AI system is used only for administrative activities that do not affect the judiciary in individual cases",
         "No": "The AI system is used beyond supporting administrative activities in the judiciary"
       },
-      "ui:id": "q26"
+      "ui:id": "q27"
     },
     "III.8.elections": {
       "ui:widget": "radio",
@@ -1899,7 +1969,7 @@
         "Yes": "The AI system is used in elections or referenda in a way that can influence the outcome or voting behavior of people",
         "No": "The AI system is not used in a way that can influence elections or voting behavior"
       },
-      "ui:id": "q27"
+      "ui:id": "q28"
     },
     "5.a": {
       "ui:widget": "radio",
@@ -1910,7 +1980,7 @@
         "Yes": "The AI system uses subliminal or manipulative techniques that operate without users' awareness",
         "No": "The AI system does not use subliminal or manipulative techniques"
       },
-      "ui:id": "q28"
+      "ui:id": "q29"
     },
     "5.a.4": {
       "ui:widget": "radio",
@@ -1921,7 +1991,7 @@
         "Yes": "The AI system can potentially have negative consequences for the user or other people",
         "No": "The AI system has no potential negative consequences for the user or other people"
       },
-      "ui:id": "q29"
+      "ui:id": "q30"
     },
     "5.c": {
       "ui:widget": "radio",
@@ -1933,7 +2003,7 @@
         "Yes": "The AI system evaluates, scores or classifies individuals in a way that could lead to unfavorable treatment",
         "No": "The AI system does not evaluate, score or classify individuals in a way that could lead to unfavorable treatment"
       },
-      "ui:id": "q30"
+      "ui:id": "q31"
     },
     "5.c.treat": {
       "ui:widget": "radio",
@@ -1944,7 +2014,7 @@
         "Yes": "The unfavorable treatment occurs in an unrelated context or is disproportionate to the behavior or characteristic it is based on",
         "No": "The unfavorable treatment is neither in an unrelated context nor disproportionate"
       },
-      "ui:id": "q31"
+      "ui:id": "q32"
     },
     "exceptions": {
       "ui:widget": "radio",
@@ -1983,7 +2053,7 @@
         "Yes": "Profiling is used — the AI system automatically evaluates or predicts characteristics, behavior or personal aspects",
         "No": "Profiling is not used"
       },
-      "ui:id": "q32"
+      "ui:id": "q33"
     },
     "6.2": {
       "ui:widget": "radio",
@@ -2006,7 +2076,7 @@
         "Yes, the AI system is used in a preparatory step, without influencing the outcome.": "The AI system is used only in a preparatory step, without influencing the outcome",
         "No": "The AI system is not limited to narrow procedural or preparatory tasks"
       },
-      "ui:id": "q33"
+      "ui:id": "q34"
     },
     "intro": {
       "ui:id": "start",
