@@ -718,6 +718,15 @@ const WizardForm = ({
             uiSchema={uiSchema}
             widgets={tooltipWidgets}
             templates={{ FieldTemplate, DescriptionFieldTemplate }}
+            // For checkbox questions (e.g. Identification Q1), suppress the
+            // error summary box on an empty submit. The inline field errors
+            // ("must NOT have fewer than 1 items", "This field is required")
+            // and the red question label still render via FieldTemplate.
+            showErrorList={
+              uiSchema?.[questions[0]]?.["ui:widget"] === "checkboxes"
+                ? false
+                : "top"
+            }
             formData={
               data[questions[0]]
                 ? {
