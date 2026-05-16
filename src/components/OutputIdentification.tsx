@@ -1,10 +1,11 @@
-import { Accordion, Alert, Button, Table } from "react-bootstrap";
+import { Alert, Button, Table } from "react-bootstrap";
 import { FormProps } from "@rjsf/core";
 import { RJSFSchema } from "@rjsf/utils";
 import { useTranslation } from "react-i18next";
 import CodeBlock from "./CodeBlock";
 import a11yLight from "react-syntax-highlighter/dist/esm/styles/hljs/a11y-light";
 import { dictionaryToCsv } from "../utils/dictionaryToCsv";
+import AccordionSection from "./AccordionSection";
 import type { OutputClassification } from "../schemas/shared/identification-types";
 
 type StatusValue = "yes" | "no" | "maybe" | null;
@@ -262,30 +263,25 @@ export default function OutputIdentification({
 
       {type === "output" && (
         <>
-          <Accordion>
-            <Accordion.Item eventKey="0">
-              <Accordion.Header>{t("export results")}</Accordion.Header>
-              <Accordion.Body>
-                <p className="mb-2">{t("save output")}</p>
-                <CodeBlock
-                  style={a11yLight}
-                  code={dictionaryToCsv(
-                    exportData as unknown as Record<string, string | number>
-                  )}
-                  language={"typescript"}
-                  title={"CSV"}
-                  wrapLongLines={false}
-                />
-                <CodeBlock
-                  style={a11yLight}
-                  code={JSON.stringify(exportData, null, 2)}
-                  language={"json"}
-                  title="JSON"
-                  wrapLongLines={false}
-                />
-              </Accordion.Body>
-            </Accordion.Item>
-          </Accordion>
+          <AccordionSection label={t("export results")} noBorder>
+            <p className="mb-2">{t("save output")}</p>
+            <CodeBlock
+              style={a11yLight}
+              code={dictionaryToCsv(
+                exportData as unknown as Record<string, string | number>
+              )}
+              language={"typescript"}
+              title={"CSV"}
+              wrapLongLines={false}
+            />
+            <CodeBlock
+              style={a11yLight}
+              code={JSON.stringify(exportData, null, 2)}
+              language={"json"}
+              title="JSON"
+              wrapLongLines={false}
+            />
+          </AccordionSection>
           <Alert variant="warning" className="my-2">
             <small>{t("disclaimer")}</small>
           </Alert>
