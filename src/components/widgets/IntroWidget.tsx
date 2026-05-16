@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Table } from "react-bootstrap";
+import { Alert, Table } from "react-bootstrap";
 
 const BADGE_ROWS: { color: string; textKey: string; conceptTextKey: string; conceptUrl: string; linkParenOnly?: boolean }[] = [
   { color: "#c9a84c", textKey: "badge ai system",   conceptTextKey: "intro concept ai",        conceptUrl: "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3", linkParenOnly: true },
@@ -62,6 +62,18 @@ export default function IntroWidget() {
           })}
         </tbody>
       </Table>
+
+      <Alert
+        style={{ color: "#6d2c91", backgroundColor: "#f5eefa", borderColor: "#d9b3f0" }}
+        className="py-2 px-3 mb-3"
+      >
+        <small style={{ fontWeight: "bold", display: "block", marginBottom: "2px" }}>
+          {t("user guidance title")}
+        </small>
+        <ul className="mb-0 ps-3" style={{ fontSize: "0.875em" }}>
+          <li>{t("intro user guidance gpai")}</li>
+        </ul>
+      </Alert>
     </div>
   );
 }

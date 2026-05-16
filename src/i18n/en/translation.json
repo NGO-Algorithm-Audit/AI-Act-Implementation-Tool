@@ -58,6 +58,7 @@
   "intro text": "By answering approximately 10 questions in this questionnaire, it is determined which laws and regulations your algorithmic application falls under.",
   "intro next steps note": "Based on the results of this questionnaire, next steps are provided to support legal compliance.",
   "intro concepts label": "The following concepts and policy frameworks are identified:",
+  "intro user guidance gpai": "General Purpose AI (GPAI) models, and corresponding risk measures, are out of scope of this tool.",
   "intro concept header": "Concept",
   "intro concept ai": "AI Act",
   "intro concept genai": "Transparency requirements for certain AI systems (Art. 50)",
