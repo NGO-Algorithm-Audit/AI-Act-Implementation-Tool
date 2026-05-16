@@ -260,9 +260,9 @@ export default function OutputRoleStatus({
 
       {!isPrivate && q13Key && (
         <div>
-          <h6 className="fw-bold mb-1 mt-2" style={{ color: "#005AA7" }}>
+          <h5 className="fw-bold mb-1 mt-2" style={{ color: "#005AA7" }}>
             {t("aiact2 next steps heading")}
-          </h6>
+          </h5>
           <div style={{ borderTop: "1px solid #005AA7", paddingTop: "8px" }}>
             <p className="mb-0" style={{ fontSize: "0.9rem" }}>
               {t("aiact2 result next steps prefix")}{" "}

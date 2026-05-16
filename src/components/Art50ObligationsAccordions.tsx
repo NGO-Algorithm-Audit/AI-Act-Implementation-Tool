@@ -102,16 +102,25 @@ export default function Art50ObligationsAccordions({ roles }: { roles: string[] 
     </p>
   );
 
+  const roleWords: string[] = [];
+  if (isProvider) roleWords.push(t("obligations art50 role provider"));
+  if (isDeployer) roleWords.push(t("obligations art50 role deployer"));
+  const roleText = roleWords.join(` ${t("and")} `);
+
   return (
     <div style={{ fontSize: "0.9rem" }}>
-      {!hasRole && (
+      {hasRole ? (
+        <div className="mb-2 fw-semibold" style={{ color: "#000" }}>
+          {t("obligations art50 heading", { role: roleText })}
+        </div>
+      ) : (
         <p className="mb-2" style={{ fontStyle: "italic", color: "var(--cma-text-muted)" }}>
           {t("obligations art50 role note")}
         </p>
       )}
 
       {/* Sub-case 1 — interactive AI */}
-      <AccordionSubsection label={t("riskcat result art50_1 core obligation heading").replace(/:\s*$/, "")} defaultOpen>
+      <AccordionSubsection label={t("riskcat result art50_1 core obligation heading").replace(/:\s*$/, "")}>
         {isProvider && (
           <div className="mb-2">
             <ul className="mb-2 ps-3">
