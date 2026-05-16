@@ -33,7 +33,9 @@ export const enTranslations: IdentificationTranslations = {
   },
   q1OtherDescription: "Provide a description of the output",
   q1Badges: [
+    { label: enJson["badge ai system"], color: "#c9a84c", url: AI_ACT_ART3_URL },
     { label: enJson["article art3 label"], color: "#F37962", url: AI_ACT_ART3_URL },
+    { label: "High-impact algorithm", color: "#fd7e14", url: ALGO_REGISTER_URL },
   ],
   q1EnumTooltips: [
     null,
@@ -70,8 +72,10 @@ export const enTranslations: IdentificationTranslations = {
   q2Description:
     "Data includes all forms of electronic information. Text, images, and audio are also data.\n\nApplications can be designed manually. However, even when designed manually, the design is sometimes based on data analysis. For example, threshold values for (failure) rules can be calculated from data, or criteria can be selected based on calculated correlations.\n\nIt also happens that components (e.g., models and algorithms) are derived more automatically from data. For example, by fitting a statistical model to data or using machine learning to learn a model or rule-based algorithm from data. Simulation and optimization can also be used to derive a model from data.",
   q2Badges: [
+    { label: enJson["badge ai system"], color: "#c9a84c", url: AI_ACT_ART3_URL },
     { label: enJson["article art3 label"], color: "#F37962", url: AI_ACT_ART3_URL },
     { label: enJson["article recital12 label"], color: "#F37962", url: AI_ACT_RECITAL12_URL },
+    { label: "High-impact algorithm", color: "#fd7e14", url: ALGO_REGISTER_URL },
   ],
   q2EnumTooltips: [
     null,
@@ -88,7 +92,7 @@ export const enTranslations: IdentificationTranslations = {
       "Yes, automation of rules, but these are not explicitly laid down in legislation or regulations or formal policy.",
     symbolic:
       "Yes, logic- and knowledge-based approaches to AI in which outcomes are derived from encoded knowledge or from a symbolic representation of the task to be solved.",
-    no: "No.",
+    no: "No",
   },
   q3FormalRefTitle:
     "Which formal policy, law, or regulation? Which article, paragraph, or section of this regulation?",
@@ -100,6 +104,7 @@ export const enTranslations: IdentificationTranslations = {
 - open legal standards that are further specified in rules
 \n\nLogic and knowledge-based approaches are also referred to as symbolic AI. This form of AI includes knowledge representation, inductive (logical) programming, knowledge bases, inference and deduction engines, and (symbolic) reasoning. This technology is often used in expert systems.`,
   q3Badges: [
+    { label: enJson["badge ai system"], color: "#c9a84c", url: AI_ACT_ART3_URL },
     { label: enJson["article art3 label"], color: "#F37962", url: AI_ACT_ART3_URL },
     { label: enJson["article recital12 label"], color: "#F37962", url: AI_ACT_RECITAL12_URL },
     { label: "High-impact algorithm", color: "#fd7e14", url: ALGO_REGISTER_URL },
@@ -115,7 +120,7 @@ export const enTranslations: IdentificationTranslations = {
   // Q4
   q4Title:
     "Is a decision made in the process for individuals (consumer or citizen), organizations, or employees?",
-  q4Options: { yes: "Yes.", no: "No." },
+  q4Options: { yes: "Yes", no: "No" },
   q4Description:
     "For instance:\n- Prioritising citizen queries or requests\n- Determining whether additional information is needed from a citizen\n- Selecting individuals for checks or inspections\n- Assessing eligibility for services or facilities.",
   q4DescriptionPublicSectorNote:
@@ -165,7 +170,7 @@ export const enTranslations: IdentificationTranslations = {
     yes3: "Yes, because the check or investigation is being carried out, the person concerned has to wait longer to be eligible for a service, facility, or permit, or a service, facility, or permit is (temporarily) denied.",
     yes4: "Yes, the check or investigation itself is intrusive, for example because a physical check is carried out (e.g. a home visit) or because the investigation has a major impact on the (private) life of the person concerned in some other way.",
     yes5: "Yes, the check is particularly intrusive for the person concerned for another reason.",
-    no: "No.",
+    no: "No",
   },
   q5_1Badges: [
     { label: "High-impact algorithm", color: "#fd7e14", url: ALGO_REGISTER_URL },
@@ -176,7 +181,7 @@ export const enTranslations: IdentificationTranslations = {
     "Does the process contribute to how the government categorizes or approaches groups of citizens, organizations, or civil servants?",
   q6TitleGeneric:
     "Does the process contribute to how the organization categorizes or approaches groups of consumers, organizations or employees?",
-  q6Options: { yes: "Yes.", unsure: "I am not sure.", no: "No." },
+  q6Options: { yes: "Yes", unsure: "I am not sure.", no: "No" },
   q6UnsureDescription:
     "Provide a brief description of the process and how it affects citizens, organisations or civil servants.",
   q6Badges: [
@@ -209,7 +214,7 @@ export const enTranslations: IdentificationTranslations = {
 
   // Q8
   q8Title: "Are personal data being processed by the application?",
-  q8Options: { yes: "Yes.", no: "No." },
+  q8Options: { yes: "Yes", no: "No" },
   q8Description: "Personal data are any information that can identify a specific individual, directly or indirectly, such as a name, email address, ID number, or location data.",
   q8AlertDescription: "Examples of non-personal data are:\n- Group statistics where no individual can be singled out\n- Anonymised data\n- Output about physical matters that are not linked to an individual, such as sensor readings, weather data, machine and operational data, urban planning and infrastructure data\n- Financial records about companies\n- Data about city districts and neighborhoods\n\nNote: businesses in which the entrepreneur is personally liable (self-employed, sole proprietorship, general partnership, professional partnership) are considered as personal data.",
   q8Badges: [
@@ -219,7 +224,7 @@ export const enTranslations: IdentificationTranslations = {
   // Q8b
   q8bTitle:
     "Are personal aspects relating to a natural person being evaluated, analyzed or predicted?",
-  q8bOptions: { yes: "Yes.", no: "No." },
+  q8bOptions: { yes: "Yes", no: "No" },
   q8bDescription:
     "Personal aspects include, for example, analysing or predicting job performance, economic situation, health, personal preferences, interests, reliability, behaviour, location or movements.",
   q8bAlertDescription: "Evaluating, analyzing or predicting personal aspects relating to a natural person is known as _profiling_.",
@@ -230,7 +235,7 @@ export const enTranslations: IdentificationTranslations = {
 
   // Q9
   q9Title: "Is the output of the algorithm shared with other organizations?",
-  q9Options: { yes: "Yes.", no: "No." },
+  q9Options: { yes: "Yes", no: "No" },
   q9Badges: [
     { label: enJson["article gdpr art22 label"], color: "#F37962", url: SADM_URL },
   ],
@@ -238,7 +243,7 @@ export const enTranslations: IdentificationTranslations = {
   // Q10
   q10Title:
     "Is the output of the algorithm stored for longer than the duration of the primary process for which the algorithm is used?",
-  q10Options: { yes: "Yes.", no: "No." },
+  q10Options: { yes: "Yes", no: "No" },
   q10Badges: [
     { label: enJson["article gdpr art22 label"], color: "#F37962", url: SADM_URL },
   ],

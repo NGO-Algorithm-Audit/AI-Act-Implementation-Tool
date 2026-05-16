@@ -15,16 +15,10 @@
      result page (headings, badges, accordion fills) matches this app's
      theme instead of ClassifyMyAI's.
      ------------------------------------------------------------------ */
-  --cma-primary-50:  #deecf7;   /* accordion closed bg (matches --host-body-bg) */
-  --cma-primary-100: #cfe1f0;
-  --cma-primary-200: #b8d6ee;   /* accordion open bg */
-  --cma-primary-300: #8ab8df;
-  --cma-primary-400: #4f93cb;
-  --cma-primary-500: #2477b8;
-  --cma-primary-600: #005aa7;   /* PRIMARY. Buttons, badges, focus rings */
-  --cma-primary-700: #003366;   /* PRIMARY-DARK. Section headings, hover */
-  --cma-primary-800: #00274d;
-  --cma-primary-900: #001833;
+  --cma-primary: #005AA7;       /* the single primary blue — text, headings, accents, icons, buttons */
+  --cma-primary-50:  #deecf7;   /* light tint — accordion/search backgrounds */
+  --cma-primary-200: #b8d6ee;   /* light tint — accordion open background */
+  --cma-primary-300: #8ab8df;   /* light tint — borders */
 
   /* NOTE: ClassifyMyAI's source has --host-primary/--host-body-bg aliases
      pointing at the emerald palette here. They are intentionally omitted
@@ -69,10 +63,12 @@
   --cma-cat-profiling:   #4f46e5;   /* indigo — "Profiling" */
 
   /* Role badges (AI Act roles) */
-  --cma-role-provider:      #6f42c1;   /* "Aanbieder" / provider */
-  --cma-role-deployer:      #0891b2;   /* "Gebruiksverantwoordelijke" / deployer */
-  --cma-role-importer:      #65a30d;   /* "Importeur" */
-  --cma-role-distributor:   #92400e;   /* "Distributeur" */
+  --cma-role-provider:       #6f42c1;   /* "Aanbieder" / provider */
+  --cma-role-deployer:       #0891b2;   /* "Gebruiksverantwoordelijke" / deployer */
+  --cma-role-importer:       #65a30d;   /* "Importeur" */
+  --cma-role-distributor:    #92400e;   /* "Distributeur" */
+  --cma-role-representative: #475569;   /* "Gemachtigde" / authorised representative */
+  --cma-role-private:        #0f766e;   /* "Particulier" / private user */
 
   /* System status */
   --cma-status-in-use:         #2563eb;
@@ -82,7 +78,7 @@
   --cma-source-legal: #f37962;        /* coral — "Art. 6", "Annex III" */
 
   /* Generic feedback */
-  --cma-success: var(--cma-primary-600);
+  --cma-success: var(--cma-primary);
   --cma-warning: #d97706;
   --cma-danger:  #dc2626;
   --cma-info:    #2563eb;
@@ -196,7 +192,7 @@
 .cma-section-header {
   font-size: var(--cma-fs-md);
   font-weight: var(--cma-fw-bold);
-  color: var(--cma-primary-700);
+  color: var(--cma-primary);
   line-height: var(--cma-lh-snug);
   margin: 0 0 var(--cma-space-2);
 }
@@ -230,6 +226,6 @@
   font-weight: var(--cma-fw-light);
 }
 .cma-wordmark-accent {
-  color: var(--cma-primary-500);
+  color: var(--cma-primary);
   font-weight: var(--cma-fw-bold);
 }

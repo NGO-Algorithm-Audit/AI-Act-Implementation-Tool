@@ -79,7 +79,8 @@
       "Bash(grep -n '\"\\\\$ref\"\\\\|\"infra\"' '/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/schemas/en/riskclassification.json')",
       "Bash(node *)",
       "Bash(cp \"/Users/jurriaan/Github repos/ClassifyMyAI/src/schemas/en/riskclassification.json\" \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/schemas/en/riskclassification.json\")",
-      "Bash(cp \"/Users/jurriaan/Github repos/ClassifyMyAI/src/schemas/nl/risicoclassificatie.json\" \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/schemas/nl/risicoclassificatie.json\")"
+      "Bash(cp \"/Users/jurriaan/Github repos/ClassifyMyAI/src/schemas/nl/risicoclassificatie.json\" \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/schemas/nl/risicoclassificatie.json\")",
+      "Bash(git -c core.quotepath=false diff --name-only)"
     ]
   }
 }

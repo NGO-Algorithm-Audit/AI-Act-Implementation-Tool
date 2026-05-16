@@ -6,17 +6,8 @@ import { useTranslation } from "react-i18next";
 import CodeBlock from "./CodeBlock";
 import a11yLight from "react-syntax-highlighter/dist/esm/styles/hljs/a11y-light";
 import { dictionaryToCsv } from "../utils/dictionaryToCsv";
-
-type Q12Key = "a3" | "a1" | "a2" | "a6" | "a7" | "a8" | "a11" | "a10";
-type Q12bKey = "m1" | "m2" | "m3" | "m4";
-type Q13Key = "in_use" | "in_development";
-type Role =
-  | "provider"
-  | "deployer"
-  | "representative"
-  | "importer"
-  | "distributor"
-  | "private";
+import { deriveRolesAndStatus, type Role } from "../utils/roleStatus";
+import AccordionSection from "./AccordionSection";
 
 type OutputProps = {
   id: number;
@@ -28,7 +19,9 @@ type OutputProps = {
     index: number,
     data: FormProps<any, RJSFSchema, any>["formData"]
   ) => void;
+  onStartQuestionnaire?: (key: string) => void;
   data: FormProps<any, RJSFSchema, any>["schema"];
+  uiSchema?: FormProps<any, RJSFSchema, any>["uiSchema"];
 };
 
 export default function OutputRoleStatus({
@@ -38,43 +31,17 @@ export default function OutputRoleStatus({
   step,
   handlePrev,
   onSubmit,
+  onStartQuestionnaire,
   data,
+  uiSchema,
 }: OutputProps) {
   const { t } = useTranslation();
   void _output;
 
-  const q12Map: { key: Q12Key; i18n: string; roles: Role[] }[] = [
-    { key: "a3", i18n: "aiact2 q12 a3", roles: ["provider", "deployer"] },
-    { key: "a1", i18n: "aiact2 q12 a1", roles: ["provider"] },
-    { key: "a2", i18n: "aiact2 q12 a2", roles: ["provider", "deployer"] },
-    { key: "a6", i18n: "aiact2 q12 a6", roles: ["provider", "deployer"] },
-    { key: "a7", i18n: "aiact2 q12 a7", roles: ["importer"] },
-    { key: "a8", i18n: "aiact2 q12 a8", roles: ["distributor"] },
-    { key: "a11", i18n: "aiact2 q12 a11", roles: ["representative"] },
-    { key: "a10", i18n: "aiact2 q12 a10", roles: ["private"] },
-  ];
-  const q12bMap: { key: Q12bKey; i18n: string }[] = [
-    { key: "m1", i18n: "aiact2 q12b m1" },
-    { key: "m2", i18n: "aiact2 q12b m2" },
-    { key: "m3", i18n: "aiact2 q12b m3" },
-    { key: "m4", i18n: "aiact2 q12b m4" },
-  ];
-
-  const q12Match = q12Map.find((m) => data?.q12 === t(m.i18n));
-  const q12bMatch = q12bMap.find((m) => data?.q12b === t(m.i18n));
-  const q13Key: Q13Key | null =
-    data?.q13 === t("aiact2 q13 a1")
-      ? "in_use"
-      : data?.q13 === t("aiact2 q13 a2")
-      ? "in_development"
-      : null;
-
-  const effectiveRoles: Role[] =
-    q12Match?.key === "a6"
-      ? q12bMatch?.key === "m4"
-        ? ["deployer"]
-        : ["provider"]
-      : q12Match?.roles ?? [];
+  const { roles: effectiveRoles, status: q13Key } = deriveRolesAndStatus(
+    data,
+    t
+  );
 
   const roleColors: Record<Role, string> = {
     provider: "#6f42c1",
@@ -122,6 +89,9 @@ export default function OutputRoleStatus({
       ? t("aiact2 q13 a2")
       : "";
 
+  // Raw export payload — keeps the schema field names (q12, q12b, q13) so the
+  // role derivation downstream (App.tsx deriveRole, deriveRolesAndStatus) keeps
+  // working when this is passed to onSubmit.
   const exportData = Object.fromEntries(
     Object.entries(data).filter(
       ([key]) =>
@@ -129,6 +99,50 @@ export default function OutputRoleStatus({
         key !== "q12bblock" &&
         key !== "q13block"
     )
+  );
+
+  // Human-readable copy for the CSV/JSON export: re-key each answer to the
+  // questionnaire's display ID (Q1, Q2, Q3) instead of the schema field name.
+  const exportDisplayData = Object.fromEntries(
+    Object.entries(exportData)
+      .filter(([key]) => key !== "intro")
+      .map(([key, value]) => {
+        const uiId = (uiSchema as Record<string, any> | undefined)?.[key]?.[
+          "ui:id"
+        ];
+        return [typeof uiId === "string" ? uiId : key, value];
+      })
+  );
+
+  // Clickable questionnaire-name badge: navigates to the questionnaire when
+  // `onStartQuestionnaire` is provided.
+  const questionnaireBadge = (label: string, key: string) => (
+    <span
+      role={onStartQuestionnaire ? "button" : undefined}
+      tabIndex={onStartQuestionnaire ? 0 : undefined}
+      onClick={onStartQuestionnaire ? () => onStartQuestionnaire(key) : undefined}
+      onKeyDown={
+        onStartQuestionnaire
+          ? (e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onStartQuestionnaire(key);
+              }
+            }
+          : undefined
+      }
+      className="badge"
+      style={{
+        backgroundColor: "#005AA7",
+        color: "#fff",
+        fontSize: "0.85rem",
+        padding: "3.2px 5.12px",
+        cursor: onStartQuestionnaire ? "pointer" : "default",
+        verticalAlign: "middle",
+      }}
+    >
+      {label}
+    </span>
   );
 
   return (
@@ -244,29 +258,48 @@ export default function OutputRoleStatus({
         </div>
       )}
 
+      {!isPrivate && q13Key && (
+        <div>
+          <h6 className="fw-bold mb-1 mt-2" style={{ color: "#005AA7" }}>
+            {t("aiact2 next steps heading")}
+          </h6>
+          <div style={{ borderTop: "1px solid #005AA7", paddingTop: "8px" }}>
+            <p className="mb-0" style={{ fontSize: "0.9rem" }}>
+              {t("aiact2 result next steps prefix")}{" "}
+              {questionnaireBadge(t("questionnaire 2 name"), "AI1")}{" "}
+              {t("and")}{" "}
+              {questionnaireBadge(t("questionnaire 4 name"), "OBL")}
+              {t("aiact2 result next steps suffix")}
+            </p>
+          </div>
+        </div>
+      )}
+
       {type === "output" && (
-        <>
-          <p className="mb-2 mt-3">{t("save output")}</p>
-          <CodeBlock
-            style={a11yLight}
-            code={dictionaryToCsv(
-              exportData as unknown as Record<string, string | number>
-            )}
-            language={"typescript"}
-            title={"CSV"}
-            wrapLongLines={false}
-          />
-          <CodeBlock
-            style={a11yLight}
-            code={JSON.stringify(exportData, null, 2)}
-            language={"json"}
-            title="JSON"
-            wrapLongLines={false}
-          />
+        <div style={{ marginTop: "1rem" }}>
+          <AccordionSection label={t("export results")} noBorder>
+            <p className="mb-2">{t("save output")}</p>
+            <CodeBlock
+              style={a11yLight}
+              code={dictionaryToCsv(
+                exportDisplayData as unknown as Record<string, string | number>
+              )}
+              language={"typescript"}
+              title={"CSV"}
+              wrapLongLines={false}
+            />
+            <CodeBlock
+              style={a11yLight}
+              code={JSON.stringify(exportDisplayData, null, 2)}
+              language={"json"}
+              title="JSON"
+              wrapLongLines={false}
+            />
+          </AccordionSection>
           <Alert variant="warning" className="my-2">
             <small>{t("disclaimer")}</small>
           </Alert>
-        </>
+        </div>
       )}
 
       <div>

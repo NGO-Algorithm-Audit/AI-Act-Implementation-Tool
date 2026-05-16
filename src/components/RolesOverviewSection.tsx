@@ -1,51 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Alert, Table } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useSettings } from "../context/SettingsContext";
-
-const ChevronIcon = ({ open }: { open: boolean }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16" height="16" viewBox="0 0 24 24"
-    fill="none" stroke="var(--cma-primary-700)" strokeWidth="2.5"
-    strokeLinecap="round" strokeLinejoin="round"
-    style={{ transition: "transform 0.2s ease", transform: open ? "rotate(180deg)" : "rotate(0deg)", flexShrink: 0 }}
-  >
-    <polyline points="6 9 12 15 18 9" />
-  </svg>
-);
-
-function AccordionSection({ label, children, noBorder }: { label: string; children: React.ReactNode; noBorder?: boolean }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <div style={{ borderTop: noBorder ? "none" : "1px solid var(--cma-primary-600)", paddingBottom: "8px", paddingTop: "8px" }}>
-      <button
-        onClick={() => setOpen((v) => !v)}
-        type="button"
-        style={{
-          background: open ? "var(--cma-primary-200)" : "var(--cma-primary-50)",
-          border: "1px solid var(--cma-primary-300)",
-          borderRadius: open ? "6px 6px 0 0" : "6px",
-          padding: "6px 10px",
-          cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-          gap: "6px",
-          width: "100%",
-        }}
-        aria-expanded={open}
-      >
-        <ChevronIcon open={open} />
-        <small style={{ color: "var(--cma-primary-700)", fontWeight: "bold" }}>{label}</small>
-      </button>
-      {open && (
-        <div style={{ border: "1px solid var(--cma-primary-300)", borderTop: "none", borderRadius: "0 0 6px 6px", padding: "12px", backgroundColor: "#fff" }}>
-          {children}
-        </div>
-      )}
-    </div>
-  );
-}
+import AccordionSection from "./AccordionSection";
 
 function SourceBadge({ label, url }: { label: string; url: string }) {
   const { hideSourceBadges } = useSettings();

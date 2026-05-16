@@ -1,4 +1,4 @@
-import { Alert, Button, Table } from "react-bootstrap";
+import { Accordion, Alert, Button, Table } from "react-bootstrap";
 import { FormProps } from "@rjsf/core";
 import { RJSFSchema } from "@rjsf/utils";
 import { useTranslation } from "react-i18next";
@@ -262,23 +262,30 @@ export default function OutputIdentification({
 
       {type === "output" && (
         <>
-          <p className="mb-2">{t("save output")}</p>
-          <CodeBlock
-            style={a11yLight}
-            code={dictionaryToCsv(
-              exportData as unknown as Record<string, string | number>
-            )}
-            language={"typescript"}
-            title={"CSV"}
-            wrapLongLines={false}
-          />
-          <CodeBlock
-            style={a11yLight}
-            code={JSON.stringify(exportData, null, 2)}
-            language={"json"}
-            title="JSON"
-            wrapLongLines={false}
-          />
+          <Accordion>
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>{t("export results")}</Accordion.Header>
+              <Accordion.Body>
+                <p className="mb-2">{t("save output")}</p>
+                <CodeBlock
+                  style={a11yLight}
+                  code={dictionaryToCsv(
+                    exportData as unknown as Record<string, string | number>
+                  )}
+                  language={"typescript"}
+                  title={"CSV"}
+                  wrapLongLines={false}
+                />
+                <CodeBlock
+                  style={a11yLight}
+                  code={JSON.stringify(exportData, null, 2)}
+                  language={"json"}
+                  title="JSON"
+                  wrapLongLines={false}
+                />
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
           <Alert variant="warning" className="my-2">
             <small>{t("disclaimer")}</small>
           </Alert>

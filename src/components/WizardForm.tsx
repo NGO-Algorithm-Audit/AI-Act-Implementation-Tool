@@ -656,7 +656,9 @@ const WizardForm = ({
                   step={step}
                   handlePrev={handlePrev}
                   onSubmit={onSubmit}
+                  onStartQuestionnaire={onStartQuestionnaire}
                   data={mergedData}
+                  uiSchema={uiSchema}
                 />
               );
             }
@@ -718,6 +720,15 @@ const WizardForm = ({
             uiSchema={uiSchema}
             widgets={tooltipWidgets}
             templates={{ FieldTemplate, DescriptionFieldTemplate }}
+            // For checkbox questions (e.g. Identification Q1), suppress the
+            // error summary box on an empty submit. The inline field errors
+            // ("must NOT have fewer than 1 items", "This field is required")
+            // and the red question label still render via FieldTemplate.
+            showErrorList={
+              uiSchema?.[questions[0]]?.["ui:widget"] === "checkboxes"
+                ? false
+                : "top"
+            }
             formData={
               data[questions[0]]
                 ? {
@@ -731,17 +742,9 @@ const WizardForm = ({
             className="d-flex flex-column justify-content-between flex-grow-1"
           >
             <div className="d-flex flex-row justify-content-between flex-row-reverse">
-              {(() => {
-                const isRiskIntroWithoutRole =
-                  questions[0] === "intro" &&
-                  (uiSchema?.intro as { "ui:widget"?: string } | undefined)?.["ui:widget"] === "RiskClassificationIntroWidget" &&
-                  (!aiAct2Roles || aiAct2Roles.length === 0);
-                return isRiskIntroWithoutRole ? null : (
-                  <Button variant="primary" type="submit">
-                    {t("next")}
-                  </Button>
-                );
-              })()}
+              <Button variant="primary" type="submit">
+                {t("next")}
+              </Button>
               {step > 0 && (
                 <Button
                   type="button"

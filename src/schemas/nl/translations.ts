@@ -33,7 +33,9 @@ export const nlTranslations: IdentificationTranslations = {
   },
   q1OtherDescription: "Geef een beschrijving van de output",
   q1Badges: [
+    { label: nlJson["badge ai system"], color: "#c9a84c", url: AI_ACT_ART3_URL },
     { label: nlJson["article art3 label"], color: "#F37962", url: AI_ACT_ART3_URL },
+    { label: "Impactvol algoritme", color: "#fd7e14", url: ALGO_REGISTER_URL },
   ],
   q1EnumTooltips: [
     null,
@@ -70,8 +72,10 @@ export const nlTranslations: IdentificationTranslations = {
   q2Description:
     "Data omvat alle vormen van elektronische gegevens. Tekst, afbeeldingen, audio zijn ook data.\n\nToepassingen kunnen met de hand worden ontworpen. Maar ook wanneer deze handmatig is opgesteld, wordt het ontwerp soms gebaseerd op data-analyse. Zo kunnen drempelwaardes voor (uitval)regels berekend worden uit data of criteria gekozen worden aan de hand van berekende correlaties.\n\nHet komt ook voor dat componenten (zoals modellen en algoritmes) meer automatisch uit data worden afgeleid. Bijvoorbeeld door een statistisch model te fitten op data of d.m.v. machine learning een model of regelgebaseerd algoritme te leren uit data. Ook vormen van simulatie en optimalising kunnen gebruikt worden om een model af te leiden uit data.",
   q2Badges: [
+    { label: nlJson["badge ai system"], color: "#c9a84c", url: AI_ACT_ART3_URL },
     { label: nlJson["article art3 label"], color: "#F37962", url: AI_ACT_ART3_URL },
     { label: nlJson["article recital12 label"], color: "#F37962", url: AI_ACT_RECITAL12_URL },
+    { label: "Impactvol algoritme", color: "#fd7e14", url: ALGO_REGISTER_URL },
   ],
   q2EnumTooltips: [
     null,
@@ -88,7 +92,7 @@ export const nlTranslations: IdentificationTranslations = {
       "Ja, automatisering van regels, maar deze zijn niet expliciet vastgesteld in wet- of regelgeving of formeel beleid.",
     symbolic:
       "Ja, logica- en kennis-gebaseerde benaderingen van AI waarbij uitkomsten worden afgeleid uit gecodeerde kennis of uit een symbolische weergave van de op te lossen taak.",
-    no: "Nee.",
+    no: "Nee",
   },
   q3FormalRefTitle:
     "Welk formeel beleid, wet- of regelgeving? Welk artikel, lid of paragraaf van deze regelgeving?",
@@ -100,6 +104,7 @@ export const nlTranslations: IdentificationTranslations = {
 - open wettelijke normen die verder gespecificeerd zijn in regels
 \n\nOp logica- en kennis-gebaseerde benaderingen worden ook wel symbolische AI-systemen genoemd (symbolic AI). Onder deze  vorm van AI-systemen vallen kennisrepresentatie, inductief (logisch) programmeren, kennisbanken, inferentie- en deductiemachines, (symbolisch) redeneren. Deze technologie wordt bijvoorbeeld ingezet in expert systemen.`,
   q3Badges: [
+    { label: nlJson["badge ai system"], color: "#c9a84c", url: AI_ACT_ART3_URL },
     { label: nlJson["article art3 label"], color: "#F37962", url: AI_ACT_ART3_URL },
     { label: nlJson["article recital12 label"], color: "#F37962", url: AI_ACT_RECITAL12_URL },
     { label: "Impactvol algoritme", color: "#fd7e14", url: ALGO_REGISTER_URL },
@@ -115,7 +120,7 @@ export const nlTranslations: IdentificationTranslations = {
   // Q4
   q4Title:
     "Wordt in het proces een beslissing genomen voor individuen (consument of burger), organisaties of medewerkers?",
-  q4Options: { yes: "Ja.", no: "Nee." },
+  q4Options: { yes: "Ja", no: "Nee" },
   q4Description:
     "Bijvoorbeeld:\n- Prioritering van vragen of verzoeken van burgers\n- Bepalen of aanvullende informatie van een burger nodig is\n- Selecteren van personen voor controles of inspecties\n- Beoordelen of een persoon in aanmerking komt voor diensten of voorzieningen",
   q4DescriptionPublicSectorNote:
@@ -166,7 +171,7 @@ export const nlTranslations: IdentificationTranslations = {
     yes3: "Ja, omdat de controle of het onderzoek wordt uitgevoerd moet de betrokkene langer wachten om in aanmerking te komen voor een dienst, voorziening of vergunning, of wordt een dienst, voorziening of vergunning (tijdelijk) ontzegd.",
     yes4: "Ja, omdat de controle of het onderzoek is ingrijpend, bijvoorbeeld omdat een fysieke controle plaatsvind (bijv. een huisbezoek) of omdat het onderzoek op een andere manier een grote invloed heeft op het (prive) leven van de betrokkene.",
     yes5: "Ja, de controle is om een andere reden bijzonder ingrijpend voor de betrokkene.",
-    no: "Nee.",
+    no: "Nee",
   },
   q5_1Badges: [
     { label: "Impactvol algoritme", color: "#fd7e14", url: ALGO_REGISTER_URL },
@@ -177,7 +182,7 @@ export const nlTranslations: IdentificationTranslations = {
     "Draagt het proces bij aan hoe de overheid (groepen) burgers of ambtenaren categoriseert of benadert?",
   q6TitleGeneric:
     "Draagt het proces bij aan hoe de organisatie (groepen) consumenten, organisaties of medewerkers categoriseert of benadert?",
-  q6Options: { yes: "Ja.", unsure: "Ik weet het niet zeker.", no: "Nee." },
+  q6Options: { yes: "Ja", unsure: "Ik weet het niet zeker.", no: "Nee" },
   q6UnsureDescription:
     "Geef een korte beschrijving van het proces en hoe dit burgers of ambtenaren raakt.",
   q6Badges: [
@@ -210,7 +215,7 @@ export const nlTranslations: IdentificationTranslations = {
 
   // Q8
   q8Title: "Worden persoonsgegevens verwerkt door de toepassing?",
-  q8Options: { yes: "Ja.", no: "Nee." },
+  q8Options: { yes: "Ja", no: "Nee" },
   q8Description: "Persoonsgegevens zijn alle informatie waarmee een specifiek individu direct of indirect geïdentificeerd kan worden, zoals een naam, e-mailadres, ID-nummer of locatiegegevens.",
   q8AlertDescription: "Voorbeelden van niet-persoonsgegevens zijn:\n- Groepsstatistieken waarbij geen individu kan worden onderscheiden\n- Geanonimiseerde gegevens\n- Output over fysieke zaken die niet aan een individu zijn gekoppeld, zoals sensormetingen, weergegevens, machine- en operationele gegevens, gegevens over stedenbouw en infrastructuur\n- Financiële gegevens van bedrijven\n- Gegevens over stadswijken en buurten.\n\nMerk op: ondernemingen waarbij de ondernemer persoonlijk aansprakelijk is (zzp'er, eenmanszaak, vennootschap onder firma, maatschap) worden beschouwd als persoonsgegevens.",
   q8Badges: [
@@ -220,7 +225,7 @@ export const nlTranslations: IdentificationTranslations = {
   // Q8b
   q8bTitle:
     "Worden persoonskenmerken geëvalueerd, geanalyseerd of voorspeld?",
-  q8bOptions: { yes: "Ja.", no: "Nee." },
+  q8bOptions: { yes: "Ja", no: "Nee" },
   q8bDescription:
     "Persoonskenmerken zijn o.a. beroepsprestaties, economische situatie, gezondheid, persoonlijke voorkeuren, interesses, betrouwbaarheid, gedrag, locatie of verplaatsingen analyseren of voorspellen.",
   q8bAlertDescription: "Het evalueren, analyseren of voorspellen van persoonskenmerken van een natuurlijk persoon staat bekend als _profilering_.",
@@ -231,7 +236,7 @@ export const nlTranslations: IdentificationTranslations = {
 
   // Q9
   q9Title: "Wordt de output van het algoritme gedeeld met andere organisaties?",
-  q9Options: { yes: "Ja.", no: "Nee." },
+  q9Options: { yes: "Ja", no: "Nee" },
   q9Badges: [
     { label: nlJson["article gdpr art22 label"], color: "#F37962", url: SADM_URL },
   ],
@@ -239,7 +244,7 @@ export const nlTranslations: IdentificationTranslations = {
   // Q10
   q10Title:
     "Wordt de output van het algoritme langer opgeslagen dan de doorlooptijd van het primaire proces waarvoor het algoritme wordt ingezet?",
-  q10Options: { yes: "Ja.", no: "Nee." },
+  q10Options: { yes: "Ja", no: "Nee" },
   q10Badges: [
     { label: nlJson["article gdpr art22 label"], color: "#F37962", url: SADM_URL },
   ],

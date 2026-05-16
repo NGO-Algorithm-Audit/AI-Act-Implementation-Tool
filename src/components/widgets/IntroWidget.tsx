@@ -1,12 +1,12 @@
 import { useTranslation } from "react-i18next";
-import { Table } from "react-bootstrap";
+import { Alert, Table } from "react-bootstrap";
 
 const BADGE_ROWS: { color: string; textKey: string; conceptTextKey: string; conceptUrl: string; linkParenOnly?: boolean }[] = [
   { color: "#c9a84c", textKey: "badge ai system",   conceptTextKey: "intro concept ai",        conceptUrl: "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3", linkParenOnly: true },
-  { color: "#fd7e14", textKey: "badge algo",         conceptTextKey: "intro concept algo",      conceptUrl: "https://aienalgoritmes.pleio.nl/wiki/view/19bb6e9e-7a97-43d5-bef3-b1d66e59f4ff/handreiking-algoritmeregister" },
   { color: "#198754", textKey: "category gdpr",      conceptTextKey: "intro concept gdpr",      conceptUrl: "https://gdpr-info.eu/art-4-gdpr/",     linkParenOnly: true },
   { color: "#4f46e5", textKey: "badge profiling",    conceptTextKey: "intro concept profiling", conceptUrl: "https://gdpr-info.eu/art-4-gdpr/",     linkParenOnly: true },
   { color: "#6b8a9e", textKey: "badge sadm",         conceptTextKey: "intro concept sadm",      conceptUrl: "https://gdpr-info.eu/art-22-gdpr/",    linkParenOnly: true },
+  { color: "#fd7e14", textKey: "badge algo",         conceptTextKey: "intro concept algo",      conceptUrl: "https://aienalgoritmes.pleio.nl/wiki/view/19bb6e9e-7a97-43d5-bef3-b1d66e59f4ff/handreiking-algoritmeregister" },
 ];
 
 export default function IntroWidget() {
@@ -62,6 +62,18 @@ export default function IntroWidget() {
           })}
         </tbody>
       </Table>
+
+      <Alert
+        style={{ color: "#6d2c91", backgroundColor: "#f5eefa", borderColor: "#d9b3f0" }}
+        className="py-2 px-3 mb-3"
+      >
+        <small style={{ fontWeight: "bold", display: "block", marginBottom: "2px" }}>
+          {t("user guidance title")}
+        </small>
+        <ul className="mb-0 ps-3" style={{ fontSize: "0.875em" }}>
+          <li>{t("intro user guidance gpai")}</li>
+        </ul>
+      </Alert>
     </div>
   );
 }
