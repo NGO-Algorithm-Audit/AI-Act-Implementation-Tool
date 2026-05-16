@@ -1,6 +1,6 @@
 {
   "JSONSchema": {
-    "title": "Risicocategorie en verplichtingen",
+    "title": "Risicocategorie",
     "type": "object",
     "definitions": {
       "outputLow": {

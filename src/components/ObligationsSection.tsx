@@ -61,7 +61,7 @@ export default function ObligationsSection({
     return (
       <div>
         <h6 className="fw-bold mb-1 mt-2" style={{ color: "var(--cma-primary)" }}>{t("aiact2 result next steps title")}</h6>
-        <div style={{ borderTop: "1px solid var(--cma-primary)", paddingTop: "8px", fontSize: "0.85rem" }}>
+        <div style={{ borderTop: "1px solid var(--cma-primary)", paddingTop: "8px", fontSize: "0.9rem" }}>
           {shortKey ? (
             <p className="mb-0">{renderLinks(t(shortKey))}</p>
           ) : (
@@ -84,7 +84,7 @@ export default function ObligationsSection({
   return (
     <div>
       <h6 className="fw-bold mb-1 mt-2" style={{ color: "var(--cma-primary)" }}>{t("aiact2 result next steps title")}</h6>
-      <div style={{ borderTop: "1px solid var(--cma-primary)", paddingTop: "8px", fontSize: "0.85rem" }}>
+      <div style={{ borderTop: "1px solid var(--cma-primary)", paddingTop: "8px", fontSize: "0.9rem" }}>
         {has("privaat") ? (
           <p className="mb-0">{t("aiact2 result private no obligations")}</p>
         ) : has("aanbieder") ? (
