@@ -470,7 +470,7 @@ export default function OutputRiskClassification({
       </div>
 
       <div>
-        <h6 className="mb-1 mt-3 fw-bold" style={{ color: "var(--cma-primary)" }}>{t("aiact2 next steps heading")}</h6>
+        <h5 className="mb-1 mt-3 fw-bold" style={{ color: "var(--cma-primary)" }}>{t("aiact2 next steps heading")}</h5>
         <div style={{ borderTop: "1px solid var(--cma-primary)", paddingTop: "8px", fontSize: "0.9rem" }}>
           <p className="mb-0">
             {t("aiact2 result next steps prefix")}{" "}

@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Alert, Button, Card } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { deriveRolesAndStatus, type Role, type Status } from "../utils/roleStatus";
-import NextStepsSection from "./NextStepsSection";
 import ObligationsSection from "./ObligationsSection";
 import Art50ObligationsAccordions from "./Art50ObligationsAccordions";
 import RolesOverviewSection from "./RolesOverviewSection";
@@ -237,23 +236,50 @@ export default function ObligationsQuestionnaire({
   const toggleStatus = (status: Status) =>
     setQ2Status((prev) => (prev === status ? null : status));
 
-  // Q3: genai / "No requirements" are each exclusive; Prohibited and High-risk
-  // are mutually exclusive; Exception only attaches to Prohibited or High-risk.
+  // Q3 selection rules:
+  //  - "No requirements" is exclusive (always alone).
+  //  - "Prohibited" is exclusive of genai/high/low.
+  //  - "Generative and interactive AI" and "High-risk" may be combined.
+  //  - "Exception" only attaches to "Prohibited" or "High-risk".
   const toggleRisk = (key: RiskKey) => {
     setQ3((prev) => {
       const has = prev.includes(key);
-      if (key === "genai") return has ? [] : ["genai"];
-      if (key === "low") return has ? [] : ["low"];
-      if (key === "exception") {
-        if (has) return prev.filter((k) => k !== "exception");
-        return prev.includes("forbidden") || prev.includes("high")
-          ? [...prev, "exception"]
-          : prev;
+      let next: RiskKey[];
+      if (has) {
+        next = prev.filter((k) => k !== key);
+      } else {
+        switch (key) {
+          case "low":
+            next = ["low"];
+            break;
+          case "forbidden":
+            next = [...prev.filter((k) => k === "exception"), "forbidden"];
+            break;
+          case "genai":
+            next = [...prev.filter((k) => k === "high" || k === "exception"), "genai"];
+            break;
+          case "high":
+            next = [...prev.filter((k) => k === "genai" || k === "exception"), "high"];
+            break;
+          case "exception":
+            next =
+              prev.includes("forbidden") || prev.includes("high")
+                ? [...prev, "exception"]
+                : prev;
+            break;
+          default:
+            next = prev;
+        }
       }
-      // forbidden / high
-      if (has) return [];
-      const keepException = prev.includes("exception");
-      return keepException ? [key, "exception"] : [key];
+      // "Exception" must stay anchored to "Prohibited" or "High-risk".
+      if (
+        next.includes("exception") &&
+        !next.includes("forbidden") &&
+        !next.includes("high")
+      ) {
+        next = next.filter((k) => k !== "exception");
+      }
+      return next;
     });
   };
   const exceptionEnabled = q3.includes("forbidden") || q3.includes("high");
@@ -293,21 +319,21 @@ export default function ObligationsQuestionnaire({
       );
     }
     if (q3.includes("high")) {
-      if (dutchRoles.length === 0) {
-        return (
-          <p className="mb-0" style={{ fontSize: "0.9rem", fontStyle: "italic", color: "var(--cma-text-muted)" }}>
-            {t("obligations no role note")}
-          </p>
-        );
-      }
+      // The "Next steps — For obligation N, continue with: …" links
+      // (NextStepsSection) are intentionally omitted here: in the Obligations
+      // menu the user is already viewing the obligations overview.
+      // When "Generative and interactive AI" is also selected, the Art. 50
+      // transparency obligations are shown below the high-risk obligations.
       return (
         <>
-          <NextStepsSection
-            roles={dutchRoles}
-            onStartQuestionnaire={onStartQuestionnaire}
-            annexIArt6Branch={annexIArt6Branch}
-          />
-          <ObligationsSection roles={dutchRoles} annexIArt6Branch={annexIArt6Branch} />
+          {dutchRoles.length === 0 ? (
+            <p className="mb-0" style={{ fontSize: "0.9rem", fontStyle: "italic", color: "var(--cma-text-muted)" }}>
+              {t("obligations no role note")}
+            </p>
+          ) : (
+            <ObligationsSection roles={dutchRoles} annexIArt6Branch={annexIArt6Branch} />
+          )}
+          {q3.includes("genai") && <Art50ObligationsAccordions roles={dutchRoles} />}
         </>
       );
     }
