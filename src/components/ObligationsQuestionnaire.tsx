@@ -166,13 +166,15 @@ function QuestionBlock({
   const { t } = useTranslation();
   return (
     <div>
-      <h6 className="fw-bold mb-1 mt-2" style={{ color: "#005AA7" }}>
-        {text}
-      </h6>
-      <div style={{ borderTop: "1px solid #005AA7", paddingTop: "8px" }}>
+      <p className="mb-1 mt-2" style={{ fontSize: "0.9rem" }}>
+        <span style={{ fontWeight: "bold", color: "#005AA7", fontSize: "1rem" }}>
+          {text}
+        </span>
         {!hideHint && (
-          <p className="mb-2" style={{ fontSize: "0.9rem" }}>
-            <span style={{ marginRight: "8px" }}>{t("obligations hint prefix")}</span>
+          <>
+            <span style={{ marginLeft: "8px", marginRight: "8px" }}>
+              {t("obligations hint prefix")}
+            </span>
             <span
               role={onStartHint ? "button" : undefined}
               className="badge"
@@ -188,8 +190,10 @@ function QuestionBlock({
             >
               {hintBadge}
             </span>
-          </p>
+          </>
         )}
+      </p>
+      <div style={{ borderTop: "1px solid #005AA7", paddingTop: "8px" }}>
         <div>{children}</div>
       </div>
     </div>
@@ -382,6 +386,10 @@ export default function ObligationsQuestionnaire({
 
         {/* Q1 — role */}
         <div style={{ marginTop: "1rem" }}>
+          <h5 className="fw-bold mb-1 mt-2" style={{ color: "#005AA7" }}>
+            {t("obligations type heading")}
+          </h5>
+          <hr className="mt-1 mb-2" />
           <QuestionBlock
             text={t("obligations q1 text")}
             hintBadge={t("questionnaire 3 name")}
@@ -443,13 +451,23 @@ export default function ObligationsQuestionnaire({
             {t("obligations overview heading")}
           </h5>
           <hr className="mt-1 mb-2" />
-          {renderObligations()}
           {q2Status && q3.length > 0 && !q3.includes("low") && (
-            <p className="mt-3 mb-0" style={{ fontSize: "0.85rem" }}>
+            <p className="mb-3" style={{ fontSize: "0.9rem" }}>
               <span style={{ color: "#005AA7" }}>{t("aiact2 result timelines title")}:</span>{" "}
-              {t(q2Status === "in_use" ? "aiact2 result in use text" : "aiact2 result in development text")}
+              {t(
+                q3.includes("forbidden")
+                  ? "aiact2 result prohibited timelines text"
+                  : q3.includes("genai")
+                  ? "aiact2 result genai timelines text"
+                  : q2Status === "in_use"
+                  ? "aiact2 result in use text"
+                  : q3.includes("high")
+                  ? "aiact2 result high development timelines text"
+                  : "aiact2 result in development text"
+              )}
             </p>
           )}
+          {renderObligations()}
         </div>
 
         <RolesOverviewSection />

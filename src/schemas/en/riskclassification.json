@@ -1,6 +1,6 @@
 {
   "JSONSchema": {
-    "title": "Risk category and obligations",
+    "title": "Risk category",
     "type": "object",
     "definitions": {
       "outputLow": {
