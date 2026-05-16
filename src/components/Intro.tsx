@@ -61,7 +61,7 @@ export default function ({
           </div>
         </div>
 
-        <div className="mb-4"> 
+        <div className="mb-0">
           <p>
             {/* first sentence */}
             {t("description1")}
@@ -94,7 +94,7 @@ export default function ({
           <p>
             {t("description5")}
           </p>
-          <p>
+          <p className="mb-0">
             {t("description6")}
             {t("feedback")}{" "}
             
