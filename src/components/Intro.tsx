@@ -7,11 +7,13 @@ export default function ({
   forms,
   onStart,
   onStartQuestionnaire,
+  onStartObligations,
   activeLanguage = false,
 }: {
   forms: { id: number; title: string }[];
   onStart: (index: number) => void;
   onStartQuestionnaire?: (key: string) => void;
+  onStartObligations?: () => void;
   activeLanguage?: boolean;
 }) {
   const { t, i18n } = useTranslation();
@@ -107,8 +109,19 @@ export default function ({
           </p>
         </div>
 
-        <ListGroup>
-          {forms.map((form) => (
+        {(() => {
+          const isRisk = (title: string) =>
+            /^(Risk category|Risicocategorie|Prohibited|Verboden)/i.test(title);
+          const isRole = (title: string) =>
+            /^(Role and status|Rol en status|Deployer|Aanbieder)/i.test(title);
+
+          const questionnaireBadge = (title: string) => {
+            if (isRisk(title)) return t("questionnaire 2 name");
+            if (isRole(title)) return t("questionnaire 3 name");
+            return t("questionnaire 1 name");
+          };
+
+          const renderFormItem = (form: { id: number; title: string }) => (
             <ListGroup.Item
               key={form.id}
               className="d-flex flex-row justify-content-between align-items-center"
@@ -120,14 +133,7 @@ export default function ({
                   className="badge me-2"
                   style={{ backgroundColor: "#005AA7", color: "#fff" }}
                 >
-                  {(() => {
-                    const title = String(form.title ?? "");
-                    if (/^(Risk category|Risicocategorie|Prohibited|Verboden)/i.test(title))
-                      return t("questionnaire 2 name");
-                    if (/^(Role and status|Rol en status|Deployer|Aanbieder)/i.test(title))
-                      return t("questionnaire 3 name");
-                    return t("questionnaire 1 name");
-                  })()}
+                  {questionnaireBadge(String(form.title ?? ""))}
                 </span>
                 <span style={{ marginLeft: "8px" }}>{form.title}</span>
               </p>
@@ -141,8 +147,59 @@ export default function ({
                 {t("startButton")}
               </Button>
             </ListGroup.Item>
-          ))}
-        </ListGroup>
+          );
+
+          // Split the Identification questionnaire (determines which policy
+          // frameworks apply) from the AI Act compliance questionnaires.
+          const identForms = forms.filter(
+            (f) => !isRisk(String(f.title ?? "")) && !isRole(String(f.title ?? ""))
+          );
+          const aiActForms = forms.filter(
+            (f) => isRisk(String(f.title ?? "")) || isRole(String(f.title ?? ""))
+          );
+
+          return (
+            <>
+              <h6 className="mt-3 mb-1 fw-bold" style={{ color: "#005AA7" }}>
+                {t("intro section identification")}
+              </h6>
+              <ListGroup>{identForms.map(renderFormItem)}</ListGroup>
+
+              <h6 className="mt-4 mb-1 fw-bold" style={{ color: "#005AA7" }}>
+                {t("intro section next steps subtitle")}
+              </h6>
+              <ListGroup>
+                {aiActForms.map(renderFormItem)}
+                {/* Fourth entry: the Obligations screen. Not a JSON-Schema
+                    wizard, so it is rendered separately from `forms`. */}
+                <ListGroup.Item
+                  className="d-flex flex-row justify-content-between align-items-center"
+                  onClick={() => onStartObligations?.()}
+                  style={{ cursor: "pointer" }}
+                >
+                  <p className="m-0 mr-4">
+                    <span
+                      className="badge me-2"
+                      style={{ backgroundColor: "#005AA7", color: "#fff" }}
+                    >
+                      {t("questionnaire 4 name")}
+                    </span>
+                    <span style={{ marginLeft: "8px" }}>{t("questionnaire 4 title")}</span>
+                  </p>
+                  <Button
+                    variant="primary"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onStartObligations?.();
+                    }}
+                  >
+                    {t("startButton")}
+                  </Button>
+                </ListGroup.Item>
+              </ListGroup>
+            </>
+          );
+        })()}
       </Card.Body>
     </Card>
   );

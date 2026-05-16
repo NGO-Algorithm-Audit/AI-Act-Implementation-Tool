@@ -3,10 +3,12 @@ import { FormProps } from "@rjsf/core";
 import { RJSFSchema, UiSchema } from "@rjsf/utils";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
-import { aiActItems } from "../data/questionnaireConfig";
+import CodeBlock from "./CodeBlock";
+import a11yLight from "react-syntax-highlighter/dist/esm/styles/hljs/a11y-light";
+import { dictionaryToCsv } from "../utils/dictionaryToCsv";
+import AccordionSection from "./AccordionSection";
 import ObligationsSection from "./ObligationsSection";
 import NextStepsSection from "./NextStepsSection";
-import RolesOverviewSection from "./RolesOverviewSection";
 import { useSettings } from "../context/SettingsContext";
 
 type RiskOutcome = "low" | "high" | "forbidden" | "highExcept" | "forbiddenExcept";
@@ -25,9 +27,9 @@ function ChevronIcon({ open }: { open: boolean }) {
   return (
     <svg
       width="16" height="16" viewBox="0 0 16 16" fill="none"
-      style={{ transition: "transform 0.2s ease", transform: open ? "rotate(180deg)" : "rotate(0deg)", color: "var(--cma-primary-700)" }}
+      style={{ transition: "transform 0.2s ease", transform: open ? "rotate(180deg)" : "rotate(0deg)", color: "var(--cma-primary)" }}
     >
-      <path d="M4 6l4 4 4-4" stroke="var(--cma-primary-700)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M4 6l4 4 4-4" stroke="var(--cma-primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -35,14 +37,14 @@ function ChevronIcon({ open }: { open: boolean }) {
 function AccordionSubsection({ label, children }: { label: string; children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   return (
-    <div style={{ borderBottom: "1px solid var(--cma-primary-600)", paddingBottom: "8px", paddingTop: "8px" }}>
+    <div style={{ borderBottom: "1px solid var(--cma-primary)", paddingBottom: "8px", paddingTop: "8px" }}>
       <button
         onClick={() => setOpen((v) => !v)}
         style={{ background: "none", border: "none", padding: 0, cursor: "pointer", display: "flex", alignItems: "center", gap: "6px", width: "100%" }}
         aria-expanded={open}
       >
         <ChevronIcon open={open} />
-        <small style={{ color: "var(--cma-primary-700)", fontWeight: "bold" }}>{label}</small>
+        <small style={{ color: "var(--cma-primary)", fontWeight: "bold" }}>{label}</small>
       </button>
       {open && <div className="mt-2">{children}</div>}
     </div>
@@ -243,36 +245,97 @@ export default function OutputRiskClassification({
   const art50TimingExceptionLines = (
     <div className="mt-2">
       <p className="mb-1">
-        <span style={{ color: "var(--cma-primary-700)" }}>{t("riskcat result art50_3 deployer timing heading")}:</span>{" "}
+        <span style={{ color: "var(--cma-primary)" }}>{t("riskcat result art50_3 deployer timing heading")}:</span>{" "}
         {t("riskcat result art50_3 deployer timing item1")}
       </p>
       <p className="mb-0">
-        <span style={{ color: "var(--cma-primary-700)" }}>{t("riskcat result art50_3 deployer exception heading")}:</span>{" "}
+        <span style={{ color: "var(--cma-primary)" }}>{t("riskcat result art50_3 deployer exception heading")}:</span>{" "}
         {t("riskcat result art50_3 deployer exception item1")}
       </p>
     </div>
   );
 
-  const rolesItem = aiActItems.find((i) => i.startKey === "AI2");
   const knownRoleBadges = (aiAct2Roles ?? [])
     .map((r) => ROLE_BADGES[r])
     .filter(Boolean) as { key: string; color: string }[];
 
-  const exportData = Object.fromEntries(
-    Object.entries(data).filter(
-      ([key]) => !key.startsWith("output") && key !== "intro"
-    )
+  // The computed classification (`riskOutcome`, `annexIArt6Branch`) lives on
+  // the `output` field, which is stripped from the saved payload. Persist it
+  // under underscore-prefixed keys so the Obligations screen can pre-fill its
+  // risk-category question. These keys have no uiSchema entry, so they are
+  // ignored by collectTriggeredQuestions and by the RJSF schema.
+  const exportData = {
+    ...Object.fromEntries(
+      Object.entries(data).filter(
+        ([key]) => !key.startsWith("output") && key !== "intro"
+      )
+    ),
+    _riskOutcome: outcome,
+    ...(annexIArt6Branch ? { _annexIArt6Branch: annexIArt6Branch } : {}),
+  };
+
+  // Human-readable copy for the CSV/JSON export: drop the internal underscore
+  // keys and re-key each answer to its display ID (Q1, Q2, …).
+  const exportDisplayData = Object.fromEntries(
+    Object.entries(exportData)
+      .filter(([key]) => !key.startsWith("_"))
+      .map(([key, value]) => {
+        const uiId = (uiSchema as Record<string, any> | undefined)?.[key]?.[
+          "ui:id"
+        ];
+        const display =
+          typeof uiId === "string" ? uiId.replace(/^q/, "Q") : key;
+        return [display, value];
+      })
   );
+
+  // Clickable questionnaire-name badge: runs `onActivate` when provided.
+  const questionnaireBadge = (label: string, onActivate?: () => void) => (
+    <span
+      role={onActivate ? "button" : undefined}
+      tabIndex={onActivate ? 0 : undefined}
+      onClick={onActivate}
+      onKeyDown={
+        onActivate
+          ? (e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onActivate();
+              }
+            }
+          : undefined
+      }
+      className="badge"
+      style={{
+        backgroundColor: "var(--cma-primary)",
+        color: "#fff",
+        fontSize: "0.85rem",
+        padding: "3.2px 5.12px",
+        cursor: onActivate ? "pointer" : "default",
+        verticalAlign: "middle",
+      }}
+    >
+      {label}
+    </span>
+  );
+
+  // Persist the current Risk-category result before opening the Obligations
+  // menu, so the Obligations menu can pre-fill its risk-category question
+  // (prefillRisk reads riskData._riskOutcome from the saved payload).
+  const handleStartObligations = () => {
+    onSubmit(id, exportData);
+    onStartQuestionnaire?.("OBL");
+  };
 
   return (
     <div className="d-flex flex-column gap-3" style={{ padding: "1rem" }}>
       <div>
-        <h5 className="mb-0 fw-bold mt-1" style={{ color: "var(--cma-primary-700)" }}>{output?.title}</h5>
+        <h5 className="mb-0 fw-bold mt-1" style={{ color: "var(--cma-primary)" }}>{output?.title}</h5>
         <hr className="mt-2 mb-0" />
       </div>
 
       <div>
-        <h6 className="mb-1 mt-3 fw-bold" style={{ color: "var(--cma-primary-700)" }}>{t("riskcat result category label")}</h6>
+        <h6 className="mb-1 mt-3 fw-bold" style={{ color: "var(--cma-primary)" }}>{t("riskcat result category label")}</h6>
         <div style={{ fontSize: "0.95rem" }}>
           <span
             className="badge badge-secondary"
@@ -407,65 +470,43 @@ export default function OutputRiskClassification({
       </div>
 
       <div>
-        <h6 className="mb-1 mt-3 fw-bold" style={{ color: "var(--cma-primary-700)" }}>{t("riskcat result role label")}</h6>
-        <div style={{ fontSize: "0.95rem" }}>
-          {knownRoleBadges.length > 0 ? (
-            knownRoleBadges.map(({ key, color }, i) => (
-              <span key={key} style={{ marginLeft: i === 0 ? 0 : "4px" }}>
-                <span
-                  className="badge badge-secondary"
-                  style={{ backgroundColor: color, fontSize: "0.85rem", padding: "3.2px 5.12px", color: "#fff", verticalAlign: "middle" }}
-                >
-                  {t(key)}
-                </span>
-              </span>
-            ))
-          ) : rolesItem ? (
-            (() => {
-              const available = !!(rolesItem.startKey && onStartQuestionnaire);
-              return (
-                <>
-                  <span style={{ marginRight: "8px" }}>{t("riskcat result fill in first")}</span>
-                  <span
-                    className="badge"
-                    style={{
-                      backgroundColor: available ? "var(--cma-primary-600)" : "var(--cma-text-muted)",
-                      color: "#fff",
-                      cursor: available ? "pointer" : "default",
-                      fontSize: "0.85rem",
-                      padding: "3.2px 5.12px",
-                      verticalAlign: "middle",
-                    }}
-                    onClick={available ? () => onStartQuestionnaire!(rolesItem.startKey!) : undefined}
-                  >
-                    {t(rolesItem.nameKey)}
-                  </span>
-                </>
-              );
-            })()
-          ) : null}
+        <h6 className="mb-1 mt-3 fw-bold" style={{ color: "var(--cma-primary)" }}>{t("aiact2 next steps heading")}</h6>
+        <div style={{ borderTop: "1px solid var(--cma-primary)", paddingTop: "8px", fontSize: "0.9rem" }}>
+          <p className="mb-0">
+            {t("aiact2 result next steps prefix")}{" "}
+            {questionnaireBadge(
+              t("questionnaire 3 name"),
+              onStartQuestionnaire ? () => onStartQuestionnaire("AI2") : undefined
+            )}{" "}
+            {t("and")}{" "}
+            {questionnaireBadge(
+              t("questionnaire 4 name"),
+              onStartQuestionnaire ? handleStartObligations : undefined
+            )}
+            {t("aiact2 result next steps suffix")}
+          </p>
         </div>
       </div>
 
       {outcome === "low" && (
         <>
           <div>
-            <h6 className="fw-bold mb-1 mt-2" style={{ color: "var(--cma-primary-700)" }}>{t("aiact2 result provider continue label")}</h6>
-            <div style={{ borderTop: "1px solid var(--cma-primary-600)", paddingTop: "8px", fontSize: "0.9rem" }}>
+            <h6 className="fw-bold mb-1 mt-2" style={{ color: "var(--cma-primary)" }}>{t("aiact2 result provider continue label")}</h6>
+            <div style={{ borderTop: "1px solid var(--cma-primary)", paddingTop: "8px", fontSize: "0.9rem" }}>
               <p className="mb-0">
                 {t("riskcat result low next steps")}
               </p>
             </div>
           </div>
           <div>
-            <h6 className="fw-bold mb-1 mt-2" style={{ color: "var(--cma-primary-700)" }}>{t("aiact2 result next steps title")}</h6>
-            <div style={{ borderTop: "1px solid var(--cma-primary-600)", paddingTop: "8px", fontSize: "0.9rem" }}>
+            <h6 className="fw-bold mb-1 mt-2" style={{ color: "var(--cma-primary)" }}>{t("aiact2 result next steps title")}</h6>
+            <div style={{ borderTop: "1px solid var(--cma-primary)", paddingTop: "8px", fontSize: "0.9rem" }}>
               {showAnyArt50Block ? (
                 isUnifiedArt50 ? (
                   <div className="mb-3">
                     <p className="mb-2">{combinedArt50Heading}</p>
                     <p className="mb-1">
-                      <span style={{ color: "var(--cma-primary-700)" }}>{t("riskcat result art50 obligations subsection heading")}:</span>
+                      <span style={{ color: "var(--cma-primary)" }}>{t("riskcat result art50 obligations subsection heading")}:</span>
                     </p>
                     <ul className="mb-2 ps-3">
                       {isArt50InteractiveProvider && (
@@ -506,13 +547,13 @@ export default function OutputRiskClassification({
                       )}
                     </ul>
                     <p className="mb-1">
-                      <span style={{ color: "var(--cma-primary-700)" }}>{t("riskcat result art50_3 deployer timing heading")}:</span>
+                      <span style={{ color: "var(--cma-primary)" }}>{t("riskcat result art50_3 deployer timing heading")}:</span>
                     </p>
                     <ul className="mb-2 ps-3">
                       <li>{t("riskcat result art50_3 deployer timing item1")}</li>
                     </ul>
                     <p className="mb-1">
-                      <span style={{ color: "var(--cma-primary-700)" }}>{t("riskcat result art50_3 deployer exception heading")}:</span>
+                      <span style={{ color: "var(--cma-primary)" }}>{t("riskcat result art50_3 deployer exception heading")}:</span>
                     </p>
                     <ul className="mb-2 ps-3">
                       <li>{t("riskcat result art50_2 deployer exceptions item1")}</li>
@@ -713,11 +754,11 @@ export default function OutputRiskClassification({
                         <li>{t("riskcat result art50_2 deployer step2")}</li>
                       </ul>
                       <p className="mb-2">
-                        <span style={{ color: "var(--cma-primary-700)" }}>{t("riskcat result art50_3 deployer timing heading")}:</span>{" "}
+                        <span style={{ color: "var(--cma-primary)" }}>{t("riskcat result art50_3 deployer timing heading")}:</span>{" "}
                         {t("riskcat result art50_3 deployer timing item1")}
                       </p>
                       <p className="mb-1">
-                        <span style={{ color: "var(--cma-primary-700)" }}>{t("riskcat result art50_2 deployer exceptions heading")}</span>
+                        <span style={{ color: "var(--cma-primary)" }}>{t("riskcat result art50_2 deployer exceptions heading")}</span>
                       </p>
                       <ul className="mb-2 ps-3">
                         <li>{t("riskcat result art50_2 deployer exceptions item1")}</li>
@@ -814,11 +855,11 @@ export default function OutputRiskClassification({
                         <li>{t("riskcat result art50_2 deployer step2")}</li>
                       </ul>
                       <p className="mb-2">
-                        <span style={{ color: "var(--cma-primary-700)" }}>{t("riskcat result art50_3 deployer timing heading")}:</span>{" "}
+                        <span style={{ color: "var(--cma-primary)" }}>{t("riskcat result art50_3 deployer timing heading")}:</span>{" "}
                         {t("riskcat result art50_3 deployer timing item1")}
                       </p>
                       <p className="mb-1">
-                        <span style={{ color: "var(--cma-primary-700)" }}>{t("riskcat result art50_2 deployer exceptions heading")}</span>
+                        <span style={{ color: "var(--cma-primary)" }}>{t("riskcat result art50_2 deployer exceptions heading")}</span>
                       </p>
                       <ul className="mb-2 ps-3">
                         <li>{t("riskcat result art50_2 deployer exceptions item1")}</li>
@@ -904,11 +945,11 @@ export default function OutputRiskClassification({
             footer={hasArt50Scenario ? (
               <div className="mt-3">
                 <p className="mb-1">
-                  <span style={{ color: "var(--cma-primary-700)" }}>{t("riskcat result art50_3 deployer timing heading")}:</span>{" "}
+                  <span style={{ color: "var(--cma-primary)" }}>{t("riskcat result art50_3 deployer timing heading")}:</span>{" "}
                   {t("riskcat result art50_3 deployer timing item1")}
                 </p>
                 <p className="mb-0">
-                  <span style={{ color: "var(--cma-primary-700)" }}>{t("riskcat result art50_3 deployer exception heading")}:</span>{" "}
+                  <span style={{ color: "var(--cma-primary)" }}>{t("riskcat result art50_3 deployer exception heading")}:</span>{" "}
                   {t("riskcat result art50_3 deployer exception item1")}
                 </p>
               </div>
@@ -928,14 +969,14 @@ export default function OutputRiskClassification({
         return (
           <>
             <div>
-              <h6 className="fw-bold mb-1 mt-2" style={{ color: "var(--cma-primary-700)" }}>{t("aiact2 result provider continue label")}</h6>
-              <div style={{ borderTop: "1px solid var(--cma-primary-600)", paddingTop: "8px", fontSize: "0.9rem" }}>
+              <h6 className="fw-bold mb-1 mt-2" style={{ color: "var(--cma-primary)" }}>{t("aiact2 result provider continue label")}</h6>
+              <div style={{ borderTop: "1px solid var(--cma-primary)", paddingTop: "8px", fontSize: "0.9rem" }}>
                 <p className="mb-0">{t(nextStepsKey)}</p>
               </div>
             </div>
             <div>
-              <h6 className="fw-bold mb-1 mt-2" style={{ color: "var(--cma-primary-700)" }}>{t("aiact2 result next steps title")}</h6>
-              <div style={{ borderTop: "1px solid var(--cma-primary-600)", paddingTop: "8px", fontSize: "0.9rem" }}>
+              <h6 className="fw-bold mb-1 mt-2" style={{ color: "var(--cma-primary)" }}>{t("aiact2 result next steps title")}</h6>
+              <div style={{ borderTop: "1px solid var(--cma-primary)", paddingTop: "8px", fontSize: "0.9rem" }}>
                 <p className="mb-0">{t("riskcat result prohibited obligation")}</p>
               </div>
             </div>
@@ -943,12 +984,31 @@ export default function OutputRiskClassification({
         );
       })()}
 
-      <RolesOverviewSection />
-
       {type === "output" && (
-        <Alert variant="warning" className="mt-4 mb-2">
-          <small>{t("disclaimer")}</small>
-        </Alert>
+        <div style={{ marginTop: "1rem" }}>
+          <AccordionSection label={t("export results")} noBorder>
+            <p className="mb-2">{t("save output")}</p>
+            <CodeBlock
+              style={a11yLight}
+              code={dictionaryToCsv(
+                exportDisplayData as unknown as Record<string, string | number>
+              )}
+              language={"typescript"}
+              title={"CSV"}
+              wrapLongLines={false}
+            />
+            <CodeBlock
+              style={a11yLight}
+              code={JSON.stringify(exportDisplayData, null, 2)}
+              language={"json"}
+              title="JSON"
+              wrapLongLines={false}
+            />
+          </AccordionSection>
+          <Alert variant="warning" className="mt-4 mb-2">
+            <small>{t("disclaimer")}</small>
+          </Alert>
+        </div>
       )}
 
       <div>

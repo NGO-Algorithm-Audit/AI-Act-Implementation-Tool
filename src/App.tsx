@@ -2,6 +2,7 @@ import { RJSFSchema } from "@rjsf/utils";
 import { Col, Container, Row } from "react-bootstrap";
 import Intro from "./components/Intro";
 import WizardForm from "./components/WizardForm";
+import ObligationsQuestionnaire from "./components/ObligationsQuestionnaire";
 import validator from "@rjsf/validator-ajv8";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -64,6 +65,7 @@ export default function App() {
   const [activeForm, setActiveForm] = useState<RJSFSchema | null>(null);
   const [activeFormIndex, setActiveFormIndex] = useState<number>(0);
   const [initialFieldKey, setInitialFieldKey] = useState<string | null>(null);
+  const [showObligations, setShowObligations] = useState<boolean>(false);
   let formsMenu = [{ id: 0, title: t("no forms") }];
 
   const params = new URLSearchParams(window.location.search);
@@ -94,8 +96,14 @@ export default function App() {
   };
 
   const onFormActivate = (index: number) => {
+    setShowObligations(false);
     setActiveFormIndex(index);
     setActiveForm(forms[i18n.language][index]);
+  };
+
+  const onStartObligations = () => {
+    setActiveForm(null);
+    setShowObligations(true);
   };
 
   // Schema titles are not always literal "Identification" / "Role and status";
@@ -105,6 +113,10 @@ export default function App() {
   const IDENTIFICATION_TITLE_RE = /^(Identification|Identificatie|AI Act,|AI-verordening,)/i;
 
   const onStartQuestionnaire = (key: string, fieldKey?: string) => {
+    if (key === "OBL") {
+      onStartObligations();
+      return;
+    }
     let idx = -1;
     if (key === "AI2") idx = findFormIndexByTitlePrefix(ROLE_AND_STATUS_TITLE_RE);
     else if (key === "AI1") idx = findFormIndexByTitlePrefix(RISK_CATEGORY_TITLE_RE);
@@ -115,6 +127,7 @@ export default function App() {
   };
 
   const roleStatusIndex = findFormIndexByTitlePrefix(ROLE_AND_STATUS_TITLE_RE);
+  const riskIndex = findFormIndexByTitlePrefix(RISK_CATEGORY_TITLE_RE);
 
   // Single source of truth for the user's role.
   //
@@ -172,7 +185,16 @@ export default function App() {
       <Container fluid className="vh-100 mx-0">
         <Row className="justify-content-center align-items-center h-100">
           <Col xs={12} className="">
-            {activeForm ? (
+            {showObligations ? (
+              <ObligationsQuestionnaire
+                roleStatusData={
+                  roleStatusIndex >= 0 ? allFormData[roleStatusIndex] : undefined
+                }
+                riskData={riskIndex >= 0 ? allFormData[riskIndex] : undefined}
+                onBack={() => setShowObligations(false)}
+                onStartQuestionnaire={onStartQuestionnaire}
+              />
+            ) : activeForm ? (
               <WizardForm
                 key={activeFormIndex}
                 id={activeFormIndex}
@@ -192,6 +214,7 @@ export default function App() {
                 forms={formsMenu}
                 onStart={(id: number) => onFormActivate(id)}
                 onStartQuestionnaire={onStartQuestionnaire}
+                onStartObligations={onStartObligations}
                 activeLanguage={lang ? true : false}
               />
             )}

@@ -60,8 +60,8 @@ export default function ObligationsSection({
     else if (has("gebruiksverantwoordelijke")) shortKey = "riskcat result annex i secB deployer only";
     return (
       <div>
-        <h6 className="fw-bold mb-1 mt-2" style={{ color: "var(--cma-primary-700)" }}>{t("aiact2 result next steps title")}</h6>
-        <div style={{ borderTop: "1px solid var(--cma-primary-600)", paddingTop: "8px", fontSize: "0.85rem" }}>
+        <h6 className="fw-bold mb-1 mt-2" style={{ color: "var(--cma-primary)" }}>{t("aiact2 result next steps title")}</h6>
+        <div style={{ borderTop: "1px solid var(--cma-primary)", paddingTop: "8px", fontSize: "0.85rem" }}>
           {shortKey ? (
             <p className="mb-0">{renderLinks(t(shortKey))}</p>
           ) : (
@@ -83,8 +83,8 @@ export default function ObligationsSection({
 
   return (
     <div>
-      <h6 className="fw-bold mb-1 mt-2" style={{ color: "var(--cma-primary-700)" }}>{t("aiact2 result next steps title")}</h6>
-      <div style={{ borderTop: "1px solid var(--cma-primary-600)", paddingTop: "8px", fontSize: "0.85rem" }}>
+      <h6 className="fw-bold mb-1 mt-2" style={{ color: "var(--cma-primary)" }}>{t("aiact2 result next steps title")}</h6>
+      <div style={{ borderTop: "1px solid var(--cma-primary)", paddingTop: "8px", fontSize: "0.85rem" }}>
         {has("privaat") ? (
           <p className="mb-0">{t("aiact2 result private no obligations")}</p>
         ) : has("aanbieder") ? (

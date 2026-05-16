@@ -371,6 +371,26 @@ function buildRoleAndStatusIndex(t: (k: string) => string): IndexedText[] {
   return out;
 }
 
+// Index the Obligations menu's "hidden" content: the per-role obligation
+// steps shown only after a role/status/risk combination is selected. Each
+// role section becomes one searchable blob whose display label is its
+// heading (e.g. "Obligations for provider of a high-risk AI system:").
+function buildObligationsIndex(lang: string): { heading: string; text: string }[] {
+  const bundle = (lang === "nl" ? nlI18n : enI18n) as Record<string, string>;
+  const out: { heading: string; text: string }[] = [];
+  for (const role of ["provider", "deployer", "importer", "distributor"]) {
+    const heading = bundle[`aiact2 result ${role} heading`];
+    if (typeof heading !== "string" || !heading.trim()) continue;
+    const parts: string[] = [heading];
+    const stepRe = new RegExp(`^aiact2 result ${role} step`);
+    for (const [k, v] of Object.entries(bundle)) {
+      if (typeof v === "string" && v.trim() && stepRe.test(k)) parts.push(v);
+    }
+    out.push({ heading, text: parts.join(" — ") });
+  }
+  return out;
+}
+
 export default function SearchBar({
   onStartQuestionnaire,
 }: {
@@ -438,6 +458,8 @@ export default function SearchBar({
 
   const badgeIndex = useMemo(() => buildBadgeIndex(lang), [lang]);
 
+  const obligationsIndex = useMemo(() => buildObligationsIndex(lang), [lang]);
+
   const allQuestionnaireItems = useMemo(() => {
     return aiActItems.map((item) => ({ item }));
   }, []);
@@ -499,8 +521,22 @@ export default function SearchBar({
       }
     });
 
+    obligationsIndex.forEach((o, i) => {
+      const score = rankMatch(o.text, q);
+      if (score > 0) {
+        matched.push({
+          id: `obl-${i}`,
+          kind: "question",
+          label: o.heading,
+          context: `id: ${t("questionnaire 4 name")} menu`,
+          score,
+          payload: { startKey: "OBL" },
+        });
+      }
+    });
+
     return matched;
-  }, [query, allQuestionnaireItems, questionIndex, badgeIndex, t]);
+  }, [query, allQuestionnaireItems, questionIndex, badgeIndex, obligationsIndex, t]);
 
   useEffect(() => {
     function onClickOutside(e: MouseEvent) {
@@ -541,7 +577,7 @@ export default function SearchBar({
       ref={containerRef}
       style={{
         position: "relative",
-        border: "1px solid var(--cma-primary-600)",
+        border: "1px solid var(--cma-primary)",
         borderRadius: "6px",
         backgroundColor: "#fff",
         marginBottom: "12px",
@@ -549,8 +585,8 @@ export default function SearchBar({
     >
       <div style={{ display: "flex", alignItems: "center", padding: "6px 12px", gap: "8px" }}>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="7" cy="7" r="5" stroke="var(--cma-primary-700)" strokeWidth="1.5" />
-          <line x1="11" y1="11" x2="14" y2="14" stroke="var(--cma-primary-700)" strokeWidth="1.5" strokeLinecap="round" />
+          <circle cx="7" cy="7" r="5" stroke="var(--cma-primary)" strokeWidth="1.5" />
+          <line x1="11" y1="11" x2="14" y2="14" stroke="var(--cma-primary)" strokeWidth="1.5" strokeLinecap="round" />
         </svg>
         <input
           type="search"
@@ -590,7 +626,7 @@ export default function SearchBar({
             right: 0,
             marginTop: "4px",
             backgroundColor: "#fff",
-            border: "1px solid var(--cma-primary-600)",
+            border: "1px solid var(--cma-primary)",
             borderRadius: "6px",
             boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
             zIndex: 1000,
@@ -617,7 +653,7 @@ export default function SearchBar({
                       style={{
                         padding: "4px 12px",
                         backgroundColor: "var(--cma-primary-50)",
-                        color: "var(--cma-primary-700)",
+                        color: "var(--cma-primary)",
                         fontWeight: "bold",
                         fontSize: "0.75rem",
                         textTransform: "uppercase",

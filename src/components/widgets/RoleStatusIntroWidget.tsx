@@ -65,6 +65,21 @@ export default function RoleStatusIntroWidget() {
 
   return (
     <div>
+      <p style={{ marginBottom: "1rem" }}>
+        {t("aiact2 intro p1 prefix")}{" "}
+        <span className="badge badge-secondary" style={{ fontSize: "0.85rem", padding: "3.2px 5.12px" }}>
+          {t("questionnaire 1 name")}
+        </span>{" "}
+        {t("aiact2 intro p1 suffix")}{" "}
+        <span
+          className="badge badge-secondary"
+          style={{ backgroundColor: "#c9a84c", color: "#fff", fontSize: "0.85rem", padding: "3.2px 5.12px" }}
+        >
+          {t("badge ai system")}
+        </span>
+        {t("aiact2 intro p1 suffix2")}
+      </p>
+
       <p style={{ marginBottom: "1rem", whiteSpace: "pre-wrap" }}>
         {t("aiact2 intro p2 prefix")}
       </p>

@@ -15,7 +15,7 @@ function ItemBadge({
       role={isAvailable ? "button" : undefined}
       className="badge"
       style={{
-        backgroundColor: isAvailable ? "var(--cma-primary-600)" : "#aaa",
+        backgroundColor: isAvailable ? "var(--cma-primary)" : "#aaa",
         color: "#fff",
         cursor: isAvailable ? "pointer" : "default",
         opacity: isAvailable ? 1 : 0.65,
@@ -46,8 +46,8 @@ export default function NextStepsSection({
   if (annexIArt6Branch === "B") {
     return (
       <div>
-        <h6 className="fw-bold mb-1 mt-2" style={{ color: "var(--cma-primary-700)" }}>{t("aiact2 result provider continue label")}</h6>
-        <div style={{ borderTop: "1px solid var(--cma-primary-600)", paddingTop: "8px", fontSize: "0.85rem" }}>
+        <h6 className="fw-bold mb-1 mt-2" style={{ color: "var(--cma-primary)" }}>{t("aiact2 result provider continue label")}</h6>
+        <div style={{ borderTop: "1px solid var(--cma-primary)", paddingTop: "8px", fontSize: "0.85rem" }}>
           {t("riskcat result next steps none")}
         </div>
       </div>
@@ -63,8 +63,8 @@ export default function NextStepsSection({
 
   return (
     <div>
-      <h6 className="fw-bold mb-1 mt-2" style={{ color: "var(--cma-primary-700)" }}>{t("aiact2 result provider continue label")}</h6>
-      <div style={{ borderTop: "1px solid var(--cma-primary-600)", paddingTop: "8px" }} className="d-flex flex-column gap-2">
+      <h6 className="fw-bold mb-1 mt-2" style={{ color: "var(--cma-primary)" }}>{t("aiact2 result provider continue label")}</h6>
+      <div style={{ borderTop: "1px solid var(--cma-primary)", paddingTop: "8px" }} className="d-flex flex-column gap-2">
         {rows.map(({ labelKey, item }) => (
           <div key={labelKey} className="d-flex align-items-center gap-2">
             <span style={{ fontSize: "0.85rem", marginRight: "0.25rem" }}>{t(labelKey)}</span>
