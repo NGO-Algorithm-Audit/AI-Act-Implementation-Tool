@@ -503,7 +503,7 @@
                     "Toewijzing of toelating van studenten tot onderwijs, opleiding of scholing",
                     "Beoordelen van het niveau of de kwaliteit van het onderwijs dat iemand ontvangt of tot heeft",
                     "Evalueren van leerresultaten of begeleiden van het leerproces (gepersonaliseerd leren)",
-                    "Monitoren en detecteren van ongeoorloofd gedrag van leerlingen, studenten of stagiairs (bijv. plagiaat detectie, proctoring, anti-cheat software)",
+                    "Monitoren en detecteren van ongeoorloofd gedrag van leerlingen, studenten of stagiairs",
                     "Geen van de bovenstaande"
                   ]
                 }
@@ -520,7 +520,7 @@
                             "Toewijzing of toelating van studenten tot onderwijs, opleiding of scholing",
                             "Beoordelen van het niveau of de kwaliteit van het onderwijs dat iemand ontvangt of tot heeft",
                             "Evalueren van leerresultaten of begeleiden van het leerproces (gepersonaliseerd leren)",
-                            "Monitoren en detecteren van ongeoorloofd gedrag van leerlingen, studenten of stagiairs (bijv. plagiaat detectie, proctoring, anti-cheat software)"
+                            "Monitoren en detecteren van ongeoorloofd gedrag van leerlingen, studenten of stagiairs"
                           ]
                         },
                         "exceptionHigh": { "$ref": "#/definitions/exceptionHigh" }
@@ -1714,9 +1714,17 @@
       "ui:widget": "radio",
       "ui:description": "Als geen van de domeinen van toepassing is, selecteer dan 'Geen van de bovenstaande'. Selecteer ook een domein als het AI-systeem een kleine of ondersteunende rol binnen het domein vervult.",
       "ui:descriptionStyle": "plain",
-      "ui:enumDescriptions": [
+      "ui:enumTooltips": [
         "Bijv. gas, water, verwarming, elektriciteitsvoorziening; het beheer of de exploitatie van wegen, bruggen of wegverkeer; en kritieke digitale infrastructuur (internetknooppunten, DNS-diensten, registratie van topleveldomeinnamen, cloudcomputingdiensten, datacenterdiensten, openbare elektronische communicatienetwerken en elektronische communicatiediensten).",
-        null, null, null, null, null, null, null, null, null
+        "Bijv. plaatsing en toelating, evaluatie en toetsing, maar ook controle zoals plagiaatdetectie en anti-cheat software.",
+        "Voorbeelden van hoe AI-systemen worden gebruikt in de context van arbeid zijn:\n• Registreren van uren, meten van KPI's en prestaties\n• Taakverdeling\n• Werving en selectie\n• Instroom en doorstroom (arbeidsvoorwaarden, contractuele voorwaarden)\n• Uitstroom (beëindiging van het dienstverband)\n\nKies ook 'ja' wanneer de toepassing in grote lijnen onder het bovenstaande valt, ook als de toepassing een kleine rol speelt in een verder handmatig proces.",
+        "Bijv. processen rond uitkeringen of toeslagen, zoals aanvraag, administratie, uitvoering, handhaving, terugvordering en bezwaar. Dit omvat ook het kwijtschelden van boetes, terugbetalingen of het verlenen van een betalingsregeling. Selecteer deze optie als de toepassing een kleine rol speelt in het proces.",
+        "Bijvoorbeeld om te bepalen of iemand een betalingsregeling kan krijgen voor het betalen van belastingen, een boete, of het terugbetalen van een uitkering.",
+        "Wetshandhaving omvat het voorkomen, opsporen en vervolgen van strafbare feiten, de tenuitvoerlegging van straffen en de bescherming van de openbare veiligheid. Denk aan politie, buitengewoon opsporingsambtenaren en de uitvoering van (taak)straffen door de reclassering. Ook andere instanties, zoals jeugdbeschermingsorganisaties en specifieke (inspectie)diensten, kunnen aan wetshandhaving doen. Selecteer dit antwoord ook voor organisaties en instellingen die wetshandhavingsinstanties ondersteunen, zoals een forensisch instituut, en voor activiteiten die namens wetshandhavingsinstanties worden uitgevoerd.",
+        null,
+        "Professionele kwesties waarin een rechter een uitspraak doet, vallen onder de rechtspraak. Alternatieve geschillenbeslechting omvat tuchtrecht, ombudsmannen, arbitrage en klachtencommissies zoals de Reclame Code Commissie, de Raad voor de Journalistiek en de Landelijke Klachtencommissie Onderwijs.",
+        null,
+        null
       ],
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
       "ui:id-badge-label": "Bijlage III AI-verordening - Hoog-risico AI-systemen als bedoeld in artikel 6(2)",
@@ -1766,6 +1774,13 @@
     "III.3.uses": {
       "ui:widget": "radio",
       "ui:description": "Kies ook een optie wanneer het AI-systeem een deel uitmaakt van het proces, zonder de enige factor te zijn.",
+      "ui:enumTooltips": [
+        null,
+        "Kies ook 'ja' wanneer de toepassing bijdraagt aan de beoordeling. Er hoeft geen sprake te zijn van (volledig) geautomatiseerde beoordeling.",
+        "Voorbeelden zijn:\n• Evaluatie van (meerkeuze)toetsen\n• Ondersteuning bij beoordeling\n• Inschatting van leertempo of leerstijl\n• Personalisering van het curriculum of leerproces.",
+        "(bijv. plagiaat detectie, proctoring, anti-cheat software)",
+        null
+      ],
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
       "ui:id-badge-label": "Bijlage III(3) AI-verordening - AI-systemen met een hoog risico als bedoeld in artikel 6, lid 2",
       "ui:badges": [
@@ -1775,7 +1790,7 @@
         "Toewijzing of toelating van studenten tot onderwijs, opleiding of scholing": "Het AI-systeem wordt gebruikt voor toewijzing of toelating van studenten tot onderwijs, opleiding of scholing",
         "Beoordelen van het niveau of de kwaliteit van het onderwijs dat iemand ontvangt of tot heeft": "Het AI-systeem beoordeelt het niveau of de kwaliteit van het onderwijs dat iemand ontvangt of waartoe iemand toegang heeft",
         "Evalueren van leerresultaten of begeleiden van het leerproces (gepersonaliseerd leren)": "Het AI-systeem evalueert leerresultaten of begeleidt het leerproces (gepersonaliseerd leren)",
-        "Monitoren en detecteren van ongeoorloofd gedrag van leerlingen, studenten of stagiairs (bijv. plagiaat detectie, proctoring, anti-cheat software)": "Het AI-systeem monitort en detecteert ongeoorloofd gedrag van leerlingen, studenten of stagiairs (bijv. plagiaatdetectie, proctoring, anti-cheat software)",
+        "Monitoren en detecteren van ongeoorloofd gedrag van leerlingen, studenten of stagiairs": "Het AI-systeem monitort en detecteert ongeoorloofd gedrag van leerlingen, studenten of stagiairs (bijv. plagiaatdetectie, proctoring, anti-cheat software)",
         "Geen van de bovenstaande": "Het AI-systeem wordt niet gebruikt voor een van de genoemde onderwijscontexten"
       },
       "ui:id": "q16"
@@ -1783,6 +1798,15 @@
     "III.4.uses": {
       "ui:widget": "radio",
       "ui:description": "Kies ook een optie wanneer het AI-systeem een deel uitmaakt van het proces. Er hoeft geen volledig geautomatiseerde beoordeling of beslissing te zijn.",
+      "ui:enumTooltips": [
+        "Dit omvat zowel gerichte werving als het schrijven van gerichte functieomschrijvingen.",
+        null,
+        null,
+        null,
+        "We bedoelen medewerkers in de breedste zin, inclusief werknemers maar ook freelancers en via een derde partij ingehuurde medewerkers (tijdelijk, detachering).",
+        "Denk aan administratieve processen waarbij uren, productiviteit, snelheid, pauzes, prestaties of gedrag worden verwerkt.\n\nWe bedoelen medewerkers in de breedste zin, inclusief werknemers maar ook freelancers en via een derde partij ingehuurde medewerkers (tijdelijk, detachering).",
+        null
+      ],
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
       "ui:id-badge-label": "Bijlage III(4) AI-verordening - AI-systemen met een hoog risico als bedoeld in artikel 6, lid 2",
       "ui:badges": [
@@ -1897,11 +1921,10 @@
     },
     "III.7.uses": {
       "ui:widget": "radio",
-      "ui:description": "Kies ook 'ja' wanneer het AI-systeem wordt gebruikt bij het beoordelen van de betrouwbaarheid van bewijs voor aanvragen of klachten.",
       "ui:enumTooltips": [
         null,
         "Denk aan een veiligheids- of gezondheidsrisico dat een migrant of asielzoeker met zich meebrengt, zoals tuberculosescreening.",
-        null,
+        "Selecteer deze optie ook wanneer het AI-systeem wordt gebruikt om personen te detecteren, herkennen of identificeren, of voor het beoordelen van de betrouwbaarheid van bewijs voor aanvragen of klachten.",
         null
       ],
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
