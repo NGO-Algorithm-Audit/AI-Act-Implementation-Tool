@@ -500,10 +500,10 @@
                   "type": "string",
                   "title": "In which of the following education contexts is the AI system used?",
                   "enum": [
-                    "Allocation or admission of students to education, trainingor schooling",
+                    "Allocation or admission of students to education, training or schooling",
                     "Assessing the level or quality of education that someone receives or has access to",
                     "Evaluating learning outcomes or guiding the learning process (personalized learning)",
-                    "Monitoring and detecting unauthorized behavior of pupils, studentsor trainees (e.g., plagiarism detection, proctoring, anti-cheating software)",
+                    "Monitoring and detecting unauthorized behavior of pupils, students or trainees",
                     "None of the above"
                   ]
                 }
@@ -517,10 +517,10 @@
                       "properties": {
                         "III.3.uses": {
                           "enum": [
-                            "Allocation or admission of students to education, trainingor schooling",
+                            "Allocation or admission of students to education, training or schooling",
                             "Assessing the level or quality of education that someone receives or has access to",
                             "Evaluating learning outcomes or guiding the learning process (personalized learning)",
-                            "Monitoring and detecting unauthorized behavior of pupils, studentsor trainees (e.g., plagiarism detection, proctoring, anti-cheating software)"
+                            "Monitoring and detecting unauthorized behavior of pupils, students or trainees"
                           ]
                         },
                         "exceptionHigh": { "$ref": "#/definitions/exceptionHigh" }
@@ -1714,9 +1714,17 @@
       "ui:widget": "radio",
       "ui:description": "If none of the domains apply, select 'None of the above'. Also select a domain when the AI system plays a small or supporting role within it.",
       "ui:descriptionStyle": "plain",
-      "ui:enumDescriptions": [
+      "ui:enumTooltips": [
         "E.g., gas, water, heating, electricity supply; the management or operation of roads, bridges or road traffic; and critical digital infrastructure (internet nodes, DNS services, top-level domain name registration, cloud computing services, data center services, public electronic communication networks, and electronic communication services).",
-        null, null, null, null, null, null, null, null, null
+        "E.g., placement and admission, evaluation and testing, but also control such as plagiarism detection and anti-cheating software.",
+        "Examples how AI systems are used in the context of employment are:\n• Recording hours, measuring KPIs and performance\n• Task distribution\n• Recruitment and selection\n• Inflow and progression (employment conditions, contractual terms)\n• Outflow (termination of contract)\n\nAlso choose 'yes' when the application broadly falls under the above, even if the application plays a small role in an otherwise manual process.",
+        "E.g., processes around benefits or allowances, such as application, administration, execution, enforcement, recovery, and objection. This also includes waiving fines, repayments, or granting a payment arrangement. Select this option if the application plays a small role in the process.",
+        "For example, to determine if someone can get a payment arrangement for paying taxes, a fine, or repaying a benefit.",
+        "Law enforcement includes the prevention, investigation, and prosecution of criminal offences, the execution of sentences, and the protection of public safety. Think of police, special enforcement officers, and the execution of (community) sentences by probation services. Other agencies, such as juvenile justice organizations and specific (inspection) services, can also engage in law enforcement. Also select this answer for organizations and institutions that support law enforcement agencies, such as a forensics institute, and for activities carried out on behalf of law enforcement agencies.",
+        null,
+        "Professional matters, in which a judge makes a ruling, fall under the judiciary. Alternative dispute resolution includes disciplinary law, ombudsmen, arbitration, and complaints committees such as the Advertising Code Committee, the Council for Journalism, and the National Complaints Committee for Education.",
+        null,
+        null
       ],
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
       "ui:id-badge-label": "Annex III AI Act - High-risk AI systems referred to in Article 6(2)",
@@ -1766,16 +1774,23 @@
     "III.3.uses": {
       "ui:widget": "radio",
       "ui:description": "Also choose an option when the AI system plays a part in the process, without being the only factor.",
+      "ui:enumTooltips": [
+        null,
+        "Also choose 'yes' when the application contributes to the assessment. There does not need to be (fully) automated assessment.",
+        "Examples are:\n• Evaluation of (multiple choice) tests\n• Grading assistance\n• Assessment of learning pace or style\n• Personalization of the curriculum or learning process.",
+        "(e.g., plagiarism detection, proctoring, anti-cheating software)",
+        null
+      ],
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
       "ui:id-badge-label": "Annex III(3) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
         { "label": "Recital 56 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-56" }
       ],
       "ui:id-summary": {
-        "Allocation or admission of students to education, trainingor schooling": "The AI system is used for allocation or admission of students to education, training or schooling",
+        "Allocation or admission of students to education, training or schooling": "The AI system is used for allocation or admission of students to education, training or schooling",
         "Assessing the level or quality of education that someone receives or has access to": "The AI system assesses the level or quality of education someone receives or has access to",
         "Evaluating learning outcomes or guiding the learning process (personalized learning)": "The AI system evaluates learning outcomes or guides the learning process (personalized learning)",
-        "Monitoring and detecting unauthorized behavior of pupils, studentsor trainees (e.g., plagiarism detection, proctoring, anti-cheating software)": "The AI system monitors and detects unauthorized behavior of pupils, students or trainees (e.g., plagiarism detection, proctoring, anti-cheating software)",
+        "Monitoring and detecting unauthorized behavior of pupils, students or trainees": "The AI system monitors and detects unauthorized behavior of pupils, students or trainees (e.g., plagiarism detection, proctoring, anti-cheating software)",
         "None of the above": "The AI system is not used for any of the listed education contexts"
       },
       "ui:id": "q16"
@@ -1783,6 +1798,15 @@
     "III.4.uses": {
       "ui:widget": "radio",
       "ui:description": "Also choose an option when the AI system plays a part in the process. There does not need to be fully automated assessment or decisions.",
+      "ui:enumTooltips": [
+        "This includes both targeted recruitment and writing targeted job descriptions.",
+        null,
+        null,
+        null,
+        "We mean employees in the broadest sense, including employees but also freelancers and employees hired through a third party (temporary, secondment).",
+        "Think of administrative processes where hours, productivity, speed, breaks, performance, or behavior are processed.\n\nWe mean employees in the broadest sense, including employees but also freelancers and employees hired through a third party (temporary, secondment).",
+        null
+      ],
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
       "ui:id-badge-label": "Annex III(4) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
@@ -1898,11 +1922,10 @@
     },
     "III.7.uses": {
       "ui:widget": "radio",
-      "ui:description": "Also choose 'yes' when the AI system is used in assessing the reliability of evidence for applications or complaints.",
       "ui:enumTooltips": [
         null,
         "Think of a safety or health risk that a migrant or asylum seeker brings, such as tuberculosis screening.",
-        null,
+        "Also select this option when the AI system is used to detect, recognise or identify individuals, or for assessing the reliability of evidence for applications or complaints.",
         null
       ],
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
