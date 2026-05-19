@@ -306,7 +306,42 @@ const WizardForm = ({
         }
       }
       if (node.dependencies && typeof node.dependencies === "object") {
-        for (const [depKey, dep] of Object.entries(node.dependencies)) {
+        const deps = node.dependencies as Record<string, any>;
+        const ownProps =
+          node.properties && typeof node.properties === "object"
+            ? (node.properties as Record<string, any>)
+            : {};
+        // A dependency key can itself be a field that only appears via
+        // another sibling dependency in the same `dependencies` map — e.g.
+        // exceptionHigh chains `exceptions` -> `6.1` -> `6.2`. Setting only
+        // the immediate gate (`6.1`) leaves `6.1` itself hidden, so the
+        // target never becomes visible. Walk back from the matched key,
+        // satisfying every gate, until we reach a real property of `node`.
+        const satisfyGateChain = (key: string, acc: Record<string, any>) => {
+          let current: string | null = key;
+          const guard = new Set<string>();
+          while (current && !guard.has(current) && !ownProps[current]) {
+            guard.add(current);
+            const cur = current;
+            let nextKey: string | null = null;
+            for (const [dk, d] of Object.entries(deps)) {
+              const branches = (d as any)?.oneOf;
+              if (!Array.isArray(branches)) continue;
+              const hit = branches.find(
+                (b: any) => b?.properties && b.properties[cur]
+              );
+              if (!hit) continue;
+              if (acc[dk] === undefined) {
+                const v = inferSatisfyingValue(hit.properties[dk]);
+                if (v !== undefined) acc[dk] = v;
+              }
+              nextKey = dk;
+              break;
+            }
+            current = nextKey;
+          }
+        };
+        for (const [depKey, dep] of Object.entries(deps)) {
           const oneOf = (dep as any)?.oneOf;
           if (!Array.isArray(oneOf)) continue;
           for (const branch of oneOf) {
@@ -317,6 +352,7 @@ const WizardForm = ({
                 const val = inferSatisfyingValue(branchProp);
                 if (val !== undefined) r[depKey] = val;
               }
+              satisfyGateChain(depKey, r);
               return r;
             }
           }
