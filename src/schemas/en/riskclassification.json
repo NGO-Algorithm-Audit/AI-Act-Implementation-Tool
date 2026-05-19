@@ -214,7 +214,7 @@
                   },
                   "III.1.2": {
                     "type": "string",
-                    "title": "Is the AI system used for public safety, crime prevention, investigationor prosecutionor the execution of criminal justice?",
+                    "title": "Is the AI system used for public safety, crime prevention, investigation or prosecution or the execution of criminal justice?",
                     "enum": [
                       "Yes",
                       "No"
@@ -540,9 +540,9 @@
                   "title": "In which of the following employment areas is the AI system used?",
                   "enum": [
                     "Placing targeted job advertisements",
-                    "Analyzing or filtering job applications (e.g., CVs, cover letters, application videosor interviews)",
+                    "Analyzing or filtering job applications (e.g., CVs, cover letters, application videos or interviews)",
                     "Assessing candidates (e.g., aptitude tests, automatic assessment based on video)",
-                    "Decisions regarding changed contractual terms, promotionsor position changes",
+                    "Decisions regarding changed contractual terms, promotions or position changes",
                     "Decisions in the area of employee outflow or termination",
                     "Determining the distribution of tasks among employees",
                     "None of the above"
@@ -569,9 +569,9 @@
                         "III.4.uses": {
                           "enum": [
                             "Placing targeted job advertisements",
-                            "Analyzing or filtering job applications (e.g., CVs, cover letters, application videosor interviews)",
+                            "Analyzing or filtering job applications (e.g., CVs, cover letters, application videos or interviews)",
                             "Assessing candidates (e.g., aptitude tests, automatic assessment based on video)",
-                            "Decisions regarding changed contractual terms, promotionsor position changes",
+                            "Decisions regarding changed contractual terms, promotions or position changes",
                             "Decisions in the area of employee outflow or termination",
                             "Determining the distribution of tasks among employees"
                           ]
@@ -617,7 +617,7 @@
               "properties": {
                 "III.5.decision": {
                   "type": "string",
-                  "title": "Is the AI system used to assess whether someone is eligible for a service, provision or benefit, or to decide whether a service is granted, denied, limited, withdrawnor reclaimed?",
+                  "title": "Is the AI system used to assess whether someone is eligible for a service, provision or benefit, or to decide whether a service is granted, denied, limited, withdrawn or reclaimed?",
                   "enum": ["Yes", "No"]
                 }
               },
@@ -647,7 +647,7 @@
                   "enum": [
                     "Creditworthiness assessment or credit scoring of individuals",
                     "Risk assessment or pricing for life or health insurance",
-                    "Evaluating emergency calls, deploying or prioritizing emergency servicesor triage of urgent medical care",
+                    "Evaluating emergency calls, deploying or prioritizing emergency services or triage of urgent medical care",
                     "None of the above"
                   ]
                 }
@@ -663,7 +663,7 @@
                           "enum": [
                             "Creditworthiness assessment or credit scoring of individuals",
                             "Risk assessment or pricing for life or health insurance",
-                            "Evaluating emergency calls, deploying or prioritizing emergency servicesor triage of urgent medical care"
+                            "Evaluating emergency calls, deploying or prioritizing emergency services or triage of urgent medical care"
                           ]
                         },
                         "exceptionHigh": { "$ref": "#/definitions/exceptionHigh" }
@@ -704,8 +704,8 @@
                             "Assess or estimate that someone will become a victim of criminal offenses",
                             "Act as a polygraph (lie detector) or similar instrument",
                             "Assess the reliability of evidence during the investigation or prosecution of criminal offenses",
-                            "Automatically evaluate or predict characteristics, behavioror personal aspects in the context of crime detection, investigationor prosecution",
-                            "Assess personality traits, characteristicsor previous criminal behavior of individuals or groups",
+                            "Automatically evaluate or predict characteristics, behavior or personal aspects in the context of crime detection, investigation or prosecution",
+                            "Assess personality traits, characteristics or previous criminal behavior of individuals or groups",
                             "None of the above"
                           ]
                         }
@@ -724,8 +724,8 @@
                             "Assess or estimate that someone will become a victim of criminal offenses",
                             "Act as a polygraph (lie detector) or similar instrument",
                             "Assess the reliability of evidence during the investigation or prosecution of criminal offenses",
-                            "Automatically evaluate or predict characteristics, behavioror personal aspects in the context of crime detection, investigationor prosecution",
-                            "Assess personality traits, characteristicsor previous criminal behavior of individuals or groups"
+                            "Automatically evaluate or predict characteristics, behavior or personal aspects in the context of crime detection, investigation or prosecution",
+                            "Assess personality traits, characteristics or previous criminal behavior of individuals or groups"
                           ]
                         },
                         "exceptionHigh": { "$ref": "#/definitions/exceptionHigh" }
@@ -746,7 +746,7 @@
                   "enum": [
                     "Act as a polygraph (lie detector) or similar instrument",
                     "Assess risks for a person entering the territory of a member state of the European Union.",
-                    "Process asylum, visaor residence permit applicationsor handle complaints related to the eligibility of the applicant",
+                    "Process asylum, visa or residence permit applications or handle complaints related to the eligibility of the applicant",
                     "None of the above"
                   ]
                 }
@@ -772,7 +772,7 @@
                           "enum": [
                             "Act as a polygraph (lie detector) or similar instrument",
                             "Assess risks for a person entering the territory of a member state of the European Union.",
-                            "Process asylum, visaor residence permit applicationsor handle complaints related to the eligibility of the applicant"
+                            "Process asylum, visa or residence permit applications or handle complaints related to the eligibility of the applicant"
                           ]
                         },
                         "exceptionHigh": { "$ref": "#/definitions/exceptionHigh" }
@@ -1606,7 +1606,7 @@
     "5.h.verify": {
       "ui:widget": "radio",
       "ui:descriptionStyle": "plain",
-      "ui:alertDescription": "Verification and authentication mean confirming an already-known identity: the person is present and willing, and the system checks them against a reference that belongs to them. If the person is unknown, passiveor not being matched against their own pre-stored reference, the system is not verifying or authenticating – it is trying to find out who someone is (identification) or infer something about them (categorisation).\n\nExamples of verification and authentication:\n- Unlocking a phone by matching your face to the face stored on the device\n- Fingerprint reader giving access to building by matching your fingerprint to your enrolled profile\n- A camera checks if your face matches the photo in your passport.\n\nExamples not involving verification or authentication, but identification or categorization:\n- A camera at a stadium entrance scans every face in the crowd to find a wanted suspect (identification)\n- An airport uses facial recognition to spot known terrorists among passengers without their knowledge (identification)\n- A shop uses cameras to detect the emotions or stress levels of customers (categorisation)\n- An HR system analyses job applicants' facial expressions during video interviews (categorisation)\n- A system checks whether someone walking past a camera is male or female based on their face (biometric categorisation)\n- A police database is searched with CCTV footage to identify who committed a crime (identification).",
+      "ui:alertDescription": "Verification and authentication mean confirming an already-known identity: the person is present and willing, and the system checks them against a reference that belongs to them. If the person is unknown, passive or not being matched against their own pre-stored reference, the system is not verifying or authenticating – it is trying to find out who someone is (identification) or infer something about them (categorisation).\n\nExamples of verification and authentication:\n- Unlocking a phone by matching your face to the face stored on the device\n- Fingerprint reader giving access to building by matching your fingerprint to your enrolled profile\n- A camera checks if your face matches the photo in your passport.\n\nExamples not involving verification or authentication, but identification or categorization:\n- A camera at a stadium entrance scans every face in the crowd to find a wanted suspect (identification)\n- An airport uses facial recognition to spot known terrorists among passengers without their knowledge (identification)\n- A shop uses cameras to detect the emotions or stress levels of customers (categorisation)\n- An HR system analyses job applicants' facial expressions during video interviews (categorisation)\n- A system checks whether someone walking past a camera is male or female based on their face (biometric categorisation)\n- A police database is searched with CCTV footage to identify who committed a crime (identification).",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
       "ui:id-badge-label": "Annex III(1) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
@@ -1745,7 +1745,7 @@
     "III.2.4": {
       "ui:widget": "radio",
       "ui:descriptionStyle": "plain",
-      "ui:alertDescription": "A component with a safety function is intended to eliminate or reduce a risk. If the failure or malfunction of the AI system endangers the health and safety of people or property, choose yes. Examples of components with a safety function are:\n- A system that automatically closes a lane for a tunnel during road congestion to prevent traffic jams in the tunnel\n- Fire alarm systems\n- Other detection or alarm functions that respond to over/under pressure, temperatureor voltage\n- Collision avoidance systems in vehicles that automatically brake to prevent a collision\n- Firewall or antivirus software.",
+      "ui:alertDescription": "A component with a safety function is intended to eliminate or reduce a risk. If the failure or malfunction of the AI system endangers the health and safety of people or property, choose yes. Examples of components with a safety function are:\n- A system that automatically closes a lane for a tunnel during road congestion to prevent traffic jams in the tunnel\n- Fire alarm systems\n- Other detection or alarm functions that respond to over/under pressure, temperature or voltage\n- Collision avoidance systems in vehicles that automatically brake to prevent a collision\n- Firewall or antivirus software.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
       "ui:id-badge-label": "Annex III(2) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
@@ -1814,9 +1814,9 @@
       ],
       "ui:id-summary": {
         "Placing targeted job advertisements": "The AI system is used to place targeted job advertisements",
-        "Analyzing or filtering job applications (e.g., CVs, cover letters, application videosor interviews)": "The AI system analyzes or filters job applications (e.g., CVs, cover letters, application videos or interviews)",
+        "Analyzing or filtering job applications (e.g., CVs, cover letters, application videos or interviews)": "The AI system analyzes or filters job applications (e.g., CVs, cover letters, application videos or interviews)",
         "Assessing candidates (e.g., aptitude tests, automatic assessment based on video)": "The AI system assesses candidates (e.g., aptitude tests, automatic assessment based on video)",
-        "Decisions regarding changed contractual terms, promotionsor position changes": "The AI system informs decisions on changed contractual terms, promotions or position changes",
+        "Decisions regarding changed contractual terms, promotions or position changes": "The AI system informs decisions on changed contractual terms, promotions or position changes",
         "Decisions in the area of employee outflow or termination": "The AI system informs decisions on employee outflow or termination",
         "Determining the distribution of tasks among employees": "The AI system determines the distribution of tasks among employees",
         "None of the above": "The AI system is not used for any of the listed employment tasks"
@@ -1825,7 +1825,7 @@
     },
     "III.4.8": {
       "ui:widget": "radio",
-      "ui:description": "Think of administrative processes where hours, productivity, speed, breaks, performanceor behavior are processed.\n\nWe mean employees in the broadest sense, including employees but also freelancers and employees hired through a third party (temporary, secondment).",
+      "ui:description": "Think of administrative processes where hours, productivity, speed, breaks, performance or behavior are processed.\n\nWe mean employees in the broadest sense, including employees but also freelancers and employees hired through a third party (temporary, secondment).",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
       "ui:id-badge-label": "Annex III(4) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
@@ -1876,7 +1876,7 @@
       "ui:id-summary": {
         "Creditworthiness assessment or credit scoring of individuals": "The AI system is used for creditworthiness assessment or credit scoring of individuals",
         "Risk assessment or pricing for life or health insurance": "The AI system is used for risk assessment or pricing for life or health insurance",
-        "Evaluating emergency calls, deploying or prioritizing emergency servicesor triage of urgent medical care": "The AI system evaluates emergency calls, deploys or prioritizes emergency services, or triages urgent medical care",
+        "Evaluating emergency calls, deploying or prioritizing emergency services or triage of urgent medical care": "The AI system evaluates emergency calls, deploys or prioritizes emergency services, or triages urgent medical care",
         "None of the above": "The AI system is not used for any of the listed financial or emergency purposes"
       },
       "ui:id": "q21"
@@ -1913,9 +1913,9 @@
         "Assess or estimate that someone will become a victim of criminal offenses": "The AI system assesses or estimates that someone will become a victim of criminal offenses",
         "Act as a polygraph (lie detector) or similar instrument": "The AI system acts as a polygraph (lie detector) or similar instrument",
         "Assess the reliability of evidence during the investigation or prosecution of criminal offenses": "The AI system assesses the reliability of evidence during investigation or prosecution of criminal offenses",
-        "Automatically evaluate or predict characteristics, behaviororpersonal aspects in the context of crime detection, investigation or prosecution": "The AI system automatically evaluates or predicts characteristics, behavior or personal aspects in the context of crime detection, investigation or prosecution",
-        "Automatically evaluate or predict characteristics, behavioror personal aspects in the context of crime detection, investigationor prosecution": "The AI system automatically evaluates or predicts characteristics, behavior or personal aspects in the context of crime detection, investigation or prosecution",
-        "Assess personality traits, characteristicsor previous criminal behavior of individuals or groups": "The AI system assesses personality traits, characteristics or previous criminal behavior of individuals or groups",
+        "Automatically evaluate or predict characteristics, behavior or personal aspects in the context of crime detection, investigation or prosecution": "The AI system automatically evaluates or predicts characteristics, behavior or personal aspects in the context of crime detection, investigation or prosecution",
+        "Automatically evaluate or predict characteristics, behavior or personal aspects in the context of crime detection, investigation or prosecution": "The AI system automatically evaluates or predicts characteristics, behavior or personal aspects in the context of crime detection, investigation or prosecution",
+        "Assess personality traits, characteristics or previous criminal behavior of individuals or groups": "The AI system assesses personality traits, characteristics or previous criminal behavior of individuals or groups",
         "None of the above": "The AI system is not used for any of the listed law-enforcement tasks"
       },
       "ui:id": "q23"
@@ -1936,7 +1936,7 @@
       "ui:id-summary": {
         "Act as a polygraph (lie detector) or similar instrument": "The AI system acts as a polygraph (lie detector) or similar instrument",
         "Assess risks for a person entering the territory of a member state of the European Union.": "The AI system assesses risks for a person entering the territory of a Member State of the European Union",
-        "Process asylum, visaor residence permit applicationsor handle complaints related to the eligibility of the applicant": "The AI system processes asylum, visa or residence permit applications, or handles eligibility-related complaints",
+        "Process asylum, visa or residence permit applications or handle complaints related to the eligibility of the applicant": "The AI system processes asylum, visa or residence permit applications, or handles eligibility-related complaints",
         "None of the above": "The AI system is not used for any of the listed migration or border-control tasks"
       },
       "ui:id": "q24"
@@ -1996,7 +1996,7 @@
     },
     "5.a": {
       "ui:widget": "radio",
-      "ui:description": "Subliminal techniques include showing images so briefly that they cannot be consciously perceived. Manipulation without awareness includes AI chatbots that give advice influencing decisions, applications that stimulate addictionor systems that prevent users from filing a complaint while they intended to.",
+      "ui:description": "Subliminal techniques include showing images so briefly that they cannot be consciously perceived. Manipulation without awareness includes AI chatbots that give advice influencing decisions, applications that stimulate addiction or systems that prevent users from filing a complaint while they intended to.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5",
       "ui:id-badge-label": "Art. 5(1)(a) AI Act - Prohibited AI practices",
       "ui:id-summary": {
@@ -2046,7 +2046,7 @@
       "ui:enumTooltips": [
         "This includes AI systems developed by students as part of their studies or by scientists affiliated with a university. In that case, the research must follow recognized ethical and professional standards for scientific research. For example, all participants must be informed that they are part of scientific research.",
         null,
-        "National security purposes mean preventing and punishing activities that can seriously destabilize the constitutional, political, economicor social structures of a country. Think of direct threats to society, the populationor the state itself, such as terrorist activities.\n\nNote: When the AI system is also used for other activities or purposes, such as regular prevention, detection, and investigation of criminal offenses, choose 'None of the above'.",
+        "National security purposes mean preventing and punishing activities that can seriously destabilize the constitutional, political, economic or social structures of a country. Think of direct threats to society, the population or the state itself, such as terrorist activities.\n\nNote: When the AI system is also used for other activities or purposes, such as regular prevention, detection, and investigation of criminal offenses, choose 'None of the above'.",
         null
       ],
       "ui:badges": [
@@ -2065,7 +2065,7 @@
     },
     "6.1": {
       "ui:widget": "radio",
-      "ui:description": "Think of automatically evaluating professional performance, economic situation, health, personal preferences, interests, reliability, behavior, locationor movements of a person to analyze or predict.",
+      "ui:description": "Think of automatically evaluating professional performance, economic situation, health, personal preferences, interests, reliability, behavior, location or movements of a person to analyze or predict.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-6",
       "ui:id-badge-label": "Art. 6(3) AI Act - Classification rules for high-risk AI systems",
       "ui:badges": [
@@ -2081,10 +2081,10 @@
     "6.2": {
       "ui:widget": "radio",
       "ui:enumTooltips": [
-        "For example: converting unstructured data into structured data, an AI system that classifies incoming documents into categoriesor an AI system used to detect duplicates within a large number of applications.",
-        "For example: an AI system that improves the language of previously drafted documents, for example, regarding professional tone or academic styleor by tailoring a text to a specific brand message.",
+        "For example: converting unstructured data into structured data, an AI system that classifies incoming documents into categories or an AI system used to detect duplicates within a large number of applications.",
+        "For example: an AI system that improves the language of previously drafted documents, for example, regarding professional tone or academic style or by tailoring a text to a specific brand message.",
         "For example: an AI system that, after a set of decisions has been made, analyzes patterns in decision-making so that human decision-makers can learn from them.",
-        "For example: smart solutions for file management, including functions such as indexing, searching, text and speech processingor linking data to other data sourcesor AI systems used for translating source documents.",
+        "For example: smart solutions for file management, including functions such as indexing, searching, text and speech processing or linking data to other data sources or AI systems used for translating source documents.",
         null
       ],
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-6",
