@@ -80,7 +80,9 @@
       "Bash(node *)",
       "Bash(cp \"/Users/jurriaan/Github repos/ClassifyMyAI/src/schemas/en/riskclassification.json\" \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/schemas/en/riskclassification.json\")",
       "Bash(cp \"/Users/jurriaan/Github repos/ClassifyMyAI/src/schemas/nl/risicoclassificatie.json\" \"/Users/jurriaan/Github repos/AI-Act-Implementation-Tool/src/schemas/nl/risicoclassificatie.json\")",
-      "Bash(git -c core.quotepath=false diff --name-only)"
+      "Bash(git -c core.quotepath=false diff --name-only)",
+      "Bash(find /Users/jurriaan/Github_repos/ClassifyMyAI -type f -name \"*.ts\" -o -name \"*.tsx\" -o -name \"*.js\" -o -name \"*.jsx\" | head -30)",
+      "Read(//Users/jurriaan/Github_repos/ClassifyMyAI/**)"
     ]
   }
 }
