@@ -39,8 +39,8 @@ export const enTranslations: IdentificationTranslations = {
   ],
   q1EnumTooltips: [
     null,
-    "For example, for routing, communication campaigns, or risk classification.",
-    null,
+    "For example, for routing, communication campaigns or risk classification, such as alerts or flags.",
+    "This includes social media feeds, search rankings and similar recommendations.",
     null,
     "This includes output of an 'AI agent'.",
     null,

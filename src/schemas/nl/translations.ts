@@ -39,8 +39,8 @@ export const nlTranslations: IdentificationTranslations = {
   ],
   q1EnumTooltips: [
     null,
-    "Bijvoorbeeld ten behoeve van routering, communicatiecampagnes of risicoclassificatie.",
-    null,
+    "Bijvoorbeeld ten behoeve van routering, communicatiecampagnes of risicoclassificatie, zoals signaleringen of markeringen.",
+    "Hieronder vallen ook social media feeds, zoekresultaten en vergelijkbare aanbevelingen.",
     null,
     "Hieronder valt ook de output van een 'AI-agent'.",
     null,
