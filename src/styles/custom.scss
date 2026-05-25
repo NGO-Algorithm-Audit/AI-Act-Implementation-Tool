@@ -114,6 +114,35 @@ body {
   }
 }
 
+.enum-tooltip-button {
+  border: none;
+  background: none;
+  padding: 0 0 0 0.25rem;
+  line-height: 1;
+
+  &:focus-visible {
+    outline: 2px solid #005AA7;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+.cma-info-popover {
+  max-width: 520px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+
+  .popover-body {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: #1f2937;
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
 .enum-option-description {
   display: block;
   font-style: italic;
