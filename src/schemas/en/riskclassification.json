@@ -1161,9 +1161,8 @@
                 "properties": {
                   "6.2": {
                     "enum": [
-                      "Yes, the AI system is used for a limited procedural task.",
+                      "Yes, the AI system is used for a narrow procedural task.",
                       "Yes, the AI system is used to improve the result of a previously human-performed activity.",
-                      "Yes, the AI system is used to detect decision-making patterns or deviations from previous decision-making patterns.",
                       "Yes, the AI system is used in a preparatory step, without influencing the outcome."
                     ]
                   },
@@ -1171,6 +1170,56 @@
                     "$ref": "#/definitions/outputHighExcept"
                   }
                 }
+              },
+              {
+                "properties": {
+                  "6.2": {
+                    "enum": [
+                      "Yes, the AI system is used to detect decision-making patterns or deviations from previous decision-making patterns."
+                    ]
+                  },
+                  "6.3": {
+                    "type": "array",
+                    "title": "Which of the following scenarios apply?",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "The human assessment is completed",
+                        "The AI system only performs an ex-post comparative assessment, which involves determining whether a current decision aligns with previous patterns or decisions.",
+                        "The AI system doesn't replace or influence the previously completed human assessment without proper human review."
+                      ]
+                    },
+                    "uniqueItems": true,
+                    "minItems": 0
+                  }
+                },
+                "required": ["6.3"],
+                "allOf": [
+                  {
+                    "if": {
+                      "properties": {
+                        "6.3": {
+                          "allOf": [
+                            { "contains": { "const": "The human assessment is completed" } },
+                            { "contains": { "const": "The AI system only performs an ex-post comparative assessment, which involves determining whether a current decision aligns with previous patterns or decisions." } },
+                            { "contains": { "const": "The AI system doesn't replace or influence the previously completed human assessment without proper human review." } }
+                          ]
+                        }
+                      },
+                      "required": ["6.3"]
+                    },
+                    "then": {
+                      "properties": {
+                        "output": { "$ref": "#/definitions/outputHighExcept" }
+                      }
+                    },
+                    "else": {
+                      "properties": {
+                        "output": { "$ref": "#/definitions/outputHigh" }
+                      }
+                    }
+                  }
+                ]
               },
               {
                 "properties": {
@@ -2081,10 +2130,10 @@
     "6.2": {
       "ui:widget": "radio",
       "ui:enumTooltips": [
-        "For example: converting unstructured data into structured data, an AI system that classifies incoming documents into categories or an AI system used to detect duplicates within a large number of applications.",
-        "For example: an AI system that improves the language of previously drafted documents, for example, regarding professional tone or academic style or by tailoring a text to a specific brand message.",
+        "For example, an AI system performs a narrow procedural task when it sorts incoming applications for admission to school or university according to the grade or educational level applied for. Such systems may categorise applications into predefined categories (e.g. primary, secondary, high school or specific grades) based on information provided in the application, without evaluating applicants' suitability or making admission decisions. In a similar scenario, an AI system that is used to detect and flag incomplete forms to initiate their return to the applicant to be completed correctly could also be classified as a narrow procedural task. However, this condition does not apply to all categorisation systems. In particular, AI systems that perform a value judgement of data relevant for decision-making, for example categorisation of input data as 'useful' or 'less useful' for the human assessment, or attributing a score or ranking to input data, are likely to have a broader impact on the assessment process and will therefore not be considered to perform only a 'narrow procedural task'.",
+        "For example: an AI system that improves the language of previously drafted documents, for example, regarding professional tone or academic style or by tailoring a text to a specific brand message. The notion 'improve' in this context means that the application of the AI system may lead to changes, but these changes should not revert or lead to a full revision or replacement of the previously completed human activity. For example, if an AI system checks a decision, plan, or construction made by a human and provides a substantially different solution, this would not be considered 'improving' a previously completed human activity, since it is not limited to refining or enhancing the outcome of that activity. By contrast, examples of AI systems that serve auxiliary improvement functions include systems that flag errors or contradictions in finalized human work that perform a quality-assurance function; systems that map conclusions to evidentiary records to strengthen the traceability of a decision without substituting the human judgment; systems that convert human-validated content for interoperability or accessibility purposes that transform but do not replace human output.",
         "For example: an AI system that, after a set of decisions has been made, analyzes patterns in decision-making so that human decision-makers can learn from them.",
-        "For example: smart solutions for file management, including functions such as indexing, searching, text and speech processing or linking data to other data sources or AI systems used for translating source documents.",
+        "'Preparatory' refers to tasks that occur prior to the actual assessment process. The decisive factor in determining whether a task is 'preparatory' is the task's role in the decision-making process and proximity to the final human decision. This specification is important, since it differentiates a preparatory task from the narrow procedural task, which can occur during the assessment process so long as it is clearly defined and limited in scope. As specified in Recital 53 AI Act, the preparatory nature of the task should be such that the 'possible impact of the output of the system is very low in terms of representing a risk for the assessment to follow'. At the same time, if the narrow procedural task occurs prior to the assessment and is preparatory in nature, both the 'narrow procedural task' and the 'preparatory step' scenario apply.\n\nIf an AI system's output is intended to inform a human operator's assessment, it may be considered to perform a preparatory task only if the system's output is a general input or factor, for example supplementary information that supports an operator's decision-making process. Where the AI system is intended to produce a specific recommendation or evaluation of the case, it plays a decisive role in the assessment or the decision and can therefore not be considered to perform a preparatory task.\n\nExample 1: smart solutions for file management, including functions such as indexing, searching, text and speech processing or linking data to other data sources or AI systems used for translating source documents.\n\nExample 2: An AI system is intended to be used for assessing data relevant to a decision (e.g., in relation to public benefits) and provides a human operator with references to the relevant legal provisions, information on jurisdiction, and possibly existing internal guidelines relevant to the decision-making process. The tasks performed by the system could be considered as preparatory, since they neither analyse nor evaluate the concrete cases at hand and do not produce an output that materially influences the decision. Rather, the system references general information as a supplementary information for the human assessor to consider in his or her decision.",
         null
       ],
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-6",
@@ -2100,6 +2149,28 @@
         "No": "The AI system is not limited to narrow procedural or preparatory tasks"
       },
       "ui:id": "q34"
+    },
+    "6.3": {
+      "ui:widget": "checkboxes",
+      "ui:description": "Select all scenarios that apply.",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Example: An AI system intended to analyse past eligibility checks completed by public administrators in the public administration in order to detect decision-making patterns or deviations for quality-assurance and reporting, without proposing outcomes on live cases or evaluating the performance of staff members, e.g., in the context of the annual appraisal.",
+      "ui:enumTooltips": [
+        "This means that all necessary steps in the evaluation process have been taken.",
+        "The AI system must not infer relevant criteria from previous decisions and propose a new assessment based on those criteria.",
+        "'Proper' means that the human review applied after the AI system's assessment should be meaningful and comprehensive, and it should consider, together with the result provided by the AI system, the various elements taken into account during the previously completed human assessment. Therefore, the output of the system can highlight discrepancies with previously made decisions, but cannot modify the input or alter the underlying reasoning. In order to allow proper human review, the system should not only flag, but also provide information on the discrepancies. It should however merely inform (e.g., through analytical tools used for quality assurance and statistics) and not replace the human assessment."
+      ],
+      "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-6",
+      "ui:id-badge-label": "Art. 6(3)(c) AI Act - Auxiliary-role carve-out",
+      "ui:badges": [
+        { "label": "Draft guidelines on the classification of high-risk AI systems (100)-(102)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+      ],
+      "ui:id-summary": {
+        "The human assessment is completed": "The human assessment is completed",
+        "The AI system only performs an ex-post comparative assessment, which involves determining whether a current decision aligns with previous patterns or decisions.": "The AI system only performs an ex-post comparative assessment",
+        "The AI system doesn't replace or influence the previously completed human assessment without proper human review.": "The AI system does not replace or influence the previously completed human assessment without proper human review"
+      },
+      "ui:id": "q35"
     },
     "intro": {
       "ui:id": "start",

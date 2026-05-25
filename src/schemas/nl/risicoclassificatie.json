@@ -1163,7 +1163,6 @@
                     "enum": [
                       "Ja, het AI-systeem wordt gebruikt voor een beperkte procedurele taak.",
                       "Ja, het AI-systeem wordt gebruikt om het resultaat van een eerder door mensen uitgevoerde activiteit te verbeteren.",
-                      "Ja, het AI-systeem wordt gebruikt om besluitvormingspatronen of afwijkingen van eerdere besluitvormingspatronen te detecteren.",
                       "Ja, het AI-systeem wordt gebruikt in een voorbereidende stap, zonder de uitkomst te beïnvloeden."
                     ]
                   },
@@ -1171,6 +1170,56 @@
                     "$ref": "#/definitions/outputHighExcept"
                   }
                 }
+              },
+              {
+                "properties": {
+                  "6.2": {
+                    "enum": [
+                      "Ja, het AI-systeem wordt gebruikt om besluitvormingspatronen of afwijkingen van eerdere besluitvormingspatronen te detecteren."
+                    ]
+                  },
+                  "6.3": {
+                    "type": "array",
+                    "title": "Welke van de volgende scenario's zijn van toepassing?",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "De menselijke beoordeling is voltooid",
+                        "Het AI-systeem voert uitsluitend een ex-post vergelijkende beoordeling uit, waarbij wordt bepaald of een huidig besluit overeenkomt met eerdere patronen of besluiten.",
+                        "Het AI-systeem vervangt of beïnvloedt de eerder voltooide menselijke beoordeling niet zonder passende menselijke evaluatie."
+                      ]
+                    },
+                    "uniqueItems": true,
+                    "minItems": 0
+                  }
+                },
+                "required": ["6.3"],
+                "allOf": [
+                  {
+                    "if": {
+                      "properties": {
+                        "6.3": {
+                          "allOf": [
+                            { "contains": { "const": "De menselijke beoordeling is voltooid" } },
+                            { "contains": { "const": "Het AI-systeem voert uitsluitend een ex-post vergelijkende beoordeling uit, waarbij wordt bepaald of een huidig besluit overeenkomt met eerdere patronen of besluiten." } },
+                            { "contains": { "const": "Het AI-systeem vervangt of beïnvloedt de eerder voltooide menselijke beoordeling niet zonder passende menselijke evaluatie." } }
+                          ]
+                        }
+                      },
+                      "required": ["6.3"]
+                    },
+                    "then": {
+                      "properties": {
+                        "output": { "$ref": "#/definitions/outputHighExcept" }
+                      }
+                    },
+                    "else": {
+                      "properties": {
+                        "output": { "$ref": "#/definitions/outputHigh" }
+                      }
+                    }
+                  }
+                ]
               },
               {
                 "properties": {
@@ -2080,10 +2129,10 @@
     "6.2": {
       "ui:widget": "radio",
       "ui:enumTooltips": [
-        "Bijvoorbeeld: een AI-systeem dat ongestructureerde gegevens omzet in gestructureerde gegevens, een AI-systeem dat inkomende documenten in categorieën indeelt, of een AI-systeem dat wordt gebruikt om duplicaten te detecteren binnen een groot aantal aanvragen.",
-        "Bijvoorbeeld: een AI-systeem dat de taal van eerder opgestelde documenten verbetert, bijvoorbeeld op het gebied van professionele toon of academische stijl, of door een tekst aan te passen aan een specifieke merkboodschap.",
+        "Een AI-systeem verricht bijvoorbeeld een beperkte procedurele taak wanneer het inkomende aanvragen voor toelating tot een school of universiteit sorteert op basis van het aangevraagde leerjaar of opleidingsniveau. Dergelijke systemen kunnen aanvragen indelen in vooraf gedefinieerde categorieën (bijv. basisonderwijs, voortgezet onderwijs, middelbare school of specifieke leerjaren) op basis van de in de aanvraag verstrekte informatie, zonder de geschiktheid van aanvragers te beoordelen of toelatingsbeslissingen te nemen. In een vergelijkbaar scenario zou ook een AI-systeem dat wordt gebruikt om onvolledige formulieren te detecteren en te markeren om deze terug te sturen naar de aanvrager om correct te worden ingevuld, kunnen worden geclassificeerd als een beperkte procedurele taak. Deze voorwaarde geldt echter niet voor alle categorisatiesystemen. Met name AI-systemen die een waardeoordeel vellen over gegevens die relevant zijn voor de besluitvorming, bijvoorbeeld door inputgegevens te categoriseren als 'nuttig' of 'minder nuttig' voor de menselijke beoordeling, of door een score of rangorde toe te kennen aan inputgegevens, hebben waarschijnlijk een bredere impact op het beoordelingsproces en worden daarom niet beschouwd als systemen die uitsluitend een 'beperkte procedurele taak' uitvoeren.",
+        "Bijvoorbeeld: een AI-systeem dat de taal van eerder opgestelde documenten verbetert, bijvoorbeeld op het gebied van professionele toon of academische stijl, of door een tekst aan te passen aan een specifieke merkboodschap. Het begrip 'verbeteren' betekent in deze context dat de toepassing van het AI-systeem tot wijzigingen kan leiden, maar dat deze wijzigingen niet mogen leiden tot een volledige herziening of vervanging van de eerder voltooide menselijke activiteit, noch deze ongedaan mogen maken. Als een AI-systeem bijvoorbeeld een door een mens genomen besluit, opgesteld plan of vervaardigde constructie controleert en een wezenlijk andere oplossing aandraagt, wordt dit niet beschouwd als het 'verbeteren' van een eerder voltooide menselijke activiteit, omdat het niet beperkt blijft tot het verfijnen of versterken van het resultaat van die activiteit. Voorbeelden van AI-systemen die wél een ondersteunende verbeterfunctie vervullen zijn daarentegen: systemen die fouten of tegenstrijdigheden signaleren in afgerond menselijk werk en zo een kwaliteitsborgingsfunctie vervullen; systemen die conclusies koppelen aan bewijsstukken om de traceerbaarheid van een besluit te versterken zonder het menselijk oordeel te vervangen; systemen die door mensen gevalideerde inhoud omzetten voor interoperabiliteits- of toegankelijkheidsdoeleinden en deze daarmee transformeren maar niet vervangen.",
         "Bijvoorbeeld: een AI-systeem dat, nadat een reeks beslissingen is genomen, patronen in de besluitvorming analyseert zodat menselijke besluitvormers ervan kunnen leren.",
-        "Bijvoorbeeld: slimme oplossingen voor dossierbeheer, inclusief functies zoals indexeren, zoeken, tekst- en spraakverwerking, of het koppelen van gegevens aan andere gegevensbronnen, of AI-systemen die worden gebruikt voor het vertalen van brondocumenten.",
+        "'Voorbereidend' verwijst naar taken die voorafgaan aan het feitelijke beoordelingsproces. Doorslaggevend bij de vraag of een taak 'voorbereidend' is, is de rol van die taak in het besluitvormingsproces en de mate van nabijheid tot het uiteindelijke menselijke besluit. Deze afbakening is van belang, omdat zij een voorbereidende taak onderscheidt van een beperkte procedurele taak, die wél tijdens het beoordelingsproces mag plaatsvinden zolang zij duidelijk omschreven en beperkt in omvang is. Zoals bepaald in overweging 53 AI-verordening, moet de voorbereidende aard van de taak zodanig zijn dat de 'mogelijke impact van de output van het systeem zeer gering is in termen van het vormen van een risico voor de daaropvolgende beoordeling'. Tegelijkertijd zijn, wanneer de beperkte procedurele taak voorafgaat aan de beoordeling en voorbereidend van aard is, zowel het scenario 'beperkte procedurele taak' als het scenario 'voorbereidende stap' van toepassing.\n\nAls de output van een AI-systeem bedoeld is om de beoordeling van een menselijke operator te informeren, kan het slechts geacht worden een voorbereidende taak uit te voeren wanneer de output van het systeem een algemene input of factor betreft, bijvoorbeeld aanvullende informatie die het besluitvormingsproces van de operator ondersteunt. Wanneer het AI-systeem bedoeld is om een specifieke aanbeveling of beoordeling van de zaak te produceren, speelt het een doorslaggevende rol in de beoordeling of het besluit en kan het derhalve niet geacht worden een voorbereidende taak uit te voeren.\n\nVoorbeeld 1: slimme oplossingen voor dossierbeheer, inclusief functies zoals indexeren, zoeken, tekst- en spraakverwerking, of het koppelen van gegevens aan andere gegevensbronnen, of AI-systemen die worden gebruikt voor het vertalen van brondocumenten.\n\nVoorbeeld 2: Een AI-systeem is bedoeld om te worden gebruikt voor het beoordelen van gegevens die relevant zijn voor een besluit (bijvoorbeeld met betrekking tot publieke voorzieningen) en voorziet een menselijke operator van verwijzingen naar de relevante wettelijke bepalingen, informatie over bevoegdheid, en eventueel bestaande interne richtlijnen die relevant zijn voor het besluitvormingsproces. De door het systeem verrichte taken kunnen worden beschouwd als voorbereidend, aangezien zij de concrete voorliggende zaken noch analyseren noch beoordelen en geen output produceren die het besluit wezenlijk beïnvloedt. Het systeem verwijst veeleer naar algemene informatie als aanvullende informatie die de menselijke beoordelaar kan meewegen in zijn of haar besluit.",
         null
       ],
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-6",
@@ -2099,6 +2148,28 @@
         "Nee": "Het AI-systeem is niet beperkt tot beperkte procedurele of voorbereidende taken"
       },
       "ui:id": "q34"
+    },
+    "6.3": {
+      "ui:widget": "checkboxes",
+      "ui:description": "Selecteer alle scenario's die van toepassing zijn.",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Voorbeeld: Een AI-systeem dat bedoeld is om eerder voltooide geschiktheidscontroles door overheidsmedewerkers binnen de overheid te analyseren om besluitvormingspatronen of afwijkingen te detecteren ten behoeve van kwaliteitsborging en rapportage, zonder uitkomsten voor lopende zaken voor te stellen of de prestaties van personeelsleden te beoordelen, bijvoorbeeld in het kader van de jaarlijkse beoordeling.",
+      "ui:enumTooltips": [
+        "Dit betekent dat alle noodzakelijke stappen in het beoordelingsproces zijn doorlopen.",
+        "Het AI-systeem mag geen relevante criteria afleiden uit eerdere besluiten en op basis daarvan een nieuwe beoordeling voorstellen.",
+        "'Passend' betekent dat de menselijke evaluatie die na de beoordeling door het AI-systeem wordt toegepast zinvol en alomvattend moet zijn, en samen met het door het AI-systeem geleverde resultaat de verschillende elementen moet meewegen die in de eerder voltooide menselijke beoordeling zijn betrokken. De output van het systeem kan dus afwijkingen ten opzichte van eerder genomen besluiten benadrukken, maar mag de input of de onderliggende redenering niet wijzigen. Om een passende menselijke evaluatie mogelijk te maken, moet het systeem niet alleen signaleren, maar ook informatie verstrekken over de afwijkingen. Het mag echter slechts informeren (bijvoorbeeld via analytische instrumenten voor kwaliteitsborging en statistiek) en de menselijke beoordeling niet vervangen."
+      ],
+      "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-6",
+      "ui:id-badge-label": "Art. 6(3)(c) AI-verordening - Uitzondering voor ondersteunende rol",
+      "ui:badges": [
+        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (100)-(102)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+      ],
+      "ui:id-summary": {
+        "De menselijke beoordeling is voltooid": "De menselijke beoordeling is voltooid",
+        "Het AI-systeem voert uitsluitend een ex-post vergelijkende beoordeling uit, waarbij wordt bepaald of een huidig besluit overeenkomt met eerdere patronen of besluiten.": "Het AI-systeem voert uitsluitend een ex-post vergelijkende beoordeling uit",
+        "Het AI-systeem vervangt of beïnvloedt de eerder voltooide menselijke beoordeling niet zonder passende menselijke evaluatie.": "Het AI-systeem vervangt of beïnvloedt de eerder voltooide menselijke beoordeling niet zonder passende menselijke evaluatie"
+      },
+      "ui:id": "q35"
     },
     "intro": {
       "ui:id": "start",
