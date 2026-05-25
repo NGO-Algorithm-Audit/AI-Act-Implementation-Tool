@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Form, OverlayTrigger, Popover } from "react-bootstrap";
 import {
   ariaDescribedByIds,
   enumOptionsIsSelected,
@@ -9,6 +9,19 @@ import {
   StrictRJSFSchema,
   WidgetProps,
 } from "@rjsf/utils";
+
+function renderTooltipBody(text: string): React.ReactNode {
+  const paragraphs = text.split(/\n\n+/);
+  return paragraphs.map((para, i) => (
+    <p
+      key={i}
+      className={i === paragraphs.length - 1 ? "mb-0" : "mb-2"}
+      style={{ whiteSpace: "pre-line" }}
+    >
+      {para}
+    </p>
+  ));
+}
 
 function renderLabel(text: string): React.ReactNode {
   const parts = String(text).split(/(\[[^\]]+\]\([^)]+\))/g);
@@ -80,16 +93,25 @@ export default function TooltipRadioWidget<
               {renderLabel(option.label)}
               {tooltip && (
                 <OverlayTrigger
+                  trigger="click"
+                  rootClose
                   placement="right"
                   overlay={
-                    <Tooltip id={`${optionId(id, index)}-tooltip`}>
-                      {tooltip}
-                    </Tooltip>
+                    <Popover
+                      id={`${optionId(id, index)}-popover`}
+                      className="cma-info-popover"
+                    >
+                      <Popover.Content>{renderTooltipBody(tooltip)}</Popover.Content>
+                    </Popover>
                   }
                 >
-                  <span className="enum-tooltip-icon" aria-label="More info">
-                    {" "}ⓘ
-                  </span>
+                  <button
+                    type="button"
+                    className="enum-tooltip-icon enum-tooltip-button"
+                    aria-label="More info"
+                  >
+                    ⓘ
+                  </button>
                 </OverlayTrigger>
               )}
               {description && (
