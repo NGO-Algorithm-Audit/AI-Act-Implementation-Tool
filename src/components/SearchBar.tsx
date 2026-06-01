@@ -37,7 +37,7 @@ function rankMatch(haystack: string, needle: string): number {
 
 type IndexedText = {
   text: string;
-  fieldKind: "title" | "option" | "description";
+  fieldKind: "title" | "option" | "description" | "badge";
   questionId: string;
   propertyKey: string;
 };
@@ -210,6 +210,39 @@ function buildRiskCategoryIndex(lang: string): IndexedText[] {
       }
     }
   }
+
+  // Per-question badges (the chips shown at the bottom of each screen, plus
+  // the question's primary article/annex label) — attribute them to the
+  // owning question so e.g. searching "Profiling" surfaces Q33 (the question
+  // where Profiling is a badge), not only the external GDPR link.
+  const fullUiSchema = (root.uiSchema ?? {}) as Record<string, Record<string, unknown>>;
+  for (const [propKey, ui] of Object.entries(fullUiSchema)) {
+    if (!ui || typeof ui !== "object") continue;
+    const uiId = ui["ui:id"];
+    if (typeof uiId !== "string" || !uiId) continue;
+    const qid = formatQuestionId(uiId, propKey);
+    const badges = ui["ui:badges"];
+    if (Array.isArray(badges)) {
+      for (const b of badges) {
+        if (
+          b && typeof b === "object" &&
+          typeof (b as { label?: unknown }).label === "string" &&
+          (b as { label: string }).label.trim().length > 1
+        ) {
+          out.push({
+            text: (b as { label: string }).label,
+            fieldKind: "badge",
+            questionId: qid,
+            propertyKey: propKey,
+          });
+        }
+      }
+    }
+    const primaryLabel = ui["ui:id-badge-label"];
+    if (typeof primaryLabel === "string" && primaryLabel.trim().length > 1) {
+      out.push({ text: primaryLabel, fieldKind: "badge", questionId: qid, propertyKey: propKey });
+    }
+  }
   return out;
 }
 
@@ -245,6 +278,29 @@ function buildIdentificationIndex(lang: string): IndexedText[] {
       for (const opt of Object.values(val as Record<string, unknown>)) {
         if (typeof opt === "string" && opt.trim().length > 1) {
           out.push({ text: opt, fieldKind: "option", questionId: qid, propertyKey });
+        }
+      }
+      continue;
+    }
+    // Badges shown at the bottom of a question screen (e.g. "Profiling",
+    // "High-impact algorithm") should make the question itself searchable —
+    // not just the external article/recital link in the global badge index.
+    const badgesMatch = key.match(/^(q\d+(?:_\d+|b)?)Badges$/);
+    if (badgesMatch && Array.isArray(val)) {
+      const propertyKey = badgesMatch[1];
+      const qid = formatQuestionId(propertyKey, propertyKey);
+      for (const b of val as unknown[]) {
+        if (
+          b && typeof b === "object" &&
+          typeof (b as { label?: unknown }).label === "string" &&
+          (b as { label: string }).label.trim().length > 1
+        ) {
+          out.push({
+            text: (b as { label: string }).label,
+            fieldKind: "badge",
+            questionId: qid,
+            propertyKey,
+          });
         }
       }
     }
@@ -506,6 +562,7 @@ export default function SearchBar({
         const fieldLabel =
           qi.fieldKind === "option" ? t("search field option") :
           qi.fieldKind === "description" ? t("search field description") :
+          qi.fieldKind === "badge" ? t("search field badge") :
           t("search field title");
         const idPart = qi.questionId
           ? `id: ${qi.questionnaire} ${qi.questionId}`

@@ -449,6 +449,7 @@
   "search field title": "titel",
   "search field option": "antwoordoptie",
   "search field description": "toelichting",
+  "search field badge": "label",
   "search badge external": "Opent externe verwijzing",
   "search more results": "+ {{count}} meer…",
   "ai1 intro role present prefix": "Uw rol is",

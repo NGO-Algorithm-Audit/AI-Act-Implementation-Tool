@@ -449,6 +449,7 @@
   "search field title": "title",
   "search field option": "answer option",
   "search field description": "description",
+  "search field badge": "badge",
   "search badge external": "Opens external reference",
   "search more results": "+ {{count}} more…",
   "ai1 intro role present prefix": "Your role is being a",
