@@ -218,6 +218,7 @@ const WizardForm = ({
   onStartQuestionnaire,
   initialFieldKey,
   onInitialFieldConsumed,
+  identificationFormData,
 }: {
   id: number;
   schema: FormProps<any, RJSFSchema, any>["schema"];
@@ -227,6 +228,11 @@ const WizardForm = ({
   onStartQuestionnaire?: (key: string) => void;
   initialFieldKey?: string | null;
   onInitialFieldConsumed?: () => void;
+  // Raw answers from a completed Identification questionnaire, when this
+  // form is the Risk-category one. Used to raise a cross-questionnaire
+  // warning on Q33 (property "6.1") when the user's profiling answer
+  // contradicts the Identification outcome.
+  identificationFormData?: Record<string, any>;
   onSubmit: (
     index: number,
     data: FormProps<any, RJSFSchema, any>["formData"]
@@ -490,7 +496,13 @@ const WizardForm = ({
     return {
       ...resolvedSchema,
       properties: flattenedProperties,
-      required: requiredFields,
+      // Definitions like `exceptionForbidden` are referenced via `$ref` from
+      // multiple sibling dependency branches, so a single user data state
+      // can pull `["exceptions"]` (or any other shared required key) into
+      // `requiredFields` more than once. Downstream that becomes
+      // `required: ["exceptions", "exceptions"]`, which AJV's meta-schema
+      // rejects. Dedupe here so every caller is safe.
+      required: Array.from(new Set(requiredFields)),
     };
   };
 
@@ -590,6 +602,25 @@ const WizardForm = ({
       const hasOther = fieldValue.some((v) => !NOTA.includes(v));
       if (hasNOTA && hasOther) {
         errors[currentField].addError(t("invalid answer combination"));
+      }
+    }
+
+    // Cross-questionnaire warning on Risk-category Q33 (property "6.1"): if
+    // Identification told us profiling applies (Q8 ≠ "No" AND Q8b = "Yes"),
+    // the expected Q33 answer is the first enum option ("Yes"/"Ja"). Block
+    // the user from advancing with "No" until they reconsider.
+    if (currentField === "6.1" && identificationFormData && !isEmpty) {
+      const idQ8 = identificationFormData.q8;
+      const idQ8b = identificationFormData.q8b;
+      const profilingApplicable =
+        !!idQ8 && idQ8 !== t("q8 option no") && idQ8b === t("q8b option yes");
+      if (profilingApplicable) {
+        const yesEnum = Array.isArray(fieldSchema?.enum)
+          ? fieldSchema.enum[0]
+          : undefined;
+        if (yesEnum && fieldValue !== yesEnum) {
+          errors[currentField].addError(t("profiling expected yes warning"));
+        }
       }
     }
 
@@ -760,8 +791,13 @@ const WizardForm = ({
             // error summary box on an empty submit. The inline field errors
             // ("must NOT have fewer than 1 items", "This field is required")
             // and the red question label still render via FieldTemplate.
+            // Risk-category Q33 (property "6.1") also opts out: the only
+            // failure mode here is the cross-questionnaire profiling
+            // warning, which already reads clearly inline — repeating it
+            // in the top alert is noise.
             showErrorList={
-              uiSchema?.[questions[0]]?.["ui:widget"] === "checkboxes"
+              uiSchema?.[questions[0]]?.["ui:widget"] === "checkboxes" ||
+              questions[0] === "6.1"
                 ? false
                 : "top"
             }

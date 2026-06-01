@@ -128,6 +128,12 @@ export default function App() {
 
   const roleStatusIndex = findFormIndexByTitlePrefix(ROLE_AND_STATUS_TITLE_RE);
   const riskIndex = findFormIndexByTitlePrefix(RISK_CATEGORY_TITLE_RE);
+  const identificationIndex = findFormIndexByTitlePrefix(IDENTIFICATION_TITLE_RE);
+  // Raw answers from the completed Identification questionnaire — passed
+  // into the Risk-category WizardForm so a cross-questionnaire check on Q33
+  // can warn when the user contradicts the profiling outcome.
+  const identificationFormData =
+    identificationIndex >= 0 ? allFormData[identificationIndex] : undefined;
 
   // Single source of truth for the user's role.
   //
@@ -208,6 +214,7 @@ export default function App() {
                 onStartQuestionnaire={onStartQuestionnaire}
                 initialFieldKey={initialFieldKey}
                 onInitialFieldConsumed={() => setInitialFieldKey(null)}
+                identificationFormData={identificationFormData}
               />
             ) : (
               <Intro

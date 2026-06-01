@@ -450,6 +450,7 @@
   "search field option": "answer option",
   "search field description": "description",
   "search field badge": "badge",
+  "profiling expected yes warning": "According to questionnaire Identification, we expect this answer to be 'Yes'. Please reconsider carefully whether the AI system is used to automatically evaluate or predict characteristics, behavior or personal aspects.",
   "search badge external": "Opens external reference",
   "search more results": "+ {{count}} more…",
   "ai1 intro role present prefix": "Your role is being a",
