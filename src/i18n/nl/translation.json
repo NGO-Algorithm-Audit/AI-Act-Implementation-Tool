@@ -449,6 +449,8 @@
   "search field title": "titel",
   "search field option": "antwoordoptie",
   "search field description": "toelichting",
+  "search field badge": "label",
+  "profiling expected yes warning": "Volgens de vragenlijst Identificatie verwachten wij dat dit antwoord 'Ja' is. Heroverweeg zorgvuldig of het AI-systeem wordt gebruikt om kenmerken, gedrag of persoonlijke aspecten automatisch te evalueren of te voorspellen.",
   "search badge external": "Opent externe verwijzing",
   "search more results": "+ {{count}} meer…",
   "ai1 intro role present prefix": "Uw rol is",

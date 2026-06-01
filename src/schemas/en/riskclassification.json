@@ -1166,10 +1166,18 @@
                       "Yes, the AI system is used in a preparatory step, without influencing the outcome."
                     ]
                   },
+                  "6.2-explain": {
+                    "type": "string",
+                    "title": "Explain why this scenario is applicable.",
+                    "default": ""
+                  },
                   "output": {
                     "$ref": "#/definitions/outputHighExcept"
                   }
-                }
+                },
+                "required": [
+                  "6.2-explain"
+                ]
               },
               {
                 "properties": {
@@ -2139,6 +2147,7 @@
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-6",
       "ui:id-badge-label": "Art. 6(3) AI Act - Classification rules for high-risk AI systems",
       "ui:badges": [
+        { "label": "Art. 6(3) AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-6" },
         { "label": "Recital 53 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-53" }
       ],
       "ui:id-summary": {
@@ -2149,6 +2158,10 @@
         "No": "The AI system is not limited to narrow procedural or preparatory tasks"
       },
       "ui:id": "q34"
+    },
+    "6.2-explain": {
+      "ui:widget": "textarea",
+      "ui:id": "q34 explanation"
     },
     "6.3": {
       "ui:widget": "checkboxes",

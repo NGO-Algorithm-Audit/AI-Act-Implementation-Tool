@@ -1166,10 +1166,18 @@
                       "Ja, het AI-systeem wordt gebruikt in een voorbereidende stap, zonder de uitkomst te beïnvloeden."
                     ]
                   },
+                  "6.2-explain": {
+                    "type": "string",
+                    "title": "Leg uit waarom dit scenario van toepassing is.",
+                    "default": ""
+                  },
                   "output": {
                     "$ref": "#/definitions/outputHighExcept"
                   }
-                }
+                },
+                "required": [
+                  "6.2-explain"
+                ]
               },
               {
                 "properties": {
@@ -2138,6 +2146,7 @@
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-6",
       "ui:id-badge-label": "Art. 6(3) AI-verordening - Classificatieregels voor hoog-risico AI-systemen",
       "ui:badges": [
+        { "label": "Art. 6(3) AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/article-6" },
         { "label": "Overweging 53 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-53" }
       ],
       "ui:id-summary": {
@@ -2148,6 +2157,10 @@
         "Nee": "Het AI-systeem is niet beperkt tot beperkte procedurele of voorbereidende taken"
       },
       "ui:id": "q34"
+    },
+    "6.2-explain": {
+      "ui:widget": "textarea",
+      "ui:id": "q34 explanation"
     },
     "6.3": {
       "ui:widget": "checkboxes",
