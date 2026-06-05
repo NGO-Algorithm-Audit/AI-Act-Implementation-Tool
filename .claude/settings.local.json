@@ -83,6 +83,9 @@
       "Bash(git -c core.quotepath=false diff --name-only)",
       "Bash(find /Users/jurriaan/Github_repos/ClassifyMyAI -type f -name \"*.ts\" -o -name \"*.tsx\" -o -name \"*.js\" -o -name \"*.jsx\" | head -30)",
       "Read(//Users/jurriaan/Github_repos/ClassifyMyAI/**)"
+    ],
+    "additionalDirectories": [
+      "/Users/jurriaan/Github_repos/ClassifyMyAI/src/schemas/en"
     ]
   }
 }
