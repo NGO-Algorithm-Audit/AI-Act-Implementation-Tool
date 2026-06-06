@@ -574,7 +574,23 @@
                 "III.2.5": {
                   "oneOf": [
                     { "properties": { "III.2.5": { "enum": ["Ja"] } } },
-                    { "properties": { "III.2.5": { "enum": ["Nee"] }, "exceptionHigh": { "$ref": "#/definitions/exceptionHigh" } } }
+                    {
+                      "properties": {
+                        "III.2.5": { "enum": ["Nee"] },
+                        "III.2.6-cer": {
+                          "type": "string",
+                          "title": "Is het AI-systeem bedoeld om te worden gebruikt door een entiteit die door een lidstaat is aangewezen als kritieke entiteit onder de Richtlijn weerbaarheid van kritieke entiteiten (Richtlijn (EU) 2022/2557)?",
+                          "enum": ["Ja", "Nee"]
+                        }
+                      },
+                      "required": ["III.2.6-cer"]
+                    }
+                  ]
+                },
+                "III.2.6-cer": {
+                  "oneOf": [
+                    { "properties": { "III.2.6-cer": { "enum": ["Ja"] }, "exceptionHigh": { "$ref": "#/definitions/exceptionHigh" } } },
+                    { "properties": { "III.2.6-cer": { "enum": ["Nee"] } } }
                   ]
                 }
               }
@@ -589,9 +605,9 @@
                   "title": "In welke van de volgende onderwijscontexten wordt het AI-systeem gebruikt?",
                   "enum": [
                     "Toewijzing of toelating van studenten tot onderwijs, opleiding of scholing",
-                    "Beoordelen van het niveau of de kwaliteit van het onderwijs dat iemand ontvangt of tot heeft",
-                    "Evalueren van leerresultaten of begeleiden van het leerproces (gepersonaliseerd leren)",
-                    "Monitoren en detecteren van ongeoorloofd gedrag van leerlingen, studenten of stagiairs",
+                    "Het beoordelen van het passende onderwijsniveau dat een persoon zal ontvangen of waartoe deze toegang zal krijgen (bijv. plaatsingstoetsen, overgang naar de volgende klas, classificatie voor speciaal onderwijs)",
+                    "Het evalueren van leerresultaten (summatieve beoordeling die leidt tot een cijfer, kwalificatie, certificering of doorstroombeslissing)",
+                    "Het tijdens toetsen monitoren en detecteren van verboden gedrag van leerlingen, studenten of stagiairs (bijv. surveillance, real-time toetsmonitoring)",
                     "Geen van de bovenstaande"
                   ]
                 }
@@ -606,9 +622,9 @@
                         "III.3.uses": {
                           "enum": [
                             "Toewijzing of toelating van studenten tot onderwijs, opleiding of scholing",
-                            "Beoordelen van het niveau of de kwaliteit van het onderwijs dat iemand ontvangt of tot heeft",
-                            "Evalueren van leerresultaten of begeleiden van het leerproces (gepersonaliseerd leren)",
-                            "Monitoren en detecteren van ongeoorloofd gedrag van leerlingen, studenten of stagiairs"
+                            "Het beoordelen van het passende onderwijsniveau dat een persoon zal ontvangen of waartoe deze toegang zal krijgen (bijv. plaatsingstoetsen, overgang naar de volgende klas, classificatie voor speciaal onderwijs)",
+                            "Het evalueren van leerresultaten (summatieve beoordeling die leidt tot een cijfer, kwalificatie, certificering of doorstroombeslissing)",
+                            "Het tijdens toetsen monitoren en detecteren van verboden gedrag van leerlingen, studenten of stagiairs (bijv. surveillance, real-time toetsmonitoring)"
                           ]
                         },
                         "exceptionHigh": { "$ref": "#/definitions/exceptionHigh" }
@@ -1975,7 +1991,7 @@
       "ui:description": "Als geen van de domeinen van toepassing is, selecteer dan 'Geen van de bovenstaande'. Selecteer ook een domein als het AI-systeem een kleine of ondersteunende rol binnen het domein vervult.",
       "ui:descriptionStyle": "plain",
       "ui:enumTooltips": [
-        "Bijv. gas, water, verwarming, elektriciteitsvoorziening; het beheer of de exploitatie van wegen, bruggen of wegverkeer; en kritieke digitale infrastructuur (internetknooppunten, DNS-diensten, registratie van topleveldomeinnamen, cloudcomputingdiensten, datacenterdiensten, openbare elektronische communicatienetwerken en elektronische communicatiediensten).",
+        "Bijv. gas, water, verwarming, elektriciteitsvoorziening; het beheer of de exploitatie van wegen, bruggen of wegverkeer; en kritieke digitale infrastructuur (internetknooppunten, DNS-diensten, registratie van topleveldomeinnamen, cloudcomputingdiensten, datacenterdiensten, openbare elektronische communicatienetwerken en elektronische communicatiediensten). Deze toepassing geldt alleen wanneer het AI-systeem bedoeld is om te worden gebruikt door een entiteit die door een lidstaat is aangewezen als kritieke entiteit onder de Richtlijn weerbaarheid van kritieke entiteiten (Richtlijn (EU) 2022/2557).",
         "Bijv. plaatsing en toelating, evaluatie en toetsing, maar ook controle zoals plagiaatdetectie en anti-cheat software.",
         "Voorbeelden van hoe AI-systemen worden gebruikt in de context van arbeid zijn:\n• Registreren van uren, meten van KPI's en prestaties\n• Taakverdeling\n• Werving en selectie\n• Instroom en doorstroom (arbeidsvoorwaarden, contractuele voorwaarden)\n• Uitstroom (beëindiging van het dienstverband)\n\nKies ook 'ja' wanneer de toepassing in grote lijnen onder het bovenstaande valt, ook als de toepassing een kleine rol speelt in een verder handmatig proces.",
         "Bijv. processen rond uitkeringen of toeslagen, zoals aanvraag, administratie, uitvoering, handhaving, terugvordering en bezwaar. Dit omvat ook het kwijtschelden van boetes, terugbetalingen of het verlenen van een betalingsregeling. Selecteer deze optie als de toepassing een kleine rol speelt in het proces.",
@@ -2005,11 +2021,12 @@
     "III.2.4": {
       "ui:widget": "radio",
       "ui:descriptionStyle": "plain",
-      "ui:alertDescription": "Een veiligheidscomponent vervult een functie die de fysieke integriteit van de kritieke infrastructuur en de gezondheid en veiligheid van personen of eigendommen rechtstreeks beschermt. Een veiligheidsfunctie valt in een van zes categorieën:\n\n- Monitoren en detecteren: bijv. AI die afwijkend gedrag in de werking van kritieke infrastructuur detecteert.\n- Onderhouds- of inspectiebehoeften detecteren: bijv. AI die detecteert of veiligheidsrelevante onderdelen versleten zijn en vervangen moeten worden voordat ze falen.\n- Schade voorkomen: bijv. AI die voorkomt dat kritieke infrastructuur opstart als afwijkend gedrag wordt gedetecteerd.\n- Schade beheersen of beperken: bijv. AI die specifiek gedrag of een functie van kritieke infrastructuur stuurt en dienovereenkomstig aanpast.\n- Gevolgen mitigeren: bijv. AI die een veilige stop activeert bij een gevaarlijke conditie.\n- Een ander veiligheidssysteem aansturen of bewaken: bijv. AI die via sensoren een ander systeem bewaakt dat een veiligheidsfunctie vervult.\n\nDe volgende AI-systemen zijn GEEN veiligheidscomponenten in kritieke infrastructuur:\n\n- AI-gestuurde verkeersstroomoptimalisatie op basis van real-time data die geen veiligheidsrelevante wijzigingen direct activeert.\n- AI voor voorspellend onderhoud die alleen aanbevelingen aan mensen geeft zonder veiligheidsacties te triggeren.\n- AI die uitsluitend voor cybersecuritydoeleinden wordt gebruikt (de volgende vraag behandelt deze uitzondering).\n- AI-systemen die louter ondersteunend, informatief, organisatorisch of optimalisatie-gericht zijn en de fysieke integriteit niet direct beschermen.",
+      "ui:alertDescription": "Een veiligheidscomponent vervult een functie die de fysieke integriteit van de kritieke infrastructuur en de gezondheid en veiligheid van personen of eigendommen rechtstreeks beschermt. Een veiligheidsfunctie valt in een van zes categorieën:\n\n- Monitoren en detecteren: bijv. AI die afwijkend gedrag in de werking van kritieke infrastructuur detecteert.\n- Onderhouds- of inspectiebehoeften detecteren: bijv. AI die detecteert of veiligheidsrelevante onderdelen versleten zijn en vervangen moeten worden voordat ze falen.\n- Schade voorkomen: bijv. AI die voorkomt dat kritieke infrastructuur opstart als afwijkend gedrag wordt gedetecteerd.\n- Schade beheersen of beperken: bijv. AI die specifiek gedrag of een functie van kritieke infrastructuur stuurt en dienovereenkomstig aanpast.\n- Gevolgen mitigeren: bijv. AI die een veilige stop activeert bij een gevaarlijke conditie.\n- Een ander veiligheidssysteem aansturen of bewaken: bijv. AI die via sensoren een ander systeem bewaakt dat een veiligheidsfunctie vervult.\n\nDe volgende AI-systemen zijn GEEN veiligheidscomponenten in kritieke infrastructuur:\n\n- AI-gestuurde verkeersstroomoptimalisatie op basis van real-time data die geen veiligheidsrelevante wijzigingen direct activeert.\n- AI voor voorspellend onderhoud die alleen aanbevelingen aan mensen geeft zonder veiligheidsacties te triggeren.\n- AI die uitsluitend voor cybersecuritydoeleinden wordt gebruikt (de volgende vraag behandelt deze uitzondering).\n- AI-systemen met een 'mere conduit'-rol — het passief doorgeven van verkeer of data zonder controle of besluitvorming over de inhoud of bestemming.\n- AI-systemen die uitsluitend zijn ontworpen om niet-fysieke schade te voorkomen (bijv. morele schade, schending van rechten) of schade die door derden via tussenpersoondiensten wordt veroorzaakt.\n- AI-systemen waarvan de beschermende functie al wordt geleverd door een afzonderlijk redundant of back-upsysteem dat de fysieke integriteit van de infrastructuur direct beschermt — in dergelijke gevallen is de AI niet wat de schade voorkomt en is het niet het veiligheidscomponent.\n- AI-systemen die louter ondersteunend, informatief, organisatorisch of optimalisatie-gericht zijn en de fysieke integriteit niet direct beschermen.\n\nSector-specifieke uitzonderingen:\n\n- Specifiek nucleaire veiligheidscomponenten vallen buiten Bijlage III(2) (gedekt door ander Unierecht); alleen veiligheidscomponenten in de elektriciteitscomponenten van kerncentrales vallen binnen de reikwijdte.\n- 'Gasvoorziening' sluit de oliesector uit (exploitanten van olietransportleidingen, olieproductie / -raffinage / -behandelingsfaciliteiten, opslag en transport, en centrale voorraadhoudende entiteiten).\n- 'Elektriciteitsvoorziening' sluit de waterstofsector uit (exploitanten van waterstofproductie, -opslag en -transport).\n\nLet op: ook als u hier 'Nee' antwoordt, kan het AI-systeem alsnog hoog-risico zijn onder artikel 6, lid 1, indien het binnen de harmonisatiewetgeving van de Unie van Bijlage I valt (bijv. radioapparatuur, kabelbaaninstallaties, burgerluchtvaart, spoorwegsystemen) — controleer uw eerdere antwoorden op Q1/Q2 indien nodig.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
       "ui:id-badge-label": "Bijlage III(2) AI-verordening - AI-systemen met een hoog risico als bedoeld in artikel 6, lid 2",
       "ui:badges": [
-        { "label": "Overweging 55 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-55" }
+        { "label": "Overweging 55 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-55" },
+        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (180)-(187)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
       "ui:id-summary": {
         "Ja": "Het AI-systeem vervult een veiligheidsfunctie binnen kritieke infrastructuur",
@@ -2019,11 +2036,13 @@
     },
     "III.2.5": {
       "ui:widget": "radio",
-      "ui:description": "Bijvoorbeeld een firewall of antivirussoftware. Als het AI-systeem ook andere veiligheidsrelevante functies uitvoert, kies dan 'Nee'. De uitzondering geldt alleen wanneer cybersecurity het enige doel is.",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Voorbeelden van AI-systemen die uitsluitend voor cybersecurity worden gebruikt (en daardoor buiten deze kritieke-infrastructuur toepassing vallen):\n\n- Een AI-honeypot die proactief cyberdreigingen in real time identificeert en neutraliseert.\n- AI die met mogelijke aanvallers in contact treedt om nieuwe aanvalspatronen te leren.\n- AI die ongeoorloofde toegang detecteert (bijv. door getroffen klanten te waarschuwen voordat een gestolen wachtwoord wordt misbruikt).\n- AI die verdachte e-mailadressen detecteert en gestolen gegevens identificeert.\n\nAls het AI-systeem ook andere veiligheidsrelevante functies vervult buiten cybersecurity, kies dan 'Nee' — de uitzondering geldt alleen wanneer cybersecurity het enige doel is.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
       "ui:id-badge-label": "Bijlage III(2) AI-verordening - AI-systemen met een hoog risico als bedoeld in artikel 6, lid 2",
       "ui:badges": [
-        { "label": "Overweging 55 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-55" }
+        { "label": "Overweging 55 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-55" },
+        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (187)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
       "ui:id-summary": {
         "Ja": "Het AI-systeem wordt uitsluitend gebruikt voor cybersecuritydoeleinden",
@@ -2031,26 +2050,45 @@
       },
       "ui:id": "q15"
     },
+    "III.2.6-cer": {
+      "ui:widget": "radio",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "De hoog-risicoclassificatie van Bijlage III punt 2 vereist niet alleen dat het AI-systeem een veiligheidsfunctie vervult (Q14) en niet uitsluitend voor cybersecuritydoeleinden wordt gebruikt (Q15), maar ook dat het bedoeld is om te worden gebruikt door een entiteit die door een lidstaat is aangewezen als kritieke entiteit onder de Richtlijn weerbaarheid van kritieke entiteiten (Richtlijn (EU) 2022/2557, de 'CER-richtlijn'). De richtlijn stelt essentiële diensten vast in elf sectoren en draagt lidstaten op om voor elke sector te bepalen welke entiteiten 'kritieke entiteiten' zijn. De classificatie onder Bijlage III(2) van de AI-verordening sluit op die aanwijzing aan.\n\nAls de gebruiker (deployer) geen door de CER aangewezen kritieke entiteit is, is Bijlage III(2) niet van toepassing. Let op:\n\n- Aanbieders kunnen er nog steeds voor kiezen om aan de hoog-risicovereisten te voldoen, ongeacht de status van de gebruiker (bijv. om deel te nemen aan aanbestedingen die dit vereisen).\n- Andere sectorale wetgeving (de CER-richtlijn zelf, NIS2, sector-specifieke veiligheidswetgeving) blijft onverminderd van toepassing.\n- Artikel 6, lid 1, en Bijlage I-verplichtingen kunnen alsnog gelden indien het AI-systeem een veiligheidscomponent is van een gereguleerd product.",
+      "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
+      "ui:id-badge-label": "Bijlage III(2) AI-verordening - AI-systemen met een hoog risico als bedoeld in artikel 6, lid 2",
+      "ui:badges": [
+        { "label": "CER-richtlijn (EU) 2022/2557", "color": "#F37962", "url": "https://eur-lex.europa.eu/eli/dir/2022/2557/oj" },
+        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (188)-(192)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+      ],
+      "ui:id-summary": {
+        "Ja": "De gebruiker is door een lidstaat aangewezen als kritieke entiteit onder de CER-richtlijn — hoog-risico volgens Bijlage III(2)",
+        "Nee": "De gebruiker is geen door de CER aangewezen kritieke entiteit — niet hoog-risico volgens Bijlage III(2) (onder voorbehoud van opt-in door de aanbieder en overige toepasselijke wetgeving)"
+      },
+      "ui:id": "q15 cer"
+    },
     "III.3.uses": {
       "ui:widget": "radio",
       "ui:description": "Kies ook een optie wanneer het AI-systeem een deel uitmaakt van het proces, zonder de enige factor te zijn.",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Deze toepassingen gelden alleen voor AI-systemen die bedoeld zijn om te worden gebruikt in de context van, of binnen, een onderwijs- of beroepsopleidingsinstelling op enig niveau — formeel of niet-formeel, openbaar of particulier, met inbegrip van volwasseneneducatie en bijscholing. AI-systemen die lerenden op eigen initiatief gebruiken voor informeel leren, waarbij het systeem niet leidt tot een erkende kwalificatie, certificering of validering, vallen niet onder deze toepassingen.\n\nAI-systemen die hoofdzakelijk gericht zijn op de opleiding van docenten of academisch personeel in plaats van studenten vallen buiten dit gebruiksgeval, maar kunnen wel onder het arbeids-gebruiksgeval van Bijlage III punt 4 vallen.\n\nLet op: volgens de Ontwerprichtsnoeren (¶215) verrichten AI-systemen in onderwijs en beroepsopleiding vaak profilering van natuurlijke personen. Wanneer dat gebeurt, kan het uitzonderingsmechanisme van artikel 6, lid 3, niet worden toegepast — ook niet als overigens aan de voorwaarden van het mechanisme zou zijn voldaan — en blijft het systeem hoog-risico.",
       "ui:enumTooltips": [
-        null,
-        "Kies ook 'ja' wanneer de toepassing bijdraagt aan de beoordeling. Er hoeft geen sprake te zijn van (volledig) geautomatiseerde beoordeling.",
-        "Voorbeelden zijn:\n• Evaluatie van (meerkeuze)toetsen\n• Ondersteuning bij beoordeling\n• Inschatting van leertempo of leerstijl\n• Personalisering van het curriculum of leerproces.",
-        "(bijv. plagiaat detectie, proctoring, anti-cheat software)",
+        "Wel gedekt (hoog-risico): geautomatiseerde toelatingssystemen die aanmeldingen, cijferlijsten en testresultaten van studenten beoordelen; schoolplaatsingssystemen die door gemeenten of regionale autoriteiten worden gebruikt op basis van woonplaats, broer/zus-aanmelding, capaciteit; systemen voor toewijzing van beroepsopleidingen die werkzoekenden of werknemers koppelen aan stageprogramma's; geautomatiseerde toetsing van beursrechten. Inclusief toewijzing aan specifieke programma's of cursussen binnen een instelling. NIET gedekt: chatbots die algemene toelatingsinformatie geven; platforms die studenten helpen om zelf te kiezen waar ze zich aanmelden (geen invloed op besluitvorming).",
+        "Wel gedekt (hoog-risico): AI-aangedreven adaptieve plaatsingstools die beginner/gevorderd/expert aanbevelen; AI-systemen die het niveau van beroepsopleiding beoordelen via plaatsingstoetsen en vaardigheidsmetingen; AI-classifiers voor speciaal onderwijs die een plaatsing en niveau van ondersteuning aanbevelen. NIET gedekt: AI die persoonlijke onderwijsaanbevelingen aan studenten geeft (niet gebruikt door een instelling) om hen te helpen hun eigen pad te kiezen; AI gebruikt voor trendanalyse van onderwijsprestaties over populaties (niet gebruikt om besluiten over individuele leerlingen te nemen).",
+        "Voorbeelden van summatieve beoordeling (hoog-risico): AI-gestuurde beoordelingssystemen voor toetsen, quizzen of examens die meetellen voor een eindbeoordeling; AI-gestuurde gepersonaliseerde leerassistenten waarvan de rapporten aan het einde van een leerstof-eenheid de eindbeoordeling van de docent informeren. NIET gedekt (uitsluitend formatieve ondersteuning): adaptieve leersystemen die de moeilijkheidsgraad aanpassen, intelligente tutoringsystemen met gepersonaliseerde feedback, leeranalyseplatforms, uitspraak-feedbacktools, leercompanions voor neurodivergente studenten, apps voor vrijwillig informeel leren die niet leiden tot een erkende kwalificatie.",
+        "Wel gedekt (hoog-risico): AI-surveillance tijdens certificeringsexamens; real-time gedragsanalysesystemen die spieken detecteren tijdens online examens; AI-toetsmonitoring met gezichtsherkenning / objectdetectie bij examens op locatie. NIET gedekt: plagiaatcontroles op huiswerk of essays na inlevering — die vinden plaats in een onbewaakte omgeving, na afronding van het werk, zonder live monitoring van gedrag tijdens de toets. Ook uitgesloten: niet-academisch monitoren van leerlingen (kantine, gangen) — al kunnen die systemen onder Bijlage III punt 1 (biometrie) vallen indien zij identificatie op afstand uitvoeren.",
         null
       ],
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
       "ui:id-badge-label": "Bijlage III(3) AI-verordening - AI-systemen met een hoog risico als bedoeld in artikel 6, lid 2",
       "ui:badges": [
-        { "label": "Overweging 56 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-56" }
+        { "label": "Overweging 56 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-56" },
+        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (207)-(235)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
       "ui:id-summary": {
         "Toewijzing of toelating van studenten tot onderwijs, opleiding of scholing": "Het AI-systeem wordt gebruikt voor toewijzing of toelating van studenten tot onderwijs, opleiding of scholing",
-        "Beoordelen van het niveau of de kwaliteit van het onderwijs dat iemand ontvangt of tot heeft": "Het AI-systeem beoordeelt het niveau of de kwaliteit van het onderwijs dat iemand ontvangt of waartoe iemand toegang heeft",
-        "Evalueren van leerresultaten of begeleiden van het leerproces (gepersonaliseerd leren)": "Het AI-systeem evalueert leerresultaten of begeleidt het leerproces (gepersonaliseerd leren)",
-        "Monitoren en detecteren van ongeoorloofd gedrag van leerlingen, studenten of stagiairs": "Het AI-systeem monitort en detecteert ongeoorloofd gedrag van leerlingen, studenten of stagiairs (bijv. plagiaatdetectie, proctoring, anti-cheat software)",
+        "Het beoordelen van het passende onderwijsniveau dat een persoon zal ontvangen of waartoe deze toegang zal krijgen (bijv. plaatsingstoetsen, overgang naar de volgende klas, classificatie voor speciaal onderwijs)": "Het AI-systeem beoordeelt het passende onderwijsniveau dat een persoon zal ontvangen of waartoe deze toegang zal krijgen",
+        "Het evalueren van leerresultaten (summatieve beoordeling die leidt tot een cijfer, kwalificatie, certificering of doorstroombeslissing)": "Het AI-systeem evalueert leerresultaten via summatieve beoordeling",
+        "Het tijdens toetsen monitoren en detecteren van verboden gedrag van leerlingen, studenten of stagiairs (bijv. surveillance, real-time toetsmonitoring)": "Het AI-systeem monitort en detecteert tijdens toetsen verboden gedrag van leerlingen, studenten of stagiairs",
         "Geen van de bovenstaande": "Het AI-systeem wordt niet gebruikt voor een van de genoemde onderwijscontexten"
       },
       "ui:id": "q16"

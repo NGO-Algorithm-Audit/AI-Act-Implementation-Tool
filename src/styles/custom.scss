@@ -103,6 +103,37 @@ body {
   }
 }
 
+.question-badge-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid #005AA7;
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+  }
+}
+
+.guidelines-modal-paragraph {
+  margin-bottom: 1rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.guidelines-modal-paragraph-num {
+  font-weight: 700;
+  color: #005AA7;
+  margin-bottom: 0.25rem;
+}
+
+.guidelines-modal-bullets {
+  padding-left: 1.25rem;
+}
+
 .enum-tooltip-icon {
   cursor: help;
   color: #005AA7;

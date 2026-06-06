@@ -574,7 +574,23 @@
                 "III.2.5": {
                   "oneOf": [
                     { "properties": { "III.2.5": { "enum": ["Yes"] } } },
-                    { "properties": { "III.2.5": { "enum": ["No"] }, "exceptionHigh": { "$ref": "#/definitions/exceptionHigh" } } }
+                    {
+                      "properties": {
+                        "III.2.5": { "enum": ["No"] },
+                        "III.2.6-cer": {
+                          "type": "string",
+                          "title": "Is the AI system intended to be used by an entity that has been identified as a critical entity by a Member State under the Critical Entities Resilience Directive (EU) 2022/2557?",
+                          "enum": ["Yes", "No"]
+                        }
+                      },
+                      "required": ["III.2.6-cer"]
+                    }
+                  ]
+                },
+                "III.2.6-cer": {
+                  "oneOf": [
+                    { "properties": { "III.2.6-cer": { "enum": ["Yes"] }, "exceptionHigh": { "$ref": "#/definitions/exceptionHigh" } } },
+                    { "properties": { "III.2.6-cer": { "enum": ["No"] } } }
                   ]
                 }
               }
@@ -589,9 +605,9 @@
                   "title": "In which of the following education contexts is the AI system used?",
                   "enum": [
                     "Allocation or admission of students to education, training or schooling",
-                    "Assessing the level or quality of education that someone receives or has access to",
-                    "Evaluating learning outcomes or guiding the learning process (personalized learning)",
-                    "Monitoring and detecting unauthorized behavior of pupils, students or trainees",
+                    "Assessing the appropriate level of education an individual will receive or be able to access (e.g. placement tests, advancement to the next grade, special-education classification)",
+                    "Evaluating learning outcomes (summative assessment leading to a grade, qualification, certification or progression decision)",
+                    "Monitoring and detecting prohibited behaviour of pupils, students or trainees during tests (e.g. proctoring, real-time exam monitoring)",
                     "None of the above"
                   ]
                 }
@@ -606,9 +622,9 @@
                         "III.3.uses": {
                           "enum": [
                             "Allocation or admission of students to education, training or schooling",
-                            "Assessing the level or quality of education that someone receives or has access to",
-                            "Evaluating learning outcomes or guiding the learning process (personalized learning)",
-                            "Monitoring and detecting unauthorized behavior of pupils, students or trainees"
+                            "Assessing the appropriate level of education an individual will receive or be able to access (e.g. placement tests, advancement to the next grade, special-education classification)",
+                            "Evaluating learning outcomes (summative assessment leading to a grade, qualification, certification or progression decision)",
+                            "Monitoring and detecting prohibited behaviour of pupils, students or trainees during tests (e.g. proctoring, real-time exam monitoring)"
                           ]
                         },
                         "exceptionHigh": { "$ref": "#/definitions/exceptionHigh" }
@@ -1975,7 +1991,7 @@
       "ui:description": "If none of the domains apply, select 'None of the above'. Also select a domain when the AI system plays a small or supporting role within it.",
       "ui:descriptionStyle": "plain",
       "ui:enumTooltips": [
-        "E.g., gas, water, heating, electricity supply; the management or operation of roads, bridges or road traffic; and critical digital infrastructure (internet nodes, DNS services, top-level domain name registration, cloud computing services, data center services, public electronic communication networks, and electronic communication services).",
+        "E.g., gas, water, heating, electricity supply; the management or operation of roads, bridges or road traffic; and critical digital infrastructure (internet nodes, DNS services, top-level domain name registration, cloud computing services, data center services, public electronic communication networks, and electronic communication services). This use case applies only when the AI system is intended to be used by an entity that has been identified by a Member State as a critical entity under the Critical Entities Resilience Directive (EU) 2022/2557.",
         "E.g., placement and admission, evaluation and testing, but also control such as plagiarism detection and anti-cheating software.",
         "Examples how AI systems are used in the context of employment are:\n• Recording hours, measuring KPIs and performance\n• Task distribution\n• Recruitment and selection\n• Inflow and progression (employment conditions, contractual terms)\n• Outflow (termination of contract)\n\nAlso choose 'yes' when the application broadly falls under the above, even if the application plays a small role in an otherwise manual process.",
         "E.g., processes around benefits or allowances, such as application, administration, execution, enforcement, recovery, and objection. This also includes waiving fines, repayments, or granting a payment arrangement. Select this option if the application plays a small role in the process.",
@@ -2005,11 +2021,12 @@
     "III.2.4": {
       "ui:widget": "radio",
       "ui:descriptionStyle": "plain",
-      "ui:alertDescription": "A safety component performs a function that directly protects the physical integrity of the critical infrastructure and the health and safety of persons or property. A safety function falls into one of six categories:\n\n- Monitor and detect: e.g. AI detecting abnormal behaviour in critical infrastructure operation.\n- Detect maintenance or inspection needs: e.g. AI detecting whether safety-related parts are worn and need replacement before they fail.\n- Prevent harm: e.g. AI preventing critical infrastructure from starting up if abnormal behaviour is detected.\n- Control or limit harm: e.g. AI controlling a specific behaviour or function of critical infrastructure and adjusting it accordingly.\n- Mitigate consequences: e.g. AI that triggers a safe stop when a dangerous condition occurs.\n- Control or supervise another safety system: e.g. AI supervising via sensors another system that performs a safety function.\n\nThe following AI systems are NOT safety components in critical infrastructure:\n\n- AI-enabled traffic-flow optimisation systems based on real-time data that do not directly trigger safety-relevant changes.\n- AI used for predictive maintenance that only generates recommendations to humans without triggering safety actions.\n- AI used solely for cybersecurity purposes (the next question covers this carve-out).\n- AI systems that are merely supportive, informational, organisational or optimisation-oriented and do not directly protect physical integrity.",
+      "ui:alertDescription": "A safety component performs a function that directly protects the physical integrity of the critical infrastructure and the health and safety of persons or property. A safety function falls into one of six categories:\n\n- Monitor and detect: e.g. AI detecting abnormal behaviour in critical infrastructure operation.\n- Detect maintenance or inspection needs: e.g. AI detecting whether safety-related parts are worn and need replacement before they fail.\n- Prevent harm: e.g. AI preventing critical infrastructure from starting up if abnormal behaviour is detected.\n- Control or limit harm: e.g. AI controlling a specific behaviour or function of critical infrastructure and adjusting it accordingly.\n- Mitigate consequences: e.g. AI that triggers a safe stop when a dangerous condition occurs.\n- Control or supervise another safety system: e.g. AI supervising via sensors another system that performs a safety function.\n\nThe following AI systems are NOT safety components in critical infrastructure:\n\n- AI-enabled traffic-flow optimisation systems based on real-time data that do not directly trigger safety-relevant changes.\n- AI used for predictive maintenance that only generates recommendations to humans without triggering safety actions.\n- AI used solely for cybersecurity purposes (the next question covers this carve-out).\n- AI systems performing a 'mere conduit' role — passive conveyance of traffic or data without control or decision-making over its content or destination.\n- AI systems designed solely to prevent non-physical harm (e.g. moral harm, rights infringement) or damages caused by third parties through intermediation services.\n- AI systems whose protective function is already provided by a separate redundant or backup system that directly protects the physical integrity of the infrastructure — in such cases the AI is not what stops the harm from materialising and is not the safety component.\n- AI systems that are merely supportive, informational, organisational or optimisation-oriented and do not directly protect physical integrity.\n\nSector-specific carve-outs:\n\n- Nuclear-specific safety components fall outside Annex III(2) (covered by other Union law); only safety components in the electricity components of nuclear plants are within scope.\n- 'Supply of gas' excludes the oil sub-sector (operators of oil transmission pipelines, oil production / refining / treatment facilities, storage and transmission, and central stockholding entities).\n- 'Supply of electricity' excludes the hydrogen sector (operators of hydrogen production, storage and transmission).\n\nNote: even if you answer 'No' here, the AI system may still be high-risk under Article 6(1) if it falls within Annex I Union harmonisation legislation (e.g. radio equipment, cableway installations, civil aviation, rail systems) — review your earlier Q1/Q2 answers if needed.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
       "ui:id-badge-label": "Annex III(2) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
-        { "label": "Recital 55 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-55" }
+        { "label": "Recital 55 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-55" },
+        { "label": "Draft guidelines on the classification of high-risk AI systems (180)-(187)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
       "ui:id-summary": {
         "Yes": "The AI system fulfills a safety function in critical infrastructure",
@@ -2019,11 +2036,13 @@
     },
     "III.2.5": {
       "ui:widget": "radio",
-      "ui:description": "For instance, a firewall or antivirus software. If the AI system also performs other safety-relevant functions, choose 'No'. The carve-out only applies when cybersecurity is the sole purpose.",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Examples of AI systems used solely for cybersecurity (and therefore outside this critical-infrastructure use case):\n\n- An AI honeypot that proactively identifies and neutralises cyber threats in real time.\n- AI that engages with potential attackers to learn new attack patterns.\n- AI that detects unauthorised access (e.g. alerting affected customers before a stolen password is misused).\n- AI that detects suspicious email addresses and identifies stolen data.\n\nIf the AI system also performs other safety-relevant functions beyond cybersecurity, choose 'No' — the carve-out only applies when cybersecurity is the sole purpose.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
       "ui:id-badge-label": "Annex III(2) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
-        { "label": "Recital 55 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-55" }
+        { "label": "Recital 55 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-55" },
+        { "label": "Draft guidelines on the classification of high-risk AI systems (187)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
       "ui:id-summary": {
         "Yes": "The AI system is used solely for cybersecurity purposes",
@@ -2031,26 +2050,45 @@
       },
       "ui:id": "q15"
     },
+    "III.2.6-cer": {
+      "ui:widget": "radio",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Annex III point 2 high-risk classification requires not only that the AI system performs a safety function (Q14) and is not used solely for cybersecurity purposes (Q15), but also that it is intended to be used by an entity identified by a Member State as a critical entity under the Critical Entities Resilience Directive (EU) 2022/2557 (the 'CER Directive'). The Directive establishes essential services across eleven sectors and tasks Member States with identifying which entities are 'critical entities' for each. The AI Act's Annex III(2) classification piggy-backs on that identification.\n\nIf the deployer is not a CER-identified critical entity, Annex III(2) does not apply. Note:\n\n- Providers may still choose to comply with the high-risk requirements regardless of deployer status (e.g. to participate in procurement procedures that require it).\n- Sectoral other law (the CER Directive itself, NIS2, sector-specific safety law) remains independently applicable.\n- Article 6(1) Annex I obligations may also still apply if the AI is a safety component of a regulated product.",
+      "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
+      "ui:id-badge-label": "Annex III(2) AI Act - High-risk AI systems referred to in Article 6(2)",
+      "ui:badges": [
+        { "label": "CER Directive (EU) 2022/2557", "color": "#F37962", "url": "https://eur-lex.europa.eu/eli/dir/2022/2557/oj" },
+        { "label": "Draft guidelines on the classification of high-risk AI systems (188)-(192)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+      ],
+      "ui:id-summary": {
+        "Yes": "The deployer has been identified by a Member State as a critical entity under the CER Directive — high-risk under Annex III(2)",
+        "No": "The deployer is not a CER-identified critical entity — not high-risk under Annex III(2) (subject to provider opt-in and other applicable law)"
+      },
+      "ui:id": "q15 cer"
+    },
     "III.3.uses": {
       "ui:widget": "radio",
       "ui:description": "Also choose an option when the AI system plays a part in the process, without being the only factor.",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "These use cases apply only to AI systems intended to be used in the context of, or within, an educational or vocational training institution at any level — formal or non-formal, public or private, including adult education and continuing education. AI systems that learners use on their own volition for informal learning, where the system does not lead to a recognised credential, certification or qualification, are not covered.\n\nAI systems mainly directed at the training of teachers or academic staff rather than students fall outside this use case, but may fall within the employment use case in point 4 of Annex III.\n\nNote: per the Draft Guidelines (¶215), AI systems in education and vocational training often perform profiling of natural persons. Where they do, the Article 6(3) filter mechanism cannot apply — even if the filter's conditions would otherwise be met — and the system remains high-risk.",
       "ui:enumTooltips": [
-        null,
-        "Also choose 'yes' when the application contributes to the assessment. There does not need to be (fully) automated assessment.",
-        "Examples are:\n• Evaluation of (multiple choice) tests\n• Grading assistance\n• Assessment of learning pace or style\n• Personalization of the curriculum or learning process.",
-        "(e.g., plagiarism detection, proctoring, anti-cheating software)",
+        "Covered (high-risk): automated admissions systems reviewing student applications, transcripts and test scores; school-assignment systems used by municipalities or regional authorities based on location, sibling attendance, capacity; vocational-training assignment systems matching job seekers or employees to apprenticeship programmes; automated scholarship-eligibility assessment. Includes assignment to specific programmes or courses within an institution. NOT covered: chatbots providing general admission information; educational-programme matching platforms that help students self-select where to apply (no decisional impact).",
+        "Covered (high-risk): AI-powered adaptive placement tools recommending beginner/intermediate/advanced levels; vocational-training level-assessment systems using placement tests and skill assessments; AI classifiers for special education that recommend a placement and level of support. NOT covered: AI that provides personalised education recommendations to students (not used by an institution) to help them choose their own path; AI used for trend analysis of educational attainment across populations (not used to make decisions about individual students).",
+        "Summative-evaluation examples (high-risk): AI-enabled grading systems for tests, quizzes or exams that count towards a final evaluation; AI-enabled personalised-learning assistants whose end-of-unit reports inform the teacher's grade. NOT covered (formative-only support): adaptive-learning systems that adjust difficulty, intelligent tutoring systems with personalised feedback, learning analytics platforms, pronunciation-feedback tools, neurodiverse learning companions, student-volitional informal-learning apps that do not lead to a recognised credential.",
+        "Covered (high-risk): AI-enabled proctoring during certification exams; real-time behaviour-analysis systems detecting cheating during online exams; AI exam-monitoring using facial recognition / object detection during in-person exams. NOT covered: plagiarism checks performed on homework or essays after submission — those take place in an unsupervised environment, after the work has been completed, without live monitoring of behaviour during the test. Also excluded: non-academic student monitoring (cafeteria, hallways) — though such systems may fall under Annex III point 1 (biometrics) if they perform remote biometric identification.",
         null
       ],
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
       "ui:id-badge-label": "Annex III(3) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
-        { "label": "Recital 56 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-56" }
+        { "label": "Recital 56 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-56" },
+        { "label": "Draft guidelines on the classification of high-risk AI systems (207)-(235)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
       "ui:id-summary": {
         "Allocation or admission of students to education, training or schooling": "The AI system is used for allocation or admission of students to education, training or schooling",
-        "Assessing the level or quality of education that someone receives or has access to": "The AI system assesses the level or quality of education someone receives or has access to",
-        "Evaluating learning outcomes or guiding the learning process (personalized learning)": "The AI system evaluates learning outcomes or guides the learning process (personalized learning)",
-        "Monitoring and detecting unauthorized behavior of pupils, students or trainees": "The AI system monitors and detects unauthorized behavior of pupils, students or trainees (e.g., plagiarism detection, proctoring, anti-cheating software)",
+        "Assessing the appropriate level of education an individual will receive or be able to access (e.g. placement tests, advancement to the next grade, special-education classification)": "The AI system assesses the appropriate level of education an individual will receive or be able to access",
+        "Evaluating learning outcomes (summative assessment leading to a grade, qualification, certification or progression decision)": "The AI system evaluates learning outcomes via summative assessment",
+        "Monitoring and detecting prohibited behaviour of pupils, students or trainees during tests (e.g. proctoring, real-time exam monitoring)": "The AI system monitors and detects prohibited behaviour of pupils, students or trainees during tests",
         "None of the above": "The AI system is not used for any of the listed education contexts"
       },
       "ui:id": "q16"
