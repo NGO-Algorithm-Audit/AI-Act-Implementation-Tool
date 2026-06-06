@@ -55,7 +55,7 @@
             "type": "string",
             "title": "What does the AI system do with biometric data?",
             "enum": [
-              "Creates or expands a facial recognition database.",
+              "Creates or expands a facial recognition database via untargeted scraping of facial images from the internet or CCTV footage.",
               "Recognizes or infers emotions or intentions.",
               "For categorizing (labeling) people.",
               "Remote identification of individuals.",
@@ -73,7 +73,7 @@
                 "properties": {
                   "III.1.1": {
                     "enum": [
-                      "Creates or expands a facial recognition database."
+                      "Creates or expands a facial recognition database via untargeted scraping of facial images from the internet or CCTV footage."
                     ]
                   },
                   "5.e.2": {
@@ -184,10 +184,18 @@
                       "No"
                     ]
                   },
-                  "infra": {
-                    "$ref": "#/definitions/infra"
+                  "5.h.verify": {
+                    "type": "string",
+                    "title": "Is the AI system only used to confirm that someone is who they say they are (verification or authentication)?",
+                    "enum": [
+                      "Yes",
+                      "No"
+                    ]
                   }
-                }
+                },
+                "required": [
+                  "5.h.verify"
+                ]
               }
             ]
           },
@@ -200,10 +208,18 @@
                       "Yes"
                     ]
                   },
-                  "infra": {
-                    "$ref": "#/definitions/infra"
+                  "5.h.verify.dual": {
+                    "type": "string",
+                    "title": "Is the biometric data also compared at the same time against any other database (e.g. criminal records, watchlists)?",
+                    "enum": [
+                      "Yes",
+                      "No"
+                    ]
                   }
-                }
+                },
+                "required": [
+                  "5.h.verify.dual"
+                ]
               },
               {
                 "properties": {
@@ -227,6 +243,42 @@
               }
             ]
           },
+          "5.h.verify.dual": {
+            "oneOf": [
+              {
+                "properties": {
+                  "5.h.verify.dual": {
+                    "enum": [
+                      "Yes"
+                    ]
+                  },
+                  "III.1.2": {
+                    "type": "string",
+                    "title": "Is the AI system used for public safety, crime prevention, investigation or prosecution or the execution of criminal justice?",
+                    "enum": [
+                      "Yes",
+                      "No"
+                    ]
+                  }
+                },
+                "required": [
+                  "III.1.2"
+                ]
+              },
+              {
+                "properties": {
+                  "5.h.verify.dual": {
+                    "enum": [
+                      "No"
+                    ]
+                  },
+                  "infra": {
+                    "$ref": "#/definitions/infra"
+                  }
+                }
+              }
+            ]
+          },
           "III.1.2": {
             "oneOf": [
               {
@@ -236,10 +288,18 @@
                       "Yes"
                     ]
                   },
-                  "exceptionForbidden": {
-                    "$ref": "#/definitions/exceptionForbidden"
+                  "III.1.2-prohibited": {
+                    "type": "string",
+                    "title": "Is the AI system used in real time, in a publicly accessible space, and outside any of the three Article 5(1)(h) exceptions (targeted search for victims of certain serious crimes or missing persons; prevention of imminent threats to life or physical safety, or genuine terrorist-attack threats; localisation of suspects of serious crimes listed in Annex II)?",
+                    "enum": [
+                      "Yes",
+                      "No"
+                    ]
                   }
-                }
+                },
+                "required": [
+                  "III.1.2-prohibited"
+                ]
               },
               {
                 "properties": {
@@ -261,6 +321,34 @@
                 "required": [
                   "cybersec"
                 ]
+              }
+            ]
+          },
+          "III.1.2-prohibited": {
+            "oneOf": [
+              {
+                "properties": {
+                  "III.1.2-prohibited": {
+                    "enum": [
+                      "Yes"
+                    ]
+                  },
+                  "exceptionForbidden": {
+                    "$ref": "#/definitions/exceptionForbidden"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "III.1.2-prohibited": {
+                    "enum": [
+                      "No"
+                    ]
+                  },
+                  "exceptionHigh": {
+                    "$ref": "#/definitions/exceptionHigh"
+                  }
+                }
               }
             ]
           },
@@ -475,7 +563,7 @@
                         "III.2.4": { "enum": ["Yes"] },
                         "III.2.5": {
                           "type": "string",
-                          "title": "Is the AI system a cybersecurity system?",
+                          "title": "Is the AI system used solely for cybersecurity purposes (e.g., defending IT systems, detecting threats, preventing intrusions)?",
                           "enum": ["Yes", "No"]
                         }
                       },
@@ -691,7 +779,30 @@
                     {
                       "properties": {
                         "III.6-5.d": { "enum": ["Yes"] },
-                        "exceptionForbidden": { "$ref": "#/definitions/exceptionForbidden" }
+                        "III.6-5.d.solely": {
+                          "type": "string",
+                          "title": "Is the risk assessment based solely on profiling of the natural person or on assessing personality traits and characteristics?",
+                          "enum": ["Yes", "No"]
+                        }
+                      },
+                      "required": ["III.6-5.d.solely"],
+                      "dependencies": {
+                        "III.6-5.d.solely": {
+                          "oneOf": [
+                            {
+                              "properties": {
+                                "III.6-5.d.solely": { "enum": ["Yes"] },
+                                "exceptionForbidden": { "$ref": "#/definitions/exceptionForbidden" }
+                              }
+                            },
+                            {
+                              "properties": {
+                                "III.6-5.d.solely": { "enum": ["No"] },
+                                "exceptionHigh": { "$ref": "#/definitions/exceptionHigh" }
+                              }
+                            }
+                          ]
+                        }
                       }
                     },
                     {
@@ -1139,7 +1250,7 @@
                   },
                   "6.2": {
                     "type": "string",
-                    "title": "Is the AI system only used for narrow procedural tasks or preparatory tasks without influencing the outcomes of a (decision-making) process?",
+                    "title": "Does the AI system fall within one of the following Article 6(3) exception scenarios? An AI system that meets at least one of these is not classified as high-risk, even though its intended purpose falls within an Annex III area.",
                     "enum": [
                       "Yes, the AI system is used for a narrow procedural task.",
                       "Yes, the AI system is used to improve the result of a previously human-performed activity.",
@@ -1162,8 +1273,7 @@
                   "6.2": {
                     "enum": [
                       "Yes, the AI system is used for a narrow procedural task.",
-                      "Yes, the AI system is used to improve the result of a previously human-performed activity.",
-                      "Yes, the AI system is used in a preparatory step, without influencing the outcome."
+                      "Yes, the AI system is used to improve the result of a previously human-performed activity."
                     ]
                   },
                   "6.2-explain": {
@@ -1177,6 +1287,59 @@
                 },
                 "required": [
                   "6.2-explain"
+                ]
+              },
+              {
+                "properties": {
+                  "6.2": {
+                    "enum": [
+                      "Yes, the AI system is used in a preparatory step, without influencing the outcome."
+                    ]
+                  },
+                  "6.2-explain": {
+                    "type": "string",
+                    "title": "Explain why this scenario is applicable.",
+                    "default": ""
+                  },
+                  "6.2-prep-confirm": {
+                    "type": "array",
+                    "title": "For the preparatory-task exception to apply, both of the following must be true:",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "The system's output is general input or supplementary information for the human assessor, not a specific recommendation or evaluation of the case.",
+                        "The possible impact of the system's output is very low in terms of representing a risk for the assessment to follow."
+                      ]
+                    },
+                    "uniqueItems": true,
+                    "minItems": 0
+                  }
+                },
+                "required": ["6.2-explain", "6.2-prep-confirm"],
+                "allOf": [
+                  {
+                    "if": {
+                      "properties": {
+                        "6.2-prep-confirm": {
+                          "allOf": [
+                            { "contains": { "const": "The system's output is general input or supplementary information for the human assessor, not a specific recommendation or evaluation of the case." } },
+                            { "contains": { "const": "The possible impact of the system's output is very low in terms of representing a risk for the assessment to follow." } }
+                          ]
+                        }
+                      },
+                      "required": ["6.2-prep-confirm"]
+                    },
+                    "then": {
+                      "properties": {
+                        "output": { "$ref": "#/definitions/outputHighExcept" }
+                      }
+                    },
+                    "else": {
+                      "properties": {
+                        "output": { "$ref": "#/definitions/outputHigh" }
+                      }
+                    }
+                  }
                 ]
               },
               {
@@ -1616,11 +1779,12 @@
       "ui:widget": "radio",
       "ui:description": "Biometric data are unique characteristics of a person such as images or video footage of faces, iris scans, fingerprints, voice sounds, handwriting, and other unique characteristics of bodies and/or behavior.",
       "ui:descriptionStyle": "plain",
-      "ui:alertDescription": "The key distinction of biometric data is: does the data measure bodily, structural, and relatively static attributes of a person – or does it merely describe or record something associated with a person?\n\nExamples of biometric data:\n- Fingerprints, iris or retina patterns\n- Facial and hand geometry, voice print, vein patterns, ear shape\n- DNA, odour and heartbeats\n- Someone's unique way of typing (keystrokes), walking (as captured by sensors or video analysis), or distinctive characteristics of movements, gestures, and motor-skills of natural persons.\n- See also: [Physiological and Behavioural Biometrics – Biometrics Institute](https://www.biometricsinstitute.org/physiological-and-behavioural-biometrics/)\n\nExamples of non-biometric data:\n- A photo of someone\n- Typed text or written signature\n- Name or ID number\n- Medical diagnosis\n- Location or GPS data\n- Passwords\n- IP address or device fingerprints (tied to devices, not bodies)\n- Age or birth date, height and weight.\n- Object recognition. For instance, an AI system used in supermarkets to detect whether a product is being put into a basket, or suspicious objects detection at airports, train stations etc.\n- Emotions inference from typed text (content, sentiment analyses or stylometry)",
+      "ui:alertDescription": "The key distinction of biometric data is: does the data measure bodily, structural, and relatively static attributes of a person – or does it merely describe or record something associated with a person?\n\nExamples of biometric data:\n- Fingerprints, iris or retina patterns\n- Facial and hand geometry, voice print, vein patterns, ear shape\n- DNA, odour, heartbeats, electroencephalography (EEG) and electrocardiograms (ECG)\n- Someone's unique way of typing (keystrokes), walking (as captured by sensors or video analysis), or distinctive characteristics of movements, gestures, and motor-skills of natural persons.\n\nExamples of non-biometric data:\n- A photo of someone\n- Typed text or written signature\n- Name or ID number\n- Medical diagnosis\n- Location or GPS data\n- Passwords\n- IP address or device fingerprints (tied to devices, not bodies)\n- Age or birth date, height and weight.\n- An AI system that follows a person based on, for example, a red scarf or a blue jacket (no biometric data).\n- Data from deceased individuals, dead bodies, human remains or traces thereof (biometric data only concerns living natural persons).\n- Object recognition. For instance, an AI system used in supermarkets to detect whether a product is being put into a basket, or suspicious objects detection at airports, train stations etc.\n- Emotions inference from typed text (content, sentiment analyses or stylometry)\n\nSee also: [Physiological and Behavioural Biometrics – Biometrics Institute](https://www.biometricsinstitute.org/physiological-and-behavioural-biometrics/)",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
       "ui:id-badge-label": "Annex III(1) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
-        { "label": "Recital 14 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-14" }
+        { "label": "Recital 14 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-14" },
+        { "label": "Draft guidelines on the classification of high-risk AI systems (122)-(124)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
       "ui:id-summary": {
         "Yes": "Biometric data is used",
@@ -1635,11 +1799,12 @@
       "ui:badges": [
         { "label": "Art. 5(1)(e)-(h) AI Act - Prohibited AI practices", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5" },
         { "label": "Recital 14 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-14" },
-        { "label": "Recital 54 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-54" }
+        { "label": "Recital 54 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-54" },
+        { "label": "Draft guidelines on the classification of high-risk AI systems (119)-(120)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
-      "ui:enumTooltips": [null, "Emotions include happiness, joy, sadness, anger, aggression, surprise, disgust, shyness, excitement, shame, contempt, satisfaction, and pleasure.", "This means that people are grouped or assigned a label based on certain characteristics, such as how they look or behave. For example, if an application labels people as 'shoplifters' or makes an estimate of someone's gender based on video images.", "Identification is about discovering who someone is from a group of people. For example, if you have a photo of a face, you can try to find out who that person is by comparing the photo with a database of faces. 'Remote' means that this identification takes place without the active involvement of the person being identified.", null],
+      "ui:enumTooltips": [null, "Emotions include happiness, joy, sadness, anger, aggression, surprise, disgust, shyness, excitement, shame, contempt, satisfaction, and pleasure. Note: physical states such as pain or fatigue are not considered emotions (e.g. driver-drowsiness detection is not emotion recognition). The mere detection of expressions, gestures or movements (e.g. a smile) is not emotion recognition unless used to infer an emotion.", "This means that people are grouped or assigned a label based on certain characteristics, such as how they look or behave. For example, if an application labels people as 'shoplifters' or makes an estimate of someone's gender based on video images. Biometric categorisation does not include categorisation according to clothes or accessories (scarfs, hats, gloves, watches, crosses) or based on social media activity.", "Identification is about discovering who someone is from a group of people. For example, if you have a photo of a face, you can try to find out who that person is by comparing the photo with a database of faces. 'Remote' means that this identification takes place without the active involvement of the person being identified. This option also covers tracking a natural person across cameras where the tracking relies on biometric data (e.g. gait, voice, face matched against a reference template), and body-worn cameras used for untargeted filming (e.g. of demonstrations).", "AI systems that use biometric data for purposes other than identification, categorisation or emotion recognition (e.g. voice samples used for language or dialect analysis to substantiate a country of origin) may still fall under other Annex III use cases — biometric categorisation (point 1(b)) or migration / asylum / border control (point 7). Continue the questionnaire to ensure the correct path."],
       "ui:id-summary": {
-        "Creates or expands a facial recognition database.": "The AI system creates or expands a facial recognition database",
+        "Creates or expands a facial recognition database via untargeted scraping of facial images from the internet or CCTV footage.": "The AI system creates or expands a facial recognition database via untargeted scraping of facial images from the internet or CCTV footage",
         "Recognizes or infers emotions or intentions.": "The AI system recognizes or infers emotions or intentions",
         "For categorizing (labeling) people.": "The AI system categorizes (labels) people",
         "Remote identification of individuals.": "The AI system is used for remote identification of individuals",
@@ -1652,7 +1817,8 @@
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5",
       "ui:id-badge-label": "Art. 5(1)(e) AI Act - Prohibited AI practices",
       "ui:badges": [
-        { "label": "Recital 43 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-43" }
+        { "label": "Recital 43 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-43" },
+        { "label": "Draft guidelines on the classification of high-risk AI systems (126)-(127)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
       "ui:id-summary": {
         "Yes": "Large-scale collection of facial images from the internet or security cameras (scraping) is involved",
@@ -1663,12 +1829,13 @@
     "5.h.verify": {
       "ui:widget": "radio",
       "ui:descriptionStyle": "plain",
-      "ui:alertDescription": "Verification and authentication mean confirming an already-known identity: the person is present and willing, and the system checks them against a reference that belongs to them. If the person is unknown, passive or not being matched against their own pre-stored reference, the system is not verifying or authenticating – it is trying to find out who someone is (identification) or infer something about them (categorisation).\n\nExamples of verification and authentication:\n- Unlocking a phone by matching your face to the face stored on the device\n- Fingerprint reader giving access to building by matching your fingerprint to your enrolled profile\n- A camera checks if your face matches the photo in your passport.\n\nExamples not involving verification or authentication, but identification or categorization:\n- A camera at a stadium entrance scans every face in the crowd to find a wanted suspect (identification)\n- An airport uses facial recognition to spot known terrorists among passengers without their knowledge (identification)\n- A shop uses cameras to detect the emotions or stress levels of customers (categorisation)\n- An HR system analyses job applicants' facial expressions during video interviews (categorisation)\n- A system checks whether someone walking past a camera is male or female based on their face (biometric categorisation)\n- A police database is searched with CCTV footage to identify who committed a crime (identification).",
+      "ui:alertDescription": "Verification and authentication mean confirming an already-known identity: the person is present and willing, and the system checks them against a reference that belongs to them. If the person is unknown, passive or not being matched against their own pre-stored reference, the system is not verifying or authenticating – it is trying to find out who someone is (identification) or infer something about them (categorisation).\n\nExamples of verification and authentication:\n- Unlocking a phone by matching your face to the face stored on the device\n- Fingerprint reader giving access to building by matching your fingerprint to your enrolled profile\n- A camera checks if your face matches the photo in your passport.\n\nExamples not involving verification or authentication, but identification or categorization:\n- A camera at a stadium entrance scans every face in the crowd to find a wanted suspect (identification)\n- An airport uses facial recognition to spot known terrorists among passengers without their knowledge (identification)\n- A shop uses cameras to detect the emotions or stress levels of customers (categorisation)\n- An HR system analyses job applicants' facial expressions during video interviews (categorisation)\n- A system checks whether someone walking past a camera is male or female based on their face (biometric categorisation)\n- A police database is searched with CCTV footage to identify who committed a crime (identification).\n\nInformation alone is not enough — for verification or authentication to apply, the person must actively and consciously participate (e.g. step into a marked capture zone, present a fingerprint on demand). A surveillance camera in a metro station ceiling fulfils the condition of remoteness; a biometric metro ticket at a turnstile does not.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
       "ui:id-badge-label": "Annex III(1) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
         { "label": "Recital 17 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-17" },
-        { "label": "Recital 54 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-54" }
+        { "label": "Recital 54 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-54" },
+        { "label": "Draft guidelines on the classification of high-risk AI systems (136)-(140)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
       "ui:id-summary": {
         "Yes": "The AI system is used only for verification or authentication of a known identity",
@@ -1676,19 +1843,53 @@
       },
       "ui:id": "q6"
     },
+    "5.h.verify.dual": {
+      "ui:widget": "radio",
+      "ui:description": "The verification carve-out (Annex III point 1(a)) only applies when the comparison is exclusively against the person's own pre-stored reference (one-to-one matching). If the captured biometric data is at the same time compared against a separate database — for example an Interpol watchlist or a criminal-records database — the system performs remote biometric identification in parallel and falls outside the verification carve-out.",
+      "ui:descriptionStyle": "plain",
+      "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
+      "ui:id-badge-label": "Annex III(1)(a) AI Act - Remote biometric identification",
+      "ui:badges": [
+        { "label": "Recital 17 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-17" },
+        { "label": "Draft guidelines on the classification of high-risk AI systems (136)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+      ],
+      "ui:id-summary": {
+        "Yes": "Biometric data is also compared against another database in parallel with verification",
+        "No": "Biometric data is compared only against the person's own pre-stored reference"
+      },
+      "ui:id": "q6 dual"
+    },
     "III.1.2": {
       "ui:widget": "radio",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5",
       "ui:id-badge-label": "Art. 5(1)(h) AI Act - Prohibited AI practices",
       "ui:badges": [
         { "label": "Recital 32 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-32" },
-        { "label": "Recital 33 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-33" }
+        { "label": "Recital 33 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-33" },
+        { "label": "Draft guidelines on the classification of high-risk AI systems (126)-(128)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
       "ui:id-summary": {
         "Yes": "The AI system is used for public safety, crime prevention, investigation, prosecution or the execution of criminal justice",
         "No": "The AI system is not used for law-enforcement purposes"
       },
       "ui:id": "q7"
+    },
+    "III.1.2-prohibited": {
+      "ui:widget": "radio",
+      "ui:description": "Article 5(1)(h) only prohibits real-time remote biometric identification (RBI) in publicly accessible spaces for law-enforcement purposes when none of the three exceptions in points (i)-(iii) applies. Post-RBI used for law enforcement, or real-time RBI under one of the three exceptions, is high-risk under Annex III point 1(a) — not prohibited — and is subject to the Article 26(10) deployer regime (prior judicial or administrative authorisation; 48-hour rule; deletion of personal data on rejection; annual reporting).",
+      "ui:descriptionStyle": "plain",
+      "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5",
+      "ui:id-badge-label": "Art. 5(1)(h) AI Act - Prohibited AI practices",
+      "ui:badges": [
+        { "label": "Annex III(1)(a) AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3" },
+        { "label": "Art. 26(10) AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-26" },
+        { "label": "Draft guidelines on the classification of high-risk AI systems (127), (145)-(164)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+      ],
+      "ui:id-summary": {
+        "Yes": "Real-time RBI in publicly accessible space for law enforcement, outside Art. 5(1)(h)(i)-(iii) exceptions — prohibited",
+        "No": "Conditions for Art. 5(1)(h) prohibition not all met — high-risk under Annex III point 1(a), subject to Art. 26(10)"
+      },
+      "ui:id": "q7 prohibited"
     },
     "5.g.1": {
       "ui:widget": "radio",
@@ -1698,7 +1899,8 @@
       "ui:id-badge-label": "Art. 5(1)(g) AI Act - Prohibited AI practices",
       "ui:badges": [
         { "label": "Annex III(1) AI Act - High-risk AI systems referred to in Article 6(2)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3" },
-        { "label": "Art. 9 GDPR - Processing of special categories of personal data", "color": "#198754", "url": "https://gdpr-info.eu/art-9-gdpr/" }
+        { "label": "Art. 9 GDPR - Processing of special categories of personal data", "color": "#198754", "url": "https://gdpr-info.eu/art-9-gdpr/" },
+        { "label": "Draft guidelines on the classification of high-risk AI systems (165)-(170)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
       "ui:id-summary": {
         "Yes": "The AI system estimates sensitive personal characteristics (such as race, ethnicity, political opinions, union membership, religion, sex life or sexual orientation)",
@@ -1712,7 +1914,8 @@
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5",
       "ui:id-badge-label": "Art. 5(1)(f) AI Act - Prohibited AI practices",
       "ui:badges": [
-        { "label": "Annex III(1) AI Act - High-risk AI systems referred to in Article 6(2)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3" }
+        { "label": "Annex III(1) AI Act - High-risk AI systems referred to in Article 6(2)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3" },
+        { "label": "Draft guidelines on the classification of high-risk AI systems (171)-(177)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
       "ui:id-summary": {
         "Yes": "The AI system is used in the workplace or in education",
@@ -1802,7 +2005,7 @@
     "III.2.4": {
       "ui:widget": "radio",
       "ui:descriptionStyle": "plain",
-      "ui:alertDescription": "A component with a safety function is intended to eliminate or reduce a risk. If the failure or malfunction of the AI system endangers the health and safety of people or property, choose yes. Examples of components with a safety function are:\n- A system that automatically closes a lane for a tunnel during road congestion to prevent traffic jams in the tunnel\n- Fire alarm systems\n- Other detection or alarm functions that respond to over/under pressure, temperature or voltage\n- Collision avoidance systems in vehicles that automatically brake to prevent a collision\n- Firewall or antivirus software.",
+      "ui:alertDescription": "A safety component performs a function that directly protects the physical integrity of the critical infrastructure and the health and safety of persons or property. A safety function falls into one of six categories:\n\n- Monitor and detect: e.g. AI detecting abnormal behaviour in critical infrastructure operation.\n- Detect maintenance or inspection needs: e.g. AI detecting whether safety-related parts are worn and need replacement before they fail.\n- Prevent harm: e.g. AI preventing critical infrastructure from starting up if abnormal behaviour is detected.\n- Control or limit harm: e.g. AI controlling a specific behaviour or function of critical infrastructure and adjusting it accordingly.\n- Mitigate consequences: e.g. AI that triggers a safe stop when a dangerous condition occurs.\n- Control or supervise another safety system: e.g. AI supervising via sensors another system that performs a safety function.\n\nThe following AI systems are NOT safety components in critical infrastructure:\n\n- AI-enabled traffic-flow optimisation systems based on real-time data that do not directly trigger safety-relevant changes.\n- AI used for predictive maintenance that only generates recommendations to humans without triggering safety actions.\n- AI used solely for cybersecurity purposes (the next question covers this carve-out).\n- AI systems that are merely supportive, informational, organisational or optimisation-oriented and do not directly protect physical integrity.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
       "ui:id-badge-label": "Annex III(2) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
@@ -1816,15 +2019,15 @@
     },
     "III.2.5": {
       "ui:widget": "radio",
-      "ui:description": "For instance, a firewall or antivirus software.",
+      "ui:description": "For instance, a firewall or antivirus software. If the AI system also performs other safety-relevant functions, choose 'No'. The carve-out only applies when cybersecurity is the sole purpose.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
       "ui:id-badge-label": "Annex III(2) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
         { "label": "Recital 55 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-55" }
       ],
       "ui:id-summary": {
-        "Yes": "The AI system is a cybersecurity system",
-        "No": "The AI system is not a cybersecurity system"
+        "Yes": "The AI system is used solely for cybersecurity purposes",
+        "No": "The AI system is not used solely for cybersecurity purposes"
       },
       "ui:id": "q15"
     },
@@ -1957,6 +2160,21 @@
         "No": "The AI system does not assess the risk of (re)committing a criminal offense"
       },
       "ui:id": "q22"
+    },
+    "III.6-5.d.solely": {
+      "ui:widget": "radio",
+      "ui:description": "Article 5(1)(d) AI Act prohibits crime-risk AI when based solely on profiling or assessing personality traits. If the assessment also relies on objective and verifiable facts directly linked to a criminal activity (e.g. prior convictions, behaviour during custody, evidence in an open investigation), choose 'No' — the system will then be classified as high-risk under Annex III point 6(d) instead of prohibited.",
+      "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5",
+      "ui:id-badge-label": "Art. 5(1)(d) AI Act - Prohibited AI practices",
+      "ui:badges": [
+        { "label": "Art. 5(1)(d) AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5" },
+        { "label": "Annex III(6)(d) AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3" }
+      ],
+      "ui:id-summary": {
+        "Yes": "Risk assessment is based solely on profiling or personality traits — prohibited under Art. 5(1)(d)",
+        "No": "Risk assessment relies on objective, verifiable facts — high-risk under Annex III(6)(d)"
+      },
+      "ui:id": "q22 solely"
     },
     "III.6.uses": {
       "ui:widget": "radio",
@@ -2122,7 +2340,7 @@
     },
     "6.1": {
       "ui:widget": "radio",
-      "ui:description": "Think of automatically evaluating professional performance, economic situation, health, personal preferences, interests, reliability, behavior, location or movements of a person to analyze or predict.",
+      "ui:description": "Think of automatically evaluating professional performance, economic situation, health, personal preferences, interests, reliability, behavior, location or movements of a person to analyze or predict.\n\nProfiling requires that the AI system processes personal data of a natural person. Classification or prediction based purely on non-personal data (e.g. goods, weather, vehicle data not tied to a natural person) is not profiling within the meaning of Article 3(52) AI Act.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-6",
       "ui:id-badge-label": "Art. 6(3) AI Act - Classification rules for high-risk AI systems",
       "ui:badges": [
@@ -2137,9 +2355,10 @@
     },
     "6.2": {
       "ui:widget": "radio",
+      "ui:description": "If the AI system is part of a more complex or agentic configuration where multiple AI components together materially influence individual decisions in a high-risk use case, this exception cannot be applied to individual modules in isolation.",
       "ui:enumTooltips": [
         "For example, an AI system performs a narrow procedural task when it sorts incoming applications for admission to school or university according to the grade or educational level applied for. Such systems may categorise applications into predefined categories (e.g. primary, secondary, high school or specific grades) based on information provided in the application, without evaluating applicants' suitability or making admission decisions. In a similar scenario, an AI system that is used to detect and flag incomplete forms to initiate their return to the applicant to be completed correctly could also be classified as a narrow procedural task. However, this condition does not apply to all categorisation systems. In particular, AI systems that perform a value judgement of data relevant for decision-making, for example categorisation of input data as 'useful' or 'less useful' for the human assessment, or attributing a score or ranking to input data, are likely to have a broader impact on the assessment process and will therefore not be considered to perform only a 'narrow procedural task'.",
-        "For example: an AI system that improves the language of previously drafted documents, for example, regarding professional tone or academic style or by tailoring a text to a specific brand message. The notion 'improve' in this context means that the application of the AI system may lead to changes, but these changes should not revert or lead to a full revision or replacement of the previously completed human activity. For example, if an AI system checks a decision, plan, or construction made by a human and provides a substantially different solution, this would not be considered 'improving' a previously completed human activity, since it is not limited to refining or enhancing the outcome of that activity. By contrast, examples of AI systems that serve auxiliary improvement functions include systems that flag errors or contradictions in finalized human work that perform a quality-assurance function; systems that map conclusions to evidentiary records to strengthen the traceability of a decision without substituting the human judgment; systems that convert human-validated content for interoperability or accessibility purposes that transform but do not replace human output.",
+        "For example: an AI system that improves the language of previously drafted documents, for example, regarding professional tone or academic style or by tailoring a text to a specific brand message. The notion 'improve' in this context means that the application of the AI system may lead to changes, but these changes should not revert or lead to a full revision or replacement of the previously completed human activity. For example, if an AI system checks a decision, plan, or construction made by a human and provides a substantially different solution, this would not be considered 'improving' a previously completed human activity, since it is not limited to refining or enhancing the outcome of that activity. By contrast, examples of AI systems that serve auxiliary improvement functions include systems that flag errors or contradictions in finalized human work that perform a quality-assurance function; systems that map conclusions to evidentiary records to strengthen the traceability of a decision without substituting the human judgment; systems that convert human-validated content for interoperability or accessibility purposes that transform but do not replace human output. An improvement that changes the rights, protection, legal or economic position of the persons affected does not qualify.",
         "For example: an AI system that, after a set of decisions has been made, analyzes patterns in decision-making so that human decision-makers can learn from them.",
         "'Preparatory' refers to tasks that occur prior to the actual assessment process. The decisive factor in determining whether a task is 'preparatory' is the task's role in the decision-making process and proximity to the final human decision. This specification is important, since it differentiates a preparatory task from the narrow procedural task, which can occur during the assessment process so long as it is clearly defined and limited in scope. As specified in Recital 53 AI Act, the preparatory nature of the task should be such that the 'possible impact of the output of the system is very low in terms of representing a risk for the assessment to follow'. At the same time, if the narrow procedural task occurs prior to the assessment and is preparatory in nature, both the 'narrow procedural task' and the 'preparatory step' scenario apply.\n\nIf an AI system's output is intended to inform a human operator's assessment, it may be considered to perform a preparatory task only if the system's output is a general input or factor, for example supplementary information that supports an operator's decision-making process. Where the AI system is intended to produce a specific recommendation or evaluation of the case, it plays a decisive role in the assessment or the decision and can therefore not be considered to perform a preparatory task.\n\nExample 1: smart solutions for file management, including functions such as indexing, searching, text and speech processing or linking data to other data sources or AI systems used for translating source documents.\n\nExample 2: An AI system is intended to be used for assessing data relevant to a decision (e.g., in relation to public benefits) and provides a human operator with references to the relevant legal provisions, information on jurisdiction, and possibly existing internal guidelines relevant to the decision-making process. The tasks performed by the system could be considered as preparatory, since they neither analyse nor evaluate the concrete cases at hand and do not produce an output that materially influences the decision. Rather, the system references general information as a supplementary information for the human assessor to consider in his or her decision.",
         null
@@ -2162,6 +2381,12 @@
     "6.2-explain": {
       "ui:widget": "textarea",
       "ui:id": "q34 explanation"
+    },
+    "6.2-prep-confirm": {
+      "ui:widget": "checkboxes",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Both conditions must be true for the preparatory-task exception to apply (Guidelines ¶105, ¶108). If only one or none is true, the AI system is classified as high-risk.",
+      "ui:id": "q34 prep-confirm"
     },
     "6.3": {
       "ui:widget": "checkboxes",
