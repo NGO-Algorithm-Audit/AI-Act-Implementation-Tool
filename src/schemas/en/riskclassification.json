@@ -768,7 +768,7 @@
               "properties": {
                 "III.6-5.d": {
                   "type": "string",
-                  "title": "Is the AI system used in assessing the risk that someone will (re)commit a criminal offense?",
+                  "title": "Is the AI system used to assess the risk of a natural person offending or re-offending — including assessment based on profiling, personality traits or past criminal behaviour?",
                   "enum": ["Yes", "No"]
                 }
               },
@@ -816,7 +816,6 @@
                             "Act as a polygraph (lie detector) or similar instrument",
                             "Assess the reliability of evidence during the investigation or prosecution of criminal offenses",
                             "Automatically evaluate or predict characteristics, behavior or personal aspects in the context of crime detection, investigation or prosecution",
-                            "Assess personality traits, characteristics or previous criminal behavior of individuals or groups",
                             "None of the above"
                           ]
                         }
@@ -835,8 +834,7 @@
                             "Assess or estimate that someone will become a victim of criminal offenses",
                             "Act as a polygraph (lie detector) or similar instrument",
                             "Assess the reliability of evidence during the investigation or prosecution of criminal offenses",
-                            "Automatically evaluate or predict characteristics, behavior or personal aspects in the context of crime detection, investigation or prosecution",
-                            "Assess personality traits, characteristics or previous criminal behavior of individuals or groups"
+                            "Automatically evaluate or predict characteristics, behavior or personal aspects in the context of crime detection, investigation or prosecution"
                           ]
                         },
                         "exceptionHigh": { "$ref": "#/definitions/exceptionHigh" }
@@ -1980,7 +1978,7 @@
         "Examples how AI systems are used in the context of employment are:\n• Recording hours, measuring KPIs and performance\n• Task distribution\n• Recruitment and selection\n• Inflow and progression (employment conditions, contractual terms)\n• Outflow (termination of contract)\n\nThe personal scope covers employees, freelancers, independent contractors, and self-employed persons including platform workers — not only formal employees. The workplace is understood broadly (physical or virtual).\n\nAlso choose 'yes' when the application broadly falls under the above, even if the application plays a small role in an otherwise manual process.",
         "E.g. processes around benefits or allowances, such as application, administration, execution, enforcement, recovery, and objection. This includes payment arrangements for repaying a benefit that was previously granted. Tax remission, waiving of fines or other measures that are not a service or benefit as such are not covered. Select this option if the application plays a small role in the process.",
         "Covers three distinct Annex III sub-uses:\n\n- Creditworthiness assessment or credit scoring of natural persons, where used to determine access to essential financial services (bank accounts, payment services with credit, loans, credit-line / credit-card extensions, mortgages, publicly-backed loans and similar). Including payment arrangements for repaying a public debt (e.g. for taxes, fines, or a benefit being reclaimed) — these are publicly-extended credit and counted as essential financial services.\n- Risk assessment or pricing of natural persons in life or health insurance — including private long-term care insurance, personal pension products and credit life insurance. Motor, home and travel insurance are NOT covered.\n- Evaluating or classifying emergency calls, dispatching emergency services, or establishing priority in such dispatch (police, fire, ambulance, healthcare patient triage).\n\nSelect this option even if the AI system plays only a small role in the process.",
-        "Law enforcement includes the prevention, investigation, and prosecution of criminal offences, the execution of sentences, and the protection of public safety. Think of police, special enforcement officers, and the execution of (community) sentences by probation services. Other agencies, such as juvenile justice organizations and specific (inspection) services, can also engage in law enforcement. Also select this answer for organizations and institutions that support law enforcement agencies, such as a forensics institute, and for activities carried out on behalf of law enforcement agencies.",
+        "Law enforcement includes the prevention, investigation, detection or prosecution of criminal offences, the execution of criminal penalties, and the safeguarding against and prevention of threats to public security. The concept is functional, not formal: it covers police, public prosecutors, probation and parole services, prison services, juvenile justice organisations, and forensics institutes, as well as Union bodies in support of law enforcement (Europol, Eurojust, EPPO, Frontex where doing law enforcement).\n\nCustoms authorities count only when acting in their criminal-investigation capacity — not when handling administrative import / export / transit procedures, customs duties or tariffs. National intelligence services are excluded unless performing specific law-enforcement functions. Administrative proceedings, including those of financial-intelligence units performing administrative anti-money-laundering tasks, are not covered.\n\nAlso select this answer for activities carried out on behalf of law enforcement agencies.",
         null,
         "Professional matters, in which a judge makes a ruling, fall under the judiciary. Alternative dispute resolution includes disciplinary law, ombudsmen, arbitration, and complaints committees such as the Advertising Code Committee, the Council for Journalism, and the National Complaints Committee for Education.",
         null,
@@ -2168,7 +2166,9 @@
     },
     "III.6-5.d": {
       "ui:widget": "radio",
-      "ui:description": "Also think of (administrative) offenses and fraud risk scores, where an estimate is made of whether someone might commit a criminal offense and an estimate of the likelihood of recidivism.",
+      "ui:description": "Choose 'Yes' if the AI system assesses the risk of offending or re-offending using profiling, personality traits, past criminal behaviour, or any combination of these as a basis.",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Point 6(d) covers AI assessing the risk that a natural person will offend or re-offend, where the assessment uses at least one of three alternative bases: (i) profiling of natural persons (Article 3(4) Law Enforcement Directive); (ii) assessment of personality traits and characteristics; (iii) assessment of past criminal behaviour of natural persons or groups. If your AI uses any of these — alone or in combination with other inputs — answer Yes.\n\nAdministrative offences are NOT covered by point 6 (Recital 59). Where an offence is formally administrative under national law but qualifies as criminal under the CJEU / ECtHR Engel criteria (classification under national law, nature of the offence, severity of the penalty — these three are alternative, not cumulative), the assessment counts as criminal.\n\nFraud-risk scoring AI is covered only if the underlying conduct constitutes a criminal offence; pure administrative fraud-risk scoring is not.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
       "ui:badges": [
         {
@@ -2177,12 +2177,13 @@
           "color": "#F37962"
         },
         { "label": "Recital 42 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-42" },
-        { "label": "Recital 59 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-59" }
+        { "label": "Recital 59 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-59" },
+        { "label": "Draft guidelines on the classification of high-risk AI systems (366)-(368)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
       "ui:id-badge-label": "Annex III.6-5.d AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:id-summary": {
-        "Yes": "The AI system assesses the risk that someone will (re)commit a criminal offense",
-        "No": "The AI system does not assess the risk of (re)committing a criminal offense"
+        "Yes": "The AI system assesses the risk of offending or re-offending (based on profiling, personality traits or past criminal behaviour)",
+        "No": "The AI system does not assess the risk of offending or re-offending"
       },
       "ui:id": "q22"
     },
@@ -2193,7 +2194,8 @@
       "ui:id-badge-label": "Art. 5(1)(d) AI Act - Prohibited AI practices",
       "ui:badges": [
         { "label": "Art. 5(1)(d) AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5" },
-        { "label": "Annex III(6)(d) AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3" }
+        { "label": "Annex III(6)(d) AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3" },
+        { "label": "Draft guidelines on the classification of high-risk AI systems (367)-(368)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
       "ui:id-summary": {
         "Yes": "Risk assessment is based solely on profiling or personality traits — prohibited under Art. 5(1)(d)",
@@ -2204,18 +2206,26 @@
     "III.6.uses": {
       "ui:widget": "radio",
       "ui:description": "Also choose an option when the AI system plays a part in the process.",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Point 6 covers AI systems intended to be used by or on behalf of law enforcement authorities, or by Union institutions / bodies / offices / agencies in support of law enforcement authorities (Europol, Eurojust, EPPO, Frontex where doing law enforcement). The concept of 'law enforcement authority' is functional, not formal: it includes police, public prosecutors, probation and parole services, prison services, and customs authorities only when acting in their criminal-investigation capacity.\n\nNOT covered:\n\n- AI used in administrative proceedings (tax administration, customs in administrative capacity for import / export / transit procedures, financial-intelligence units performing administrative tasks under anti-money-laundering law).\n- AI used by national intelligence authorities outside law-enforcement activities (excluded from the AI Act under Article 2(3)).\n\nAI systems often used by law enforcement that are NOT in scope of point 6 (¶371-372):\n\n- Administrative AI (case management, accounting, equipment management, shift scheduling).\n- Chatbots on police websites providing general information.\n- Automated number-plate readers (vehicle-focused).\n- Road-safety rule detection (speeding, helmet use, phone use while driving).\n- Object detection (weapons, suspicious parcels, stolen goods, cultural objects).\n- Detection of unusual behaviour or movements without identifying persons (running, raised arms, fighting stance).\n- Gunshot-sound detection.\n- Customs AI for goods assessment based on goods / routing / payment data.\n\nChoose 'None of the above' if your system fits one of these out-of-scope categories.",
+      "ui:enumTooltips": [
+        "Covered (high-risk): AI assessing the risk that a specific natural person becomes the victim of a criminal offence — e.g. domestic-violence risk-assessment systems analysing victim statements, police reports, previous incidents, restraining-order data; human-trafficking vulnerability-detection systems aggregating indicators (age, documentation, signs of control, traveling with unrelated adult, link to high-risk sectors). All cumulative conditions: (i) used by or on behalf of law enforcement; (ii) risk to a natural person as a victim; (iii) victim of criminal offences specifically.\n\nNOT covered:\n\n- Location-focused crime-risk AI (predicting where in a neighbourhood crime may happen) — not person-focused.\n- Situational-awareness AI at a crime scene evaluating the environment (weapons, hazards) rather than specific persons.\n- Road-traffic accident-risk prediction — accidents, not criminal offences.\n- Crowd-stampede / structural-hazard / overcrowding AI at gatherings.\n- Flood / wildfire / catastrophe-victim prediction — accidents, not crimes.\n\nNote: AI assessing victim risk almost always involves profiling and therefore cannot benefit from the Article 6(3) filter.",
+        "Covered (high-risk): AI polygraphs / lie detectors and similar tools — voice stress analysis, eye-tracking / pupillometry, brain-imaging deception detection, behavioural-analysis of micro-expressions, body language, or speech cues for credibility assessment during interrogation.\n\nNOT covered:\n\n- AI monitoring police officers' fatigue or stress (occupational health, also Art 5(1)(f) medical/safety exempt).\n- Plain interview transcription with tone-flagging that does not draw truthfulness conclusions (check whether this triggers point 1(c) emotion recognition instead).\n- AI that flags irregularities across polygraph examiners' interpretations (interprets examiners, not suspects).\n\nNote: lie-detector AI that also infers emotional states may also fall under point 1(c) (emotion recognition).",
+        "Covered (high-risk) — the four ¶364 functions: (i) authenticity verification (e.g. deepfake / manipulation detection on photos, audio, video); (ii) data-integrity checks (e.g. document alterations, forged signatures, metadata analysis); (iii) source-reliability assessment (e.g. evaluating informant or witness credibility through consistency of statements over time); (iv) evaluation whether evidence is internally consistent or aligns with other available information. Limited to use in the course of an open criminal investigation or prosecution.\n\nNOT covered (¶365 explicit out-of-scope list):\n\n- Collecting / arranging / structuring information; data extraction and linking; document clustering.\n- Timeline reconstruction; visualisation.\n- Indexing of documents; duplicate detection.\n- Search in any form (keyword, similarity, knowledge-graph, fuzzy, multimodal, semantic).\n- Translation; transcription; data structuring or standardisation.\n- Image enhancement / data recovery from devices (extracting data for human evaluation — not evaluating reliability itself).\n- Crime-scene reconstruction or visualisation models.\n- Pattern detection across cases (linking similar burglary methods, similar victim profiles).\n- Content flagging — CSAM detection / classification, sex-industry-ad analysis for trafficking flags.\n- Ballistic-markings matching against a reference database (file-handling / similarity search).\n\nArticle 6(3) filter-eligible (the questionnaire will check this on a later screen): document / picture / video classification for further analysis that does not affect reliability assessment; indexing or tagging of financial documents collected to be evaluated.",
+        "Covered (high-risk): AI performing profiling of natural persons (automated processing of personal data to evaluate or predict personal aspects — Article 3(4) LED) in the course of crime detection, investigation or prosecution. Examples:\n\n- Identifying potential suspects from neighbourhood data + sex-offender registry + behavioural patterns when a child is reported missing.\n- Identifying suspects from witness descriptions plus other personal data.\n- Online monitoring classifying users for radicalisation potential through sentiment analysis, posting patterns, network analysis (not a social-scoring system if limited to targeted radicalisation monitoring within specific spheres).\n\nNOT covered:\n\n- Predictive crime-mapping AI that analyses neighbourhoods without profiling identifiable individuals.\n- Money-laundering / terrorist-financing AI that focuses on transactional patterns (amounts, frequencies, intervals, routing) without enrichment with personal data such as names or account holders.\n- Crime-linkage AI that links incidents based on modus operandi or victim profiles without identifying particular individuals as suspects.\n\nImportant: AI in point 6 that performs profiling cannot benefit from the Article 6(3) filter even if the filter's conditions would otherwise be met (¶353).",
+        null
+      ],
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
       "ui:id-badge-label": "Annex III(6) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
-        { "label": "Recital 59 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-59" }
+        { "label": "Recital 59 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-59" },
+        { "label": "Draft guidelines on the classification of high-risk AI systems (337)-(372)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
       "ui:id-summary": {
         "Assess or estimate that someone will become a victim of criminal offenses": "The AI system assesses or estimates that someone will become a victim of criminal offenses",
         "Act as a polygraph (lie detector) or similar instrument": "The AI system acts as a polygraph (lie detector) or similar instrument",
         "Assess the reliability of evidence during the investigation or prosecution of criminal offenses": "The AI system assesses the reliability of evidence during investigation or prosecution of criminal offenses",
         "Automatically evaluate or predict characteristics, behavior or personal aspects in the context of crime detection, investigation or prosecution": "The AI system automatically evaluates or predicts characteristics, behavior or personal aspects in the context of crime detection, investigation or prosecution",
-        "Automatically evaluate or predict characteristics, behavior or personal aspects in the context of crime detection, investigation or prosecution": "The AI system automatically evaluates or predicts characteristics, behavior or personal aspects in the context of crime detection, investigation or prosecution",
-        "Assess personality traits, characteristics or previous criminal behavior of individuals or groups": "The AI system assesses personality traits, characteristics or previous criminal behavior of individuals or groups",
         "None of the above": "The AI system is not used for any of the listed law-enforcement tasks"
       },
       "ui:id": "q23"
