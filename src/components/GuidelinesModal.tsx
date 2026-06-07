@@ -12,11 +12,26 @@ type Props = {
 };
 
 /** Lightweight markdown-ish renderer for the extracted paragraph text.
- *  Handles **bold**, *italic*, blank-line paragraph breaks, and "–" bullet
- *  lines. The source is verbatim pdftotext output, so we keep it minimal. */
+ *  Handles `#`-style headings, **bold**, *italic*, blank-line paragraph
+ *  breaks, and "–" bullet lines. The source is verbatim pdftotext output
+ *  with markdown structure layered on top by the extraction script, so we
+ *  keep the renderer minimal. */
 function renderParagraphBody(text: string): ReactNode {
   const blocks = text.split(/\n\s*\n/).map((b) => b.trim()).filter(Boolean);
   return blocks.map((block, i) => {
+    // Single-line heading block: 1-6 `#` chars followed by space + text.
+    // Strip the `#` markers and render as a styled subheading. This catches
+    // §3.X.Y section headers, lettered sub-bullet headings (#### a) ...) and
+    // roman-numeral sub-bullets (##### i. ...) that the extractor folds into
+    // paragraph bodies between `**(N)**` markers.
+    const headingMatch = block.match(/^(#{1,6})\s+(.+)$/);
+    if (headingMatch && !headingMatch[2].includes("\n")) {
+      return (
+        <h6 key={i} className="guidelines-modal-subheading">
+          {renderInline(headingMatch[2])}
+        </h6>
+      );
+    }
     const lines = block.split("\n").map((l) => l.trim());
     const isBulletGroup = lines.every((l) => /^[–-]\s+/.test(l));
     if (isBulletGroup) {
