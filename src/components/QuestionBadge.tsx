@@ -1,5 +1,10 @@
-import { useState } from "react";
-import { lookupGuidelinesExcerpt } from "../utils/guidelinesContent";
+import { useEffect, useState } from "react";
+import {
+  consumePendingGuidelinesBadgeIfMatches,
+  getPendingGuidelinesBadge,
+  lookupGuidelinesExcerpt,
+  subscribePendingGuidelinesBadge,
+} from "../utils/guidelinesContent";
 import GuidelinesModal from "./GuidelinesModal";
 
 interface QuestionBadgeProps {
@@ -15,6 +20,26 @@ export default function QuestionBadge({
 }: QuestionBadgeProps) {
   const excerpt = lookupGuidelinesExcerpt(label);
   const [show, setShow] = useState(false);
+
+  // Auto-open this badge's modal when a caller (e.g. SearchBar) has requested
+  // it via `requestOpenGuidelinesBadge(label)`. Checks the pending request on
+  // mount (handles the case where the request was made before the question
+  // screen rendered) and subscribes for subsequent requests (handles the case
+  // where the user is already on this screen).
+  useEffect(() => {
+    if (!excerpt) return;
+    if (getPendingGuidelinesBadge() === label) {
+      setShow(true);
+      consumePendingGuidelinesBadgeIfMatches(label);
+    }
+    const unsubscribe = subscribePendingGuidelinesBadge((req) => {
+      if (req === label) {
+        setShow(true);
+        consumePendingGuidelinesBadgeIfMatches(label);
+      }
+    });
+    return unsubscribe;
+  }, [excerpt, label]);
 
   const badge = (
     <span className="question-badge" style={{ backgroundColor: color }}>

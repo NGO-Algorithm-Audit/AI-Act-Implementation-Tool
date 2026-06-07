@@ -1,7 +1,20 @@
+import React from "react";
 import { Alert, Card, Button, ListGroup } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
 import SearchBar from "./SearchBar";
+
+function renderLinks(text: string): React.ReactNode {
+  const parts = text.split(/(\[[^\]]+\]\([^)]+\))/g);
+  if (parts.length === 1) return text;
+  return parts.map((part, i) => {
+    const m = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (m) {
+      return <a key={i} href={m[2]} target="_blank" rel="noreferrer">{m[1]}</a>;
+    }
+    return <React.Fragment key={i}>{part}</React.Fragment>;
+  });
+}
 
 export default function ({
   forms,
@@ -32,15 +45,7 @@ export default function ({
             color: "#212529",
           }}
         >
-          {t("intro banner")}
-          <a
-            href="https://digital-strategy.ec.europa.eu/en/library/draft-guidelines-implementation-transparency-obligations-certain-ai-systems-under-article-50-ai-act"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {t("intro banner draft guidelines link")}
-          </a>
-          {t("intro banner 2")}
+          {renderLinks(t("intro banner"))}
         </Alert>
         <SearchBar onStartQuestionnaire={onStartQuestionnaire} />
         <div className="d-flex flex-row justify-content-between align-items-top mb-2">

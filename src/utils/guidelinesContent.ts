@@ -58,3 +58,38 @@ export function lookupGuidelinesExcerpt(label: string): GuidelinesExcerpt | null
   if (found.length === 0) return null;
   return { section, paragraphs: found, missing };
 }
+
+// Pending-open requests: a caller (currently SearchBar) marks a badge label to
+// be opened automatically when its QuestionBadge next renders or, if already
+// mounted, receives the notification. QuestionBadge consumes the request via
+// `consumePendingGuidelinesBadgeIfMatches`. This keeps the Draft Guidelines
+// modal scoped to the question screen that actually owns the badge.
+
+let pendingBadgeLabel: string | null = null;
+type PendingBadgeListener = (label: string | null) => void;
+const pendingBadgeListeners = new Set<PendingBadgeListener>();
+
+export function requestOpenGuidelinesBadge(label: string): void {
+  pendingBadgeLabel = label;
+  pendingBadgeListeners.forEach((l) => l(label));
+}
+
+export function getPendingGuidelinesBadge(): string | null {
+  return pendingBadgeLabel;
+}
+
+export function consumePendingGuidelinesBadgeIfMatches(label: string): boolean {
+  if (pendingBadgeLabel === label) {
+    pendingBadgeLabel = null;
+    pendingBadgeListeners.forEach((l) => l(null));
+    return true;
+  }
+  return false;
+}
+
+export function subscribePendingGuidelinesBadge(listener: PendingBadgeListener): () => void {
+  pendingBadgeListeners.add(listener);
+  return () => {
+    pendingBadgeListeners.delete(listener);
+  };
+}

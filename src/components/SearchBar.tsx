@@ -7,6 +7,7 @@ import enRiskSchema from "../schemas/en/riskclassification.json";
 import nlRiskSchema from "../schemas/nl/risicoclassificatie.json";
 import enI18n from "../i18n/en/translation.json";
 import nlI18n from "../i18n/nl/translation.json";
+import { lookupGuidelinesExcerpt, requestOpenGuidelinesBadge } from "../utils/guidelinesContent";
 
 // Adapted from ClassifyMyAI's SearchBar (see /Users/jurriaan/Github
 // repos/ClassifyMyAI/src/components/SearchBar.tsx). Stripped of the
@@ -14,7 +15,7 @@ import nlI18n from "../i18n/nl/translation.json";
 // repo) and collapsed the multi-group questionnaire dispatch down to the
 // single onStartQuestionnaire(key) callback this app already exposes.
 
-type SearchKind = "questionnaire" | "question" | "badge";
+type SearchKind = "questionnaire" | "question" | "badge" | "guidelines";
 
 type SearchResult = {
   id: string;
@@ -22,7 +23,7 @@ type SearchResult = {
   label: string;
   context: string;
   score: number;
-  payload: { startKey?: string; questionnaire?: string; fieldKey?: string; url?: string };
+  payload: { startKey?: string; questionnaire?: string; fieldKey?: string; url?: string; badgeLabel?: string; badgeUrl?: string };
 };
 
 function rankMatch(haystack: string, needle: string): number {
@@ -37,9 +38,11 @@ function rankMatch(haystack: string, needle: string): number {
 
 type IndexedText = {
   text: string;
-  fieldKind: "title" | "option" | "description" | "badge";
+  fieldKind: "title" | "option" | "description" | "badge" | "guidelines";
   questionId: string;
   propertyKey: string;
+  badgeLabel?: string;
+  badgeUrl?: string;
 };
 
 function stripMarkdown(s: string): string {
@@ -229,12 +232,29 @@ function buildRiskCategoryIndex(lang: string): IndexedText[] {
           typeof (b as { label?: unknown }).label === "string" &&
           (b as { label: string }).label.trim().length > 1
         ) {
+          const badgeLabel = (b as { label: string }).label;
           out.push({
-            text: (b as { label: string }).label,
+            text: badgeLabel,
             fieldKind: "badge",
             questionId: qid,
             propertyKey: propKey,
           });
+          const excerpt = lookupGuidelinesExcerpt(badgeLabel);
+          if (excerpt) {
+            const badgeUrl = typeof (b as { url?: unknown }).url === "string"
+              ? (b as { url: string }).url
+              : undefined;
+            for (const para of excerpt.paragraphs) {
+              out.push({
+                text: `(${para.number}) ${para.text}`,
+                fieldKind: "guidelines",
+                questionId: qid,
+                propertyKey: propKey,
+                badgeLabel,
+                badgeUrl,
+              });
+            }
+          }
         }
       }
     }
@@ -468,6 +488,8 @@ export default function SearchBar({
       fieldKind: IndexedText["fieldKind"];
       startKey: "IDENT" | "AI1" | "AI2";
       propertyKey: string;
+      badgeLabel?: string;
+      badgeUrl?: string;
     }[] = [];
 
     buildIdentificationIndex(lang).forEach((q, i) =>
@@ -501,6 +523,8 @@ export default function SearchBar({
         fieldKind: q.fieldKind,
         startKey: "AI1",
         propertyKey: q.propertyKey,
+        badgeLabel: q.badgeLabel,
+        badgeUrl: q.badgeUrl,
       }),
     );
     const seen = new Set<string>();
@@ -563,17 +587,24 @@ export default function SearchBar({
           qi.fieldKind === "option" ? t("search field option") :
           qi.fieldKind === "description" ? t("search field description") :
           qi.fieldKind === "badge" ? t("search field badge") :
+          qi.fieldKind === "guidelines" ? t("search field guidelines") :
           t("search field title");
         const idPart = qi.questionId
           ? `id: ${qi.questionnaire} ${qi.questionId}`
           : `id: ${qi.questionnaire}`;
+        const isGuidelines = qi.fieldKind === "guidelines" && typeof qi.badgeLabel === "string";
         matched.push({
           id: qi.id,
-          kind: "question",
+          kind: isGuidelines ? "guidelines" : "question",
           label: qi.text,
           context: `${idPart} · ${fieldLabel}`,
           score,
-          payload: { startKey: qi.startKey, questionnaire: qi.questionnaire, fieldKey: qi.propertyKey },
+          payload: {
+            startKey: qi.startKey,
+            questionnaire: qi.questionnaire,
+            fieldKey: qi.propertyKey,
+            ...(isGuidelines ? { badgeLabel: qi.badgeLabel, badgeUrl: qi.badgeUrl } : {}),
+          },
         });
       }
     });
@@ -608,6 +639,15 @@ export default function SearchBar({
   function dispatchResult(r: SearchResult) {
     setOpen(false);
     setQuery("");
+    if (r.kind === "guidelines" && r.payload.badgeLabel && r.payload.startKey) {
+      // Stage the modal-open request first, then navigate. The target
+      // question's QuestionBadge will pick up the pending request when it
+      // mounts (or via its subscription if already mounted) and open the
+      // GuidelinesModal on top of the question screen.
+      requestOpenGuidelinesBadge(r.payload.badgeLabel);
+      onStartQuestionnaire?.(r.payload.startKey, r.payload.fieldKey);
+      return;
+    }
     if ((r.kind === "questionnaire" || r.kind === "question") && r.payload.startKey) {
       onStartQuestionnaire?.(r.payload.startKey, r.payload.fieldKey);
       return;
@@ -618,7 +658,7 @@ export default function SearchBar({
   }
 
   const grouped = useMemo(() => {
-    const byKind: Record<SearchKind, SearchResult[]> = { questionnaire: [], question: [], badge: [] };
+    const byKind: Record<SearchKind, SearchResult[]> = { questionnaire: [], question: [], badge: [], guidelines: [] };
     results.forEach((r) => byKind[r.kind].push(r));
     (Object.keys(byKind) as SearchKind[]).forEach((k) => {
       byKind[k].sort((a, b) => b.score - a.score || a.label.length - b.label.length);
@@ -697,12 +737,13 @@ export default function SearchBar({
             </div>
           ) : (
             <>
-              {(["questionnaire", "question", "badge"] as SearchKind[]).map((kind) => {
+              {(["questionnaire", "question", "guidelines", "badge"] as SearchKind[]).map((kind) => {
                 const items = grouped[kind];
                 if (items.length === 0) return null;
                 const headerKey =
                   kind === "questionnaire" ? "search group questionnaires" :
                   kind === "badge" ? "search group badges" :
+                  kind === "guidelines" ? "search group guidelines" :
                   "search group questions";
                 return (
                   <div key={kind}>
