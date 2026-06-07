@@ -646,8 +646,8 @@
                     "Placing targeted job advertisements",
                     "Analyzing or filtering job applications (e.g., CVs, cover letters, application videos or interviews)",
                     "Assessing candidates (e.g., aptitude tests, automatic assessment based on video)",
-                    "Decisions regarding changed contractual terms, promotions or position changes",
-                    "Decisions in the area of employee outflow or termination",
+                    "Decisions affecting terms of work-related relationships (pay, working time, leave, training entitlement), or affecting promotion or position change",
+                    "Decisions on termination of work-related relationships (dismissal, redundancy, non-renewal of fixed-term contracts, definitive suspension or deactivation of platform accounts)",
                     "Determining the distribution of tasks among employees",
                     "None of the above"
                   ]
@@ -660,13 +660,13 @@
                     {
                       "properties": {
                         "III.4.uses": { "enum": ["None of the above"] },
-                        "III.4.8": {
+                        "III.4.monitor": {
                           "type": "string",
-                          "title": "Is the AI system used in processes where activities, behavior or performance of employees are processed?",
+                          "title": "Does the AI system monitor or evaluate the performance or behaviour of workers (employees, freelancers, platform workers or other persons in work-related relationships)?",
                           "enum": ["Yes", "No"]
                         }
                       },
-                      "required": ["III.4.8"]
+                      "required": ["III.4.monitor"]
                     },
                     {
                       "properties": {
@@ -675,8 +675,8 @@
                             "Placing targeted job advertisements",
                             "Analyzing or filtering job applications (e.g., CVs, cover letters, application videos or interviews)",
                             "Assessing candidates (e.g., aptitude tests, automatic assessment based on video)",
-                            "Decisions regarding changed contractual terms, promotions or position changes",
-                            "Decisions in the area of employee outflow or termination",
+                            "Decisions affecting terms of work-related relationships (pay, working time, leave, training entitlement), or affecting promotion or position change",
+                            "Decisions on termination of work-related relationships (dismissal, redundancy, non-renewal of fixed-term contracts, definitive suspension or deactivation of platform accounts)",
                             "Determining the distribution of tasks among employees"
                           ]
                         },
@@ -685,31 +685,15 @@
                     }
                   ]
                 },
-                "III.4.8": {
-                  "oneOf": [
-                    { "properties": { "III.4.8": { "enum": ["No"] } } },
-                    {
-                      "properties": {
-                        "III.4.8": { "enum": ["Yes"] },
-                        "III.4.9": {
-                          "type": "string",
-                          "title": "Is there evaluation or monitoring of behavior or performance in this process or in related processes?",
-                          "enum": ["Yes", "No"]
-                        }
-                      },
-                      "required": ["III.4.9"]
-                    }
-                  ]
-                },
-                "III.4.9": {
+                "III.4.monitor": {
                   "oneOf": [
                     {
                       "properties": {
-                        "III.4.9": { "enum": ["Yes"] },
+                        "III.4.monitor": { "enum": ["Yes"] },
                         "exceptionHigh": { "$ref": "#/definitions/exceptionHigh" }
                       }
                     },
-                    { "properties": { "III.4.9": { "enum": ["No"] } } }
+                    { "properties": { "III.4.monitor": { "enum": ["No"] } } }
                   ]
                 }
               }
@@ -1993,9 +1977,9 @@
       "ui:enumTooltips": [
         "E.g., gas, water, heating, electricity supply; the management or operation of roads, bridges or road traffic; and critical digital infrastructure (internet nodes, DNS services, top-level domain name registration, cloud computing services, data center services, public electronic communication networks, and electronic communication services). This use case applies only when the AI system is intended to be used by an entity that has been identified by a Member State as a critical entity under the Critical Entities Resilience Directive (EU) 2022/2557.",
         "E.g., placement and admission, evaluation and testing, but also control such as plagiarism detection and anti-cheating software.",
-        "Examples how AI systems are used in the context of employment are:\n• Recording hours, measuring KPIs and performance\n• Task distribution\n• Recruitment and selection\n• Inflow and progression (employment conditions, contractual terms)\n• Outflow (termination of contract)\n\nAlso choose 'yes' when the application broadly falls under the above, even if the application plays a small role in an otherwise manual process.",
-        "E.g., processes around benefits or allowances, such as application, administration, execution, enforcement, recovery, and objection. This also includes waiving fines, repayments, or granting a payment arrangement. Select this option if the application plays a small role in the process.",
-        "For example, to determine if someone can get a payment arrangement for paying taxes, a fine, or repaying a benefit.",
+        "Examples how AI systems are used in the context of employment are:\n• Recording hours, measuring KPIs and performance\n• Task distribution\n• Recruitment and selection\n• Inflow and progression (employment conditions, contractual terms)\n• Outflow (termination of contract)\n\nThe personal scope covers employees, freelancers, independent contractors, and self-employed persons including platform workers — not only formal employees. The workplace is understood broadly (physical or virtual).\n\nAlso choose 'yes' when the application broadly falls under the above, even if the application plays a small role in an otherwise manual process.",
+        "E.g. processes around benefits or allowances, such as application, administration, execution, enforcement, recovery, and objection. This includes payment arrangements for repaying a benefit that was previously granted. Tax remission, waiving of fines or other measures that are not a service or benefit as such are not covered. Select this option if the application plays a small role in the process.",
+        "Covers three distinct Annex III sub-uses:\n\n- Creditworthiness assessment or credit scoring of natural persons, where used to determine access to essential financial services (bank accounts, payment services with credit, loans, credit-line / credit-card extensions, mortgages, publicly-backed loans and similar). Including payment arrangements for repaying a public debt (e.g. for taxes, fines, or a benefit being reclaimed) — these are publicly-extended credit and counted as essential financial services.\n- Risk assessment or pricing of natural persons in life or health insurance — including private long-term care insurance, personal pension products and credit life insurance. Motor, home and travel insurance are NOT covered.\n- Evaluating or classifying emergency calls, dispatching emergency services, or establishing priority in such dispatch (police, fire, ambulance, healthcare patient triage).\n\nSelect this option even if the AI system plays only a small role in the process.",
         "Law enforcement includes the prevention, investigation, and prosecution of criminal offences, the execution of sentences, and the protection of public safety. Think of police, special enforcement officers, and the execution of (community) sentences by probation services. Other agencies, such as juvenile justice organizations and specific (inspection) services, can also engage in law enforcement. Also select this answer for organizations and institutions that support law enforcement agencies, such as a forensics institute, and for activities carried out on behalf of law enforcement agencies.",
         null,
         "Professional matters, in which a judge makes a ruling, fall under the judiciary. Alternative dispute resolution includes disciplinary law, ombudsmen, arbitration, and complaints committees such as the Advertising Code Committee, the Council for Journalism, and the National Complaints Committee for Education.",
@@ -2096,80 +2080,83 @@
     "III.4.uses": {
       "ui:widget": "radio",
       "ui:description": "Also choose an option when the AI system plays a part in the process. There does not need to be fully automated assessment or decisions.",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "The personal scope of point 4 covers employment, workers' management and access to self-employment. This includes employees, freelancers, independent contractors and other self-employed persons — in particular platform workers, solo self-employed persons in a situation comparable to workers, and persons providing services through digital platforms. The workplace is understood broadly: any physical or virtual space where natural persons engage in tasks assigned by their employer or by the organisation they are affiliated to.\n\nArticle 5(1)(f) AI Act separately prohibits AI systems intended to infer emotions of natural persons in the workplace, except for medical or safety reasons. If the AI system performs emotion recognition, the prohibition takes precedence over any high-risk classification under point 4.",
       "ui:enumTooltips": [
-        "This includes both targeted recruitment and writing targeted job descriptions.",
-        null,
-        null,
-        null,
-        "We mean employees in the broadest sense, including employees but also freelancers and employees hired through a third party (temporary, secondment).",
-        "Think of administrative processes where hours, productivity, speed, breaks, performance, or behavior are processed.\n\nWe mean employees in the broadest sense, including employees but also freelancers and employees hired through a third party (temporary, secondment).",
+        "Covered (high-risk): AI selecting which users see specific job vacancies on social media or other platforms based on user characteristics that go beyond inherent occupational requirements. NOT covered: (i) employer-branding advertisements highlighting workplace culture, employee benefits or career development that are NOT tied to a specific vacancy; (ii) ads personalised on non-discriminatory, objective and reasonable criteria that are genuine and determining occupational requirements (e.g. a job needing a forklift permit shown to certified forklift drivers); (iii) ads based exclusively on contextual targeting — content of the website where the ad is placed, with no personal-data targeting of individual users. Note: where the AI performs profiling, the Article 6(3) filter cannot apply even if the filter's other conditions would otherwise be met.",
+        "Covered (high-risk): AI producing suitability scores, ranking candidates, assessing the compatibility of a candidate's profile or experience with selection criteria, or generating competence profiles that condition shortlisting. The 'analysis ↔ filtering' continuum applies: any analysis that affects access to later recruitment stages operates de facto as filtering. NOT covered (Article 6(3) carve-outs): AI performing only descriptive analysis — file-format conversion, OCR, classifying degrees into standard categories without applying evaluative weight, organising CV information into a searchable internal database. AI that exclusively generates job descriptions from a list of tasks and qualifications previously defined by a human recruiter can be a narrow procedural task; however, AI that itself generates the required qualifications/skills, or that evaluates candidates against its own generated job description, falls within the high-risk use case.",
+        "Covered (high-risk): scoring or ranking candidates based on written or oral responses to an online assessment; aptitude tests, video-based automatic assessments, predictive modelling of candidate suitability, qualitative judgements derived from data inputs. Evaluation does not need to determine the hiring outcome directly — it is enough that it appreciably influences the decision-making process (e.g. by shortlisting or prioritising candidates).",
+        "Covered (high-risk): AI driving decisions on pay, working-time arrangements, leave entitlements, denial of a leave request, significant changes to regular working hours, promotion or grade elevation, allocation of responsibilities or access to career development. 'Decisions' includes omissions — e.g. an AI-driven failure to promote or to grant a leave request is covered. Training entitlement that conditions advancement, remuneration, grade or continued employability is included. NOT covered: day-to-day operational organisational adjustments that do not materially alter rights or obligations under the contract (e.g. allocation of office space, choice of break or lunch time within an assigned shift).",
+        "Covered (high-risk): AI driving dismissal, redundancy, AI-driven non-renewal of a fixed-term contract, definitive suspension or deactivation of a platform-worker account, and lengthy or frequent suspensions producing equivalent effects. 'Decisions' includes omissions producing equivalent effects (constructive dismissal). Platform-work suspensions are explicitly in scope. NOT covered (Article 6(3) carve-out): AI that merely records and flags to a manager the imminent lapsing of a fixed-term contract before its end point — free from discretionary consideration, evaluative judgment, and without suggesting a decision — because the outcome follows directly from the contract.",
+        "Covered (high-risk): task allocation based on individual behaviour or personal traits/characteristics — performance scores, acceptance/decline rates for offered shifts, customer or manager ratings, reliability metrics, behavioural profiling, personality testing or inferred productivity traits. Allocation of more complex / visible / lucrative assignments to higher-scoring workers, or withholding delivery slots from workers with lower acceptance rates, falls in scope. NOT covered: allocation based exclusively on objective, neutral and external criteria tied directly to the job requirements — availability indicated by the worker in scheduling tools, geographical proximity to the work location, possession of a required professional accreditation (forklift permit, bar accreditation). Such criteria cannot be a proxy for nationality or ethnicity. We mean workers in the broadest sense: employees, freelancers, employees hired through a third party (temporary, secondment), and self-employed persons including platform workers.",
         null
       ],
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
       "ui:id-badge-label": "Annex III(4) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
-        { "label": "Recital 57 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-57" }
+        { "label": "Recital 57 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-57" },
+        { "label": "Draft guidelines on the classification of high-risk AI systems (236)-(278)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
       "ui:id-summary": {
         "Placing targeted job advertisements": "The AI system is used to place targeted job advertisements",
         "Analyzing or filtering job applications (e.g., CVs, cover letters, application videos or interviews)": "The AI system analyzes or filters job applications (e.g., CVs, cover letters, application videos or interviews)",
         "Assessing candidates (e.g., aptitude tests, automatic assessment based on video)": "The AI system assesses candidates (e.g., aptitude tests, automatic assessment based on video)",
-        "Decisions regarding changed contractual terms, promotions or position changes": "The AI system informs decisions on changed contractual terms, promotions or position changes",
-        "Decisions in the area of employee outflow or termination": "The AI system informs decisions on employee outflow or termination",
+        "Decisions affecting terms of work-related relationships (pay, working time, leave, training entitlement), or affecting promotion or position change": "The AI system informs decisions on terms of work-related relationships, promotion or position change",
+        "Decisions on termination of work-related relationships (dismissal, redundancy, non-renewal of fixed-term contracts, definitive suspension or deactivation of platform accounts)": "The AI system informs decisions on termination of work-related relationships",
         "Determining the distribution of tasks among employees": "The AI system determines the distribution of tasks among employees",
         "None of the above": "The AI system is not used for any of the listed employment tasks"
       },
       "ui:id": "q17"
     },
-    "III.4.8": {
+    "III.4.monitor": {
       "ui:widget": "radio",
-      "ui:description": "Think of administrative processes where hours, productivity, speed, breaks, performance or behavior are processed.\n\nWe mean employees in the broadest sense, including employees but also freelancers and employees hired through a third party (temporary, secondment).",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Covered (high-risk): AI rating workers on number of deliveries per hour or other quantitative productivity measures; qualitative indicators (feedback scores, performance assessments, appraisals, rankings) feeding into employee files; AI assessing or downgrading workers for low shift-acceptance rates; AI assessing punctuality, adherence to workplace rules, responsiveness, patterns of interaction with colleagues. Either monitoring or evaluation alone is enough — one is not required.\n\nNOT covered:\n\n- AI deployed solely to meet external legal or regulatory obligations (e.g. transaction logging for financial-market abuse rules), provided the same system is not also used for employment monitoring.\n- AI deployed purely and exclusively for medical and safety reasons.\n- AI deployed purely and exclusively to protect property or company assets, where not also used for employment monitoring.\n- AI that flags potential issues only to the worker (not to the employer or anyone else in the employer organisation) to support task performance.\n- AI that conveys aggregate performance data only to the worker (e.g. comparing their results to company averages), without notification to managers.\n- AI used purely to track delivery operations or detect workflow mistakes where the system informs only the employee in charge, who then adopts any needed correction.\n\nWe mean workers in the broadest sense: employees, freelancers, employees hired through a third party (temporary, secondment), and self-employed persons including platform workers.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
       "ui:id-badge-label": "Annex III(4) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
-        { "label": "Recital 57 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-57" }
+        { "label": "Recital 57 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-57" },
+        { "label": "Draft guidelines on the classification of high-risk AI systems (273)-(278)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
       "ui:id-summary": {
-        "Yes": "The AI system is used in processes handling employee activity, behavior or performance data",
-        "No": "The AI system does not process employee activity, behavior or performance data"
+        "Yes": "The AI system monitors or evaluates the performance or behaviour of workers in work-related relationships",
+        "No": "The AI system does not monitor or evaluate the performance or behaviour of workers"
       },
-      "ui:id": "q18"
-    },
-    "III.4.9": {
-      "ui:widget": "radio",
-      "ui:description": "Think of monitoring productivity or speed or other performance.",
-      "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
-      "ui:id-badge-label": "Annex III(4) AI Act - High-risk AI systems referred to in Article 6(2)",
-      "ui:badges": [
-        { "label": "Recital 57 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-57" }
-      ],
-      "ui:id-summary": {
-        "Yes": "Employee behavior or performance is evaluated or monitored in this or related processes",
-        "No": "Employee behavior or performance is not evaluated or monitored"
-      },
-      "ui:id": "q19"
+      "ui:id": "q18 monitor"
     },
     "III.5.decision": {
       "ui:widget": "radio",
       "ui:description": "Also choose 'yes' if the AI system is part of a preparatory step for these decisions, such as selection for control.",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "This use case applies only when all of the following are true:\n\n- The AI system is intended to be used by a public authority or by someone acting on its behalf.\n- The benefits or services involved are essential — i.e. necessary for natural persons to fully participate in society or improve their standard of living. The illustrative categories are: (i) healthcare services including long-term care; (ii) social-security benefits (sickness, maternity / paternity, invalidity, old-age, survivors', accident-at-work and occupational-disease, death grants, unemployment, pre-retirement, family, long-term-care, minimum-income, housing benefits, benefits to access essential services such as water, energy, digital communications); (iii) social services (social assistance, employment and training services, housing support and social housing, childcare).\n- The AI system evaluates eligibility for those benefits, or is used to grant, deny, reduce, revoke or reclaim them — including as a preparatory step (e.g. selection for control).\n\nNOT covered: AI assessing applications or claims from companies (not natural persons); AI that only matches persons with the support services that fit them (without evaluating eligibility); AI for case-handler allocation; AI for proactive identification of persons in need of preventive care (where outputs are not used to prioritise / exclude / influence access). Tax remission and analogous waivers of public revenue are also outside.\n\nTypical Article 6(3) filter-eligible profiles (the questionnaire will check these on a later screen): factual chatbots answering case-handler questions; AI summarising medical reports for a case handler; AI translating applications written in a foreign language; AI converting speech to text in case-handler conversations.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
       "ui:id-badge-label": "Annex III(5)(a) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
-        { "label": "Recital 58 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-58" }
+        { "label": "Recital 58 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-58" },
+        { "label": "Draft guidelines on the classification of high-risk AI systems (279)-(293)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
       "ui:id-summary": {
-        "Yes": "The AI system assesses eligibility for public services, provisions or benefits",
-        "No": "The AI system does not assess eligibility for public services, provisions or benefits"
+        "Yes": "The AI system assesses eligibility for essential public services, provisions or benefits",
+        "No": "The AI system does not assess eligibility for essential public services, provisions or benefits"
       },
       "ui:id": "q20"
     },
     "III.5.private": {
       "ui:widget": "radio",
-      "ui:description": "Emergency services include police, fire brigade, and ambulance. Credit scoring also includes determining if someone can get a payment arrangement for taxes, fines or repaying a benefit.",
+      "ui:description": "Choose the option that fits — see the explanation box below for scope, inclusions and carve-outs.",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Point 5(b)-(d) of Annex III together cover AI systems used in relation to essential private services — services necessary for people to fully participate in society or to improve their standard of living (Recital 58). The three sub-options below correspond to (b) creditworthiness / credit scoring, (c) life and health insurance risk assessment and pricing, and (d) emergency calls and emergency-services dispatch. Non-essential services (e.g. motor or travel insurance, complex financial instruments, leisure loans) are outside this use case.\n\nChoose 'None of the above' if the AI system relates to a financial, insurance or emergency context but none of the three sub-uses applies. In particular, AI mainly used for financial-fraud detection or for non-essential financial services is outside point 5(b).",
+      "ui:enumTooltips": [
+        "Covered (high-risk): AI evaluating a natural person's creditworthiness (ability/willingness to repay) or establishing a credit score, where used to determine access to essential financial services. Essential financial services include: a bank account; payment services where credit is provided as an ancillary feature; loans and credit; extensions of credit-line or credit-card limit; mortgages; publicly-backed financial services (subsidised loans, repayable advances, student support, social microcredit). Where one AI system both assesses creditworthiness AND prices the credit, the integrated system is in scope.\n\nNOT covered:\n\n- AI intended only for pricing of credit (interest rates, fees) without itself evaluating creditworthiness or establishing a credit score, even if it uses creditworthiness data as input (¶300).\n- AI used for non-essential financial services: stocks / securities acquisition, margin trading for leveraged products, complex financial instruments, premium credit cards, leisure / travel loans (¶304).\n- AI mainly used for fraud detection — pattern recognition, anomaly detection in credit applications, detection of misused / forged / altered ID documents or income statements. Fraud detection must be the main intended use, preceding other purposes (¶306-308).\n- AI for anti-money-laundering / counter-terrorist-financing (AML/CFT), unless functionally linked to creditworthiness or credit-scoring (¶309).\n- AI used solely for internal prudential purposes (IRB risk weighting under CRR Art. 144, Solvency II Art. 120), where the system does not also do credit scoring or creditworthiness for natural persons. If a single system serves both purposes, it stays high-risk (¶322-325).",
+        "Covered (high-risk): AI used for risk assessment OR pricing in relation to natural persons in life or health insurance — including both, one alone is enough (¶311-313). Includes:\n\n- Private long-term care insurance (¶317).\n- Personal pension products in so far as they can impact livelihood in old age (¶317).\n- Credit life insurance (mortgage life cover etc.), since this is life insurance regardless of its payment-protection function (¶318).\n- Health insurance offered by publicly-financed insurers (¶319).\n- Privately serviced health insurance even where the Member State has a universal public healthcare system — the private cover is then an addition to the public one (¶320).\n\nNOT covered:\n\n- Other insurance lines: motor / car insurance, home insurance, travel insurance, property insurance (¶314).\n- Insurance-based investment products as defined in Article 4(2) of Regulation (EU) No 1286/2014 (¶314).\n- AI for claims management (verifying a claim under policy terms, determining the amount to be paid) where it does not also do risk assessment or pricing.\n- AI for product design (analysing demographics / behavioural / socio-economic data to identify market segments and design product features) where it does not also evaluate individual risk profiles.\n\nNote: unlike credit-scoring, point 5(c) does NOT exempt fraud detection. Only where a fraud-detection feature is a distinct system in its own right will that feature fall outside; the risk-assessment / pricing system itself remains high-risk (¶321).",
+        "Covered (high-risk) — five sub-types (¶330): (i) AI evaluating or classifying emergency calls by natural persons; (ii) AI used to dispatch emergency first-response services; (iii) AI establishing priority in such dispatch; (iv) AI dispatching emergency healthcare patient-triage systems; (v) AI establishing priority in triage dispatch. Emergency first-response services include police, firefighters, medical aid, ambulance, search-and-rescue, evacuation.\n\nForecasting AI is covered ONLY if specifically intended to decide when or where to dispatch emergency first-response services. Generic forecasting (flood-prone regions, wildfire spread, weather monitoring, seismic activity) without a dispatch link is NOT covered.\n\nNOT covered:\n\n- AI transcribing emergency calls (no evaluation / classification).\n- General disaster forecasting / pre-emergency analytics not linked to dispatch.\n- AI training simulators for first responders.\n- AI for patient identification at medical procedures (biometric or otherwise).\n- AI for network-connectivity / call-traffic management of the emergency communication system.\n- AI for estimated healing time, bed management, appointment scheduling.\n\nCross-reference: emergency healthcare patient-triage AI that qualifies as a medical device under the Medical Devices Regulation also falls under Annex I AI Act (Article 6(1)) — the questionnaire's earlier Q1/Q2 catches that path.",
+        null
+      ],
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
       "ui:id-badge-label": "Annex III(5)(b)-(d) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
-        { "label": "Recital 58 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-58" }
+        { "label": "Recital 58 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-58" },
+        { "label": "Draft guidelines on the classification of high-risk AI systems (294)-(336)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
       "ui:id-summary": {
         "Creditworthiness assessment or credit scoring of individuals": "The AI system is used for creditworthiness assessment or credit scoring of individuals",
