@@ -20,14 +20,14 @@
         "riskOutcome": "high",
         "annexIArt6Branch": "A",
         "title": "Result",
-        "default": "Based on your answers, your AI system is a high-risk AI system as a safety component of, or itself a product under, Annex I Section A harmonisation legislation that requires a third-party conformity assessment (Article 6(1) of the AI Act). The full set of high-risk obligations under the AI Act applies, including Articles 8 to 15, Article 16, Article 17, conformity assessment, registration, and post-market monitoring. Determine in consultation with relevant legal experts which specific obligations apply to your organisation's role."
+        "default": "Based on your answers, your AI system is a high-risk AI system as a safety component of, or itself a product under, Annex I Section A harmonisation legislation that requires a third-party conformity assessment (Article 6(1) of the AI Act). The full set of high-risk obligations under Section 2 of Chapter III AI Act applies, including Articles 8 to 15, Article 16, Article 17, conformity assessment, registration, and post-market monitoring. To minimise compliance burden, Articles 8(2), 9(10) and 17(3) AI Act allow the AI-specific risk-management and quality-management obligations to be integrated into the risk- and quality-management systems already required under the applicable sectoral legislation. Article 40 AI Act requires consistency of AI Act harmonised standards with standards developed under the Annex I sectoral legislation. Determine in consultation with relevant legal experts which specific obligations apply to your organisation's role."
       },
       "outputHighSecB": {
         "type": "string",
         "riskOutcome": "high",
         "annexIArt6Branch": "B",
         "title": "Result",
-        "default": "Based on your answers, your AI system is a high-risk AI system as a safety component of, or itself a product under, Annex I Section B sectoral legislation that requires a third-party conformity assessment (Article 6(1) of the AI Act). For Annex I Section B products only Article 6(1), Articles 102 to 109 (which integrate AI requirements into the relevant sectoral regulations) and Article 112 (Commission evaluation) of the AI Act apply directly; the detailed obligations of Articles 8 to 17 are integrated into the sectoral regulations governing your product."
+        "default": "Based on your answers, your AI system is a high-risk AI system as a safety component of, or itself a product under, Annex I Section B sectoral legislation that requires a third-party conformity assessment (Article 6(1) of the AI Act). For Annex I Section B products only Article 6(1), Articles 102 to 109 (which integrate AI requirements into the relevant sectoral regulations) and Article 112 (Commission evaluation) of the AI Act apply directly (Article 2(2) AI Act); the detailed obligations of Articles 8 to 17 are not applied directly but are integrated into the sectoral regulations governing your product. To minimise compliance burden, Articles 8(2), 9(10) and 17(3) AI Act allow AI-specific risk- and quality-management obligations to be folded into the sectoral compliance framework; Article 40 AI Act requires consistency of AI Act harmonised standards with standards developed under the Annex I sectoral legislation. Sector-specific safety regulations remain authoritative for the detailed requirements applicable to your product."
       },
       "outputForbidden": {
         "type": "string",
@@ -1274,9 +1274,24 @@
                       "Yes, the AI system is used to improve the result of a previously human-performed activity."
                     ]
                   },
-                  "6.2-explain": {
+                  "6.2-explain-purpose": {
                     "type": "string",
-                    "title": "Explain why this scenario is applicable.",
+                    "title": "(i) Describe the intended purpose of the AI system.",
+                    "default": ""
+                  },
+                  "6.2-explain-highrisk": {
+                    "type": "string",
+                    "title": "(ii) Describe why the system would qualify as high-risk under Article 6(2) AI Act — that is, which Annex III use case applies and how.",
+                    "default": ""
+                  },
+                  "6.2-explain-condition": {
+                    "type": "string",
+                    "title": "(iii) Describe which Article 6(3) condition you rely on and why it applies — i.e. why the AI system does not materially influence the outcome of decision-making.",
+                    "default": ""
+                  },
+                  "6.2-explain-profiling": {
+                    "type": "string",
+                    "title": "(iv) Describe why the AI system does not perform profiling of natural persons (automated processing of personal data to evaluate personal aspects).",
                     "default": ""
                   },
                   "output": {
@@ -1284,7 +1299,10 @@
                   }
                 },
                 "required": [
-                  "6.2-explain"
+                  "6.2-explain-purpose",
+                  "6.2-explain-highrisk",
+                  "6.2-explain-condition",
+                  "6.2-explain-profiling"
                 ]
               },
               {
@@ -1294,9 +1312,24 @@
                       "Yes, the AI system is used in a preparatory step, without influencing the outcome."
                     ]
                   },
-                  "6.2-explain": {
+                  "6.2-explain-purpose": {
                     "type": "string",
-                    "title": "Explain why this scenario is applicable.",
+                    "title": "(i) Describe the intended purpose of the AI system.",
+                    "default": ""
+                  },
+                  "6.2-explain-highrisk": {
+                    "type": "string",
+                    "title": "(ii) Describe why the system would qualify as high-risk under Article 6(2) AI Act — that is, which Annex III use case applies and how.",
+                    "default": ""
+                  },
+                  "6.2-explain-condition": {
+                    "type": "string",
+                    "title": "(iii) Describe which Article 6(3) condition you rely on and why it applies — i.e. why the AI system does not materially influence the outcome of decision-making.",
+                    "default": ""
+                  },
+                  "6.2-explain-profiling": {
+                    "type": "string",
+                    "title": "(iv) Describe why the AI system does not perform profiling of natural persons (automated processing of personal data to evaluate personal aspects).",
                     "default": ""
                   },
                   "6.2-prep-confirm": {
@@ -1313,7 +1346,7 @@
                     "minItems": 0
                   }
                 },
-                "required": ["6.2-explain", "6.2-prep-confirm"],
+                "required": ["6.2-explain-purpose", "6.2-explain-highrisk", "6.2-explain-condition", "6.2-explain-profiling", "6.2-prep-confirm"],
                 "allOf": [
                   {
                     "if": {
@@ -1347,6 +1380,26 @@
                       "Yes, the AI system is used to detect decision-making patterns or deviations from previous decision-making patterns."
                     ]
                   },
+                  "6.2-explain-purpose": {
+                    "type": "string",
+                    "title": "(i) Describe the intended purpose of the AI system.",
+                    "default": ""
+                  },
+                  "6.2-explain-highrisk": {
+                    "type": "string",
+                    "title": "(ii) Describe why the system would qualify as high-risk under Article 6(2) AI Act — that is, which Annex III use case applies and how.",
+                    "default": ""
+                  },
+                  "6.2-explain-condition": {
+                    "type": "string",
+                    "title": "(iii) Describe which Article 6(3) condition you rely on and why it applies — i.e. why the AI system does not materially influence the outcome of decision-making.",
+                    "default": ""
+                  },
+                  "6.2-explain-profiling": {
+                    "type": "string",
+                    "title": "(iv) Describe why the AI system does not perform profiling of natural persons (automated processing of personal data to evaluate personal aspects).",
+                    "default": ""
+                  },
                   "6.3": {
                     "type": "array",
                     "title": "Which of the following scenarios apply?",
@@ -1362,7 +1415,7 @@
                     "minItems": 0
                   }
                 },
-                "required": ["6.3"],
+                "required": ["6.2-explain-purpose", "6.2-explain-highrisk", "6.2-explain-condition", "6.2-explain-profiling", "6.3"],
                 "allOf": [
                   {
                     "if": {
@@ -1496,7 +1549,7 @@
       },
       "annexI": {
         "type": "string",
-        "title": "Is the AI system intended to be used as a safety component of a product, or is itself a product, that falls under the list in Annex I of the AI Act?",
+        "title": "Does your AI system fall within the scope of Annex I of the AI Act — either as the product itself, or as a safety component of a regulated product?",
         "enum": [
           "None of the below",
           "Toy Safety Directive ([Directive 2009/48/EC](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32009L0048))",
@@ -1564,7 +1617,7 @@
               },
               "art6.thirdParty": {
                 "type": "string",
-                "title": "Is the product whose safety component is the AI system required to undergo a third-party conformity assessment?",
+                "title": "Is the product (or the AI system itself if it is the product) subject to enhanced regulatory scrutiny under the applicable Annex I legislation before being placed on the market — that is, third-party conformity assessment or, where the legislation permits internal control, internal control subject to mandatory application of harmonised standards?",
                 "enum": [
                   "Yes",
                   "No"
@@ -1618,7 +1671,7 @@
               },
               "art6.thirdParty": {
                 "type": "string",
-                "title": "Is the product whose safety component is the AI system required to undergo a third-party conformity assessment?",
+                "title": "Is the product (or the AI system itself if it is the product) subject to enhanced regulatory scrutiny under the applicable Annex I legislation before being placed on the market — that is, third-party conformity assessment or, where the legislation permits internal control, internal control subject to mandatory application of harmonised standards?",
                 "enum": [
                   "Yes",
                   "No"
@@ -1691,8 +1744,30 @@
   "uiSchema": {
     "annexI": {
       "ui:widget": "radio",
-      "ui:description": "A 'safety component' is a component whose failure endangers the health and safety of persons or property. If an AI system is used as such a component, you are likely already aware of this through your existing compliance processes.",
       "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Article 6(1) is triggered when (a) your AI system falls within the scope of Union harmonisation legislation listed in Annex I, and (b) the product is required to undergo a third-party conformity assessment (next question).\n\nTwo scenarios qualify:\n\n— The AI system IS the product itself: independently placed on the market with its own intended purpose, directly regulated by the Annex I legislation. Example: under the Machinery Regulation, certain software is itself a regulated product.\n\n— The AI system is a safety component of a regulated product, qualifying under either of two alternative tests:\n\n(i) Safety function (intent-based): your intended purpose, as documented in instructions of use, technical documentation, or promotional materials, is to prevent or mitigate risks to health and safety. Examples: AI-based safe-stop trigger in a robot cell; AI monitoring gas concentrations and commanding shutdown; AI predicting runaway pressure and actuating protective measures.\n\n(ii) Failure or malfunctioning (consequences-based): even where the provider does not intend a safety function, the system qualifies if its failure or malfunction (incorrect outputs, drift, latency, misclassification) would endanger health, safety or property. Examples: AI for lift door timing and obstacle detection; AI lane-assistance in a vehicle; AI for chemical-spraying drones.\n\nDeployment form does not matter: Article 6(1) applies whether the AI system is embedded in the product, or supplied independently as a software update, add-on, or remote service.\n\nConsumer products are not excluded: both professional and consumer AI systems can qualify if all Article 6(1) conditions are met. Many smart home appliances will fall outside because their intended purpose is comfort or efficiency and their failure does not endanger safety — but a smart thermostat with a safety function, or whose failure could cause fire or carbon monoxide formation, qualifies.\n\nExamples that do NOT fall within the safety-component definition: AI that recommends music in a connected toy; AI drones used solely for agronomic yield forecasting or irrigation optimisation.",
+      "ui:enumTooltips": [
+        null,
+        "Positive: AI safety functions in connected toys (e.g. child-safety lockouts, hazard detection). Negative (Guidelines ¶47): an AI that recommends music in a connected toy is neither a safety function nor a system whose failure would endanger health or safety.",
+        "Examples include AI controlling navigation, propulsion safety, collision avoidance, or stability on recreational craft and personal watercraft — systems whose failure or intended safety function affects passenger safety.",
+        "Positive example (Guidelines ¶46): AI managing door closing timing and obstacle detection. The provider's intended purpose may be efficient lift operation, but a malfunction could cause injury and thus qualifies as a safety component.",
+        "Positive example (Guidelines ¶45): AI monitoring gas concentrations in explosive-atmosphere equipment and commanding shutdown.",
+        "Positive (Guidelines ¶49): a smart thermostat where the intended purpose is a safety function (e.g. preventing carbon monoxide formation or fire risk), or where failure may endanger health or safety beyond mere discomfort. Negative (¶48): a smart thermostat that optimises comfort or energy efficiency only.",
+        "Positive example (Guidelines ¶45): AI predicting runaway pressure in pressure equipment and actuating protective measures such as shutdown linked to safety accessories.",
+        "Examples include AI supervising drive or brake systems, detecting collisions, or controlling stability on cableway installations — components whose intended safety function or failure consequences affect passenger safety.",
+        "Examples include AI sensors integrated into personal protective equipment that detect hazardous conditions, monitor vital signs of the wearer, or trigger protective responses.",
+        "Positive example (Guidelines ¶43): AI optimising combustion efficiency in household gas appliances where failure could lead to carbon monoxide formation, explosion, or fire. Negative: AI that merely optimises heating schedules based on household habits — failure results only in discomfort or higher bills.",
+        "Examples include AI diagnostic, monitoring, alerting, or treatment-decision-support systems integrated into regulated medical devices. Both stand-alone medical-device AI (where the AI system itself is the product) and embedded safety functions can qualify.",
+        "Examples include AI systems analysing in vitro samples for diagnostic results, alerting on critical values, or supporting treatment decisions where misdiagnosis arising from system failure could endanger health.",
+        "Section B. Examples include AI supporting passenger or baggage screening, threat detection, or access control to security-restricted zones in civil aviation.",
+        "Section B. Examples include AI for stability control, anti-lock braking, collision avoidance, or rider-assist systems on two- or three-wheel vehicles and quadricycles whose failure could endanger health or safety.",
+        "Section B. Positive example (Guidelines ¶46): AI targeting agricultural land for chemical spraying that does not adequately account for nearby persons could endanger health and safety. Negative (¶47): AI used solely for yield forecasting or irrigation optimisation.",
+        "Section B. Examples include AI for navigation, collision avoidance, stability and ballast control, or lifesaving equipment — systems whose intended safety function or failure consequences affect vessel or passenger safety.",
+        "Section B. Positive example (Guidelines ¶45): AI in a train monitoring speed limits to prevent collisions and derailments.",
+        "Section B. Positive example (Guidelines ¶46): AI lane assistance — while the provider's intended purpose may be enhanced user experience, a malfunction that steers the vehicle unexpectedly could cause a collision.",
+        "Section B. Examples include AI for advanced driver-assistance, automated emergency braking, drowsiness or distraction detection (note: drowsiness and pain are physical states, not emotions), or other safety functions required under the General Safety Regulation.",
+        "Section B. Examples include AI in flight controls, collision avoidance (TCAS-type) systems, engine or system-health monitoring, or air-traffic management aids — systems whose failure could endanger flight safety."
+      ],
       "ui:optionHeaders": {
         "1": "Annex I - Section A",
         "13": "Annex I - Section B"
@@ -1731,7 +1806,8 @@
         }
       ],
       "ui:badges": [
-        { "label": "Art. 6(1) AI Act - Classification rules for high-risk AI systems", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-6" }
+        { "label": "Art. 6(1) AI Act - Classification rules for high-risk AI systems", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-6" },
+        { "label": "Draft guidelines on the classification of high-risk AI systems (15)-(49)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
       "ui:id-summary": {
         "None of the below": "The AI system is not a safety component under Annex I harmonisation legislation",
@@ -1759,13 +1835,14 @@
     },
     "art6.thirdParty": {
       "ui:widget": "radio",
-      "ui:description": "You are likely already aware of this through an existing compliance processes.",
       "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Decision 768/2008/EC defines eight conformity assessment modules (A–H). Module A is internal control without notified-body involvement. Modules B, C1, C2, D, E, F, G, H involve a notified body at the design and/or production stage.\n\nImportant: the choice of conformity assessment module does NOT determine the AI system's classification under Article 6(1). The fact that the Union harmonisation legislation may allow a manufacturer to rely on internal control (Module A) based on harmonised standards, as a procedural option, does not affect classification of an AI system as high-risk. The decisive factor is whether the product, according to the Annex I legislation, is subject to enhanced regulatory scrutiny — third-party conformity assessment OR equivalent mechanisms such as Module A with mandatory application of harmonised standards.\n\nIf you are uncertain about your conformity assessment route, your existing product-safety compliance documentation will identify the applicable module(s). The Toys Safety Regulation (Recital 15) and the Machinery Regulation expressly confirm that the manufacturer's ability to opt out of third-party assessment by applying harmonised standards does not affect classification as a high-risk AI system.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-6",
       "ui:id-badge-label": "Art. 6(1) AI Act - Classification rules for high-risk AI systems",
       "ui:badges": [
         { "label": "Recital 50 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-50" },
-        { "label": "Recital 51 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-51" }
+        { "label": "Recital 51 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-51" },
+        { "label": "Draft guidelines on the classification of high-risk AI systems (50)-(62)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
       "ui:id-summary": {
         "Yes": "The product or AI system requires a third-party conformity assessment under Union harmonisation legislation",
@@ -1775,7 +1852,7 @@
     },
     "III.1": {
       "ui:widget": "radio",
-      "ui:description": "Biometric data are unique characteristics of a person such as images or video footage of faces, iris scans, fingerprints, voice sounds, handwriting, and other unique characteristics of bodies and/or behavior.",
+      "ui:description": "The previous questions covered Article 6(1) / Annex I (product-safety route). From here on, the questionnaire assesses Article 6(2) / Annex III (use-case route) — both routes can apply to the same system.\n\nBiometric data are unique characteristics of a person such as images or video footage of faces, iris scans, fingerprints, voice sounds, handwriting, and other unique characteristics of bodies and/or behavior.",
       "ui:descriptionStyle": "plain",
       "ui:alertDescription": "The key distinction of biometric data is: does the data measure bodily, structural, and relatively static attributes of a person – or does it merely describe or record something associated with a person?\n\nExamples of biometric data:\n- Fingerprints, iris or retina patterns\n- Facial and hand geometry, voice print, vein patterns, ear shape\n- DNA, odour, heartbeats, electroencephalography (EEG) and electrocardiograms (ECG)\n- Someone's unique way of typing (keystrokes), walking (as captured by sensors or video analysis), or distinctive characteristics of movements, gestures, and motor-skills of natural persons.\n\nExamples of non-biometric data:\n- A photo of someone\n- Typed text or written signature\n- Name or ID number\n- Medical diagnosis\n- Location or GPS data\n- Passwords\n- IP address or device fingerprints (tied to devices, not bodies)\n- Age or birth date, height and weight.\n- An AI system that follows a person based on, for example, a red scarf or a blue jacket (no biometric data).\n- Data from deceased individuals, dead bodies, human remains or traces thereof (biometric data only concerns living natural persons).\n- Object recognition. For instance, an AI system used in supermarkets to detect whether a product is being put into a basket, or suspicious objects detection at airports, train stations etc.\n- Emotions inference from typed text (content, sentiment analyses or stylometry)\n\nSee also: [Physiological and Behavioural Biometrics – Biometrics Institute](https://www.biometricsinstitute.org/physiological-and-behavioural-biometrics/)",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
@@ -2387,12 +2464,14 @@
     },
     "6.1": {
       "ui:widget": "radio",
-      "ui:description": "Think of automatically evaluating professional performance, economic situation, health, personal preferences, interests, reliability, behavior, location or movements of a person to analyze or predict.\n\nProfiling requires that the AI system processes personal data of a natural person. Classification or prediction based purely on non-personal data (e.g. goods, weather, vehicle data not tied to a natural person) is not profiling within the meaning of Article 3(52) AI Act.",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Profiling under Article 4(4) GDPR (referenced by Article 3(52) AI Act) has three cumulative elements: (i) automated processing; (ii) on personal data; (iii) with the objective to evaluate personal aspects relating to a natural person (analysing or predicting performance at work, economic situation, health, personal preferences, interests, reliability, behaviour, location or movements). All three must be present.\n\nChoose 'Yes' if your AI system performs all three.\n\nNOT profiling:\n\n- Classification or prediction based purely on non-personal data (e.g. goods, weather, vehicle telematics not tied to a natural person). Example: a customs AI assessing the risk of goods entering the EU on the basis of container number, description, routing, transport and payment method — it evaluates compliance risk of goods, not personal aspects of a natural person.\n- Simple classification of individuals on personal characteristics (age, sex, height) without prediction, inference or drawing of conclusions.\n\nNote: the profiled subject can be on either side of a decision. E.g. an AI that analyses recruiters' past decision-making patterns and evaluates their personal characteristics IS profiling (the recruiters are the subjects), even though the AI's headline purpose concerns the candidates.\n\nIf the answer is 'Yes', the Article 6(3) filter mechanism cannot be applied — the system stays high-risk.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-6",
       "ui:id-badge-label": "Art. 6(3) AI Act - Classification rules for high-risk AI systems",
       "ui:badges": [
         { "label": "Profiling", "color": "#4F46E5", "url": "https://gdpr-info.eu/art-4-gdpr/" },
-        { "label": "Recital 53 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-53" }
+        { "label": "Recital 53 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-53" },
+        { "label": "Draft guidelines on the classification of high-risk AI systems (109)-(112)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
       "ui:id-summary": {
         "Yes": "Profiling is used — the AI system automatically evaluates or predicts characteristics, behavior or personal aspects",
@@ -2402,7 +2481,8 @@
     },
     "6.2": {
       "ui:widget": "radio",
-      "ui:description": "If the AI system is part of a more complex or agentic configuration where multiple AI components together materially influence individual decisions in a high-risk use case, this exception cannot be applied to individual modules in isolation.",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Article 6(3) is an exception from the high-risk rules. The four conditions below are exhaustive but alternative — one is enough — and must be interpreted narrowly. The master test under-lying all four is that the AI system should not materially influence the outcome of the decision.\n\nThe filter mechanism applies only to systems classified as high-risk under Article 6(2) (Annex III). It does NOT apply to systems classified as high-risk under Article 6(1) (Annex I product-safety legislation) — those stay high-risk regardless. If the questionnaire flagged your system as high-risk via Q1/Q2 (Annex I), the filter is not available; if your system is high-risk only via the Annex III gate (Q13 → follow-up questions), continue here.\n\nIf the AI system is part of a more complex or agentic configuration where multiple AI components together materially influence individual decisions in a high-risk use case, this exception cannot be applied to individual modules in isolation.\n\nSelf-assessment is not a free pass. Article 80 empowers market surveillance authorities to evaluate AI systems with respect to their high-risk classification, to request the provider to bring the system into compliance with high-risk requirements, and to request corrective actions. Article 99 allows penalties on providers who misclassify systems to circumvent the high-risk regime.",
       "ui:enumTooltips": [
         "For example, an AI system performs a narrow procedural task when it sorts incoming applications for admission to school or university according to the grade or educational level applied for. Such systems may categorise applications into predefined categories (e.g. primary, secondary, high school or specific grades) based on information provided in the application, without evaluating applicants' suitability or making admission decisions. In a similar scenario, an AI system that is used to detect and flag incomplete forms to initiate their return to the applicant to be completed correctly could also be classified as a narrow procedural task. However, this condition does not apply to all categorisation systems. In particular, AI systems that perform a value judgement of data relevant for decision-making, for example categorisation of input data as 'useful' or 'less useful' for the human assessment, or attributing a score or ranking to input data, are likely to have a broader impact on the assessment process and will therefore not be considered to perform only a 'narrow procedural task'.",
         "For example: an AI system that improves the language of previously drafted documents, for example, regarding professional tone or academic style or by tailoring a text to a specific brand message. The notion 'improve' in this context means that the application of the AI system may lead to changes, but these changes should not revert or lead to a full revision or replacement of the previously completed human activity. For example, if an AI system checks a decision, plan, or construction made by a human and provides a substantially different solution, this would not be considered 'improving' a previously completed human activity, since it is not limited to refining or enhancing the outcome of that activity. By contrast, examples of AI systems that serve auxiliary improvement functions include systems that flag errors or contradictions in finalized human work that perform a quality-assurance function; systems that map conclusions to evidentiary records to strengthen the traceability of a decision without substituting the human judgment; systems that convert human-validated content for interoperability or accessibility purposes that transform but do not replace human output. An improvement that changes the rights, protection, legal or economic position of the persons affected does not qualify.",
@@ -2414,7 +2494,8 @@
       "ui:id-badge-label": "Art. 6(3) AI Act - Classification rules for high-risk AI systems",
       "ui:badges": [
         { "label": "Art. 6(3) AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-6" },
-        { "label": "Recital 53 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-53" }
+        { "label": "Recital 53 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-53" },
+        { "label": "Draft guidelines on the classification of high-risk AI systems (84)-(108)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
       "ui:id-summary": {
         "Yes, the AI system is used for a narrow procedural task.": "The AI system is used only for a narrow procedural task",
@@ -2425,9 +2506,23 @@
       },
       "ui:id": "q34"
     },
-    "6.2-explain": {
+    "6.2-explain-purpose": {
       "ui:widget": "textarea",
-      "ui:id": "q34 explanation"
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "The four-field rationale below forms the core of the self-assessment record that the provider must keep under Article 6(4) AI Act. When the filter mechanism is applied, the AI system is not classified as high-risk and Chapter III obligations do not apply. However, the provider must (i) document this assessment before placing the AI system on the market or putting it into service, and (ii) register the AI system in the EU database established under Article 71 AI Act for traceability of exempted AI systems.",
+      "ui:id": "q34 explain purpose"
+    },
+    "6.2-explain-highrisk": {
+      "ui:widget": "textarea",
+      "ui:id": "q34 explain highrisk"
+    },
+    "6.2-explain-condition": {
+      "ui:widget": "textarea",
+      "ui:id": "q34 explain condition"
+    },
+    "6.2-explain-profiling": {
+      "ui:widget": "textarea",
+      "ui:id": "q34 explain profiling"
     },
     "6.2-prep-confirm": {
       "ui:widget": "checkboxes",

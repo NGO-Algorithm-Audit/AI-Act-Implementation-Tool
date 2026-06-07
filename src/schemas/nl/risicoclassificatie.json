@@ -20,14 +20,14 @@
         "riskOutcome": "high",
         "annexIArt6Branch": "A",
         "title": "Uitkomst",
-        "default": "Op basis van uw antwoorden is uw AI-systeem een hoog-risico AI-systeem als veiligheidscomponent van, of zelf als product onder, de harmonisatiewetgeving van Bijlage I Afdeling A waarvoor een conformiteitsbeoordeling door een derde partij vereist is (Artikel 6(1) van de AI-verordening). Het volledige pakket aan verplichtingen voor hoog-risico AI-systemen onder de AI-verordening is van toepassing, waaronder Artikelen 8 tot en met 15, Artikel 16, Artikel 17, conformiteitsbeoordeling, registratie en monitoring na marktintroductie. Bepaal in overleg met relevante juridische experts welke specifieke verplichtingen van toepassing zijn op de rol van uw organisatie."
+        "default": "Op basis van uw antwoorden is uw AI-systeem een hoog-risico AI-systeem als veiligheidscomponent van, of zelf als product onder, de harmonisatiewetgeving van Bijlage I Afdeling A waarvoor een conformiteitsbeoordeling door een derde partij vereist is (Artikel 6(1) van de AI-verordening). Het volledige pakket aan verplichtingen voor hoog-risico AI-systemen onder Afdeling 2 van Hoofdstuk III van de AI-verordening is van toepassing, waaronder Artikelen 8 tot en met 15, Artikel 16, Artikel 17, conformiteitsbeoordeling, registratie en monitoring na marktintroductie. Om de nalevingslast te beperken, maken Artikelen 8(2), 9(10) en 17(3) AI-verordening het mogelijk om de AI-specifieke verplichtingen inzake risicobeheer en kwaliteitsbeheer te integreren in de risico- en kwaliteitsbeheersystemen die reeds vereist zijn op grond van de toepasselijke sectorale wetgeving. Artikel 40 AI-verordening vereist consistentie tussen de geharmoniseerde normen van de AI-verordening en de normen die zijn ontwikkeld onder de sectorale wetgeving in Bijlage I. Bepaal in overleg met relevante juridische experts welke specifieke verplichtingen van toepassing zijn op de rol van uw organisatie."
       },
       "outputHighSecB": {
         "type": "string",
         "riskOutcome": "high",
         "annexIArt6Branch": "B",
         "title": "Uitkomst",
-        "default": "Op basis van uw antwoorden is uw AI-systeem een hoog-risico AI-systeem als veiligheidscomponent van, of zelf als product onder, de sectorale wetgeving van Bijlage I Afdeling B waarvoor een conformiteitsbeoordeling door een derde partij vereist is (Artikel 6(1) van de AI-verordening). Voor producten onder Bijlage I Afdeling B zijn alleen Artikel 6(1), Artikelen 102 tot en met 109 (die AI-vereisten integreren in de relevante sectorale verordeningen) en Artikel 112 (evaluatie door de Commissie) van de AI-verordening rechtstreeks van toepassing; de gedetailleerde verplichtingen van Artikelen 8 tot en met 17 worden geïntegreerd in de sectorale verordeningen die op uw product van toepassing zijn."
+        "default": "Op basis van uw antwoorden is uw AI-systeem een hoog-risico AI-systeem als veiligheidscomponent van, of zelf als product onder, de sectorale wetgeving van Bijlage I Afdeling B waarvoor een conformiteitsbeoordeling door een derde partij vereist is (Artikel 6(1) van de AI-verordening). Voor producten onder Bijlage I Afdeling B zijn alleen Artikel 6(1), Artikelen 102 tot en met 109 (die AI-vereisten integreren in de relevante sectorale verordeningen) en Artikel 112 (evaluatie door de Commissie) van de AI-verordening rechtstreeks van toepassing (Artikel 2(2) AI-verordening); de gedetailleerde verplichtingen van Artikelen 8 tot en met 17 zijn niet rechtstreeks van toepassing maar worden geïntegreerd in de sectorale verordeningen die op uw product van toepassing zijn. Om de nalevingslast te beperken, maken Artikelen 8(2), 9(10) en 17(3) AI-verordening het mogelijk om AI-specifieke risico- en kwaliteitsbeheerverplichtingen op te nemen in het sectorale nalevingskader; Artikel 40 AI-verordening vereist consistentie tussen de geharmoniseerde normen van de AI-verordening en de normen die zijn ontwikkeld onder de sectorale wetgeving in Bijlage I. Sectorspecifieke veiligheidsregelgeving blijft maatgevend voor de gedetailleerde vereisten die op uw product van toepassing zijn."
       },
       "outputForbidden": {
         "type": "string",
@@ -1274,9 +1274,24 @@
                       "Ja, het AI-systeem wordt gebruikt om het resultaat van een eerder door mensen uitgevoerde activiteit te verbeteren."
                     ]
                   },
-                  "6.2-explain": {
+                  "6.2-explain-purpose": {
                     "type": "string",
-                    "title": "Leg uit waarom dit scenario van toepassing is.",
+                    "title": "(i) Beschrijf het beoogde doel van het AI-systeem.",
+                    "default": ""
+                  },
+                  "6.2-explain-highrisk": {
+                    "type": "string",
+                    "title": "(ii) Beschrijf waarom het systeem als hoog-risico zou kwalificeren onder artikel 6, lid 2 — dat wil zeggen, welke Bijlage III-toepassing van toepassing is en hoe.",
+                    "default": ""
+                  },
+                  "6.2-explain-condition": {
+                    "type": "string",
+                    "title": "(iii) Beschrijf op welke voorwaarde van artikel 6, lid 3, u zich beroept en waarom deze van toepassing is — d.w.z. waarom het AI-systeem geen wezenlijke invloed heeft op de uitkomst van besluitvorming.",
+                    "default": ""
+                  },
+                  "6.2-explain-profiling": {
+                    "type": "string",
+                    "title": "(iv) Beschrijf waarom het AI-systeem geen profilering van natuurlijke personen verricht (geautomatiseerde verwerking van persoonsgegevens om persoonlijke aspecten te evalueren).",
                     "default": ""
                   },
                   "output": {
@@ -1284,7 +1299,10 @@
                   }
                 },
                 "required": [
-                  "6.2-explain"
+                  "6.2-explain-purpose",
+                  "6.2-explain-highrisk",
+                  "6.2-explain-condition",
+                  "6.2-explain-profiling"
                 ]
               },
               {
@@ -1294,9 +1312,24 @@
                       "Ja, het AI-systeem wordt gebruikt in een voorbereidende stap, zonder de uitkomst te beïnvloeden."
                     ]
                   },
-                  "6.2-explain": {
+                  "6.2-explain-purpose": {
                     "type": "string",
-                    "title": "Leg uit waarom dit scenario van toepassing is.",
+                    "title": "(i) Beschrijf het beoogde doel van het AI-systeem.",
+                    "default": ""
+                  },
+                  "6.2-explain-highrisk": {
+                    "type": "string",
+                    "title": "(ii) Beschrijf waarom het systeem als hoog-risico zou kwalificeren onder artikel 6, lid 2 — dat wil zeggen, welke Bijlage III-toepassing van toepassing is en hoe.",
+                    "default": ""
+                  },
+                  "6.2-explain-condition": {
+                    "type": "string",
+                    "title": "(iii) Beschrijf op welke voorwaarde van artikel 6, lid 3, u zich beroept en waarom deze van toepassing is — d.w.z. waarom het AI-systeem geen wezenlijke invloed heeft op de uitkomst van besluitvorming.",
+                    "default": ""
+                  },
+                  "6.2-explain-profiling": {
+                    "type": "string",
+                    "title": "(iv) Beschrijf waarom het AI-systeem geen profilering van natuurlijke personen verricht (geautomatiseerde verwerking van persoonsgegevens om persoonlijke aspecten te evalueren).",
                     "default": ""
                   },
                   "6.2-prep-confirm": {
@@ -1313,7 +1346,7 @@
                     "minItems": 0
                   }
                 },
-                "required": ["6.2-explain", "6.2-prep-confirm"],
+                "required": ["6.2-explain-purpose", "6.2-explain-highrisk", "6.2-explain-condition", "6.2-explain-profiling", "6.2-prep-confirm"],
                 "allOf": [
                   {
                     "if": {
@@ -1347,6 +1380,26 @@
                       "Ja, het AI-systeem wordt gebruikt om besluitvormingspatronen of afwijkingen van eerdere besluitvormingspatronen te detecteren."
                     ]
                   },
+                  "6.2-explain-purpose": {
+                    "type": "string",
+                    "title": "(i) Beschrijf het beoogde doel van het AI-systeem.",
+                    "default": ""
+                  },
+                  "6.2-explain-highrisk": {
+                    "type": "string",
+                    "title": "(ii) Beschrijf waarom het systeem als hoog-risico zou kwalificeren onder artikel 6, lid 2 — dat wil zeggen, welke Bijlage III-toepassing van toepassing is en hoe.",
+                    "default": ""
+                  },
+                  "6.2-explain-condition": {
+                    "type": "string",
+                    "title": "(iii) Beschrijf op welke voorwaarde van artikel 6, lid 3, u zich beroept en waarom deze van toepassing is — d.w.z. waarom het AI-systeem geen wezenlijke invloed heeft op de uitkomst van besluitvorming.",
+                    "default": ""
+                  },
+                  "6.2-explain-profiling": {
+                    "type": "string",
+                    "title": "(iv) Beschrijf waarom het AI-systeem geen profilering van natuurlijke personen verricht (geautomatiseerde verwerking van persoonsgegevens om persoonlijke aspecten te evalueren).",
+                    "default": ""
+                  },
                   "6.3": {
                     "type": "array",
                     "title": "Welke van de volgende scenario's zijn van toepassing?",
@@ -1362,7 +1415,7 @@
                     "minItems": 0
                   }
                 },
-                "required": ["6.3"],
+                "required": ["6.2-explain-purpose", "6.2-explain-highrisk", "6.2-explain-condition", "6.2-explain-profiling", "6.3"],
                 "allOf": [
                   {
                     "if": {
@@ -1496,7 +1549,7 @@
       },
       "annexI": {
         "type": "string",
-        "title": "Is het AI-systeem bedoeld om te worden gebruikt als veiligheidscomponent van een product, of is het zelf een product, dat onder de lijst in Bijlage I van de AI-verordening valt?",
+        "title": "Valt uw AI-systeem binnen de reikwijdte van Bijlage I van de AI-verordening — als product zelf, of als veiligheidscomponent van een gereguleerd product?",
         "enum": [
           "Geen van de bovenstaande",
           "Richtlijn speelgoedveiligheid ([Richtlijn 2009/48/EG](https://eur-lex.europa.eu/legal-content/NL/TXT/HTML/?uri=CELEX:32009L0048))",
@@ -1564,7 +1617,7 @@
               },
               "art6.thirdParty": {
                 "type": "string",
-                "title": "Is het product waarvan het AI-systeem een veiligheidscomponent is, onderworpen aan een conformiteitsbeoordeling door een derde partij?",
+                "title": "Is het product (of het AI-systeem zelf als dat het product is) onderworpen aan verscherpt regelgevend toezicht onder de toepasselijke wetgeving van Bijlage I voordat het in de handel wordt gebracht — dat wil zeggen, een conformiteitsbeoordeling door een derde partij of, waar de wetgeving interne controle toestaat, interne controle onder verplichte toepassing van geharmoniseerde normen?",
                 "enum": [
                   "Ja",
                   "Nee"
@@ -1618,7 +1671,7 @@
               },
               "art6.thirdParty": {
                 "type": "string",
-                "title": "Is het product waarvan het AI-systeem een veiligheidscomponent is, onderworpen aan een conformiteitsbeoordeling door een derde partij?",
+                "title": "Is het product (of het AI-systeem zelf als dat het product is) onderworpen aan verscherpt regelgevend toezicht onder de toepasselijke wetgeving van Bijlage I voordat het in de handel wordt gebracht — dat wil zeggen, een conformiteitsbeoordeling door een derde partij of, waar de wetgeving interne controle toestaat, interne controle onder verplichte toepassing van geharmoniseerde normen?",
                 "enum": [
                   "Ja",
                   "Nee"
@@ -1691,8 +1744,30 @@
   "uiSchema": {
     "annexI": {
       "ui:widget": "radio",
-      "ui:description": "Een 'veiligheidscomponent' is een component waarvan het falen de gezondheid en veiligheid van personen of eigendommen in gevaar brengt. Als een AI-systeem als zodanig wordt gebruikt, bent u zich hier waarschijnlijk al van bewust via uw bestaande compliance-processen.",
       "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Artikel 6, lid 1, is van toepassing wanneer (a) uw AI-systeem binnen de reikwijdte valt van de harmonisatiewetgeving van de Unie in Bijlage I, en (b) het product een conformiteitsbeoordeling door een derde partij moet ondergaan (volgende vraag).\n\nTwee scenario's kwalificeren:\n\n— Het AI-systeem IS het product zelf: zelfstandig in de handel gebracht met een eigen beoogd doel, rechtstreeks gereguleerd door de Bijlage I-wetgeving. Voorbeeld: onder de Machineverordening is bepaalde software zelf een gereguleerd product.\n\n— Het AI-systeem is een veiligheidscomponent van een gereguleerd product, en kwalificeert volgens een van twee alternatieve tests:\n\n(i) Veiligheidsfunctie (intentie-gebaseerd): uw beoogde doel, zoals vastgelegd in de gebruiksaanwijzing, technische documentatie of promotiemateriaal, is het voorkomen of beperken van risico's voor gezondheid en veiligheid. Voorbeelden: AI-gestuurde veilige stop in een robotcel; AI die gasconcentraties bewaakt en uitschakeling aanstuurt; AI die op hol geslagen druk voorspelt en beschermende maatregelen activeert.\n\n(ii) Falen of storing (gevolg-gebaseerd): zelfs als de aanbieder geen veiligheidsfunctie beoogt, kwalificeert het systeem als het falen of storen ervan (foutieve outputs, drift, vertraging, misclassificatie) de gezondheid, veiligheid of eigendom in gevaar zou brengen. Voorbeelden: AI voor liftdeurtiming en obstakeldetectie; AI rijstrookassistentie in een voertuig; AI voor chemische bespuiting per drone.\n\nDe inzetvorm doet er niet toe: Artikel 6, lid 1, is van toepassing of het AI-systeem nu in het product is ingebouwd, of zelfstandig wordt geleverd als software-update, add-on of remote service.\n\nConsumentenproducten zijn niet uitgesloten: zowel professionele als consumenten-AI-systemen kunnen kwalificeren als aan alle voorwaarden van Artikel 6, lid 1, is voldaan. Veel slimme huishoudelijke apparaten vallen erbuiten omdat hun beoogde doel comfort of efficiëntie is en hun falen de veiligheid niet in gevaar brengt — maar een slimme thermostaat met een veiligheidsfunctie, of waarvan het falen brand of vorming van koolmonoxide kan veroorzaken, kwalificeert wel.\n\nVoorbeelden die NIET onder de definitie van veiligheidscomponent vallen: een AI die muziek aanbeveelt in connected speelgoed; AI-drones die uitsluitend worden gebruikt voor agronomische opbrengstvoorspelling of irrigatieoptimalisatie.",
+      "ui:enumTooltips": [
+        null,
+        "Positief: AI-veiligheidsfuncties in connected speelgoed (bijv. kinderveiligheidsvergrendelingen, gevarendetectie). Negatief (Richtsnoeren ¶47): een AI die muziek aanbeveelt in connected speelgoed is geen veiligheidsfunctie en heeft geen falen dat gezondheid of veiligheid in gevaar brengt.",
+        "Voorbeelden zijn AI die navigatie, voortstuwingsveiligheid, botsingsvermijding of stabiliteit op pleziervaartuigen en waterscooters aanstuurt — systemen waarvan het falen of de beoogde veiligheidsfunctie de veiligheid van inzittenden raakt.",
+        "Positief voorbeeld (Richtsnoeren ¶46): AI die liftdeurtiming en obstakeldetectie aanstuurt. Het beoogde doel van de aanbieder kan efficiënte liftwerking zijn, maar een storing kan letsel veroorzaken en daarmee kwalificeert het als veiligheidscomponent.",
+        "Positief voorbeeld (Richtsnoeren ¶45): AI die gasconcentraties bewaakt in apparatuur voor explosieve atmosferen en uitschakeling aanstuurt.",
+        "Positief (Richtsnoeren ¶49): een slimme thermostaat waarbij het beoogde doel een veiligheidsfunctie is (bijv. het voorkomen van koolmonoxidevorming of brandrisico), of waarbij falen de gezondheid of veiligheid in gevaar kan brengen meer dan louter ongemak. Negatief (¶48): een slimme thermostaat die uitsluitend comfort of energie-efficiëntie optimaliseert.",
+        "Positief voorbeeld (Richtsnoeren ¶45): AI die op hol geslagen druk in drukapparatuur voorspelt en beschermende maatregelen activeert, zoals uitschakeling gekoppeld aan veiligheidsaccessoires.",
+        "Voorbeelden zijn AI die aandrijf- of remsystemen toezicht houdt, botsingen detecteert of stabiliteit van kabelbaaninstallaties regelt — componenten waarvan de beoogde veiligheidsfunctie of de gevolgen van falen de veiligheid van inzittenden raken.",
+        "Voorbeelden zijn AI-sensoren die in persoonlijke beschermingsmiddelen zijn geïntegreerd en gevaarlijke omstandigheden detecteren, vitale functies van de drager monitoren of beschermende reacties activeren.",
+        "Positief voorbeeld (Richtsnoeren ¶43): AI die de verbrandingsefficiëntie in huishoudelijke gastoestellen optimaliseert wanneer falen kan leiden tot koolmonoxidevorming, explosie of brand. Negatief: AI die uitsluitend verwarmingsschema's optimaliseert op basis van huishoudelijke gewoonten — falen leidt enkel tot ongemak of hogere rekeningen.",
+        "Voorbeelden zijn AI-diagnostiek, monitoring, alarmering of beslissingsondersteuning bij behandeling die zijn geïntegreerd in gereguleerde medische hulpmiddelen. Zowel zelfstandige medische-hulpmiddel-AI (waarbij het AI-systeem zelf het product is) als ingebouwde veiligheidsfuncties kunnen kwalificeren.",
+        "Voorbeelden zijn AI-systemen die in-vitromonsters analyseren voor diagnostische resultaten, alarmeren bij kritieke waarden, of behandelbeslissingen ondersteunen waarbij misdiagnose door systeemfalen de gezondheid in gevaar kan brengen.",
+        "Afdeling B. Voorbeelden zijn AI die passagiers- of bagagescreening ondersteunt, dreigingsdetectie of toegangscontrole tot beveiligde zones in de burgerluchtvaart.",
+        "Afdeling B. Voorbeelden zijn AI voor stabiliteitscontrole, antiblokkeerremmen, botsingsvermijding of bestuurdersassistentie op twee- of driewielige voertuigen en vierwielers waarvan het falen gezondheid of veiligheid in gevaar kan brengen.",
+        "Afdeling B. Positief voorbeeld (Richtsnoeren ¶46): AI die landbouwgrond aanwijst voor chemische bespuiting en daarbij onvoldoende rekening houdt met aanwezige personen, kan gezondheid en veiligheid in gevaar brengen. Negatief (¶47): AI uitsluitend gebruikt voor opbrengstvoorspelling of irrigatieoptimalisatie.",
+        "Afdeling B. Voorbeelden zijn AI voor navigatie, botsingsvermijding, stabiliteits- en ballastregeling, of reddingsmiddelen — systemen waarvan de beoogde veiligheidsfunctie of de gevolgen van falen de veiligheid van het vaartuig of de passagiers raken.",
+        "Afdeling B. Positief voorbeeld (Richtsnoeren ¶45): AI in een trein die snelheidslimieten bewaakt om botsingen en ontsporingen te voorkomen.",
+        "Afdeling B. Positief voorbeeld (Richtsnoeren ¶46): AI rijstrookassistentie — hoewel het beoogde doel van de aanbieder een betere gebruikerservaring kan zijn, kan een storing die het voertuig onverwacht stuurt een botsing veroorzaken.",
+        "Afdeling B. Voorbeelden zijn AI voor geavanceerde bestuurdersassistentie, automatische noodremming, vermoeidheids- of afleidingsdetectie (let op: vermoeidheid en pijn zijn fysieke toestanden, geen emoties), of andere veiligheidsfuncties die vereist zijn onder de Algemene Veiligheidsverordening.",
+        "Afdeling B. Voorbeelden zijn AI in vluchtbesturing, botsingsvermijding (TCAS-achtig), motor- of systeemgezondheidsmonitoring, of luchtverkeersleidingshulpmiddelen — systemen waarvan het falen de vliegveiligheid in gevaar kan brengen."
+      ],
       "ui:optionHeaders": {
         "1": "Bijlage I - Afdeling A",
         "13": "Bijlage I - Afdeling B"
@@ -1731,7 +1806,8 @@
         }
       ],
       "ui:badges": [
-        { "label": "Art. 6(1) AI-verordening - Classificatieregels voor hoog-risico AI-systemen", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-6" }
+        { "label": "Art. 6(1) AI-verordening - Classificatieregels voor hoog-risico AI-systemen", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-6" },
+        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (15)-(49)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
       "ui:id-summary": {
         "Geen van de bovenstaande": "Het AI-systeem is geen veiligheidscomponent onder de harmonisatiewetgeving van Bijlage I",
@@ -1759,13 +1835,14 @@
     },
     "art6.thirdParty": {
       "ui:widget": "radio",
-      "ui:description": "U bent zich hier waarschijnlijk al van bewust via een bestaand compliance-proces.",
       "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Besluit 768/2008/EG definieert acht conformiteitsbeoordelingsmodules (A–H). Module A is interne controle zonder betrokkenheid van een aangemelde instantie. Modules B, C1, C2, D, E, F, G, H omvatten een aangemelde instantie in de ontwerp- en/of productiefase.\n\nBelangrijk: de keuze van conformiteitsbeoordelingsmodule bepaalt NIET de classificatie van het AI-systeem onder Artikel 6, lid 1. Het feit dat de harmonisatiewetgeving van de Unie een fabrikant kan toestaan om te vertrouwen op interne controle (Module A) op basis van geharmoniseerde normen, als procedurele optie, doet geen afbreuk aan de classificatie van een AI-systeem als hoog-risico. De doorslaggevende factor is of het product, volgens de Bijlage I-wetgeving, onderworpen is aan verscherpt regelgevend toezicht — een conformiteitsbeoordeling door een derde partij OF gelijkwaardige mechanismen zoals Module A met verplichte toepassing van geharmoniseerde normen.\n\nAls u twijfelt over uw conformiteitsbeoordelingsroute, identificeert uw bestaande documentatie voor productveiligheidsnaleving de toepasselijke module(s). De Verordening speelgoedveiligheid (overweging 15) en de Machineverordening bevestigen uitdrukkelijk dat de mogelijkheid van de fabrikant om af te zien van een beoordeling door een derde partij door het toepassen van geharmoniseerde normen, geen invloed heeft op de classificatie als hoog-risico AI-systeem.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-6",
       "ui:id-badge-label": "Art. 6(1) AI-verordening - Classificatieregels voor hoog-risico AI-systemen",
       "ui:badges": [
         { "label": "Overweging 50 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-50" },
-        { "label": "Overweging 51 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-51" }
+        { "label": "Overweging 51 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-51" },
+        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (50)-(62)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
       "ui:id-summary": {
         "Ja": "Het product of AI-systeem moet een conformiteitsbeoordeling door een derde partij ondergaan krachtens de harmonisatiewetgeving van de Unie",
@@ -1775,7 +1852,7 @@
     },
     "III.1": {
       "ui:widget": "radio",
-      "ui:description": "Biometrische gegevens zijn unieke kenmerken van een persoon zoals afbeeldingen of videobeelden van gezichten, irisscannen, vingerafdrukken, stemgeluiden, handschrift en andere unieke lichaamskenmerken en/of gedragskenmerken.",
+      "ui:description": "De voorgaande vragen behandelden Artikel 6, lid 1, / Bijlage I (route productveiligheid). Vanaf hier beoordeelt de vragenlijst Artikel 6, lid 2, / Bijlage III (route toepassingsdomein) — beide routes kunnen op hetzelfde systeem van toepassing zijn.\n\nBiometrische gegevens zijn unieke kenmerken van een persoon zoals afbeeldingen of videobeelden van gezichten, irisscannen, vingerafdrukken, stemgeluiden, handschrift en andere unieke lichaamskenmerken en/of gedragskenmerken.",
       "ui:descriptionStyle": "plain",
       "ui:alertDescription": "Biometrische gegevens onderscheiden zich als volgt: meet de data lichamelijke, structurele en relatief statische kenmerken van een persoon — of beschrijft of registreert het slechts iets wat met een persoon geassocieerd is?\n\nVoorbeelden van biometrische gegevens:\n- Vingerafdrukken, iris- of netvliespatronen\n- Geometrie in gezicht en hand, stem- of aderpatroon, vorm van het oor\n- DNA, geur, hartslag, elektro-encefalografie (EEG) en elektrocardiogrammen (ECG)\n- Iemands unieke manier van typen (toetsaanslagen), lopen (zoals vastgelegd door sensoren of video-analyse), of onderscheidende kenmerken van bewegingen, gebaren en motoriek van natuurlijke personen.\n\nVoorbeelden van niet-biometrische gegevens:\n- Een foto van iemand\n- Getypte tekst of geschreven handtekening\n- Naam of ID-nummer\n- Medische diagnose\n- Locatie- of GPS-gegevens\n- Wachtwoorden\n- IP-adres of apparaatfingerafdrukken (gekoppeld aan apparaat, niet aan lichaam)\n- Leeftijd of geboortedatum, lengte en gewicht.\n- Een AI-systeem dat een persoon volgt op basis van bijvoorbeeld een rode sjaal of blauwe jas (geen biometrische gegevens).\n- Gegevens van overleden personen, stoffelijke resten of sporen daarvan (biometrische gegevens betreffen uitsluitend levende natuurlijke personen).\n- Objectherkenning. Bijvoorbeeld een AI-systeem dat in supermarkten wordt gebruikt om te detecteren of een product in een mandje wordt gelegd, of detectie van verdachte voorwerpen op luchthavens, treinstations enz.\n- Het afleiden van emoties uit getypte tekst (inhoud, sentimentanalyse of stylometrie)\n\nZie ook: [Fysiologische en gedragsmatige biometrie – Biometrics Institute](https://www.biometricsinstitute.org/physiological-and-behavioural-biometrics/)",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
@@ -2387,12 +2464,14 @@
     },
     "6.1": {
       "ui:widget": "radio",
-      "ui:description": "Denk aan het automatisch evalueren van professionele prestaties, economische situatie, gezondheid, persoonlijke voorkeuren, interesses, betrouwbaarheid, gedrag, locatie of bewegingen van een persoon om te analyseren of te voorspellen.\n\nProfilering vereist dat het AI-systeem persoonsgegevens van een natuurlijke persoon verwerkt. Classificatie of voorspelling op basis van uitsluitend niet-persoonsgegevens (bijv. goederen, weersomstandigheden, voertuiggegevens die niet aan een natuurlijke persoon gekoppeld zijn) is geen profilering in de zin van artikel 3(52) AI-verordening.",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Profilering in de zin van artikel 4, lid 4, AVG (waarnaar artikel 3, lid 52, AI-verordening verwijst) bestaat uit drie cumulatieve elementen: (i) geautomatiseerde verwerking; (ii) van persoonsgegevens; (iii) met als doel persoonlijke aspecten van een natuurlijke persoon te evalueren (analyseren of voorspellen van professionele prestaties, economische situatie, gezondheid, persoonlijke voorkeuren, interesses, betrouwbaarheid, gedrag, locatie of bewegingen). Alle drie moeten aanwezig zijn.\n\nKies 'Ja' als uw AI-systeem alle drie verricht.\n\nGEEN profilering:\n\n- Classificatie of voorspelling die uitsluitend gebaseerd is op niet-persoonsgegevens (bijv. goederen, weersomstandigheden, voertuigtelematica die niet aan een natuurlijke persoon gekoppeld is). Voorbeeld: een douane-AI die het risico beoordeelt van goederen die de EU binnenkomen op basis van containernummer, omschrijving, routering, transport en betaalmethode — het systeem evalueert het nalevingsrisico van goederen, geen persoonlijke aspecten van een natuurlijke persoon.\n- Eenvoudige classificatie van personen op persoonlijke kenmerken (leeftijd, geslacht, lengte) zonder voorspelling, gevolgtrekking of het trekken van conclusies.\n\nLet op: de geprofileerde persoon kan aan beide zijden van een besluit staan. Bijvoorbeeld: een AI die de eerdere besluitvormingspatronen van recruiters analyseert en hun persoonlijke kenmerken evalueert IS profilering (de recruiters zijn het onderwerp), ook al ziet het hoofddoel van de AI op de kandidaten.\n\nAls het antwoord 'Ja' is, kan het filtermechanisme van artikel 6, lid 3, niet worden toegepast — het systeem blijft hoog-risico.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-6",
       "ui:id-badge-label": "Art. 6(3) AI-verordening - Classificatieregels voor hoog-risico AI-systemen",
       "ui:badges": [
         { "label": "Profilering", "color": "#4F46E5", "url": "https://gdpr-info.eu/art-4-gdpr/" },
-        { "label": "Overweging 53 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-53" }
+        { "label": "Overweging 53 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-53" },
+        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (109)-(112)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
       "ui:id-summary": {
         "Ja": "Profilering wordt gebruikt — het AI-systeem evalueert of voorspelt automatisch kenmerken, gedrag of persoonlijke aspecten",
@@ -2402,7 +2481,8 @@
     },
     "6.2": {
       "ui:widget": "radio",
-      "ui:description": "Als het AI-systeem deel uitmaakt van een complexere of agentische configuratie waarbij meerdere AI-componenten samen wezenlijk invloed hebben op individuele beslissingen binnen een hoog-risico use case, kan deze uitzondering niet afzonderlijk op individuele modules worden toegepast.",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Artikel 6, lid 3, is een uitzondering op de hoog-risicoregels. De vier onderstaande voorwaarden zijn uitputtend maar alternatief — één daarvan volstaat — en moeten restrictief worden uitgelegd. De onderliggende mastertest voor alle vier is dat het AI-systeem geen wezenlijke invloed mag hebben op de uitkomst van de besluitvorming.\n\nHet filtermechanisme is uitsluitend van toepassing op systemen die hoog-risico zijn op grond van artikel 6, lid 2 (Bijlage III). Het is NIET van toepassing op systemen die hoog-risico zijn op grond van artikel 6, lid 1 (productveiligheidswetgeving in Bijlage I) — die blijven onverkort hoog-risico. Als de vragenlijst uw systeem als hoog-risico heeft aangemerkt via Q1/Q2 (Bijlage I), is het filter niet beschikbaar; als uw systeem alleen via de Bijlage III-toegang (Q13 → vervolgvragen) hoog-risico is, ga hier verder.\n\nAls het AI-systeem deel uitmaakt van een complexere of agentische configuratie waarbij meerdere AI-componenten samen wezenlijk invloed hebben op individuele beslissingen binnen een hoog-risico use case, kan deze uitzondering niet afzonderlijk op individuele modules worden toegepast.\n\nZelfbeoordeling is geen vrijbrief. Artikel 80 geeft markttoezichtautoriteiten de bevoegdheid om AI-systemen te evalueren met betrekking tot hun hoog-risicoclassificatie, de aanbieder te verzoeken het systeem in overeenstemming te brengen met de hoog-risicovereisten en corrigerende maatregelen te eisen. Artikel 99 maakt sancties mogelijk voor aanbieders die systemen verkeerd classificeren om het hoog-risicoregime te omzeilen.",
       "ui:enumTooltips": [
         "Een AI-systeem verricht bijvoorbeeld een beperkte procedurele taak wanneer het inkomende aanvragen voor toelating tot een school of universiteit sorteert op basis van het aangevraagde leerjaar of opleidingsniveau. Dergelijke systemen kunnen aanvragen indelen in vooraf gedefinieerde categorieën (bijv. basisonderwijs, voortgezet onderwijs, middelbare school of specifieke leerjaren) op basis van de in de aanvraag verstrekte informatie, zonder de geschiktheid van aanvragers te beoordelen of toelatingsbeslissingen te nemen. In een vergelijkbaar scenario zou ook een AI-systeem dat wordt gebruikt om onvolledige formulieren te detecteren en te markeren om deze terug te sturen naar de aanvrager om correct te worden ingevuld, kunnen worden geclassificeerd als een beperkte procedurele taak. Deze voorwaarde geldt echter niet voor alle categorisatiesystemen. Met name AI-systemen die een waardeoordeel vellen over gegevens die relevant zijn voor de besluitvorming, bijvoorbeeld door inputgegevens te categoriseren als 'nuttig' of 'minder nuttig' voor de menselijke beoordeling, of door een score of rangorde toe te kennen aan inputgegevens, hebben waarschijnlijk een bredere impact op het beoordelingsproces en worden daarom niet beschouwd als systemen die uitsluitend een 'beperkte procedurele taak' uitvoeren.",
         "Bijvoorbeeld: een AI-systeem dat de taal van eerder opgestelde documenten verbetert, bijvoorbeeld op het gebied van professionele toon of academische stijl, of door een tekst aan te passen aan een specifieke merkboodschap. Het begrip 'verbeteren' betekent in deze context dat de toepassing van het AI-systeem tot wijzigingen kan leiden, maar dat deze wijzigingen niet mogen leiden tot een volledige herziening of vervanging van de eerder voltooide menselijke activiteit, noch deze ongedaan mogen maken. Als een AI-systeem bijvoorbeeld een door een mens genomen besluit, opgesteld plan of vervaardigde constructie controleert en een wezenlijk andere oplossing aandraagt, wordt dit niet beschouwd als het 'verbeteren' van een eerder voltooide menselijke activiteit, omdat het niet beperkt blijft tot het verfijnen of versterken van het resultaat van die activiteit. Voorbeelden van AI-systemen die wél een ondersteunende verbeterfunctie vervullen zijn daarentegen: systemen die fouten of tegenstrijdigheden signaleren in afgerond menselijk werk en zo een kwaliteitsborgingsfunctie vervullen; systemen die conclusies koppelen aan bewijsstukken om de traceerbaarheid van een besluit te versterken zonder het menselijk oordeel te vervangen; systemen die door mensen gevalideerde inhoud omzetten voor interoperabiliteits- of toegankelijkheidsdoeleinden en deze daarmee transformeren maar niet vervangen. Een verbetering die de rechten, bescherming, juridische of economische positie van de betrokken personen wijzigt, valt niet onder deze uitzondering.",
@@ -2414,7 +2494,8 @@
       "ui:id-badge-label": "Art. 6(3) AI-verordening - Classificatieregels voor hoog-risico AI-systemen",
       "ui:badges": [
         { "label": "Art. 6(3) AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/article-6" },
-        { "label": "Overweging 53 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-53" }
+        { "label": "Overweging 53 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-53" },
+        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (84)-(108)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
       "ui:id-summary": {
         "Ja, het AI-systeem wordt gebruikt voor een beperkte procedurele taak.": "Het AI-systeem wordt uitsluitend gebruikt voor een beperkte procedurele taak",
@@ -2425,9 +2506,23 @@
       },
       "ui:id": "q34"
     },
-    "6.2-explain": {
+    "6.2-explain-purpose": {
       "ui:widget": "textarea",
-      "ui:id": "q34 explanation"
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "De vier velden hieronder vormen de kern van het zelfbeoordelingsdossier dat de aanbieder moet bijhouden op grond van artikel 6, lid 4, AI-verordening. Wanneer het filtermechanisme wordt toegepast, wordt het AI-systeem niet als hoog-risico geclassificeerd en zijn de verplichtingen van Hoofdstuk III niet van toepassing. De aanbieder moet echter (i) deze beoordeling vastleggen voordat het AI-systeem in de handel wordt gebracht of in gebruik wordt gesteld, en (ii) het AI-systeem registreren in de EU-databank die is opgericht uit hoofde van artikel 71 AI-verordening (voor de traceerbaarheid van vrijgestelde AI-systemen).",
+      "ui:id": "q34 explain purpose"
+    },
+    "6.2-explain-highrisk": {
+      "ui:widget": "textarea",
+      "ui:id": "q34 explain highrisk"
+    },
+    "6.2-explain-condition": {
+      "ui:widget": "textarea",
+      "ui:id": "q34 explain condition"
+    },
+    "6.2-explain-profiling": {
+      "ui:widget": "textarea",
+      "ui:id": "q34 explain profiling"
     },
     "6.2-prep-confirm": {
       "ui:widget": "checkboxes",
