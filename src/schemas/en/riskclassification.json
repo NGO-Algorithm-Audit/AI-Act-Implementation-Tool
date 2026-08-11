@@ -208,18 +208,10 @@
                       "Yes"
                     ]
                   },
-                  "5.h.verify.dual": {
-                    "type": "string",
-                    "title": "Is the biometric data also compared at the same time against any other database (e.g. criminal records, watchlists)?",
-                    "enum": [
-                      "Yes",
-                      "No"
-                    ]
+                  "infra": {
+                    "$ref": "#/definitions/infra"
                   }
-                },
-                "required": [
-                  "5.h.verify.dual"
-                ]
+                }
               },
               {
                 "properties": {
@@ -240,42 +232,6 @@
                 "required": [
                   "III.1.2"
                 ]
-              }
-            ]
-          },
-          "5.h.verify.dual": {
-            "oneOf": [
-              {
-                "properties": {
-                  "5.h.verify.dual": {
-                    "enum": [
-                      "Yes"
-                    ]
-                  },
-                  "III.1.2": {
-                    "type": "string",
-                    "title": "Is the AI system used for public safety, crime prevention, investigation or prosecution or the execution of criminal justice?",
-                    "enum": [
-                      "Yes",
-                      "No"
-                    ]
-                  }
-                },
-                "required": [
-                  "III.1.2"
-                ]
-              },
-              {
-                "properties": {
-                  "5.h.verify.dual": {
-                    "enum": [
-                      "No"
-                    ]
-                  },
-                  "infra": {
-                    "$ref": "#/definitions/infra"
-                  }
-                }
               }
             ]
           },
@@ -1917,22 +1873,6 @@
         "No": "The AI system is used beyond verification or authentication"
       },
       "ui:id": "q6"
-    },
-    "5.h.verify.dual": {
-      "ui:widget": "radio",
-      "ui:description": "The verification carve-out (Annex III point 1(a)) only applies when the comparison is exclusively against the person's own pre-stored reference (one-to-one matching). If the captured biometric data is at the same time compared against a separate database — for example an Interpol watchlist or a criminal-records database — the system performs remote biometric identification in parallel and falls outside the verification carve-out.",
-      "ui:descriptionStyle": "plain",
-      "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
-      "ui:id-badge-label": "Annex III(1)(a) AI Act - Remote biometric identification",
-      "ui:badges": [
-        { "label": "Recital 17 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-17" },
-        { "label": "Draft guidelines on the classification of high-risk AI systems (136)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
-      ],
-      "ui:id-summary": {
-        "Yes": "Biometric data is also compared against another database in parallel with verification",
-        "No": "Biometric data is compared only against the person's own pre-stored reference"
-      },
-      "ui:id": "q6 dual"
     },
     "III.1.2": {
       "ui:widget": "radio",
