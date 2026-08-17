@@ -1617,7 +1617,7 @@
               },
               "art6.thirdParty": {
                 "type": "string",
-                "title": "Is het product (of het AI-systeem zelf als dat het product is) onderworpen aan verscherpt regelgevend toezicht onder de toepasselijke wetgeving van Bijlage I voordat het in de handel wordt gebracht — dat wil zeggen, een conformiteitsbeoordeling door een derde partij of, waar de wetgeving interne controle toestaat, interne controle onder verplichte toepassing van geharmoniseerde normen?",
+                "title": "Moet het product waarvan het AI-systeem een veiligheidscomponent vormt, of het AI-systeem zelf als product, worden onderworpen aan een conformiteitsbeoordeling door een derde partij op grond van de EU-harmonisatiewetgeving?",
                 "enum": [
                   "Ja",
                   "Nee"
@@ -1671,7 +1671,7 @@
               },
               "art6.thirdParty": {
                 "type": "string",
-                "title": "Is het product (of het AI-systeem zelf als dat het product is) onderworpen aan verscherpt regelgevend toezicht onder de toepasselijke wetgeving van Bijlage I voordat het in de handel wordt gebracht — dat wil zeggen, een conformiteitsbeoordeling door een derde partij of, waar de wetgeving interne controle toestaat, interne controle onder verplichte toepassing van geharmoniseerde normen?",
+                "title": "Moet het product waarvan het AI-systeem een veiligheidscomponent vormt, of het AI-systeem zelf als product, worden onderworpen aan een conformiteitsbeoordeling door een derde partij op grond van de EU-harmonisatiewetgeving?",
                 "enum": [
                   "Ja",
                   "Nee"

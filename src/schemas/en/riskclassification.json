@@ -1617,7 +1617,7 @@
               },
               "art6.thirdParty": {
                 "type": "string",
-                "title": "Is the product (or the AI system itself if it is the product) subject to enhanced regulatory scrutiny under the applicable Annex I legislation before being placed on the market — that is, third-party conformity assessment or, where the legislation permits internal control, internal control subject to mandatory application of harmonised standards?",
+                "title": "Is the product whose safety component is the AI system, or the AI system itself as a product, required to undergo a third-party conformity assessment under EU harmonisation legislation?",
                 "enum": [
                   "Yes",
                   "No"
@@ -1671,7 +1671,7 @@
               },
               "art6.thirdParty": {
                 "type": "string",
-                "title": "Is the product (or the AI system itself if it is the product) subject to enhanced regulatory scrutiny under the applicable Annex I legislation before being placed on the market — that is, third-party conformity assessment or, where the legislation permits internal control, internal control subject to mandatory application of harmonised standards?",
+                "title": "Is the product whose safety component is the AI system, or the AI system itself as a product, required to undergo a third-party conformity assessment under EU harmonisation legislation?",
                 "enum": [
                   "Yes",
                   "No"
