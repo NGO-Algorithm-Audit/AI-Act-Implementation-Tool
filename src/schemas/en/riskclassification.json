@@ -1917,7 +1917,7 @@
     },
     "5.f.1": {
       "ui:widget": "radio",
-      "ui:description": "The work environment also includes recruitment and selection, and the home work environment. Education also includes admission to education and online education.",
+      "ui:description": "The work environment also includes recruitment and selection and the home work environment. Education also includes admission to education and online education.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5",
       "ui:id-badge-label": "Art. 5(1)(f) AI Act - Prohibited AI practices",
       "ui:badges": [
@@ -1932,8 +1932,8 @@
     },
     "cybersec": {
       "ui:widget": "radio",
-      "ui:description": "This refers to AI systems whose only job is to defend IT systems or safeguard personal data. For example, tools that detect malware, block intrusions, filter phishing, control access, anonymize data or spot data leaks.",
       "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "This refers to AI systems whose only job is to defend IT systems or safeguard personal data. For example, tools that detect malware, block intrusions, filter phishing, control access, anonymize data or spot data leaks.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-54",
       "ui:id-badge-label": "Recital 54 AI Act - Cybersecurity and personal-data-protection carve-out",
       "ui:badges": [

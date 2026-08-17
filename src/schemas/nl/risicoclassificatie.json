@@ -1917,7 +1917,7 @@
     },
     "5.f.1": {
       "ui:widget": "radio",
-      "ui:description": "De werkomgeving omvat ook werving en selectie, en de thuiswerkomgeving. Onderwijs omvat ook toelating tot onderwijs en online onderwijs.",
+      "ui:description": "De werkomgeving omvat ook werving en selectie en de thuiswerkomgeving. Onderwijs omvat ook toelating tot onderwijs en online onderwijs.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5",
       "ui:id-badge-label": "Art. 5(f) AI-verordening - Verboden AI-praktijken",
       "ui:badges": [
@@ -1932,8 +1932,8 @@
     },
     "cybersec": {
       "ui:widget": "radio",
-      "ui:description": "Dit verwijst naar AI-systemen die uitsluitend bedoeld zijn om IT-systemen te beschermen of persoonsgegevens te beveiligen. Bijvoorbeeld: tools die malware detecteren, indringers blokkeren, phishing filteren, toegang beheren, gegevens anonimiseren of datalekken signaleren.",
       "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Dit verwijst naar AI-systemen die uitsluitend bedoeld zijn om IT-systemen te beschermen of persoonsgegevens te beveiligen. Bijvoorbeeld: tools die malware detecteren, indringers blokkeren, phishing filteren, toegang beheren, gegevens anonimiseren of datalekken signaleren.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-54",
       "ui:id-badge-label": "Overweging 54 AI-verordening - Uitzondering cybersecurity en bescherming van persoonsgegevens",
       "ui:badges": [
