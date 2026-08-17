@@ -184,18 +184,10 @@
                       "Nee"
                     ]
                   },
-                  "5.h.verify": {
-                    "type": "string",
-                    "title": "Wordt het AI-systeem uitsluitend gebruikt om te bevestigen dat iemand is wie hij of zij zegt te zijn (verificatie of authenticatie)?",
-                    "enum": [
-                      "Ja",
-                      "Nee"
-                    ]
+                  "infra": {
+                    "$ref": "#/definitions/infra"
                   }
-                },
-                "required": [
-                  "5.h.verify"
-                ]
+                }
               }
             ]
           },
