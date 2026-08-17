@@ -259,7 +259,6 @@
                   "cybersec": {
                     "type": "string",
                     "title": "Is the system used solely for the purpose of enabling cybersecurity and personal data protection measures?",
-                    "description": "This refers to AI systems whose only job is to defend IT systems or safeguard personal data. For example, tools that detect malware, block intrusions, filter phishing, control access, anonymize data or spot data leaks.",
                     "enum": [
                       "Yes",
                       "No"
@@ -324,7 +323,6 @@
                   "cybersec": {
                     "type": "string",
                     "title": "Is the system used solely for the purpose of enabling cybersecurity and personal data protection measures?",
-                    "description": "This refers to AI systems whose only job is to defend IT systems or safeguard personal data. For example, tools that detect malware, block intrusions, filter phishing, control access, anonymize data or spot data leaks.",
                     "enum": [
                       "Yes",
                       "No"
@@ -361,7 +359,6 @@
                   "cybersec": {
                     "type": "string",
                     "title": "Is the system used solely for the purpose of enabling cybersecurity and personal data protection measures?",
-                    "description": "This refers to AI systems whose only job is to defend IT systems or safeguard personal data. For example, tools that detect malware, block intrusions, filter phishing, control access, anonymize data or spot data leaks.",
                     "enum": [
                       "Yes",
                       "No"

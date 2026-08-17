@@ -259,7 +259,6 @@
                   "cybersec": {
                     "type": "string",
                     "title": "Wordt het systeem uitsluitend gebruikt om cybersecurity en de bescherming van persoonsgegevens mogelijk te maken?",
-                    "description": "Dit verwijst naar AI-systemen die uitsluitend bedoeld zijn om IT-systemen te beschermen of persoonsgegevens te beveiligen. Bijvoorbeeld: tools die malware detecteren, indringers blokkeren, phishing filteren, toegang beheren, gegevens anonimiseren of datalekken signaleren.",
                     "enum": [
                       "Ja",
                       "Nee"
@@ -324,7 +323,6 @@
                   "cybersec": {
                     "type": "string",
                     "title": "Wordt het systeem uitsluitend gebruikt om cybersecurity en de bescherming van persoonsgegevens mogelijk te maken?",
-                    "description": "Dit verwijst naar AI-systemen die uitsluitend bedoeld zijn om IT-systemen te beschermen of persoonsgegevens te beveiligen. Bijvoorbeeld: tools die malware detecteren, indringers blokkeren, phishing filteren, toegang beheren, gegevens anonimiseren of datalekken signaleren.",
                     "enum": [
                       "Ja",
                       "Nee"
@@ -361,7 +359,6 @@
                   "cybersec": {
                     "type": "string",
                     "title": "Wordt het systeem uitsluitend gebruikt om cybersecurity en de bescherming van persoonsgegevens mogelijk te maken?",
-                    "description": "Dit verwijst naar AI-systemen die uitsluitend bedoeld zijn om IT-systemen te beschermen of persoonsgegevens te beveiligen. Bijvoorbeeld: tools die malware detecteren, indringers blokkeren, phishing filteren, toegang beheren, gegevens anonimiseren of datalekken signaleren.",
                     "enum": [
                       "Ja",
                       "Nee"
