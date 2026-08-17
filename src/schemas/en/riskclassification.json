@@ -1900,8 +1900,8 @@
     },
     "5.g.1": {
       "ui:widget": "radio",
-      "ui:description": "This does not cover any labelling or filtering of lawfully acquired biometric datasets, such as images, based on biometric data or categorizing of biometric data in the area of law enforcement.",
       "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "This does not cover any labelling or filtering of lawfully acquired biometric datasets, such as images, based on biometric data or categorizing of biometric data in the area of law enforcement.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5",
       "ui:id-badge-label": "Art. 5(1)(g) AI Act - Prohibited AI practices",
       "ui:badges": [

@@ -1900,8 +1900,8 @@
     },
     "5.g.1": {
       "ui:widget": "radio",
-      "ui:description": "Dit heeft geen betrekking op het labellen of filteren van rechtmatig verkregen biometrische datasets, zoals afbeeldingen, op basis van biometrische gegevens, of het categoriseren van biometrische gegevens op het gebied van rechtshandhaving.",
       "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Dit heeft geen betrekking op het labellen of filteren van rechtmatig verkregen biometrische datasets, zoals afbeeldingen, op basis van biometrische gegevens, of het categoriseren van biometrische gegevens op het gebied van rechtshandhaving.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5",
       "ui:id-badge-label": "Art. 5(g) AI-verordening - Verboden AI-praktijken",
       "ui:badges": [
