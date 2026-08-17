@@ -200,18 +200,10 @@
                       "Ja"
                     ]
                   },
-                  "5.h.verify.dual": {
-                    "type": "string",
-                    "title": "Worden de biometrische gegevens tegelijkertijd ook vergeleken met een andere database (bijvoorbeeld strafregisters of watchlists)?",
-                    "enum": [
-                      "Ja",
-                      "Nee"
-                    ]
+                  "infra": {
+                    "$ref": "#/definitions/infra"
                   }
-                },
-                "required": [
-                  "5.h.verify.dual"
-                ]
+                }
               },
               {
                 "properties": {
@@ -232,42 +224,6 @@
                 "required": [
                   "III.1.2"
                 ]
-              }
-            ]
-          },
-          "5.h.verify.dual": {
-            "oneOf": [
-              {
-                "properties": {
-                  "5.h.verify.dual": {
-                    "enum": [
-                      "Ja"
-                    ]
-                  },
-                  "III.1.2": {
-                    "type": "string",
-                    "title": "Wordt het AI-systeem gebruikt voor openbare veiligheid, misdaadpreventie, onderzoek of vervolging, of de uitvoering van strafrechtelijke rechtspleging?",
-                    "enum": [
-                      "Ja",
-                      "Nee"
-                    ]
-                  }
-                },
-                "required": [
-                  "III.1.2"
-                ]
-              },
-              {
-                "properties": {
-                  "5.h.verify.dual": {
-                    "enum": [
-                      "Nee"
-                    ]
-                  },
-                  "infra": {
-                    "$ref": "#/definitions/infra"
-                  }
-                }
               }
             ]
           },
@@ -1908,22 +1864,6 @@
         "Nee": "Het AI-systeem wordt gebruikt voor meer dan verificatie of authenticatie"
       },
       "ui:id": "q6"
-    },
-    "5.h.verify.dual": {
-      "ui:widget": "radio",
-      "ui:description": "De uitzondering voor verificatie (Bijlage III punt 1(a)) geldt alleen wanneer de vergelijking uitsluitend plaatsvindt tegen de eigen vooraf opgeslagen referentie van de persoon (één-op-één-matching). Als de vastgelegde biometrische gegevens tegelijkertijd worden vergeleken met een aparte database — bijvoorbeeld een Interpol-watchlist of een strafregister — voert het systeem parallel biometrische identificatie op afstand uit en valt het buiten de uitzondering voor verificatie.",
-      "ui:descriptionStyle": "plain",
-      "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
-      "ui:id-badge-label": "Bijlage III(1)(a) AI-verordening - Biometrische identificatie op afstand",
-      "ui:badges": [
-        { "label": "Overweging 17 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-17" },
-        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (136)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
-      ],
-      "ui:id-summary": {
-        "Ja": "Biometrische gegevens worden parallel ook met een andere database vergeleken",
-        "Nee": "Biometrische gegevens worden uitsluitend met de eigen vooraf opgeslagen referentie vergeleken"
-      },
-      "ui:id": "q6 dual"
     },
     "III.1.2": {
       "ui:widget": "radio",
