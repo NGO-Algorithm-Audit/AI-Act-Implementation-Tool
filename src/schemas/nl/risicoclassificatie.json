@@ -214,7 +214,7 @@
                   },
                   "III.1.2": {
                     "type": "string",
-                    "title": "Wordt het AI-systeem gebruikt voor openbare veiligheid, misdaadpreventie, onderzoek of vervolging, of de uitvoering van strafrechtelijke rechtspleging?",
+                    "title": "Wordt het AI-systeem gebruikt in publiek toegankelijke ruimtes ten behoeve van wetshandhaving (onderzoek, vervolging of de uitvoering van strafrechtelijke rechtspleging)?",
                     "enum": [
                       "Ja",
                       "Nee"
@@ -1867,6 +1867,7 @@
     },
     "III.1.2": {
       "ui:widget": "radio",
+      "ui:description": "Sommige situaties zijn uitgesloten van deze vraag. Die situaties betreffen de zoektocht naar bepaalde slachtoffers van criminaliteit, waaronder vermiste personen; bepaalde bedreigingen voor het leven of de fysieke veiligheid van natuurlijke personen of van een terroristische aanslag; en de lokalisatie of identificatie van daders of verdachten van de volgende strafbare feiten:\n- terrorisme\n- mensenhandel\n- seksuele uitbuiting van kinderen, en kinderpornografie\n- illegale handel in verdovende middelen of psychotrope stoffen\n- illegale handel in wapens, munitie of explosieven\n- moord, doodslag, zware mishandeling\n- illegale handel in menselijke organen of weefsels\n- illegale handel in nucleaire of radioactieve stoffen\n- ontvoering, wederrechtelijke vrijheidsberoving of gijzeling\n- misdrijven die onder de rechtsmacht van het Internationaal Strafhof vallen\n- wederrechtelijke inbezitneming van luchtvaartuigen of schepen\n- verkrachting\n- milieucriminaliteit\n- georganiseerde of gewapende diefstal\n- sabotage\n- deelname aan een criminele organisatie die betrokken is bij een of meer van de hierboven genoemde strafbare feiten.\n\nIn deze gevallen moet het antwoord op deze vraag 'Nee' zijn.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5",
       "ui:id-badge-label": "Art. 5.h AI-verordening - Verboden AI-praktijken",
       "ui:badges": [
@@ -1875,8 +1876,8 @@
         { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (126)-(128)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
       "ui:id-summary": {
-        "Ja": "Het AI-systeem wordt gebruikt voor openbare veiligheid, misdaadpreventie, onderzoek of vervolging, of de uitvoering van strafrechtelijke rechtspleging",
-        "Nee": "Het AI-systeem wordt niet gebruikt voor wetshandhavingsdoeleinden"
+        "Ja": "Het AI-systeem wordt gebruikt in publiek toegankelijke ruimtes ten behoeve van wetshandhaving (onderzoek, vervolging of de uitvoering van strafrechtelijke rechtspleging)",
+        "Nee": "Het AI-systeem wordt niet gebruikt in publiek toegankelijke ruimtes ten behoeve van wetshandhaving"
       },
       "ui:id": "q7"
     },

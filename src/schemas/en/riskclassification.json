@@ -214,7 +214,7 @@
                   },
                   "III.1.2": {
                     "type": "string",
-                    "title": "Is the AI system used for public safety, crime prevention, investigation or prosecution or the execution of criminal justice?",
+                    "title": "Is the AI system used in publicly accessible spaces for the purpose of law enforcement (investigation or prosecution or the execution of criminal justice)?",
                     "enum": [
                       "Yes",
                       "No"
@@ -1867,6 +1867,7 @@
     },
     "III.1.2": {
       "ui:widget": "radio",
+      "ui:description": "Some situations are excluded from this question. Those situations involve the search for certain victims of crime including missing persons; certain threats to the life or to the physical safety of natural persons or of a terrorist attack; and the localisation or identification of perpetrators or suspects of the following criminal offences:\n- terrorism\n- trafficking in human beings\n- sexual exploitation of children, and child pornography\n- illicit trafficking in narcotic drugs or psychotropic substances\n- illicit trafficking in weapons, munitions or explosives\n- murder, grievous bodily injury\n- illicit trade in human organs or tissue\n- illicit trafficking in nuclear or radioactive materials\n- kidnapping, illegal restraint or hostage-taking\n- crimes within the jurisdiction of the International Criminal Court\n- unlawful seizure of aircraft or ships\n- rape\n- environmental crime\n- organised or armed robbery\n- sabotage\n- participation in a criminal organisation involved in one or more of the offences listed above.\n\nIn these cases the answer to this question should be 'No'.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5",
       "ui:id-badge-label": "Art. 5(1)(h) AI Act - Prohibited AI practices",
       "ui:badges": [
@@ -1875,8 +1876,8 @@
         { "label": "Draft guidelines on the classification of high-risk AI systems (126)-(128)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
       "ui:id-summary": {
-        "Yes": "The AI system is used for public safety, crime prevention, investigation, prosecution or the execution of criminal justice",
-        "No": "The AI system is not used for law-enforcement purposes"
+        "Yes": "The AI system is used in publicly accessible spaces for the purpose of law enforcement (investigation, prosecution or the execution of criminal justice)",
+        "No": "The AI system is not used in publicly accessible spaces for law enforcement purposes"
       },
       "ui:id": "q7"
     },
