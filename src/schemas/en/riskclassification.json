@@ -55,7 +55,7 @@
             "type": "string",
             "title": "What does the AI system do with biometric data?",
             "enum": [
-              "Creates or expands a facial recognition database via untargeted scraping of facial images from the internet or CCTV footage.",
+              "Creates or expands a facial recognition database.",
               "Recognizes or infers emotions or intentions.",
               "For categorizing (labeling) people.",
               "Remote identification of individuals.",
@@ -73,7 +73,7 @@
                 "properties": {
                   "III.1.1": {
                     "enum": [
-                      "Creates or expands a facial recognition database via untargeted scraping of facial images from the internet or CCTV footage."
+                      "Creates or expands a facial recognition database."
                     ]
                   },
                   "5.e.2": {
@@ -1878,7 +1878,7 @@
       ],
       "ui:enumTooltips": [null, "Emotions include happiness, joy, sadness, anger, aggression, surprise, disgust, shyness, excitement, shame, contempt, satisfaction, and pleasure. Note: physical states such as pain or fatigue are not considered emotions (e.g. driver-drowsiness detection is not emotion recognition). The mere detection of expressions, gestures or movements (e.g. a smile) is not emotion recognition unless used to infer an emotion.", "This means that people are grouped or assigned a label based on certain characteristics, such as how they look or behave. For example, if an application labels people as 'shoplifters' or makes an estimate of someone's gender based on video images. Biometric categorisation does not include categorisation according to clothes or accessories (scarfs, hats, gloves, watches, crosses) or based on social media activity.", "Identification is about discovering who someone is from a group of people. For example, if you have a photo of a face, you can try to find out who that person is by comparing the photo with a database of faces. 'Remote' means that this identification takes place without the active involvement of the person being identified. This option also covers tracking a natural person across cameras where the tracking relies on biometric data (e.g. gait, voice, face matched against a reference template), and body-worn cameras used for untargeted filming (e.g. of demonstrations).", "AI systems that use biometric data for purposes other than identification, categorisation or emotion recognition (e.g. voice samples used for language or dialect analysis to substantiate a country of origin) may still fall under other Annex III use cases — biometric categorisation (point 1(b)) or migration / asylum / border control (point 7). Continue the questionnaire to ensure the correct path."],
       "ui:id-summary": {
-        "Creates or expands a facial recognition database via untargeted scraping of facial images from the internet or CCTV footage.": "The AI system creates or expands a facial recognition database via untargeted scraping of facial images from the internet or CCTV footage",
+        "Creates or expands a facial recognition database.": "The AI system creates or expands a facial recognition database",
         "Recognizes or infers emotions or intentions.": "The AI system recognizes or infers emotions or intentions",
         "For categorizing (labeling) people.": "The AI system categorizes (labels) people",
         "Remote identification of individuals.": "The AI system is used for remote identification of individuals",

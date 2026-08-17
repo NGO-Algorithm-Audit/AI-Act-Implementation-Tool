@@ -55,7 +55,7 @@
             "type": "string",
             "title": "Waarvoor worden biometrische gegevens gebruikt?",
             "enum": [
-              "Legt een gezichtsherkenningsdatabase aan of breidt deze uit door ongerichte scraping van gezichtsafbeeldingen van internet of CCTV-beelden.",
+              "Legt een gezichtsherkenningsdatabase aan of breidt deze uit.",
               "Herkent of leidt emoties of intenties af.",
               "Voor het categoriseren (labelen) van personen.",
               "Identificeert personen op afstand.",
@@ -73,7 +73,7 @@
                 "properties": {
                   "III.1.1": {
                     "enum": [
-                      "Legt een gezichtsherkenningsdatabase aan of breidt deze uit door ongerichte scraping van gezichtsafbeeldingen van internet of CCTV-beelden."
+                      "Legt een gezichtsherkenningsdatabase aan of breidt deze uit."
                     ]
                   },
                   "5.e.2": {
@@ -1878,7 +1878,7 @@
       ],
       "ui:enumTooltips": [null, "Emoties omvatten blijdschap, vreugde, verdriet, woede, agressie, verrassing, walging, verlegenheid, opwinding, schaamte, minachting, tevredenheid en plezier. Let op: fysieke toestanden zoals pijn of vermoeidheid worden niet als emoties beschouwd (bijv. detectie van slaperigheid bij bestuurders is geen emotieherkenning). Het louter detecteren van uitdrukkingen, gebaren of bewegingen (zoals een glimlach) is geen emotieherkenning, tenzij het wordt gebruikt om een emotie af te leiden.", "Dit betekent dat mensen worden gegroepeerd of een label krijgen op basis van bepaalde kenmerken, zoals hoe ze eruitzien of zich gedragen. Bijvoorbeeld als een toepassing mensen labelt als 'winkeldief' of een schatting maakt van iemands geslacht op basis van videobeelden. Biometrische categorisatie omvat geen categorisatie op basis van kleding of accessoires (sjaals, hoeden, handschoenen, horloges, kruisjes) of op basis van activiteit op sociale media.", "Identificatie gaat over het ontdekken wie iemand is uit een groep mensen. Als je bijvoorbeeld een foto van een gezicht hebt, kun je proberen erachter te komen wie die persoon is door de foto te vergelijken met een database van gezichten. 'Op afstand' betekent dat deze identificatie plaatsvindt zonder de actieve betrokkenheid van de persoon die wordt geïdentificeerd. Deze optie omvat ook het volgen van een natuurlijke persoon over meerdere camera's wanneer dat volgen gebaseerd is op biometrische gegevens (bijvoorbeeld gangpatroon, stem of gezicht vergeleken met een referentiesjabloon), evenals bodycams die worden gebruikt voor ongerichte opname (bijvoorbeeld van demonstraties).", "AI-systemen die biometrische gegevens gebruiken voor andere doeleinden dan identificatie, categorisatie of emotieherkenning (bijvoorbeeld stemfragmenten voor taal- of dialectanalyse om een land van herkomst aannemelijk te maken) kunnen alsnog onder andere Bijlage III-toepassingsgebieden vallen — biometrische categorisatie (punt 1(b)) of migratie, asiel en grenstoezicht (punt 7). Doorloop de vragenlijst om het juiste pad te bepalen."],
       "ui:id-summary": {
-        "Legt een gezichtsherkenningsdatabase aan of breidt deze uit door ongerichte scraping van gezichtsafbeeldingen van internet of CCTV-beelden.": "Het AI-systeem legt een gezichtsherkenningsdatabase aan of breidt deze uit door ongerichte scraping van gezichtsafbeeldingen van internet of CCTV-beelden",
+        "Legt een gezichtsherkenningsdatabase aan of breidt deze uit.": "Het AI-systeem legt een gezichtsherkenningsdatabase aan of breidt deze uit",
         "Herkent of leidt emoties of intenties af.": "Het AI-systeem herkent of leidt emoties of intenties af",
         "Voor het categoriseren (labelen) van personen.": "Het AI-systeem categoriseert (labelt) personen",
         "Identificeert personen op afstand.": "Het AI-systeem identificeert personen op afstand",
