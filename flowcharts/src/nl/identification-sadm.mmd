@@ -1,0 +1,56 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'Avenir Next, Avenir, Helvetica, sans-serif', 'fontSize': '14px', 'lineColor': '#005AA7', 'primaryColor': '#005AA7', 'edgeLabelBackground': '#ffffff'}, 'flowchart': {'curve': 'basis', 'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 110, 'padding': 24}}}%%
+flowchart LR
+
+    classDef Q fill:#daeaf7,stroke:#005aa7,color:#000
+    classDef cat_sadm fill:#6B8A9E,stroke:#6B8A9E,color:#fff,font-weight:bold
+    classDef cat_gdpr fill:#198754,stroke:#198754,color:#fff,font-weight:bold
+    classDef cat_prof fill:#e0e7ff,stroke:#4f46e5,color:#000,font-weight:bold
+    classDef cat_none fill:#f5f5f5,stroke:#adb5bd,color:#6c757d
+    linkStyle default stroke:#005AA7,stroke-width:1.2px
+
+    %% ════════ Indirecte sADM (Fase 2) ════════
+    Q4["V4 · Persoonsgegevens<br/>verwerkt?"]:::Q
+    Q4 -->|"Nee"| Q8
+    Q4 -->|"Ja"| GDPR_FLAG
+
+    GDPR_FLAG["Persoonsgegevens<br/>van toepassing"]:::cat_gdpr
+    GDPR_FLAG --> Q5
+
+    Q5["V5 · Persoonskenmerken<br/>geëvalueerd, geanalyseerd<br/>of voorspeld?"]:::Q
+    Q5 -->|"Ja"| PROF_FLAG
+    Q5 -->|"Nee"| Q6
+
+    PROF_FLAG["Profilering<br/>van toepassing"]:::cat_prof
+    PROF_FLAG --> Q6
+
+    Q6["V6 · Output gedeeld met<br/>andere organisaties?"]:::Q
+    Q6 -->|"Ja"| SADM_SHARE
+    Q6 -->|"Nee"| Q7
+
+    SADM_SHARE["💡 sADM mogelijk<br/>(indirect — delen<br/>Art. 22 AVG)"]:::cat_sadm
+    SADM_SHARE --> Q8
+
+    Q7["V7 · Output langer opgeslagen<br/>dan het primaire proces?"]:::Q
+    Q7 -->|"Ja"| SADM_STORE
+    Q7 -->|"Nee"| Q8
+
+    SADM_STORE["💡 sADM mogelijk<br/>(indirect — langetermijnopslag<br/>Art. 22 AVG)"]:::cat_sadm
+    SADM_STORE --> Q8
+
+    %% ════════ Directe sADM (eindstadium) ════════
+    Q8["V8 · Beslissing genomen voor<br/>individuele burgers,<br/>organisaties of medewerkers?"]:::Q
+    Q8 -->|"Nee"| NONE_Q8["❌ Geen directe sADM"]:::cat_none
+    Q8 -->|"Ja"| Q9
+
+    Q9["V9 · Soort beslissing?"]:::Q
+    Q9 -->|"anders / prioritering"| NONE_Q9["❌ Geen directe sADM"]:::cat_none
+    Q9 -->|"formele klachten · financieel ·<br/>scholen · in aanmerking · juridisch"| Q12
+    Q9 -->|"controle/onderzoek"| Q10
+
+    Q10["V10 · Bijzonder ingrijpend?"]:::Q
+    Q10 -->|"Nee"| NONE_Q10["❌ Geen directe sADM"]:::cat_none
+    Q10 -->|"Ja"| Q12
+
+    Q12["V12 · Effect op de uitkomst?"]:::Q
+    Q12 -->|"bepaalt direct"| SADM_DIRECT["💡 sADM mogelijk"]:::cat_sadm
+    Q12 -->|"deels / volledig menselijk / anders"| NONE_Q12["❌ Geen directe sADM"]:::cat_none

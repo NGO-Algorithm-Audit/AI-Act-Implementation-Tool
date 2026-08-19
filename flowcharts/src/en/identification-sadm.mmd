@@ -1,0 +1,56 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'Avenir Next, Avenir, Helvetica, sans-serif', 'fontSize': '14px', 'lineColor': '#005AA7', 'primaryColor': '#005AA7', 'edgeLabelBackground': '#ffffff'}, 'flowchart': {'curve': 'basis', 'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 110, 'padding': 24}}}%%
+flowchart LR
+
+    classDef Q fill:#daeaf7,stroke:#005aa7,color:#000
+    classDef cat_sadm fill:#6B8A9E,stroke:#6B8A9E,color:#fff,font-weight:bold
+    classDef cat_gdpr fill:#198754,stroke:#198754,color:#fff,font-weight:bold
+    classDef cat_prof fill:#e0e7ff,stroke:#4f46e5,color:#000,font-weight:bold
+    classDef cat_none fill:#f5f5f5,stroke:#adb5bd,color:#6c757d
+    linkStyle default stroke:#005AA7,stroke-width:1.2px
+
+    %% ════════ Indirect sADM (Phase 2) ════════
+    Q4["Q4 · Personal data<br/>processed?"]:::Q
+    Q4 -->|"No"| Q8
+    Q4 -->|"Yes"| GDPR_FLAG
+
+    GDPR_FLAG["Personal data applies"]:::cat_gdpr
+    GDPR_FLAG --> Q5
+
+    Q5["Q5 · Personal aspects<br/>evaluated, analysed<br/>or predicted?"]:::Q
+    Q5 -->|"Yes"| PROF_FLAG
+    Q5 -->|"No"| Q6
+
+    PROF_FLAG["Profiling applies"]:::cat_prof
+    PROF_FLAG --> Q6
+
+    Q6["Q6 · Output shared<br/>with other organisations?"]:::Q
+    Q6 -->|"Yes"| SADM_SHARE
+    Q6 -->|"No"| Q7
+
+    SADM_SHARE["💡 sADM may apply<br/>(indirect — sharing<br/>Art. 22 GDPR)"]:::cat_sadm
+    SADM_SHARE --> Q8
+
+    Q7["Q7 · Output stored longer<br/>than the primary process?"]:::Q
+    Q7 -->|"Yes"| SADM_STORE
+    Q7 -->|"No"| Q8
+
+    SADM_STORE["💡 sADM may apply<br/>(indirect — long-term storage<br/>Art. 22 GDPR)"]:::cat_sadm
+    SADM_STORE --> Q8
+
+    %% ════════ Direct sADM (final-outcome stage) ════════
+    Q8["Q8 · Decision made for<br/>individual citizens,<br/>organisations, or employees?"]:::Q
+    Q8 -->|"No"| NONE_Q8["❌ No direct sADM"]:::cat_none
+    Q8 -->|"Yes"| Q9
+
+    Q9["Q9 · Type of decision?"]:::Q
+    Q9 -->|"other / prioritisation"| NONE_Q9["❌ No direct sADM"]:::cat_none
+    Q9 -->|"formal complaints · financial ·<br/>schools · eligibility · legal"| Q12
+    Q9 -->|"inspection"| Q10
+
+    Q10["Q10 · Particularly intrusive?"]:::Q
+    Q10 -->|"No"| NONE_Q10["❌ No direct sADM"]:::cat_none
+    Q10 -->|"Yes"| Q12
+
+    Q12["Q12 · Effect on outcome?"]:::Q
+    Q12 -->|"directly determines"| SADM_DIRECT["💡 sADM may apply"]:::cat_sadm
+    Q12 -->|"partially / fully human / other"| NONE_Q12["❌ No direct sADM"]:::cat_none

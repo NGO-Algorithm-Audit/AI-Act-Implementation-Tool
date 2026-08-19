@@ -1,5 +1,9 @@
 {
   "theme": "base",
-  "flowchart": { "useMaxWidth": false, "htmlLabels": true },
+  "flowchart": {
+    "useMaxWidth": false,
+    "htmlLabels": true,
+    "wrappingWidth": 2500
+  },
   "themeCSS": ".label, .nodeLabel, .edgeLabel, .edgeLabel p, span, p, div, text, tspan { font-family: 'Avenir Next', 'Avenir', Helvetica, sans-serif !important; }"
 }

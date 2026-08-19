@@ -1,9 +1,15 @@
 /*
- * generate.ts — build Mermaid `.mmd` flowcharts for the AI-Act questionnaires
- * directly from their JSON schemas (+ code logic for Role, Obligations).
+ * generate.ts — SCAFFOLD ONLY. Derives rough Mermaid `.mmd` skeletons for the AI-Act
+ * questionnaires from their JSON schemas (+ code logic for Role, Obligations).
+ *
+ * The shipped charts are the hand-curated masters in `flowcharts/src/{en,nl}/*.mmd` —
+ * see the authoring rules in SKILL.md. This generator is raw material only: its
+ * `expanded` guard collapses any branch that converges on a shared block, and its
+ * labels are the verbatim schema `title` + full `ui:badges` list, which is far too
+ * much text for a node. Never render its output as a final chart.
  *
  * Run:  npx --yes tsx .claude/skills/export-questionnaire-flowcharts/generate.ts <outDir>
- * Emits <outDir>/{en,nl}/<chart>.mmd for chart in:
+ * Emits <outDir>/{en,nl}/<chart>.mmd (default outDir: flowcharts/.scaffold) for chart in:
  *   identification, identification-ai, identification-algo, identification-sadm,
  *   role, risk, obligations
  */
@@ -261,7 +267,7 @@ import { buildObligationsGraph } from "./role-obligations.js";
 
 // ── main ───────────────────────────────────────────────────────────────────
 async function main() {
-  const outDir = process.argv[2] || pathResolve(REPO, "flowcharts");
+  const outDir = process.argv[2] || pathResolve(REPO, "flowcharts/.scaffold");
   for (const lang of ["en", "nl"] as const) {
     const { risk, role, ident } = await loadSchemas(lang);
     const dir = pathResolve(outDir, lang);

@@ -1,0 +1,45 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'Avenir Next, Avenir, Helvetica, sans-serif', 'fontSize': '14px', 'lineColor': '#005AA7', 'primaryColor': '#005AA7', 'edgeLabelBackground': '#ffffff'}, 'flowchart': {'curve': 'basis', 'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 110, 'padding': 24}}}%%
+flowchart LR
+
+    classDef Q fill:#daeaf7,stroke:#005aa7,color:#000
+    classDef cat_algo fill:#fd7e14,stroke:#fd7e14,color:#fff,font-weight:bold
+    classDef cat_none fill:#f5f5f5,stroke:#adb5bd,color:#6c757d
+    linkStyle default stroke:#005AA7,stroke-width:1.2px
+
+    %% ════════ Fase 1 — laat de routering überhaupt een algoritme toe? ════════
+    Q1["V1 · Uitkomst van<br/>de toepassing?"]:::Q
+    Q1 -->|"score / label / aanbeveling /<br/>beslissing / content / herkenning"| Q2
+    Q1 -->|"alleen dashboard of alleen anders"| NONE_RULES["❌ Geen impactvol algoritme<br/>(regelgebaseerd / niet-actionable)"]:::cat_none
+
+    Q2["V2 · Is het ontwerp<br/>gebaseerd op data?"]:::Q
+    Q2 -->|"Data-geïnspireerd"| Q8
+    Q2 -->|"Data-afgeleid"| Q8
+    Q2 -->|"Geen data"| Q3
+
+    Q3["V3 · Automatisering van door<br/>mensen opgestelde regels?"]:::Q
+    Q3 -->|"Een-op-een met wet- of regelgeving"| NONE_RULES
+    Q3 -->|"Informele regels of Nee"| Q8
+    Q3 -->|"Symbolische AI"| Q8
+
+    %% ════════ Fase 3 — impactbepaling (Fase 2 is irrelevant voor algoritme) ════════
+    Q8["V8 · Beslissing genomen voor<br/>individuele burgers,<br/>organisaties of medewerkers?"]:::Q
+    Q8 -->|"Nee"| Q11
+    Q8 -->|"Ja"| Q9
+
+    Q11["V11 · Draagt het proces bij aan<br/>hoe de overheid (groepen) burgers<br/>categoriseert of benadert?"]:::Q
+    Q11 -->|"Nee"| NONE_NOIMPACT["❌ Geen impactvol algoritme"]:::cat_none
+    Q11 -->|"Ja of Onzeker"| Q12
+
+    Q9["V9 · Soort beslissing?"]:::Q
+    Q9 -->|"anders"| NONE_NOIMPACT
+    Q9 -->|"prioritering"| Q12
+    Q9 -->|"formele klachten · financieel ·<br/>scholen · in aanmerking · juridisch"| Q12
+    Q9 -->|"controle/onderzoek"| Q10
+
+    Q10["V10 · Bijzonder ingrijpend?"]:::Q
+    Q10 -->|"Ja of Nee"| Q12
+
+    Q12["V12 · Effect op de uitkomst?"]:::Q
+    Q12 -->|"bepaalt direct"| ALGO_OK["Impactvol algoritme"]:::cat_algo
+    Q12 -->|"beïnvloedt deels"| ALGO_OK
+    Q12 -->|"volledig menselijk / anders"| NONE_NOIMPACT

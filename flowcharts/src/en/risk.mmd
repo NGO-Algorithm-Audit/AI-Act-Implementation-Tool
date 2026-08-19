@@ -1,0 +1,204 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'Avenir Next, Avenir, Helvetica, sans-serif', 'fontSize': '14px', 'lineColor': '#005AA7', 'primaryColor': '#005AA7', 'edgeLabelBackground': '#ffffff'}, 'flowchart': {'curve': 'basis', 'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 100, 'rankSpacing': 140, 'padding': 24}}}%%
+flowchart LR
+
+    classDef Q fill:#daeaf7,stroke:#005aa7,color:#000
+    classDef gate fill:#e0f2fe,stroke:#0284c7,color:#0c4a6e,font-weight:bold
+    classDef exc fill:#eff6ff,stroke:#3b82f6,color:#1e3a8a
+    classDef cat_low fill:#0d9488,stroke:#0d9488,color:#fff,font-weight:bold
+    classDef cat_high fill:#d97706,stroke:#d97706,color:#fff,font-weight:bold
+    classDef cat_except fill:#6c757d,stroke:#6c757d,color:#fff,font-weight:bold
+    classDef cat_forb fill:#dc3545,stroke:#dc3545,color:#fff,font-weight:bold
+    linkStyle default stroke:#005AA7,stroke-width:1.2px
+
+    %% ════════ Q1 — Annex I safety-component / product check ════════
+    Q1["Q1 · Art. 6(1) · Annex I<br/>Is the AI system intended as a<br/>safety component of a product,<br/>or is itself a product, under<br/>Annex I harmonisation law?"]:::Q
+    Q1 -->|"None of the below"| Q3
+    Q1 -->|"Annex I — Section A<br/>directive"| Q2A
+    Q1 -->|"Annex I — Section B<br/>regulation"| Q2B
+
+    %% ════════ Q2 — Art. 6(1) third-party conformity assessment (Section A) ════════
+    Q2A["Q2 · Art. 6(1)<br/>Section A — third-party<br/>conformity assessment<br/>required?"]:::Q
+    Q2A -->|"Yes"| HIGHSECA
+    Q2A -->|"No"| Q3
+
+    %% ════════ Q2 — Art. 6(1) third-party conformity assessment (Section B) ════════
+    Q2B["Q2 · Art. 6(1)<br/>Section B — third-party<br/>conformity assessment<br/>required?"]:::Q
+    Q2B -->|"Yes"| HIGHSECB
+    Q2B -->|"No"| Q3
+
+    %% ════════ Q3 — biometric-data gate ════════
+    Q3["Q3 · Annex III(1)<br/>Does the AI system use<br/>biometric data?"]:::Q
+    Q3 -->|"Yes"| Q4
+    Q3 -->|"No"| Q11
+
+    %% ════════ Q4 — biometric purpose ════════
+    Q4["Q4 · Annex III(1.1)<br/>What does the AI system<br/>do with biometric data?"]:::Q
+    Q4 -->|"Facial-recognition database"| Q5
+    Q4 -->|"Remote identification"| Q6
+    Q4 -->|"Categorisation (labelling)"| Q8
+    Q4 -->|"Emotions or intentions"| Q9
+    Q4 -->|"Other purpose"| Q11
+
+    %% ════════ Q5 — large-scale facial scraping ════════
+    Q5["Q5 · Art. 5(1)(e)<br/>Large-scale facial-image<br/>scraping?"]:::Q
+    Q5 -->|"Yes"| EXCF
+    Q5 -->|"No"| Q11
+
+    %% ════════ Q6 — verification carve-out ════════
+    Q6["Q6 · Art. 5(1)(h) · Annex III(1)<br/>Verification or<br/>authentication only?"]:::Q
+    Q6 -->|"Yes"| Q11
+    Q6 -->|"No"| Q7
+
+    %% ════════ Q7 — public safety / law enforcement ════════
+    Q7["Q7 · Art. 5(1)(h) · Annex III(1.2)<br/>Public safety or<br/>law enforcement?"]:::Q
+    Q7 -->|"Yes"| EXCF
+    Q7 -->|"No"| Q10
+
+    %% ════════ Q8 — sensitive-attribute inference ════════
+    Q8["Q8 · Art. 5(1)(g) · Annex III(1)<br/>Estimates race, ethnicity,<br/>beliefs, sex life, etc.?"]:::Q
+    Q8 -->|"Yes"| EXCF
+    Q8 -->|"No"| Q10
+
+    %% ════════ Q9 — workplace or education context ════════
+    Q9["Q9 · Art. 5(1)(f) · Annex III(1)<br/>Used in workplace<br/>or education?"]:::Q
+    Q9 -->|"Yes"| EXCF
+    Q9 -->|"No"| Q10
+
+    %% ════════ Q10 — Recital 54 cybersecurity / personal-data-protection carve-out ════════
+    Q10["Q10 · Recital 54<br/>Used solely for cybersecurity /<br/>personal-data-protection<br/>measures?"]:::Q
+    Q10 -->|"Yes"| Q11
+    Q10 -->|"No"| EXCH
+
+    %% ════════ Q11 — Article 50 transparency screen ════════
+    Q11["Q11 · Art. 50 · Art. 3(60) · Recital 134<br/>Which Article 50 transparency<br/>scenarios apply?<br/>(multi-select)"]:::Q
+    Q11 -->|"Interaction"| Q13
+    Q11 -->|"Generating synthetic audio,<br/>image, video or text content"| Q12
+    Q11 -->|"Categorization or emotion recognition<br/>based on biometric data"| Q13
+    Q11 -->|"Generating or manipulating image, audio,<br/>video or public-interest text content"| Q12
+    Q11 -->|"None of the above"| Q13
+
+    %% ════════ Q12 — Non-consensual fake nude imagery (nudification) ════════
+    Q12["Q12 · Art. 5<br/>Non-consensual fake<br/>nude imagery (nudification)?"]:::Q
+    Q12 -->|"Yes"| FORB
+    Q12 -->|"No"| Q13
+
+    %% ════════ Q13 — Annex III gate ════════
+    Q13["Q13 · Annex III<br/>Does the AI system fall<br/>within an Annex III domain?"]:::gate
+    Q13 -->|"Critical physical and digital infrastructure"| Q14
+    Q13 -->|"Education or vocational training"| Q16
+    Q13 -->|"Employment or HR"| Q17
+    Q13 -->|"Government benefits or public services"| Q20
+    Q13 -->|"Credit, insurance or emergency services"| Q21
+    Q13 -->|"Law enforcement"| Q22
+    Q13 -->|"Migration, asylum or border control"| Q24
+    Q13 -->|"Administration of justice"| Q27
+    Q13 -->|"Elections or democratic processes"| Q28
+    Q13 -->|"None of the above"| Q29
+
+    %% ════════ Domain 1 — Critical infrastructure (Annex III(2)) ════════
+    Q14["Q14 · Annex III(2.4)<br/>Safety function?"]:::Q
+    Q15["Q15 · Annex III(2.5)<br/>Cybersecurity system?"]:::Q
+    Q14 -->|"Yes"| Q15
+    Q14 -->|"No"| Q29
+    Q15 -->|"Yes"| Q29
+    Q15 -->|"No"| EXCH
+
+    %% ════════ Domain 2 — Education (Annex III(3)) ════════
+    Q16["Q16 · Annex III(3.uses)<br/>Education context?"]:::Q
+    Q16 -->|"Any high-risk option"| EXCH
+    Q16 -->|"None of the above"| Q29
+
+    %% ════════ Domain 3 — Employment / HR (Annex III(4)) ════════
+    Q17["Q17 · Annex III(4.uses)<br/>Employment use?"]:::Q
+    Q18["Q18 · Annex III(4.8)<br/>Activities, behaviour or<br/>performance of employees?"]:::Q
+    Q19["Q19 · Annex III(4.9)<br/>Evaluation or monitoring<br/>of performance?"]:::Q
+    Q17 -->|"High-risk option"| EXCH
+    Q17 -->|"None of the above"| Q18
+    Q18 -->|"Yes"| Q19
+    Q18 -->|"No"| Q29
+    Q19 -->|"Yes"| EXCH
+    Q19 -->|"No"| Q29
+
+    %% ════════ Domain 4 — Government benefits (Annex III(5)(a)) ════════
+    Q20["Q20 · Annex III(5.decision)<br/>Eligibility or<br/>service decision?"]:::Q
+    Q20 -->|"Yes"| EXCH
+    Q20 -->|"No"| Q29
+
+    %% ════════ Domain 5 — Credit / insurance / emergency (Annex III(5)(b)–(d)) ════════
+    Q21["Q21 · Annex III(5.private)<br/>Creditworthiness, insurance<br/>pricing or emergency triage?"]:::Q
+    Q21 -->|"Credit / insurance / emergency"| EXCH
+    Q21 -->|"None of the above"| Q29
+
+    %% ════════ Domain 6 — Law enforcement (Annex III(6) · Art. 5(1)(d)) ════════
+    Q22["Q22 · Art. 5 · Annex III(6)<br/>Predict risk of<br/>(re)committing an offence?"]:::Q
+    Q23["Q23 · Annex III(6.uses)<br/>Other law-enforcement<br/>uses?"]:::Q
+    Q22 -->|"Yes — recidivism risk"| EXCF
+    Q22 -->|"No"| Q23
+    Q23 -->|"High-risk option"| EXCH
+    Q23 -->|"None of the above"| Q29
+
+    %% ════════ Domain 7 — Migration / asylum / border (Annex III(7)) ════════
+    Q24["Q24 · Annex III(7.uses)<br/>Polygraph, risk or<br/>asylum processing?"]:::Q
+    Q25["Q25 · Annex III(7.4)<br/>Detection, recognition or<br/>identification of persons?"]:::Q
+    Q26["Q26 · Annex III(7.5)<br/>Travel-document<br/>verification only?"]:::Q
+    Q24 -->|"Polygraph / risk / asylum"| EXCH
+    Q24 -->|"None of the above"| Q25
+    Q25 -->|"Yes"| Q26
+    Q25 -->|"No"| Q29
+    Q26 -->|"Yes — passport only"| Q29
+    Q26 -->|"No"| EXCH
+
+    %% ════════ Domain 8 — Administration of justice (Annex III(8)(a)) ════════
+    Q27["Q27 · Annex III(8.2)<br/>Administrative<br/>support only?"]:::Q
+    Q27 -->|"Yes — admin only"| Q29
+    Q27 -->|"No"| EXCH
+
+    %% ════════ Domain 9 — Elections (Annex III(8)(b)) ════════
+    Q28["Q28 · Annex III(8.elections)<br/>Influences voting outcome<br/>or behaviour?"]:::Q
+    Q28 -->|"Yes"| EXCH
+    Q28 -->|"No"| Q29
+
+    %% ════════ Art. 5(1)(a) and (c) prohibited-practices screening ════════
+    Q29["Q29 · Art. 5(1)(a)<br/>Subliminal or<br/>manipulative techniques?"]:::Q
+    Q30["Q30 · Art. 5(1)(a)<br/>Possible negative<br/>consequences?"]:::Q
+    Q31["Q31 · Art. 5(1)(c)<br/>Social-behaviour or<br/>characteristics scoring with<br/>adverse treatment?"]:::Q
+    Q32["Q32 · Art. 5(1)(c)<br/>Unrelated context<br/>or disproportionate?"]:::Q
+    Q29 -->|"Yes"| Q30
+    Q29 -->|"No"| Q31
+    Q30 -->|"Yes"| EXCF
+    Q30 -->|"No"| Q31
+    Q31 -->|"Yes"| Q32
+    Q31 -->|"No"| LOW
+    Q32 -->|"Yes"| EXCF
+    Q32 -->|"No"| LOW
+
+    %% ════════ Exception screen — high-risk branch (Art. 2(3)–(8) · Art. 6(3)) ════════
+    EXCH["Exception screen · Art. 2<br/>Research, defence or<br/>national security?"]:::exc
+    Q33["Q33 · Art. 6(3)<br/>Automatically evaluate or<br/>predict characteristics,<br/>behaviour or aspects?"]:::Q
+    Q34["Q34 · Art. 6(3)<br/>Limited procedural or<br/>preparatory task?"]:::Q
+    EXCH -->|"Research / defence /<br/>national security"| HIGHEXCEPT
+    EXCH -->|"None of the above"| Q33
+    Q33 -->|"Yes"| HIGH
+    Q33 -->|"No"| Q34
+    Q34 -->|"Procedural / preparatory /<br/>pattern / improve"| HIGHEXCEPT
+    Q34 -->|"No"| HIGH
+
+    %% ════════ Exception screen — prohibited branch (Art. 2(3)–(8)) ════════
+    EXCF["Exception screen · Art. 2<br/>Research, defence or<br/>national security?"]:::exc
+    EXCF -->|"Research / defence /<br/>national security"| FORBEXCEPT
+    EXCF -->|"None of the above"| FORB
+
+    %% ════════ Outcomes ════════
+    LOW["No requirements<br/>(Art. 5, 6)"]:::cat_low
+    HIGH["High-risk AI system<br/>(Art. 6 + Annex III)"]:::cat_high
+    HIGHSECA["High-risk AI system<br/>Annex I — Section A<br/>(Art. 6(1); full Art. 8–17,<br/>conformity assessment,<br/>registration, post-market<br/>monitoring)"]:::cat_high
+    HIGHSECB["High-risk AI system<br/>Annex I — Section B<br/>(Art. 6(1), Art. 102–109,<br/>Art. 112; sectoral<br/>regulation governs<br/>detailed obligations)"]:::cat_high
+    HIGHEXCEPT["High-risk + possible exception<br/>(Art. 2, 6(3))"]:::cat_except
+    FORB["Prohibited AI system<br/>(Art. 5)"]:::cat_forb
+    FORBEXCEPT["Prohibited + possible exception<br/>(Art. 2)"]:::cat_except
+
+    %% ════════ High-fanout Annex III nodes — colour-code outgoing destinations ════════
+    %% Light brown (#b08968): edges from Q15/Q16/Q19/Q20/Q21/Q23/Q26/Q27/Q28 → EXCH
+    %% Purple      (#9370DB): edges from Q15/Q16/Q19/Q20/Q21/Q23/Q26/Q27/Q28 → Q29
+    linkStyle 46,47,53,55,57,61,68,70,71 stroke:#b08968,stroke-width:1.8px
+    linkStyle 45,48,54,56,58,62,67,69,72 stroke:#9370DB,stroke-width:1.8px

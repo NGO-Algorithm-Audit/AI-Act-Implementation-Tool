@@ -1,0 +1,32 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'Avenir Next, Avenir, Helvetica, sans-serif', 'fontSize': '14px', 'lineColor': '#005AA7', 'primaryColor': '#005AA7', 'edgeLabelBackground': '#ffffff'}, 'flowchart': {'curve': 'basis', 'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 110, 'padding': 24}}}%%
+flowchart LR
+
+    classDef Q fill:#daeaf7,stroke:#005aa7,color:#000
+    classDef pA fill:#eaeff5,stroke:#6B8A9E,color:#4a6d8c,font-weight:bold
+    classDef pB fill:#fff3ea,stroke:#e06010,color:#7a3a00,font-weight:bold
+    classDef pC fill:#fffff0,stroke:#b8860b,color:#7a5e00,font-weight:bold
+    classDef cat_ai fill:#c9a84c,stroke:#c9a84c,color:#fff,font-weight:bold
+    classDef cat_none fill:#f5f5f5,stroke:#adb5bd,color:#6c757d
+    linkStyle default stroke:#005AA7,stroke-width:1.2px
+
+    Q1["Q1 · Outcome of the<br/>application?"]:::Q
+    Q1 -->|"score / label / recommendation /<br/>decision / content / recognition"| Q2
+    Q1 -->|"only dashboard or only other"| PATH_A
+
+    Q2["Q2 · Is the design<br/>based on data?"]:::Q
+    Q2 -->|"Data-inspired"| PATH_B
+    Q2 -->|"Data-derived"| PATH_C
+    Q2 -->|"No data"| Q3
+
+    Q3["Q3 · Automation of rules<br/>defined by humans?"]:::Q
+    Q3 -->|"One-to-one with legislation"| PATH_A
+    Q3 -->|"Informal rules or No"| PATH_B
+    Q3 -->|"Symbolic AI"| PATH_C
+
+    PATH_A(["<b>PATH A</b><br/>Rule-based, no learned model<br/>(sADM-only candidate)"]):::pA
+    PATH_B(["<b>PATH B</b><br/>Data-derived algorithm<br/>(does not qualify as AI system)"]):::pB
+    PATH_C(["<b>PATH C</b><br/>Data-derived or symbolic AI<br/>(AI system eligible)"]):::pC
+
+    PATH_A --> NONE_A["❌ Not an AI system"]:::cat_none
+    PATH_B --> NONE_B["❌ Not an AI system"]:::cat_none
+    PATH_C --> AI_OK["✅ AI system applicable<br/>(every final outcome on Path C<br/>carries the AI-system flag)"]:::cat_ai

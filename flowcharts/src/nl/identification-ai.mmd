@@ -1,0 +1,32 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'Avenir Next, Avenir, Helvetica, sans-serif', 'fontSize': '14px', 'lineColor': '#005AA7', 'primaryColor': '#005AA7', 'edgeLabelBackground': '#ffffff'}, 'flowchart': {'curve': 'basis', 'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 110, 'padding': 24}}}%%
+flowchart LR
+
+    classDef Q fill:#daeaf7,stroke:#005aa7,color:#000
+    classDef pA fill:#eaeff5,stroke:#6B8A9E,color:#4a6d8c,font-weight:bold
+    classDef pB fill:#fff3ea,stroke:#e06010,color:#7a3a00,font-weight:bold
+    classDef pC fill:#fffff0,stroke:#b8860b,color:#7a5e00,font-weight:bold
+    classDef cat_ai fill:#c9a84c,stroke:#c9a84c,color:#fff,font-weight:bold
+    classDef cat_none fill:#f5f5f5,stroke:#adb5bd,color:#6c757d
+    linkStyle default stroke:#005AA7,stroke-width:1.2px
+
+    Q1["V1 · Uitkomst van<br/>de toepassing?"]:::Q
+    Q1 -->|"score / label / aanbeveling /<br/>beslissing / content / herkenning"| Q2
+    Q1 -->|"alleen dashboard of alleen anders"| PATH_A
+
+    Q2["V2 · Is het ontwerp<br/>gebaseerd op data?"]:::Q
+    Q2 -->|"Data-geïnspireerd"| PATH_B
+    Q2 -->|"Data-afgeleid"| PATH_C
+    Q2 -->|"Geen data"| Q3
+
+    Q3["V3 · Automatisering van door<br/>mensen opgestelde regels?"]:::Q
+    Q3 -->|"Een-op-een met wet- of regelgeving"| PATH_A
+    Q3 -->|"Informele regels of Nee"| PATH_B
+    Q3 -->|"Symbolische AI"| PATH_C
+
+    PATH_A(["<b>PAD A</b><br/>Regelgebaseerd, geen geleerd model<br/>(alleen sADM-kandidaat)"]):::pA
+    PATH_B(["<b>PAD B</b><br/>Data-afgeleid algoritme<br/>(geen AI-systeem)"]):::pB
+    PATH_C(["<b>PAD C</b><br/>Data-afgeleid of symbolische AI<br/>(komt in aanmerking als AI-systeem)"]):::pC
+
+    PATH_A --> NONE_A["❌ Geen AI-systeem"]:::cat_none
+    PATH_B --> NONE_B["❌ Geen AI-systeem"]:::cat_none
+    PATH_C --> AI_OK["✅ AI-systeem van toepassing<br/>(elke einduitkomst op Pad C<br/>krijgt de AI-systeem-vlag)"]:::cat_ai
