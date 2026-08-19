@@ -1976,7 +1976,7 @@
     },
     "annexIIIGate": {
       "ui:widget": "radio",
-      "ui:description": "Select the domain in which the AI system is used. This selection alone does not result in a high-risk classification. Follow-up questions must be answered before determining whether the AI system is applied in a high-risk context. If none of the domains apply, select 'None of the above'. Also select a domain when the AI system plays a small or supporting role within it.",
+      "ui:description": "Select the domain in which the AI system is used. If none of the domains apply, select 'None of the above'. Also select a domain when the AI system plays a small or supporting role within it.",
       "ui:descriptionStyle": "plain",
       "ui:enumTooltips": [
         "E.g., gas, water, heating, electricity supply; the management or operation of roads, bridges or road traffic; and critical digital infrastructure (internet nodes, DNS services, top-level domain name registration, cloud computing services, data center services, public electronic communication networks, and electronic communication services). This use case applies only when the AI system is intended to be used by an entity that has been identified by a Member State as a critical entity under the [Critical Entities Resilience Directive (EU) 2022/2557](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32022L2557).",
