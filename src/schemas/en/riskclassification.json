@@ -550,9 +550,9 @@
                   "title": "In which of the following education contexts is the AI system used?",
                   "enum": [
                     "Allocation or admission of students to education, training or schooling",
-                    "Assessing the appropriate level of education an individual will receive or be able to access (e.g. placement tests, advancement to the next grade, special-education classification)",
-                    "Evaluating learning outcomes (summative assessment leading to a grade, qualification, certification or progression decision)",
-                    "Monitoring and detecting prohibited behaviour of pupils, students or trainees during tests (e.g. proctoring, real-time exam monitoring)",
+                    "Assessing the level or quality of education someone receives",
+                    "Evaluating learning outcomes (assessment leading to a grade, qualification, certification or progression decision)",
+                    "Monitoring or detecting unauthorised behaviour of students during tests (e.g., proctoring, or anti-cheating software).",
                     "None of the above"
                   ]
                 }
@@ -567,9 +567,9 @@
                         "III.3.uses": {
                           "enum": [
                             "Allocation or admission of students to education, training or schooling",
-                            "Assessing the appropriate level of education an individual will receive or be able to access (e.g. placement tests, advancement to the next grade, special-education classification)",
-                            "Evaluating learning outcomes (summative assessment leading to a grade, qualification, certification or progression decision)",
-                            "Monitoring and detecting prohibited behaviour of pupils, students or trainees during tests (e.g. proctoring, real-time exam monitoring)"
+                            "Assessing the level or quality of education someone receives",
+                            "Evaluating learning outcomes (assessment leading to a grade, qualification, certification or progression decision)",
+                            "Monitoring or detecting unauthorised behaviour of students during tests (e.g., proctoring, or anti-cheating software)."
                           ]
                         },
                         "exceptionHigh": { "$ref": "#/definitions/exceptionHigh" }
@@ -2060,10 +2060,10 @@
       "ui:descriptionStyle": "plain",
       "ui:alertDescription": "These use cases apply only to AI systems intended to be used in the context of, or within, an educational or vocational training institution at any level — formal or non-formal, public or private, including adult education and continuing education. AI systems that learners use on their own volition for informal learning, where the system does not lead to a recognised credential, certification or qualification, are not covered.\n\nAI systems mainly directed at the training of teachers or academic staff rather than students fall outside this use case, but may fall within the employment use case in point 4 of Annex III.\n\nNote: per the Draft Guidelines (¶215), AI systems in education and vocational training often perform profiling of natural persons. Where they do, the Article 6(3) filter mechanism cannot apply — even if the filter's conditions would otherwise be met — and the system remains high-risk.",
       "ui:enumTooltips": [
-        "Covered (high-risk): automated admissions systems reviewing student applications, transcripts and test scores; school-assignment systems used by municipalities or regional authorities based on location, sibling attendance, capacity; vocational-training assignment systems matching job seekers or employees to apprenticeship programmes; automated scholarship-eligibility assessment. Includes assignment to specific programmes or courses within an institution. NOT covered: chatbots providing general admission information; educational-programme matching platforms that help students self-select where to apply (no decisional impact).",
-        "Covered (high-risk): AI-powered adaptive placement tools recommending beginner/intermediate/advanced levels; vocational-training level-assessment systems using placement tests and skill assessments; AI classifiers for special education that recommend a placement and level of support. NOT covered: AI that provides personalised education recommendations to students (not used by an institution) to help them choose their own path; AI used for trend analysis of educational attainment across populations (not used to make decisions about individual students).",
-        "Summative-evaluation examples (high-risk): AI-enabled grading systems for tests, quizzes or exams that count towards a final evaluation; AI-enabled personalised-learning assistants whose end-of-unit reports inform the teacher's grade. NOT covered (formative-only support): adaptive-learning systems that adjust difficulty, intelligent tutoring systems with personalised feedback, learning analytics platforms, pronunciation-feedback tools, neurodiverse learning companions, student-volitional informal-learning apps that do not lead to a recognised credential.",
-        "Covered (high-risk): AI-enabled proctoring during certification exams; real-time behaviour-analysis systems detecting cheating during online exams; AI exam-monitoring using facial recognition / object detection during in-person exams. NOT covered: plagiarism checks performed on homework or essays after submission — those take place in an unsupervised environment, after the work has been completed, without live monitoring of behaviour during the test. Also excluded: non-academic student monitoring (cafeteria, hallways) — though such systems may fall under Annex III point 1 (biometrics) if they perform remote biometric identification.",
+        "E.g., Automated admission systems review student applications, transcripts and test scores, school-assignment systems used by municipalities or regional authorities based on location, sibling attendance and capacity, AI systems matching job seekers or employees to apprenticeships programs. Includes assignment to specific programs or courses within an institution. AI systems that are not included are: chatbots providing general admission information and matching platforms that help students select educational programs themselves (no decision making involved).",
+        "E.g., AI-powered tools recommending educational levels, systems using placement tests and skill assessment for vocational training, AI classifiers used in special education that recommend a placement and level of support. AI systems that are not included are: AI that provides personalised education recommendations to students that help them choose their own path, AI used for trend analysis in level of education.",
+        "E.g., AI-enabled grading systems that count towards a final evaluation, AI-enabled personal learning assistants whose reports are used by the teacher in their grading. AI systems that are not included are: adaptive learning systems that adjust difficulty, tutoring systems with personalised feedback, learning analytics platforms (i.e. AI-based learning tools that do not lead to a grade of any form).",
+        "E.g., Real-time behavior analysis systems used to detect cheating during exams, AI exam monitoring using facial recognition during in-person exams. AI systems that are not included are: plagiarism checks performed on homework or essays after submission, non-academic student monitoring for instance in cafeterias or hallways.",
         null
       ],
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
@@ -2074,9 +2074,9 @@
       ],
       "ui:id-summary": {
         "Allocation or admission of students to education, training or schooling": "The AI system is used for allocation or admission of students to education, training or schooling",
-        "Assessing the appropriate level of education an individual will receive or be able to access (e.g. placement tests, advancement to the next grade, special-education classification)": "The AI system assesses the appropriate level of education an individual will receive or be able to access",
-        "Evaluating learning outcomes (summative assessment leading to a grade, qualification, certification or progression decision)": "The AI system evaluates learning outcomes via summative assessment",
-        "Monitoring and detecting prohibited behaviour of pupils, students or trainees during tests (e.g. proctoring, real-time exam monitoring)": "The AI system monitors and detects prohibited behaviour of pupils, students or trainees during tests",
+        "Assessing the level or quality of education someone receives": "The AI system assesses the level or quality of education someone receives",
+        "Evaluating learning outcomes (assessment leading to a grade, qualification, certification or progression decision)": "The AI system evaluates learning outcomes leading to a grade, qualification, certification or progression decision",
+        "Monitoring or detecting unauthorised behaviour of students during tests (e.g., proctoring, or anti-cheating software).": "The AI system monitors or detects unauthorised behaviour of students during tests",
         "None of the above": "The AI system is not used for any of the listed education contexts"
       },
       "ui:id": "q16"

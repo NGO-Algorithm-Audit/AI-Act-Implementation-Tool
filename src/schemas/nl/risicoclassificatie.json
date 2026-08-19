@@ -550,9 +550,9 @@
                   "title": "In welke van de volgende onderwijscontexten wordt het AI-systeem gebruikt?",
                   "enum": [
                     "Toewijzing of toelating van studenten tot onderwijs, opleiding of scholing",
-                    "Het beoordelen van het passende onderwijsniveau dat een persoon zal ontvangen of waartoe deze toegang zal krijgen (bijv. plaatsingstoetsen, overgang naar de volgende klas, classificatie voor speciaal onderwijs)",
-                    "Het evalueren van leerresultaten (summatieve beoordeling die leidt tot een cijfer, kwalificatie, certificering of doorstroombeslissing)",
-                    "Het tijdens toetsen monitoren en detecteren van verboden gedrag van leerlingen, studenten of stagiairs (bijv. surveillance, real-time toetsmonitoring)",
+                    "Het beoordelen van het niveau of de kwaliteit van het onderwijs dat iemand ontvangt",
+                    "Het evalueren van leerresultaten (beoordeling die leidt tot een cijfer, kwalificatie, certificering of doorstroombeslissing)",
+                    "Het monitoren of detecteren van ongeoorloofd gedrag van studenten tijdens toetsen (bijv. surveillance, of anti-fraudesoftware).",
                     "Geen van de bovenstaande"
                   ]
                 }
@@ -567,9 +567,9 @@
                         "III.3.uses": {
                           "enum": [
                             "Toewijzing of toelating van studenten tot onderwijs, opleiding of scholing",
-                            "Het beoordelen van het passende onderwijsniveau dat een persoon zal ontvangen of waartoe deze toegang zal krijgen (bijv. plaatsingstoetsen, overgang naar de volgende klas, classificatie voor speciaal onderwijs)",
-                            "Het evalueren van leerresultaten (summatieve beoordeling die leidt tot een cijfer, kwalificatie, certificering of doorstroombeslissing)",
-                            "Het tijdens toetsen monitoren en detecteren van verboden gedrag van leerlingen, studenten of stagiairs (bijv. surveillance, real-time toetsmonitoring)"
+                            "Het beoordelen van het niveau of de kwaliteit van het onderwijs dat iemand ontvangt",
+                            "Het evalueren van leerresultaten (beoordeling die leidt tot een cijfer, kwalificatie, certificering of doorstroombeslissing)",
+                            "Het monitoren of detecteren van ongeoorloofd gedrag van studenten tijdens toetsen (bijv. surveillance, of anti-fraudesoftware)."
                           ]
                         },
                         "exceptionHigh": { "$ref": "#/definitions/exceptionHigh" }
@@ -2060,10 +2060,10 @@
       "ui:descriptionStyle": "plain",
       "ui:alertDescription": "Deze toepassingen gelden alleen voor AI-systemen die bedoeld zijn om te worden gebruikt in de context van, of binnen, een onderwijs- of beroepsopleidingsinstelling op enig niveau — formeel of niet-formeel, openbaar of particulier, met inbegrip van volwasseneneducatie en bijscholing. AI-systemen die lerenden op eigen initiatief gebruiken voor informeel leren, waarbij het systeem niet leidt tot een erkende kwalificatie, certificering of validering, vallen niet onder deze toepassingen.\n\nAI-systemen die hoofdzakelijk gericht zijn op de opleiding van docenten of academisch personeel in plaats van studenten vallen buiten dit gebruiksgeval, maar kunnen wel onder het arbeids-gebruiksgeval van Bijlage III punt 4 vallen.\n\nLet op: volgens de Ontwerprichtsnoeren (¶215) verrichten AI-systemen in onderwijs en beroepsopleiding vaak profilering van natuurlijke personen. Wanneer dat gebeurt, kan het uitzonderingsmechanisme van artikel 6, lid 3, niet worden toegepast — ook niet als overigens aan de voorwaarden van het mechanisme zou zijn voldaan — en blijft het systeem hoog-risico.",
       "ui:enumTooltips": [
-        "Wel gedekt (hoog-risico): geautomatiseerde toelatingssystemen die aanmeldingen, cijferlijsten en testresultaten van studenten beoordelen; schoolplaatsingssystemen die door gemeenten of regionale autoriteiten worden gebruikt op basis van woonplaats, broer/zus-aanmelding, capaciteit; systemen voor toewijzing van beroepsopleidingen die werkzoekenden of werknemers koppelen aan stageprogramma's; geautomatiseerde toetsing van beursrechten. Inclusief toewijzing aan specifieke programma's of cursussen binnen een instelling. NIET gedekt: chatbots die algemene toelatingsinformatie geven; platforms die studenten helpen om zelf te kiezen waar ze zich aanmelden (geen invloed op besluitvorming).",
-        "Wel gedekt (hoog-risico): AI-aangedreven adaptieve plaatsingstools die beginner/gevorderd/expert aanbevelen; AI-systemen die het niveau van beroepsopleiding beoordelen via plaatsingstoetsen en vaardigheidsmetingen; AI-classifiers voor speciaal onderwijs die een plaatsing en niveau van ondersteuning aanbevelen. NIET gedekt: AI die persoonlijke onderwijsaanbevelingen aan studenten geeft (niet gebruikt door een instelling) om hen te helpen hun eigen pad te kiezen; AI gebruikt voor trendanalyse van onderwijsprestaties over populaties (niet gebruikt om besluiten over individuele leerlingen te nemen).",
-        "Voorbeelden van summatieve beoordeling (hoog-risico): AI-gestuurde beoordelingssystemen voor toetsen, quizzen of examens die meetellen voor een eindbeoordeling; AI-gestuurde gepersonaliseerde leerassistenten waarvan de rapporten aan het einde van een leerstof-eenheid de eindbeoordeling van de docent informeren. NIET gedekt (uitsluitend formatieve ondersteuning): adaptieve leersystemen die de moeilijkheidsgraad aanpassen, intelligente tutoringsystemen met gepersonaliseerde feedback, leeranalyseplatforms, uitspraak-feedbacktools, leercompanions voor neurodivergente studenten, apps voor vrijwillig informeel leren die niet leiden tot een erkende kwalificatie.",
-        "Wel gedekt (hoog-risico): AI-surveillance tijdens certificeringsexamens; real-time gedragsanalysesystemen die spieken detecteren tijdens online examens; AI-toetsmonitoring met gezichtsherkenning / objectdetectie bij examens op locatie. NIET gedekt: plagiaatcontroles op huiswerk of essays na inlevering — die vinden plaats in een onbewaakte omgeving, na afronding van het werk, zonder live monitoring van gedrag tijdens de toets. Ook uitgesloten: niet-academisch monitoren van leerlingen (kantine, gangen) — al kunnen die systemen onder Bijlage III punt 1 (biometrie) vallen indien zij identificatie op afstand uitvoeren.",
+        "Bijv. geautomatiseerde toelatingssystemen die aanmeldingen, cijferlijsten en testresultaten van studenten beoordelen, schoolplaatsingssystemen die door gemeenten of regionale autoriteiten worden gebruikt op basis van woonplaats, broer/zus-aanmelding en capaciteit, AI-systemen die werkzoekenden of werknemers koppelen aan stageprogramma's. Inclusief toewijzing aan specifieke programma's of cursussen binnen een instelling. AI-systemen die niet zijn inbegrepen zijn: chatbots die algemene toelatingsinformatie geven en platforms die studenten helpen om zelf een onderwijsprogramma te kiezen (geen invloed op besluitvorming).",
+        "Bijv. AI-gestuurde tools die onderwijsniveaus aanbevelen, systemen die plaatsingstoetsen en vaardigheidsmetingen gebruiken voor beroepsopleiding, AI-classifiers voor speciaal onderwijs die een plaatsing en niveau van ondersteuning aanbevelen. AI-systemen die niet zijn inbegrepen zijn: AI die persoonlijke onderwijsaanbevelingen aan studenten geeft om hen te helpen hun eigen pad te kiezen, AI gebruikt voor trendanalyse in onderwijsniveau.",
+        "Bijv. AI-gestuurde beoordelingssystemen die meetellen voor een eindbeoordeling, AI-gestuurde persoonlijke leerassistenten waarvan de rapporten door de docent worden gebruikt bij het beoordelen. AI-systemen die niet zijn inbegrepen zijn: adaptieve leersystemen die de moeilijkheidsgraad aanpassen, tutoringsystemen met gepersonaliseerde feedback, leeranalyseplatforms (d.w.z. AI-leertools die niet leiden tot enige vorm van cijfer).",
+        "Bijv. real-time gedragsanalysesystemen die worden gebruikt om spieken tijdens examens te detecteren, AI-toetsmonitoring met gezichtsherkenning bij examens op locatie. AI-systemen die niet zijn inbegrepen zijn: plagiaatcontroles op huiswerk of essays na inlevering, niet-academisch monitoren van studenten zoals in kantines of gangen.",
         null
       ],
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
@@ -2074,9 +2074,9 @@
       ],
       "ui:id-summary": {
         "Toewijzing of toelating van studenten tot onderwijs, opleiding of scholing": "Het AI-systeem wordt gebruikt voor toewijzing of toelating van studenten tot onderwijs, opleiding of scholing",
-        "Het beoordelen van het passende onderwijsniveau dat een persoon zal ontvangen of waartoe deze toegang zal krijgen (bijv. plaatsingstoetsen, overgang naar de volgende klas, classificatie voor speciaal onderwijs)": "Het AI-systeem beoordeelt het passende onderwijsniveau dat een persoon zal ontvangen of waartoe deze toegang zal krijgen",
-        "Het evalueren van leerresultaten (summatieve beoordeling die leidt tot een cijfer, kwalificatie, certificering of doorstroombeslissing)": "Het AI-systeem evalueert leerresultaten via summatieve beoordeling",
-        "Het tijdens toetsen monitoren en detecteren van verboden gedrag van leerlingen, studenten of stagiairs (bijv. surveillance, real-time toetsmonitoring)": "Het AI-systeem monitort en detecteert tijdens toetsen verboden gedrag van leerlingen, studenten of stagiairs",
+        "Het beoordelen van het niveau of de kwaliteit van het onderwijs dat iemand ontvangt": "Het AI-systeem beoordeelt het niveau of de kwaliteit van het onderwijs dat iemand ontvangt",
+        "Het evalueren van leerresultaten (beoordeling die leidt tot een cijfer, kwalificatie, certificering of doorstroombeslissing)": "Het AI-systeem evalueert leerresultaten die leiden tot een cijfer, kwalificatie, certificering of doorstroombeslissing",
+        "Het monitoren of detecteren van ongeoorloofd gedrag van studenten tijdens toetsen (bijv. surveillance, of anti-fraudesoftware).": "Het AI-systeem monitort of detecteert ongeoorloofd gedrag van studenten tijdens toetsen",
         "Geen van de bovenstaande": "Het AI-systeem wordt niet gebruikt voor een van de genoemde onderwijscontexten"
       },
       "ui:id": "q16"
