@@ -1,0 +1,36 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'Avenir Next, Avenir, Helvetica, sans-serif', 'fontSize': '14px', 'lineColor': '#005AA7', 'primaryColor': '#005AA7', 'edgeLabelBackground': '#ffffff'}, 'flowchart': {'curve': 'basis', 'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 110, 'padding': 24}}}%%
+flowchart LR
+
+    classDef Q fill:#daeaf7,stroke:#005aa7,color:#000
+    classDef mid fill:#fffde7,stroke:#ffc107,color:#555
+    classDef pA fill:#eaeff5,stroke:#6B8A9E,color:#4a6d8c
+    classDef pB fill:#fff3ea,stroke:#e06010,color:#7a3a00
+    classDef pC fill:#fffff0,stroke:#b8860b,color:#7a5e00
+    classDef cat_ai fill:#fff9e0,stroke:#c9a84c,color:#000,font-weight:bold
+    classDef cat_algo fill:#ffe9d6,stroke:#fd7e14,color:#000,font-weight:bold
+    classDef cat_gdpr fill:#198754,stroke:#198754,color:#fff,font-weight:bold
+    classDef cat_sadm fill:#eaeff5,stroke:#6B8A9E,color:#000,font-weight:bold
+    classDef cat_prof fill:#e0e7ff,stroke:#4f46e5,color:#000,font-weight:bold
+    classDef oNone fill:#f5f5f5,stroke:#adb5bd,color:#6c757d
+    linkStyle default stroke:#005AA7,stroke-width:1.2px
+
+    n_q1["<b>Q1 · AI-systeem · Art. 3 AI-verordening - Definities · Impactvol algoritme</b><br/>Wat is de uitkomst van de<br/>toepassing?"]:::Q
+    n_q2["<b>Q2 · AI-systeem · Art. 3 AI-verordening - Definities · Overweging 12 AI-verordening · Impactvol algoritme</b><br/>Is het ontwerp van de<br/>toepassing gebaseerd op data?"]:::Q
+    n_q8["<b>Q4 · Persoonsgegevens</b><br/>Worden persoonsgegevens<br/>verwerkt door de toepassing?"]:::Q
+    n_q8b["<b>Q5 · Profilering · Art. 4 AVG - Definities</b><br/>Worden persoonskenmerken<br/>geëvalueerd, geanalyseerd of<br/>voorspeld?"]:::Q
+    n_q9["<b>Q6 · Art. 22 AVG - Geautomatiseerde individuele besluitvorming, waaronder profilering</b><br/>Wordt de output van het<br/>algoritme gedeeld met andere<br/>organisaties?"]:::Q
+    n_q4["<b>Q8 · Impactvol algoritme · Art. 22 AVG - Geautomatiseerde individuele besluitvorming, waaronder profilering</b><br/>Wordt in het proces een<br/>beslissing genomen voor<br/>individuen (consument of<br/>burger), organisaties of<br/>medewerkers?"]:::Q
+    n_q5["<b>Q9 · Impactvol algoritme</b><br/>Wat voor soort beslissing<br/>wordt er genomen in dit<br/>proces? Kies de optie die de<br/>grootste overeenkomst heeft<br/>met de soort beslissing."]:::Q
+    T_no_no_no["None of these"]:::oNone
+    n_q10["<b>Q7 · Art. 22 AVG - Geautomatiseerde individuele besluitvorming, waaronder profilering</b><br/>Wordt de output van het<br/>algoritme langer opgeslagen<br/>dan de doorlooptijd van het<br/>primaire proces waarvoor het<br/>algoritme wordt ingezet?"]:::Q
+
+    n_q4 -->|"Ja"| n_q5
+    n_q4 -->|"Nee"| T_no_no_no
+    n_q10 -->|"Ja<br/>Nee"| n_q4
+    n_q9 -->|"Ja"| n_q4
+    n_q9 -->|"Nee"| n_q10
+    n_q8b -->|"Ja<br/>Nee"| n_q9
+    n_q8 -->|"Ja"| n_q8b
+    n_q8 -->|"Nee"| n_q4
+    n_q1 -->|"6 answers"| n_q2
+    n_q1 -->|"Een dashboard of grafiek,<br/>met enkel rechtstreekse<br/>datavisualisatie.<br/>Een ander soort output."| n_q8

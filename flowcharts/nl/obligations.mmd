@@ -1,0 +1,35 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'Avenir Next, Avenir, Helvetica, sans-serif', 'fontSize': '14px', 'lineColor': '#005AA7', 'primaryColor': '#005AA7', 'edgeLabelBackground': '#ffffff'}, 'flowchart': {'curve': 'basis', 'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 90, 'rankSpacing': 130, 'padding': 24}}}%%
+flowchart LR
+
+    classDef Q fill:#daeaf7,stroke:#005aa7,color:#000
+    classDef cat_forb fill:#dc3545,stroke:#a01c2a,color:#fff,font-weight:bold
+    classDef cat_high fill:#d97706,stroke:#a05705,color:#fff,font-weight:bold
+    classDef cat_genai fill:#FFBF00,stroke:#b88a00,color:#fff,font-weight:bold
+    classDef role_prov fill:#6f42c1,stroke:#4f2c91,color:#fff,font-weight:bold
+    classDef role_dep fill:#0891b2,stroke:#076a8d,color:#fff,font-weight:bold
+    classDef scenario fill:#fff5cc,stroke:#b88a00,color:#000,font-weight:bold
+    classDef oblig_forb fill:#fbe2e4,stroke:#dc3545,color:#000
+    classDef oblig_high fill:#fdecd0,stroke:#d97706,color:#000
+    classDef oblig_genai fill:#f1f3f5,stroke:#9aa3ab,color:#000
+    linkStyle default stroke:#005AA7,stroke-width:1.2px
+
+    START(["Risicocategorie"]):::Q
+    FORB["Verboden"]:::cat_forb
+    HIGH["Hoog risico"]:::cat_high
+    GENAI["Generatieve en interactieve AI"]:::cat_genai
+    O_FORB["Mag niet worden ontwikkeld, in<br/>de handel gebracht of gebruikt<br/>(art. 5)."]:::oblig_forb
+    ROLE_P["Aanbieder"]:::role_prov
+    ROLE_D["Gebruiksverantwoordelijke"]:::role_dep
+    O_HIGH_P["Risico- en kwaliteitsbeheer,<br/>datagovernance, technische<br/>documentatie,<br/>conformiteitsbeoordeling,<br/>CE-markering, registratie<br/>(hfd. III afd. 2-3)."]:::oblig_high
+    O_HIGH_D["Gebruik volgens instructies,<br/>menselijk toezicht,<br/>monitoring, logging,<br/>betrokkenen informeren (art.<br/>26-27)."]:::oblig_high
+    O_GENAI["Transparantieverplichtingen:<br/>AI-interactie kenbaar maken en<br/>AI-gegenereerde content<br/>markeren (art. 50)."]:::oblig_genai
+
+    START -->|"Verboden"| FORB
+    START -->|"Hoog risico"| HIGH
+    START -->|"GPAI / beperkt"| GENAI
+    FORB --> O_FORB
+    HIGH -->|"als aanbieder"| ROLE_P
+    HIGH -->|"als<br/>gebruiksverantwoordelijke"| ROLE_D
+    ROLE_P --> O_HIGH_P
+    ROLE_D --> O_HIGH_D
+    GENAI --> O_GENAI
