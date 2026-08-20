@@ -1,0 +1,118 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'Avenir Next, Avenir, Helvetica, sans-serif', 'fontSize': '14px', 'lineColor': '#005AA7', 'primaryColor': '#005AA7', 'edgeLabelBackground': '#ffffff'}, 'flowchart': {'curve': 'basis', 'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 110, 'padding': 24}}}%%
+flowchart LR
+
+    classDef Q fill:#daeaf7,stroke:#005aa7,color:#000
+    classDef mid fill:#fffde7,stroke:#ffc107,color:#555
+    classDef pA fill:#eaeff5,stroke:#6B8A9E,color:#4a6d8c
+    classDef pB fill:#fff3ea,stroke:#e06010,color:#7a3a00
+    classDef pC fill:#fffff0,stroke:#b8860b,color:#7a5e00
+    classDef cat_ai fill:#fff9e0,stroke:#c9a84c,color:#000,font-weight:bold
+    classDef cat_algo fill:#ffe9d6,stroke:#fd7e14,color:#000,font-weight:bold
+    classDef cat_gdpr fill:#198754,stroke:#198754,color:#fff,font-weight:bold
+    classDef cat_sadm fill:#eaeff5,stroke:#6B8A9E,color:#000,font-weight:bold
+    classDef cat_prof fill:#e0e7ff,stroke:#4f46e5,color:#000,font-weight:bold
+    classDef oNone fill:#f5f5f5,stroke:#adb5bd,color:#6c757d
+    linkStyle default stroke:#005AA7,stroke-width:1.2px
+
+    START([▶ Start]) --> Q1
+
+    %% ════════ PHASE 1 — Routing  Q1 · Q2 · Q3 ════════
+    Q1["Q1 · What is the outcome<br/>of the application?"]:::Q
+
+    Q1 -->|"score / label / recommendation /<br/>decision / content / recognition"| Q2
+    Q1 -->|"only dashboard<br/>or only other"| PATH_A
+
+    Q2["Q2 · Is the design<br/>based on data?"]:::Q
+    Q2 -->|"No data"| Q3
+    Q2 -->|"Data-inspired"| PATH_B
+    Q2 -->|"Data-derived"| PATH_C
+
+    Q3["Q3 · Automation of rules<br/>defined by humans?"]:::Q
+    Q3 -->|"One-to-one<br/>with legislation"| PATH_A
+    Q3 -->|"Informal rules<br/>or No"| PATH_B
+    Q3 -->|"Symbolic AI"| PATH_C
+
+    PATH_A(["<b>PATH A</b> — sADM<br/>rule-based, no learned model"]):::pA
+    PATH_B(["<b>PATH B</b> — Algo + sADM<br/>data-derived, not an AI system"]):::pB
+    PATH_C(["<b>PATH C</b> — AI + Algo + sADM<br/>AI system eligible"]):::pC
+
+    %% ════════ PHASE 2 — Personal data + Profiling  Q4 · Q5 · Q6 · Q7 ════════
+    PATH_A & PATH_B & PATH_C --> Q4
+
+    Q4["Q4 · Are personal data<br/>being processed?"]:::Q
+    Q4 -->|"No — skip Q5 / Q6 / Q7"| INTER
+    Q4 -->|"Yes"| GDPR_CAT
+
+    GDPR_CAT["Personal data applies"]:::cat_gdpr
+    GDPR_CAT --> Q5
+
+    Q5["Q5 · Are personal aspects<br/>evaluated, analysed<br/>or predicted?"]:::Q
+    Q5 -->|"Yes"| PROF_CAT
+    Q5 -->|"No"| Q6
+
+    PROF_CAT["Profiling applies"]:::cat_prof
+    PROF_CAT --> Q6
+
+    Q6["Q6 · Output shared<br/>with other organisations?"]:::Q
+    Q6 -->|"Yes"| SADM_SHARING
+    Q6 -->|"No"| Q7
+
+    SADM_SHARING["💡 sADM may apply<br/>(indirect — sharing<br/>Art. 22 GDPR)"]:::cat_sadm
+    SADM_SHARING --> INTER
+
+    Q7["Q7 · Output stored longer<br/>than the primary process?"]:::Q
+    Q7 -->|"Yes"| SADM_STORAGE
+    Q7 -->|"No"| INTER
+
+    SADM_STORAGE["💡 sADM may apply<br/>(indirect — long-term storage<br/>Art. 22 GDPR)"]:::cat_sadm
+    SADM_STORAGE --> INTER
+
+    INTER(["◆ Intermediate checkpoint"]):::mid
+
+    %% ════════ PHASE 3 — Impact  Q8 · Q9 · Q10 · Q11 · Q12 ════════
+    INTER --> Q8
+
+    Q8["Q8 · Is a decision made<br/>for individual citizens,<br/>organisations, or employees?"]:::Q
+    Q8 -->|"No — Path A only"| NONE_Q8["❌ None"]:::oNone
+    Q8 -->|"No — Path B or C"| Q11
+    Q8 -->|"Yes"| Q9
+
+    Q11["Q11 · Does the process contribute<br/>to how the government categorises<br/>or approaches groups?"]:::Q
+    Q11 -->|"No — Path B"| NONE_Q11B["❌ None"]:::oNone
+    Q11 -->|"No — Path C"| AI_Q11C["✅ AI system"]:::cat_ai
+    Q11 -->|"Yes or Unsure"| Q12cat
+
+    Q12cat["Q12 · Effect on outcome?<br/>(after Q11 = Yes)"]:::Q
+    Q12cat -->|"directly / partially<br/>Path B"| ALGO_CAT["✅ Algo"]:::cat_algo
+    Q12cat -->|"directly / partially<br/>Path C"| AIALGO_CAT["✅ AI + Algo"]:::cat_ai
+    Q12cat -->|"fully human / other<br/>Path B"| NONE_CAT_B["❌ None"]:::oNone
+    Q12cat -->|"fully human / other<br/>Path C"| AI_CAT_C["✅ AI system"]:::cat_ai
+
+    Q9["Q9 · What type of decision<br/>is made in this process?"]:::Q
+    Q9 -->|"other"| Q9OTHER["Path A → ❌ None<br/>Path B → ❌ None<br/>Path C → ✅ AI system"]:::oNone
+    Q9 -->|"prioritisation<br/>Path A only"| SADM_PRIO["❌ None<br/>(Path A skips Q12)"]:::oNone
+    Q9 -->|"prioritisation"| Q12PRIO
+    Q9 -->|"formal complaints · financial ·<br/>schools · eligibility · legal"| Q12HIGH
+    Q9 -->|"inspection"| Q10
+
+    Q10["Q10 · Is the check or<br/>investigation particularly intrusive?"]:::Q
+    Q10 -->|"No — Path A only"| SADM_INSP["❌ None<br/>(Path A skips Q12)"]:::oNone
+    Q10 -->|"Yes — intrusive"| Q12HIGH
+    Q10 -->|"No — not intrusive"| Q12INSP
+
+    Q12PRIO["Q12 · Effect on outcome?<br/>— prioritisation —"]:::Q
+    Q12PRIO -->|"directly / partially<br/>Path B"| ALGO_PRIO["✅ Algo"]:::cat_algo
+    Q12PRIO -->|"directly / partially<br/>Path C"| AIALGO_PRIO["✅ AI + Algo"]:::cat_ai
+    Q12PRIO -->|"fully human / other<br/>Path B"| NONE_PRIO["❌ None"]:::oNone
+    Q12PRIO -->|"fully human / other<br/>Path C"| AI_PRIO["✅ AI system"]:::cat_ai
+
+    Q12INSP["Q12 · Effect on outcome?<br/>— non-intrusive inspection —"]:::Q
+    Q12INSP -->|"directly / partially<br/>Path B"| ALGO_INSP["✅ Algo"]:::cat_algo
+    Q12INSP -->|"directly / partially<br/>Path C"| AIALGO_INSP["✅ AI + Algo"]:::cat_ai
+    Q12INSP -->|"fully human / other<br/>Path B"| NONE_INSP["❌ None"]:::oNone
+    Q12INSP -->|"fully human / other<br/>Path C"| AI_INSP["✅ AI system"]:::cat_ai
+
+    Q12HIGH["Q12 · Effect on outcome?<br/>— high-impact decision types —"]:::Q
+    Q12HIGH -->|"directly determines"| OUT_DIRECT["Path A → 💡 sADM<br/>Path B → ✅ Algo + 💡 sADM<br/>Path C → ✅ AI + Algo + 💡 sADM"]:::cat_sadm
+    Q12HIGH -->|"partially influences"| OUT_PARTIAL["Path A → ❌ None<br/>Path B → ✅ Algo<br/>Path C → ✅ AI + Algo"]:::cat_algo
+    Q12HIGH -->|"fully human / other"| OUT_HUMAN["Path A → ❌ None<br/>Path B → ❌ None<br/>Path C → ✅ AI system"]:::cat_ai

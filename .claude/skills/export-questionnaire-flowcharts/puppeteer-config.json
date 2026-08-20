@@ -1,0 +1,5 @@
+{
+  "executablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+  "headless": "new",
+  "args": ["--no-sandbox", "--font-render-hinting=none"]
+}

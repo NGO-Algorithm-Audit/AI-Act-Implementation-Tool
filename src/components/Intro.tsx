@@ -21,12 +21,14 @@ export default function ({
   onStart,
   onStartQuestionnaire,
   onStartObligations,
+  onStartNta,
   activeLanguage = false,
 }: {
   forms: { id: number; title: string }[];
   onStart: (index: number) => void;
   onStartQuestionnaire?: (key: string) => void;
   onStartObligations?: () => void;
+  onStartNta?: () => void;
   activeLanguage?: boolean;
 }) {
   const { t, i18n } = useTranslation();
@@ -196,6 +198,39 @@ export default function ({
                     onClick={(e) => {
                       e.stopPropagation();
                       onStartObligations?.();
+                    }}
+                  >
+                    {t("startButton")}
+                  </Button>
+                </ListGroup.Item>
+              </ListGroup>
+
+              <h6 className="mt-4 mb-1 fw-bold" style={{ color: "#005AA7" }}>
+                {t("intro section high impact algorithms")}
+              </h6>
+              <ListGroup>
+                {/* NTA 8047. Not a single JSON-Schema wizard but a container
+                    for four sub-questionnaires, so it opens the NTA overview
+                    screen instead of a form. */}
+                <ListGroup.Item
+                  className="d-flex flex-row justify-content-between align-items-center"
+                  onClick={() => onStartNta?.()}
+                  style={{ cursor: "pointer" }}
+                >
+                  <p className="m-0 mr-4">
+                    <span
+                      className="badge me-2"
+                      style={{ backgroundColor: "#005AA7", color: "#fff" }}
+                    >
+                      {t("questionnaire NTA name")}
+                    </span>
+                    <span style={{ marginLeft: "8px" }}>{t("questionnaire NTA title")}</span>
+                  </p>
+                  <Button
+                    variant="primary"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onStartNta?.();
                     }}
                   >
                     {t("startButton")}

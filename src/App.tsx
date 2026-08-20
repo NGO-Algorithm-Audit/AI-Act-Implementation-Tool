@@ -3,6 +3,8 @@ import { Col, Container, Row } from "react-bootstrap";
 import Intro from "./components/Intro";
 import WizardForm from "./components/WizardForm";
 import ObligationsQuestionnaire from "./components/ObligationsQuestionnaire";
+import NTAOverview from "./components/NTAOverview";
+import { ntaItems } from "./data/ntaConfig";
 import validator from "@rjsf/validator-ajv8";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -66,6 +68,15 @@ export default function App() {
   const [activeFormIndex, setActiveFormIndex] = useState<number>(0);
   const [initialFieldKey, setInitialFieldKey] = useState<string | null>(null);
   const [showObligations, setShowObligations] = useState<boolean>(false);
+  // NTA 8047: an overview screen listing four sub-questionnaires, each of
+  // which is a JSON schema in src/schemas/nta/<lang>/<key>.json. These are
+  // kept out of `forms` (and out of the main-screen card list) on purpose.
+  const [showNta, setShowNta] = useState<boolean>(false);
+  const [activeNtaKey, setActiveNtaKey] = useState<string | null>(null);
+  const [ntaForms, setNtaForms] = useState<{
+    [key: string]: Record<string, RJSFSchema>;
+  }>({ nl: {}, en: {} });
+  const [ntaFormData, setNtaFormData] = useState<Record<string, any>>({});
   let formsMenu = [{ id: 0, title: t("no forms") }];
 
   const params = new URLSearchParams(window.location.search);
@@ -97,13 +108,29 @@ export default function App() {
 
   const onFormActivate = (index: number) => {
     setShowObligations(false);
+    setShowNta(false);
+    setActiveNtaKey(null);
     setActiveFormIndex(index);
     setActiveForm(forms[i18n.language][index]);
   };
 
   const onStartObligations = () => {
     setActiveForm(null);
+    setShowNta(false);
+    setActiveNtaKey(null);
     setShowObligations(true);
+  };
+
+  const onStartNta = () => {
+    setActiveForm(null);
+    setShowObligations(false);
+    setActiveNtaKey(null);
+    setShowNta(true);
+  };
+
+  const onNtaSubmit = (key: string, data?: any) => {
+    setNtaFormData((prev) => ({ ...prev, [key]: data ?? null }));
+    setActiveNtaKey(null);
   };
 
   // Schema titles are not always literal "Identification" / "Role and status";
@@ -117,6 +144,10 @@ export default function App() {
       onStartObligations();
       return;
     }
+    if (key === "NTA") {
+      onStartNta();
+      return;
+    }
     let idx = -1;
     if (key === "AI2") idx = findFormIndexByTitlePrefix(ROLE_AND_STATUS_TITLE_RE);
     else if (key === "AI1") idx = findFormIndexByTitlePrefix(RISK_CATEGORY_TITLE_RE);
@@ -125,6 +156,15 @@ export default function App() {
     setInitialFieldKey(fieldKey ?? null);
     onFormActivate(idx);
   };
+
+  const activeNtaSchema: RJSFSchema | null = activeNtaKey
+    ? ntaForms[i18n.language]?.[activeNtaKey] ?? null
+    : null;
+  // Each NTA sub-questionnaire carries its own phase tag ("Fase 1" / "Phase 1")
+  // rather than the shared "NTA" tag.
+  const activeNtaNameKey = activeNtaKey
+    ? ntaItems.find((item) => item.key === activeNtaKey)?.nameKey
+    : undefined;
 
   const roleStatusIndex = findFormIndexByTitlePrefix(ROLE_AND_STATUS_TITLE_RE);
   const riskIndex = findFormIndexByTitlePrefix(RISK_CATEGORY_TITLE_RE);
@@ -150,6 +190,10 @@ export default function App() {
   useEffect(() => {
     // Use Vite's import.meta.glob to get a map of file paths in nested directories
     const jsonFiles = import.meta.glob("/src/schemas/*/*.json");
+    // The NTA schemas live one level deeper so this glob does not pick them
+    // up — they are reached from the NTA overview screen, not the main-screen
+    // card list.
+    const ntaJsonFiles = import.meta.glob("/src/schemas/nta/*/*.json");
 
     const loadJsonFiles = async () => {
       const forms = {} as { [key: string]: RJSFSchema[] };
@@ -180,7 +224,28 @@ export default function App() {
       setForms(forms);
     };
 
+    const loadNtaJsonFiles = async () => {
+      const entries: [string, RJSFSchema][] = await Promise.all(
+        Object.entries(ntaJsonFiles).map(async ([path, importFile]) => {
+          const module = await importFile();
+          return [path, (module as { default: RJSFSchema }).default];
+        })
+      );
+
+      // "/src/schemas/nta/nl/wenselijkheid.json" -> language "nl", key "wenselijkheid"
+      const byLanguage = {} as { [key: string]: Record<string, RJSFSchema> };
+      for (const [path, data] of entries) {
+        const segments = path.split("/");
+        const language: string = segments[4] ?? "nl";
+        const key = (segments[5] ?? "").replace(/\.json$/, "");
+        byLanguage[language] = { ...(byLanguage[language] ?? {}), [key]: data };
+      }
+
+      setNtaForms(byLanguage);
+    };
+
     loadJsonFiles();
+    loadNtaJsonFiles();
   }, []);
 
   return (
@@ -191,7 +256,24 @@ export default function App() {
       <Container fluid className="vh-100 mx-0">
         <Row className="justify-content-center align-items-center h-100">
           <Col xs={12} className="">
-            {showObligations ? (
+            {showNta && activeNtaKey && activeNtaSchema ? (
+              <WizardForm
+                key={`nta-${activeNtaKey}`}
+                id={0}
+                schema={activeNtaSchema.JSONSchema}
+                uiSchema={activeNtaSchema.uiSchema}
+                formData={ntaFormData[activeNtaKey] ?? {}}
+                onSubmit={(_index, data) => onNtaSubmit(activeNtaKey, data)}
+                onCancel={() => setActiveNtaKey(null)}
+                validator={validator}
+                badgeLabel={t(activeNtaNameKey ?? "questionnaire NTA name")}
+              />
+            ) : showNta ? (
+              <NTAOverview
+                onBack={() => setShowNta(false)}
+                onStart={(key) => setActiveNtaKey(key)}
+              />
+            ) : showObligations ? (
               <ObligationsQuestionnaire
                 roleStatusData={
                   roleStatusIndex >= 0 ? allFormData[roleStatusIndex] : undefined
@@ -222,6 +304,7 @@ export default function App() {
                 onStart={(id: number) => onFormActivate(id)}
                 onStartQuestionnaire={onStartQuestionnaire}
                 onStartObligations={onStartObligations}
+                onStartNta={onStartNta}
                 activeLanguage={lang ? true : false}
               />
             )}

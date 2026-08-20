@@ -1,0 +1,142 @@
+{
+  "JSONSchema": {
+    "title": "Wenselijkheid en noodzakelijkheid",
+    "type": "object",
+    "properties": {
+      "q1-probleem": {
+        "type": "string",
+        "title": "1) Beschrijf het probleem dat door de (mogelijke) inzet van het profileringalgoritme wordt opgelost.",
+        "default": ""
+      },
+      "q1-oorzaken": {
+        "type": "string",
+        "title": "2) Beschrijf de oorzaken van het probleem.",
+        "default": ""
+      },
+      "q1-omvang": {
+        "type": "string",
+        "title": "3) Beschrijf de omvang van het probleem, kwantificeer indien mogelijk.",
+        "default": ""
+      },
+      "q1-huidig-beleid": {
+        "type": "string",
+        "title": "4) Beschrijf het huidige beleid om het probleem op te lossen en de evaluatie daarvan.",
+        "default": ""
+      },
+      "q1-gevolgen-zonder-algoritme": {
+        "type": "string",
+        "title": "5) Beschrijf de gevolgen wanneer geen profileringsalgoritme zou inzetten binnen het besluitvormingsproces, en het huidige beleid voort zou zetten.",
+        "default": ""
+      },
+      "q1-processtappen": {
+        "type": "string",
+        "title": "6) Beschrijf alle processtappen van het besluitvormingsproces waarbinnen het profileringsalgoritme wordt gebruikt. Geef expliciet aan welke vorm van menselijke tussenkomst wordt ingericht en/of welke handmatige beoordeling door een beslismedewerker vereist is om een beslissing te nemen.",
+        "default": ""
+      },
+      "q1-gevolgen-betrokkenen": {
+        "type": "string",
+        "title": "7) Bepaal (voorziene) gevolgen van de uitkomst van een profileringsalgoritme in het besluitvormingsproces voor de betrokkenen. Dus: wat het effect is van bijvoorbeeld een foutieve voorspelling of een hoogrisico-uitkomst voor de betrokkene. Denk hierbij ook aan mogelijke onbedoelde of secundaire gevolgen.",
+        "default": ""
+      },
+      "q2-doelen": {
+        "type": "string",
+        "title": "1) Documenteer de beoogde doelen en/of subdoelen van het besluitvormingsproces en hoe deze aansluiten bij kernwaarden en wettelijke taken van de overheidsinstelling.",
+        "default": ""
+      },
+      "q2-wettelijke-taak": {
+        "type": "string",
+        "title": "2) Documenteer in welke mate het besluitvormingsproces invulling geeft aan de wettelijke taak van de overheidsinstelling.",
+        "default": ""
+      },
+      "q2-bevoegdheid": {
+        "type": "string",
+        "title": "3) Documenteer waarom het besluitvormingsproces binnen de bevoegdheid van de overheidsinstelling valt.",
+        "default": ""
+      },
+      "q2-doel-algoritme": {
+        "type": "string",
+        "title": "4) Beschrijf welk(e) doel(en) de inzet van een profileringsalgoritme heeft in de context van het besluitvormingsproces en hoe dit aansluit bij de doelen gedocumenteerd onder 1).",
+        "default": ""
+      },
+      "q2-behoefte": {
+        "type": "string",
+        "title": "5) Documenteer waarom het beoogde doel van het profileringsalgoritme voorziet in een daadwerkelijke behoefte.",
+        "default": ""
+      },
+      "q2-eisen-randvoorwaarden": {
+        "type": "string",
+        "title": "6) Documenteer eventuele specifieke eisen en/of randvoorwaarden die vanuit wet- en regelgeving en/of relevante (beleids)kaders gelden voor het betreffende besluitvormingsproces.",
+        "default": ""
+      },
+      "output": {
+        "type": "string",
+        "title": "Resultaat",
+        "default": "De inhoud van deze vragenlijst volgt."
+      }
+    }
+  },
+  "uiSchema": {
+    "q1-probleem": {
+      "ui:widget": "textarea",
+      "ui:id": "q1",
+      "ui:group": "fase1-probleemanalyse",
+      "ui:groupTitle": "6.1 Probleemanalyse"
+    },
+    "q1-oorzaken": {
+      "ui:widget": "textarea",
+      "ui:group": "fase1-probleemanalyse"
+    },
+    "q1-omvang": {
+      "ui:widget": "textarea",
+      "ui:group": "fase1-probleemanalyse",
+      "ui:description": "Denk aan: financiële omvang en absolute omvang van het probleem",
+      "ui:descriptionStyle": "plain"
+    },
+    "q1-huidig-beleid": {
+      "ui:widget": "textarea",
+      "ui:group": "fase1-probleemanalyse"
+    },
+    "q1-gevolgen-zonder-algoritme": {
+      "ui:widget": "textarea",
+      "ui:group": "fase1-probleemanalyse"
+    },
+    "q1-processtappen": {
+      "ui:widget": "textarea",
+      "ui:group": "fase1-probleemanalyse"
+    },
+    "q1-gevolgen-betrokkenen": {
+      "ui:widget": "textarea",
+      "ui:group": "fase1-probleemanalyse"
+    },
+    "q2-doelen": {
+      "ui:widget": "textarea",
+      "ui:id": "q2",
+      "ui:group": "fase1-doel",
+      "ui:groupTitle": "6.2 Doel besluitvormingsproces",
+      "ui:description": "Denk aan: jaarplan, ethisch kompas, ambtseed, enz. Onderscheid hierbij maatschappelijk doelen, organisatiedoelen en procesdoelen. Beoordeel of de doelen niet op zichzelf discriminerend of in strijd met de wet zijn.",
+      "ui:descriptionStyle": "plain"
+    },
+    "q2-wettelijke-taak": {
+      "ui:widget": "textarea",
+      "ui:group": "fase1-doel"
+    },
+    "q2-bevoegdheid": {
+      "ui:widget": "textarea",
+      "ui:group": "fase1-doel"
+    },
+    "q2-doel-algoritme": {
+      "ui:widget": "textarea",
+      "ui:group": "fase1-doel"
+    },
+    "q2-behoefte": {
+      "ui:widget": "textarea",
+      "ui:group": "fase1-doel"
+    },
+    "q2-eisen-randvoorwaarden": {
+      "ui:widget": "textarea",
+      "ui:group": "fase1-doel",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Als het besluitvormingsproces wordt gebruikt voor toezicht- of handhavingsdoeleinden is extra zorgvuldigheid vereist. Handhavingsbeleid kan verschillende doelen dienen, zoals correctie en herstel van wetsovertredingen of het stimuleren van een bepaalde gedragsverandering. In het geval van een stimulatie van gedragsverandering moet er worden beschreven hoe verwacht wordt dat handhaving het gewenste gedrag gaat stimuleren en of er andere (minder repressieve) middelen zijn, bijvoorbeeld gericht op preventie, om deze gedragsverandering te realiseren."
+    }
+  }
+}

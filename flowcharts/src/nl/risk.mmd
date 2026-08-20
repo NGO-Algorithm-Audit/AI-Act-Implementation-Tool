@@ -1,0 +1,204 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'Avenir Next, Avenir, Helvetica, sans-serif', 'fontSize': '14px', 'lineColor': '#005AA7', 'primaryColor': '#005AA7', 'edgeLabelBackground': '#ffffff'}, 'flowchart': {'curve': 'basis', 'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 100, 'rankSpacing': 140, 'padding': 24}}}%%
+flowchart LR
+
+    classDef Q fill:#daeaf7,stroke:#005aa7,color:#000
+    classDef gate fill:#e0f2fe,stroke:#0284c7,color:#0c4a6e,font-weight:bold
+    classDef exc fill:#eff6ff,stroke:#3b82f6,color:#1e3a8a
+    classDef cat_low fill:#0d9488,stroke:#0d9488,color:#fff,font-weight:bold
+    classDef cat_high fill:#d97706,stroke:#d97706,color:#fff,font-weight:bold
+    classDef cat_except fill:#6c757d,stroke:#6c757d,color:#fff,font-weight:bold
+    classDef cat_forb fill:#dc3545,stroke:#dc3545,color:#fff,font-weight:bold
+    linkStyle default stroke:#005AA7,stroke-width:1.2px
+
+    %% ════════ V1 — Bijlage I veiligheidscomponent / product-controle ════════
+    Q1["V1 · Art. 6(1) · Bijlage I<br/>Is het AI-systeem bedoeld als<br/>veiligheidscomponent van een product,<br/>of zelf een product, onder de<br/>harmonisatiewetgeving van Bijlage I?"]:::Q
+    Q1 -->|"Geen van de bovenstaande"| Q3
+    Q1 -->|"Bijlage I — Afdeling A<br/>richtlijn"| Q2A
+    Q1 -->|"Bijlage I — Afdeling B<br/>verordening"| Q2B
+
+    %% ════════ V2 — Art. 6(1) conformiteitsbeoordeling door derde partij (Afdeling A) ════════
+    Q2A["V2 · Art. 6(1)<br/>Afdeling A — conformiteits-<br/>beoordeling door derde partij<br/>vereist?"]:::Q
+    Q2A -->|"Ja"| HIGHSECA
+    Q2A -->|"Nee"| Q3
+
+    %% ════════ V2 — Art. 6(1) conformiteitsbeoordeling door derde partij (Afdeling B) ════════
+    Q2B["V2 · Art. 6(1)<br/>Afdeling B — conformiteits-<br/>beoordeling door derde partij<br/>vereist?"]:::Q
+    Q2B -->|"Ja"| HIGHSECB
+    Q2B -->|"Nee"| Q3
+
+    %% ════════ V3 — biometrische gegevens-poort ════════
+    Q3["V3 · Bijlage III(1)<br/>Maakt het AI-systeem gebruik<br/>van biometrische gegevens?"]:::Q
+    Q3 -->|"Ja"| Q4
+    Q3 -->|"Nee"| Q11
+
+    %% ════════ V4 — biometrisch doel ════════
+    Q4["V4 · Bijlage III(1.1)<br/>Waarvoor worden biometrische<br/>gegevens gebruikt?"]:::Q
+    Q4 -->|"Gezichtsherkenningsdatabase"| Q5
+    Q4 -->|"Identificatie op afstand"| Q6
+    Q4 -->|"Categorisering (labelen)"| Q8
+    Q4 -->|"Emoties of intenties"| Q9
+    Q4 -->|"Ander doel"| Q11
+
+    %% ════════ V5 — grootschalige scraping van gezichtsafbeeldingen ════════
+    Q5["V5 · Art. 5(1)(e)<br/>Grootschalige scraping<br/>van gezichtsafbeeldingen?"]:::Q
+    Q5 -->|"Ja"| EXCF
+    Q5 -->|"Nee"| Q11
+
+    %% ════════ V6 — verificatie-uitzondering ════════
+    Q6["V6 · Art. 5(1)(h) · Bijlage III(1)<br/>Alleen verificatie<br/>of authenticatie?"]:::Q
+    Q6 -->|"Ja"| Q11
+    Q6 -->|"Nee"| Q7
+
+    %% ════════ V7 — openbare veiligheid / wetshandhaving ════════
+    Q7["V7 · Art. 5(1)(h) · Bijlage III(1.2)<br/>Openbare veiligheid<br/>of wetshandhaving?"]:::Q
+    Q7 -->|"Ja"| EXCF
+    Q7 -->|"Nee"| Q10
+
+    %% ════════ V8 — afleiding gevoelige kenmerken ════════
+    Q8["V8 · Art. 5(1)(g) · Bijlage III(1)<br/>Schat ras, etniciteit,<br/>overtuigingen, seksleven, enz.?"]:::Q
+    Q8 -->|"Ja"| EXCF
+    Q8 -->|"Nee"| Q10
+
+    %% ════════ V9 — werkplek- of onderwijscontext ════════
+    Q9["V9 · Art. 5(1)(f) · Bijlage III(1)<br/>Gebruikt op de werkplek<br/>of in het onderwijs?"]:::Q
+    Q9 -->|"Ja"| EXCF
+    Q9 -->|"Nee"| Q10
+
+    %% ════════ V10 — Overweging 54 cybersecurity / bescherming persoonsgegevens uitzondering ════════
+    Q10["V10 · Overweging 54<br/>Uitsluitend voor cybersecurity /<br/>bescherming persoonsgegevens?"]:::Q
+    Q10 -->|"Ja"| Q11
+    Q10 -->|"Nee"| EXCH
+
+    %% ════════ V11 — Artikel 50 transparantie-scherm ════════
+    Q11["V11 · Art. 50 · Art. 3(60) · Overweging 134<br/>Welke Artikel 50 transparantie-<br/>scenario's zijn van toepassing?<br/>(meervoudige keuze)"]:::Q
+    Q11 -->|"Interactie"| Q13
+    Q11 -->|"Genereren van synthetische audio-,<br/>beeld-, video- of tekstinhoud"| Q12
+    Q11 -->|"Categorisering of emotieherkenning<br/>op basis van biometrische gegevens"| Q13
+    Q11 -->|"Genereren of manipuleren van beeld-, audio-,<br/>video- of tekstinhoud van algemeen belang"| Q12
+    Q11 -->|"Geen van de bovenstaande"| Q13
+
+    %% ════════ V12 — Niet-instemmend vervalst naaktbeeld (nudificatie) ════════
+    Q12["V12 · Art. 5<br/>Niet-instemmend vervalst<br/>naaktbeeld (nudificatie)?"]:::Q
+    Q12 -->|"Ja"| FORB
+    Q12 -->|"Nee"| Q13
+
+    %% ════════ V13 — Bijlage III-poort ════════
+    Q13["V13 · Bijlage III<br/>Valt het AI-systeem binnen<br/>een Bijlage III-domein?"]:::gate
+    Q13 -->|"Kritieke fysieke en digitale infrastructuur"| Q14
+    Q13 -->|"Onderwijs of beroepsopleiding"| Q16
+    Q13 -->|"Arbeid of HR"| Q17
+    Q13 -->|"Overheidsuitkeringen of publieke diensten"| Q20
+    Q13 -->|"Krediet, verzekering of nooddiensten"| Q21
+    Q13 -->|"Wetshandhaving"| Q22
+    Q13 -->|"Migratie, asiel of grensbeheer"| Q24
+    Q13 -->|"Rechtspraak"| Q27
+    Q13 -->|"Verkiezingen of democratische processen"| Q28
+    Q13 -->|"Geen van de bovenstaande"| Q29
+
+    %% ════════ Domein 1 — Kritieke infrastructuur (Bijlage III(2)) ════════
+    Q14["V14 · Bijlage III(2.4)<br/>Veiligheidsfunctie?"]:::Q
+    Q15["V15 · Bijlage III(2.5)<br/>Cyberbeveiligingssysteem?"]:::Q
+    Q14 -->|"Ja"| Q15
+    Q14 -->|"Nee"| Q29
+    Q15 -->|"Ja"| Q29
+    Q15 -->|"Nee"| EXCH
+
+    %% ════════ Domein 2 — Onderwijs (Bijlage III(3)) ════════
+    Q16["V16 · Bijlage III(3.uses)<br/>Onderwijscontext?"]:::Q
+    Q16 -->|"Een hoog-risico-optie"| EXCH
+    Q16 -->|"Geen van de bovenstaande"| Q29
+
+    %% ════════ Domein 3 — Arbeid / HR (Bijlage III(4)) ════════
+    Q17["V17 · Bijlage III(4.uses)<br/>Arbeidsgebruik?"]:::Q
+    Q18["V18 · Bijlage III(4.8)<br/>Activiteiten, gedrag of<br/>prestaties van werknemers?"]:::Q
+    Q19["V19 · Bijlage III(4.9)<br/>Evaluatie of monitoring<br/>van prestaties?"]:::Q
+    Q17 -->|"Hoog-risico-optie"| EXCH
+    Q17 -->|"Geen van de bovenstaande"| Q18
+    Q18 -->|"Ja"| Q19
+    Q18 -->|"Nee"| Q29
+    Q19 -->|"Ja"| EXCH
+    Q19 -->|"Nee"| Q29
+
+    %% ════════ Domein 4 — Overheidsuitkeringen (Bijlage III(5)(a)) ════════
+    Q20["V20 · Bijlage III(5.decision)<br/>In-aanmerking-komen of<br/>dienstbeslissing?"]:::Q
+    Q20 -->|"Ja"| EXCH
+    Q20 -->|"Nee"| Q29
+
+    %% ════════ Domein 5 — Krediet / verzekering / nood (Bijlage III(5)(b)–(d)) ════════
+    Q21["V21 · Bijlage III(5.private)<br/>Kredietwaardigheid, verzekerings-<br/>prijzen of nood-triage?"]:::Q
+    Q21 -->|"Krediet / verzekering / nood"| EXCH
+    Q21 -->|"Geen van de bovenstaande"| Q29
+
+    %% ════════ Domein 6 — Wetshandhaving (Bijlage III(6) · Art. 5(1)(d)) ════════
+    Q22["V22 · Art. 5 · Bijlage III(6)<br/>Voorspelt risico op<br/>(herhaling van) strafbaar feit?"]:::Q
+    Q23["V23 · Bijlage III(6.uses)<br/>Overige wetshandhavings-<br/>doeleinden?"]:::Q
+    Q22 -->|"Ja — recidiverisico"| EXCF
+    Q22 -->|"Nee"| Q23
+    Q23 -->|"Hoog-risico-optie"| EXCH
+    Q23 -->|"Geen van de bovenstaande"| Q29
+
+    %% ════════ Domein 7 — Migratie / asiel / grens (Bijlage III(7)) ════════
+    Q24["V24 · Bijlage III(7.uses)<br/>Polygraaf, risico of<br/>asielverwerking?"]:::Q
+    Q25["V25 · Bijlage III(7.4)<br/>Detectie, herkenning of<br/>identificatie van personen?"]:::Q
+    Q26["V26 · Bijlage III(7.5)<br/>Alleen verificatie<br/>reisdocument?"]:::Q
+    Q24 -->|"Polygraaf / risico / asiel"| EXCH
+    Q24 -->|"Geen van de bovenstaande"| Q25
+    Q25 -->|"Ja"| Q26
+    Q25 -->|"Nee"| Q29
+    Q26 -->|"Ja — alleen paspoort"| Q29
+    Q26 -->|"Nee"| EXCH
+
+    %% ════════ Domein 8 — Rechtspraak (Bijlage III(8)(a)) ════════
+    Q27["V27 · Bijlage III(8.2)<br/>Alleen administratieve<br/>ondersteuning?"]:::Q
+    Q27 -->|"Ja — alleen administratie"| Q29
+    Q27 -->|"Nee"| EXCH
+
+    %% ════════ Domein 9 — Verkiezingen (Bijlage III(8)(b)) ════════
+    Q28["V28 · Bijlage III(8.elections)<br/>Beïnvloedt verkiezingsuitkomst<br/>of -gedrag?"]:::Q
+    Q28 -->|"Ja"| EXCH
+    Q28 -->|"Nee"| Q29
+
+    %% ════════ Art. 5(1)(a) en (c) verboden-praktijken-screening ════════
+    Q29["V29 · Art. 5(1)(a)<br/>Subliminale of<br/>manipulatieve technieken?"]:::Q
+    Q30["V30 · Art. 5(1)(a)<br/>Mogelijke negatieve<br/>gevolgen?"]:::Q
+    Q31["V31 · Art. 5(1)(c)<br/>Score op sociaal gedrag of<br/>kenmerken met<br/>nadelige behandeling?"]:::Q
+    Q32["V32 · Art. 5(1)(c)<br/>Niet-gerelateerde context<br/>of disproportioneel?"]:::Q
+    Q29 -->|"Ja"| Q30
+    Q29 -->|"Nee"| Q31
+    Q30 -->|"Ja"| EXCF
+    Q30 -->|"Nee"| Q31
+    Q31 -->|"Ja"| Q32
+    Q31 -->|"Nee"| LOW
+    Q32 -->|"Ja"| EXCF
+    Q32 -->|"Nee"| LOW
+
+    %% ════════ Uitzonderingenscherm — hoog-risico-tak (Art. 2(3)–(8) · Art. 6(3)) ════════
+    EXCH["Uitzonderingenscherm · Art. 2<br/>Onderzoek, defensie of<br/>nationale veiligheid?"]:::exc
+    Q33["V33 · Art. 6(3)<br/>Automatisch kenmerken,<br/>gedrag of aspecten<br/>evalueren of voorspellen?"]:::Q
+    Q34["V34 · Art. 6(3)<br/>Beperkte procedurele of<br/>voorbereidende taak?"]:::Q
+    EXCH -->|"Onderzoek / defensie /<br/>nationale veiligheid"| HIGHEXCEPT
+    EXCH -->|"Geen van de bovenstaande"| Q33
+    Q33 -->|"Ja"| HIGH
+    Q33 -->|"Nee"| Q34
+    Q34 -->|"Procedureel / voorbereidend /<br/>patroon / verbeteren"| HIGHEXCEPT
+    Q34 -->|"Nee"| HIGH
+
+    %% ════════ Uitzonderingenscherm — verboden-tak (Art. 2(3)–(8)) ════════
+    EXCF["Uitzonderingenscherm · Art. 2<br/>Onderzoek, defensie of<br/>nationale veiligheid?"]:::exc
+    EXCF -->|"Onderzoek / defensie /<br/>nationale veiligheid"| FORBEXCEPT
+    EXCF -->|"Geen van de bovenstaande"| FORB
+
+    %% ════════ Uitkomsten ════════
+    LOW["Geen vereisten<br/>(Art. 5, 6)"]:::cat_low
+    HIGH["Hoog-risico AI-systeem<br/>(Art. 6 + Bijlage III)"]:::cat_high
+    HIGHSECA["Hoog-risico AI-systeem<br/>Bijlage I — Afdeling A<br/>(Art. 6(1); volledige Art. 8–17,<br/>conformiteitsbeoordeling,<br/>registratie, monitoring na het<br/>in de handel brengen)"]:::cat_high
+    HIGHSECB["Hoog-risico AI-systeem<br/>Bijlage I — Afdeling B<br/>(Art. 6(1), Art. 102–109,<br/>Art. 112; sectorale<br/>verordening regelt<br/>gedetailleerde verplichtingen)"]:::cat_high
+    HIGHEXCEPT["Hoog-risico + mogelijke uitzondering<br/>(Art. 2, 6(3))"]:::cat_except
+    FORB["Verboden AI-systeem<br/>(Art. 5)"]:::cat_forb
+    FORBEXCEPT["Verboden + mogelijke uitzondering<br/>(Art. 2)"]:::cat_except
+
+    %% ════════ Hoog-fanout Bijlage III nodes — kleurcodering uitgaande paden ════════
+    %% Lichtbruin (#b08968): Q15/Q16/Q19/Q20/Q21/Q23/Q26/Q27/Q28 → EXCH
+    %% Paars      (#9370DB): Q15/Q16/Q19/Q20/Q21/Q23/Q26/Q27/Q28 → Q29
+    linkStyle 46,47,53,55,57,61,68,70,71 stroke:#b08968,stroke-width:1.8px
+    linkStyle 45,48,54,56,58,62,67,69,72 stroke:#9370DB,stroke-width:1.8px

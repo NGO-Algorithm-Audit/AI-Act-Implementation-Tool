@@ -30,3 +30,5 @@ yarn.lock
 # build output
 tsconfig.app.tsbuildinfo
 tsconfig.node.tsbuildinfo
+# scratch output of the flowchart scaffold generator (not a chart source)
+flowcharts/.scaffold/

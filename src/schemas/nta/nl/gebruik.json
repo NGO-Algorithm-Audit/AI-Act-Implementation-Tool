@@ -1,0 +1,24 @@
+{
+  "JSONSchema": {
+    "title": "Gebruik",
+    "type": "object",
+    "properties": {
+      "q1": {
+        "type": "string",
+        "title": "Placeholder vraag.",
+        "default": ""
+      },
+      "output": {
+        "type": "string",
+        "title": "Resultaat",
+        "default": "De inhoud van deze vragenlijst volgt."
+      }
+    }
+  },
+  "uiSchema": {
+    "q1": {
+      "ui:widget": "textarea",
+      "ui:id": "q1"
+    }
+  }
+}

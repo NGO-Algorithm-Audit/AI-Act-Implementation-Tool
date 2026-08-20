@@ -1,0 +1,116 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'Avenir Next, Avenir, Helvetica, sans-serif', 'fontSize': '14px', 'lineColor': '#005AA7', 'primaryColor': '#005AA7', 'edgeLabelBackground': '#ffffff'}, 'flowchart': {'curve': 'basis', 'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 110, 'padding': 24}}}%%
+flowchart LR
+
+    classDef Q fill:#daeaf7,stroke:#005aa7,color:#000
+    classDef mid fill:#fffde7,stroke:#ffc107,color:#555
+    classDef pA fill:#eaeff5,stroke:#6B8A9E,color:#4a6d8c
+    classDef pB fill:#fff3ea,stroke:#e06010,color:#7a3a00
+    classDef pC fill:#fffff0,stroke:#b8860b,color:#7a5e00
+    classDef cat_ai fill:#fff9e0,stroke:#c9a84c,color:#000,font-weight:bold
+    classDef cat_algo fill:#ffe9d6,stroke:#fd7e14,color:#000,font-weight:bold
+    classDef cat_gdpr fill:#198754,stroke:#198754,color:#fff,font-weight:bold
+    classDef cat_sadm fill:#eaeff5,stroke:#6B8A9E,color:#000,font-weight:bold
+    classDef cat_prof fill:#e0e7ff,stroke:#4f46e5,color:#000,font-weight:bold
+    classDef oNone fill:#f5f5f5,stroke:#adb5bd,color:#6c757d
+    linkStyle default stroke:#005AA7,stroke-width:1.2px
+
+    %% ════════ FASE 1 — Routering  V1 · V2 · V3 ════════
+    Q1["V1 · Wat is de uitkomst<br/>van de toepassing?"]:::Q
+
+    Q1 -->|"score / label / aanbeveling /<br/>beslissing / content / herkenning"| Q2
+    Q1 -->|"alleen dashboard<br/>of alleen anders"| PATH_A
+
+    Q2["V2 · Is het ontwerp<br/>gebaseerd op data?"]:::Q
+    Q2 -->|"Geen data"| Q3
+    Q2 -->|"Data-geïnspireerd"| PATH_B
+    Q2 -->|"Data-afgeleid"| PATH_C
+
+    Q3["V3 · Automatisering van door<br/>mensen opgestelde regels?"]:::Q
+    Q3 -->|"Een-op-een met<br/>wet- of regelgeving"| PATH_A
+    Q3 -->|"Informele regels<br/>of Nee"| PATH_B
+    Q3 -->|"Symbolische AI"| PATH_C
+
+    PATH_A(["<b>PAD A</b> — sADM<br/>regelgebaseerd, geen geleerd model"]):::pA
+    PATH_B(["<b>PAD B</b> — Algoritme + sADM<br/>data-afgeleid, geen AI-systeem"]):::pB
+    PATH_C(["<b>PAD C</b> — AI + Algoritme + sADM<br/>komt in aanmerking als AI-systeem"]):::pC
+
+    %% ════════ FASE 2 — Persoonsgegevens + Profilering  V4 · V5 · V6 · V7 ════════
+    PATH_A & PATH_B & PATH_C --> Q4
+
+    Q4["V4 · Worden persoonsgegevens<br/>verwerkt?"]:::Q
+    Q4 -->|"Nee — sla V5 / V6 / V7 over"| INTER
+    Q4 -->|"Ja"| GDPR_CAT
+
+    GDPR_CAT["Persoonsgegevens<br/>van toepassing"]:::cat_gdpr
+    GDPR_CAT --> Q5
+
+    Q5["V5 · Worden persoonskenmerken<br/>geëvalueerd, geanalyseerd<br/>of voorspeld?"]:::Q
+    Q5 -->|"Ja"| PROF_CAT
+    Q5 -->|"Nee"| Q6
+
+    PROF_CAT["Profilering<br/>van toepassing"]:::cat_prof
+    PROF_CAT --> Q6
+
+    Q6["V6 · Output gedeeld met<br/>andere organisaties?"]:::Q
+    Q6 -->|"Ja"| SADM_SHARING
+    Q6 -->|"Nee"| Q7
+
+    SADM_SHARING["💡 sADM mogelijk<br/>(indirect — delen<br/>Art. 22 AVG)"]:::cat_sadm
+    SADM_SHARING --> INTER
+
+    Q7["V7 · Output langer opgeslagen<br/>dan het primaire proces?"]:::Q
+    Q7 -->|"Ja"| SADM_STORAGE
+    Q7 -->|"Nee"| INTER
+
+    SADM_STORAGE["💡 sADM mogelijk<br/>(indirect — langetermijnopslag<br/>Art. 22 AVG)"]:::cat_sadm
+    SADM_STORAGE --> INTER
+
+    INTER(["◆ Tussencontrole"]):::mid
+
+    %% ════════ FASE 3 — Impact  V8 · V9 · V10 · V11 · V12 ════════
+    INTER --> Q8
+
+    Q8["V8 · Wordt een beslissing genomen<br/>voor individuele burgers,<br/>organisaties of medewerkers?"]:::Q
+    Q8 -->|"Nee — alleen Pad A"| NONE_Q8["❌ Geen"]:::oNone
+    Q8 -->|"Nee — Pad B of C"| Q11
+    Q8 -->|"Ja"| Q9
+
+    Q11["V11 · Draagt het proces bij aan<br/>hoe de overheid (groepen) burgers<br/>categoriseert of benadert?"]:::Q
+    Q11 -->|"Nee — Pad B"| NONE_Q11B["❌ Geen"]:::oNone
+    Q11 -->|"Nee — Pad C"| AI_Q11C["✅ AI-systeem"]:::cat_ai
+    Q11 -->|"Ja of Onzeker"| Q12cat
+
+    Q12cat["V12 · Effect op de uitkomst?<br/>(na V11 = Ja)"]:::Q
+    Q12cat -->|"direct / deels<br/>Pad B"| ALGO_CAT["✅ Algoritme"]:::cat_algo
+    Q12cat -->|"direct / deels<br/>Pad C"| AIALGO_CAT["✅ AI + Algoritme"]:::cat_ai
+    Q12cat -->|"volledig menselijk / anders<br/>Pad B"| NONE_CAT_B["❌ Geen"]:::oNone
+    Q12cat -->|"volledig menselijk / anders<br/>Pad C"| AI_CAT_C["✅ AI-systeem"]:::cat_ai
+
+    Q9["V9 · Wat voor soort beslissing<br/>wordt genomen in dit proces?"]:::Q
+    Q9 -->|"anders"| Q9OTHER["Pad A → ❌ Geen<br/>Pad B → ❌ Geen<br/>Pad C → ✅ AI-systeem"]:::oNone
+    Q9 -->|"prioritering<br/>alleen Pad A"| SADM_PRIO["❌ Geen<br/>(Pad A slaat V12 over)"]:::oNone
+    Q9 -->|"prioritering"| Q12PRIO
+    Q9 -->|"formele klachten · financieel ·<br/>scholen · in aanmerking · juridisch"| Q12HIGH
+    Q9 -->|"controle/onderzoek"| Q10
+
+    Q10["V10 · Is de controle of het<br/>onderzoek bijzonder ingrijpend?"]:::Q
+    Q10 -->|"Nee — alleen Pad A"| SADM_INSP["❌ Geen<br/>(Pad A slaat V12 over)"]:::oNone
+    Q10 -->|"Ja — ingrijpend"| Q12HIGH
+    Q10 -->|"Nee — niet ingrijpend"| Q12INSP
+
+    Q12PRIO["V12 · Effect op de uitkomst?<br/>— prioritering —"]:::Q
+    Q12PRIO -->|"direct / deels<br/>Pad B"| ALGO_PRIO["✅ Algoritme"]:::cat_algo
+    Q12PRIO -->|"direct / deels<br/>Pad C"| AIALGO_PRIO["✅ AI + Algoritme"]:::cat_ai
+    Q12PRIO -->|"volledig menselijk / anders<br/>Pad B"| NONE_PRIO["❌ Geen"]:::oNone
+    Q12PRIO -->|"volledig menselijk / anders<br/>Pad C"| AI_PRIO["✅ AI-systeem"]:::cat_ai
+
+    Q12INSP["V12 · Effect op de uitkomst?<br/>— niet-ingrijpend onderzoek —"]:::Q
+    Q12INSP -->|"direct / deels<br/>Pad B"| ALGO_INSP["✅ Algoritme"]:::cat_algo
+    Q12INSP -->|"direct / deels<br/>Pad C"| AIALGO_INSP["✅ AI + Algoritme"]:::cat_ai
+    Q12INSP -->|"volledig menselijk / anders<br/>Pad B"| NONE_INSP["❌ Geen"]:::oNone
+    Q12INSP -->|"volledig menselijk / anders<br/>Pad C"| AI_INSP["✅ AI-systeem"]:::cat_ai
+
+    Q12HIGH["V12 · Effect op de uitkomst?<br/>— hoog-impactvolle beslissingen —"]:::Q
+    Q12HIGH -->|"bepaalt direct"| OUT_DIRECT["Pad A → 💡 sADM<br/>Pad B → ✅ Algoritme + 💡 sADM<br/>Pad C → ✅ AI + Algoritme + 💡 sADM"]:::cat_sadm
+    Q12HIGH -->|"beïnvloedt deels"| OUT_PARTIAL["Pad A → ❌ Geen<br/>Pad B → ✅ Algoritme<br/>Pad C → ✅ AI + Algoritme"]:::cat_algo
+    Q12HIGH -->|"volledig menselijk / anders"| OUT_HUMAN["Pad A → ❌ Geen<br/>Pad B → ❌ Geen<br/>Pad C → ✅ AI-systeem"]:::cat_ai
