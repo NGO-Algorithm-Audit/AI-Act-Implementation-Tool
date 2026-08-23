@@ -68,6 +68,63 @@
         "title": "6) Documenteer eventuele specifieke eisen en/of randvoorwaarden die vanuit wet- en regelgeving en/of relevante (beleids)kaders gelden voor het betreffende besluitvormingsproces.",
         "default": ""
       },
+      "q3-betrokkenen-identificeren": {
+        "type": "string",
+        "title": "1) Identificeer relevante betrokkenen binnen en buiten de overheidsinstelling.",
+        "default": ""
+      },
+      "q3-representatieve-groep": {
+        "type": "string",
+        "title": "2) Betrek een representatieve groep van betrokkenen om ten minste de belangen van betrokken te identificeren (stap 3), de alternatieve instrumenten in kaart te brengen en te beoordelen (6.5) en de voorlopige afweging te maken (6.6). Zorg ervoor dat het burgerbelang effectief wordt behartigd, door bijvoorbeeld het betrekken van medezeggenschapsorganen voor burgers, ombudsfuncties, burgerrechtenorganisaties of onafhankelijk wetenschappelijk onderzoek.",
+        "default": ""
+      },
+      "q3-belangen-documenteren": {
+        "type": "string",
+        "title": "3) Identificeer en documenteer de belangen van betrokkenen bij het besluitvormingsproces.",
+        "default": ""
+      },
+      "q4-instrumenten": {
+        "type": "string",
+        "title": "1) Inventariseer en beschrijf beschikbare (beleids)instrumenten om de doelstelling(en) van het besluitvormingsproces te behalen.",
+        "default": ""
+      },
+      "q4-oorzaak-gevolg": {
+        "type": "string",
+        "title": "2) Beschrijf welke oorzaak-gevolgrelatie er is tussen de instrumenten en de beoogde doelstelling.",
+        "default": ""
+      },
+      "q4-beoordeling": {
+        "type": "array",
+        "title": "3) Beschrijf voor de alternatieve mogelijkheden beschreven in stap 1):",
+        "items": {
+          "type": "string",
+          "default": ""
+        },
+        "default": [
+          "",
+          ""
+        ]
+      },
+      "q4-rangorde": {
+        "type": "string",
+        "title": "4) Breng een rangorde aan in de onder stap 3) geïdentificeerde alternatieve instrumenten en profileringsalgoritme op basis van de verwachte prestaties, benodigde inzet en impact (zowel positief als negatief) op betrokkenen.",
+        "default": ""
+      },
+      "q5-selectie-opties": {
+        "type": "string",
+        "title": "1) Selecteer op basis van de rangorde van alternatieve instrumenten uit 6.5 welke opties zullen worden onderzocht. Documenteer de geselecteerde opties en de motivatie.",
+        "default": ""
+      },
+      "q5-onderzoeken-waard": {
+        "type": "string",
+        "title": "2) Documenteer op basis van de overwegingen in dit hoofdstuk waarom de inzet van een profileringsalgoritme het onderzoeken waard is.",
+        "default": ""
+      },
+      "q5-minder-ingrijpend": {
+        "type": "string",
+        "title": "3) Beschrijf hoe het profileringsalgoritme zich verhoudt tot minder ingrijpende instrumenten, waarbij geen profilering wordt toegepast (zoals een aselecte steekproef). Wanneer er geen instrumenten zonder profilering worden onderzocht, onderbouw waarom deze instrumenten geen geschikte alternatieven zijn om het geïdentificeerde probleem op te lossen.",
+        "default": ""
+      },
       "output": {
         "type": "string",
         "title": "Resultaat",
@@ -80,7 +137,7 @@
       "ui:widget": "textarea",
       "ui:id": "q1",
       "ui:group": "fase1-probleemanalyse",
-      "ui:groupTitle": "6.1 Probleemanalyse"
+      "ui:groupTitle": "6.2 Probleemanalyse"
     },
     "q1-oorzaken": {
       "ui:widget": "textarea",
@@ -112,7 +169,7 @@
       "ui:widget": "textarea",
       "ui:id": "q2",
       "ui:group": "fase1-doel",
-      "ui:groupTitle": "6.2 Doel besluitvormingsproces",
+      "ui:groupTitle": "6.3 Doel besluitvormingsproces",
       "ui:description": "Denk aan: jaarplan, ethisch kompas, ambtseed, enz. Onderscheid hierbij maatschappelijk doelen, organisatiedoelen en procesdoelen. Beoordeel of de doelen niet op zichzelf discriminerend of in strijd met de wet zijn.",
       "ui:descriptionStyle": "plain"
     },
@@ -137,6 +194,76 @@
       "ui:group": "fase1-doel",
       "ui:descriptionStyle": "plain",
       "ui:alertDescription": "Als het besluitvormingsproces wordt gebruikt voor toezicht- of handhavingsdoeleinden is extra zorgvuldigheid vereist. Handhavingsbeleid kan verschillende doelen dienen, zoals correctie en herstel van wetsovertredingen of het stimuleren van een bepaalde gedragsverandering. In het geval van een stimulatie van gedragsverandering moet er worden beschreven hoe verwacht wordt dat handhaving het gewenste gedrag gaat stimuleren en of er andere (minder repressieve) middelen zijn, bijvoorbeeld gericht op preventie, om deze gedragsverandering te realiseren."
+    },
+    "q3-betrokkenen-identificeren": {
+      "ui:widget": "textarea",
+      "ui:id": "q3",
+      "ui:group": "fase1-belangen",
+      "ui:groupTitle": "6.4 Belangen van betrokkenen"
+    },
+    "q3-representatieve-groep": {
+      "ui:widget": "textarea",
+      "ui:group": "fase1-belangen"
+    },
+    "q3-belangen-documenteren": {
+      "ui:widget": "textarea",
+      "ui:group": "fase1-belangen"
+    },
+    "q4-instrumenten": {
+      "ui:widget": "textarea",
+      "ui:id": "q4",
+      "ui:group": "fase1-alternatieven",
+      "ui:groupTitle": "6.5 Alternatieve instrumenten",
+      "ui:groupIntro": "Beschrijf op onderstaande wijze alternatieve instrumenten die kunnen helpen om het doel van het besluitvormingsproces te realiseren. Betrek hierbij de uitkomsten van 6.2 t/m 6.4.",
+      "ui:description": "Kijk hierbij naar de maatschappelijke, organisatie- en procesdoelen. Bekijk ten minste: alternatieve werkwijzen of aanpassing van het besluitvormingsproces (zonder toepassing van een profileringsalgoritme); het gebruik van een aselecte steekproef; het acteren op basis van externe signalen of meldingen.",
+      "ui:descriptionStyle": "plain"
+    },
+    "q4-oorzaak-gevolg": {
+      "ui:widget": "textarea",
+      "ui:group": "fase1-alternatieven"
+    },
+    "q4-beoordeling": {
+      "ui:group": "fase1-alternatieven",
+      "ui:bullets": [
+        "In hoeverre deze alternatieve middelen bijdragen aan het beoogde doel(en) en/of subdoel(en) van het besluitvormingsproces.",
+        "Of hierbij profilering wordt toegepast en in welke mate dit leidt tot een eventuele inbreuk op belangen of rechten van betrokkenen.",
+        "Welke inzet van de organisatie of maatschappij vereist is, zoals middelen, infrastructuur, beleids- of wetswijziging."
+      ],
+      "items": {
+        "ui:widget": "ListItemTextareaWidget",
+        "ui:label": false,
+        "ui:options": {
+          "rows": 1,
+          "itemPlaceholderPrefix": "Alternatief"
+        }
+      }
+    },
+    "q4-rangorde": {
+      "ui:widget": "PlainTextWidget",
+      "ui:group": "fase1-alternatieven",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Het kan zijn dat in deze oriëntatiefase naar de wenselijkheid en noodzakelijkheid van inzet van een profileringsalgoritme de prestaties en impact van het profileringsalgoritme en andere middelen niet nauwkeurig kunnen worden bepaald. Het doel van deze stap is om de verwachte positieve en negatieve impact van overwogen methoden op hoofdlijnen in te schatten en zo een afweging te kunnen maken welke methode het meest zinvol is om nader uit te werken. Methoden om de prestaties en impact van een profileringsalgoritme exact te bepalen, staan in 7.8."
+    },
+    "q5-selectie-opties": {
+      "ui:widget": "textarea",
+      "ui:id": "q5",
+      "ui:group": "fase1-voorlopige-afweging",
+      "ui:groupTitle": "6.6 Voorlopige afweging",
+      "ui:groupIntro": "Weeg op basis van de voorgaande stappen voorlopig af of de inzet van een profileringsalgoritme het onderzoeken waard is.",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Als de conclusie van deze stap is dat een profileringsalgoritme niet een van de geselecteerde opties is, dan is de rest van deze NTA niet van toepassing."
+    },
+    "q5-onderzoeken-waard": {
+      "ui:widget": "textarea",
+      "ui:group": "fase1-voorlopige-afweging",
+      "ui:description": "Voor het onderzoek naar het profileringsalgoritme is deze NTA van toepassing.",
+      "ui:descriptionStyle": "plain"
+    },
+    "q5-minder-ingrijpend": {
+      "ui:widget": "textarea",
+      "ui:group": "fase1-voorlopige-afweging",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Voor het maken van deze voorlopige afweging kan gebruik worden gemaakt van verschillende instrumenten zoals het Impact Assessment Mensenrechten en Algoritmes. Het gebruik van dit instrument kan helpen om de ethische aspecten van het gebruik van een profileringsalgoritme in kaart te brengen."
     }
   }
 }

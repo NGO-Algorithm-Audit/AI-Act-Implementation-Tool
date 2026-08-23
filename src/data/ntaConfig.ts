@@ -4,7 +4,7 @@ export interface NtaItem {
    * src/schemas/nta/{en,nl}/<key>.json.
    */
   key: string;
-  /** Translation key for the short badge name (e.g. "Fase 1") */
+  /** Translation key for the short badge name (e.g. "Hoofdstuk 6") */
   nameKey: string;
   /** Translation key for the title shown on the NTA overview screen */
   titleKey: string;

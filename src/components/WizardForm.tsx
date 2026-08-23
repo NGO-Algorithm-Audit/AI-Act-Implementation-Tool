@@ -25,6 +25,11 @@ import TooltipRadioWidget from "./widgets/TooltipRadioWidget";
 import IntroWidget from "./widgets/IntroWidget";
 import RoleStatusIntroWidget from "./widgets/RoleStatusIntroWidget";
 import RiskClassificationIntroWidget from "./widgets/RiskClassificationIntroWidget";
+import {
+  ArrayFieldTemplate,
+  ArrayFieldItemTemplate,
+  ListItemTextareaWidget,
+} from "./templates/DraggableArrayFieldTemplate";
 import { useTranslation } from "react-i18next";
 
 function PlainTextWidget({ value }: { value: string }) {
@@ -201,6 +206,7 @@ const tooltipWidgets = {
   CheckboxesWidget: TooltipCheckboxesWidget,
   RadioWidget: TooltipRadioWidget,
   PlainTextWidget,
+  ListItemTextareaWidget,
   IntroWidget,
   RoleStatusIntroWidget,
   RiskClassificationIntroWidget,
@@ -836,11 +842,22 @@ const WizardForm = ({
                 {uiSchema?.[questions[0]]?.["ui:groupTitle"] as string}
               </h5>
             )}
+            {/* Body text under the section subtitle (see `ui:groupIntro`). */}
+            {!!uiSchema?.[questions[0]]?.["ui:groupIntro"] && (
+              <p className="mb-3">
+                {uiSchema?.[questions[0]]?.["ui:groupIntro"] as string}
+              </p>
+            )}
             <Form
               schema={currentStepSchema as RJSFSchema}
               uiSchema={uiSchema}
               widgets={tooltipWidgets}
-              templates={{ FieldTemplate, DescriptionFieldTemplate }}
+              templates={{
+                FieldTemplate,
+                DescriptionFieldTemplate,
+                ArrayFieldTemplate,
+                ArrayFieldItemTemplate,
+              }}
               // For checkbox questions (e.g. Identification Q1), suppress the
               // error summary box on an empty submit. The inline field errors
               // ("must NOT have fewer than 1 items", "This field is required")
@@ -884,6 +901,20 @@ const WizardForm = ({
               {/* tag with question ID */}
               <div style={{ display: "inline-block", marginTop: "8px" }}>
                 {(() => {
+                  // Grouped steps (`ui:group`, used by the NTA questionnaires)
+                  // are cited by their NTA section — "6.2 Probleemanalyse" —
+                  // so the section title is the id, without a chapter prefix
+                  // or a Q<n> counter.
+                  const groupTitle = uiSchema?.[questions[0]]?.[
+                    "ui:groupTitle"
+                  ] as string | undefined;
+                  if (groupTitle) {
+                    return (
+                      <span className="badge badge-secondary me-1">
+                        id: {groupTitle}
+                      </span>
+                    );
+                  }
                   const rawSuffix =
                     (uiSchema?.[questions[0]]?.["ui:id"] as string | undefined) ??
                     questions[0];

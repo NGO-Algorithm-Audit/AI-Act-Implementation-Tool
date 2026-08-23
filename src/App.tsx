@@ -160,7 +160,8 @@ export default function App() {
   const activeNtaSchema: RJSFSchema | null = activeNtaKey
     ? ntaForms[i18n.language]?.[activeNtaKey] ?? null
     : null;
-  // Each NTA sub-questionnaire carries its own phase tag ("Fase 1" / "Phase 1")
+  // Each NTA sub-questionnaire carries its own chapter tag ("Hoofdstuk 6" /
+  // "Chapter 6")
   // rather than the shared "NTA" tag.
   const activeNtaNameKey = activeNtaKey
     ? ntaItems.find((item) => item.key === activeNtaKey)?.nameKey
