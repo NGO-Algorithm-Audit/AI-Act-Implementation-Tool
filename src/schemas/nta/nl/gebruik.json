@@ -5,177 +5,177 @@
     "properties": {
       "q1-informatie-beoordeling": {
         "type": "string",
-        "title": "1) Leg vast op basis van welke informatie een beslismedewerker een zaak moet beoordelen.",
+        "title": "1) Leg vast welke informatie een beslismedewerker gebruikt bij het beoordelen van een zaak.",
         "default": ""
       },
       "q1-vastleggen-beslissing": {
         "type": "string",
-        "title": "2) Zorg ervoor dat de beslismedewerker vastlegt welke beslissing is genomen, op basis van welke informatie tot deze beslissing is gekomen en hoe deze beslissing is onderbouwd binnen het besluitvormingsproces.",
+        "title": "2) Beschrijf hoe de beslismedewerker vastlegt welke beslissing is genomen, welke informatie daaraan ten grondslag lag en hoe die beslissing binnen het besluitvormingsproces is onderbouwd.",
         "default": ""
       },
       "q1-voldoende-informatie": {
         "type": "string",
-        "title": "3) Zorg ervoor dat de beslismedewerker beschikt over voldoende informatie om een weloverwogen beslissing te nemen.",
+        "title": "3) Beschrijf hoe is geborgd dat een beslismedewerker genoeg informatie heeft om weloverwogen te beslissen.",
         "default": ""
       },
       "q1-gelijke-behandeling": {
         "type": "string",
-        "title": "4) Zorg ervoor dat alle betrokkenen die een vervolgactie van het profileringsalgoritme ondervinden in gelijke gevallen op dezelfde manier worden behandeld.",
+        "title": "4) Beschrijf hoe is geborgd dat gelijke gevallen gelijk worden behandeld, ook wanneer het profileringsalgoritme een vervolgactie in gang zet.",
         "default": ""
       },
       "q1-misclassificatie": {
         "type": "string",
-        "title": "5) Zorg ervoor dat er een procedure bestaat voor hoe er moet worden gehandeld als een zaak of persoon verkeerd is geclassificeerd (dus bij foutpositieven en foutnegatieven).",
+        "title": "5) Leg de procedure vast voor het handelen bij een verkeerd geclassificeerde zaak of persoon, dus bij foutpositieven en foutnegatieven.",
         "default": ""
       },
       "q1-kennis-algoritme": {
         "type": "string",
-        "title": "6) Leg vast of de beslismedewerker kennis moet hebben van het gebruik van een profileringsalgoritme voor betekenisvolle menselijke controle.",
+        "title": "6) Bepaal en leg vast of een beslismedewerker moet weten dat een profileringsalgoritme is gebruikt, met het oog op betekenisvolle menselijke controle.",
         "default": ""
       },
       "q1-neutrale-presentatie": {
         "type": "string",
-        "title": "7) Presenteer een zaak zo neutraal mogelijk aan beslismedewerkers, bijvoorbeeld zonder kleurcodes of toegekende risicocategorieën.",
+        "title": "7) Beschrijf hoe een zaak zo neutraal mogelijk aan beslismedewerkers wordt getoond, dus zonder kleurcodes of toegekende risicocategorieën.",
         "default": ""
       },
       "q1-feedback": {
         "type": "string",
-        "title": "8) Zorg ervoor dat beslismedewerkers de mogelijkheid hebben om feedback te geven over aan hen voorgelegde zaken.",
+        "title": "8) Beschrijf hoe beslismedewerkers feedback kunnen geven op de zaken die hun worden voorgelegd.",
         "default": ""
       },
       "q1-specifieke-omstandigheden": {
         "type": "string",
-        "title": "9) Zorg ervoor dat beslismedewerkers specifieke omstandigheden kunnen meenemen in hun beoordeling die het profileringsalgoritme niet meeweegt.",
+        "title": "9) Beschrijf hoe beslismedewerkers omstandigheden kunnen meewegen die het profileringsalgoritme buiten beschouwing laat.",
         "default": ""
       },
       "q1-hulp-vragen": {
         "type": "string",
-        "title": "10) Zorg ervoor dat beslismedewerkers de mogelijkheid hebben om elkaar of een leidinggevende om hulp te vragen.",
+        "title": "10) Beschrijf hoe beslismedewerkers een collega of leidinggevende om hulp kunnen vragen.",
         "default": ""
       },
       "q1-geen-invloed": {
         "type": "string",
-        "title": "11) Zorg ervoor dat geselecteerden geen invloed hebben op het besluitvormingsproces en het toekennen van labels door het profileringsalgoritme of beslissingen door de beslismedewerker.",
+        "title": "11) Beschrijf hoe is uitgesloten dat geselecteerde personen invloed uitoefenen op het besluitvormingsproces, op de labels die het profileringsalgoritme toekent of op de beslissing van de beslismedewerker.",
         "default": ""
       },
       "q1-kwaliteitscontroles": {
         "type": "string",
-        "title": "12) Zorg ervoor dat er kwaliteitscontroles plaatsvinden op het werk van beslismedewerkers, bijvoorbeeld met een vierogenprincipe en met monitoring.",
+        "title": "12) Beschrijf welke kwaliteitscontroles op het werk van beslismedewerkers plaatsvinden, bijvoorbeeld een vierogenprincipe of monitoring.",
         "default": ""
       },
       "q1-bewustzijn-gevolgen": {
         "type": "string",
-        "title": "13) Zorg ervoor dat de beslismedewerker zich bewust is van de (financiële) gevolgen van een besluit en de impact op betrokkenen.",
+        "title": "13) Beschrijf hoe beslismedewerkers doordrongen zijn van wat een besluit financieel en anderszins betekent voor de betrokkene.",
         "default": ""
       },
       "q1-opleiding": {
         "type": "string",
-        "title": "14) Zorg voor de opleiding van beslismedewerkers, waarbij aandacht is voor onbewuste vooroordelen, culturele sensitiviteit en cognitieve vooringenomenheid.",
+        "title": "14) Beschrijf de opleiding van beslismedewerkers, met aandacht voor onbewuste vooroordelen, cognitieve vooringenomenheid en culturele sensitiviteit.",
         "default": ""
       },
       "q2-verhouding": {
         "type": "string",
-        "title": "1) Stel het aantal betrokkenen vast waarvoor het besluitvormingsproces doorlopen wordt en bepaal een passende verhouding tussen betrokkenen die aselect worden geselecteerd en betrokkenen die worden geselecteerd door het profileringsalgoritme.",
+        "title": "1) Bepaal voor hoeveel betrokkenen het besluitvormingsproces wordt doorlopen en kies een passende verhouding tussen aselect geselecteerde betrokkenen en betrokkenen die het profileringsalgoritme aanwijst.",
         "default": ""
       },
       "q2-signalen": {
         "type": "string",
-        "title": "2) Richt een werkproces met handelingsopties in zodat signalen over mogelijke discriminatie als gevolg van het besluitvormingsproces en/of het profileringsalgoritme worden opgepakt en behandeld.",
+        "title": "2) Richt een werkproces met handelingsopties in waarmee signalen van mogelijke discriminatie door het besluitvormingsproces of het profileringsalgoritme worden opgepakt en afgehandeld.",
         "default": ""
       },
       "q2-klachtonderzoek": {
         "type": "string",
-        "title": "3) Beschrijf hoe bij een klacht van discriminatie in individuele gevallen aanvullend onderzoek plaatsvindt om uit te sluiten dat dit onderscheid objectief gerechtvaardigd was.",
+        "title": "3) Beschrijf welk aanvullend onderzoek volgt op een klacht over discriminatie in een individueel geval, om uit te sluiten dat het gemaakte onderscheid objectief gerechtvaardigd was.",
         "default": ""
       },
       "q2-bezwaar-beroep": {
         "type": "string",
-        "title": "4) Richt een proces in voor bezwaar en beroep als er sprake is van een formeel besluit volgens de Awb. Als dat er niet is, moet een klachtenprocedure worden ingericht.",
+        "title": "4) Richt bezwaar en beroep in wanneer het om een formeel besluit in de zin van de Awb gaat; is dat niet zo, zorg dan voor een klachtenprocedure.",
         "default": ""
       },
       "q3-informeren": {
         "type": "string",
-        "title": "1) Beschrijf hoe betrokkenen in begrijpelijke taal worden geïnformeerd wanneer het profileringsalgoritme een rol heeft gespeeld in (de voorbereiding van) een besluitvormingsproces, bijvoorbeeld in een privacystatement of in brieven (besluiten).",
+        "title": "1) Beschrijf hoe betrokkenen in begrijpelijke taal te horen krijgen dat het profileringsalgoritme een rol heeft gespeeld bij (de voorbereiding van) een besluit, bijvoorbeeld via een privacystatement of in de brief met het besluit.",
         "default": ""
       },
       "q3-publicatie": {
         "type": "string",
-        "title": "2) Beschrijf waar informatie over het profileringsalgoritme wordt gepubliceerd, bijvoorbeeld op de eigen website van de overheidsinstelling of in het landelijke Algoritmeregister.",
+        "title": "2) Beschrijf waar informatie over het profileringsalgoritme openbaar wordt gemaakt, bijvoorbeeld op de eigen website of in het landelijke Algoritmeregister.",
         "default": ""
       },
       "q4-frequentie": {
         "type": "string",
-        "title": "1) Stel de frequentie vast waarop periodiek moet worden geëvalueerd en gemonitord.",
+        "title": "1) Bepaal hoe vaak evaluatie en monitoring plaatsvinden.",
         "default": ""
       },
       "q4-werkwijze": {
         "type": "string",
-        "title": "2) Leg vast hoe de evaluatie en monitoring worden uitgevoerd en gedocumenteerd.",
+        "title": "2) Leg vast op welke manier evaluatie en monitoring plaatsvinden en hoe de resultaten worden gedocumenteerd.",
         "default": ""
       },
       "q4-evaluatierapport": {
         "type": "string",
-        "title": "3) Voer periodiek een evaluatie uit en stel een rapport op waarin de evaluatie wordt vastgelegd.",
+        "title": "3) Voer de evaluatie periodiek uit en leg de uitkomsten vast in een rapport.",
         "default": ""
       },
       "q4-ad-hoc": {
         "type": "string",
-        "title": "4) Bepaal welke signalen of factoren aanleiding geven tot het uitvoeren van een ad-hocevaluatie, bijvoorbeeld bij wijzigingen in wet- en regelgeving, signalen van een meldpunt of concrete wijzigingen in de referentiepopulatie.",
+        "title": "4) Bepaal welke signalen of factoren aanleiding zijn voor een ad-hocevaluatie, bijvoorbeeld gewijzigde wet- en regelgeving, meldingen bij een meldpunt of aantoonbare veranderingen in de referentiepopulatie.",
         "default": ""
       },
       "q4-feedback": {
         "type": "string",
-        "title": "5) Zorg ervoor dat het profileringsalgoritme wordt aangepast naar aanleiding van feedback van beslismedewerkers, betrokkenen, andere medewerkers of monitoring.",
+        "title": "5) Beschrijf hoe het profileringsalgoritme wordt bijgesteld naar aanleiding van monitoring of van feedback van beslismedewerkers, betrokkenen en andere medewerkers.",
         "default": ""
       },
       "q4-risicobeheersing": {
         "type": "string",
-        "title": "6) Evalueer en documenteer de effectiviteit en actualiteit van de organisatorische risicobeheersing, inclusief de toegewezen rollen en verantwoordelijkheden, procesbeschrijving en risicoanalyse.",
+        "title": "6) Evalueer en documenteer of de organisatorische risicobeheersing nog effectief en actueel is, inclusief de belegde rollen en verantwoordelijkheden, de procesbeschrijving en de risicoanalyse.",
         "default": ""
       },
       "q4-context": {
         "type": "string",
-        "title": "7) Evalueer of de context waarin het profileringsalgoritme wordt toegepast is gewijzigd.",
+        "title": "7) Ga na of de context waarin het profileringsalgoritme wordt gebruikt is veranderd.",
         "default": ""
       },
       "q4-herziening": {
         "type": "string",
-        "title": "8) Beoordeel of deze veranderingen aanleiding geven tot herziening van het algoritmebeleid (zie 5.3.1 van de NTA), het besluitvormingsproces of de inzet/uitwerking van het profileringsalgoritme.",
+        "title": "8) Beoordeel of die veranderingen reden zijn om het besluitvormingsproces, de opzet en inzet van het profileringsalgoritme of het algoritmebeleid (zie 5.3.1 van de NTA) te herzien.",
         "default": ""
       },
       "q4-uitkomsten": {
         "type": "string",
-        "title": "9) Documenteer de uitkomsten en eventuele beslissingen, zoals het wel of niet doorvoeren van aanpassingen aan het profileringsalgoritme, en stel indien nodig een actielijst op voor aanpassingen.",
+        "title": "9) Leg de uitkomsten en de genomen beslissingen vast — bijvoorbeeld of het profileringsalgoritme wel of niet wordt aangepast — en stel zo nodig een actielijst op.",
         "default": ""
       },
       "q5-datakwaliteit": {
         "type": "string",
-        "title": "1) Monitor de kwaliteit van de gebruikte data zoals beschreven in 7.3.2.",
+        "title": "1) Monitor of de gebruikte data van voldoende kwaliteit blijven, langs de lijnen van 7.3.2.",
         "default": ""
       },
       "q5-afwijkingen": {
         "type": "string",
-        "title": "2) Zorg ervoor dat met monitoring kan worden vastgesteld hoe vaak de beslissing van de beslismedewerkers overeenkomt met de voorspelling van het profileringsalgoritme en hoe vaak beslismedewerkers van de voorspelling afwijken.",
+        "title": "2) Richt de monitoring zo in dat zichtbaar wordt hoe vaak de beslismedewerker de voorspelling van het profileringsalgoritme volgt en hoe vaak daarvan wordt afgeweken.",
         "default": ""
       },
       "q5-data-drift": {
         "type": "string",
-        "title": "3) Monitor de 'data drift' door de gemiddelden of frequenties van de profileringskenmerken en voorspellingen voor de doelvariabele over tijd te monitoren.",
+        "title": "3) Volg de 'data drift': kijk hoe de verdeling van de profileringskenmerken en van de voorspelde doelvariabele zich over de tijd ontwikkelt.",
         "default": ""
       },
       "q5-prestaties": {
         "type": "string",
-        "title": "4) Monitor de prestaties van het profileringsalgoritme ten opzichte van de aselecte steekproef, zoals beschreven in 7.7.2.",
+        "title": "4) Vergelijk de prestaties van het profileringsalgoritme periodiek met die van de aselecte steekproef, volgens 7.7.2.",
         "default": ""
       },
       "q5-onderscheid": {
         "type": "string",
-        "title": "5) Monitor het onderscheid van het profileringsalgoritme zoals beschreven in 7.7.3.",
+        "title": "5) Meet periodiek het onderscheid dat het profileringsalgoritme maakt, volgens 7.7.3.",
         "default": ""
       },
       "q6-herevaluatie": {
         "type": "string",
-        "title": "1) Doorloop op basis van de resultaten uit 9.3.2 en 9.3.3 opnieuw de toetsing in 8.4 en documenteer de uitkomst.",
+        "title": "1) Doorloop de juridische toets uit 8.4 opnieuw op basis van de resultaten van 9.3.2 en 9.3.3, en leg de uitkomst vast.",
         "default": ""
       },
       "output": {
@@ -191,7 +191,7 @@
       "ui:id": "q1",
       "ui:group": "gebruik-werkinstructies",
       "ui:groupTitle": "9.2.1 Duidelijke werkinstructies en consistente uitkomsten",
-      "ui:groupIntro": "Als in hoofdstuk 8 door de toetsing, verificatie en validatie is bepaald dat het profileringsalgoritme wenselijk, geschikt en toegestaan is, kan het worden geïmplementeerd in de praktijk. Bij het in gebruik nemen kunnen nieuwe risico's ontstaan; de processen rondom het gebruik en de besluitvorming moeten daarom duidelijk zijn. Er moeten duidelijke werkinstructies zijn voor de beslismedewerker die als onderdeel van het besluitvormingsproces een beslissing neemt, als er sprake is van een handmatige beoordeling, onder meer op basis van de voorspellingen van het profileringsalgoritme."
+      "ui:groupIntro": "Blijkt uit hoofdstuk 8 — toetsing, verificatie en validatie — dat inzet van het profileringsalgoritme wenselijk is, dat het geschikt is en dat het is toegestaan, dan kan het in de praktijk worden ingevoerd. Ingebruikname brengt nieuwe risico's met zich mee, dus de processen rond gebruik en besluitvorming moeten helder zijn. Neemt een beslismedewerker in het besluitvormingsproces een handmatige beslissing, mede op basis van de voorspelling van het algoritme, dan zijn duidelijke werkinstructies nodig."
     },
     "q1-vastleggen-beslissing": {
       "ui:widget": "textarea",
@@ -200,13 +200,13 @@
     "q1-voldoende-informatie": {
       "ui:widget": "textarea",
       "ui:group": "gebruik-werkinstructies",
-      "ui:description": "Stel vast welke gegevens en bronnen een beslismedewerker mag raadplegen, volgens de verwerkingen die zijn opgenomen in de voor dit besluitvormingsproces opgestelde DPIA. De handmatige beoordeling van individuen mag niet afhangen van de uitkomst van het profileringsalgoritme.",
+      "ui:description": "Bepaal tot welke gegevens en bronnen een beslismedewerker toegang heeft, binnen de verwerkingen die de DPIA voor dit besluitvormingsproces beschrijft. De handmatige beoordeling van een individu mag niet afhangen van wat het profileringsalgoritme voorspelt.",
       "ui:descriptionStyle": "plain"
     },
     "q1-gelijke-behandeling": {
       "ui:widget": "textarea",
       "ui:group": "gebruik-werkinstructies",
-      "ui:description": "Hiervoor is het van belang dat er tijdens de behandeling geen verdere ongedocumenteerde (handmatige) selectie plaatsvindt die kan duiden op verdere profilering, bijvoorbeeld door op basis van gedrags- of dossierkenmerken aanvullend documentenonderzoek uit te voeren.",
+      "ui:description": "Van belang is dat tijdens de behandeling geen ongedocumenteerde handmatige selectie plaatsvindt die op aanvullende profilering wijst, zoals extra documentenonderzoek dat wordt gestart op grond van gedrags- of dossierkenmerken.",
       "ui:descriptionStyle": "plain"
     },
     "q1-misclassificatie": {
@@ -216,7 +216,7 @@
     "q1-kennis-algoritme": {
       "ui:widget": "textarea",
       "ui:group": "gebruik-werkinstructies",
-      "ui:description": "Als het niet strikt noodzakelijk is om de beslismedewerker te informeren hoe een zaak is geselecteerd, bijvoorbeeld door middel van een profileringsalgoritme of op basis van een aselecte steekproef, heeft het de voorkeur om dit niet kenbaar te maken om conformisme van beslismedewerkers met het advies van het profileringsalgoritme te voorkomen.",
+      "ui:description": "Is het niet strikt nodig dat de beslismedewerker weet hoe een zaak is geselecteerd — via het profileringsalgoritme of via een aselecte steekproef — dan verdient het de voorkeur dat niet te delen. Zo wordt voorkomen dat medewerkers het advies van het algoritme klakkeloos volgen.",
       "ui:descriptionStyle": "plain"
     },
     "q1-neutrale-presentatie": {
@@ -251,27 +251,27 @@
       "ui:widget": "textarea",
       "ui:group": "gebruik-werkinstructies",
       "ui:descriptionStyle": "plain",
-      "ui:alertDescription": "Een uitgebreidere toelichting over de werkinstructies voor beslismedewerkers kan worden gevonden in Handvatten betekenisvolle menselijke tussenkomst van de Autoriteit Persoonsgegevens.\n\nEen beslissing van een mens kan ondanks bovengenoemde maatregelen alsnog leiden tot bevooroordeelde besluitvorming. Het toevoegen van menselijke tussenkomst betekent niet noodzakelijkerwijs dat de beslissing eerlijk is."
+      "ui:alertDescription": "De Autoriteit Persoonsgegevens geeft in Handvatten betekenisvolle menselijke tussenkomst een uitgebreidere toelichting op werkinstructies voor beslismedewerkers.\n\nOok met al deze maatregelen kan een menselijk oordeel bevooroordeeld uitpakken: menselijke tussenkomst toevoegen maakt een beslissing niet automatisch eerlijk."
     },
     "q2-verhouding": {
       "ui:widget": "textarea",
       "ui:id": "q2",
       "ui:group": "gebruik-selectie",
       "ui:groupTitle": "9.2.2 Selectie voor besluitvormingsproces",
-      "ui:groupIntro": "Leg vast hoe de selectie voor het besluitvormingsproces tot stand komt en hoe signalen over mogelijke discriminatie worden opgepakt.",
-      "ui:description": "Houd hierbij rekening met de benodigde steekproefgrootte, zie bijlage C van de NTA.",
+      "ui:groupIntro": "Beschrijf op welke wijze betrokkenen voor het besluitvormingsproces worden geselecteerd en wat er gebeurt met signalen die op discriminatie kunnen wijzen.",
+      "ui:description": "Betrek daarbij de steekproefgrootte die nodig is; bijlage C van de NTA geeft hiervoor handvatten.",
       "ui:descriptionStyle": "plain"
     },
     "q2-signalen": {
       "ui:widget": "textarea",
       "ui:group": "gebruik-selectie",
       "ui:descriptionStyle": "plain",
-      "ui:alertDescription": "Voor het opstellen van een protocol kan gebruik worden gemaakt van het discriminatieprotocol opgesteld door het Ministerie van Binnenlandse Zaken en Koninkrijksrelaties."
+      "ui:alertDescription": "Bij het opstellen van zo'n protocol kan het discriminatieprotocol van het Ministerie van Binnenlandse Zaken en Koninkrijksrelaties als basis dienen."
     },
     "q2-klachtonderzoek": {
       "ui:widget": "textarea",
       "ui:group": "gebruik-selectie",
-      "ui:description": "Statistieken of gegevens over groepen zijn geen onderbouwing van de objectieve rechtvaardiging van het onderscheid op individueel niveau.",
+      "ui:description": "Cijfers over groepen onderbouwen niet dat het onderscheid in een individueel geval objectief gerechtvaardigd is.",
       "ui:descriptionStyle": "plain"
     },
     "q2-bezwaar-beroep": {
@@ -283,20 +283,20 @@
       "ui:id": "q3",
       "ui:group": "gebruik-transparantie",
       "ui:groupTitle": "9.2.3 Transparantieverplichtingen",
-      "ui:groupIntro": "De overheidsinstelling moet voldoende transparant zijn over het gebruik van een profileringsalgoritme in het besluitvormingsproces richting betrokkenen."
+      "ui:groupIntro": "Richting betrokkenen is transparantie nodig over de rol die het profileringsalgoritme in het besluitvormingsproces speelt."
     },
     "q3-publicatie": {
       "ui:widget": "textarea",
       "ui:group": "gebruik-transparantie",
       "ui:descriptionStyle": "plain",
-      "ui:alertDescription": "De AVG en Awb kunnen verplichten tot bepaalde vormen van transparantie, bijvoorbeeld in het geval van (geautomatiseerde) besluitvorming."
+      "ui:alertDescription": "Uit de AVG en de Awb kunnen concrete transparantieverplichtingen volgen, bijvoorbeeld bij (geautomatiseerde) besluitvorming."
     },
     "q4-frequentie": {
       "ui:widget": "textarea",
       "ui:id": "q4",
       "ui:group": "gebruik-monitoring-organisatie",
       "ui:groupTitle": "9.3.2 Monitoren op organisatorische waarborgen en veranderingen",
-      "ui:groupIntro": "Via monitoring wordt het profileringsalgoritme systematisch geëvalueerd gedurende de gehele fase van gebruik. Monitoring ondersteunt het waarborgen van effectiviteit, rechtmatigheid en actualiteit van het profileringsalgoritme en de context waarin het wordt toegepast. Stel voordat het profileringsalgoritme in gebruik wordt genomen vast wanneer en hoe het wordt geëvalueerd en gemonitord (stappen 1 t/m 4) en voer daarna periodiek de stappen 5 t/m 9 uit. Veranderingen in de toepassingscontext en wijzigingen in wet- en regelgeving moeten tijdens monitoring worden meegenomen."
+      "ui:groupIntro": "Monitoring houdt het profileringsalgoritme gedurende de hele gebruiksfase systematisch tegen het licht en helpt de effectiviteit, rechtmatigheid en actualiteit ervan — en van de context waarin het draait — te bewaken. Leg vóór ingebruikname vast wanneer en hoe er wordt geëvalueerd en gemonitord (stappen 1 tot en met 4); voer daarna de stappen 5 tot en met 9 periodiek uit. Neem daarbij ook veranderingen in de toepassingscontext en in wet- en regelgeving mee."
     },
     "q4-werkwijze": {
       "ui:widget": "textarea",
@@ -313,7 +313,7 @@
     "q4-feedback": {
       "ui:widget": "textarea",
       "ui:group": "gebruik-monitoring-organisatie",
-      "ui:description": "Let hierbij in het bijzonder op signalen die voortkomen uit bezwaar- en beroepsprocedures.",
+      "ui:description": "Besteed daarbij bijzondere aandacht aan wat uit bezwaar- en beroepsprocedures naar voren komt.",
       "ui:descriptionStyle": "plain"
     },
     "q4-risicobeheersing": {
@@ -323,7 +323,7 @@
     "q4-context": {
       "ui:widget": "textarea",
       "ui:group": "gebruik-monitoring-organisatie",
-      "ui:description": "Denk aan veranderingen in maatschappelijke omstandigheden die leiden tot wijzigingen in de (referentie)populatie, politieke prioriteiten, wet- en regelgeving, beleid, organisatorische structuur of toezichtvereisten.",
+      "ui:description": "Denk aan gewijzigde toezichtvereisten, een andere organisatiestructuur, nieuw beleid of nieuwe wetgeving, verschoven politieke prioriteiten, of maatschappelijke ontwikkelingen die de (referentie)populatie veranderen.",
       "ui:descriptionStyle": "plain"
     },
     "q4-herziening": {
@@ -339,7 +339,7 @@
       "ui:id": "q5",
       "ui:group": "gebruik-monitoring-prestaties",
       "ui:groupTitle": "9.3.3 Monitoren van prestaties en onderscheid",
-      "ui:groupIntro": "De prestaties en werking van het profileringsalgoritme moeten worden gemonitord. Voer hiervoor periodiek de volgende stappen uit."
+      "ui:groupIntro": "Houd de werking en de prestaties van het profileringsalgoritme in de gaten door periodiek de onderstaande stappen te doorlopen."
     },
     "q5-afwijkingen": {
       "ui:widget": "textarea",
@@ -352,13 +352,13 @@
     "q5-prestaties": {
       "ui:widget": "textarea",
       "ui:group": "gebruik-monitoring-prestaties",
-      "ui:description": "Zorg ervoor dat er periodiek een nieuwe testdataset wordt geselecteerd om deze stap te doorlopen.",
+      "ui:description": "Selecteer hiervoor telkens een nieuwe testdataset.",
       "ui:descriptionStyle": "plain"
     },
     "q5-onderscheid": {
       "ui:widget": "textarea",
       "ui:group": "gebruik-monitoring-prestaties",
-      "ui:description": "Zorg ervoor dat er periodiek een nieuwe testdataset wordt geselecteerd om deze stap te doorlopen.",
+      "ui:description": "Ook hiervoor is telkens een nieuwe testdataset nodig.",
       "ui:descriptionStyle": "plain"
     },
     "q6-herevaluatie": {
