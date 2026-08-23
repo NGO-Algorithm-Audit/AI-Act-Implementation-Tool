@@ -25,6 +25,11 @@ import TooltipRadioWidget from "./widgets/TooltipRadioWidget";
 import IntroWidget from "./widgets/IntroWidget";
 import RoleStatusIntroWidget from "./widgets/RoleStatusIntroWidget";
 import RiskClassificationIntroWidget from "./widgets/RiskClassificationIntroWidget";
+import {
+  ArrayFieldTemplate,
+  ArrayFieldItemTemplate,
+  ListItemTextareaWidget,
+} from "./templates/DraggableArrayFieldTemplate";
 import { useTranslation } from "react-i18next";
 
 function PlainTextWidget({ value }: { value: string }) {
@@ -201,6 +206,7 @@ const tooltipWidgets = {
   CheckboxesWidget: TooltipCheckboxesWidget,
   RadioWidget: TooltipRadioWidget,
   PlainTextWidget,
+  ListItemTextareaWidget,
   IntroWidget,
   RoleStatusIntroWidget,
   RiskClassificationIntroWidget,
@@ -219,6 +225,7 @@ const WizardForm = ({
   initialFieldKey,
   onInitialFieldConsumed,
   identificationFormData,
+  badgeLabel,
 }: {
   id: number;
   schema: FormProps<any, RJSFSchema, any>["schema"];
@@ -233,6 +240,10 @@ const WizardForm = ({
   // warning on Q33 (property "6.1") when the user's profiling answer
   // contradicts the Identification outcome.
   identificationFormData?: Record<string, any>;
+  // Overrides the questionnaire name shown in the blue header tag and the
+  // grey question-ID badge. Without it the name is derived from the schema
+  // title, which only covers the AI Act / Identification questionnaires.
+  badgeLabel?: string;
   onSubmit: (
     index: number,
     data: FormProps<any, RJSFSchema, any>["formData"]
@@ -373,8 +384,7 @@ const WizardForm = ({
     const seededData = { ...data, ...patch };
 
     const flattenedSchema = flattenSchema(schema, schema, seededData);
-    const visibleFields = getVisibleFields(flattenedSchema);
-    const idx = visibleFields.indexOf(initialFieldKey);
+    const idx = getStepForField(flattenedSchema, initialFieldKey);
     if (idx >= 0) {
       if (Object.keys(patch).length > 0) setData(seededData);
       setStep(idx);
@@ -517,6 +527,31 @@ const WizardForm = ({
     );
   };
 
+  // Group the visible fields into wizard steps. Consecutive fields carrying
+  // the same `ui:group` value share a step (used by the NTA questionnaires,
+  // which present a section of free-text fields on one screen); every other
+  // field is a step of its own, which is the historical behaviour.
+  const getStepGroups = (flattenedSchema: any): string[][] => {
+    const groups: string[][] = [];
+    let currentGroup: string | null = null;
+
+    getVisibleFields(flattenedSchema).forEach((fieldName) => {
+      const group = uiSchema?.[fieldName]?.["ui:group"] as string | undefined;
+      if (group && group === currentGroup) {
+        groups[groups.length - 1].push(fieldName);
+        return;
+      }
+      groups.push([fieldName]);
+      currentGroup = group ?? null;
+    });
+
+    return groups;
+  };
+
+  // Index of the step holding `fieldName`, or -1.
+  const getStepForField = (flattenedSchema: any, fieldName: string): number =>
+    getStepGroups(flattenedSchema).findIndex((g) => g.includes(fieldName));
+
   // Get hidden fields with their default values
   const getHiddenFieldsWithDefaults = (
     flattenedSchema: any
@@ -549,18 +584,24 @@ const WizardForm = ({
     // after III.1 (which is what RJSF's top-level retrieveSchema produces).
     const flattenedSchema = flattenSchema(schema, schema, currentData);
 
-    // Get visible fields only
-    const visibleFields = getVisibleFields(flattenedSchema);
-    const property = visibleFields[step];
+    // One step is one group of visible fields (usually a single field).
+    const stepFields = (getStepGroups(flattenedSchema)[step] ?? []).filter(
+      (property) => flattenedSchema?.properties?.[property]
+    );
 
-    if (flattenedSchema?.properties?.[property]) {
+    if (stepFields.length > 0) {
       return {
         type: "object",
-        required: flattenedSchema?.required?.filter(
-          (x: string) => x === property
+        required: flattenedSchema?.required?.filter((x: string) =>
+          stepFields.includes(x)
         ),
         definitions: schema.definitions,
-        properties: { [property]: flattenedSchema?.properties?.[property] },
+        properties: Object.fromEntries(
+          stepFields.map((property) => [
+            property,
+            flattenedSchema?.properties?.[property],
+          ])
+        ),
       };
     }
 
@@ -578,8 +619,21 @@ const WizardForm = ({
 
   const handleValidate = (formData: any, errors: any) => {
     const currentSchema = getCurrentStepSchema(validator, schema, data);
-    const currentField = Object.keys(currentSchema.properties)[0];
+    // A step usually holds one field, but grouped steps (`ui:group`) hold
+    // several — validate each of them.
+    Object.keys(currentSchema.properties).forEach((currentField) =>
+      validateField(currentField, currentSchema, formData, errors)
+    );
 
+    return errors;
+  };
+
+  const validateField = (
+    currentField: string,
+    currentSchema: GenericObjectType,
+    formData: any,
+    errors: any
+  ) => {
     const fieldValue = formData[currentField];
     const fieldSchema = currentSchema.properties?.[currentField];
     const isArrayField = fieldSchema?.type === "array";
@@ -623,8 +677,6 @@ const WizardForm = ({
         }
       }
     }
-
-    return errors;
   };
 
   const handleNext = (formData: typeof data) => {
@@ -671,11 +723,13 @@ const WizardForm = ({
             const isRoleAndStatus = /^(Role and status|Rol en status|Deployer|Aanbieder)/i.test(
               title
             );
-            const tag = isRiskCategory
-              ? t("questionnaire 2 name")
-              : isRoleAndStatus
-              ? t("questionnaire 3 name")
-              : t("questionnaire 1 name");
+            const tag =
+              badgeLabel ??
+              (isRiskCategory
+                ? t("questionnaire 2 name")
+                : isRoleAndStatus
+                ? t("questionnaire 3 name")
+                : t("questionnaire 1 name"));
             return (
               <span
                 className="badge"
@@ -738,8 +792,7 @@ const WizardForm = ({
                 ? (t("questionnaire 2 name") as string)
                 : undefined;
               const handleJumpToField = (fieldKey: string) => {
-                const visibleFields = getVisibleFields(flattenedSchema);
-                const idx = visibleFields.indexOf(fieldKey);
+                const idx = getStepForField(flattenedSchema, fieldKey);
                 if (idx >= 0) setStep(idx);
               };
               return (
@@ -782,92 +835,125 @@ const WizardForm = ({
             );
           })()
         ) : (
-          <Form
-            schema={currentStepSchema as RJSFSchema}
-            uiSchema={uiSchema}
-            widgets={tooltipWidgets}
-            templates={{ FieldTemplate, DescriptionFieldTemplate }}
-            // For checkbox questions (e.g. Identification Q1), suppress the
-            // error summary box on an empty submit. The inline field errors
-            // ("must NOT have fewer than 1 items", "This field is required")
-            // and the red question label still render via FieldTemplate.
-            // Risk-category Q33 (property "6.1") also opts out: the only
-            // failure mode here is the cross-questionnaire profiling
-            // warning, which already reads clearly inline — repeating it
-            // in the top alert is noise.
-            showErrorList={
-              uiSchema?.[questions[0]]?.["ui:widget"] === "checkboxes" ||
-              questions[0] === "6.1"
-                ? false
-                : "top"
-            }
-            formData={
-              data[questions[0]]
-                ? {
-                    [questions[0]]: data[questions[0]],
-                  }
-                : {}
-            }
-            onSubmit={(data) => handleNext(data.formData)}
-            validator={validator}
-            customValidate={handleValidate}
-            className="d-flex flex-column justify-content-between flex-grow-1"
-          >
-            <div className="d-flex flex-row justify-content-between flex-row-reverse">
-              <Button variant="primary" type="submit">
-                {t("next")}
-              </Button>
-              {step > 0 && (
-                <Button
-                  type="button"
-                  variant="outline-secondary"
-                  onClick={handlePrev}
-                  style={{ marginRight: "8px" }}
-                >
-                  {t("back")}
-                </Button>
+          <>
+            {/* Section subtitle for grouped steps (see `ui:group`). */}
+            {!!uiSchema?.[questions[0]]?.["ui:groupTitle"] && (
+              <h5 className="mb-3">
+                {uiSchema?.[questions[0]]?.["ui:groupTitle"] as string}
+              </h5>
+            )}
+            {/* Body text under the section subtitle (see `ui:groupIntro`). */}
+            {!!uiSchema?.[questions[0]]?.["ui:groupIntro"] && (
+              <p className="mb-3">
+                {uiSchema?.[questions[0]]?.["ui:groupIntro"] as string}
+              </p>
+            )}
+            <Form
+              schema={currentStepSchema as RJSFSchema}
+              uiSchema={uiSchema}
+              widgets={tooltipWidgets}
+              templates={{
+                FieldTemplate,
+                DescriptionFieldTemplate,
+                ArrayFieldTemplate,
+                ArrayFieldItemTemplate,
+              }}
+              // For checkbox questions (e.g. Identification Q1), suppress the
+              // error summary box on an empty submit. The inline field errors
+              // ("must NOT have fewer than 1 items", "This field is required")
+              // and the red question label still render via FieldTemplate.
+              // Risk-category Q33 (property "6.1") also opts out: the only
+              // failure mode here is the cross-questionnaire profiling
+              // warning, which already reads clearly inline — repeating it
+              // in the top alert is noise.
+              showErrorList={
+                uiSchema?.[questions[0]]?.["ui:widget"] === "checkboxes" ||
+                questions[0] === "6.1"
+                  ? false
+                  : "top"
+              }
+              formData={Object.fromEntries(
+                questions
+                  .filter((question) => data[question])
+                  .map((question) => [question, data[question]])
               )}
-            </div>
+              onSubmit={(data) => handleNext(data.formData)}
+              validator={validator}
+              customValidate={handleValidate}
+              className="d-flex flex-column justify-content-between flex-grow-1"
+            >
+              <div className="d-flex flex-row justify-content-between flex-row-reverse">
+                <Button variant="primary" type="submit">
+                  {t("next")}
+                </Button>
+                {step > 0 && (
+                  <Button
+                    type="button"
+                    variant="outline-secondary"
+                    onClick={handlePrev}
+                    style={{ marginRight: "8px" }}
+                  >
+                    {t("back")}
+                  </Button>
+                )}
+              </div>
 
-            {/* tag with question ID */}
-            <div style={{ display: "inline-block", marginTop: "8px" }}>
-              {(() => {
-                const rawSuffix =
-                  (uiSchema?.[questions[0]]?.["ui:id"] as string | undefined) ??
-                  questions[0];
-                const displaySuffix = rawSuffix.replace(/^q/, "Q");
-                const title = String(schema?.title ?? "");
-                const isRiskCategory = /^(Risk category|Risicocategorie)/i.test(
-                  title
-                );
-                const isRoleAndStatus = /^(Role and status|Rol en status|Deployer|Aanbieder)/i.test(
-                  title
-                );
-                const questionnaireName = isRiskCategory
-                  ? t("questionnaire 2 name")
-                  : isRoleAndStatus
-                  ? t("questionnaire 3 name")
-                  : t("questionnaire 1 name");
-                return (
-                  <span className="badge badge-secondary me-1">
-                    id: {questionnaireName} {displaySuffix}
-                  </span>
-                );
-              })()}
-              {(uiSchema?.[questions[0]]?.["ui:badges"] as {
-                label: string;
-                color?: string;
-                url?: string;
-              }[] | undefined)?.map((badge, i) => (
-                <QuestionBadge
-                  key={i}
-                  label={badge.label}
-                  color={badge.color}
-                  href={badge.url}
-                />
-              ))}
-            </div>
-          </Form>
+              {/* tag with question ID */}
+              <div style={{ display: "inline-block", marginTop: "8px" }}>
+                {(() => {
+                  // Grouped steps (`ui:group`, used by the NTA questionnaires)
+                  // are cited by their NTA section — "6.2 Probleemanalyse" —
+                  // so the section title is the id, without a chapter prefix
+                  // or a Q<n> counter.
+                  const groupTitle = uiSchema?.[questions[0]]?.[
+                    "ui:groupTitle"
+                  ] as string | undefined;
+                  if (groupTitle) {
+                    return (
+                      <span className="badge badge-secondary me-1">
+                        id: {groupTitle}
+                      </span>
+                    );
+                  }
+                  const rawSuffix =
+                    (uiSchema?.[questions[0]]?.["ui:id"] as string | undefined) ??
+                    questions[0];
+                  const displaySuffix = rawSuffix.replace(/^q/, "Q");
+                  const title = String(schema?.title ?? "");
+                  const isRiskCategory = /^(Risk category|Risicocategorie)/i.test(
+                    title
+                  );
+                  const isRoleAndStatus = /^(Role and status|Rol en status|Deployer|Aanbieder)/i.test(
+                    title
+                  );
+                  const questionnaireName =
+                    badgeLabel ??
+                    (isRiskCategory
+                      ? t("questionnaire 2 name")
+                      : isRoleAndStatus
+                      ? t("questionnaire 3 name")
+                      : t("questionnaire 1 name"));
+                  return (
+                    <span className="badge badge-secondary me-1">
+                      id: {questionnaireName} {displaySuffix}
+                    </span>
+                  );
+                })()}
+                {(uiSchema?.[questions[0]]?.["ui:badges"] as {
+                  label: string;
+                  color?: string;
+                  url?: string;
+                }[] | undefined)?.map((badge, i) => (
+                  <QuestionBadge
+                    key={i}
+                    label={badge.label}
+                    color={badge.color}
+                    href={badge.url}
+                  />
+                ))}
+              </div>
+            </Form>
+          </>
         )}
       </Card.Body>
     </Card>

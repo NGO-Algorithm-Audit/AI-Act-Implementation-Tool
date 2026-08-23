@@ -1,0 +1,89 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'Avenir Next, Avenir, Helvetica, sans-serif', 'fontSize': '14px', 'lineColor': '#005AA7', 'primaryColor': '#005AA7', 'edgeLabelBackground': '#ffffff'}, 'flowchart': {'curve': 'basis', 'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 90, 'rankSpacing': 130, 'padding': 24}}}%%
+flowchart LR
+
+    classDef Q fill:#daeaf7,stroke:#005aa7,color:#000
+    classDef cat_forb fill:#dc3545,stroke:#a01c2a,color:#fff,font-weight:bold
+    classDef cat_high fill:#d97706,stroke:#a05705,color:#fff,font-weight:bold
+    classDef cat_genai fill:#FFBF00,stroke:#b88a00,color:#fff,font-weight:bold
+    classDef role_prov fill:#6f42c1,stroke:#4f2c91,color:#fff,font-weight:bold
+    classDef role_dep fill:#0891b2,stroke:#076a8d,color:#fff,font-weight:bold
+    classDef scenario fill:#fff5cc,stroke:#b88a00,color:#000,font-weight:bold
+    classDef oblig_forb fill:#fbe2e4,stroke:#dc3545,color:#000
+    classDef oblig_high fill:#fdecd0,stroke:#d97706,color:#000
+    classDef oblig_genai fill:#f1f3f5,stroke:#9aa3ab,color:#000
+    linkStyle default stroke:#005AA7,stroke-width:1.2px
+
+    Q1["Risicocategorie<br/>(bepaald door de<br/>Risicocategorie-vragenlijst)"]:::Q
+    Q1 -->|"Verboden<br/>Art. 5"| FORB
+    Q1 -->|"Hoog-risico<br/>Art. 6 + Bijlage III"| HIGH
+    Q1 -->|"Generatieve en interactieve<br/>Art. 50"| GENAI
+
+    FORB["Verboden<br/>AI-systeem"]:::cat_forb
+    HIGH["Hoog-risico<br/>AI-systeem"]:::cat_high
+    GENAI["Generatief en<br/>interactief AI-systeem"]:::cat_genai
+
+    FORB --> Q2F["Rol"]:::Q
+    HIGH --> Q2H["Rol"]:::Q
+    GENAI --> Q10["V10 scenario<br/>(meervoudige keuze)"]:::Q
+
+    Q2F -->|"Aanbieder"| FP
+    Q2F -->|"Gebruiksverantwoordelijke"| FD
+    Q2H -->|"Aanbieder"| HP
+    Q2H -->|"Gebruiksverantwoordelijke"| HD
+
+    Q10 -->|"Interageert direct<br/>met natuurlijke personen"| S1
+    Q10 -->|"Genereert synthetische<br/>audio / beeld / video / tekst"| S2
+    Q10 -->|"Herkent emoties of<br/>biometrische categorisering"| S3
+    Q10 -->|"Genereert / manipuleert<br/>inhoud van algemeen belang"| S4
+
+    S1["Art. 50(1)<br/>Interactieve AI"]:::scenario
+    S2["Art. 50(2)<br/>Generatieve AI"]:::scenario
+    S3["Art. 50(3)<br/>Emotieherkenning /<br/>biometrische categorisering"]:::scenario
+    S4["Art. 50(4)<br/>Deepfakes /<br/>tekst van algemeen belang"]:::scenario
+
+    S1 --> S1R["Rol"]:::Q
+    S2 --> S2R["Rol"]:::Q
+    S3 --> S3R["Rol"]:::Q
+    S4 --> S4R["Rol"]:::Q
+
+    S1R -->|"Aanbieder"| S1P
+    S1R -->|"Gebruiksverantwoordelijke"| S1D
+    S2R -->|"Aanbieder"| S2P
+    S2R -->|"Gebruiksverantwoordelijke"| S2D
+    S3R -->|"Aanbieder"| S3P
+    S3R -->|"Gebruiksverantwoordelijke"| S3D
+    S4R -->|"Gebruiksverantwoordelijke"| S4D
+
+    FP["Aanbieder"]:::role_prov
+    FD["Gebruiksverantwoordelijke"]:::role_dep
+    HP["Aanbieder"]:::role_prov
+    HD["Gebruiksverantwoordelijke"]:::role_dep
+    S1P["Aanbieder"]:::role_prov
+    S1D["Gebruiksverantwoordelijke"]:::role_dep
+    S2P["Aanbieder"]:::role_prov
+    S2D["Gebruiksverantwoordelijke"]:::role_dep
+    S3P["Aanbieder"]:::role_prov
+    S3D["Gebruiksverantwoordelijke"]:::role_dep
+    S4D["Gebruiksverantwoordelijke"]:::role_dep
+
+    FP --> FP_O["Het AI-systeem moet onmiddellijk buiten gebruik worden gesteld. Breng het niet op de markt, stel het niet in gebruik en gebruik het niet binnen de Europese Unie.<br/>Bron: Art. 5 AI-verordening"]:::oblig_forb
+
+    FD --> FD_O["Stop het gebruik van het AI-systeem. Informeer de aanbieder dat het systeem onmiddellijk buiten gebruik moet worden gesteld. Gebruik het niet binnen de Europese Unie.<br/>Bron: Art. 5 AI-verordening"]:::oblig_forb
+
+    HP --> HP_O["Verplichtingen voor de aanbieder van een hoog-risico AI-systeem:<br/>• Systeem voor risicobeheer (Art. 9)<br/>• Data en datagovernance (Art. 10)<br/>• Technische documentatie — Bijlage IV — vóór het in de handel brengen (Art. 11)<br/>• Registratie en logs — bewaren ≥ 6 maanden (Art. 12)<br/>• Transparantie en gebruiksaanwijzing voor gebruiksverantwoordelijken (Art. 13)<br/>• Menselijk toezicht en betekenisvolle menselijke tussenkomst (Art. 14)<br/>• Nauwkeurigheid, robuustheid en cyberbeveiliging (Art. 15)<br/>• Systeem voor kwaliteitsbeheer, incl. monitoring na het in de handel brengen (Art. 17)<br/>• Conformiteitsbeoordeling — zelfevaluatie of derde partij (Art. 43)<br/>• EU-conformiteitsverklaring (Art. 47)<br/>• CE-markering (Art. 48)<br/>• Registratie in de EU-databank vóór het in de handel brengen (Art. 49)<br/>• Markttoezicht achteraf &amp; melding ernstige incidenten (Art. 72)<br/>• AI-geletterdheid van personeel (Art. 4)<br/>Bron: Art. 16 AI-verordening"]:::oblig_high
+
+    HD --> HD_O["Verplichtingen voor de gebruiksverantwoordelijke van een hoog-risico AI-systeem:<br/>• Gebruik het systeem overeenkomstig de gebruiksaanwijzing (Art. 26(1))<br/>• Ken menselijk toezicht toe aan competente personen (Art. 26(2))<br/>• Zorg, voor zover de gebruiksverantwoordelijke controle heeft over de invoerdata, voor relevantie en representativiteit (Art. 26(4))<br/>• Monitor de werking en meld risico's / ernstige incidenten aan de aanbieder, distributeur en markttoezichtautoriteit (Art. 26(5))<br/>• Bewaar automatisch gegenereerde logboeken ≥ 6 maanden (Art. 26(6))<br/>• Informeer werknemersvertegenwoordigers en betrokken werknemers vóór ingebruikname op de werkplek (Art. 26(7))<br/>• Informeer natuurlijke personen dat zij onderworpen zijn aan een hoog-risico AI-systeem (Art. 26(11))<br/>• Grondrechteneffectbeoordeling vóór ingebruikname — voor overheidsinstanties en bepaalde private gebruiksverantwoordelijken van Bijlage III-systemen (Art. 27)<br/>Bron: Art. 26 AI-verordening"]:::oblig_high
+
+    S1P --> S1P_O["Verplichtingen voor AI die direct met natuurlijke personen interageert:<br/>• Ontwerp en ontwikkel het AI-systeem zo dat natuurlijke personen duidelijk worden geïnformeerd dat zij met een AI-systeem interageren, tenzij dit duidelijk blijkt vanuit het perspectief van een redelijk goed geïnformeerde natuurlijke persoon, rekening houdend met de omstandigheden en de gebruikscontext.<br/>• De melding moet in het ontwerp zijn ingebed en uiterlijk bij de eerste interactie worden verstrekt (Art. 50(5)).<br/>• De informatie moet duidelijk, onderscheidbaar en toegankelijk zijn (ook voor kwetsbare groepen: kinderen, ouderen, personen met een beperking) en op een contextgepaste wijze worden gegeven.<br/>Timing: Verstrek de informatie aan gebruikers uiterlijk op het moment van de eerste blootstelling aan het systeem.<br/>Uitzondering: Systemen die bij wet zijn toegestaan voor het opsporen, voorkomen of onderzoeken van strafbare feiten, met passende waarborgen onder Unierecht.<br/>Bron: Art. 50(1) AI-verordening"]:::oblig_genai
+
+    S1D --> S1D_O["Verplichtingen voor AI die direct met natuurlijke personen interageert:<br/>• Controleer dat de aanbieder de openbaarmaking van interactieve AI heeft geïmplementeerd (bijv. een openingszin van een chatbot, een duidelijk 'AI-assistent'-label of een gelijkwaardig signaal).<br/>• Verifieer dubbel dat uw eigen configuratie, branding of integratie van het systeem de openbaarmaking door de aanbieder niet ondermijnt of verwijdert. Wanneer u het systeem fine-tunet, herbrandt of substantieel wijzigt, kan artikel 25 u tot aanbieder maken, waarmee de volledige verplichtingen van artikel 50(1) voor aanbieders op u van toepassing worden.<br/>Timing: Verstrek de informatie aan gebruikers uiterlijk op het moment van de eerste blootstelling aan het systeem.<br/>Uitzondering: Systemen die bij wet zijn toegestaan voor het opsporen, voorkomen of onderzoeken van strafbare feiten, met passende waarborgen onder Unierecht.<br/>Bron: Art. 50(1) AI-verordening"]:::oblig_genai
+
+    S2P --> S2P_O["Verplichtingen voor AI die synthetische audio-, beeld-, video- of tekstinhoud genereert:<br/>• Markering: outputs moeten worden voorzien van een machineleesbaar merkteken (bijv. watermerken, metadata, cryptografische herkomstmethoden, fingerprints).<br/>• Detectie: aanbieders moeten middelen beschikbaar stellen om vast te stellen dat de output AI-gegenereerd of gemanipuleerd is, met voor mensen leesbare resultaten.<br/>• Beide elementen moeten aanwezig zijn; alleen markering is onvoldoende.<br/>Timing: Verstrek de informatie aan gebruikers uiterlijk op het moment van de eerste blootstelling aan het systeem.<br/>Uitzondering: Systemen die bij wet zijn toegestaan voor het opsporen, voorkomen of onderzoeken van strafbare feiten, met passende waarborgen onder Unierecht.<br/>Bron: Art. 50(2) AI-verordening"]:::oblig_genai
+
+    S2D --> S2D_O["Verplichtingen voor AI die synthetische audio-, beeld-, video- of tekstinhoud genereert:<br/>• Gebruiksverantwoordelijken van AI-systemen die deepfakes (zoals gedefinieerd in art. 3(60)) genereren, moeten kenbaar maken dat de inhoud kunstmatig is gegenereerd of gemanipuleerd.<br/>• Gebruiksverantwoordelijken van AI-systemen die tekst genereren of manipuleren welke wordt gepubliceerd om het publiek te informeren over aangelegenheden van algemeen belang, moeten kenbaar maken dat de tekst kunstmatig is gegenereerd of gemanipuleerd.<br/>Timing: Verstrek de informatie aan gebruikers uiterlijk op het moment van de eerste blootstelling aan het systeem.<br/>Uitzondering:<br/>• Wanneer het gebruik bij wet is toegestaan voor het opsporen, voorkomen, onderzoeken of vervolgen van strafbare feiten.<br/>• Wanneer de inhoud onderdeel is van een kennelijk artistiek, creatief, satirisch, fictief of vergelijkbaar werk of programma. De verplichting beperkt zich dan tot het op een passende manier kenbaar maken van het bestaan van dergelijke gegenereerde of gemanipuleerde inhoud zonder de weergave of het genot van het werk te belemmeren.<br/>• Wanneer de AI-gegenereerde inhoud een proces van menselijke beoordeling of redactionele controle heeft ondergaan en een natuurlijke of rechtspersoon redactionele verantwoordelijkheid draagt voor de publicatie.<br/>Bron: Art. 50(4) AI-verordening"]:::oblig_genai
+
+    S3P --> S3P_O["Informeer blootgestelde personen en verwerk persoonsgegevens conform de AVG."]:::oblig_genai
+
+    S3D --> S3D_O["Verplichtingen voor AI die emoties herkent of personen categoriseert op basis van biometrische gegevens:<br/>• Informeer alle natuurlijke personen die aan het systeem worden blootgesteld dat het in werking is of wordt gebruikt.<br/>• Verstrek de informatie op een duidelijke, onderscheidbare en toegankelijke manier (Art. 50(5)).<br/>• De informatie mag schriftelijk, via gestandaardiseerde iconen, mondeling, elektronisch of in een combinatie hiervan worden gegeven, afhankelijk van de gebruikscontext.<br/>Timing: Verstrek de informatie aan gebruikers uiterlijk op het moment van de eerste blootstelling aan het systeem.<br/>Uitzondering: Systemen die bij wet zijn toegestaan voor het opsporen, voorkomen of onderzoeken van strafbare feiten, met passende waarborgen onder Unierecht.<br/>Bron: Art. 50(3) en Art. 50(5) AI-verordening"]:::oblig_genai
+
+    S4D --> S4D_O["Verplichtingen voor AI die beeld-, audio-, video- of tekstinhoud van algemeen belang genereert of manipuleert:<br/>• Gebruiksverantwoordelijken van AI-systemen die deepfakes (zoals gedefinieerd in art. 3(60)) genereren, moeten kenbaar maken dat de inhoud kunstmatig is gegenereerd of gemanipuleerd.<br/>• Gebruiksverantwoordelijken van AI-systemen die tekst genereren of manipuleren welke wordt gepubliceerd om het publiek te informeren over aangelegenheden van algemeen belang, moeten kenbaar maken dat de tekst kunstmatig is gegenereerd of gemanipuleerd.<br/>Timing: Verstrek de informatie aan gebruikers uiterlijk op het moment van de eerste blootstelling aan het systeem.<br/>Uitzondering:<br/>• Wanneer het gebruik bij wet is toegestaan voor het opsporen, voorkomen, onderzoeken of vervolgen van strafbare feiten.<br/>• Wanneer de inhoud onderdeel is van een kennelijk artistiek, creatief, satirisch, fictief of vergelijkbaar werk of programma. De verplichting beperkt zich dan tot het op een passende manier kenbaar maken van het bestaan van dergelijke gegenereerde of gemanipuleerde inhoud zonder de weergave of het genot van het werk te belemmeren.<br/>• Wanneer de AI-gegenereerde inhoud een proces van menselijke beoordeling of redactionele controle heeft ondergaan en een natuurlijke of rechtspersoon redactionele verantwoordelijkheid draagt voor de publicatie.<br/>Bron: Art. 50(4) AI-verordening"]:::oblig_genai

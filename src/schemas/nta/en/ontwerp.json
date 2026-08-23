@@ -1,0 +1,765 @@
+{
+  "JSONSchema": {
+    "title": "Ontwerp en ontwikkeling",
+    "type": "object",
+    "properties": {
+      "q1-relatie-doel": {
+        "type": "string",
+        "title": "1) Relatie met doel: beschrijf hoe het (correct) voorspellen van het fenomeen dat de doelvariabele beoogt te meten, bijdraagt aan het bereiken van het doel. Betrek hierbij de uitkomsten van 6.2 en 6.3.",
+        "default": ""
+      },
+      "q1-definitie": {
+        "type": "string",
+        "title": "2) Definitie: definieer de doelvariabele.",
+        "default": ""
+      },
+      "q1-meetbaarheid": {
+        "type": "string",
+        "title": "3) Meetbaarheid: beoordeel in welke mate de doelvariabele voldoende observeerbaar en/of meetbaar is voor het beoogde doel.",
+        "default": ""
+      },
+      "q1-datakwaliteit": {
+        "type": "string",
+        "title": "4) Datakwaliteit: beoordeel de kwaliteit van de beschikbare dataset waarin de doelvariabele is opgenomen zoals beschreven in 7.3.2.",
+        "default": ""
+      },
+      "q1-werkinstructies": {
+        "type": "string",
+        "title": "5) Werkinstructies: als de doelvariabele wordt vastgesteld door een beslismedewerker, moeten er duidelijke werkinstructies beschikbaar zijn. Zie ook 9.2.1.",
+        "default": ""
+      },
+      "q2-populatie": {
+        "type": "string",
+        "title": "1) Populatie en referentiepopulatie: definieer de populatie en de referentiepopulatie.",
+        "default": ""
+      },
+      "q2-steekproef": {
+        "type": "string",
+        "title": "2) Steekproef: bepaal de steekproef (uit de referentiepopulatie) die wordt gebruikt als dataset tijdens de ontwikkeling van het profileringsalgoritme.",
+        "default": ""
+      },
+      "q2-aselecte-steekproef": {
+        "type": "string",
+        "title": "3) Aselecte steekproef: trek een aselecte steekproef uit de referentiepopulatie. Voor het bepalen van een passend steekproefontwerp, zie bijlage C van de NTA.",
+        "default": ""
+      },
+      "q2-datasets": {
+        "type": "string",
+        "title": "4) Ontwikkel-, validatie- en testdataset: bepaal op basis van de steekproef en/of de aselecte steekproef de ontwikkel-, validatie- en testdataset.",
+        "default": ""
+      },
+      "q2-een-dataset": {
+        "type": "string",
+        "title": "5) Als het profileringsalgoritme wordt afgeleid uit een (historische) dataset zonder beschikbare aselecte steekproef: weeg af of de ontwikkeling van het profileringsalgoritme opweegt tegen de alternatieven zoals geïdentificeerd in 6.5, en documenteer de motivering wanneer het algoritme toch op basis van één dataset wordt ontwikkeld.",
+        "default": ""
+      },
+      "q3-accuraatheid": {
+        "type": "array",
+        "title": "1) Accuraatheid: verifieer of de data in de dataset de werkelijke waarde beschrijven van de profileringskenmerken en doelvariabele. Gebruik hiervoor ten minste één van de volgende methodes:",
+        "items": {
+          "type": "string",
+          "enum": [
+            "Een domeinexpert valideert of de verkregen data de werkelijke waarde in de praktijk beschrijven.",
+            "Inspecteer de data, waaronder extreme waarden, spelfouten bij categorische variabelen en relaties tussen waarden van verschillende variabelen.",
+            "Vergelijk de waarden in de data met een betrouwbare referentiebron, zoals een dataset samengesteld op basis van een ander dataverzamelingsproces."
+          ]
+        },
+        "uniqueItems": true,
+        "minItems": 0
+      },
+      "q3-compleetheid": {
+        "type": "string",
+        "title": "2) Compleetheid: verifieer de mate waarin de dataset waarden bevat voor alle betrokkenen uit de steekproef.",
+        "default": ""
+      },
+      "q3-representativiteit": {
+        "type": "string",
+        "title": "3) Representativiteit: verifieer of de beschikbare data in de dataset voldoende representatief zijn voor de referentiepopulatie.",
+        "default": ""
+      },
+      "q3-consistentie": {
+        "type": "string",
+        "title": "4) Consistentie: verifieer de mate waarin data in de dataset logisch kloppen en niet tegenstrijdig zijn met de praktische uitwerking van het besluitvormingsproces.",
+        "default": ""
+      },
+      "q3-actueel": {
+        "type": "string",
+        "title": "5) Actueel: bepaal of de dataset voldoende actueel is om het profileringsalgoritme mee te ontwerpen en ontwikkelen.",
+        "default": ""
+      },
+      "q4-herkomst": {
+        "type": "string",
+        "title": "1) Herkomst en dataverzameling: documenteer ten minste de volgende informatie:",
+        "default": ""
+      },
+      "q4-samenstelling": {
+        "type": "array",
+        "title": "2) Samenstelling van de dataset: documenteer ten minste de volgende informatie:",
+        "items": {
+          "type": "string",
+          "enum": [
+            "De omvang van de dataset (aantal steekproefeenheden en het aantal profileringskenmerken).",
+            "De definitie en het variabeletype (categorisch of numeriek) van het profileringskenmerk en de doelvariabele.",
+            "De (toegestane en geobserveerde) waarden.",
+            "De, voor zover bekend, aanwezigheid van (directe of indirecte) relaties met discriminatiegronden.",
+            "Bekende ontbrekende waarden, onnauwkeurigheden of inconsistenties.",
+            "De betekenis van ontbrekende waarden (lege, NA- of NULL-waarden)."
+          ]
+        },
+        "uniqueItems": true,
+        "minItems": 0
+      },
+      "q4-bewerkingen": {
+        "type": "array",
+        "title": "3) Bewerkingen op de dataset: documenteer elke bewerking op de dataset en de redenering achter de gemaakte keuzes, inclusief de gekozen omgang met lege, NA- en NULL-waarden.",
+        "items": {
+          "type": "string",
+          "default": ""
+        },
+        "default": [
+          "",
+          ""
+        ]
+      },
+      "q5-kenmerken": {
+        "type": "array",
+        "title": "1) Inventariseer samen met domeinexperts, ethisch en juridisch experts de potentiële profileringskenmerken.",
+        "items": {
+          "type": "string",
+          "default": ""
+        },
+        "default": [
+          "",
+          ""
+        ]
+      },
+      "q5-bezwaren": {
+        "type": "string",
+        "title": "2) Beschrijf per potentieel profileringskenmerk in hoeverre er zwaarwegende feitelijke, organisatorische of juridische bezwaren zijn te voorzien tegen het gebruik ervan. Stel in dat kader vast of sprake is van een van de volgende situaties:",
+        "default": ""
+      },
+      "q5-selectie": {
+        "type": "string",
+        "title": "3) Documenteer welke profileringskenmerken op basis van deze kwalitatieve analyse wel en niet worden meegenomen in de ontwikkeling, inclusief de onderbouwing.",
+        "default": ""
+      },
+      "q6-proxyanalyse": {
+        "type": "string",
+        "title": "1) Proxyanalyse: bepaal of er een univariaat verband bestaat tussen de profileringskenmerken en de relevante gronden (zie 7.7.3, stap 1).",
+        "default": ""
+      },
+      "q6-dataminimalisatie": {
+        "type": "string",
+        "title": "2) Dataminimalisatie: onderzoek het onderlinge verband tussen profileringskenmerken en documenteer welke kenmerken op basis daarvan worden weggelaten.",
+        "default": ""
+      },
+      "q7-keuze": {
+        "type": "string",
+        "title": "1) Documenteer het gekozen type algoritme en de onderbouwing van deze keuze op basis van o.a. de volgende aspecten:",
+        "default": ""
+      },
+      "q7-ai-verordening": {
+        "type": "string",
+        "title": "2) Bepaal en documenteer of het profileringsalgoritme onderdeel is van een AI-systeem volgens de AI-verordening.",
+        "default": ""
+      },
+      "q8-regels": {
+        "type": "array",
+        "title": "1) Regelgebaseerd profileringsalgoritme: documenteer per regel de gebruikte profileringskenmerken, drempelwaarden en/of gewichten, en de onderliggende onderbouwing.",
+        "items": {
+          "type": "string",
+          "default": ""
+        },
+        "default": [
+          "",
+          ""
+        ]
+      },
+      "q8-datagebaseerd": {
+        "type": "string",
+        "title": "2) Datagebaseerd profileringsalgoritme: beschrijf hoe de gekozen datagebaseerde methode is getraind met de geschikte ontwikkeldata en profileringskenmerken, en hoe eventuele drempelwaarden en (hyper)parameters op de validatiedataset zijn geoptimaliseerd.",
+        "default": ""
+      },
+      "q9-metrieken": {
+        "type": "array",
+        "title": "1) Bepaal relevante prestatiemetrieken die gemeten moeten worden om voldoende inzicht te krijgen in de prestaties van het profileringsalgoritme voor de doelvariabele, en documenteer de motivatie.",
+        "items": {
+          "type": "string",
+          "default": ""
+        },
+        "default": [
+          "",
+          ""
+        ]
+      },
+      "q9-uitkomsten": {
+        "type": "array",
+        "title": "2) Bepaal voor welke uitkomsten van het besluitvormingsproces de prestaties moeten worden gemeten. Neem ten minste de uitkomst van het profileringsalgoritme.",
+        "items": {
+          "type": "string",
+          "default": ""
+        },
+        "default": [
+          "",
+          ""
+        ]
+      },
+      "q9-bandbreedtes": {
+        "type": "string",
+        "title": "3) Bepaal bandbreedtes: bepaal op basis van de context en het beoogde doel welke bandbreedte(s) de gekozen prestatiemetrieken maximaal mogen hebben, en documenteer de motivatie ervoor.",
+        "default": ""
+      },
+      "q9-meten": {
+        "type": "string",
+        "title": "4) Meten van prestaties: pas het profileringsalgoritme toe op de betrokkenen in de validatiedataset, vergelijk de toegekende labels met de geobserveerde waarden van de doelvariabele en bereken op basis daarvan de prestatiemetrieken uit stap 1).",
+        "default": ""
+      },
+      "q9-beoordeling": {
+        "type": "string",
+        "title": "5) Bepaal of de gemeten resultaten binnen de gekozen bandbreedtes liggen en beter zijn dan de resultaten van een aselecte steekproef.",
+        "default": ""
+      },
+      "q9-documentatie": {
+        "type": "string",
+        "title": "6) Documenteer de resultaten van het definitieve profileringsalgoritme op de validatiedataset en leg in begrijpelijke taal uit wat de resultaten en prestatiemetrieken inhouden.",
+        "default": ""
+      },
+      "q10-gronden": {
+        "type": "array",
+        "title": "1) Bepaal relevante gronden: documenteer alle gronden die relevant worden geacht om onderscheid te meten in de specifieke context waarin het profileringsalgoritme wordt toegepast.",
+        "items": {
+          "type": "string",
+          "default": ""
+        },
+        "default": [
+          "",
+          ""
+        ]
+      },
+      "q10-stappen": {
+        "type": "string",
+        "title": "2) Bepaal relevante stappen in het besluitvormingsproces: bepaal voor welke uitkomsten van het besluitvormingsproces het onderscheid moet worden gemeten. Neem ten minste de uitkomst van het profileringsalgoritme.",
+        "default": ""
+      },
+      "q10-persoonskenmerken": {
+        "type": "string",
+        "title": "3) Verkrijg noodzakelijke persoonskenmerken: verkrijg, indien redelijkerwijs mogelijk, toegang tot data over de relevant bevonden gronden uit stap 1) en beschrijf hoe deze data zijn verkregen en welke waarborgen daarbij gelden.",
+        "default": ""
+      },
+      "q10-metrieken": {
+        "type": "array",
+        "title": "4) Bepaal relevante gelijkheidsmetrieken op basis van de specifieke context, doelstellingen en impact van foute voorspellingen, en documenteer de motivatie(s).",
+        "items": {
+          "type": "string",
+          "default": ""
+        },
+        "default": [
+          "",
+          ""
+        ]
+      },
+      "q10-meten": {
+        "type": "string",
+        "title": "5) Meten van gelijkheidsmetrieken: pas het profileringsalgoritme toe op de betrokkenen in de validatiedataset en bereken de gelijkheidsmetrieken uit stap 4) voor de groepen die door de relevante gronden of combinaties daarvan zijn gedefinieerd.",
+        "default": ""
+      },
+      "q10-documentatie": {
+        "type": "string",
+        "title": "6) Documenteer de resultaten van het definitieve model op de validatiedataset en leg in begrijpelijke taal uit wat de resultaten en gelijkheidsmetrieken inhouden.",
+        "default": ""
+      },
+      "q11-effectgrootte": {
+        "type": "string",
+        "title": "1) Evalueer de effectgrootte: geef aan hoe groot het gevonden verschil is.",
+        "default": ""
+      },
+      "q11-significantie": {
+        "type": "string",
+        "title": "2) Evalueer de statistische significantie: bepaal of er voldoende bewijs is dat het gevonden effect geen toevalstreffer is.",
+        "default": ""
+      },
+      "q11-hypothesetoetsen": {
+        "type": "string",
+        "title": "3) Voer relevante hypothesetoetsen uit en documenteer de uitkomsten om de volgende punten vast te stellen:",
+        "default": ""
+      },
+      "q12-motivatie": {
+        "type": "string",
+        "title": "1) Documenteer de motivatie voor een eventuele herziening van de metrieken en bandbreedtes vóór aanvang van de fase 'Verificatie en validatie' uit de levenscyclus.",
+        "default": ""
+      },
+      "q12-latere-aanpassing": {
+        "type": "string",
+        "title": "2) Documenteer een latere aanpassing van de metrieken en bandbreedtes in de levenscyclus, inclusief de onderliggende risicoanalyse en de expliciete, gemotiveerde beslissing waarin de overwegingen en consequenties zijn vastgelegd. Aanpassing kan alleen:",
+        "default": ""
+      },
+      "q13-doelvariabele": {
+        "type": "string",
+        "title": "1) De keuze en onderbouwing van de doelvariabele, volgens 7.2.",
+        "default": ""
+      },
+      "q13-type-algoritme": {
+        "type": "string",
+        "title": "2) Het type algoritme dat wordt gebruikt en de onderbouwing voor deze keuze, volgens 7.5.",
+        "default": ""
+      },
+      "q13-kenmerken": {
+        "type": "string",
+        "title": "3) De gebruikte profileringskenmerken, inclusief een inhoudelijke motivering in objectieve termen voor de opname van het profileringskenmerk, en een belangenafweging van de effecten. Gebruik hierbij onder andere 7.4.2 en 7.4.3.",
+        "default": ""
+      },
+      "q13-methode": {
+        "type": "string",
+        "title": "4) De methode waarmee het algoritme is opgesteld, volgens 7.6.",
+        "default": ""
+      },
+      "q13-definitief-algoritme": {
+        "type": "string",
+        "title": "5) Het definitieve profileringsalgoritme na doorlopen van de iteraties, zoals beschreven in 7.7.",
+        "default": ""
+      },
+      "output": {
+        "type": "string",
+        "title": "Resultaat",
+        "default": "De inhoud van deze vragenlijst volgt."
+      }
+    }
+  },
+  "uiSchema": {
+    "q1-relatie-doel": {
+      "ui:widget": "textarea",
+      "ui:id": "q1",
+      "ui:group": "ontwerp-doelvariabele",
+      "ui:groupTitle": "7.2 Definieer en onderbouw doelvariabele",
+      "ui:groupIntro": "De stappen in Hoofdstuk 7 hoeven niet in een bepaalde volgorde plaats te vinden, maar kunnen iteratief en in parallel worden doorlopen.",
+      "ui:description": "Beoordeel of het aannemelijk is dat er een significant statistisch verband bestaat tussen het te voorspellen fenomeen en relevante discriminatiegronden. Als dit aannemelijk is, is een bijzonder zorgvuldige verantwoording vereist. Maak een inschatting van de omvang van dit verband.",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Profileringsalgoritmes worden meestal zodanig ontworpen dat de doelvariabele zo accuraat mogelijk wordt voorspeld. Wanneer er een statistisch verband bestaat tussen een discriminatiegrond en de doelvariabele, is het daarom aannemelijk dat de inzet van het profileringsalgoritme leidt tot indirect onderscheid, zelfs wanneer géén gebruik wordt gemaakt van profileringskenmerken met een duidelijk sterk proxykarakter (zie ook 7.4.3)."
+    },
+    "q1-definitie": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-doelvariabele",
+      "ui:description": "Er is een inhoudelijke en herleidbare relatie tussen de waarden van de doelvariabele en het beoogde doel, zoals vastgesteld in 6.3. Bij voorkeur is de doelvariabele een categorische variabele, zodat gevolgen in het besluitvormingsproces voor de verschillende categorieën eenduidig kunnen worden vastgelegd. Documenteer, indien nodig, waarom het niet mogelijk of wenselijk is om de doelvariabele als categorische variabele weer te geven.",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Het doel van een profileringsalgoritme is vaak om een selectie van betrokkenen te maken waarvoor een volgende stap in het besluitvormingsproces wordt genomen. Hierbij wordt de doelvariabele vaak uitgedrukt in twee categorieën, bijvoorbeeld wel/niet geselecteerd. Iedere numerieke variabele kan worden gerepresenteerd als (tweewaardige) categorische variabele door middel van intervalindeling of drempelwaarden."
+    },
+    "q1-meetbaarheid": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-doelvariabele",
+      "ui:description": "Beoordeel of de observeerbaarheid en/of meetbaarheid gelijk is voor alle betrokkenen, in het bijzonder wanneer dit afhankelijk is van een discriminatiegrond. Als dat niet het geval is, moet worden beargumenteerd waarom het niet mogelijk is om gebruik te maken van een alternatieve doelvariabele met gelijke observeerbaarheid en/of meetbaarheid voor alle betrokkenen.",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Verschillen in observeerbaarheid en/of meetbaarheid van de doelvariabele voor verschillende groepen betrokkenen kunnen leiden tot een (sterker) statistisch verband tussen de doelvariabele en een discriminatiegrond dan tussen het fenomeen dat de doelvariabele beoogt te meten en een discriminatiegrond. Hierdoor kan de inzet van het profileringsalgoritme leiden tot indirect onderscheid.\n\nDe observeerbaarheid en/of meetbaarheid kan bijvoorbeeld verschillen doordat de beschikbare dataset niet tot stand is gekomen door een aselecte steekproef of doordat de gekozen doelvariabele mede wordt bepaald door onbedoelde en irrelevante factoren."
+    },
+    "q1-datakwaliteit": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-doelvariabele"
+    },
+    "q1-werkinstructies": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-doelvariabele",
+      "ui:description": "Als de waarden voor de doelvariabele in het verleden zijn toegekend, moet worden gecontroleerd of deze eerdere werkinstructies voldoen aan de huidige gestelde eisen voor het toekennen van waarden aan de doelvariabele voor de specifieke context van het profileringsalgoritme.",
+      "ui:descriptionStyle": "plain"
+    },
+    "q2-populatie": {
+      "ui:widget": "textarea",
+      "ui:id": "q2",
+      "ui:group": "ontwerp-datasets",
+      "ui:groupTitle": "7.3.1 Datasets",
+      "ui:groupIntro": "Maak tijdens het ontwerp en de ontwikkeling van het profileringsalgoritme gebruik van verschillende datasets. Als het niet mogelijk is de hieronder genoemde datasets te gebruiken, documenteer de onderbouwing hiervoor en de impact op het ontwikkeltraject.",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "De relatie tussen de populatie, referentiepopulatie, steekproef en aselecte steekproef staat in bijlage B van de NTA.\n\nBij het verwerken van gegevens gelden de eisen die volgen uit de AVG, zoals het hebben van een wettelijke grondslag voor het verwerken van persoonsgegevens."
+    },
+    "q2-steekproef": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-datasets",
+      "ui:description": "Als nieuwe data voor de dataset worden verzameld, documenteer het dataverzamelingsproces. Zorg dat voor alle steekproefeenheden de doelvariabele wordt toegekend op basis van de werkinstructies, zoals beschreven in 9.2.1. Als historische data worden gebruikt, besteed extra aandacht aan de datakwaliteit (zie 7.3.2).",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Een steekproef kan de gehele referentiepopulatie bevatten."
+    },
+    "q2-aselecte-steekproef": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-datasets",
+      "ui:description": "Doorloop het gehele besluitvormingsproces voor betrokkenen die zijn geselecteerd voor de aselecte steekproef. Hierdoor worden de waarden y van de doelvariabele Y voor deze betrokkenen bekend. Een aselect geselecteerde zaak moet door hetzelfde besluitvormingsproces worden beoordeeld als een zaak waarbij gebruikgemaakt wordt van een profileringsalgoritme (zie 9.2.1).",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Het gebruiken van een aselecte steekproef is relevant, omdat (historische) datasets niet altijd representatief of zelfs vooringenomen kunnen zijn door onzorgvuldige dataverzamelingsprocessen."
+    },
+    "q2-datasets": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-datasets",
+      "ui:bullets": [
+        "Ontwikkeldataset: steekproef aan de hand waarvan het profileringsalgoritme wordt opgesteld.",
+        "Validatiedataset: steekproef, anders dan de ontwikkeldataset, op basis waarvan de prestaties van verschillende profileringsalgoritmes worden vergeleken (7.7.2). Deze dataset wordt iteratief tijdens het ontwikkelproces gebruikt.",
+        "Testdataset: steekproef, disjunct van de ontwikkel- en validatiedataset, die wordt gebruikt om het gekozen profileringsalgoritme te toetsen. Indien mogelijk is dit (een deel van) een aselecte steekproef of nieuw verzamelde data. De resultaten worden gebruikt in 8.3 en als input voor de discriminatietoets in 8.4."
+      ],
+      "ui:description": "Wanneer er een algoritme wordt ontwikkeld gebaseerd op alleen domeinexpertise of logica en er geen data wordt gebruikt voor het opstellen van het algoritme, hoeft er niet noodzakelijk een ontwikkeldataset te zijn. In dat geval geldt 7.3 alleen voor de testdataset.",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Wanneer er gebruik wordt gemaakt van een regelgebaseerd systeem waarbij profileringskenmerken en/of drempelwaarden handmatig worden vastgesteld op basis van domeinexpertise, geïnformeerd of gevalideerd door data-analyse, is er ook sprake van een ontwikkeldataset.\n\nBij beperkte omvang van een dataset kan een validatiedataset worden afgeleid uit de ontwikkeldataset, bijvoorbeeld met kruisvalidatie of bootstrapping."
+    },
+    "q2-een-dataset": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-datasets",
+      "ui:description": "Zonder aselecte steekproef ontstaat het risico dat conclusies worden gebaseerd op een steekproef die niet noodzakelijkerwijs representatief is voor de referentiepopulatie.",
+      "ui:descriptionStyle": "plain"
+    },
+    "q3-accuraatheid": {
+      "ui:widget": "checkboxes",
+      "ui:id": "q3",
+      "ui:group": "ontwerp-datakwaliteit",
+      "ui:groupTitle": "7.3.2 Datakwaliteit",
+      "ui:groupIntro": "Doorloop de volgende stappen om na te gaan of de kwaliteit van de dataset voldoende is.",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Fouten in de data kunnen bijvoorbeeld ontstaan door verkeerde aanlevering, onnauwkeurige observaties, fouten in de afleiding van data, of onjuiste inferenties. Begrip van hoe data tot stand zijn gekomen, kan helpen bij de identificatie van accuraatheid."
+    },
+    "q3-compleetheid": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-datakwaliteit",
+      "ui:bullets": [
+        "Onderzoek en documenteer wat de oorzaak is van missende waarden."
+      ],
+      "ui:description": "Bepaal het aantal missende waarden. Bepaal of het aantal missende waarden acceptabel is. Evalueer of de kansverdeling van missende waarden verschilt voor verschillende waarden van een discriminatiegrond.",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Meer informatie over een evaluatie van missende waarden staat in bijlage D van de NTA.\n\nZie 7.7.3, stap 3) voor een toelichting op het verkrijgen van data met betrekking tot discriminatiegronden."
+    },
+    "q3-representativiteit": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-datakwaliteit",
+      "ui:bullets": [
+        "Verifieer of de kansverdeling van de profileringskenmerken in de dataset overeenkomt met die in de referentiepopulatie, als deze voor de gehele referentiepopulatie bekend zijn. Zo niet, verifieer of de kansverdeling overeenkomt met de aselecte steekproef.",
+        "Beschrijf in hoeverre de data in de gebruikte dataset worden beïnvloed door andere datasets en/of besluitvormingsprocessen."
+      ],
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Als de profileringskenmerken niet voor de gehele referentiepopulatie bekend zijn en de aselecte steekproef geen onderdeel is van de gebruikte datasets, kan deze stap niet worden uitgevoerd."
+    },
+    "q3-consistentie": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-datakwaliteit",
+      "ui:bullets": [
+        "Beschrijf het proces waarmee de data zijn verzameld. Zorg ervoor dat dit proces consistent is voor alle betrokkenen.",
+        "Onderzoek de data op contradicties, logische samenhang, dubbele waarden en extreme waarden.",
+        "Motiveer en documenteer hoe er wordt omgegaan met gevonden inconsistenties."
+      ]
+    },
+    "q3-actueel": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-datakwaliteit",
+      "ui:bullets": [
+        "Leg vast wat de geldigheidsperiode van de dataset is. Bepaal wat er moet worden uitgevoerd als deze geldigheidsperiode is verlopen.",
+        "Leg vast welke variabelen tijdsafhankelijk zijn en met regelmaat moeten worden bijgewerkt."
+      ],
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Aanvullende informatie over datakwaliteitseisen kan worden gevonden in de NEN-ISO 8000-reeks, ISO/IEC 25012 en NEN-ISO/IEC 25024."
+    },
+    "q4-herkomst": {
+      "ui:widget": "textarea",
+      "ui:id": "q4",
+      "ui:group": "ontwerp-datasetdocumentatie",
+      "ui:groupTitle": "7.3.3 Documentatie van datasets",
+      "ui:description": "De bron(nen) van de data, inclusief de partij die verantwoordelijk is voor het verzamelen, het beheer en het ontsluiten van de dataset. Het doel waarvoor en het proces waarbinnen de data oorspronkelijk zijn verzameld. De juridische grondslag voor gebruik in het profileringsalgoritme. De geografische en/of sociodemografische herkomst en dekking, en de periode waarin de data zijn verzameld. Bekende beperkingen of vertekeningen in de wijze van dataverzameling. Als er datasets zijn afgeleid, verrijkt of gecombineerd, moet dit expliciet worden vastgelegd.",
+      "ui:descriptionStyle": "plain"
+    },
+    "q4-samenstelling": {
+      "ui:widget": "checkboxes",
+      "ui:group": "ontwerp-datasetdocumentatie",
+      "ui:enumTooltips": [
+        null,
+        null,
+        "Voor numerieke kenmerken het bereik (minimum- en maximumwaarde). Voor categorische kenmerken en de doelvariabele de labels en hun betekenis.",
+        null,
+        null,
+        "Waaronder: het onderscheid tussen niet van toepassing zijnde en ontbrekende waarden; de frequentie van deze waarden per variabele; bekende patronen (bijv. selectief ontbreken voor specifieke groepen)."
+      ]
+    },
+    "q4-bewerkingen": {
+      "ui:group": "ontwerp-datasetdocumentatie",
+      "ui:bullets": [
+        "normalisatie of schaling;",
+        "strategie voor missende waarden (ongewijzigd laten, records of variabelen uitsluiten, imputeren);",
+        "filtering of uitsluiting;",
+        "codering, herclassificatie, intervalverdeling."
+      ],
+      "items": {
+        "ui:widget": "ListItemTextareaWidget",
+        "ui:label": false,
+        "ui:options": {
+          "rows": 1,
+          "itemPlaceholderPrefix": "Bewerking"
+        }
+      },
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Niet van toepassing zijnde waarden (NA of not applicable) zijn niet bepaald, omdat het betreffende kenmerk conceptueel niet relevant is voor de betreffende records. Ontbrekende (missende) waarden zijn niet bepaald of vastgelegd, terwijl zij wel relevant zijn en in beginsel bepaald hadden kunnen worden. Zonder aanvullende documentatie zijn lege of NULL-waarden semantisch ambigu."
+    },
+    "q5-kenmerken": {
+      "ui:id": "q5",
+      "ui:group": "ontwerp-kenmerken-kwalitatief",
+      "ui:groupTitle": "7.4.2 Kwalitatieve analyse",
+      "ui:groupIntro": "Om een betrouwbaar profileringsalgoritme te ontwikkelen, is het van belang om profileringskenmerken zorgvuldig te selecteren; zowel kwalitatieve als kwantitatieve afwegingen onderbouwen die selectie. Voordat een profileringsalgoritme daadwerkelijk wordt ontwikkeld, moet de keuze voor profileringskenmerken vooraf worden onderbouwd op basis van domeinkennis en wettelijke vereisten.",
+      "items": {
+        "ui:widget": "ListItemTextareaWidget",
+        "ui:label": false,
+        "ui:options": {
+          "rows": 1,
+          "itemPlaceholderPrefix": "Profileringskenmerk"
+        }
+      }
+    },
+    "q5-bezwaren": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-kenmerken-kwalitatief",
+      "ui:bullets": [
+        "Verwerking van het profileringskenmerk is verboden volgens AVG artikel 9 of 10, en er is geen wettelijke uitzonderingsgrond.",
+        "Het profileringskenmerk maakt een (direct of indirect) onderscheid waartegen op voorhand andere zelfstandige, zwaarwegende juridische bezwaren of haalbaarheidsrisico's bestaan. Ga o.a. op basis van literatuuronderzoek na of een profileringskenmerk een bekend proxykenmerk is voor een discriminatiegrond. Direct onderscheid op basis van ras is verboden bij het gebruik van profilering voor handhaving en toezicht.",
+        "Tegen een specifiek profileringskenmerk zijn in eerdere vergelijkbare casus zwaarwegende ethische of juridische bezwaren vastgesteld. Ga hierbij na of de contexten voldoende vergelijkbaar zijn.",
+        "Het is niet mogelijk een inhoudelijk verband te beredeneren tussen een profileringskenmerk en het legitieme doel dat wordt nagestreefd."
+      ],
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Als een van deze situaties zich voordoet, is er een grote kans dat een profileringsalgoritme dat op deze kenmerken is ontwikkeld feitelijk niet uitvoerbaar is of niet door de discriminatietoets uit hoofdstuk 8 komt. Het wordt aangeraden om in deze fase, indien mogelijk, de ontwikkeling van het algoritme door te zetten zonder gebruik van dergelijk(e) profileringskenmerk(en)."
+    },
+    "q5-selectie": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-kenmerken-kwalitatief"
+    },
+    "q6-proxyanalyse": {
+      "ui:widget": "textarea",
+      "ui:id": "q6",
+      "ui:group": "ontwerp-kenmerken-kwantitatief",
+      "ui:groupTitle": "7.4.3 Kwantitatieve analyse",
+      "ui:groupIntro": "Naast de kwalitatieve analyse kan ook een kwantitatieve analyse de keuze voor profileringskenmerken onderbouwen. Redenen om bepaalde profileringskenmerken niet mee te nemen zijn bijvoorbeeld een sterk kwantitatief verband tussen een profileringskenmerk en een beschermde grond, of dat het gebruik niet in lijn is met het dataminimalisatieprincipe. De volgende stappen worden aangeraden.",
+      "ui:description": "Als er een grondslag is voor de verwerking van (bijzondere) persoonsgegevens voor het doel om non-discriminatie te waarborgen (zie 7.4.1 en 7.7.3, stap 3), kan deze data worden gebruikt om na te gaan of er een verband bestaat (bijv. op basis van correlaties). Als er een sterk verband wordt gevonden, heeft het profileringskenmerk een proxykarakter en is er een gerede kans dat het algoritme indirect onderscheid zal maken. Het wordt aangeraden om, indien mogelijk, de ontwikkeling voort te zetten zonder dit profileringskenmerk.",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Naast een univariaat verband kan er ook een multivariaat verband zijn. De analyse daarvan kan een waarschuwing geven dat het algoritme de mogelijkheid heeft om informatie over de discriminatiegrond te gebruiken in de selectie.\n\nOf het geobserveerde verband te sterk en dus onwenselijk is, wordt per geval bepaald.\n\nHet verwijderen van een profileringskenmerk met een proxykarakter is niet voldoende om indirect onderscheid te voorkomen; ook een statistisch verband tussen de doelvariabele en een discriminatiegrond (zie 7.2) kan hiertoe leiden.\n\nEen gevonden verband impliceert geen oorzakelijk verband: correlatie is geen causatie."
+    },
+    "q6-dataminimalisatie": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-kenmerken-kwantitatief",
+      "ui:description": "Vanuit het uitgangspunt van dataminimalisatie en uitlegbaarheid wordt aangeraden waar mogelijk het aantal profileringskenmerken te reduceren. Als er een zeer sterk verband is tussen twee profileringskenmerken, kan een van beide worden weggelaten zonder verlies aan informatie; bij voorkeur het kenmerk dat het minst bijdraagt aan een verklaring van het doel.",
+      "ui:descriptionStyle": "plain"
+    },
+    "q7-keuze": {
+      "ui:widget": "textarea",
+      "ui:id": "q7",
+      "ui:group": "ontwerp-algoritmekeuze",
+      "ui:groupTitle": "7.5 Algoritmekeuze",
+      "ui:groupIntro": "Bepaal welk type algoritme het meest geschikt is om in te zetten als profileringsalgoritme. Er kan worden gekozen voor o.a. een regelgebaseerd algoritme (bijv. op basis van domeinkennis), een datagebaseerd algoritme of een combinatie hiervan.",
+      "ui:bullets": [
+        "Uitlegbaarheid: een algoritme moet in begrijpelijke taal kunnen worden uitgelegd voor verschillende doelgroepen.",
+        "Complexiteit: beperk de complexiteit van het algoritme, rekening houdend met prestaties en onderscheid. Denk aan het aantal gebruikte profileringskenmerken, het aantal opgestelde regels en de gedefinieerde relaties tussen kenmerken en/of regels.",
+        "Beschikbare data: de beschikbare data moet geschikt zijn voor de ontwikkeling en evaluatie van het beoogde type algoritme (zie 7.3).",
+        "Beschikbare domeinexpertise: analyseer de beschikbaarheid, betrouwbaarheid en objectiviteit van domeinexpertise voor het ontwikkelen van het algoritme.",
+        "Beoogde toepassing: het gekozen type algoritme moet aansluiten bij de beoogde toepassing en het werkproces."
+      ],
+      "ui:description": "Een eenvoudiger algoritme kan ten koste gaan van de prestaties of de mate van onderscheid verhogen. Maak de afweging voor complexiteit op basis van uitlegbaarheid, prestaties en gemeten onderscheid.",
+      "ui:descriptionStyle": "plain"
+    },
+    "q7-ai-verordening": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-algoritmekeuze",
+      "ui:description": "Wanneer er wordt gekozen voor een (deels) datagebaseerd algoritme, of regels worden afgeleid uit data en/of op basis van op logica en kennis gebaseerde benaderingen, kan het zijn dat het profileringsalgoritme onderdeel vormt van een AI-systeem. Als dat het geval is, moet het AI-systeem worden ontwikkeld en gebruikt volgens de vereisten uit de AI-verordening.",
+      "ui:descriptionStyle": "plain"
+    },
+    "q8-regels": {
+      "ui:id": "q8",
+      "ui:group": "ontwerp-opstellen",
+      "ui:groupTitle": "7.6 Opstellen van profileringsalgoritme",
+      "ui:groupIntro": "Na het doorlopen van de stappen in 7.2 t/m 7.5 kan het profileringsalgoritme worden opgesteld. Maak hiervoor gebruik van de profileringskenmerken die na de datavoorbereiding (7.3) en de selectie van profileringskenmerken (7.4) beschikbaar zijn. Gebruik het type algoritme dat in 7.5 is gekozen.",
+      "items": {
+        "ui:widget": "ListItemTextareaWidget",
+        "ui:label": false,
+        "ui:options": {
+          "rows": 1,
+          "itemPlaceholderPrefix": "Regel"
+        }
+      },
+      "ui:description": "Het opstellen van deze regels of formules kan iteratief verlopen, waarbij domeinexpertise en datagedreven inzichten elkaar opvolgen en afwisselen.",
+      "ui:descriptionStyle": "plain"
+    },
+    "q8-datagebaseerd": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-opstellen"
+    },
+    "q9-metrieken": {
+      "ui:id": "q9",
+      "ui:group": "ontwerp-prestaties",
+      "ui:groupTitle": "7.7.2 Prestaties van het profileringsalgoritme voor de doelvariabele",
+      "ui:groupIntro": "Tijdens de ontwikkelfase wordt het profileringsalgoritme iteratief aangepast aan de hand van metingen van de prestaties en het gemaakte onderscheid. Meet beide op de validatiedataset en na elke iteratie van het algoritme, omdat wijzigingen in de prestaties het indirect onderscheid kunnen beïnvloeden en andersom. Let op: het bepalen van de prestaties van het profileringsalgoritme voor de doelvariabele is niet hetzelfde als het bepalen van de effectiviteit van het profileringsalgoritme om het beoogde doel te bereiken (zie 5.3.4).",
+      "items": {
+        "ui:widget": "ListItemTextareaWidget",
+        "ui:label": false,
+        "ui:options": {
+          "rows": 1,
+          "itemPlaceholderPrefix": "Prestatiemetriek"
+        }
+      },
+      "ui:description": "Denk hierbij aan metrieken als nauwkeurigheid, precisie, sensitiviteit, specificiteit en AUC.",
+      "ui:descriptionStyle": "plain"
+    },
+    "q9-uitkomsten": {
+      "ui:group": "ontwerp-prestaties",
+      "items": {
+        "ui:widget": "ListItemTextareaWidget",
+        "ui:label": false,
+        "ui:options": {
+          "rows": 1,
+          "itemPlaceholderPrefix": "Uitkomst"
+        }
+      },
+      "ui:description": "Er kunnen ook eventuele vervolgacties in het besluitvormingsproces worden bepaald om een breder beeld te krijgen, zoals menselijke beoordeling, selecties van betrokkenen en de uiteindelijke beslissing. Deze data moeten daarvoor beschikbaar zijn in de validatiedataset.",
+      "ui:descriptionStyle": "plain"
+    },
+    "q9-bandbreedtes": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-prestaties",
+      "ui:description": "De bandbreedte meet hoe groot de foutmarges van de prestatiemetrieken maximaal mogen zijn. De bandbreedtes moeten zodanig worden opgesteld dat wanneer de prestaties binnen de bandbreedte vallen, het profileringsalgoritme het legitieme doel voldoende dichterbij brengt (zie 8.4). Er bestaat geen universeel toepasbare bandbreedte; dit moet de organisatie zelf per context afwegen en documenteren.",
+      "ui:descriptionStyle": "plain"
+    },
+    "q9-meten": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-prestaties",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Wanneer er veel iteraties worden gedaan op de validatiedataset, ontstaat er een risico op overfitting op de validatiedataset. In dat geval zal het algoritme goede resultaten op de validatiedataset geven, maar minder goede resultaten op de testdataset en in de praktijk."
+    },
+    "q9-beoordeling": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-prestaties",
+      "ui:description": "Als dit niet het geval is, moet er een nieuwe iteratie worden gedaan om het algoritme te verbeteren, of worden besloten te stoppen als een voldoende prestatie niet haalbaar wordt geacht.",
+      "ui:descriptionStyle": "plain"
+    },
+    "q9-documentatie": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-prestaties",
+      "ui:description": "Bijvoorbeeld: 'Door gebruik van het profileringsalgoritme worden 0,7 x zoveel foutieve aanvragen gevonden in vergelijking met selectie op basis van een aselecte steekproef.'",
+      "ui:descriptionStyle": "plain"
+    },
+    "q10-gronden": {
+      "ui:id": "q10",
+      "ui:group": "ontwerp-onderscheid",
+      "ui:groupTitle": "7.7.3 Meten van indirect onderscheid tussen groepen door het profileringsalgoritme",
+      "ui:groupIntro": "Om mogelijke discriminatie in kaart te brengen, moet worden geanalyseerd of het profileringsalgoritme groepen betrokkenen die worden gekenmerkt door een discriminatiegrond onevenredig benadeelt. Betrek bij het bepalen van de gronden (stap 1), de relevante stappen in het besluitvormingsproces (stap 2) en de gelijkheidsmetrieken (stap 4) verschillende domeinexperts, ethisch en juridisch experts.",
+      "items": {
+        "ui:widget": "ListItemTextareaWidget",
+        "ui:label": false,
+        "ui:options": {
+          "rows": 1,
+          "itemPlaceholderPrefix": "Grond"
+        }
+      },
+      "ui:description": "Documenteer voor discriminatiegronden in ieder geval waarom voor deze gronden onderscheid wel of niet wordt gemeten, en bepaal of er ook andere gronden zijn op basis waarvan onderscheid vanuit ethisch of maatschappelijk oogpunt onwenselijk wordt geacht. Bepaal ook of er sprake kan zijn van subgroepen met meerdere relevante gronden (meervoudige discriminatie) of specifieke combinaties daarvan (intersectionaliteit). De gekozen gronden behoren in ieder geval een aanmerkelijke mate van ernst te hebben.",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "De methoden in 7.7.3 kunnen niet aantonen dat er wel of geen onderscheid is op individueel niveau."
+    },
+    "q10-stappen": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-onderscheid",
+      "ui:description": "Er kunnen ook eventuele vervolgacties worden bepaald om een breder beeld te krijgen, zoals menselijke beoordeling, selecties van betrokkenen en de uiteindelijke beslissing. Dit kan alleen als de data daarvoor beschikbaar zijn in de validatiedataset.",
+      "ui:descriptionStyle": "plain"
+    },
+    "q10-persoonskenmerken": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-onderscheid",
+      "ui:bullets": [
+        "Interne beschikbare data: gegevens waarvoor binnen de overheidsinstelling een verwerkingsgrondslag is in de context van het beoogde legitieme doel.",
+        "Aanvullende dataverzameling: het verzamelen van aanvullende gegevens, indien noodzakelijk, om prestaties van het profileringsalgoritme te evalueren.",
+        "CBS-microdata: toegang tot gepseudonimiseerde gegevens via een daarvoor gemachtigde instelling, enkel voor statistisch onderzoek naar de werking van het profileringsalgoritme.",
+        "CBS-maatwerktabellen: aanvullende statistieken over de kansverdeling van gegevens over relevante gronden in de relevante referentiepopulatie."
+      ],
+      "ui:description": "Het verkrijgen van bijzondere categorieën persoonsgegevens vereist passende waarborgen voor de grondrechten en fundamentele vrijheden van natuurlijke personen, waaronder technische beperkingen voor hergebruik en maatregelen zoals pseudonimisering of versleuteling. Als gegevens over de relevante gronden niet toereikend zijn voor het meten van onderscheid, wordt aanbevolen de ontwikkeling te stoppen. Wordt toch doorgegaan, onderbouw dan: de gegronde redenen daarvoor; in hoeverre de kwalitatieve en kwantitatieve analyses van de profileringskenmerken voldoende zorgvuldig zijn onderbouwd; welke kwalitatieve beheersmaatregelen zijn geïmplementeerd, zoals menselijke controle; hoe actief wordt gemonitord op mogelijk onderscheid; en welke aspecten ervoor zorgen dat het profileringsalgoritme alsnog verantwoord kan worden ingezet.",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Als er gebruik wordt gemaakt van bekende proxykenmerken, is de kans groot dat er sprake is van (indirect) onderscheid op basis van een discriminatiegrond."
+    },
+    "q10-metrieken": {
+      "ui:group": "ontwerp-onderscheid",
+      "items": {
+        "ui:widget": "ListItemTextareaWidget",
+        "ui:label": false,
+        "ui:options": {
+          "rows": 1,
+          "itemPlaceholderPrefix": "Gelijkheidsmetriek"
+        }
+      },
+      "ui:description": "Bereken voor de relevante gronden of combinaties ten minste de gelijkheidsmetriek demografische pariteit; deze sluit het beste aan bij de definitie van indirect onderscheid. Motiveer welke aanvullende gelijkheidsmetrieken worden gemeten; veelgebruikt zijn gelijke misclassificatieratio (equalized odds) en gelijke sensitiviteit (equality of opportunity).",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "De gedefinieerde gelijkheidsmetrieken zijn geen voldoende voorwaarde voor groepsgelijkheid, omdat deze maatstaven niet alle concepten van groepsgelijkheid kunnen omvatten.\n\nBij verschillende uitkomstratio's tussen de groepen in de datasets zal het niet mogelijk zijn om tegelijk exact aan demografische pariteit en gelijke classificatieratio's te voldoen."
+    },
+    "q10-meten": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-onderscheid",
+      "ui:description": "Als de gevonden verschillen te groot worden bevonden, moet er een nieuwe iteratie worden gedaan om het algoritme te verbeteren, of worden besloten te stoppen als het niet haalbaar is om een niveau van onderscheid te behalen dat door de toets in hoofdstuk 8 kan komen. Let op dat ieder significant onderscheid in principe verboden is, tenzij er een objectieve rechtvaardiging voor bestaat (zie 8.4).",
+      "ui:descriptionStyle": "plain"
+    },
+    "q10-documentatie": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-onderscheid",
+      "ui:description": "Bijvoorbeeld: 'Door het gebruik van het profileringsalgoritme worden mensen met een niet-Europese achtergrond 1,5 x zo vaak geselecteerd voor controle in vergelijking met een selectie op basis van een aselecte steekproef.'",
+      "ui:descriptionStyle": "plain"
+    },
+    "q11-effectgrootte": {
+      "ui:widget": "textarea",
+      "ui:id": "q11",
+      "ui:group": "ontwerp-statistisch-toetsen",
+      "ui:groupTitle": "7.7.4 Statistisch toetsen van prestaties en onderscheid",
+      "ui:groupIntro": "Een gemeten verschil bij metrieken kan berusten op toeval. Statistiek kan helpen om te bepalen of wat er is gevonden een eigenschap is van de populatie of een toevalstreffer is.",
+      "ui:description": "Bijvoorbeeld: het profileringsalgoritme maakt tweemaal zo vaak een terechte selectie als de aselecte steekproef.",
+      "ui:descriptionStyle": "plain"
+    },
+    "q11-significantie": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-statistisch-toetsen",
+      "ui:description": "Bijvoorbeeld: de verhouding mannen en vrouwen na selectie van het profileringsalgoritme wijkt significant af van de verhouding in de populatie.",
+      "ui:descriptionStyle": "plain"
+    },
+    "q11-hypothesetoetsen": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-statistisch-toetsen",
+      "ui:bullets": [
+        "Bepaal of de gemeten prestaties significant binnen de gekozen bandbreedtes voor de prestaties van het algoritme liggen.",
+        "Bepaal voor alle gelijkheidsmetrieken of de gemeten verschillen tussen groepen significant zijn.",
+        "Bepaal of de gemeten prestaties voor alle groepen significant binnen de gekozen bandbreedtes liggen."
+      ],
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Voor meer informatie over hypothesetoetsen, zie ISO 3534-1 en bijlage C van de NTA.\n\nIn het geval dat er veel hypothesetoetsen worden uitgevoerd, kan het zinvol zijn te kijken naar 'multiple testing correction'."
+    },
+    "q12-motivatie": {
+      "ui:widget": "textarea",
+      "ui:id": "q12",
+      "ui:group": "ontwerp-herziening",
+      "ui:groupTitle": "7.7.5 Herziening van gekozen metrieken en bandbreedtes",
+      "ui:groupIntro": "Om vooringenomenheid over een gewenste uitkomst te voorkomen (confirmation bias), is het belangrijk dat een organisatie metrieken en bandbreedtes kiest voorafgaand aan de metingen en toetsing. Toch kunnen eerste resultaten aanleiding geven tot aanvullend onderzoek en discussie, voordat metrieken en bandbreedtes formeel worden vastgesteld."
+    },
+    "q12-latere-aanpassing": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-herziening",
+      "ui:bullets": [
+        "naar aanleiding van incidenten, klachten of andere aanwijzingen dat het algoritme onbedoelde of ongewenste effecten voor de betrokkenen veroorzaakt;",
+        "wanneer is aangetoond dat er een betere methode beschikbaar is om prestaties en/of onderscheid te meten met een bijbehorende, onderbouwde drempelwaarde."
+      ],
+      "ui:description": "In het eerste geval mag de herziening uitsluitend leiden tot een strengere of meer beperkende toepassing van het criterium.",
+      "ui:descriptionStyle": "plain"
+    },
+    "q13-doelvariabele": {
+      "ui:widget": "textarea",
+      "ui:id": "q13",
+      "ui:group": "ontwerp-documentatie",
+      "ui:groupTitle": "7.8 Documenteer ontwikkeling profileringsalgoritme",
+      "ui:groupIntro": "Documenteer het definitieve ontwerp van het profileringsalgoritme volgens de documentatie-eisen zoals beschreven in 5.3.3 van de NTA. Leg hierbij ten minste de volgende aspecten vast."
+    },
+    "q13-type-algoritme": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-documentatie"
+    },
+    "q13-kenmerken": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-documentatie",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Dit geldt voor alle profileringskenmerken, inclusief kenmerken die niet direct of indirect worden geassocieerd met een discriminatiegrond. De inhoudelijke motivering bevat de formulering van een onderbouwde hypothese over het veronderstelde verband tussen het kenmerk en de doelvariabele. De onderbouwing kan verschillende vormen krijgen, waaronder wetenschappelijk, statistisch of juridisch. De normen voor onderbouwing zijn strenger naar mate het een profileringskenmerk betreft dat direct of indirect wordt geassocieerd met een discriminatiegrond, nauwer verbonden is met de identiteit van een persoon of significante kwetsbaarheid."
+    },
+    "q13-methode": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-documentatie"
+    },
+    "q13-definitief-algoritme": {
+      "ui:widget": "textarea",
+      "ui:group": "ontwerp-documentatie",
+      "ui:description": "Documenteer bij een regelgebaseerd profileringsalgoritme ten minste de opgestelde regels met bijbehorende drempelwaarden en de interactie tussen de regels. Documenteer bij een datagebaseerd profileringsalgoritme ten minste de structuur en de gewichten.",
+      "ui:descriptionStyle": "plain"
+    }
+  }
+}

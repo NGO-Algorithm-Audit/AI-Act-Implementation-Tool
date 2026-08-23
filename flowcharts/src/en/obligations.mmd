@@ -1,0 +1,89 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'Avenir Next, Avenir, Helvetica, sans-serif', 'fontSize': '14px', 'lineColor': '#005AA7', 'primaryColor': '#005AA7', 'edgeLabelBackground': '#ffffff'}, 'flowchart': {'curve': 'basis', 'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 90, 'rankSpacing': 130, 'padding': 24}}}%%
+flowchart LR
+
+    classDef Q fill:#daeaf7,stroke:#005aa7,color:#000
+    classDef cat_forb fill:#dc3545,stroke:#a01c2a,color:#fff,font-weight:bold
+    classDef cat_high fill:#d97706,stroke:#a05705,color:#fff,font-weight:bold
+    classDef cat_genai fill:#FFBF00,stroke:#b88a00,color:#fff,font-weight:bold
+    classDef role_prov fill:#6f42c1,stroke:#4f2c91,color:#fff,font-weight:bold
+    classDef role_dep fill:#0891b2,stroke:#076a8d,color:#fff,font-weight:bold
+    classDef scenario fill:#fff5cc,stroke:#b88a00,color:#000,font-weight:bold
+    classDef oblig_forb fill:#fbe2e4,stroke:#dc3545,color:#000
+    classDef oblig_high fill:#fdecd0,stroke:#d97706,color:#000
+    classDef oblig_genai fill:#f1f3f5,stroke:#9aa3ab,color:#000
+    linkStyle default stroke:#005AA7,stroke-width:1.2px
+
+    Q1["Risk category<br/>(determined by the<br/>Risk-category questionnaire)"]:::Q
+    Q1 -->|"Prohibited<br/>Art. 5"| FORB
+    Q1 -->|"High-risk<br/>Art. 6 + Annex III"| HIGH
+    Q1 -->|"Generative and interactive<br/>Art. 50"| GENAI
+
+    FORB["Prohibited<br/>AI system"]:::cat_forb
+    HIGH["High-risk<br/>AI system"]:::cat_high
+    GENAI["Generative and<br/>interactive AI system"]:::cat_genai
+
+    FORB --> Q2F["Role"]:::Q
+    HIGH --> Q2H["Role"]:::Q
+    GENAI --> Q10["Q10 scenario<br/>(multi-select)"]:::Q
+
+    Q2F -->|"Provider"| FP
+    Q2F -->|"Deployer"| FD
+    Q2H -->|"Provider"| HP
+    Q2H -->|"Deployer"| HD
+
+    Q10 -->|"Interacts directly<br/>with natural persons"| S1
+    Q10 -->|"Generates synthetic<br/>audio / image / video / text"| S2
+    Q10 -->|"Recognises emotions or<br/>biometric categorisation"| S3
+    Q10 -->|"Generates / manipulates<br/>public-interest content"| S4
+
+    S1["Art. 50(1)<br/>Interactive AI"]:::scenario
+    S2["Art. 50(2)<br/>Generative AI"]:::scenario
+    S3["Art. 50(3)<br/>Emotion recognition /<br/>biometric categorisation"]:::scenario
+    S4["Art. 50(4)<br/>Deep fakes /<br/>public-interest text"]:::scenario
+
+    S1 --> S1R["Role"]:::Q
+    S2 --> S2R["Role"]:::Q
+    S3 --> S3R["Role"]:::Q
+    S4 --> S4R["Role"]:::Q
+
+    S1R -->|"Provider"| S1P
+    S1R -->|"Deployer"| S1D
+    S2R -->|"Provider"| S2P
+    S2R -->|"Deployer"| S2D
+    S3R -->|"Provider"| S3P
+    S3R -->|"Deployer"| S3D
+    S4R -->|"Deployer"| S4D
+
+    FP["Provider"]:::role_prov
+    FD["Deployer"]:::role_dep
+    HP["Provider"]:::role_prov
+    HD["Deployer"]:::role_dep
+    S1P["Provider"]:::role_prov
+    S1D["Deployer"]:::role_dep
+    S2P["Provider"]:::role_prov
+    S2D["Deployer"]:::role_dep
+    S3P["Provider"]:::role_prov
+    S3D["Deployer"]:::role_dep
+    S4D["Deployer"]:::role_dep
+
+    FP --> FP_O["Take the AI system out of service immediately. Do not place it on the market, put it into service or use it within the European Union.<br/>Source: Art. 5 AI Act"]:::oblig_forb
+
+    FD --> FD_O["Stop using the AI system. Inform the provider that the system must be taken out of service immediately. Do not use within the European Union.<br/>Source: Art. 5 AI Act"]:::oblig_forb
+
+    HP --> HP_O["Obligations for the provider of a high-risk AI system:<br/>• Risk management system (Art. 9)<br/>• Data and data governance (Art. 10)<br/>• Technical documentation — Annex IV — before placing on the market (Art. 11)<br/>• Record-keeping and logging — retain logs ≥ 6 months (Art. 12)<br/>• Transparency and instructions to deployers (Art. 13)<br/>• Human oversight and meaningful human intervention (Art. 14)<br/>• Accuracy, robustness and cybersecurity (Art. 15)<br/>• Quality management system, incl. post-market monitoring (Art. 17)<br/>• Conformity assessment — self- or third-party (Art. 43)<br/>• EU Declaration of Conformity (Art. 47)<br/>• CE marking (Art. 48)<br/>• Registration in the EU database before placing on the market (Art. 49)<br/>• Post-market monitoring &amp; serious-incident reporting (Art. 72)<br/>• AI literacy of staff (Art. 4)<br/>Source: Art. 16 AI Act"]:::oblig_high
+
+    HD --> HD_O["Obligations for the deployer of a high-risk AI system:<br/>• Use the system in accordance with the instructions for use (Art. 26(1))<br/>• Assign human oversight to competent persons (Art. 26(2))<br/>• Where the deployer controls input data, ensure relevance &amp; representativeness (Art. 26(4))<br/>• Monitor operation and report risks / serious incidents to the provider, distributor and market-surveillance authority (Art. 26(5))<br/>• Keep automatically generated logs ≥ 6 months (Art. 26(6))<br/>• Inform workers' representatives and affected workers before workplace deployment (Art. 26(7))<br/>• Inform natural persons that they are subject to a high-risk AI system (Art. 26(11))<br/>• Fundamental Rights Impact Assessment before deployment — for public bodies and certain private deployers of Annex III systems (Art. 27)<br/>Source: Art. 26 AI Act"]:::oblig_high
+
+    S1P --> S1P_O["Obligations for AI interacting directly with natural persons:<br/>• Design and develop the AI system so that natural persons are clearly informed they are interacting with an AI system, unless this is obvious from the perspective of a reasonably well-informed natural person, taking into account the circumstances and context of use.<br/>• The notification must be embedded in design and provided at the latest at the time of the first interaction (Art. 50(5)).<br/>• Information must be clear, distinguishable, accessible (incl. for vulnerable groups: children, elderly, persons with disabilities) and given in a context-appropriate manner.<br/>Timing: Provide information to users at the latest at the time of the first exposure to the system.<br/>Exception: Systems permitted by law to detect, prevent or investigate criminal offences, with appropriate safeguards under Union law.<br/>Source: Art. 50(1) AI Act"]:::oblig_genai
+
+    S1D --> S1D_O["Obligations for AI interacting directly with natural persons:<br/>• Verify that the provider has implemented the disclosure of interactive AI (e.g. an opening line from a chatbot, a clear 'AI assistant' label, or equivalent signal).<br/>• Double-check that your own configuration, branding, or integration of the system does not undermine or remove the provider's disclosure. If you fine-tune, rebrand, or substantially modify the system, Article 25 may convert you into a provider, importing full Article 50(1) provider duties.<br/>Timing: Provide information to users at the latest at the time of the first exposure to the system.<br/>Exception: Systems permitted by law to detect, prevent or investigate criminal offences, with appropriate safeguards under Union law.<br/>Source: Art. 50(1) AI Act"]:::oblig_genai
+
+    S2P --> S2P_O["Obligations for AI generating synthetic audio, image, video or text content:<br/>• Marking: outputs must be marked in a machine-readable format (e.g. watermarks, metadata, cryptographic provenance methods, fingerprints).<br/>• Detection: providers must make means available to detect that the output is AI-generated or manipulated, with human-readable results.<br/>• Both elements must be present; marking alone is insufficient.<br/>Timing: Provide information to users at the latest at the time of the first exposure to the system.<br/>Exception: Systems permitted by law to detect, prevent or investigate criminal offences, with appropriate safeguards under Union law.<br/>Source: Art. 50(2) AI Act"]:::oblig_genai
+
+    S2D --> S2D_O["Obligations for AI generating synthetic audio, image, video or text content:<br/>• Deployers of AI systems that generate deep fakes (as defined in Art. 3(60)) must disclose that the content has been artificially generated or manipulated.<br/>• Deployers of AI systems that generate or manipulate text which is published with the purpose of informing the public on matters of public interest must disclose that the text has been artificially generated or manipulated.<br/>Timing: Provide information to users at the latest at the time of the first exposure to the system.<br/>Exception:<br/>• Where the use is authorised by law to detect, prevent, investigate, or prosecute criminal offences.<br/>• Where the content forms part of an evidently artistic, creative, satirical, fictional, or analogous work or programme. The obligation is limited to disclosing the existence of such generated or manipulated content in an appropriate manner that does not hamper the display or enjoyment of the work.<br/>• Where the AI-generated content has undergone a process of human review or editorial control, and a natural or legal person holds editorial responsibility for the publication.<br/>Source: Art. 50(4) AI Act"]:::oblig_genai
+
+    S3P --> S3P_O["Inform exposed persons and process personal data per GDPR."]:::oblig_genai
+
+    S3D --> S3D_O["Obligations for AI recognising emotions or categorising persons based on biometric data:<br/>• Inform all natural persons exposed to the system that it is being operated / used.<br/>• Provide information in a clear, distinguishable and accessible manner (Art. 50(5)).<br/>• Information may be given in writing, via standardised icons, orally, electronically or any combination, depending on the deployment context.<br/>Timing: Provide information to users at the latest at the time of the first exposure to the system.<br/>Exception: Systems permitted by law to detect, prevent or investigate criminal offences, with appropriate safeguards under Union law.<br/>Source: Art. 50(3) and Art. 50(5) AI Act"]:::oblig_genai
+
+    S4D --> S4D_O["Obligations for AI generating or manipulating image, audio, video or public-interest text content:<br/>• Deployers of AI systems that generate deep fakes (as defined in Art. 3(60)) must disclose that the content has been artificially generated or manipulated.<br/>• Deployers of AI systems that generate or manipulate text which is published with the purpose of informing the public on matters of public interest must disclose that the text has been artificially generated or manipulated.<br/>Timing: Provide information to users at the latest at the time of the first exposure to the system.<br/>Exception:<br/>• Where the use is authorised by law to detect, prevent, investigate, or prosecute criminal offences.<br/>• Where the content forms part of an evidently artistic, creative, satirical, fictional, or analogous work or programme. The obligation is limited to disclosing the existence of such generated or manipulated content in an appropriate manner that does not hamper the display or enjoyment of the work.<br/>• Where the AI-generated content has undergone a process of human review or editorial control, and a natural or legal person holds editorial responsibility for the publication.<br/>Source: Art. 50(4) AI Act"]:::oblig_genai

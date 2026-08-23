@@ -1,0 +1,55 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'Avenir Next, Avenir, Helvetica, sans-serif', 'fontSize': '14px', 'lineColor': '#005AA7', 'primaryColor': '#005AA7', 'edgeLabelBackground': '#ffffff'}, 'flowchart': {'curve': 'basis', 'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 110, 'padding': 24}}}%%
+flowchart LR
+
+    classDef Q fill:#daeaf7,stroke:#005aa7,color:#000
+    classDef cat_provider fill:#6f42c1,stroke:#6f42c1,color:#fff,font-weight:bold
+    %% cat_pd: rendered as a BL→UR diagonal split (purple top, cyan bottom) via SVG patch in the .html wrapper.
+    %% Standalone Mermaid renders the fallback solid purple fill.
+    classDef cat_pd fill:#6f42c1,stroke:#003c70,color:#fff,font-weight:bold
+    classDef cat_deployer fill:#0891b2,stroke:#0891b2,color:#fff,font-weight:bold
+    classDef cat_importer fill:#65a30d,stroke:#65a30d,color:#fff,font-weight:bold
+    classDef cat_distrib fill:#92400e,stroke:#92400e,color:#fff,font-weight:bold
+    classDef cat_repr fill:#475569,stroke:#475569,color:#fff,font-weight:bold
+    classDef cat_private fill:#0f766e,stroke:#0f766e,color:#fff,font-weight:bold
+    classDef cat_inuse fill:#2563eb,stroke:#2563eb,color:#fff,font-weight:bold
+    classDef cat_indev fill:#8b5cf6,stroke:#8b5cf6,color:#fff,font-weight:bold
+    linkStyle default stroke:#005AA7,stroke-width:1.2px
+
+    %% ════════ V1 — hoe is het AI-systeem ontwikkeld of hoe wordt deze gebruikt ════════
+    Q1["V1 · Hoe is het AI-systeem<br/>ontwikkeld of hoe wordt<br/>deze gebruikt?"]:::Q
+
+    Q1 -->|"We ontwikkelen en gebruiken<br/>het AI-systeem zelf"| ROLE_PD
+    Q1 -->|"We ontwikkelen het<br/>AI-systeem alleen"| ROLE_P
+    Q1 -->|"We ontwikkelen het AI-systeem<br/>en anderen gebruiken deze ook"| ROLE_PD
+    Q1 -->|"We gebruiken een extern<br/>ontwikkeld AI-systeem"| Q2
+    Q1 -->|"We importeren het AI-systeem<br/>van een leverancier buiten de EU"| ROLE_I
+    Q1 -->|"We kopen het AI-systeem van een<br/>leverancier binnen de EU en verkopen het"| ROLE_X
+    Q1 -->|"Wij vertegenwoordigen een persoon<br/>of entiteit van buiten de EU"| ROLE_R
+    Q1 -->|"Natuurlijk persoon — uitsluitend<br/>persoonlijke, niet-professionele activiteit"| ROLE_PRIV
+
+    %% ════════ V2 — scenario's voor een extern ontwikkeld AI-systeem ════════
+    Q2["V2 · Geldt een van de volgende<br/>scenario's voor jouw AI-systeem?"]:::Q
+    Q2 -->|"De naam of het handelsmerk van uw<br/>organisatie staat op het AI-systeem"| ROLE_P
+    Q2 -->|"Er is een substantiële wijziging<br/>aangebracht aan het AI-systeem"| ROLE_P
+    Q2 -->|"Het beoogde doel is door<br/>uw organisatie aangepast"| ROLE_P
+    Q2 -->|"Geen van bovenstaande"| ROLE_D
+
+    %% ════════ Rollen ════════
+    ROLE_P["Aanbieder"]:::cat_provider
+    ROLE_PD["Aanbieder + Gebruiksverantwoordelijke"]:::cat_pd
+    ROLE_D["Gebruiksverantwoordelijke"]:::cat_deployer
+    ROLE_I["Importeur"]:::cat_importer
+    ROLE_X["Distributeur"]:::cat_distrib
+    ROLE_R["Gemachtigde"]:::cat_repr
+    ROLE_PRIV["Particulier<br/>Buiten reikwijdte AI-verordening"]:::cat_private
+
+    %% Persoonlijk niet-professioneel gebruik is eindstation — geen V3
+    ROLE_P & ROLE_PD & ROLE_D & ROLE_I & ROLE_X & ROLE_R --> Q3
+
+    %% ════════ V3 — status van het AI-systeem ════════
+    Q3["V3 · Is het AI-systeem<br/>al in gebruik?"]:::Q
+    Q3 -->|"In gebruik (vóór inwerkingtreding AI-verordening)"| OUT_INUSE
+    Q3 -->|"In ontwikkeling"| OUT_INDEV
+
+    OUT_INUSE["In gebruik<br/>voldoen uiterlijk in 2030<br/>(Art. 111 AI-verordening)"]:::cat_inuse
+    OUT_INDEV["In ontwikkeling<br/>kortere deadlines per type<br/>(Art. 113 AI-verordening)"]:::cat_indev
