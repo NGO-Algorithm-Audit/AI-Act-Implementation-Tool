@@ -39,13 +39,33 @@ const qNumbers = (uiSchema) => {
   return out;
 };
 
+// The four NTA 8047 chapter questionnaires: chart key -> schema basename in
+// src/schemas/nta/<lang>/. Their `ui:id`s (q1..qn) number the screens, not the
+// individual requirements listed on a screen.
+const NTA = {
+  "nta-wenselijkheid": "wenselijkheid",
+  "nta-ontwerp": "ontwerp",
+  "nta-verificatie": "verificatie",
+  "nta-gebruik": "gebruik",
+};
+// Charts that exist in Dutch only — the English NTA schemas are still copies of the
+// Dutch ones, so there is no English master to check or to compare against.
+// "nta" merges the four chapter charts into one diagram; its node ids are prefixed per
+// chapter (W/O/T/G), so it carries no Q-numbers of its own — the chapter charts below
+// are what the schema check runs against.
+const NL_ONLY = new Set([...Object.keys(NTA), "nta"]);
+
 async function schemaQuestions(lang) {
   const risk = readJSON(`src/schemas/${lang}/${lang === "en" ? "riskclassification" : "risicoclassificatie"}.json`);
   const idMod = await import(
     lang === "en" ? "../../../src/schemas/en/identification-adm.ts" : "../../../src/schemas/nl/identificatie-adm.ts"
   );
   const ident = idMod.identificationSchema ?? idMod.default;
-  return { risk: qNumbers(risk.uiSchema), identification: qNumbers(ident.uiSchema) };
+  const out = { risk: qNumbers(risk.uiSchema), identification: qNumbers(ident.uiSchema) };
+  for (const [chart, file] of Object.entries(NTA)) {
+    out[chart] = qNumbers(readJSON(`src/schemas/nta/${lang}/${file}.json`).uiSchema);
+  }
+  return out;
 }
 
 // ── chart side ─────────────────────────────────────────────────────────────
@@ -60,7 +80,7 @@ const declaredClasses = (mmd) => [...mmd.matchAll(/^\s*classDef\s+(\S+)/gm)].map
 const usedClasses = (mmd) => new Set([...mmd.matchAll(/:::(\w+)/g)].map((m) => m[1]));
 
 const CHARTS = ["identification", "identification-ai", "identification-algo", "identification-sadm",
-  "role", "risk", "obligations"];
+  "role", "risk", "obligations", "nta", ...Object.keys(NTA)];
 // Charts whose questions are numbered from a schema (role/obligations come from code logic).
 const QUESTION_SOURCE = {
   risk: "risk",
@@ -68,6 +88,7 @@ const QUESTION_SOURCE = {
   "identification-ai": "identification",
   "identification-algo": "identification",
   "identification-sadm": "identification",
+  ...Object.fromEntries(Object.keys(NTA).map((k) => [k, k])),
 };
 // Sub-charts show a subset of the questionnaire on purpose.
 const SUBSET_OK = new Set(["identification-ai", "identification-algo", "identification-sadm"]);
@@ -81,6 +102,7 @@ for (const lang of ["en", "nl"]) {
   nodesByLang[lang] = {};
   console.log(`\n── ${lang} ──`);
   for (const chart of CHARTS) {
+    if (lang === "en" && NL_ONLY.has(chart)) { console.log(`  ${chart}: skipped (Dutch-only chart)`); continue; }
     const path = join(SRC, lang, `${chart}.mmd`);
     if (!existsSync(path)) { console.error(`  ${chart}: MISSING master ${path}`); problems++; continue; }
     const mmd = readFileSync(path, "utf8");
