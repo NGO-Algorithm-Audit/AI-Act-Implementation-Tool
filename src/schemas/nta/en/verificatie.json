@@ -5,137 +5,137 @@
     "properties": {
       "q1-mandaat": {
         "type": "string",
-        "title": "1) Leg vast wie het mandaat heeft om het besluit te nemen over het al dan niet in gebruik nemen van het profileringsalgoritme.",
+        "title": "1) Benoem wie bevoegd is te besluiten of het profileringsalgoritme in gebruik wordt genomen.",
         "default": ""
       },
       "q1-adviezen": {
         "type": "string",
-        "title": "2) Lever ter voorbereiding op dit besluit in ieder geval technisch, ethisch en juridisch advies aan, en documenteer deze adviezen.",
+        "title": "2) Verzamel voorafgaand aan dit besluit ten minste een technisch, een ethisch en een juridisch advies, en leg die adviezen vast.",
         "default": ""
       },
       "q1-besluit": {
         "type": "string",
-        "title": "3) Documenteer het genomen besluit over het al dan niet in gebruik nemen van het profileringsalgoritme, op basis van de toetsing uit dit hoofdstuk en de bijbehorende adviezen en onderbouwingen.",
+        "title": "3) Leg vast welk besluit over ingebruikname is genomen, met verwijzing naar de toetsing, de adviezen en de onderbouwing uit dit hoofdstuk.",
         "default": ""
       },
       "q2-methodes": {
         "type": "string",
-        "title": "1) Documenteer welke methodes zijn gebruikt om de specificaties en vereisten te verifiëren, en een onderbouwing van de keuze voor deze methodes.",
+        "title": "1) Leg vast met welke methodes de specificaties en vereisten zijn geverifieerd, en waarom voor die methodes is gekozen.",
         "default": ""
       },
       "q2-resultaten": {
         "type": "string",
-        "title": "2) Documenteer wat de resultaten zijn van de verificatie.",
+        "title": "2) Leg vast wat de verificatie heeft opgeleverd.",
         "default": ""
       },
       "q3-testdataset": {
         "type": "string",
-        "title": "1) Beschrijf de onafhankelijke testdataset waarop de verificatie wordt uitgevoerd.",
+        "title": "1) Beschrijf de onafhankelijke testdataset die voor de verificatie wordt gebruikt.",
         "default": ""
       },
       "q3-nieuwe-data": {
         "type": "string",
-        "title": "2) Als er geen testdataset beschikbaar is: beschrijf hoe nieuwe data worden verzameld voor de verificatie, bijvoorbeeld via het uitvoeren van een aselecte steekproef (7.3).",
+        "title": "2) Is er geen testdataset, beschrijf dan hoe voor de verificatie nieuwe data worden verzameld, bijvoorbeeld met een aselecte steekproef (7.3).",
         "default": ""
       },
       "q4-opzet": {
         "type": "string",
-        "title": "1) Beschrijf of en hoe schaduwdraaien wordt toegepast tijdens het verzamelen van nieuwe data voor verificatie.",
+        "title": "1) Beschrijf of schaduwdraaien wordt ingezet bij het verzamelen van nieuwe verificatiedata, en zo ja hoe.",
         "default": ""
       },
       "q4-vergelijking": {
         "type": "string",
-        "title": "2) Vergelijk de selectie van het profileringsalgoritme met de selectie volgens het huidige besluitvormingsproces en beschrijf op welke punten de selecties verschillen.",
+        "title": "2) Zet de selectie van het profileringsalgoritme naast de selectie uit het huidige besluitvormingsproces en benoem waar beide van elkaar afwijken.",
         "default": ""
       },
       "q4-pariteit": {
         "type": "string",
-        "title": "3) Analyseer of er in de selectie van het profileringsalgoritme een onderscheid is in de verdeling van de relevante gronden (demografische pariteit, 7.7.3).",
+        "title": "3) Ga na of de selectie van het profileringsalgoritme de relevante gronden ongelijk verdeelt (demografische pariteit, 7.7.3).",
         "default": ""
       },
       "q5-prestaties": {
         "type": "string",
-        "title": "1) Bereken de prestaties van het algoritme, volgens de stappen uit 7.7.2, op de testdataset.",
+        "title": "1) Bereken op de testdataset de prestaties van het algoritme, langs de stappen van 7.7.2.",
         "default": ""
       },
       "q5-bandbreedtes": {
         "type": "string",
-        "title": "2) Stel vast of de prestaties binnen de vooraf bepaalde bandbreedtes voor de prestaties vallen.",
+        "title": "2) Ga na of de gemeten prestaties binnen de vooraf vastgestelde bandbreedtes blijven.",
         "default": ""
       },
       "q5-onderscheid": {
         "type": "string",
-        "title": "3) Bereken de mate van onderscheid, volgens de stappen uit 7.7.3, op de testdataset.",
+        "title": "3) Bereken op de testdataset hoeveel onderscheid het algoritme maakt, langs de stappen van 7.7.3.",
         "default": ""
       },
       "q5-significant-onderscheid": {
         "type": "string",
-        "title": "4) Documenteer of er een significant onderscheid wordt gemeten op de relevante gronden.",
+        "title": "4) Leg vast of op de relevante gronden een significant onderscheid wordt gemeten.",
         "default": ""
       },
       "q6-legitiem-doel": {
         "type": "string",
-        "title": "1) Legitiem doel: beoordeel en documenteer of het gestelde doel van het profileringsalgoritme een legitiem doel (of doelen) nastreeft.",
+        "title": "1) Legitiem doel: beoordeel of het doel dat met het profileringsalgoritme wordt nagestreefd legitiem is, en leg dat oordeel vast.",
         "default": ""
       },
       "q6-geschiktheid": {
         "type": "string",
-        "title": "2) Geschiktheid middel: beoordeel en documenteer of het profileringsalgoritme het gestelde legitieme doel daadwerkelijk en betekenisvol bevordert, of dichterbij brengt.",
+        "title": "2) Geschiktheid middel: beoordeel of het profileringsalgoritme dat legitieme doel werkelijk en merkbaar dichterbij brengt, en leg dat oordeel vast.",
         "default": ""
       },
       "q6-subsidiariteit": {
         "type": "string",
-        "title": "3) Noodzakelijkheid middel: subsidiariteit. Beoordeel en documenteer of er voor de overheidsinstelling geen redelijke alternatieven voorhanden zijn voor het profileringsalgoritme, die het gestelde doel in voldoende vergelijkbare mate bevorderen of dichterbij brengen.",
+        "title": "3) Noodzakelijkheid middel: subsidiariteit. Beoordeel of de overheidsinstelling redelijke alternatieven heeft die het gestelde doel in vergelijkbare mate dichterbij brengen, en leg dat oordeel vast.",
         "default": ""
       },
       "q6-proportionaliteit": {
         "type": "string",
-        "title": "4) Noodzakelijkheid middel: proportionaliteit. Beoordeel en documenteer of het onderscheid dat het profileringsalgoritme maakt, en alle voorzienbare nadelige effecten voor betrokkenen die daaruit voortvloeien, proportioneel moeten worden geacht.",
+        "title": "4) Noodzakelijkheid middel: proportionaliteit. Beoordeel of het onderscheid van het profileringsalgoritme en alle voorzienbare nadelige gevolgen daarvan voor betrokkenen in verhouding staan, en leg dat oordeel vast.",
         "default": ""
       },
       "q6-oordeel": {
         "type": "string",
-        "title": "5) Documenteer het oordeel of het gemaakte onderscheid objectief gerechtvaardigd is.",
+        "title": "5) Leg vast tot welk oordeel dit leidt: is het onderscheid objectief te rechtvaardigen?",
         "default": ""
       },
       "q7-pilot": {
         "type": "string",
-        "title": "1) Pilot: pas het profileringsalgoritme op kleine schaal in de praktijk toe en beschrijf hoe ten minste de volgende maatregelen zijn getroffen:",
+        "title": "1) Pilot: zet het profileringsalgoritme op beperkte schaal in de praktijk in en beschrijf welke van de onderstaande maatregelen zijn getroffen:",
         "default": ""
       },
       "q7-evaluatie": {
         "type": "string",
-        "title": "2) Evaluatie: evalueer de uitkomsten van de pilot ten minste op de volgende zaken:",
+        "title": "2) Evaluatie: kijk bij de uitkomsten van de pilot in elk geval naar de volgende punten:",
         "default": ""
       },
       "q7-rapport": {
         "type": "string",
-        "title": "3) Leg de opzet en de uitkomsten van de praktijkvalidatie vast in een afzonderlijk praktijkvalidatierapport, dat onderdeel vormt van het verantwoordingsdossier van het profileringsalgoritme.",
+        "title": "3) Leg opzet en uitkomsten van de praktijkvalidatie vast in een apart rapport en voeg dat toe aan het verantwoordingsdossier van het profileringsalgoritme.",
         "default": ""
       },
       "q8-processtappen": {
         "type": "string",
-        "title": "1) NTA-processtappen: valideer dat het profileringsalgoritme en de bijbehorende documentatie aantoonbaar voldoen aan de normen, uitgangspunten en processtappen zoals beschreven in deze NTA.",
+        "title": "1) NTA-processtappen: stel vast dat het algoritme en de documentatie daaromheen aantoonbaar voldoen aan wat deze NTA aan normen, uitgangspunten en processtappen voorschrijft.",
         "default": ""
       },
       "q8-algoritmebeleid": {
         "type": "string",
-        "title": "2) Algoritmebeleid: valideer of het profileringsalgoritme wordt beheerd volgens het algoritmebeleid van de overheidsinstelling (zie 5.3.1 van de NTA).",
+        "title": "2) Algoritmebeleid: stel vast dat het profileringsalgoritme wordt beheerd zoals het algoritmebeleid van de overheidsinstelling voorschrijft (zie 5.3.1 van de NTA).",
         "default": ""
       },
       "q8-extern-beleid": {
         "type": "string",
-        "title": "3) Extern beleid: valideer of er wordt voldaan aan relevant extern beleid en relevante externe richtlijnen en kaders.",
+        "title": "3) Extern beleid: stel vast dat wordt voldaan aan het externe beleid, de richtlijnen en de kaders die van toepassing zijn.",
         "default": ""
       },
       "q9-herhaling-84": {
         "type": "string",
-        "title": "1) Doorloop nogmaals de stappen uit 8.4 en documenteer de definitieve afweging of het gebruik van het profileringsalgoritme voldoet aan het non-discriminatierecht.",
+        "title": "1) Loop de stappen uit 8.4 opnieuw door en leg de definitieve afweging vast over de vraag of gebruik van het profileringsalgoritme binnen het non-discriminatierecht blijft.",
         "default": ""
       },
       "q9-besluit": {
         "type": "string",
-        "title": "2) Besluit of het profileringsalgoritme gereed is voor implementatie in het besluitvormingsproces, of aanpassingen nodig zijn, of dat het profileringsalgoritme (nog) niet voldoet aan de gestelde normen.",
+        "title": "2) Besluit of het profileringsalgoritme klaar is voor implementatie in het besluitvormingsproces, of het eerst moet worden aangepast, of dat het (nog) niet aan de gestelde normen voldoet.",
         "default": ""
       },
       "output": {
@@ -151,14 +151,14 @@
       "ui:id": "q1",
       "ui:group": "toetsing-adviezen",
       "ui:groupTitle": "8.2 Adviezen en besluitvorming",
-      "ui:groupIntro": "Nadat de stappen uit hoofdstuk 7 zijn doorlopen, is er een profileringsalgoritme ontwikkeld. In dit hoofdstuk wordt getoetst of dit algoritme gereed is voor implementatie: de besluitvorming over het al dan niet in gebruik nemen (8.2), de verificatie van technische prestaties en onderscheid (8.3) en de juridische toets (8.4). Daarna moet het algoritme in de praktijk worden gevalideerd (8.5), moet een onafhankelijke assessment of audit worden uitgevoerd (8.6) en moet een definitieve afweging worden gemaakt (8.7).",
-      "ui:description": "Wie dit mandaat heeft, volgt in een overheidsinstelling uit het mandaatbesluit en het organisatiebesluit, en uit de organisatiestructuur en eventueel bestaande governanceafspraken.",
+      "ui:groupIntro": "Met de stappen uit hoofdstuk 7 is een profileringsalgoritme ontwikkeld. Dit hoofdstuk toetst of het klaar is voor implementatie: wie besluit over ingebruikname (8.2), verificatie van de technische prestaties en van het gemeten onderscheid (8.3) en de juridische toetsing daarvan (8.4). Daarna volgt validatie in de praktijk (8.5), een onafhankelijke assessment of audit (8.6) en ten slotte de definitieve afweging (8.7).",
+      "ui:description": "Binnen een overheidsinstelling blijkt die bevoegdheid uit het mandaat- en organisatiebesluit, uit de inrichting van de organisatie en uit eventuele governanceafspraken.",
       "ui:descriptionStyle": "plain"
     },
     "q1-adviezen": {
       "ui:widget": "textarea",
       "ui:group": "toetsing-adviezen",
-      "ui:description": "Het verdient aanbeveling dat hier multidisciplinair wordt gewerkt, wat inhoudt dat de verschillende adviezen in samenhang worden opgesteld.",
+      "ui:description": "Een multidisciplinaire aanpak verdient de voorkeur: stel de adviezen in samenhang met elkaar op.",
       "ui:descriptionStyle": "plain"
     },
     "q1-besluit": {
@@ -170,35 +170,35 @@
       "ui:id": "q2",
       "ui:group": "toetsing-verificatie-doel",
       "ui:groupTitle": "8.3.1 Doel en context van verificatie",
-      "ui:groupIntro": "Verificatie van het profileringsalgoritme is een essentiële stap in het ontwikkelproces: er moet worden gecontroleerd of het profileringsalgoritme op een deugdelijke wijze is ontwikkeld en geïmplementeerd, dat wil zeggen technisch correct en volgens op voorhand vastgestelde specificaties en vereisten. In de verificatiefase wordt het algoritme getest zonder dat hierbij enige impact is op de betrokkenen. De verificatie moet gestructureerd plaatsvinden en volledig worden gedocumenteerd, zodat later onafhankelijke beoordelingen of audits mogelijk zijn."
+      "ui:groupIntro": "Verificatie is een onmisbare stap in de ontwikkeling: er wordt nagegaan of het profileringsalgoritme deugdelijk is gebouwd en ingericht — technisch correct en conform de vooraf vastgelegde specificaties en vereisten. Tijdens deze fase wordt getest zonder dat betrokkenen daar gevolgen van ondervinden. Doe dit gestructureerd en leg alles vast, zodat een onafhankelijke beoordeling of audit later mogelijk blijft."
     },
     "q2-resultaten": {
       "ui:widget": "textarea",
       "ui:group": "toetsing-verificatie-doel",
       "ui:descriptionStyle": "plain",
-      "ui:alertDescription": "In de algemene technische verificatie worden ook de aspecten buiten non-discriminatie, zoals veiligheids- en toegankelijkheidsaspecten, gecontroleerd. Deze NTA richt zich niet op deze vereisten."
+      "ui:alertDescription": "Een brede technische verificatie kijkt ook naar zaken buiten non-discriminatie, zoals veiligheid en toegankelijkheid. Die vereisten vallen buiten het bereik van deze NTA."
     },
     "q3-testdataset": {
       "ui:widget": "textarea",
       "ui:id": "q3",
       "ui:group": "toetsing-testdataset",
       "ui:groupTitle": "8.3.2 Testdataset",
-      "ui:groupIntro": "De verificatie in de toetsingsfase moet worden uitgevoerd op de onafhankelijke testdataset (7.3).",
-      "ui:description": "Deze testdataset moet onafhankelijk blijven van de data die is gebruikt tijdens de ontwikkeling en mag daarom niet iteratief worden gebruikt. Als het algoritme niet voldoet en er een nieuwe versie wordt ontwikkeld, moet er een nieuwe onafhankelijke testdataset worden gebruikt voor deze toetsing.",
+      "ui:groupIntro": "Voer de verificatie in deze fase uit op de onafhankelijke testdataset uit 7.3.",
+      "ui:description": "Houd deze dataset gescheiden van alle data die bij de ontwikkeling zijn gebruikt; herhaald gebruik is daarom uitgesloten. Voldoet het algoritme niet en komt er een nieuwe versie, dan is voor de toetsing opnieuw een verse onafhankelijke testdataset nodig.",
       "ui:descriptionStyle": "plain"
     },
     "q3-nieuwe-data": {
       "ui:widget": "textarea",
       "ui:group": "toetsing-testdataset",
       "ui:descriptionStyle": "plain",
-      "ui:alertDescription": "Het verzamelen van nieuwe data kan tijdrovend zijn. Er kunnen gedurende dit proces vroegtijdige inzichten worden verzameld over het profileringsalgoritme met behulp van schaduwdraaien (8.3.3)."
+      "ui:alertDescription": "Nieuwe data verzamelen kost vaak veel tijd. Schaduwdraaien (8.3.3) levert in die periode alvast eerste inzichten op over het profileringsalgoritme."
     },
     "q4-opzet": {
       "ui:widget": "textarea",
       "ui:id": "q4",
       "ui:group": "toetsing-schaduwdraaien",
       "ui:groupTitle": "8.3.3 Schaduwdraaien",
-      "ui:groupIntro": "Tijdens schaduwdraaien wordt het profileringsalgoritme toegepast op data van betrokkenen in het besluitvormingsproces zonder dat er beslissingen worden genomen op basis van de uitkomsten. Let op dat de data van deze betrokkenen geen onderdeel zijn geweest van de datasets die zijn gebruikt tijdens de ontwikkelings- en ontwerpfase."
+      "ui:groupIntro": "Bij schaduwdraaien draait het profileringsalgoritme mee op gegevens van betrokkenen in het besluitvormingsproces, zonder dat de uitkomsten tot beslissingen leiden. Controleer daarbij dat de gegevens van deze betrokkenen niet al in de datasets van de ontwerp- en ontwikkelfase zaten."
     },
     "q4-vergelijking": {
       "ui:widget": "textarea",
@@ -208,93 +208,93 @@
       "ui:widget": "textarea",
       "ui:group": "toetsing-schaduwdraaien",
       "ui:descriptionStyle": "plain",
-      "ui:alertDescription": "Het beoordelen van de prestaties en gelijkheidsmetrieken voor classificatieratio's kan alleen wanneer de uitkomsten van het besluitvormingsproces bekend zijn."
+      "ui:alertDescription": "Prestaties en gelijkheidsmetrieken voor classificatieratio's zijn pas te beoordelen zodra de uitkomsten van het besluitvormingsproces bekend zijn."
     },
     "q5-prestaties": {
       "ui:widget": "textarea",
       "ui:id": "q5",
       "ui:group": "toetsing-beoordelen",
       "ui:groupTitle": "8.3.4 Beoordelen prestaties en mate van onderscheid",
-      "ui:groupIntro": "Bepaal en documenteer de technische prestaties van het algoritme en de mate van onderscheid op de testdataset.",
-      "ui:description": "De stappen 1) t/m 3) zijn in de ontwikkelfase al gedaan en worden overgenomen. Voer de stappen 4) en 5) opnieuw uit op de testdataset.",
+      "ui:groupIntro": "Stel op de testdataset vast hoe het algoritme technisch presteert en hoeveel onderscheid het maakt, en leg dat vast.",
+      "ui:description": "De eerste drie stappen zijn in de ontwikkelfase al doorlopen; neem die over. Herhaal stap 4) en 5) op de testdataset.",
       "ui:descriptionStyle": "plain"
     },
     "q5-bandbreedtes": {
       "ui:widget": "textarea",
       "ui:group": "toetsing-beoordelen",
-      "ui:description": "Als de prestaties niet binnen de gestelde bandbreedtes vallen, voldoet het profileringsalgoritme op technisch vlak niet aan de gestelde eisen.",
+      "ui:description": "Blijven ze daarbuiten, dan haalt het profileringsalgoritme technisch gezien de gestelde eisen niet.",
       "ui:descriptionStyle": "plain"
     },
     "q5-onderscheid": {
       "ui:widget": "textarea",
       "ui:group": "toetsing-beoordelen",
-      "ui:description": "De stappen 1) t/m 4) zijn in de ontwikkelfase al gedaan en worden overgenomen. Voer de stappen 5) en 6) opnieuw uit op de testdataset.",
+      "ui:description": "De eerste vier stappen komen uit de ontwikkelfase en worden overgenomen. Herhaal stap 5) en 6) op de testdataset.",
       "ui:descriptionStyle": "plain"
     },
     "q5-significant-onderscheid": {
       "ui:widget": "textarea",
       "ui:group": "toetsing-beoordelen",
       "ui:descriptionStyle": "plain",
-      "ui:alertDescription": "Als er een significant onderscheid wordt gemeten op de relevante gronden, betekent dit dat het algoritme een verschil maakt tussen groepen. Dit is niet toegestaan, tenzij er een objectieve rechtvaardiging is. Dit wordt behandeld in 8.4."
+      "ui:alertDescription": "Wordt zo'n onderscheid gemeten, dan maakt het algoritme verschil tussen groepen. Dat mag alleen als daarvoor een objectieve rechtvaardiging bestaat; 8.4 gaat daarover."
     },
     "q6-legitiem-doel": {
       "ui:widget": "textarea",
       "ui:id": "q6",
       "ui:group": "toetsing-juridisch",
       "ui:groupTitle": "8.4 Juridische toets",
-      "ui:groupIntro": "In deze stap worden de resultaten uit de voorgaande stappen verzameld en in onderlinge samenhang in de juridische context geplaatst, zodat de overheidsinstelling een eigen oordeel vormt over de vraag of het gebruik van het profileringsalgoritme voldoet aan het non-discriminatierecht. Als een profileringsalgoritme indirect onderscheid maakt op grond van een discriminatiegrond (zie 8.3), is het niet toegestaan, tenzij kan worden vastgesteld dat het onderscheid objectief gerechtvaardigd is. Als aan een van de onderstaande vier voorwaarden niet wordt voldaan, is het profileringsalgoritme in strijd met het discriminatieverbod en is het niet toegestaan dit in werking te stellen.",
-      "ui:description": "Beoordeel of het doel niet op zichzelf discriminerend is of in strijd met de wet, en of het tegemoetkomt aan een voldoende zwaarwegende, daadwerkelijke behoefte. Gebruik hiervoor ook de uitkomsten van de stappen in 6.2 t/m 6.4.",
+      "ui:groupIntro": "Hier komen de resultaten van de vorige stappen samen en worden ze in onderlinge samenhang juridisch geduid, zodat de overheidsinstelling zelf een oordeel vormt over de vraag of het profileringsalgoritme binnen het non-discriminatierecht blijft. Maakt het algoritme indirect onderscheid op een discriminatiegrond (zie 8.3), dan mag het niet worden gebruikt, tenzij vaststaat dat dat onderscheid objectief gerechtvaardigd is. Wordt aan een van de vier onderstaande voorwaarden niet voldaan, dan is het algoritme in strijd met het discriminatieverbod en mag het niet in werking treden.",
+      "ui:description": "Ga na of het doel zelf niet discrimineert en niet in strijd is met de wet, en of het beantwoordt aan een werkelijke, voldoende zwaarwegende behoefte. Betrek daarbij de uitkomsten van 6.2 tot en met 6.4.",
       "ui:descriptionStyle": "plain"
     },
     "q6-geschiktheid": {
       "ui:widget": "textarea",
       "ui:group": "toetsing-juridisch",
-      "ui:description": "Gebruik hiervoor ook de uitkomsten van de stappen in 6.3 t/m 6.5, 7.7 en 8.3.",
+      "ui:description": "Betrek hierbij ook wat 6.3 tot en met 6.5, 7.7 en 8.3 hebben opgeleverd.",
       "ui:descriptionStyle": "plain",
-      "ui:alertDescription": "De prestaties van het algoritme voor de doelvariabele zijn geen toereikend argument voor de effectiviteit (zie 5.3.4 van de NTA)."
+      "ui:alertDescription": "Goede prestaties op de doelvariabele vormen op zichzelf geen bewijs van effectiviteit (zie 5.3.4 van de NTA)."
     },
     "q6-subsidiariteit": {
       "ui:widget": "textarea",
       "ui:group": "toetsing-juridisch",
-      "ui:description": "Gebruik hiervoor ook de uitkomsten van de stappen in 6.5 en 6.6.",
+      "ui:description": "Betrek hierbij ook de uitkomsten van 6.5 en 6.6.",
       "ui:descriptionStyle": "plain"
     },
     "q6-proportionaliteit": {
       "ui:widget": "textarea",
       "ui:group": "toetsing-juridisch",
-      "ui:description": "Weeg dit tegen de mate waarin het profileringsalgoritme bijdraagt aan het legitieme doel, mede gelet op het maatschappelijk gewicht van dat legitieme doel. Gebruik hiervoor ook de uitkomsten van de stappen in 6.1 t/m 6.6 en 8.3.",
+      "ui:description": "Zet dit af tegen de bijdrage die het profileringsalgoritme aan het legitieme doel levert, en tegen het maatschappelijk gewicht van dat doel. Betrek hierbij ook de uitkomsten van 6.1 tot en met 6.6 en 8.3.",
       "ui:descriptionStyle": "plain"
     },
     "q6-oordeel": {
       "ui:widget": "textarea",
       "ui:group": "toetsing-juridisch",
-      "ui:description": "Als het gemaakte onderscheid niet geschikt, noodzakelijk of subsidiair is, is het niet objectief gerechtvaardigd en mag het profileringsalgoritme niet in gebruik worden genomen. Beoordelingen moeten altijd met het oog op de concrete context worden gemaakt.",
+      "ui:description": "Ontbreekt het aan geschiktheid, noodzaak of subsidiariteit, dan is er geen objectieve rechtvaardiging en mag het profileringsalgoritme niet worden ingezet. Beoordeel altijd binnen de concrete context.",
       "ui:descriptionStyle": "plain",
-      "ui:alertDescription": "De intensiteit van toetsing kan verschillen per discriminatiegrond en op basis van impact op betrokkenen; bij onderscheid op grond van ras wordt in de praktijk de meest stringente toets vereist. Profileringsalgoritmes met een grote impact vragen een strengere beoordeling — denk aan algoritmes gebruikt voor toezicht- of handhavingsdoeleinden, toegepast op zeer grote groepen, of waarvan de gevolgen ingrijpen op het privéleven van betrokkenen en/of onomkeerbaar zijn.\n\nZie bijlage A van de NTA voor een toelichting op het minderheidsstandpunt over de objectieve rechtvaardiging van indirect onderscheid op grond van ras/nationaliteit bij profilering voor handhaving en toezicht."
+      "ui:alertDescription": "Hoe streng er wordt getoetst, hangt af van de discriminatiegrond en van de impact op betrokkenen; voor onderscheid op grond van ras geldt in de praktijk de zwaarste toets. Een profileringsalgoritme met grote impact vraagt een strengere beoordeling — bijvoorbeeld bij toezicht en handhaving, bij toepassing op zeer grote groepen, of wanneer de gevolgen diep in het privéleven ingrijpen of onomkeerbaar zijn.\n\nBijlage A van de NTA bevat een toelichting op het minderheidsstandpunt: wanneer indirect onderscheid naar ras of nationaliteit bij profilering voor toezicht en handhaving objectief gerechtvaardigd kan zijn."
     },
     "q7-pilot": {
       "ui:widget": "textarea",
       "ui:id": "q7",
       "ui:group": "toetsing-praktijkvalidatie",
       "ui:groupTitle": "8.5 Praktijkvalidatie",
-      "ui:groupIntro": "Als is beoordeeld dat het profileringsalgoritme voldoet aan het non-discriminatierecht en het gebruik ervan wenselijk is, moet het profileringsalgoritme in de praktijk worden gevalideerd. In de praktijkvalidatie wordt het algoritme binnen een gelimiteerde context toegepast op het besluitvormingsproces; de uitkomsten worden gebruikt en hebben impact op de betrokkenen. De stappen moeten worden gemonitord en er moeten voldoende beheersmaatregelen zijn ingesteld om mogelijke risico's te mitigeren.",
+      "ui:groupIntro": "Is vastgesteld dat het profileringsalgoritme binnen het non-discriminatierecht blijft en dat inzet wenselijk is, dan volgt validatie in de praktijk. Daarbij draait het algoritme in een afgebakende context mee in het besluitvormingsproces en werken de uitkomsten wél door naar betrokkenen. Monitor die stappen en tref genoeg beheersmaatregelen om risico's af te dekken.",
       "ui:bullets": [
-        "De pilot moet in duur en omvang strikt worden begrensd.",
-        "Alle uitkomsten van het profileringsalgoritme en verwerkingen van deze uitkomsten moeten continu worden vastgelegd en gevolgd (logging en monitoring).",
-        "Vooraf moeten duidelijke stopcriteria worden vastgesteld en waarborgen voor herstelmaatregelen worden geïmplementeerd.",
-        "Betrokkenen moeten worden geïnformeerd over het doel, de duur, de aard van de pilot en het gebruik van hun persoonsgegevens. Alleen bij zwaarwegende redenen mag hiervan worden afgeweken; die uitzondering moet worden gemotiveerd en gedocumenteerd.",
-        "Het moet zijn vastgelegd wie verantwoordelijk is voor de uitvoering en documentatie van de pilot, en wie ingrijpt wanneer aan de stopcriteria wordt voldaan of andere onvoorziene risico's optreden."
+        "Baken vooraf strikt af hoe lang de pilot duurt en hoe groot die is.",
+        "Leg doorlopend vast wat het algoritme oplevert en wat er vervolgens met die uitkomsten gebeurt, en volg dat (logging en monitoring).",
+        "Stel vooraf heldere stopcriteria vast en zorg dat herstelmaatregelen klaarstaan.",
+        "Informeer betrokkenen over het doel, de duur en de aard van de pilot en over het gebruik van hun persoonsgegevens. Afwijken mag alleen om zwaarwegende redenen, en die uitzondering wordt gemotiveerd en vastgelegd.",
+        "Leg vast wie de pilot uitvoert en documenteert, en wie ingrijpt zodra een stopcriterium wordt geraakt of zich een ander onvoorzien risico voordoet."
       ],
-      "ui:description": "Weeg zorgvuldig af of de pilot noodzakelijk is, aangezien deze methode het meest impactvol is. Bij voorkeur wordt in de pilot ook een controlegroep opgenomen die volgens het huidige besluitvormingsproces zonder algoritme wordt behandeld.",
+      "ui:description": "Weeg goed af of een pilot echt nodig is: van alle methodes grijpt deze het diepst in. Neem bij voorkeur een controlegroep mee die het huidige besluitvormingsproces zonder algoritme doorloopt.",
       "ui:descriptionStyle": "plain"
     },
     "q7-evaluatie": {
       "ui:widget": "textarea",
       "ui:group": "toetsing-praktijkvalidatie",
       "ui:bullets": [
-        "Doorloop op basis van de nieuwe resultaten en inzichten opnieuw de beoordelingen in 8.3 voor de verschillende stappen in het besluitvormingsproces. Vergelijk deze, indien aanwezig, met de controlegroep.",
-        "Analyseer de impact van het profileringsalgoritme op het gehele besluitvormingsproces.",
-        "Analyseer of er andere niet voorziene positieve en/of negatieve gevolgen zijn geconstateerd van het profileringsalgoritme op het besluitvormingsproces, de betrokkenen en/of de medewerkers."
+        "Loop met de nieuwe resultaten en inzichten de beoordelingen uit 8.3 nogmaals langs voor elke stap in het besluitvormingsproces, en vergelijk ze met de controlegroep als die er is.",
+        "Breng in beeld welke invloed het profileringsalgoritme op het besluitvormingsproces als geheel heeft.",
+        "Ga na of zich onvoorziene effecten — positief of negatief — hebben voorgedaan voor het besluitvormingsproces, de betrokkenen of de medewerkers."
       ]
     },
     "q7-rapport": {
@@ -306,7 +306,7 @@
       "ui:id": "q8",
       "ui:group": "toetsing-audit",
       "ui:groupTitle": "8.6 Onafhankelijke assessment of audit",
-      "ui:groupIntro": "Het profileringsalgoritme zou door een onafhankelijke partij moeten worden beoordeeld, waarbij het ontwikkelproces wordt getoetst aan de hand van de vereisten van deze NTA en relevante wet- en regelgeving. In sommige situaties, bijvoorbeeld wanneer de impact van het in te zetten profileringsalgoritme laag is, kan ook worden gekozen voor een interne beoordeling."
+      "ui:groupIntro": "Laat het profileringsalgoritme bij voorkeur door een onafhankelijke partij beoordelen, die het ontwikkelproces afzet tegen de vereisten van deze NTA en tegen de geldende wet- en regelgeving. Is de impact van het algoritme beperkt, dan kan een interne beoordeling volstaan."
     },
     "q8-algoritmebeleid": {
       "ui:widget": "textarea",
@@ -321,15 +321,15 @@
       "ui:id": "q9",
       "ui:group": "toetsing-definitieve-afweging",
       "ui:groupTitle": "8.7 Definitieve afweging",
-      "ui:groupIntro": "Kom op basis van alle inzichten die zijn opgehaald uit hoofdstuk 6, 7 en 8 tot een definitieve afweging.",
-      "ui:description": "Gebruik hiervoor ook de voorlopige afweging die is gemaakt in 6.6.",
+      "ui:groupIntro": "Breng alle inzichten uit de hoofdstukken 6, 7 en 8 samen in een definitieve afweging.",
+      "ui:description": "Betrek daarbij de voorlopige afweging uit 6.6.",
       "ui:descriptionStyle": "plain"
     },
     "q9-besluit": {
       "ui:widget": "textarea",
       "ui:group": "toetsing-definitieve-afweging",
       "ui:descriptionStyle": "plain",
-      "ui:alertDescription": "Betrek bij het nemen van deze afweging dat er restrisico's op discriminerende effecten kunnen zijn, gezien alle processen om het profileringsalgoritme heen die kunnen leiden tot discriminerende effecten."
+      "ui:alertDescription": "Houd er bij deze afweging rekening mee dat restrisico's blijven bestaan: ook de processen rondom het profileringsalgoritme kunnen discriminerend uitpakken."
     }
   }
 }
