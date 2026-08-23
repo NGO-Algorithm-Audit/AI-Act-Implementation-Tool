@@ -115,4 +115,21 @@ export const STYLES: Record<string, ChartStyle> = {
       linkDefault,
     ],
   },
+
+  // The four NTA 8047 chapter charts share one style: they are linear documentation
+  // forms, so there is a single question class and one terminal (the result screen).
+  ...Object.fromEntries(
+    ["nta", "nta-wenselijkheid", "nta-ontwerp", "nta-verificatie", "nta-gebruik"].map((k) => [
+      k,
+      {
+        init: init(80, 110),
+        classDefs: [
+          Q,
+          "classDef entry fill:#e0f2fe,stroke:#0284c7,color:#0c4a6e,font-weight:bold",
+          "classDef cat_result fill:#005AA7,stroke:#003c70,color:#fff,font-weight:bold",
+          linkDefault,
+        ],
+      },
+    ])
+  ),
 };

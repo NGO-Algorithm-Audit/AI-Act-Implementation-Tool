@@ -17,6 +17,15 @@ every question and outcome in the questionnaire actually appears in the chart.
 
 Charts (EN + NL): `identification`, `identification-ai`, `identification-algo`,
 `identification-sadm`, `role`, `risk`, `obligations` → `flowcharts/{en,nl}/<chart>.pdf`.
+Charts (NL only): `nta-wenselijkheid` (NTA 8047 ch. 6), `nta-ontwerp` (ch. 7),
+`nta-verificatie` (ch. 8), `nta-gebruik` (ch. 9), plus `nta` — the four chapters merged into one
+diagram — → `flowcharts/nl/<chart>.pdf`. These four are
+Dutch-only because `src/schemas/nta/en/*.json` are still byte-identical copies of the Dutch
+schemas; add the English masters (and the `en` entries in `descriptions.ts`) once they are
+translated. They are also the only *linear* questionnaires: documentation forms whose screens are
+NTA sections, so the charts are a chain of screen nodes (section number, condensed paraphrase,
+number of requirements) ending in the result screen — no branches, no edge labels, one `Q` class
+plus one terminal class. See the NTA rules below for how the merged `nta` chart is wired.
 
 **Hard requirement: each PDF is exactly one page — the header and the diagram must never be split
 across pages.** The page height is measured from the actual rendered layout rather than assumed, and
@@ -50,7 +59,12 @@ npx --yes tsx .claude/skills/export-questionnaire-flowcharts/render.mjs flowchar
 ```
 
 The argument (`flowcharts`) is the chart dir: masters are read from `<dir>/src/{en,nl}/`, PDFs are
-written to `<dir>/{en,nl}/`.
+written to `<dir>/{en,nl}/`. Any further arguments limit the run to those chart keys, so one chapter
+can be re-exported without rewriting the other PDFs:
+
+```bash
+npx --yes tsx .claude/skills/export-questionnaire-flowcharts/render.mjs flowcharts nta-gebruik
+```
 
 Step 3 logs `PDF: en/risk.pdf (9892x3604, 1 page)` per chart. **Every chart must say `1 page`** — a
 `2 pages, retrying taller` warning is self-healing, but a `still N pages — header/diagram split!`
@@ -113,6 +127,51 @@ create or edit a master. The risk master (`flowcharts/src/en/risk.mmd`) is the r
     differs. `check-coverage.mjs` diffs the node id sets.
 12. **One page.** See the hard requirement above.
 
+## NTA 8047 charts only (`nta`, `nta-*`)
+
+These four questionnaires are linear documentation forms, so the charts follow the rules above with
+these additions. They apply to the NTA charts and to nothing else.
+
+1. **One node per screen**, not per requirement: head line `§ <NTA-paragraaf> · <sectietitel>`, then
+   a 2–4 line condensed paraphrase, then `(n vereisten)`. Requirements are listed inside the tool,
+   not in the chart.
+2. **No edge labels.** There are no answers to paraphrase — the screens simply follow each other.
+3. **Each chapter ends in its own result node** (`Resultaat · Hoofdstuk <n> vastgelegd`), mirroring
+   the result screen of that questionnaire.
+4. **Merged chart `nta` — layout and wiring (mandatory).**
+   - **The four chapters sit below each other, each as one left-to-right row**: top-level
+     `flowchart TB`, one `subgraph` per chapter with `direction LR`. This keeps the PDF narrow
+     (~6.700px instead of the ~16.100px of a single ribbon).
+   - **No edge may cross a chapter's `subgraph` boundary.** Mermaid silently drops a cluster's
+     `direction` as soon as an edge connects a node inside it to a node outside — verified with both
+     the dagre and the elk renderer — and the whole diagram collapses into one serial chain. A node
+     that a chapter links to therefore has to live *inside* that chapter.
+   - The entry into every chapter is drawn as an **entry connector at the head of its row**, wired
+     to the first screen of that chapter (`§ 6.2`, `§ 7.2`, `§ 8.2`, `§ 9.2.1`):
+     `▶ Vanaf het NTA-scherm` for chapter 6, and `▶ Vanaf het NTA-scherm of Resultaat Hoofdstuk
+     <n-1>` for chapters 7, 8 and 9. Each chapter still ends in its own result node, so the
+     hand-off `Resultaat Hoofdstuk 6 → § 7.2` is readable across the rows. This off-page-connector
+     convention is what a single arrow between the rows would be — mermaid cannot draw that arrow
+     without destroying the row layout, so do not try.
+   - Chapter order comes from **invisible links between the clusters** (never between nodes):
+     `CH6 ~~~ CH7 ~~~ CH8 ~~~ CH9`. Cluster-level links do not break the inner `direction`.
+   - Those three links inherit `linkStyle default` and would render as stray blue lines, so end the
+     master with an explicit `linkStyle <i>,<j>,<k> stroke:none,stroke-width:0px`. The indices are
+     0-based over all `-->` edges in declaration order — **recount them after adding or removing any
+     edge**.
+   - Node ids are prefixed per chapter (`W`, `O`, `T`, `G`) so the four chains can live in one
+     diagram; `check-coverage.mjs` therefore skips the Q-number check for `nta` and relies on the
+     four chapter charts.
+   - **The rows are left-aligned**, so the entry connectors of the four chapters line up in one
+     column and each row starts at the same x. Mermaid centres clusters of unequal width, so
+     `render.mjs` does this after rendering: every cluster is emitted as a nested
+     `<g class="root" transform="translate(x,y)">`, and each row's `x` is pulled to the smallest
+     one (`LEFT_ALIGN_ROWS` in `render.mjs`, currently just `nta`). It is only safe because no
+     visible edge crosses a cluster boundary — with such an edge the shift would tear it loose from
+     its node, so keep the previous rule.
+5. **Cluster styling** comes from the init block: `clusterBkg #f2f7fb`, `clusterBorder #9dbcd8`,
+   `titleColor #005AA7` (Mermaid's default cluster orange is not house style).
+
 ## Keeping charts in sync with the questionnaires
 
 `check-coverage.mjs` reads the risk JSON schema and the identification schema factory, extracts the
@@ -126,7 +185,8 @@ delete a question node to make the check pass**. Report the drift and ask.
 ## Files
 - `flowcharts/src/{en,nl}/*.mmd` — **the curated chart masters. Edit these.**
 - `check-coverage.mjs` — questionnaire ↔ chart sync check (see above).
-- `render.mjs` — mermaid-cli → SVG → HTML wrapper → Chrome `--print-to-pdf`. The page height is
+- `render.mjs` — mermaid-cli → SVG → HTML wrapper → Chrome `--print-to-pdf`. Also holds
+  `LEFT_ALIGN_ROWS`, the set of charts whose subgraph rows are left-aligned after rendering. The page height is
   **measured** in a headless-Chrome `--dump-dom` pass (the header wraps differently per chart and
   language), so header + diagram always land on a single page; the page count of each PDF is
   checked afterwards and re-rendered once, taller, if it ever splits.
@@ -152,3 +212,6 @@ delete a question node to make the check pass**. Report the drift and ask.
 - `risk` (EN + NL): schema question `q35` (`6.3`) has no node in the chart, and the chart's `Q19`
   no longer exists in the schema.
 - `identification`: the EN master has a `START` node the NL master lacks.
+
+The `nta-*` charts are checked against `src/schemas/nta/nl/*.json` (their `ui:id`s number the
+screens, not the individual requirements on a screen) and are skipped for EN.

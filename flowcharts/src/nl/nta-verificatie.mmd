@@ -1,0 +1,45 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'Avenir Next, Avenir, Helvetica, sans-serif', 'fontSize': '14px', 'lineColor': '#005AA7', 'primaryColor': '#005AA7', 'edgeLabelBackground': '#ffffff'}, 'flowchart': {'curve': 'basis', 'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 110, 'padding': 24}}}%%
+flowchart LR
+
+    classDef Q fill:#daeaf7,stroke:#005aa7,color:#000
+    classDef cat_result fill:#005AA7,stroke:#003c70,color:#fff,font-weight:bold
+    linkStyle default stroke:#005AA7,stroke-width:1.2px
+
+    %% ════════ Q1 — 8.2 Adviezen en besluitvorming ════════
+    Q1["NTA 8047 § 8.2 · Adviezen en<br/>besluitvorming<br/>Mandaat, technisch, ethisch en<br/>juridisch advies, en het besluit<br/>over ingebruikname<br/>(3 vereisten)"]:::Q
+    Q1 --> Q2
+
+    %% ════════ Q2 — 8.3.1 Doel en context van verificatie ════════
+    Q2["NTA 8047 § 8.3.1 · Doel en context<br/>van verificatie<br/>Gebruikte verificatiemethodes,<br/>de onderbouwing daarvan en<br/>de resultaten<br/>(2 vereisten)"]:::Q
+    Q2 --> Q3
+
+    %% ════════ Q3 — 8.3.2 Testdataset ════════
+    Q3["NTA 8047 § 8.3.2 · Testdataset<br/>Onafhankelijke testdataset, of het<br/>verzamelen van nieuwe data als<br/>die er niet is<br/>(2 vereisten)"]:::Q
+    Q3 --> Q4
+
+    %% ════════ Q4 — 8.3.3 Schaduwdraaien ════════
+    Q4["NTA 8047 § 8.3.3 · Schaduwdraaien<br/>Schaduwdraaien, vergelijking met het<br/>huidige besluitvormingsproces en<br/>verdeling over relevante gronden<br/>(3 vereisten)"]:::Q
+    Q4 --> Q5
+
+    %% ════════ Q5 — 8.3.4 Beoordelen prestaties en onderscheid ════════
+    Q5["NTA 8047 § 8.3.4 · Beoordelen<br/>prestaties en onderscheid<br/>Prestaties en onderscheid op de<br/>testdataset, getoetst aan de vooraf<br/>bepaalde bandbreedtes<br/>(4 vereisten)"]:::Q
+    Q5 --> Q6
+
+    %% ════════ Q6 — 8.4 Juridische toets ════════
+    Q6["NTA 8047 § 8.4 · Juridische toets<br/>Legitiem doel, geschiktheid,<br/>subsidiariteit, proportionaliteit en<br/>objectieve rechtvaardiging<br/>(5 vereisten)"]:::Q
+    Q6 --> Q7
+
+    %% ════════ Q7 — 8.5 Praktijkvalidatie ════════
+    Q7["NTA 8047 § 8.5 · Praktijkvalidatie<br/>Pilot op kleine schaal, evaluatie<br/>van de uitkomsten en een<br/>praktijkvalidatierapport<br/>(3 vereisten)"]:::Q
+    Q7 --> Q8
+
+    %% ════════ Q8 — 8.6 Onafhankelijke assessment of audit ════════
+    Q8["NTA 8047 § 8.6 · Onafhankelijke<br/>assessment of audit<br/>Processtappen van de NTA,<br/>algoritmebeleid en extern<br/>beleid valideren<br/>(3 vereisten)"]:::Q
+    Q8 --> Q9
+
+    %% ════════ Q9 — 8.7 Definitieve afweging ════════
+    Q9["NTA 8047 § 8.7 · Definitieve<br/>afweging<br/>Juridische toets herhalen en<br/>besluiten: implementeren,<br/>aanpassen of niet gebruiken<br/>(2 vereisten)"]:::Q
+    Q9 --> RES
+
+    %% ════════ Afsluiting ════════
+    RES["Resultaat<br/>Hoofdstuk 8 vastgelegd<br/>(inhoud van de resultaten-<br/>pagina volgt)"]:::cat_result

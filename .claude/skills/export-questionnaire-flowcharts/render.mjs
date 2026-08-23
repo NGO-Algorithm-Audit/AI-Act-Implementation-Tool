@@ -17,6 +17,9 @@ const REPO = resolve(__dirname, "../../..");
 const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const LOGO = "/Users/jurriaan/Library/CloudStorage/OneDrive-AlgorithmAudit/Team Algorithm Audit/House style/01 Logo/logo_MAIN.svg";
 const outDir = process.argv[2] || resolve(REPO, "flowcharts");
+// Optional chart filter: any further arguments limit the run to those chart keys,
+// so a single chapter can be re-exported without rewriting every other PDF.
+const only = process.argv.slice(3);
 
 const DESC = (await import("./descriptions.ts")).DESCRIPTIONS ??
   (await import("./descriptions.js")).DESCRIPTIONS;
@@ -77,10 +80,27 @@ const measurePageHeight = (htmlPath, h) => {
   return PAD * 2 + logoH + 130 + h;
 };
 
+// Charts whose subgraph rows must start at the same x instead of being centred.
+// Mermaid emits every cluster as a nested <g class="root" transform="translate(x,y)">,
+// so pulling each row's x to the smallest one left-aligns the rows without touching the
+// layout inside them. Only safe when no visible edge crosses a cluster boundary — with
+// cross-cluster edges the shift would tear those edges loose from their nodes.
+const LEFT_ALIGN_ROWS = new Set(["nta"]);
+const ROW_RE = /(<g class="root" transform="translate\()(-?[\d.]+)(,\s*)(-?[\d.]+)(\)")/g;
+const leftAlignRows = (svg) => {
+  const xs = [...svg.matchAll(ROW_RE)].map((m) => +m[2]);
+  if (xs.length < 2) return svg;
+  const min = Math.min(...xs);
+  return svg.replace(ROW_RE, (_m, head, _x, sep, y, tail) => `${head}${min}${sep}${y}${tail}`);
+};
+
 const pdfPageCount = (path) =>
   (readFileSync(path).toString("latin1").match(/\/Type\s*\/Page[^s]/g) || []).length;
 
-const charts = ["identification", "identification-ai", "identification-algo", "identification-sadm", "role", "risk", "obligations"];
+// nta-* masters exist in Dutch only (see descriptions.ts); the per-language loop below
+// simply skips a chart when its master is missing for that language.
+const charts = ["identification", "identification-ai", "identification-algo", "identification-sadm", "role", "risk", "obligations",
+  "nta", "nta-wenselijkheid", "nta-ontwerp", "nta-verificatie", "nta-gebruik"];
 const tmp = mkdtempSync(join(tmpdir(), "fc-"));
 
 for (const lang of ["en", "nl"]) {
@@ -90,6 +110,7 @@ for (const lang of ["en", "nl"]) {
   if (!existsSync(srcDir) && !existsSync(dir)) continue;
   mkdirSync(dir, { recursive: true });
   for (const chart of charts) {
+    if (only.length && !only.includes(chart)) continue;
     const mmd = [join(srcDir, `${chart}.mmd`), join(dir, `${chart}.mmd`)].find(existsSync);
     if (!mmd) continue;
     const svgPath = join(tmp, `${lang}-${chart}.svg`);
@@ -97,7 +118,8 @@ for (const lang of ["en", "nl"]) {
     execFileSync("npx", ["--yes", "@mermaid-js/mermaid-cli", "-i", mmd, "-o", svgPath,
       "-c", join(__dirname, "mmdc-config.json"), "-p", join(__dirname, "puppeteer-config.json"),
       "-b", "white"], { stdio: "inherit" });
-    const svg = readFileSync(svgPath, "utf8").replace(/<\?xml[^>]*\?>/, "");
+    let svg = readFileSync(svgPath, "utf8").replace(/<\?xml[^>]*\?>/, "");
+    if (LEFT_ALIGN_ROWS.has(chart)) svg = leftAlignRows(svg);
     const { w, h } = svgSize(svg);
     if (w <= 40 && h <= 40) { console.warn("SKIP empty:", `${lang}/${chart}`); continue; }
     const d = DESC[lang]?.[chart] || { title: chart, text: "" };
