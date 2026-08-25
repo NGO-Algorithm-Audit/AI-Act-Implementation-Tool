@@ -237,12 +237,19 @@
                     ]
                   },
                   "III.1.2-prohibited": {
-                    "type": "string",
-                    "title": "Wordt het AI-systeem in real time gebruikt, in een openbaar toegankelijke ruimte, en buiten een van de drie uitzonderingen van artikel 5, lid 1, onder h) (gerichte zoektocht naar slachtoffers van bepaalde ernstige misdrijven of vermiste personen; voorkomen van dreigend gevaar voor leven of fysieke veiligheid, of een feitelijke terreurdreiging; lokaliseren van verdachten van ernstige misdrijven genoemd in Bijlage II)?",
-                    "enum": [
-                      "Ja",
-                      "Nee"
-                    ]
+                    "type": "array",
+                    "title": "Welke van de volgende scenario's zijn van toepassing op uw AI-systeem?",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "Het AI-systeem wordt gebruikt voor de zoektocht naar slachtoffers van criminaliteit, waaronder vermiste personen, of bedreigingen voor het leven of de fysieke veiligheid van natuurlijke personen of van een terroristische aanslag, of de lokalisatie of identificatie van daders of verdachten van specifieke strafbare feiten zoals vermeld in de gebruikersaanwijzing hieronder",
+                        "Er is een beoordeling van de gevolgen voor de grondrechten (FRIA) uitgevoerd voor dit AI-systeem",
+                        "Het AI-systeem is geregistreerd in de EU-databank",
+                        "Toestemming voor gebruik is verleend door een rechterlijke instantie"
+                      ]
+                    },
+                    "uniqueItems": true,
+                    "minItems": 0
                   }
                 },
                 "required": [
@@ -272,28 +279,33 @@
             ]
           },
           "III.1.2-prohibited": {
-            "oneOf": [
+            "allOf": [
               {
-                "properties": {
-                  "III.1.2-prohibited": {
-                    "enum": [
-                      "Ja"
-                    ]
+                "if": {
+                  "properties": {
+                    "III.1.2-prohibited": {
+                      "allOf": [
+                        { "contains": { "const": "Het AI-systeem wordt gebruikt voor de zoektocht naar slachtoffers van criminaliteit, waaronder vermiste personen, of bedreigingen voor het leven of de fysieke veiligheid van natuurlijke personen of van een terroristische aanslag, of de lokalisatie of identificatie van daders of verdachten van specifieke strafbare feiten zoals vermeld in de gebruikersaanwijzing hieronder" } },
+                        { "contains": { "const": "Er is een beoordeling van de gevolgen voor de grondrechten (FRIA) uitgevoerd voor dit AI-systeem" } },
+                        { "contains": { "const": "Het AI-systeem is geregistreerd in de EU-databank" } },
+                        { "contains": { "const": "Toestemming voor gebruik is verleend door een rechterlijke instantie" } }
+                      ]
+                    }
                   },
-                  "exceptionForbidden": {
-                    "$ref": "#/definitions/exceptionForbidden"
+                  "required": ["III.1.2-prohibited"]
+                },
+                "then": {
+                  "properties": {
+                    "output": {
+                      "$ref": "#/definitions/outputForbiddenExcept"
+                    }
                   }
-                }
-              },
-              {
-                "properties": {
-                  "III.1.2-prohibited": {
-                    "enum": [
-                      "Nee"
-                    ]
-                  },
-                  "exceptionHigh": {
-                    "$ref": "#/definitions/exceptionHigh"
+                },
+                "else": {
+                  "properties": {
+                    "exceptionForbidden": {
+                      "$ref": "#/definitions/exceptionForbidden"
+                    }
                   }
                 }
               }
@@ -1864,7 +1876,8 @@
     },
     "III.1.2": {
       "ui:widget": "radio",
-      "ui:description": "Sommige situaties zijn uitgesloten van deze vraag. Die situaties betreffen de zoektocht naar bepaalde slachtoffers van criminaliteit, waaronder vermiste personen; bepaalde bedreigingen voor het leven of de fysieke veiligheid van natuurlijke personen of van een terroristische aanslag; en de lokalisatie of identificatie van daders of verdachten van de volgende strafbare feiten:\n- terrorisme\n- mensenhandel\n- seksuele uitbuiting van kinderen, en kinderpornografie\n- illegale handel in verdovende middelen of psychotrope stoffen\n- illegale handel in wapens, munitie of explosieven\n- moord, doodslag, zware mishandeling\n- illegale handel in menselijke organen of weefsels\n- illegale handel in nucleaire of radioactieve stoffen\n- ontvoering, wederrechtelijke vrijheidsberoving of gijzeling\n- misdrijven die onder de rechtsmacht van het Internationaal Strafhof vallen\n- wederrechtelijke inbezitneming van luchtvaartuigen of schepen\n- verkrachting\n- milieucriminaliteit\n- georganiseerde of gewapende diefstal\n- sabotage\n- deelname aan een criminele organisatie die betrokken is bij een of meer van de hierboven genoemde strafbare feiten.\n\nIn deze gevallen moet het antwoord op deze vraag 'Nee' zijn.",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Wetshandhaving omvat onder andere onderzoek, vervolging of de uitvoering van strafrechtelijke rechtspleging. Uitzonderingen op het verbod kunnen van toepassing zijn; deze worden besproken in de vervolgvraag Q7-exceptions.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5",
       "ui:id-badge-label": "Art. 5.h AI-verordening - Verboden AI-praktijken",
       "ui:badges": [
@@ -1879,9 +1892,15 @@
       "ui:id": "q7"
     },
     "III.1.2-prohibited": {
-      "ui:widget": "radio",
-      "ui:description": "Artikel 5, lid 1, onder h) verbiedt real-time biometrische identificatie op afstand (RBI) in openbaar toegankelijke ruimten voor rechtshandhavingsdoeleinden alleen wanneer geen van de drie uitzonderingen in onder (i)-(iii) van toepassing is. Post-RBI voor rechtshandhaving, of real-time RBI onder een van de drie uitzonderingen, is hoog-risico volgens Bijlage III punt 1(a) — niet verboden — en valt onder het gebruikersregime van artikel 26, lid 10 (voorafgaande rechterlijke of administratieve toestemming; de 48-uur regel; verwijdering van persoonsgegevens bij afwijzing; jaarlijkse rapportage).",
+      "ui:widget": "checkboxes",
       "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Vink het vakje aan als het AI-systeem wordt gebruikt voor de lokalisatie of identificatie van daders of verdachten van de volgende strafbare feiten:\n- terrorisme\n- mensenhandel\n- seksuele uitbuiting van kinderen, en kinderpornografie\n- illegale handel in verdovende middelen of psychotrope stoffen\n- illegale handel in wapens, munitie of explosieven\n- moord, doodslag, zware mishandeling\n- illegale handel in menselijke organen of weefsels\n- illegale handel in nucleaire of radioactieve stoffen\n- ontvoering, wederrechtelijke vrijheidsberoving of gijzeling\n- misdrijven die onder de rechtsmacht van het Internationaal Strafhof vallen\n- wederrechtelijke inbezitneming van luchtvaartuigen of schepen\n- verkrachting\n- milieucriminaliteit\n- georganiseerde of gewapende diefstal\n- sabotage\n- deelname aan een criminele organisatie die betrokken is bij een of meer van de hierboven genoemde strafbare feiten.\n\nEen rechterlijke instantie moet in brede zin worden opgevat. Dit kan instanties omvatten die een rechterlijke functie uitoefenen of deel uitmaken van het rechtssysteem. Een onafhankelijke bestuurlijke instantie waarvan de beslissing bindend is van de lidstaat waarin het gebruik zal plaatsvinden, wordt eveneens beschouwd als een rechterlijke instantie.",
+      "ui:enumTooltips": [
+        null,
+        null,
+        "In naar behoren gerechtvaardigde spoedeisende gevallen mag het gebruik van dergelijke systemen worden gestart zonder registratie in de EU-databank, mits deze registratie zonder onnodige vertraging wordt voltooid.",
+        "In een naar behoren gerechtvaardigde spoedeisende situatie mag het gebruik van het systeem worden gestart zonder toestemming, mits deze toestemming zonder onnodige vertraging wordt aangevraagd, uiterlijk binnen 24 uur."
+      ],
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5",
       "ui:id-badge-label": "Art. 5(1)(h) AI-verordening - Verboden AI-praktijken",
       "ui:badges": [
@@ -1889,11 +1908,7 @@
         { "label": "Art. 26(10) AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-26" },
         { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (127), (145)-(164)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
       ],
-      "ui:id-summary": {
-        "Ja": "Real-time RBI in openbaar toegankelijke ruimte voor rechtshandhaving, buiten de uitzonderingen van art. 5(1)(h)(i)-(iii) — verboden",
-        "Nee": "Niet alle voorwaarden voor het verbod van art. 5(1)(h) zijn vervuld — hoog-risico volgens Bijlage III punt 1(a), onderworpen aan art. 26(10)"
-      },
-      "ui:id": "q7 prohibited"
+      "ui:id": "q7 exceptions"
     },
     "5.g.1": {
       "ui:widget": "radio",
