@@ -814,6 +814,7 @@ const WizardForm = ({
                 step={step}
                 handlePrev={handlePrev}
                 onSubmit={onSubmit}
+                onStartQuestionnaire={onStartQuestionnaire}
                 data={mergedData}
               />
             ) : (

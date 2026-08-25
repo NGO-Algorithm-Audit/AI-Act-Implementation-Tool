@@ -27,6 +27,7 @@ type OutputProps = {
     index: number,
     data: FormProps<any, RJSFSchema, any>["formData"]
   ) => void;
+  onStartQuestionnaire?: (key: string) => void;
   data: FormProps<any, RJSFSchema, any>["schema"];
 };
 
@@ -37,6 +38,7 @@ export default function OutputIdentification({
   step,
   handlePrev,
   onSubmit,
+  onStartQuestionnaire,
   data,
 }: OutputProps) {
   const { t } = useTranslation();
@@ -138,6 +140,44 @@ export default function OutputIdentification({
     summaryClauses.push({ badge: t("badge profiling"), color: "#4f46e5" });
 
   const exportData = { ...data, output: outputDefault };
+
+  // Clickable questionnaire-name badge: runs `onActivate` when provided.
+  const questionnaireBadge = (label: string, onActivate?: () => void) => (
+    <span
+      role={onActivate ? "button" : undefined}
+      tabIndex={onActivate ? 0 : undefined}
+      onClick={onActivate}
+      onKeyDown={
+        onActivate
+          ? (e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onActivate();
+              }
+            }
+          : undefined
+      }
+      className="badge"
+      style={{
+        backgroundColor: "var(--cma-primary)",
+        color: "#fff",
+        fontSize: "0.85rem",
+        padding: "3.2px 5.12px",
+        cursor: onActivate ? "pointer" : "default",
+        verticalAlign: "middle",
+      }}
+    >
+      {label}
+    </span>
+  );
+
+  // Persist the current Identification answers before opening the Risk
+  // category questionnaire, so cross-questionnaire checks there (e.g. the
+  // Q33 profiling warning) can read this saved Identification data.
+  const handleStartRiskCategory = () => {
+    onSubmit(id, exportData);
+    onStartQuestionnaire?.("AI1");
+  };
 
   return (
     <div className="d-flex flex-column gap-3" style={{ padding: "1rem" }}>
@@ -259,6 +299,30 @@ export default function OutputIdentification({
 
       {data?.additionalOutputText && (
         <Alert variant="info">{data.additionalOutputText}</Alert>
+      )}
+
+      {classification?.ai === "yes" && (
+        <div>
+          <h5 className="mb-1 mt-3 fw-bold" style={{ color: "var(--cma-primary)" }}>
+            {t("identification next steps heading")}
+          </h5>
+          <div
+            style={{
+              borderTop: "1px solid var(--cma-primary)",
+              paddingTop: "8px",
+              fontSize: "0.9rem",
+            }}
+          >
+            <p className="mb-0">
+              {t("identification result next steps ai prefix")}{" "}
+              {questionnaireBadge(
+                t("questionnaire 2 name"),
+                onStartQuestionnaire ? handleStartRiskCategory : undefined
+              )}{" "}
+              {t("identification result next steps ai suffix")}
+            </p>
+          </div>
+        </div>
       )}
 
       {type === "output" && (
