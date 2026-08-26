@@ -1764,7 +1764,7 @@
       ],
       "ui:badges": [
         { "label": "Art. 6(1) AI-verordening - Classificatieregels voor hoog-risico AI-systemen", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-6" },
-        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (15)-(49)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (23)-(28)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#main-elements-classification-high-risk-under-article-61-ai-act" }
       ],
       "ui:id-summary": {
         "Geen van de bovenstaande": "Het AI-systeem is geen veiligheidscomponent onder de harmonisatiewetgeving van Bijlage I",
@@ -1799,7 +1799,7 @@
       "ui:badges": [
         { "label": "Overweging 50 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-50" },
         { "label": "Overweging 51 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-51" },
-        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (50)-(62)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (50)-(59)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#product-required-undergo-third-party-conformity-assessment" }
       ],
       "ui:id-summary": {
         "Ja": "Het product of AI-systeem moet een conformiteitsbeoordeling door een derde partij ondergaan krachtens de harmonisatiewetgeving van de Unie",
@@ -1815,7 +1815,7 @@
       "ui:id-badge-label": "Bijlage III(1) AI-verordening - AI-systemen met een hoog risico als bedoeld in artikel 6, lid 2",
       "ui:badges": [
         { "label": "Overweging 14 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-14" },
-        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (122)-(124)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (122)-(125)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#overview-use-cases-and-horizontal-issues" }
       ],
       "ui:id-summary": {
         "Ja": "Er worden biometrische gegevens gebruikt",
@@ -1831,7 +1831,7 @@
         { "label": "Art. 5(e)-(h) AI-verordening - Verboden AI-praktijken", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5" },
         { "label": "Overweging 14 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-14" },
         { "label": "Overweging 54 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-54" },
-        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (119)-(120)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (120)-(121)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#overview-use-cases-and-horizontal-issues" }
       ],
       "ui:enumTooltips": [null, "Emoties omvatten blijdschap, vreugde, verdriet, woede, agressie, verrassing, walging, verlegenheid, opwinding, schaamte, minachting, tevredenheid en plezier. Let op: fysieke toestanden zoals pijn of vermoeidheid worden niet als emoties beschouwd (bijv. detectie van slaperigheid bij bestuurders is geen emotieherkenning). Het louter detecteren van uitdrukkingen, gebaren of bewegingen (zoals een glimlach) is geen emotieherkenning, tenzij het wordt gebruikt om een emotie af te leiden.", "Dit betekent dat mensen worden gegroepeerd of een label krijgen op basis van bepaalde kenmerken, zoals hoe ze eruitzien of zich gedragen. Bijvoorbeeld als een toepassing mensen labelt als 'winkeldief' of een schatting maakt van iemands geslacht op basis van videobeelden. Biometrische categorisatie omvat geen categorisatie op basis van kleding of accessoires (sjaals, hoeden, handschoenen, horloges, kruisjes) of op basis van activiteit op sociale media.", "Identificatie gaat over het ontdekken wie iemand is uit een groep mensen. Als je bijvoorbeeld een foto van een gezicht hebt, kun je proberen erachter te komen wie die persoon is door de foto te vergelijken met een database van gezichten. 'Op afstand' betekent dat deze identificatie plaatsvindt zonder de actieve betrokkenheid van de persoon die wordt geïdentificeerd. Deze optie omvat ook het volgen van een natuurlijke persoon over meerdere camera's wanneer dat volgen gebaseerd is op biometrische gegevens (bijvoorbeeld gangpatroon, stem of gezicht vergeleken met een referentiesjabloon), evenals bodycams die worden gebruikt voor ongerichte opname (bijvoorbeeld van demonstraties).", "AI-systemen die biometrische gegevens gebruiken voor andere doeleinden dan identificatie, categorisatie of emotieherkenning (bijvoorbeeld stemfragmenten voor taal- of dialectanalyse om een land van herkomst aannemelijk te maken) kunnen alsnog onder andere Bijlage III-toepassingsgebieden vallen — biometrische categorisatie (punt 1(b)) of migratie, asiel en grenstoezicht (punt 7). Doorloop de vragenlijst om het juiste pad te bepalen."],
       "ui:id-summary": {
@@ -1848,8 +1848,8 @@
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5",
       "ui:id-badge-label": "Art. 5(e) AI-verordening - Verboden AI-praktijken",
       "ui:badges": [
-        { "label": "Overweging 43 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-43" },
-        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (126)-(127)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Art. 5(1)(e) AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5" },
+        { "label": "Overweging 43 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-43" }
       ],
       "ui:id-summary": {
         "Ja": "Er is sprake van grootschalige verzameling van gezichtsafbeeldingen van internet of beveiligingscamera's (scraping)",
@@ -1866,7 +1866,7 @@
       "ui:badges": [
         { "label": "Overweging 17 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-17" },
         { "label": "Overweging 54 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-54" },
-        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (136)-(140)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (129)-(144)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#remote-biometric-identification-system" }
       ],
       "ui:id-summary": {
         "Ja": "Het AI-systeem wordt uitsluitend gebruikt voor verificatie of authenticatie van een reeds bekende identiteit",
@@ -1883,7 +1883,8 @@
       "ui:badges": [
         { "label": "Overweging 32 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-32" },
         { "label": "Overweging 33 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-33" },
-        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (126)-(128)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (127)-(128)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-1a-remote-biometric-identification-systems" },
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (126)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#overview-use-cases-and-horizontal-issues" }
       ],
       "ui:id-summary": {
         "Ja": "Het AI-systeem wordt gebruikt in publiek toegankelijke ruimtes ten behoeve van wetshandhaving (onderzoek, vervolging of de uitvoering van strafrechtelijke rechtspleging)",
@@ -1906,7 +1907,10 @@
       "ui:badges": [
         { "label": "Bijlage III(1)(a) AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3" },
         { "label": "Art. 26(10) AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-26" },
-        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (127), (145)-(164)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Art. 5(2) AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5" },
+        { "label": "Art. 5(3) AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5" },
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (145)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#authorisation-requirement-certain-law-enforcement-uses-post-rbi-under-article-2610-ai-act" },
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (146)-(148)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#subparagraphs-1-and-2-article-2610-ai-act" }
       ],
       "ui:id": "q7 exceptions"
     },
@@ -1919,7 +1923,7 @@
       "ui:badges": [
         { "label": "Bijlage III(1) AI-verordening - AI-systemen met een hoog risico als bedoeld in artikel 6, lid 2", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3" },
         { "label": "Art. 9 AVG - Verwerking van bijzondere categorieën van persoonsgegevens", "color": "#198754", "url": "https://gdpr-info.eu/art-9-gdpr/" },
-        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (165)-(170)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (165)-(170)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-1b-biometric-categorisation" }
       ],
       "ui:id-summary": {
         "Ja": "Het AI-systeem schat gevoelige persoonskenmerken in (zoals ras, etniciteit, politieke opvattingen, vakbondslidmaatschap, religie, seksleven of seksuele geaardheid)",
@@ -1934,7 +1938,7 @@
       "ui:id-badge-label": "Art. 5(f) AI-verordening - Verboden AI-praktijken",
       "ui:badges": [
         { "label": "Bijlage III(1) AI-verordening - AI-systemen met een hoog risico als bedoeld in artikel 6, lid 2", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3" },
-        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (171)-(177)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (171)-(177)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-1c-emotion-recognition" }
       ],
       "ui:id-summary": {
         "Ja": "Het AI-systeem wordt gebruikt op de werkplek of in het onderwijs",
@@ -1949,7 +1953,8 @@
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-54",
       "ui:id-badge-label": "Overweging 54 AI-verordening - Uitzondering cybersecurity en bescherming van persoonsgegevens",
       "ui:badges": [
-        { "label": "Overweging 54 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-54" }
+        { "label": "Overweging 54 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-54" },
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen - praktijkvoorbeelden (Punt 1(a))", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#practical-examples-ai-systems-falling-outside-high-risk-use-case-point-1a" }
       ],
       "ui:id-summary": {
         "Ja": "Het AI-systeem wordt uitsluitend gebruikt om cybersecurity en de bescherming van persoonsgegevens mogelijk te maken",
@@ -2007,6 +2012,9 @@
       ],
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
       "ui:id-badge-label": "Bijlage III AI-verordening - Hoog-risico AI-systemen als bedoeld in artikel 6(2)",
+      "ui:badges": [
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (118)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#high-risk-ai-systems-areas-listed-annex-iii" }
+      ],
       "ui:id-summary": {
         "Kritieke fysieke en digitale infrastructuur": "Het AI-systeem opereert binnen kritieke fysieke of digitale infrastructuur",
         "Onderwijs of beroepsopleiding": "Het AI-systeem wordt gebruikt in onderwijs of beroepsopleiding",
@@ -2029,7 +2037,7 @@
       "ui:id-badge-label": "Bijlage III(2) AI-verordening - AI-systemen met een hoog risico als bedoeld in artikel 6, lid 2",
       "ui:badges": [
         { "label": "Overweging 55 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-55" },
-        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (180)-(187)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (180)-(192)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#overview-use-cases-and-horizontal-issues-0" }
       ],
       "ui:id-summary": {
         "Ja": "Het AI-systeem vervult een veiligheidsfunctie binnen kritieke infrastructuur",
@@ -2045,7 +2053,7 @@
       "ui:id-badge-label": "Bijlage III(2) AI-verordening - AI-systemen met een hoog risico als bedoeld in artikel 6, lid 2",
       "ui:badges": [
         { "label": "Overweging 55 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-55" },
-        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (187)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (180)-(192)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#overview-use-cases-and-horizontal-issues-0" }
       ],
       "ui:id-summary": {
         "Ja": "Het AI-systeem wordt uitsluitend gebruikt voor cybersecuritydoeleinden",
@@ -2061,7 +2069,7 @@
       "ui:id-badge-label": "Bijlage III(2) AI-verordening - AI-systemen met een hoog risico als bedoeld in artikel 6, lid 2",
       "ui:badges": [
         { "label": "CER-richtlijn (EU) 2022/2557", "color": "#F37962", "url": "https://eur-lex.europa.eu/eli/dir/2022/2557/oj" },
-        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (188)-(192)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (180)-(192)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#overview-use-cases-and-horizontal-issues-0" }
       ],
       "ui:id-summary": {
         "Ja": "De gebruiker is door een lidstaat aangewezen als kritieke entiteit onder de CER-richtlijn — hoog-risico volgens Bijlage III(2)",
@@ -2085,7 +2093,10 @@
       "ui:id-badge-label": "Bijlage III(3) AI-verordening - AI-systemen met een hoog risico als bedoeld in artikel 6, lid 2",
       "ui:badges": [
         { "label": "Overweging 56 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-56" },
-        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (207)-(235)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (217)-(219)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-3a-ai-systems-intended-be-used-determine-access-or-admission-or-assign-natural-persons" },
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (220)-(225)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-3b-ai-systems-intended-be-used-evaluate-learning-outcomes" },
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (226)-(229)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-3c-ai-systems-intended-be-used-purpose-assessing-appropriate-level-education" },
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (230)-(235)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-3d-ai-systems-intended-be-used-monitoring-and-detecting-prohibited-behaviour-students" }
       ],
       "ui:id-summary": {
         "Toewijzing of toelating van studenten tot onderwijs, opleiding of scholing": "Het AI-systeem wordt gebruikt voor toewijzing of toelating van studenten tot onderwijs, opleiding of scholing",
@@ -2114,7 +2125,8 @@
       "ui:id-badge-label": "Bijlage III(4) AI-verordening - AI-systemen met een hoog risico als bedoeld in artikel 6, lid 2",
       "ui:badges": [
         { "label": "Overweging 57 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-57" },
-        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (236)-(278)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (243)-(254)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-4a-ai-systems-intended-be-used-recruitment-or-selection-natural-persons" },
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (255)-(278)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-4b-ai-systems-intended-be-used-manage-work-related-relationships" }
       ],
       "ui:id-summary": {
         "Plaatsen van gerichte vacatures": "Het AI-systeem wordt gebruikt voor het plaatsen van gerichte vacatures",
@@ -2135,7 +2147,7 @@
       "ui:id-badge-label": "Bijlage III(4) AI-verordening - AI-systemen met een hoog risico als bedoeld in artikel 6, lid 2",
       "ui:badges": [
         { "label": "Overweging 57 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-57" },
-        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (273)-(278)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (255)-(278)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-4b-ai-systems-intended-be-used-manage-work-related-relationships" }
       ],
       "ui:id-summary": {
         "Ja": "Het AI-systeem monitort of evalueert de prestaties of het gedrag van werkenden in werkgerelateerde relaties",
@@ -2152,7 +2164,7 @@
       "ui:id-badge-label": "Bijlage III(5)(a) AI-verordening - AI-systemen met een hoog risico als bedoeld in artikel 6, lid 2",
       "ui:badges": [
         { "label": "Overweging 58 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-58" },
-        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (279)-(293)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (282)-(293)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-5a-evaluation-eligibility-natural-person-essential-public-assistance-benefits-and-services" }
       ],
       "ui:id-summary": {
         "Ja": "Het AI-systeem beoordeelt de toegang tot essentiële publieke diensten, voorzieningen of uitkeringen",
@@ -2175,7 +2187,9 @@
       "ui:id-badge-label": "Bijlage III(5)(b)-(d) AI-verordening - AI-systemen met een hoog risico als bedoeld in artikel 6, lid 2",
       "ui:badges": [
         { "label": "Overweging 58 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-58" },
-        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (294)-(336)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (294)-(309)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-5b-ai-systems-intended-be-used-evaluate-creditworthiness-natural-persons-or-establish-their" },
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (310)-(321)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-5c-ai-systems-intended-be-used-risk-assessment-and-pricing-case-life-and-health-insurance" },
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (329)-(336)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-5d-evaluation-and-classification-emergency-calls-or-dispatching-or-establishing" }
       ],
       "ui:id-summary": {
         "Kredietwaardigheidsonderzoek of kredietscoring van personen": "Het AI-systeem wordt gebruikt voor kredietwaardigheidsonderzoek of kredietscoring van personen",
@@ -2199,7 +2213,7 @@
         },
         { "label": "Overweging 42 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-42" },
         { "label": "Overweging 59 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-59" },
-        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (366)-(368)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (366)-(368)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-6d-ai-systems-assessing-offending-or-reoffending-concrete-persons" }
       ],
       "ui:id-badge-label": "Bijlage III.6-5.d AI-verordening - AI-systemen met een hoog risico als bedoeld in artikel 6, lid 2",
       "ui:id-summary": {
@@ -2216,7 +2230,7 @@
       "ui:badges": [
         { "label": "Art. 5(1)(d) AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/article-5" },
         { "label": "Bijlage III(6)(d) AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/annex-3" },
-        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (367)-(368)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (366)-(368)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-6d-ai-systems-assessing-offending-or-reoffending-concrete-persons" }
       ],
       "ui:id-summary": {
         "Ja": "Risicobeoordeling uitsluitend op basis van profilering of persoonlijkheidskenmerken — verboden onder art. 5(1)(d)",
@@ -2240,7 +2254,10 @@
       "ui:id-badge-label": "Bijlage III(6) AI-verordening - AI-systemen met een hoog risico als bedoeld in artikel 6, lid 2",
       "ui:badges": [
         { "label": "Overweging 59 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-59" },
-        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (337)-(372)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (356)-(359)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-6a-assessing-risk-natural-person-becoming-victim-criminal-offence" },
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (360)-(362)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-6b-polygraphs-and-or-similar-tools" },
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (363)-(365)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-6c-ai-systems-intended-be-used-evaluate-reliability-evidence" },
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (369)-(370)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-6e-ai-systems-intended-be-used-profiling-natural-persons-course-detection-investigation-or" }
       ],
       "ui:id-summary": {
         "Inschatten of iemand slachtoffer zal worden van strafbare feiten": "Het AI-systeem schat in of iemand slachtoffer zal worden van strafbare feiten",
@@ -2265,7 +2282,9 @@
       "ui:id-badge-label": "Bijlage III(7) AI-verordening - AI-systemen met een hoog risico als bedoeld in artikel 6, lid 2",
       "ui:badges": [
         { "label": "Overweging 60 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-60" },
-        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (373)-(400)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (388)-(392)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-7a-ai-systems-intended-be-used-polygraphs-or-similar-tools" },
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (393)-(396)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-7b-ai-systems-intended-be-used-risk-assessment-persons-seeking-enter-or-stay" },
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (397)-(400)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-7c-ai-systems-intended-be-used-assistance-examining-asylumvisaresidence-applications-and" }
       ],
       "ui:id-summary": {
         "Fungeren als leugendetector of vergelijkbaar instrument": "Het AI-systeem fungeert als leugendetector of vergelijkbaar instrument",
@@ -2283,7 +2302,7 @@
       "ui:id-badge-label": "Bijlage III(7) AI-verordening - AI-systemen met een hoog risico als bedoeld in artikel 6, lid 2",
       "ui:badges": [
         { "label": "Overweging 60 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-60" },
-        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (401)-(403)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (401)-(403)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-7d-ai-systems-intended-be-used-detecting-recognising-or-identifying-natural-persons-migration" }
       ],
       "ui:id-summary": {
         "Ja": "Het AI-systeem wordt gebruikt voor het detecteren, herkennen of identificeren van personen in migratie of grensbeheer",
@@ -2299,7 +2318,7 @@
       "ui:id-badge-label": "Bijlage III(7) AI-verordening - AI-systemen met een hoog risico als bedoeld in artikel 6, lid 2",
       "ui:badges": [
         { "label": "Overweging 60 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-60" },
-        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (380)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (380)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#overview-use-cases-and-horizontal-issues-3" }
       ],
       "ui:id-summary": {
         "Ja": "Het AI-systeem wordt uitsluitend gebruikt om een reis-/identiteitsdocument te verifiëren (incl. anti-spoofing binnen een één-op-één-verificatieflow)",
@@ -2313,7 +2332,8 @@
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
       "ui:id-badge-label": "Bijlage III(8)(a) AI-verordening - AI-systemen met een hoog risico als bedoeld in artikel 6, lid 2",
       "ui:badges": [
-        { "label": "Overweging 61 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-61" }
+        { "label": "Overweging 61 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-61" },
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (405)-(434)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-8a-ai-systems-intended-be-used-assist-judicial-authorities-or-alternative-dispute-resolution" }
       ],
       "ui:id-summary": {
         "Ja": "Het AI-systeem wordt uitsluitend gebruikt ter ondersteuning van administratieve activiteiten die de rechtspraak in individuele zaken niet beïnvloeden",
@@ -2329,7 +2349,7 @@
       "ui:id-badge-label": "Bijlage III(8)(b) AI-verordening - AI-systemen met een hoog risico als bedoeld in artikel 6, lid 2",
       "ui:badges": [
         { "label": "Overweging 62 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-62" },
-        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (435)-(447)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (435)-(447)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-8-b-ai-systems-intended-be-used-influencing-outcome-elections-or-referendum" }
       ],
       "ui:id-summary": {
         "Ja": "Het AI-systeem is bedoeld om de uitkomst van een verkiezing of referendum, of het stemgedrag van natuurlijke personen te beïnvloeden",
@@ -2415,7 +2435,7 @@
       "ui:badges": [
         { "label": "Profilering", "color": "#4F46E5", "url": "https://gdpr-info.eu/art-4-gdpr/" },
         { "label": "Overweging 53 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-53" },
-        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (109)-(112)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (109)-(112)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#exception-profiling" }
       ],
       "ui:id-summary": {
         "Ja": "Profilering wordt gebruikt — het AI-systeem evalueert of voorspelt automatisch kenmerken, gedrag of persoonlijke aspecten",
@@ -2439,7 +2459,7 @@
       "ui:badges": [
         { "label": "Art. 6(3) AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/article-6" },
         { "label": "Overweging 53 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-53" },
-        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (84)-(108)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (86)-(108)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#conditions-filter-apply" }
       ],
       "ui:id-summary": {
         "Ja, het AI-systeem wordt gebruikt voor een beperkte procedurele taak.": "Het AI-systeem wordt uitsluitend gebruikt voor een beperkte procedurele taak",
@@ -2487,7 +2507,7 @@
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-6",
       "ui:id-badge-label": "Art. 6(3)(c) AI-verordening - Uitzondering voor ondersteunende rol",
       "ui:badges": [
-        { "label": "Ontwerprichtsnoeren voor de classificatie van hoog-risico AI-systemen (100)-(102)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (86)-(108)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#conditions-filter-apply" }
       ],
       "ui:id-summary": {
         "De menselijke beoordeling is voltooid": "De menselijke beoordeling is voltooid",

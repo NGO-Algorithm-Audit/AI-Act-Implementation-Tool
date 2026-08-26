@@ -1764,7 +1764,7 @@
       ],
       "ui:badges": [
         { "label": "Art. 6(1) AI Act - Classification rules for high-risk AI systems", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-6" },
-        { "label": "Draft guidelines on the classification of high-risk AI systems (15)-(49)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Guidelines on the classification of high-risk AI systems (23)-(28)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#main-elements-classification-high-risk-under-article-61-ai-act" }
       ],
       "ui:id-summary": {
         "None of the below": "The AI system is not a safety component under Annex I harmonisation legislation",
@@ -1799,7 +1799,7 @@
       "ui:badges": [
         { "label": "Recital 50 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-50" },
         { "label": "Recital 51 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-51" },
-        { "label": "Draft guidelines on the classification of high-risk AI systems (50)-(62)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Guidelines on the classification of high-risk AI systems (50)-(59)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#product-required-undergo-third-party-conformity-assessment" }
       ],
       "ui:id-summary": {
         "Yes": "The product or AI system requires a third-party conformity assessment under Union harmonisation legislation",
@@ -1815,7 +1815,7 @@
       "ui:id-badge-label": "Annex III(1) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
         { "label": "Recital 14 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-14" },
-        { "label": "Draft guidelines on the classification of high-risk AI systems (122)-(124)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Guidelines on the classification of high-risk AI systems (122)-(125)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#overview-use-cases-and-horizontal-issues" }
       ],
       "ui:id-summary": {
         "Yes": "Biometric data is used",
@@ -1831,7 +1831,7 @@
         { "label": "Art. 5(1)(e)-(h) AI Act - Prohibited AI practices", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5" },
         { "label": "Recital 14 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-14" },
         { "label": "Recital 54 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-54" },
-        { "label": "Draft guidelines on the classification of high-risk AI systems (119)-(120)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Guidelines on the classification of high-risk AI systems (120)-(121)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#overview-use-cases-and-horizontal-issues" }
       ],
       "ui:enumTooltips": [null, "Emotions include happiness, joy, sadness, anger, aggression, surprise, disgust, shyness, excitement, shame, contempt, satisfaction, and pleasure. Note: physical states such as pain or fatigue are not considered emotions (e.g. driver-drowsiness detection is not emotion recognition). The mere detection of expressions, gestures or movements (e.g. a smile) is not emotion recognition unless used to infer an emotion.", "This means that people are grouped or assigned a label based on certain characteristics, such as how they look or behave. For example, if an application labels people as 'shoplifters' or makes an estimate of someone's gender based on video images. Biometric categorisation does not include categorisation according to clothes or accessories (scarfs, hats, gloves, watches, crosses) or based on social media activity.", "Identification is about discovering who someone is from a group of people. For example, if you have a photo of a face, you can try to find out who that person is by comparing the photo with a database of faces. 'Remote' means that this identification takes place without the active involvement of the person being identified. This option also covers tracking a natural person across cameras where the tracking relies on biometric data (e.g. gait, voice, face matched against a reference template), and body-worn cameras used for untargeted filming (e.g. of demonstrations).", "AI systems that use biometric data for purposes other than identification, categorisation or emotion recognition (e.g. voice samples used for language or dialect analysis to substantiate a country of origin) may still fall under other Annex III use cases — biometric categorisation (point 1(b)) or migration / asylum / border control (point 7). Continue the questionnaire to ensure the correct path."],
       "ui:id-summary": {
@@ -1848,8 +1848,8 @@
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5",
       "ui:id-badge-label": "Art. 5(1)(e) AI Act - Prohibited AI practices",
       "ui:badges": [
-        { "label": "Recital 43 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-43" },
-        { "label": "Draft guidelines on the classification of high-risk AI systems (126)-(127)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Art. 5(1)(e) AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5" },
+        { "label": "Recital 43 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-43" }
       ],
       "ui:id-summary": {
         "Yes": "Large-scale collection of facial images from the internet or security cameras (scraping) is involved",
@@ -1866,7 +1866,7 @@
       "ui:badges": [
         { "label": "Recital 17 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-17" },
         { "label": "Recital 54 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-54" },
-        { "label": "Draft guidelines on the classification of high-risk AI systems (136)-(140)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Guidelines on the classification of high-risk AI systems (129)-(144)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#remote-biometric-identification-system" }
       ],
       "ui:id-summary": {
         "Yes": "The AI system is used only for verification or authentication of a known identity",
@@ -1883,7 +1883,8 @@
       "ui:badges": [
         { "label": "Recital 32 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-32" },
         { "label": "Recital 33 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-33" },
-        { "label": "Draft guidelines on the classification of high-risk AI systems (126)-(128)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Guidelines on the classification of high-risk AI systems (127)-(128)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-1a-remote-biometric-identification-systems" },
+        { "label": "Guidelines on the classification of high-risk AI systems (126)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#overview-use-cases-and-horizontal-issues" }
       ],
       "ui:id-summary": {
         "Yes": "The AI system is used in publicly accessible spaces for the purpose of law enforcement (investigation, prosecution or the execution of criminal justice)",
@@ -1906,7 +1907,10 @@
       "ui:badges": [
         { "label": "Annex III(1)(a) AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3" },
         { "label": "Art. 26(10) AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-26" },
-        { "label": "Draft guidelines on the classification of high-risk AI systems (127), (145)-(164)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Art. 5(2) AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5" },
+        { "label": "Art. 5(3) AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5" },
+        { "label": "Guidelines on the classification of high-risk AI systems (145)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#authorisation-requirement-certain-law-enforcement-uses-post-rbi-under-article-2610-ai-act" },
+        { "label": "Guidelines on the classification of high-risk AI systems (146)-(148)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#subparagraphs-1-and-2-article-2610-ai-act" }
       ],
       "ui:id": "q7 exceptions"
     },
@@ -1919,7 +1923,7 @@
       "ui:badges": [
         { "label": "Annex III(1) AI Act - High-risk AI systems referred to in Article 6(2)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3" },
         { "label": "Art. 9 GDPR - Processing of special categories of personal data", "color": "#198754", "url": "https://gdpr-info.eu/art-9-gdpr/" },
-        { "label": "Draft guidelines on the classification of high-risk AI systems (165)-(170)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Guidelines on the classification of high-risk AI systems (165)-(170)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-1b-biometric-categorisation" }
       ],
       "ui:id-summary": {
         "Yes": "The AI system estimates sensitive personal characteristics (such as race, ethnicity, political opinions, union membership, religion, sex life or sexual orientation)",
@@ -1934,7 +1938,7 @@
       "ui:id-badge-label": "Art. 5(1)(f) AI Act - Prohibited AI practices",
       "ui:badges": [
         { "label": "Annex III(1) AI Act - High-risk AI systems referred to in Article 6(2)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3" },
-        { "label": "Draft guidelines on the classification of high-risk AI systems (171)-(177)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Guidelines on the classification of high-risk AI systems (171)-(177)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-1c-emotion-recognition" }
       ],
       "ui:id-summary": {
         "Yes": "The AI system is used in the workplace or in education",
@@ -1949,7 +1953,8 @@
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-54",
       "ui:id-badge-label": "Recital 54 AI Act - Cybersecurity and personal-data-protection carve-out",
       "ui:badges": [
-        { "label": "Recital 54 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-54" }
+        { "label": "Recital 54 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-54" },
+        { "label": "Guidelines on the classification of high-risk AI systems - practical examples (Point 1(a))", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#practical-examples-ai-systems-falling-outside-high-risk-use-case-point-1a" }
       ],
       "ui:id-summary": {
         "Yes": "The AI system is used solely to enable cybersecurity and personal data protection measures",
@@ -2007,6 +2012,9 @@
       ],
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
       "ui:id-badge-label": "Annex III AI Act - High-risk AI systems referred to in Article 6(2)",
+      "ui:badges": [
+        { "label": "Guidelines on the classification of high-risk AI systems (118)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#high-risk-ai-systems-areas-listed-annex-iii" }
+      ],
       "ui:id-summary": {
         "Critical physical and digital infrastructure": "The AI system operates within critical physical or digital infrastructure",
         "Education or vocational training": "The AI system is used in education or vocational training",
@@ -2029,7 +2037,7 @@
       "ui:id-badge-label": "Annex III(2) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
         { "label": "Recital 55 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-55" },
-        { "label": "Draft guidelines on the classification of high-risk AI systems (180)-(187)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Guidelines on the classification of high-risk AI systems (180)-(192)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#overview-use-cases-and-horizontal-issues-0" }
       ],
       "ui:id-summary": {
         "Yes": "The AI system fulfills a safety function in critical infrastructure",
@@ -2045,7 +2053,7 @@
       "ui:id-badge-label": "Annex III(2) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
         { "label": "Recital 55 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-55" },
-        { "label": "Draft guidelines on the classification of high-risk AI systems (187)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Guidelines on the classification of high-risk AI systems (180)-(192)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#overview-use-cases-and-horizontal-issues-0" }
       ],
       "ui:id-summary": {
         "Yes": "The AI system is used solely for cybersecurity purposes",
@@ -2061,7 +2069,7 @@
       "ui:id-badge-label": "Annex III(2) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
         { "label": "CER Directive (EU) 2022/2557", "color": "#F37962", "url": "https://eur-lex.europa.eu/eli/dir/2022/2557/oj" },
-        { "label": "Draft guidelines on the classification of high-risk AI systems (188)-(192)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Guidelines on the classification of high-risk AI systems (180)-(192)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#overview-use-cases-and-horizontal-issues-0" }
       ],
       "ui:id-summary": {
         "Yes": "The deployer has been identified by a Member State as a critical entity under the CER Directive — high-risk under Annex III(2)",
@@ -2085,7 +2093,10 @@
       "ui:id-badge-label": "Annex III(3) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
         { "label": "Recital 56 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-56" },
-        { "label": "Draft guidelines on the classification of high-risk AI systems (207)-(235)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Guidelines on the classification of high-risk AI systems (217)-(219)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-3a-ai-systems-intended-be-used-determine-access-or-admission-or-assign-natural-persons" },
+        { "label": "Guidelines on the classification of high-risk AI systems (220)-(225)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-3b-ai-systems-intended-be-used-evaluate-learning-outcomes" },
+        { "label": "Guidelines on the classification of high-risk AI systems (226)-(229)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-3c-ai-systems-intended-be-used-purpose-assessing-appropriate-level-education" },
+        { "label": "Guidelines on the classification of high-risk AI systems (230)-(235)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-3d-ai-systems-intended-be-used-monitoring-and-detecting-prohibited-behaviour-students" }
       ],
       "ui:id-summary": {
         "Allocation or admission of students to education, training or schooling": "The AI system is used for allocation or admission of students to education, training or schooling",
@@ -2114,7 +2125,8 @@
       "ui:id-badge-label": "Annex III(4) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
         { "label": "Recital 57 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-57" },
-        { "label": "Draft guidelines on the classification of high-risk AI systems (236)-(278)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Guidelines on the classification of high-risk AI systems (243)-(254)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-4a-ai-systems-intended-be-used-recruitment-or-selection-natural-persons" },
+        { "label": "Guidelines on the classification of high-risk AI systems (255)-(278)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-4b-ai-systems-intended-be-used-manage-work-related-relationships" }
       ],
       "ui:id-summary": {
         "Placing targeted job advertisements": "The AI system is used to place targeted job advertisements",
@@ -2135,7 +2147,7 @@
       "ui:id-badge-label": "Annex III(4) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
         { "label": "Recital 57 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-57" },
-        { "label": "Draft guidelines on the classification of high-risk AI systems (273)-(278)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Guidelines on the classification of high-risk AI systems (255)-(278)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-4b-ai-systems-intended-be-used-manage-work-related-relationships" }
       ],
       "ui:id-summary": {
         "Yes": "The AI system monitors or evaluates the performance or behaviour of workers in work-related relationships",
@@ -2152,7 +2164,7 @@
       "ui:id-badge-label": "Annex III(5)(a) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
         { "label": "Recital 58 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-58" },
-        { "label": "Draft guidelines on the classification of high-risk AI systems (279)-(293)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Guidelines on the classification of high-risk AI systems (282)-(293)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-5a-evaluation-eligibility-natural-person-essential-public-assistance-benefits-and-services" }
       ],
       "ui:id-summary": {
         "Yes": "The AI system assesses eligibility for essential public services, provisions or benefits",
@@ -2175,7 +2187,9 @@
       "ui:id-badge-label": "Annex III(5)(b)-(d) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
         { "label": "Recital 58 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-58" },
-        { "label": "Draft guidelines on the classification of high-risk AI systems (294)-(336)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Guidelines on the classification of high-risk AI systems (294)-(309)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-5b-ai-systems-intended-be-used-evaluate-creditworthiness-natural-persons-or-establish-their" },
+        { "label": "Guidelines on the classification of high-risk AI systems (310)-(321)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-5c-ai-systems-intended-be-used-risk-assessment-and-pricing-case-life-and-health-insurance" },
+        { "label": "Guidelines on the classification of high-risk AI systems (329)-(336)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-5d-evaluation-and-classification-emergency-calls-or-dispatching-or-establishing" }
       ],
       "ui:id-summary": {
         "Creditworthiness assessment or credit scoring of individuals": "The AI system is used for creditworthiness assessment or credit scoring of individuals",
@@ -2199,7 +2213,7 @@
         },
         { "label": "Recital 42 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-42" },
         { "label": "Recital 59 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-59" },
-        { "label": "Draft guidelines on the classification of high-risk AI systems (366)-(368)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Guidelines on the classification of high-risk AI systems (366)-(368)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-6d-ai-systems-assessing-offending-or-reoffending-concrete-persons" }
       ],
       "ui:id-badge-label": "Annex III.6-5.d AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:id-summary": {
@@ -2216,7 +2230,7 @@
       "ui:badges": [
         { "label": "Art. 5(1)(d) AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5" },
         { "label": "Annex III(6)(d) AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3" },
-        { "label": "Draft guidelines on the classification of high-risk AI systems (367)-(368)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Guidelines on the classification of high-risk AI systems (366)-(368)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-6d-ai-systems-assessing-offending-or-reoffending-concrete-persons" }
       ],
       "ui:id-summary": {
         "Yes": "Risk assessment is based solely on profiling or personality traits — prohibited under Art. 5(1)(d)",
@@ -2240,7 +2254,10 @@
       "ui:id-badge-label": "Annex III(6) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
         { "label": "Recital 59 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-59" },
-        { "label": "Draft guidelines on the classification of high-risk AI systems (337)-(372)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Guidelines on the classification of high-risk AI systems (356)-(359)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-6a-assessing-risk-natural-person-becoming-victim-criminal-offence" },
+        { "label": "Guidelines on the classification of high-risk AI systems (360)-(362)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-6b-polygraphs-and-or-similar-tools" },
+        { "label": "Guidelines on the classification of high-risk AI systems (363)-(365)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-6c-ai-systems-intended-be-used-evaluate-reliability-evidence" },
+        { "label": "Guidelines on the classification of high-risk AI systems (369)-(370)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-6e-ai-systems-intended-be-used-profiling-natural-persons-course-detection-investigation-or" }
       ],
       "ui:id-summary": {
         "Assess or estimate that someone will become a victim of criminal offenses": "The AI system assesses or estimates that someone will become a victim of criminal offenses",
@@ -2265,7 +2282,9 @@
       "ui:id-badge-label": "Annex III(7) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
         { "label": "Recital 60 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-60" },
-        { "label": "Draft guidelines on the classification of high-risk AI systems (373)-(400)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Guidelines on the classification of high-risk AI systems (388)-(392)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-7a-ai-systems-intended-be-used-polygraphs-or-similar-tools" },
+        { "label": "Guidelines on the classification of high-risk AI systems (393)-(396)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-7b-ai-systems-intended-be-used-risk-assessment-persons-seeking-enter-or-stay" },
+        { "label": "Guidelines on the classification of high-risk AI systems (397)-(400)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-7c-ai-systems-intended-be-used-assistance-examining-asylumvisaresidence-applications-and" }
       ],
       "ui:id-summary": {
         "Act as a polygraph (lie detector) or similar instrument": "The AI system acts as a polygraph (lie detector) or similar instrument",
@@ -2283,7 +2302,7 @@
       "ui:id-badge-label": "Annex III(7) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
         { "label": "Recital 60 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-60" },
-        { "label": "Draft guidelines on the classification of high-risk AI systems (401)-(403)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Guidelines on the classification of high-risk AI systems (401)-(403)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-7d-ai-systems-intended-be-used-detecting-recognising-or-identifying-natural-persons-migration" }
       ],
       "ui:id-summary": {
         "Yes": "The AI system is used for detection, recognition or identification of individuals in migration or border control",
@@ -2299,7 +2318,7 @@
       "ui:id-badge-label": "Annex III(7) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
         { "label": "Recital 60 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-60" },
-        { "label": "Draft guidelines on the classification of high-risk AI systems (380)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Guidelines on the classification of high-risk AI systems (380)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#overview-use-cases-and-horizontal-issues-3" }
       ],
       "ui:id-summary": {
         "Yes": "The AI system is used solely to verify a travel/identity document (incl. anti-spoofing within a one-to-one verification flow)",
@@ -2313,7 +2332,8 @@
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3",
       "ui:id-badge-label": "Annex III(8)(a) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
-        { "label": "Recital 61 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-61" }
+        { "label": "Recital 61 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-61" },
+        { "label": "Guidelines on the classification of high-risk AI systems (405)-(434)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-8a-ai-systems-intended-be-used-assist-judicial-authorities-or-alternative-dispute-resolution" }
       ],
       "ui:id-summary": {
         "Yes": "The AI system is used only for administrative activities that do not affect the judiciary in individual cases",
@@ -2329,7 +2349,7 @@
       "ui:id-badge-label": "Annex III(8)(b) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
         { "label": "Recital 62 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-62" },
-        { "label": "Draft guidelines on the classification of high-risk AI systems (435)-(447)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Guidelines on the classification of high-risk AI systems (435)-(447)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#point-8-b-ai-systems-intended-be-used-influencing-outcome-elections-or-referendum" }
       ],
       "ui:id-summary": {
         "Yes": "The AI system is intended to influence the outcome of an election or referendum, or the voting behaviour of natural persons",
@@ -2415,7 +2435,7 @@
       "ui:badges": [
         { "label": "Profiling", "color": "#4F46E5", "url": "https://gdpr-info.eu/art-4-gdpr/" },
         { "label": "Recital 53 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-53" },
-        { "label": "Draft guidelines on the classification of high-risk AI systems (109)-(112)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Guidelines on the classification of high-risk AI systems (109)-(112)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#exception-profiling" }
       ],
       "ui:id-summary": {
         "Yes": "Profiling is used — the AI system automatically evaluates or predicts characteristics, behavior or personal aspects",
@@ -2439,7 +2459,7 @@
       "ui:badges": [
         { "label": "Art. 6(3) AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-6" },
         { "label": "Recital 53 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-53" },
-        { "label": "Draft guidelines on the classification of high-risk AI systems (84)-(108)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Guidelines on the classification of high-risk AI systems (86)-(108)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#conditions-filter-apply" }
       ],
       "ui:id-summary": {
         "Yes, the AI system is used for a narrow procedural task.": "The AI system is used only for a narrow procedural task",
@@ -2487,7 +2507,7 @@
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-6",
       "ui:id-badge-label": "Art. 6(3)(c) AI Act - Auxiliary-role carve-out",
       "ui:badges": [
-        { "label": "Draft guidelines on the classification of high-risk AI systems (100)-(102)", "color": "#F37962", "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" }
+        { "label": "Guidelines on the classification of high-risk AI systems (86)-(108)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#conditions-filter-apply" }
       ],
       "ui:id-summary": {
         "The human assessment is completed": "The human assessment is completed",
