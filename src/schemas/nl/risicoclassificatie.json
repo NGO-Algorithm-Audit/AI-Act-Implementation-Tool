@@ -1953,8 +1953,7 @@
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-54",
       "ui:id-badge-label": "Overweging 54 AI-verordening - Uitzondering cybersecurity en bescherming van persoonsgegevens",
       "ui:badges": [
-        { "label": "Overweging 54 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-54" },
-        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen - praktijkvoorbeelden (Punt 1(a))", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#practical-examples-ai-systems-falling-outside-high-risk-use-case-point-1a" }
+        { "label": "Overweging 54 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-54" }
       ],
       "ui:id-summary": {
         "Ja": "Het AI-systeem wordt uitsluitend gebruikt om cybersecurity en de bescherming van persoonsgegevens mogelijk te maken",
@@ -2053,7 +2052,7 @@
       "ui:id-badge-label": "Bijlage III(2) AI-verordening - AI-systemen met een hoog risico als bedoeld in artikel 6, lid 2",
       "ui:badges": [
         { "label": "Overweging 55 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/nl/ai-act/recital-55" },
-        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (180)-(192)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#overview-use-cases-and-horizontal-issues-0" }
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (187)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#overview-use-cases-and-horizontal-issues-0" }
       ],
       "ui:id-summary": {
         "Ja": "Het AI-systeem wordt uitsluitend gebruikt voor cybersecuritydoeleinden",
@@ -2069,7 +2068,7 @@
       "ui:id-badge-label": "Bijlage III(2) AI-verordening - AI-systemen met een hoog risico als bedoeld in artikel 6, lid 2",
       "ui:badges": [
         { "label": "CER-richtlijn (EU) 2022/2557", "color": "#F37962", "url": "https://eur-lex.europa.eu/eli/dir/2022/2557/oj" },
-        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (180)-(192)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#overview-use-cases-and-horizontal-issues-0" }
+        { "label": "Richtsnoeren voor de classificatie van hoog-risico AI-systemen (188)-(192)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#overview-use-cases-and-horizontal-issues-0" }
       ],
       "ui:id-summary": {
         "Ja": "De gebruiker is door een lidstaat aangewezen als kritieke entiteit onder de CER-richtlijn — hoog-risico volgens Bijlage III(2)",
@@ -2362,6 +2361,9 @@
       "ui:description": "Subliminale technieken omvatten het tonen van afbeeldingen zo kort dat ze niet bewust waarneembaar zijn. Manipulatie zonder bewustzijn omvat AI-chatbots die adviezen geven die beslissingen beïnvloeden, toepassingen die verslaving stimuleren, of systemen die voorkomen dat gebruikers een klacht indienen terwijl ze dat van plan waren.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5",
       "ui:id-badge-label": "Art. 5(1)(a) AI-verordening - Verboden AI-praktijken",
+      "ui:badges": [
+        { "label": "Art. 5(1)(a) AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5" }
+      ],
       "ui:id-summary": {
         "Ja": "Het AI-systeem gebruikt subliminale of manipulatieve technieken die werken zonder bewustzijn van de gebruiker",
         "Nee": "Het AI-systeem gebruikt geen subliminale of manipulatieve technieken"
@@ -2373,6 +2375,9 @@
       "ui:description": "Denk aan een AI-gezondheids-chatbot die tips geeft over een gezonde levensstijl en op maat gemaakt advies voor psychologische en fysieke oefeningen. Als de chatbot echter ongezonde gewoonten of gevaarlijke activiteiten aanmoedigt (bijv. overmatig sporten zonder rust of drinkwater) die ze anders niet zouden hebben gedaan, heeft het negatieve gevolgen voor de gebruiker.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5",
       "ui:id-badge-label": "Art. 5.a AI-verordening - Verboden AI-praktijken",
+      "ui:badges": [
+        { "label": "Art. 5(1)(a) AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5" }
+      ],
       "ui:id-summary": {
         "Ja": "Het AI-systeem kan potentieel negatieve gevolgen hebben voor de gebruiker of andere mensen",
         "Nee": "Het AI-systeem heeft geen potentieel negatieve gevolgen voor de gebruiker of andere mensen"
@@ -2385,6 +2390,9 @@
       "ui:alertDescription": "Voorbeelden van sociaal gedrag zijn:\n- Rijgedrag\n- Communicatiestijl\n- Het overtreden van (on)geschreven regels\n\nVoorbeelden van persoonlijke kenmerken zijn:\n- Leeftijd\n- Lengte\n- Geslacht\n- Economische situatie\n- Bewegingspatronen\n- Interesses",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5",
       "ui:id-badge-label": "Art. 5(1)(c) AI-verordening - Verboden AI-praktijken",
+      "ui:badges": [
+        { "label": "Art. 5(1)(c) AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5" }
+      ],
       "ui:id-summary": {
         "Ja": "Het AI-systeem evalueert, scoort of classificeert personen op een manier die tot nadelige behandeling kan leiden",
         "Nee": "Het AI-systeem evalueert, scoort of classificeert personen niet op een manier die tot nadelige behandeling kan leiden"
@@ -2396,6 +2404,9 @@
       "ui:description": "Nadelige behandeling in een niet-gerelateerde context is bijvoorbeeld een frauderisicoscore die leidt tot een onderzoek, waarbij de frauderisicoscore is gebaseerd op kenmerken zonder duidelijke relevantie voor de beoordeling van fraude, zoals het hebben van een partner met een bepaalde nationaliteit of gedrag op sociale platforms.\n\nOnevenredige behandeling is bijvoorbeeld iemand die een hogere frauderisicoscore krijgt omdat gemeentelijke belastingen ooit te laat zijn betaald, of een student die niet wordt toegelaten tot verdere opleiding omdat hij of zij ooit betrapt is op spieken.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5",
       "ui:id-badge-label": "Art. 5(1)(c) AI-verordening - Verboden AI-praktijken",
+      "ui:badges": [
+        { "label": "Art. 5(1)(c) AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5" }
+      ],
       "ui:id-summary": {
         "Ja": "De nadelige behandeling vindt plaats in een niet-gerelateerde context of is onevenredig ten opzichte van het gedrag of kenmerk waarop zij is gebaseerd",
         "Nee": "De nadelige behandeling is niet in een niet-gerelateerde context en ook niet onevenredig"

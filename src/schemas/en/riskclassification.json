@@ -1953,8 +1953,7 @@
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-54",
       "ui:id-badge-label": "Recital 54 AI Act - Cybersecurity and personal-data-protection carve-out",
       "ui:badges": [
-        { "label": "Recital 54 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-54" },
-        { "label": "Guidelines on the classification of high-risk AI systems - practical examples (Point 1(a))", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#practical-examples-ai-systems-falling-outside-high-risk-use-case-point-1a" }
+        { "label": "Recital 54 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-54" }
       ],
       "ui:id-summary": {
         "Yes": "The AI system is used solely to enable cybersecurity and personal data protection measures",
@@ -2053,7 +2052,7 @@
       "ui:id-badge-label": "Annex III(2) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
         { "label": "Recital 55 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/recital-55" },
-        { "label": "Guidelines on the classification of high-risk AI systems (180)-(192)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#overview-use-cases-and-horizontal-issues-0" }
+        { "label": "Guidelines on the classification of high-risk AI systems (187)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#overview-use-cases-and-horizontal-issues-0" }
       ],
       "ui:id-summary": {
         "Yes": "The AI system is used solely for cybersecurity purposes",
@@ -2069,7 +2068,7 @@
       "ui:id-badge-label": "Annex III(2) AI Act - High-risk AI systems referred to in Article 6(2)",
       "ui:badges": [
         { "label": "CER Directive (EU) 2022/2557", "color": "#F37962", "url": "https://eur-lex.europa.eu/eli/dir/2022/2557/oj" },
-        { "label": "Guidelines on the classification of high-risk AI systems (180)-(192)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#overview-use-cases-and-horizontal-issues-0" }
+        { "label": "Guidelines on the classification of high-risk AI systems (188)-(192)", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/guideline-explorer#overview-use-cases-and-horizontal-issues-0" }
       ],
       "ui:id-summary": {
         "Yes": "The deployer has been identified by a Member State as a critical entity under the CER Directive — high-risk under Annex III(2)",
@@ -2362,6 +2361,9 @@
       "ui:description": "Subliminal techniques include showing images so briefly that they cannot be consciously perceived. Manipulation without awareness includes AI chatbots that give advice influencing decisions, applications that stimulate addiction or systems that prevent users from filing a complaint while they intended to.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5",
       "ui:id-badge-label": "Art. 5(1)(a) AI Act - Prohibited AI practices",
+      "ui:badges": [
+        { "label": "Art. 5(1)(a) AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5" }
+      ],
       "ui:id-summary": {
         "Yes": "The AI system uses subliminal or manipulative techniques that operate without users' awareness",
         "No": "The AI system does not use subliminal or manipulative techniques"
@@ -2373,6 +2375,9 @@
       "ui:description": "Think of an AI health chatbot intended to give tips on a healthy lifestyle and tailored advice for psychological and physical exercises. However, if the chatbot encourages unhealthy habits or dangerous activities (e.g., excessive exercise without rest or drinking water) that they would not have done otherwise, it has negative consequences for the user.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5",
       "ui:id-badge-label": "Art. 5.a AI Act - Prohibited AI practices",
+      "ui:badges": [
+        { "label": "Art. 5(1)(a) AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5" }
+      ],
       "ui:id-summary": {
         "Yes": "The AI system can potentially have negative consequences for the user or other people",
         "No": "The AI system has no potential negative consequences for the user or other people"
@@ -2385,6 +2390,9 @@
       "ui:alertDescription": "Examples of social behavior are:\n- Driving behavior\n- Communication style\n- Breaking (un)written rules\n\nExamples of personal characteristics are:\n- Age\n- Height\n- Gender\n- Economic situation\n- Movement patterns\n- Interests",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5",
       "ui:id-badge-label": "Art. 5(1)(c) AI Act - Prohibited AI practices",
+      "ui:badges": [
+        { "label": "Art. 5(1)(c) AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5" }
+      ],
       "ui:id-summary": {
         "Yes": "The AI system evaluates, scores or classifies individuals in a way that could lead to unfavorable treatment",
         "No": "The AI system does not evaluate, score or classify individuals in a way that could lead to unfavorable treatment"
@@ -2396,6 +2404,9 @@
       "ui:description": "Unfavorable treatment in an unrelated context is, for example, a fraud risk score that leads to an investigation, where the fraud risk score is based on characteristics without clear relevance to the assessment of fraud, such as having a partner with a certain nationality or behavior on social platforms.\n\nDisproportionate treatment is, for example, someone getting a higher fraud risk score because municipal taxes were once paid late or a student not being admitted to further education because they were once caught cheating.",
       "ui:id-link": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5",
       "ui:id-badge-label": "Art. 5(1)(c) AI Act - Prohibited AI practices",
+      "ui:badges": [
+        { "label": "Art. 5(1)(c) AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5" }
+      ],
       "ui:id-summary": {
         "Yes": "The unfavorable treatment occurs in an unrelated context or is disproportionate to the behavior or characteristic it is based on",
         "No": "The unfavorable treatment is neither in an unrelated context nor disproportionate"
