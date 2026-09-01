@@ -51,8 +51,13 @@ flowchart LR
 
     %% ════════ Q7 — public safety / law enforcement ════════
     Q7["Q7 · Art. 5(1)(h) · Annex III(1.2)<br/>Public safety or<br/>law enforcement?"]:::Q
-    Q7 -->|"Yes"| EXCF
+    Q7 -->|"Yes"| Q7B
     Q7 -->|"No"| Q10
+
+    %% ════════ Q7B — real-time RBI safeguard checklist ════════
+    Q7B["Q7B · Art. 5(1)(h)<br/>Victim search purpose, FRIA,<br/>EU-database registration and<br/>judicial authorisation<br/>all in place?"]:::Q
+    Q7B -->|"All 4 safeguards met"| FORBEXCEPT
+    Q7B -->|"Not all met"| EXCF
 
     %% ════════ Q8 — sensitive-attribute inference ════════
     Q8["Q8 · Art. 5(1)(g) · Annex III(1)<br/>Estimates race, ethnicity,<br/>beliefs, sex life, etc.?"]:::Q
@@ -98,10 +103,13 @@ flowchart LR
     %% ════════ Domain 1 — Critical infrastructure (Annex III(2)) ════════
     Q14["Q14 · Annex III(2.4)<br/>Safety function?"]:::Q
     Q15["Q15 · Annex III(2.5)<br/>Cybersecurity system?"]:::Q
+    Q15B["Q15B · Annex III(2.6)<br/>Used by an entity critical<br/>under the Critical Entities<br/>Resilience Directive?"]:::Q
     Q14 -->|"Yes"| Q15
     Q14 -->|"No"| Q29
     Q15 -->|"Yes"| Q29
-    Q15 -->|"No"| EXCH
+    Q15 -->|"No"| Q15B
+    Q15B -->|"Yes"| EXCH
+    Q15B -->|"No"| Q29
 
     %% ════════ Domain 2 — Education (Annex III(3)) ════════
     Q16["Q16 · Annex III(3.uses)<br/>Education context?"]:::Q
@@ -110,14 +118,11 @@ flowchart LR
 
     %% ════════ Domain 3 — Employment / HR (Annex III(4)) ════════
     Q17["Q17 · Annex III(4.uses)<br/>Employment use?"]:::Q
-    Q18["Q18 · Annex III(4.8)<br/>Activities, behaviour or<br/>performance of employees?"]:::Q
-    Q19["Q19 · Annex III(4.9)<br/>Evaluation or monitoring<br/>of performance?"]:::Q
+    Q18["Q18 · Annex III(4.monitor)<br/>Monitor or evaluate the<br/>performance or behaviour<br/>of employees?"]:::Q
     Q17 -->|"High-risk option"| EXCH
     Q17 -->|"None of the above"| Q18
-    Q18 -->|"Yes"| Q19
+    Q18 -->|"Yes"| EXCH
     Q18 -->|"No"| Q29
-    Q19 -->|"Yes"| EXCH
-    Q19 -->|"No"| Q29
 
     %% ════════ Domain 4 — Government benefits (Annex III(5)(a)) ════════
     Q20["Q20 · Annex III(5.decision)<br/>Eligibility or<br/>service decision?"]:::Q
@@ -131,9 +136,12 @@ flowchart LR
 
     %% ════════ Domain 6 — Law enforcement (Annex III(6) · Art. 5(1)(d)) ════════
     Q22["Q22 · Art. 5 · Annex III(6)<br/>Predict risk of<br/>(re)committing an offence?"]:::Q
+    Q22B["Q22B · Art. 5(1)(d)<br/>Based solely on profiling<br/>or personality traits?"]:::Q
     Q23["Q23 · Annex III(6.uses)<br/>Other law-enforcement<br/>uses?"]:::Q
-    Q22 -->|"Yes — recidivism risk"| EXCF
+    Q22 -->|"Yes — recidivism risk"| Q22B
     Q22 -->|"No"| Q23
+    Q22B -->|"Yes — solely profiling"| EXCF
+    Q22B -->|"No — objective facts too"| EXCH
     Q23 -->|"High-risk option"| EXCH
     Q23 -->|"None of the above"| Q29
 
@@ -176,12 +184,16 @@ flowchart LR
     EXCH["Exception screen · Art. 2<br/>Research, defence or<br/>national security?"]:::exc
     Q33["Q33 · Art. 6(3)<br/>Automatically evaluate or<br/>predict characteristics,<br/>behaviour or aspects?"]:::Q
     Q34["Q34 · Art. 6(3)<br/>Limited procedural or<br/>preparatory task?"]:::Q
+    Q35["Q35 · Art. 6(3)<br/>Human assessment completed,<br/>ex-post comparison only, and<br/>no replacement of that review?"]:::Q
     EXCH -->|"Research / defence /<br/>national security"| HIGHEXCEPT
     EXCH -->|"None of the above"| Q33
     Q33 -->|"Yes"| HIGH
     Q33 -->|"No"| Q34
-    Q34 -->|"Procedural / preparatory /<br/>pattern / improve"| HIGHEXCEPT
+    Q34 -->|"Procedural /<br/>improve / preparatory"| HIGHEXCEPT
+    Q34 -->|"Decision-making<br/>patterns"| Q35
     Q34 -->|"No"| HIGH
+    Q35 -->|"All 3 scenarios apply"| HIGHEXCEPT
+    Q35 -->|"Not all apply"| HIGH
 
     %% ════════ Exception screen — prohibited branch (Art. 2(3)–(8)) ════════
     EXCF["Exception screen · Art. 2<br/>Research, defence or<br/>national security?"]:::exc
@@ -198,7 +210,7 @@ flowchart LR
     FORBEXCEPT["Prohibited + possible exception<br/>(Art. 2)"]:::cat_except
 
     %% ════════ High-fanout Annex III nodes — colour-code outgoing destinations ════════
-    %% Light brown (#b08968): edges from Q15/Q16/Q19/Q20/Q21/Q23/Q26/Q27/Q28 → EXCH
-    %% Purple      (#9370DB): edges from Q15/Q16/Q19/Q20/Q21/Q23/Q26/Q27/Q28 → Q29
-    linkStyle 46,47,53,55,57,61,68,70,71 stroke:#b08968,stroke-width:1.8px
-    linkStyle 45,48,54,56,58,62,67,69,72 stroke:#9370DB,stroke-width:1.8px
+    %% Light brown (#b08968): edges from Q15B/Q16/Q18/Q20/Q21/Q23/Q26/Q27/Q28 → EXCH
+    %% Purple      (#9370DB): edges from Q15B/Q16/Q18/Q20/Q21/Q23/Q26/Q27/Q28 → Q29
+    linkStyle 49,51,55,57,59,65,72,74,75 stroke:#b08968,stroke-width:1.8px
+    linkStyle 50,52,56,58,60,66,71,73,76 stroke:#9370DB,stroke-width:1.8px

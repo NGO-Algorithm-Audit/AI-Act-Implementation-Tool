@@ -51,8 +51,13 @@ flowchart LR
 
     %% ════════ V7 — openbare veiligheid / wetshandhaving ════════
     Q7["V7 · Art. 5(1)(h) · Bijlage III(1.2)<br/>Openbare veiligheid<br/>of wetshandhaving?"]:::Q
-    Q7 -->|"Ja"| EXCF
+    Q7 -->|"Ja"| Q7B
     Q7 -->|"Nee"| Q10
+
+    %% ════════ V7B — waarborgenchecklist real-time RBI ════════
+    Q7B["V7B · Art. 5(1)(h)<br/>Slachtofferzoektocht, FRIA,<br/>EU-registratie en rechterlijke<br/>machtiging allemaal aanwezig?"]:::Q
+    Q7B -->|"Alle 4 waarborgen aanwezig"| FORBEXCEPT
+    Q7B -->|"Niet allemaal aanwezig"| EXCF
 
     %% ════════ V8 — afleiding gevoelige kenmerken ════════
     Q8["V8 · Art. 5(1)(g) · Bijlage III(1)<br/>Schat ras, etniciteit,<br/>overtuigingen, seksleven, enz.?"]:::Q
@@ -98,10 +103,13 @@ flowchart LR
     %% ════════ Domein 1 — Kritieke infrastructuur (Bijlage III(2)) ════════
     Q14["V14 · Bijlage III(2.4)<br/>Veiligheidsfunctie?"]:::Q
     Q15["V15 · Bijlage III(2.5)<br/>Cyberbeveiligingssysteem?"]:::Q
+    Q15B["V15B · Bijlage III(2.6)<br/>Gebruikt door een entiteit<br/>die kritiek is onder de<br/>CER-richtlijn?"]:::Q
     Q14 -->|"Ja"| Q15
     Q14 -->|"Nee"| Q29
     Q15 -->|"Ja"| Q29
-    Q15 -->|"Nee"| EXCH
+    Q15 -->|"Nee"| Q15B
+    Q15B -->|"Ja"| EXCH
+    Q15B -->|"Nee"| Q29
 
     %% ════════ Domein 2 — Onderwijs (Bijlage III(3)) ════════
     Q16["V16 · Bijlage III(3.uses)<br/>Onderwijscontext?"]:::Q
@@ -110,14 +118,11 @@ flowchart LR
 
     %% ════════ Domein 3 — Arbeid / HR (Bijlage III(4)) ════════
     Q17["V17 · Bijlage III(4.uses)<br/>Arbeidsgebruik?"]:::Q
-    Q18["V18 · Bijlage III(4.8)<br/>Activiteiten, gedrag of<br/>prestaties van werknemers?"]:::Q
-    Q19["V19 · Bijlage III(4.9)<br/>Evaluatie of monitoring<br/>van prestaties?"]:::Q
+    Q18["V18 · Bijlage III(4.monitor)<br/>Monitort of evalueert het<br/>AI-systeem de prestaties of<br/>het gedrag van werknemers?"]:::Q
     Q17 -->|"Hoog-risico-optie"| EXCH
     Q17 -->|"Geen van de bovenstaande"| Q18
-    Q18 -->|"Ja"| Q19
+    Q18 -->|"Ja"| EXCH
     Q18 -->|"Nee"| Q29
-    Q19 -->|"Ja"| EXCH
-    Q19 -->|"Nee"| Q29
 
     %% ════════ Domein 4 — Overheidsuitkeringen (Bijlage III(5)(a)) ════════
     Q20["V20 · Bijlage III(5.decision)<br/>In-aanmerking-komen of<br/>dienstbeslissing?"]:::Q
@@ -131,9 +136,12 @@ flowchart LR
 
     %% ════════ Domein 6 — Wetshandhaving (Bijlage III(6) · Art. 5(1)(d)) ════════
     Q22["V22 · Art. 5 · Bijlage III(6)<br/>Voorspelt risico op<br/>(herhaling van) strafbaar feit?"]:::Q
+    Q22B["V22B · Art. 5(1)(d)<br/>Uitsluitend gebaseerd op<br/>profilering of persoonlijkheids-<br/>kenmerken?"]:::Q
     Q23["V23 · Bijlage III(6.uses)<br/>Overige wetshandhavings-<br/>doeleinden?"]:::Q
-    Q22 -->|"Ja — recidiverisico"| EXCF
+    Q22 -->|"Ja — recidiverisico"| Q22B
     Q22 -->|"Nee"| Q23
+    Q22B -->|"Ja — uitsluitend profilering"| EXCF
+    Q22B -->|"Nee — ook objectieve feiten"| EXCH
     Q23 -->|"Hoog-risico-optie"| EXCH
     Q23 -->|"Geen van de bovenstaande"| Q29
 
@@ -176,12 +184,16 @@ flowchart LR
     EXCH["Uitzonderingenscherm · Art. 2<br/>Onderzoek, defensie of<br/>nationale veiligheid?"]:::exc
     Q33["V33 · Art. 6(3)<br/>Automatisch kenmerken,<br/>gedrag of aspecten<br/>evalueren of voorspellen?"]:::Q
     Q34["V34 · Art. 6(3)<br/>Beperkte procedurele of<br/>voorbereidende taak?"]:::Q
+    Q35["V35 · Art. 6(3)<br/>Menselijke beoordeling voltooid,<br/>uitsluitend ex-post vergelijking,<br/>en geen vervanging van die<br/>beoordeling?"]:::Q
     EXCH -->|"Onderzoek / defensie /<br/>nationale veiligheid"| HIGHEXCEPT
     EXCH -->|"Geen van de bovenstaande"| Q33
     Q33 -->|"Ja"| HIGH
     Q33 -->|"Nee"| Q34
-    Q34 -->|"Procedureel / voorbereidend /<br/>patroon / verbeteren"| HIGHEXCEPT
+    Q34 -->|"Procedureel /<br/>verbeteren / voorbereidend"| HIGHEXCEPT
+    Q34 -->|"Besluitvormings-<br/>patronen"| Q35
     Q34 -->|"Nee"| HIGH
+    Q35 -->|"Alle 3 scenario's van toepassing"| HIGHEXCEPT
+    Q35 -->|"Niet allemaal van toepassing"| HIGH
 
     %% ════════ Uitzonderingenscherm — verboden-tak (Art. 2(3)–(8)) ════════
     EXCF["Uitzonderingenscherm · Art. 2<br/>Onderzoek, defensie of<br/>nationale veiligheid?"]:::exc
@@ -198,7 +210,7 @@ flowchart LR
     FORBEXCEPT["Verboden + mogelijke uitzondering<br/>(Art. 2)"]:::cat_except
 
     %% ════════ Hoog-fanout Bijlage III nodes — kleurcodering uitgaande paden ════════
-    %% Lichtbruin (#b08968): Q15/Q16/Q19/Q20/Q21/Q23/Q26/Q27/Q28 → EXCH
-    %% Paars      (#9370DB): Q15/Q16/Q19/Q20/Q21/Q23/Q26/Q27/Q28 → Q29
-    linkStyle 46,47,53,55,57,61,68,70,71 stroke:#b08968,stroke-width:1.8px
-    linkStyle 45,48,54,56,58,62,67,69,72 stroke:#9370DB,stroke-width:1.8px
+    %% Lichtbruin (#b08968): Q15B/Q16/Q18/Q20/Q21/Q23/Q26/Q27/Q28 → EXCH
+    %% Paars      (#9370DB): Q15B/Q16/Q18/Q20/Q21/Q23/Q26/Q27/Q28 → Q29
+    linkStyle 49,51,55,57,59,65,72,74,75 stroke:#b08968,stroke-width:1.8px
+    linkStyle 50,52,56,58,60,66,71,73,76 stroke:#9370DB,stroke-width:1.8px
