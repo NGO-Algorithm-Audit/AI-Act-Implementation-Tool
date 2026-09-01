@@ -3,6 +3,10 @@
 // articles covered, the lead enumerates the screens in order, and every lead closes with
 // the pointer to the tool itself — that closer is what licenses the condensed node text
 // in the charts (see the authoring rules in SKILL.md). Keys match the chart keys.
+//
+// The four NTA 8047 charts (nta-*) are Dutch-only: the schemas in src/schemas/nta/en are
+// still byte-identical copies of the Dutch ones, so an English chart would not match what
+// the tool shows. Add the en entries together with the English masters once those land.
 
 export interface Desc {
   title: string;
@@ -68,6 +72,26 @@ export const DESCRIPTIONS: Record<"en" | "nl", Record<string, Desc>> = {
     obligations: {
       title: "Stroomschema — Verplichtingen per risicocategorie, rol en Artikel 50-scenario (Art. 4, 5, 9, 10-17, 26, 27, 43, 47-50, 72 en Bijlage III, IV AI-verordening)",
       text: "Dit schema toont de verplichtingen die van toepassing zijn, afhankelijk van de rol van de actor (aanbieder of gebruiksverantwoordelijke) en de risicocategorie (verboden, hoog-risico of generatieve en interactieve AI), en weerspiegelt de conditionele logica van de pagina “Risicocategorie-resultaten” op basis van de Risicocategorie-vragenlijst en de Rol en status-vragenlijst. De volledige vragen en de tekst van de resultaten-pagina zijn te vinden in de AI AQT tool zelf.",
+    },
+    nta: {
+      title: "Stroomschema \u2014 NTA 8047 voor profileringsalgoritmes (hoofdstukken 6\u20139)",
+      text: "Dit schema toont de vier NTA 8047-vragenlijsten in \u00e9\u00e9n beeld, zoals ze vanaf het NTA-scherm in de tool kunnen worden gestart: Wenselijkheid en noodzakelijkheid (hoofdstuk 6), Ontwerp en ontwikkeling (hoofdstuk 7), Toetsing (hoofdstuk 8) en Gebruik profileringsalgoritme (hoofdstuk 9). Elk hoofdstuk staat op een eigen rij: een reeks schermen met per scherm de NTA-paragraaf, een korte omschrijving en het aantal vast te leggen vereisten, eindigend op de resultatenpagina van dat hoofdstuk. De instapknoop links op elke rij geeft aan waar dat hoofdstuk vandaan wordt gestart \u2014 vanaf het NTA-scherm, of na de resultatenpagina van het vorige hoofdstuk. De vier vragenlijsten zijn lineaire documentatieformulieren: er zijn geen vertakkingen en de volgorde tussen de hoofdstukken wordt niet door de tool afgedwongen. Het auteursrecht op de vereisten en de NTA 8047 berust bij NEN. De volledige vragen zijn te vinden in de AI AQT tool zelf.",
+    },
+    "nta-wenselijkheid": {
+      title: "Stroomschema \u2014 NTA 8047 hoofdstuk 6: Wenselijkheid en noodzakelijkheid (\u00a7 6.2\u20136.6)",
+      text: "Dit schema toont de schermen van de vragenlijst Wenselijkheid en noodzakelijkheid, in de volgorde waarin ze in de tool worden doorlopen: probleemanalyse (6.2), doel van het besluitvormingsproces (6.3), belangen van betrokkenen (6.4), alternatieve instrumenten (6.5) en de voorlopige afweging (6.6). Per scherm is aangegeven hoeveel vereisten uit de NTA moeten worden vastgelegd. Deze vragenlijst is een lineair documentatieformulier: er zijn geen vertakkingen of uitkomsten. Het auteursrecht op de vereisten en de NTA 8047 berust bij NEN. De volledige vragen zijn te vinden in de AI AQT tool zelf.",
+    },
+    "nta-ontwerp": {
+      title: "Stroomschema \u2014 NTA 8047 hoofdstuk 7: Ontwerp en ontwikkeling (\u00a7 7.2\u20137.8)",
+      text: "Dit schema toont de schermen van de vragenlijst Ontwerp en ontwikkeling, in de volgorde waarin ze in de tool worden doorlopen: doelvariabele (7.2), datasets, datakwaliteit en datasetdocumentatie (7.3.1\u20137.3.3), kwalitatieve en kwantitatieve analyse van profileringskenmerken (7.4.2\u20137.4.3), algoritmekeuze (7.5), opstellen van het profileringsalgoritme (7.6), prestaties, indirect onderscheid, statistisch toetsen en herziening van metrieken (7.7.2\u20137.7.5) en de documentatie van de ontwikkeling (7.8). Per scherm is aangegeven hoeveel vereisten uit de NTA moeten worden vastgelegd. Deze vragenlijst is een lineair documentatieformulier: er zijn geen vertakkingen of uitkomsten. Het auteursrecht op de vereisten en de NTA 8047 berust bij NEN. De volledige vragen zijn te vinden in de AI AQT tool zelf.",
+    },
+    "nta-verificatie": {
+      title: "Stroomschema \u2014 NTA 8047 hoofdstuk 8: Toetsing (\u00a7 8.2\u20138.7)",
+      text: "Dit schema toont de schermen van de vragenlijst Toetsing, in de volgorde waarin ze in de tool worden doorlopen: adviezen en besluitvorming (8.2), doel en context van de verificatie, testdataset, schaduwdraaien en het beoordelen van prestaties en onderscheid (8.3.1\u20138.3.4), de juridische toets (8.4), praktijkvalidatie (8.5), onafhankelijke assessment of audit (8.6) en de definitieve afweging (8.7). Per scherm is aangegeven hoeveel vereisten uit de NTA moeten worden vastgelegd. Deze vragenlijst is een lineair documentatieformulier: er zijn geen vertakkingen of uitkomsten. Het auteursrecht op de vereisten en de NTA 8047 berust bij NEN. De volledige vragen zijn te vinden in de AI AQT tool zelf.",
+    },
+    "nta-gebruik": {
+      title: "Stroomschema \u2014 NTA 8047 hoofdstuk 9: Gebruik profileringsalgoritme (\u00a7 9.2.1\u20139.3.4)",
+      text: "Dit schema toont de schermen van de vragenlijst Gebruik profileringsalgoritme, in de volgorde waarin ze in de tool worden doorlopen: duidelijke werkinstructies en consistente uitkomsten (9.2.1), selectie voor het besluitvormingsproces (9.2.2), transparantieverplichtingen (9.2.3), monitoren op organisatorische waarborgen en veranderingen (9.3.2), monitoren van prestaties en onderscheid (9.3.3) en het herevalueren van de toetsing (9.3.4). Per scherm is aangegeven hoeveel vereisten uit de NTA moeten worden vastgelegd. Deze vragenlijst is een lineair documentatieformulier: er zijn geen vertakkingen of uitkomsten. Het auteursrecht op de vereisten en de NTA 8047 berust bij NEN. De volledige vragen zijn te vinden in de AI AQT tool zelf.",
     },
   },
 };

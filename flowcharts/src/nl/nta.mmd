@@ -1,0 +1,95 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'Avenir Next, Avenir, Helvetica, sans-serif', 'fontSize': '14px', 'lineColor': '#005AA7', 'primaryColor': '#005AA7', 'edgeLabelBackground': '#ffffff', 'clusterBkg': '#f2f7fb', 'clusterBorder': '#9dbcd8', 'titleColor': '#005AA7'}, 'flowchart': {'curve': 'basis', 'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 110, 'padding': 24}}}%%
+flowchart TB
+
+    classDef Q fill:#daeaf7,stroke:#005aa7,color:#000
+    classDef entry fill:#e0f2fe,stroke:#0284c7,color:#0c4a6e,font-weight:bold
+    classDef cat_result fill:#005AA7,stroke:#003c70,color:#fff,font-weight:bold
+    linkStyle default stroke:#005AA7,stroke-width:1.2px
+
+    %% ════════════════════════════════════════════════════════════════════
+    %% Hoofdstuk 6 — Wenselijkheid en noodzakelijkheid
+    %% ════════════════════════════════════════════════════════════════════
+    subgraph CH6["Hoofdstuk 6 · Wenselijkheid en noodzakelijkheid"]
+        direction LR
+        E6["▶ Vanaf het NTA-scherm<br/>NTA 8047 voor<br/>profileringsalgoritmes"]:::entry
+        W1["§ 6.2 · Probleemanalyse<br/>Probleem, oorzaken en omvang,<br/>huidig beleid, processtappen en<br/>gevolgen voor betrokkenen<br/>(7 vereisten)"]:::Q
+        W2["§ 6.3 · Doel besluitvormingsproces<br/>Doelen, wettelijke taak en<br/>bevoegdheid, doel van het<br/>profileringsalgoritme, kaders<br/>(6 vereisten)"]:::Q
+        W3["§ 6.4 · Belangen van betrokkenen<br/>Betrokkenen identificeren,<br/>representatief betrekken en<br/>belangen documenteren<br/>(3 vereisten)"]:::Q
+        W4["§ 6.5 · Alternatieve instrumenten<br/>Alternatieven inventariseren,<br/>oorzaak-gevolgrelatie beschrijven<br/>en rangorde aanbrengen<br/>(4 vereisten)"]:::Q
+        W5["§ 6.6 · Voorlopige afweging<br/>Te onderzoeken opties kiezen en<br/>onderbouwen waarom een profilerings-<br/>algoritme het onderzoeken waard is<br/>(3 vereisten)"]:::Q
+        RESW["Resultaat<br/>Hoofdstuk 6<br/>vastgelegd"]:::cat_result
+        E6 --> W1
+        W1 --> W2 --> W3 --> W4 --> W5 --> RESW
+    end
+
+    %% ════════════════════════════════════════════════════════════════════
+    %% Hoofdstuk 7 — Ontwerp en ontwikkeling
+    %% ════════════════════════════════════════════════════════════════════
+    subgraph CH7["Hoofdstuk 7 · Ontwerp en ontwikkeling"]
+        direction LR
+        E7["▶ Vanaf het NTA-scherm<br/>of Resultaat<br/>Hoofdstuk 6"]:::entry
+        O1["§ 7.2 · Definieer en onderbouw<br/>doelvariabele<br/>Relatie met het doel, definitie,<br/>meetbaarheid, datakwaliteit en<br/>werkinstructies<br/>(5 vereisten)"]:::Q
+        O2["§ 7.3.1 · Datasets<br/>Populatie en referentiepopulatie,<br/>(aselecte) steekproef, ontwikkel-,<br/>validatie- en testdataset<br/>(5 vereisten)"]:::Q
+        O3["§ 7.3.2 · Datakwaliteit<br/>Accuraatheid, compleetheid,<br/>representativiteit, consistentie<br/>en actualiteit<br/>(5 vereisten)"]:::Q
+        O4["§ 7.3.3 · Documentatie van datasets<br/>Herkomst en dataverzameling,<br/>samenstelling en bewerkingen<br/>(3 vereisten)"]:::Q
+        O5["§ 7.4.2 · Kwalitatieve analyse<br/>Profileringskenmerken inventariseren,<br/>bezwaren wegen en de gemaakte<br/>keuzes onderbouwen<br/>(3 vereisten)"]:::Q
+        O6["§ 7.4.3 · Kwantitatieve analyse<br/>Proxyanalyse op relevante gronden<br/>en dataminimalisatie<br/>(2 vereisten)"]:::Q
+        O7["§ 7.5 · Algoritmekeuze<br/>Type algoritme onderbouwen en<br/>bepalen of het onderdeel is van een<br/>AI-systeem volgens de AI-verordening<br/>(2 vereisten)"]:::Q
+        O8["§ 7.6 · Opstellen van<br/>profileringsalgoritme<br/>Regelgebaseerd: regels, drempel-<br/>waarden en gewichten. Datagebaseerd:<br/>training en gemaakte keuzes<br/>(2 vereisten)"]:::Q
+        O9["§ 7.7.2 · Prestaties voor de<br/>doelvariabele<br/>Prestatiemetrieken en bandbreedtes<br/>bepalen, meten op de validatiedataset<br/>en resultaten uitleggen<br/>(6 vereisten)"]:::Q
+        O10["§ 7.7.3 · Meten van indirect<br/>onderscheid<br/>Relevante gronden en gelijkheids-<br/>metrieken bepalen, onderscheid meten<br/>en resultaten uitleggen<br/>(6 vereisten)"]:::Q
+        O11["§ 7.7.4 · Statistisch toetsen<br/>Effectgrootte, statistische<br/>significantie en hypothesetoetsen<br/>(3 vereisten)"]:::Q
+        O12["§ 7.7.5 · Herziening van metrieken<br/>en bandbreedtes<br/>Motivatie vóór de fase Verificatie<br/>en validatie, en bij latere aanpassing<br/>in de levenscyclus<br/>(2 vereisten)"]:::Q
+        O13["§ 7.8 · Documenteer ontwikkeling<br/>profileringsalgoritme<br/>Doelvariabele, algoritmetype,<br/>profileringskenmerken, methode<br/>en definitief algoritme<br/>(5 vereisten)"]:::Q
+        RESO["Resultaat<br/>Hoofdstuk 7<br/>vastgelegd"]:::cat_result
+        E7 --> O1
+        O1 --> O2 --> O3 --> O4 --> O5 --> O6 --> O7 --> O8 --> O9 --> O10 --> O11 --> O12 --> O13 --> RESO
+    end
+
+    %% ════════════════════════════════════════════════════════════════════
+    %% Hoofdstuk 8 — Toetsing
+    %% ════════════════════════════════════════════════════════════════════
+    subgraph CH8["Hoofdstuk 8 · Toetsing"]
+        direction LR
+        E8["▶ Vanaf het NTA-scherm<br/>of Resultaat<br/>Hoofdstuk 7"]:::entry
+        T1["§ 8.2 · Adviezen en besluitvorming<br/>Mandaat, technisch, ethisch en<br/>juridisch advies, en het besluit<br/>over ingebruikname<br/>(3 vereisten)"]:::Q
+        T2["§ 8.3.1 · Doel en context van<br/>verificatie<br/>Gebruikte verificatiemethodes,<br/>de onderbouwing daarvan en<br/>de resultaten<br/>(2 vereisten)"]:::Q
+        T3["§ 8.3.2 · Testdataset<br/>Onafhankelijke testdataset, of het<br/>verzamelen van nieuwe data als<br/>die er niet is<br/>(2 vereisten)"]:::Q
+        T4["§ 8.3.3 · Schaduwdraaien<br/>Schaduwdraaien, vergelijking met het<br/>huidige besluitvormingsproces en<br/>verdeling over relevante gronden<br/>(3 vereisten)"]:::Q
+        T5["§ 8.3.4 · Beoordelen prestaties<br/>en onderscheid<br/>Prestaties en onderscheid op de<br/>testdataset, getoetst aan de vooraf<br/>bepaalde bandbreedtes<br/>(4 vereisten)"]:::Q
+        T6["§ 8.4 · Juridische toets<br/>Legitiem doel, geschiktheid,<br/>subsidiariteit, proportionaliteit en<br/>objectieve rechtvaardiging<br/>(5 vereisten)"]:::Q
+        T7["§ 8.5 · Praktijkvalidatie<br/>Pilot op kleine schaal, evaluatie<br/>van de uitkomsten en een<br/>praktijkvalidatierapport<br/>(3 vereisten)"]:::Q
+        T8["§ 8.6 · Onafhankelijke assessment<br/>of audit<br/>Processtappen van de NTA,<br/>algoritmebeleid en extern<br/>beleid valideren<br/>(3 vereisten)"]:::Q
+        T9["§ 8.7 · Definitieve afweging<br/>Juridische toets herhalen en<br/>besluiten: implementeren,<br/>aanpassen of niet gebruiken<br/>(2 vereisten)"]:::Q
+        REST["Resultaat<br/>Hoofdstuk 8<br/>vastgelegd"]:::cat_result
+        E8 --> T1
+        T1 --> T2 --> T3 --> T4 --> T5 --> T6 --> T7 --> T8 --> T9 --> REST
+    end
+
+    %% ════════════════════════════════════════════════════════════════════
+    %% Hoofdstuk 9 — Gebruik profileringsalgoritme
+    %% ════════════════════════════════════════════════════════════════════
+    subgraph CH9["Hoofdstuk 9 · Gebruik profileringsalgoritme"]
+        direction LR
+        E9["▶ Vanaf het NTA-scherm<br/>of Resultaat<br/>Hoofdstuk 8"]:::entry
+        G1["§ 9.2.1 · Duidelijke werkinstructies<br/>en consistente uitkomsten<br/>Werkinstructies en vastlegging, gelijke<br/>behandeling, neutrale presentatie,<br/>feedback, kwaliteitscontrole en opleiding<br/>(14 vereisten)"]:::Q
+        G2["§ 9.2.2 · Selectie voor<br/>besluitvormingsproces<br/>Verhouding aselecte selectie, signalen<br/>van discriminatie, aanvullend onderzoek<br/>bij klachten, bezwaar en beroep<br/>(4 vereisten)"]:::Q
+        G3["§ 9.2.3 · Transparantieverplichtingen<br/>Betrokkenen in begrijpelijke taal<br/>informeren en publicatie over<br/>het profileringsalgoritme<br/>(2 vereisten)"]:::Q
+        G4["§ 9.3.2 · Monitoren op organisatorische<br/>waarborgen en veranderingen<br/>Frequentie, periodieke en ad-hoc-<br/>evaluatie, aanpassing na feedback en<br/>veranderingen in context en beleid<br/>(9 vereisten)"]:::Q
+        G5["§ 9.3.3 · Monitoren van prestaties<br/>en onderscheid<br/>Datakwaliteit, afwijking tussen<br/>beslismedewerker en algoritme,<br/>data drift, prestaties en onderscheid<br/>(5 vereisten)"]:::Q
+        G6["§ 9.3.4 · Herevalueren toetsing<br/>Op basis van de monitoring de<br/>juridische toets uit 8.4 opnieuw<br/>doorlopen en documenteren<br/>(1 vereiste)"]:::Q
+        RESG["Resultaat<br/>Hoofdstuk 9<br/>vastgelegd"]:::cat_result
+        E9 --> G1
+        G1 --> G2 --> G3 --> G4 --> G5 --> G6 --> RESG
+    end
+
+    %% ════════ Volgorde van de hoofdstukken ════════
+    %% Onzichtbare links tussen de clusters (niet tussen knopen!) houden de vier
+    %% hoofdstukken onder elkaar én laten de LR-richting binnen elke rij intact.
+    CH6 ~~~ CH7
+    CH7 ~~~ CH8
+    CH8 ~~~ CH9
+
+    %% De drie cluster-links hierboven zijn ordeningshulp, geen stap in het proces:
+    %% expliciet onzichtbaar maken, anders erven ze de blauwe `linkStyle default`.
+    linkStyle 37,38,39 stroke:none,stroke-width:0px

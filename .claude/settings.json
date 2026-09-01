@@ -1,7 +1,12 @@
 {
   "permissions": {
     "allow": [
-      "Bash(* /Users/jurriaan/Github\\ repos/*)"
+      "Bash(* /Users/jurriaan/Github\\ repos/*)",
+      "Bash(python3 -c ' *)",
+      "Bash(S=/private/tmp/claude-501/-Users-jurriaan-Documents-GitHub-AI-Act-Implementation-Tool/e6d1a482-e583-4ba9-a2d0-92fd9b98b060/scratchpad && mkdir -p $S/baseline && cp src/schemas/nta/nl/*.json $S/baseline/ && ls $S/baseline *)"
+    ],
+    "additionalDirectories": [
+      "/Users/jurriaan/Documents/GitHub/AI-Act-Implementation-Tool/src/schemas/nta/nl"
     ]
   }
 }

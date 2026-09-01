@@ -1,0 +1,61 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'Avenir Next, Avenir, Helvetica, sans-serif', 'fontSize': '14px', 'lineColor': '#005AA7', 'primaryColor': '#005AA7', 'edgeLabelBackground': '#ffffff'}, 'flowchart': {'curve': 'basis', 'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 80, 'rankSpacing': 110, 'padding': 24}}}%%
+flowchart LR
+
+    classDef Q fill:#daeaf7,stroke:#005aa7,color:#000
+    classDef cat_result fill:#005AA7,stroke:#003c70,color:#fff,font-weight:bold
+    linkStyle default stroke:#005AA7,stroke-width:1.2px
+
+    %% ════════ Q1 — 7.2 Doelvariabele ════════
+    Q1["NTA 8047 § 7.2 · Definieer en<br/>onderbouw doelvariabele<br/>Relatie met het doel, definitie,<br/>meetbaarheid, datakwaliteit en<br/>werkinstructies<br/>(5 vereisten)"]:::Q
+    Q1 --> Q2
+
+    %% ════════ Q2 — 7.3.1 Datasets ════════
+    Q2["NTA 8047 § 7.3.1 · Datasets<br/>Populatie en referentiepopulatie,<br/>(aselecte) steekproef, ontwikkel-,<br/>validatie- en testdataset<br/>(5 vereisten)"]:::Q
+    Q2 --> Q3
+
+    %% ════════ Q3 — 7.3.2 Datakwaliteit ════════
+    Q3["NTA 8047 § 7.3.2 · Datakwaliteit<br/>Accuraatheid, compleetheid,<br/>representativiteit, consistentie<br/>en actualiteit<br/>(5 vereisten)"]:::Q
+    Q3 --> Q4
+
+    %% ════════ Q4 — 7.3.3 Documentatie van datasets ════════
+    Q4["NTA 8047 § 7.3.3 · Documentatie<br/>van datasets<br/>Herkomst en dataverzameling,<br/>samenstelling en bewerkingen<br/>(3 vereisten)"]:::Q
+    Q4 --> Q5
+
+    %% ════════ Q5 — 7.4.2 Kwalitatieve analyse ════════
+    Q5["NTA 8047 § 7.4.2 · Kwalitatieve<br/>analyse<br/>Profileringskenmerken inventariseren,<br/>bezwaren wegen en de gemaakte<br/>keuzes onderbouwen<br/>(3 vereisten)"]:::Q
+    Q5 --> Q6
+
+    %% ════════ Q6 — 7.4.3 Kwantitatieve analyse ════════
+    Q6["NTA 8047 § 7.4.3 · Kwantitatieve<br/>analyse<br/>Proxyanalyse op relevante gronden<br/>en dataminimalisatie<br/>(2 vereisten)"]:::Q
+    Q6 --> Q7
+
+    %% ════════ Q7 — 7.5 Algoritmekeuze ════════
+    Q7["NTA 8047 § 7.5 · Algoritmekeuze<br/>Type algoritme onderbouwen en<br/>bepalen of het onderdeel is van een<br/>AI-systeem volgens de AI-verordening<br/>(2 vereisten)"]:::Q
+    Q7 --> Q8
+
+    %% ════════ Q8 — 7.6 Opstellen van profileringsalgoritme ════════
+    Q8["NTA 8047 § 7.6 · Opstellen van<br/>profileringsalgoritme<br/>Regelgebaseerd: regels, drempel-<br/>waarden en gewichten. Datagebaseerd:<br/>training en gemaakte keuzes<br/>(2 vereisten)"]:::Q
+    Q8 --> Q9
+
+    %% ════════ Q9 — 7.7.2 Prestaties ════════
+    Q9["NTA 8047 § 7.7.2 · Prestaties voor<br/>de doelvariabele<br/>Prestatiemetrieken en bandbreedtes<br/>bepalen, meten op de validatiedataset<br/>en resultaten uitleggen<br/>(6 vereisten)"]:::Q
+    Q9 --> Q10
+
+    %% ════════ Q10 — 7.7.3 Indirect onderscheid ════════
+    Q10["NTA 8047 § 7.7.3 · Meten van<br/>indirect onderscheid<br/>Relevante gronden en gelijkheids-<br/>metrieken bepalen, onderscheid meten<br/>en resultaten uitleggen<br/>(6 vereisten)"]:::Q
+    Q10 --> Q11
+
+    %% ════════ Q11 — 7.7.4 Statistisch toetsen ════════
+    Q11["NTA 8047 § 7.7.4 · Statistisch<br/>toetsen<br/>Effectgrootte, statistische<br/>significantie en hypothesetoetsen<br/>(3 vereisten)"]:::Q
+    Q11 --> Q12
+
+    %% ════════ Q12 — 7.7.5 Herziening metrieken en bandbreedtes ════════
+    Q12["NTA 8047 § 7.7.5 · Herziening van<br/>metrieken en bandbreedtes<br/>Motivatie vóór de fase Verificatie<br/>en validatie, en bij latere aanpassing<br/>in de levenscyclus<br/>(2 vereisten)"]:::Q
+    Q12 --> Q13
+
+    %% ════════ Q13 — 7.8 Documentatie ontwikkeling ════════
+    Q13["NTA 8047 § 7.8 · Documenteer<br/>ontwikkeling profileringsalgoritme<br/>Doelvariabele, algoritmetype,<br/>profileringskenmerken, methode<br/>en definitief algoritme<br/>(5 vereisten)"]:::Q
+    Q13 --> RES
+
+    %% ════════ Afsluiting ════════
+    RES["Resultaat<br/>Hoofdstuk 7 vastgelegd<br/>(inhoud van de resultaten-<br/>pagina volgt)"]:::cat_result
