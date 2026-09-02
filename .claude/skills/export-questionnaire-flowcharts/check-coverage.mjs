@@ -10,135 +10,79 @@
  *   - EN/NL structural drift (different node ids)
  * Exits non-zero if anything is missing.
  *
+ * This is a *presence* check only — it does not verify that a node's outgoing edges
+ * go to the right place. See check-logic.mjs for that (risk/role/identification only).
+ *
  * Run:  npx --yes tsx .claude/skills/export-questionnaire-flowcharts/check-coverage.mjs
  */
 import { readFileSync, existsSync } from "node:fs";
-import { fileURLToPath } from "node:url";
-import { dirname, resolve, join } from "node:path";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const REPO = resolve(__dirname, "../../..");
-const SRC = process.argv[2] || resolve(REPO, "flowcharts/src");
-
-const readJSON = (rel) => JSON.parse(readFileSync(resolve(REPO, rel), "utf8"));
-
-// ── schema side: which question numbers does the questionnaire have? ────────
-// ui:id values look like "q1", "q2.1", "q34 explain purpose" -> the leading number.
-const qNumbers = (uiSchema) => {
-  const out = new Set();
-  const walk = (o) => {
-    if (!o || typeof o !== "object") return;
-    const id = o["ui:id"];
-    if (typeof id === "string") {
-      const m = id.trim().toLowerCase().match(/^q(\d+)/);
-      if (m) out.add(+m[1]);
-    }
-    for (const v of Object.values(o)) if (v && typeof v === "object") walk(v);
-  };
-  walk(uiSchema);
-  return out;
-};
-
-// The four NTA 8047 chapter questionnaires: chart key -> schema basename in
-// src/schemas/nta/<lang>/. Their `ui:id`s (q1..qn) number the screens, not the
-// individual requirements listed on a screen.
-const NTA = {
-  "nta-wenselijkheid": "wenselijkheid",
-  "nta-ontwerp": "ontwerp",
-  "nta-verificatie": "verificatie",
-  "nta-gebruik": "gebruik",
-};
-// Charts that exist in Dutch only — the English NTA schemas are still copies of the
-// Dutch ones, so there is no English master to check or to compare against.
-// "nta" merges the four chapter charts into one diagram; its node ids are prefixed per
-// chapter (W/O/T/G), so it carries no Q-numbers of its own — the chapter charts below
-// are what the schema check runs against.
-const NL_ONLY = new Set([...Object.keys(NTA), "nta"]);
-
-async function schemaQuestions(lang) {
-  const risk = readJSON(`src/schemas/${lang}/${lang === "en" ? "riskclassification" : "risicoclassificatie"}.json`);
-  const idMod = await import(
-    lang === "en" ? "../../../src/schemas/en/identification-adm.ts" : "../../../src/schemas/nl/identificatie-adm.ts"
-  );
-  const ident = idMod.identificationSchema ?? idMod.default;
-  const out = { risk: qNumbers(risk.uiSchema), identification: qNumbers(ident.uiSchema) };
-  for (const [chart, file] of Object.entries(NTA)) {
-    out[chart] = qNumbers(readJSON(`src/schemas/nta/${lang}/${file}.json`).uiSchema);
-  }
-  return out;
-}
-
-// ── chart side ─────────────────────────────────────────────────────────────
-// Node declarations sit at the start of a line: `    Q12["…"]:::Q` / `START([▶ Start])`.
-const chartNodeIds = (mmd) =>
-  new Set([...mmd.matchAll(/^\s+([A-Za-z][A-Za-z0-9_]*)\s*(?:\[|\(\[|\{|\()/gm)].map((m) => m[1])
-    .filter((id) => id !== "linkStyle" && id !== "classDef" && id !== "flowchart"));
-// Q2A / Q2B / Q12cat all cover question 2 / 12.
-const chartQNumbers = (ids) =>
-  new Set([...ids].map((id) => id.match(/^Q(\d+)/)).filter(Boolean).map((m) => +m[1]));
-const declaredClasses = (mmd) => [...mmd.matchAll(/^\s*classDef\s+(\S+)/gm)].map((m) => m[1]);
-const usedClasses = (mmd) => new Set([...mmd.matchAll(/:::(\w+)/g)].map((m) => m[1]));
-
-const CHARTS = ["identification", "identification-ai", "identification-algo", "identification-sadm",
-  "role", "risk", "obligations", "nta", ...Object.keys(NTA)];
-// Charts whose questions are numbered from a schema (role/obligations come from code logic).
-const QUESTION_SOURCE = {
-  risk: "risk",
-  identification: "identification",
-  "identification-ai": "identification",
-  "identification-algo": "identification",
-  "identification-sadm": "identification",
-  ...Object.fromEntries(Object.keys(NTA).map((k) => [k, k])),
-};
-// Sub-charts show a subset of the questionnaire on purpose.
-const SUBSET_OK = new Set(["identification-ai", "identification-algo", "identification-sadm"]);
+import { join } from "node:path";
+import {
+  REPO, NL_ONLY, CHARTS, QUESTION_SOURCE, SUBSET_OK,
+  loadSchema, qNumbers, chartNodeIds, chartQNumbers, declaredClasses, usedClasses,
+} from "./flowchart-shared.mjs";
 
 const list = (s) => [...s].sort((a, b) => a - b || String(a).localeCompare(String(b))).join(", ");
-let problems = 0;
 
-const nodesByLang = {};
-for (const lang of ["en", "nl"]) {
-  const schema = await schemaQuestions(lang);
-  nodesByLang[lang] = {};
-  console.log(`\n── ${lang} ──`);
-  for (const chart of CHARTS) {
-    if (lang === "en" && NL_ONLY.has(chart)) { console.log(`  ${chart}: skipped (Dutch-only chart)`); continue; }
-    const path = join(SRC, lang, `${chart}.mmd`);
-    if (!existsSync(path)) { console.error(`  ${chart}: MISSING master ${path}`); problems++; continue; }
-    const mmd = readFileSync(path, "utf8");
-    const ids = chartNodeIds(mmd);
-    nodesByLang[lang][chart] = ids;
-    const msgs = [];
+// Single chart+language check — returns { ok, findings, nodeIds } so render.mjs can call
+// it directly as part of its pre-export gate, and so the CLI runner below can still do
+// the cross-language node-id-set parity comparison afterwards.
+export async function checkChartCoverage({ chart, lang, srcDir }) {
+  const SRC = srcDir || join(REPO, "flowcharts/src");
+  const findings = [];
+  if (lang === "en" && NL_ONLY.has(chart)) return { ok: true, findings, skipped: true, nodeIds: null };
+  const path = join(SRC, lang, `${chart}.mmd`);
+  if (!existsSync(path)) return { ok: false, findings: [`MISSING master ${path}`], nodeIds: null };
+  const mmd = readFileSync(path, "utf8");
+  const ids = chartNodeIds(mmd);
 
-    const src = QUESTION_SOURCE[chart];
-    if (src) {
-      const want = schema[src], have = chartQNumbers(ids);
-      const missing = [...want].filter((q) => !have.has(q));
-      const extra = [...have].filter((q) => !want.has(q));
-      if (missing.length && !SUBSET_OK.has(chart)) msgs.push(`questions in schema, not in chart: q${list(missing).split(", ").join(", q")}`);
-      if (extra.length) msgs.push(`Q-nodes in chart, not in schema: Q${list(extra).split(", ").join(", Q")}`);
-    }
-
-    const used = usedClasses(mmd);
-    const unused = declaredClasses(mmd).filter((c) => !used.has(c));
-    if (unused.length) msgs.push(`classDefs declared but never applied: ${unused.join(", ")}`);
-
-    if (msgs.length) { problems += msgs.length; msgs.forEach((m) => console.error(`  ${chart}: ${m}`)); }
-    else console.log(`  ${chart}: ok (${ids.size} nodes)`);
+  const src = QUESTION_SOURCE[chart];
+  if (src) {
+    const schema = await loadSchema(chart, lang);
+    const want = schema ? qNumbers(schema.uiSchema) : new Set();
+    const have = chartQNumbers(ids);
+    const missing = [...want].filter((q) => !have.has(q));
+    const extra = [...have].filter((q) => !want.has(q));
+    if (missing.length && !SUBSET_OK.has(chart)) findings.push(`questions in schema, not in chart: q${list(missing).split(", ").join(", q")}`);
+    if (extra.length) findings.push(`Q-nodes in chart, not in schema: Q${list(extra).split(", ").join(", Q")}`);
   }
+
+  const used = usedClasses(mmd);
+  const unused = declaredClasses(mmd).filter((c) => !used.has(c));
+  if (unused.length) findings.push(`classDefs declared but never applied: ${unused.join(", ")}`);
+
+  return { ok: findings.length === 0, findings, nodeIds: ids };
 }
 
-// EN/NL structural parity
-console.log("\n── en/nl parity ──");
-for (const chart of CHARTS) {
-  const a = nodesByLang.en[chart], b = nodesByLang.nl[chart];
-  if (!a || !b) continue;
-  const onlyEn = [...a].filter((x) => !b.has(x)), onlyNl = [...b].filter((x) => !a.has(x));
-  if (onlyEn.length || onlyNl.length) {
-    problems++;
-    console.error(`  ${chart}: node ids differ — only en: ${onlyEn.join(", ") || "-"} | only nl: ${onlyNl.join(", ") || "-"}`);
-  } else console.log(`  ${chart}: ok (${a.size} nodes both languages)`);
-}
+// ── standalone CLI ─────────────────────────────────────────────────────────────────
+if (import.meta.url === `file://${process.argv[1]}`) {
+  const SRC = process.argv[2] || join(REPO, "flowcharts/src");
+  let problems = 0;
+  const nodesByLang = {};
+  for (const lang of ["en", "nl"]) {
+    nodesByLang[lang] = {};
+    console.log(`\n── ${lang} ──`);
+    for (const chart of CHARTS) {
+      const { ok, findings, skipped, nodeIds } = await checkChartCoverage({ chart, lang, srcDir: SRC });
+      if (skipped) { console.log(`  ${chart}: skipped (Dutch-only chart)`); continue; }
+      nodesByLang[lang][chart] = nodeIds;
+      if (!ok) { problems += findings.length; findings.forEach((m) => console.error(`  ${chart}: ${m}`)); }
+      else console.log(`  ${chart}: ok (${nodeIds.size} nodes)`);
+    }
+  }
 
-console.log(problems ? `\n${problems} issue(s) — review before exporting.` : "\nAll charts in sync with the schemas.");
-process.exit(problems ? 1 : 0);
+  // EN/NL structural parity
+  console.log("\n── en/nl parity ──");
+  for (const chart of CHARTS) {
+    const a = nodesByLang.en[chart], b = nodesByLang.nl[chart];
+    if (!a || !b) continue;
+    const onlyEn = [...a].filter((x) => !b.has(x)), onlyNl = [...b].filter((x) => !a.has(x));
+    if (onlyEn.length || onlyNl.length) {
+      problems++;
+      console.error(`  ${chart}: node ids differ — only en: ${onlyEn.join(", ") || "-"} | only nl: ${onlyNl.join(", ") || "-"}`);
+    } else console.log(`  ${chart}: ok (${a.size} nodes both languages)`);
+  }
+
+  console.log(problems ? `\n${problems} issue(s) — review before exporting.` : "\nAll charts in sync with the schemas.");
+  process.exit(problems ? 1 : 0);
+}

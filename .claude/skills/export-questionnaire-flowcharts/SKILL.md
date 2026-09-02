@@ -12,8 +12,10 @@ description on top, the diagram below, all in Avenir**, page sized tightly to th
 the source of truth for what a chart shows and how it is worded. The questionnaires
 (`src/schemas/**`, `src/utils/roleStatus.ts`, `src/components/ObligationsQuestionnaire.tsx`) are the
 reference for **completeness and logic**, not for wording: a chart shows a condensed, hand-written
-paraphrase of each question, never the verbatim schema text. `check-coverage.mjs` enforces that
-every question and outcome in the questionnaire actually appears in the chart.
+paraphrase of each question, never the verbatim schema text. Two automatic checks enforce this before
+every export, scoped to exactly the chart(s) being exported — `check-coverage.mjs` (does a node exist
+for every question?) and `check-logic.mjs` (do a node's *arrows* actually go where the schema says
+they must? — see "Logic check" below).
 
 Charts (EN + NL): `identification`, `identification-ai`, `identification-algo`,
 `identification-sadm`, `role`, `risk`, `obligations` → `flowcharts/{en,nl}/<chart>.pdf`.
@@ -38,7 +40,12 @@ across pages.** The page height is measured from the actual rendered layout rath
 - Any request for the branded AI-Act decision-tree diagrams.
 
 ## Prerequisites
-- Node (repo uses v26) — scripts run via `npx --yes tsx`.
+- Node ≥18 (repo uses v26) — scripts run via `npx --yes tsx`. **Known environment quirk:** on at
+  least one dev machine the `node` on `PATH` is v16 (too old for `tsx`/`esbuild`), with a working
+  Node 20 install sitting unused at `/usr/local/Cellar/node/20.8.0/bin` (x86_64 under Rosetta on
+  arm64 — functional, just a slow cold start; retry once if the first Puppeteer/Chrome launch times
+  out). If `npx --yes tsx ...` fails with an `esbuild`/engine error, prefix commands with
+  `PATH="/usr/local/Cellar/node/20.8.0/bin:$PATH"` rather than changing the system Node version.
 - `npx --yes @mermaid-js/mermaid-cli` (downloaded on demand; no install needed).
 - **Google Chrome.app** installed (Puppeteer browser + HTML→PDF). Path is in
   `puppeteer-config.json` / `render.mjs`.
@@ -51,22 +58,33 @@ Run from the repo root:
 # 1) edit the curated master(s) by hand:  flowcharts/src/{en,nl}/<chart>.mmd
 #    (follow the authoring rules below — this is where chart content lives)
 
-# 2) check the masters against the questionnaires (questions, outcomes, EN/NL parity)
-npx --yes tsx .claude/skills/export-questionnaire-flowcharts/check-coverage.mjs
-
-# 3) .mmd -> SVG (Avenir) -> HTML (logo + description) -> PDF
+# 2) .mmd -> SVG (Avenir) -> HTML (logo + description) -> PDF
 npx --yes tsx .claude/skills/export-questionnaire-flowcharts/render.mjs flowcharts
 ```
 
-The argument (`flowcharts`) is the chart dir: masters are read from `<dir>/src/{en,nl}/`, PDFs are
-written to `<dir>/{en,nl}/`. Any further arguments limit the run to those chart keys, so one chapter
-can be re-exported without rewriting the other PDFs:
+**Step 2 is gated.** Before rendering anything, `render.mjs` automatically runs `check-coverage.mjs`
+and `check-logic.mjs` for exactly the chart(s) about to be exported (respecting the chart-key filter
+below) and prints any drift as `PRECHECK <lang>/<chart>: ...` lines. If anything fails, **no PDF is
+written** and the command exits non-zero — fix the drift, or re-run with `FLOWCHART_ALLOW_DRIFT=1` to
+export anyway (prints a warning, still renders). `obligations` has no declarative source and is never
+gated — see "Logic check" below.
+
+Both checks are also independently runnable, for a human who wants to check without exporting:
+
+```bash
+npx --yes tsx .claude/skills/export-questionnaire-flowcharts/check-coverage.mjs
+npx --yes tsx .claude/skills/export-questionnaire-flowcharts/check-logic.mjs [chart...]
+```
+
+The render argument (`flowcharts`) is the chart dir: masters are read from `<dir>/src/{en,nl}/`, PDFs
+are written to `<dir>/{en,nl}/`. Any further arguments limit the run to those chart keys, so one
+chapter can be re-exported (and only that chapter gated) without rewriting the other PDFs:
 
 ```bash
 npx --yes tsx .claude/skills/export-questionnaire-flowcharts/render.mjs flowcharts nta-gebruik
 ```
 
-Step 3 logs `PDF: en/risk.pdf (9892x3604, 1 page)` per chart. **Every chart must say `1 page`** — a
+It logs `PDF: en/risk.pdf (9892x3604, 1 page)` per chart. **Every chart must say `1 page`** — a
 `2 pages, retrying taller` warning is self-healing, but a `still N pages — header/diagram split!`
 error means the output is broken and must be fixed before shipping. To re-check existing PDFs:
 
@@ -174,18 +192,74 @@ these additions. They apply to the NTA charts and to nothing else.
 
 ## Keeping charts in sync with the questionnaires
 
-`check-coverage.mjs` reads the risk JSON schema and the identification schema factory, extracts the
-`ui:id` question numbers and compares them with the `Q<n>` nodes in each master. It reports, per
-chart and language: questions in the schema missing from the chart, `Q` nodes no longer in the
-schema, unused classDefs, and EN/NL node-id drift. Exit code is non-zero when anything is off.
+`check-coverage.mjs` reads each chart's schema (risk/role: plain JSON; identification: the TS
+factory, imported and executed to get the materialized schema object — same pattern as this check
+always used), extracts the `ui:id` question numbers and compares them with the `Q<n>` nodes in each
+master. It reports, per chart and language: questions in the schema missing from the chart, `Q` nodes
+no longer in the schema, unused classDefs, and EN/NL node-id drift. Exit code is non-zero when
+anything is off. **This is a presence check only** — it does not look at what a node's arrows point
+to, which is why it can (and did) report a chart "ok" while 3 real logic bugs sat in it undetected.
 
 Findings are for a human to resolve — the labels are legal content, so **never silently rewrite or
 delete a question node to make the check pass**. Report the drift and ask.
 
+### Logic check (`check-logic.mjs`)
+
+Verifies branching *logic*, not just node presence, for `risk`, `role`, and `identification` (+ its 3
+subset sub-charts, which reuse `identification`'s required edges). For every answer branch in the
+schema that leads to another question or to a terminal outcome, the chart must have *some* path (not
+necessarily a single hop — see below) from that question's node cluster (`Q7`, `Q7B`, ... all count as
+cluster `Q7`) to the required destination.
+
+**How it works:** recursively walks the schema's materialized `dependencies`/`oneOf`/`allOf`/`if-then`
+tree (expanding `$ref`s to `definitions.*` in place), tracking which `ui:id`-tagged field "owns" each
+branch — this is genuinely tricky in two ways worth knowing about if you touch this code: (1) a
+schema sometimes declares a field's own follow-up logic as a flat **sibling** key in the same
+`dependencies` object as the field that introduces it, rather than nesting it inside that branch (Q7's
+safeguard checklist is declared this way relative to Q6) — the walker threads ownership through a
+registry shared across the whole walk, not just the current recursive call, to get this right; (2) a
+field's follow-up can share its parent's leading question number (`"q22"` vs `"q22 follow-up"` both
+read as question 22) — the walker tracks each field's *full* `ui:id` string, not just the number, so
+these aren't mistaken for a trivial self-loop and silently dropped. Terminal (`output.$ref`) targets
+resolve to chart node ids via a small hand-maintained `TERMINAL_MAP` per chart, because the naming
+isn't mechanical (`outputForbidden` → `FORB`, not `FORBIDDEN`) — `risk` has a full map; `role` and
+`identification` are weak-only (existence-check: "reaches *some* terminal") because their terminals
+are genuinely ambiguous or many-to-one at the schema level.
+
+**On the chart side:** the required edge is checked via *bounded BFS* (6 hops), not a literal
+single-hop arrow — `role.mmd` is why: `Q1`'s schema-required edge to `Q3` only exists as a two-hop
+path through an intermediate role-label node (`ROLE_PD`) that has no schema counterpart at all. A
+terminal is anything with zero outgoing edges (a topological sink) — node CSS class is *not* a
+reliable signal (`ROLE_PD` carries a terminal-looking class but still has an outgoing edge).
+
+**What this deliberately does NOT catch** (report drift for a human, same philosophy as above — never
+silently patch a chart to make this pass):
+- Wrong or misleading text on an otherwise-correct edge — labels are never compared, since house style
+  condenses/paraphrases them and a verbatim match would be a dead end by design.
+- Extra chart edges the schema doesn't require.
+- A coincidentally-reachable path within the hop limit that isn't really "the same logic," just
+  topologically connected.
+- Exact terminal *identity* for `role`/`identification` (existence-only there, see above).
+
+**`obligations` is intentionally excluded**, not silently skipped — it prints "not logic-checked (no
+declarative source) — verify by hand" instead of a fake pass. It has no schema; it's a fixed
+3-question form whose outcome text is chosen by ~15-20 imperative `switch`/`if`/ternary branches in
+`ObligationsQuestionnaire.tsx`. A heuristic that scraped its i18n keys and checked they appear
+somewhere in the chart would compare an implementation detail against deliberately-condensed chart
+labels — noise, not signal, so it isn't attempted. `nta`/`nta-*` are out of scope too.
+
 ## Files
 - `flowcharts/src/{en,nl}/*.mmd` — **the curated chart masters. Edit these.**
-- `check-coverage.mjs` — questionnaire ↔ chart sync check (see above).
-- `render.mjs` — mermaid-cli → SVG → HTML wrapper → Chrome `--print-to-pdf`. Also holds
+- `flowchart-shared.mjs` — primitives shared by both checkers: which file is chart X's source for
+  language Y (`loadSchema`), `.mmd` node/edge parsing, and the `CHARTS`/`QUESTION_SOURCE`/`SUBSET_OK`/
+  `NTA`/`NL_ONLY` tables. Kept in one place so the two checkers can't silently disagree about a
+  chart's source.
+- `check-coverage.mjs` — node-presence sync check (see above). Also exports `checkChartCoverage()`,
+  called by `render.mjs`'s pre-export gate.
+- `check-logic.mjs` — branching-logic sync check (see "Logic check" above). Also exports
+  `checkChartLogic()`, called by `render.mjs`'s pre-export gate.
+- `render.mjs` — runs the pre-export gate (both checks above, scoped to the chart(s) being exported),
+  then mermaid-cli → SVG → HTML wrapper → Chrome `--print-to-pdf`. Also holds
   `LEFT_ALIGN_ROWS`, the set of charts whose subgraph rows are left-aligned after rendering. The page height is
   **measured** in a headless-Chrome `--dump-dom` pass (the header wraps differently per chart and
   language), so header + diagram always land on a single page; the page count of each PDF is
@@ -208,10 +282,12 @@ delete a question node to make the check pass**. Report the drift and ask.
 - Logo path, page padding, output dir → top of `render.mjs`.
 
 ## Known drift (as of the last export)
-`check-coverage.mjs` currently reports, for a human to decide on:
-- `risk` (EN + NL): schema question `q35` (`6.3`) has no node in the chart, and the chart's `Q19`
-  no longer exists in the schema.
-- `identification`: the EN master has a `START` node the NL master lacks.
+- `risk` (EN + NL): fixed — was missing `q35` (`6.3`)'s node, plus 3 real branching-logic bugs
+  (`check-coverage.mjs` couldn't see the latter; `check-logic.mjs` was built partly in response to
+  that gap). Both checks now pass clean for `risk`.
+- `identification`: the EN master has a `START` node the NL master lacks. **This now blocks an
+  `identification` export** under the pre-export gate (coverage-checking is part of the same hard
+  gate as the logic check) — fix it, or export with `FLOWCHART_ALLOW_DRIFT=1` in the meantime.
 
 The `nta-*` charts are checked against `src/schemas/nta/nl/*.json` (their `ui:id`s number the
 screens, not the individual requirements on a screen) and are skipped for EN.

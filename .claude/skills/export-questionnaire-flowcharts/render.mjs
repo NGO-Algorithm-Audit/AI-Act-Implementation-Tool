@@ -103,6 +103,54 @@ const charts = ["identification", "identification-ai", "identification-algo", "i
   "nta", "nta-wenselijkheid", "nta-ontwerp", "nta-verificatie", "nta-gebruik"];
 const tmp = mkdtempSync(join(tmpdir(), "fc-"));
 
+// ── pre-export gate: node-presence + branching-logic checks, scoped to exactly the
+// chart(s) about to be rendered (the `only` filter above). Neither check touches the
+// .mmd content — they only read it. See SKILL.md's "Logic check" section for what
+// check-logic.mjs does and does not catch; check-coverage.mjs is presence-only.
+{
+  const { checkChartCoverage } = await import("./check-coverage.mjs");
+  const { checkChartLogic } = await import("./check-logic.mjs");
+  let gateFailed = false;
+  const nodesByLang = { en: {}, nl: {} };
+  for (const lang of ["en", "nl"]) {
+    const srcDir = join(outDir, "src", lang);
+    const dir = join(outDir, lang);
+    if (!existsSync(srcDir) && !existsSync(dir)) continue;
+    for (const chart of charts) {
+      if (only.length && !only.includes(chart)) continue;
+      const mmd = [join(srcDir, `${chart}.mmd`), join(dir, `${chart}.mmd`)].find(existsSync);
+      if (!mmd) continue;
+      const coverage = await checkChartCoverage({ chart, lang, srcDir: join(outDir, "src") });
+      const logic = await checkChartLogic({ chart, lang, mmdPath: mmd });
+      if (coverage.nodeIds) nodesByLang[lang][chart] = coverage.nodeIds;
+      for (const f of [...coverage.findings, ...logic.findings]) console.error(`PRECHECK ${lang}/${chart}: ${f}`);
+      if (!coverage.ok || !logic.ok) gateFailed = true;
+    }
+  }
+  // EN/NL structural parity — needs both languages' node-id sets at once, so it can't
+  // live in the per-(lang,chart) loop above (check-coverage.mjs's CLI runner does the
+  // same comparison; duplicated here in miniature since render.mjs only has one chart's
+  // worth of `only`-filtered charts to compare, not the full CHARTS list).
+  for (const chart of charts) {
+    if (only.length && !only.includes(chart)) continue;
+    const a = nodesByLang.en[chart], b = nodesByLang.nl[chart];
+    if (!a || !b) continue; // one side is a Dutch-only chart or wasn't part of this export
+    const onlyEn = [...a].filter((x) => !b.has(x)), onlyNl = [...b].filter((x) => !a.has(x));
+    if (onlyEn.length || onlyNl.length) {
+      gateFailed = true;
+      console.error(`PRECHECK ${chart}: en/nl node ids differ — only en: ${onlyEn.join(", ") || "-"} | only nl: ${onlyNl.join(", ") || "-"}`);
+    }
+  }
+  if (gateFailed) {
+    if (process.env.FLOWCHART_ALLOW_DRIFT) {
+      console.warn("\nPre-export checks failed — exporting anyway (FLOWCHART_ALLOW_DRIFT set).");
+    } else {
+      console.error("\nPre-export checks failed — see PRECHECK lines above. Fix the drift, or re-run with FLOWCHART_ALLOW_DRIFT=1 to export anyway.");
+      process.exit(1);
+    }
+  }
+}
+
 for (const lang of ["en", "nl"]) {
   // curated masters live in <outDir>/src/<lang>; PDFs are written to <outDir>/<lang>
   const srcDir = join(outDir, "src", lang);
