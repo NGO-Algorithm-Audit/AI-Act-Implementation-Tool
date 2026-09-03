@@ -81,7 +81,7 @@ export default function Art50ObligationsAccordions({ roles }: { roles: string[] 
   const isDeployer = roles.includes("gebruiksverantwoordelijke");
   const hasRole = isProvider || isDeployer;
 
-  const TimingExceptionLines = (
+  const timingExceptionLines = (exceptionItemKey: string) => (
     <div className="mt-2">
       <p className="mb-1">
         <span style={{ color: "#005AA7" }}>{t("riskcat result art50_3 deployer timing heading")}:</span>{" "}
@@ -89,10 +89,11 @@ export default function Art50ObligationsAccordions({ roles }: { roles: string[] 
       </p>
       <p className="mb-0">
         <span style={{ color: "#005AA7" }}>{t("riskcat result art50_3 deployer exception heading")}:</span>{" "}
-        {t("riskcat result art50_3 deployer exception item1")}
+        {t(exceptionItemKey)}
       </p>
     </div>
   );
+  const TimingExceptionLines = timingExceptionLines("riskcat result art50_3 deployer exception item1");
 
   const GuidelinesSource = ({ prefixKey, linkKey, urlKey, suffixKey }: { prefixKey: string; linkKey: string; urlKey: string; suffixKey: string }) => (
     <p className="mt-2 mb-0" style={{ fontStyle: "italic", color: "var(--cma-text-muted)", fontSize: "0.85rem" }}>
@@ -160,7 +161,7 @@ export default function Art50ObligationsAccordions({ roles }: { roles: string[] 
         )}
         {hasRole && (
           <>
-            {TimingExceptionLines}
+            {timingExceptionLines("riskcat result art50_1 deployer exception item1")}
             <div className="mt-2">
               <SourceBadge label={t("article art50_1 label")} url={t("article art50_1 url")} />
             </div>
@@ -212,30 +213,12 @@ export default function Art50ObligationsAccordions({ roles }: { roles: string[] 
             </AccordionSubsection>
           </div>
         )}
-        {isDeployer && (
-          <>
-            <ul className="mb-2 ps-3">
-              <li>{t("riskcat result art50_2 deployer step1")}</li>
-              <li>{t("riskcat result art50_2 deployer step2")}</li>
-            </ul>
-            <p className="mb-2">
-              <span style={{ color: "#005AA7" }}>{t("riskcat result art50_3 deployer timing heading")}:</span>{" "}
-              {t("riskcat result art50_3 deployer timing item1")}
-            </p>
-            <p className="mb-1">
-              <span style={{ color: "#005AA7" }}>{t("riskcat result art50_2 deployer exceptions heading")}</span>
-            </p>
-            <ul className="mb-2 ps-3">
-              <li>{t("riskcat result art50_2 deployer exceptions item1")}</li>
-              <li>{t("riskcat result art50_2 deployer exceptions item2")}</li>
-              <li>
-                {t("riskcat result art50_2 deployer exceptions item3")}{" "}
-                <InfoTooltip id="art50_2-acc-exceptions-item3" text={t("riskcat result art50_2 deployer exceptions item3 tooltip")} />
-              </li>
-            </ul>
-          </>
+        {!isProvider && (
+          <p className="mb-0" style={{ fontStyle: "italic", color: "var(--cma-text-muted)" }}>
+            {t("obligations art50_2 provider only note")}
+          </p>
         )}
-        {hasRole && (
+        {isProvider && (
           <div className="mt-2">
             <SourceBadge label={t("article art50_2 label")} url={t("article art50_2 url")} />
           </div>

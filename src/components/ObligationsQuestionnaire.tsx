@@ -50,7 +50,7 @@ const ROLE_TO_DUTCH: Record<Role, string> = {
   deployer: "gebruiksverantwoordelijke",
   importer: "importeur",
   distributor: "distributeur",
-  representative: "importeur",
+  representative: "vertegenwoordiger",
   private: "privaat",
 };
 
@@ -454,18 +454,18 @@ export default function ObligationsQuestionnaire({
           {q2Status && q3.length > 0 && !q3.includes("low") && (
             <p className="mb-3" style={{ fontSize: "0.9rem" }}>
               <span style={{ color: "#005AA7" }}>{t("aiact2 result timelines title")}:</span>{" "}
-              {t(
-                q3.includes("forbidden")
-                  ? "aiact2 result prohibited timelines text"
-                  : q3.includes("genai") && q2Status === "in_use"
-                  ? "aiact2 result genai in use timelines text"
-                  : q3.includes("genai")
-                  ? "aiact2 result genai timelines text"
-                  : q2Status === "in_use"
-                  ? "aiact2 result in use text"
-                  : q3.includes("high")
-                  ? "aiact2 result high development timelines text"
-                  : "aiact2 result in development text"
+              {q3.includes("forbidden") ? (
+                t("aiact2 result prohibited timelines text")
+              ) : (
+                <>
+                  {q3.includes("genai") &&
+                    t(q2Status === "in_use" ? "aiact2 result genai in use timelines text" : "aiact2 result genai timelines text")}
+                  {q3.includes("genai") && q3.includes("high") && " "}
+                  {q3.includes("high") &&
+                    t(q2Status === "in_use" ? "aiact2 result in use text" : "aiact2 result high development timelines text")}
+                  {!q3.includes("genai") && !q3.includes("high") &&
+                    t(q2Status === "in_use" ? "aiact2 result in use text" : "aiact2 result in development text")}
+                </>
               )}
             </p>
           )}
