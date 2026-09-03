@@ -457,6 +457,8 @@ export default function ObligationsQuestionnaire({
               {t(
                 q3.includes("forbidden")
                   ? "aiact2 result prohibited timelines text"
+                  : q3.includes("genai") && q2Status === "in_use"
+                  ? "aiact2 result genai in use timelines text"
                   : q3.includes("genai")
                   ? "aiact2 result genai timelines text"
                   : q2Status === "in_use"
@@ -466,6 +468,11 @@ export default function ObligationsQuestionnaire({
                   : "aiact2 result in development text"
               )}
             </p>
+          )}
+          {q3.includes("exception") && (q3.includes("forbidden") || q3.includes("high")) && (
+            <Alert variant="warning" className="mb-3">
+              <small>{t("obligations exception banner")}</small>
+            </Alert>
           )}
           {renderObligations()}
         </div>
