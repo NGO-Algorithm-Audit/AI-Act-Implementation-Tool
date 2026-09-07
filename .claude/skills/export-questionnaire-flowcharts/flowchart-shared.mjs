@@ -81,9 +81,21 @@ export const chartNodeIds = (mmd) =>
 export const chartQNumbers = (ids) =>
   new Set([...ids].map((id) => id.match(/^Q(\d+)/)).filter(Boolean).map((m) => +m[1]));
 export const declaredClasses = (mmd) => [...mmd.matchAll(/^\s*classDef\s+(\S+)/gm)].map((m) => m[1]);
-export const usedClasses = (mmd) => new Set([...mmd.matchAll(/:::(\w+)/g)].map((m) => m[1]));
+// A class can be applied three ways: the `id:::className` shorthand; the standalone
+// `class id1,id2 className` statement; or, for `@{shape: ...}` nodes (which can't take
+// the `:::` shorthand — combining them is a Mermaid parse error, "got 'STYLE_SEPARATOR'"),
+// a `class: "className"` key inside the shape's own `@{...}` metadata block.
+export const usedClasses = (mmd) => new Set([
+  ...[...mmd.matchAll(/:::(\w+)/g)].map((m) => m[1]),
+  ...[...mmd.matchAll(/^\s*class\s+\S+\s+(\w+)\s*;?\s*$/gm)].map((m) => m[1]),
+  ...[...mmd.matchAll(/@\{[^}]*\bclass:\s*"?(\w+)"?/g)].map((m) => m[1]),
+]);
 
-// All `A --> B` edges in declaration order, as { src, dst, label }. Handles Mermaid's
+// All `A --> B` (and arrow-less `A --- B`) edges in declaration order, as { src, dst,
+// label }. The `---` form is used for the first hop into an invisible junction node
+// (declutters labels on high-fanout convergence points, e.g. risk.mmd's edges into
+// Q29/EXCH) — no arrowhead there so only the junction's own final hop shows one.
+// Handles Mermaid's
 // multi-node `&`-chaining on either side (`A & B & C --> D`, `A --> B & C`) by expanding
 // it to the full set of pairs — role.mmd's role-label convergence line
 // (`ROLE_P & ROLE_PD & ... --> Q3`) is exactly this shape, and a plain single-id regex
@@ -91,7 +103,7 @@ export const usedClasses = (mmd) => new Set([...mmd.matchAll(/:::(\w+)/g)].map((
 // unable to reach Q3, when the real chart is correctly wired).
 export const chartEdges = (mmd) => {
   const out = [];
-  for (const m of mmd.matchAll(/^\s*([\w\s&]+?)\s*-->\s*(?:\|"([^"]*)"\|)?\s*([\w\s&]+?)\s*$/gm)) {
+  for (const m of mmd.matchAll(/^\s*([\w\s&]+?)\s*(?:-->|---)\s*(?:\|"([^"]*)"\|)?\s*([\w\s&]+?)\s*$/gm)) {
     const srcs = m[1].split(/\s*&\s*/).filter(Boolean);
     const dsts = m[3].split(/\s*&\s*/).filter(Boolean);
     for (const src of srcs) for (const dst of dsts) out.push({ src, label: m[2] ?? null, dst });

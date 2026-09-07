@@ -8,6 +8,7 @@ flowchart LR
     classDef cat_high fill:#d97706,stroke:#d97706,color:#fff,font-weight:bold
     classDef cat_except fill:#6c757d,stroke:#6c757d,color:#fff,font-weight:bold
     classDef cat_forb fill:#dc3545,stroke:#dc3545,color:#fff,font-weight:bold
+    classDef junction fill:none,stroke:none,color:transparent
     linkStyle default stroke:#005AA7,stroke-width:1.2px
 
     %% ════════ V1 — Bijlage I veiligheidscomponent / product-controle ════════
@@ -51,13 +52,13 @@ flowchart LR
 
     %% ════════ V7 — openbare veiligheid / wetshandhaving ════════
     Q7["V7 · Art. 5(1)(h) · Bijlage III(1.2)<br/>Openbare veiligheid<br/>of wetshandhaving?"]:::Q
-    Q7 -->|"Ja"| Q7B
+    Q7 -->|"Ja"| Q7_exceptions
     Q7 -->|"Nee"| Q10
 
-    %% ════════ V7B — waarborgenchecklist real-time RBI ════════
-    Q7B["V7B · Art. 5(1)(h)<br/>Slachtofferzoektocht, FRIA,<br/>EU-registratie en rechterlijke<br/>machtiging allemaal aanwezig?"]:::Q
-    Q7B -->|"Alle 4 waarborgen aanwezig"| FORBEXCEPT
-    Q7B -->|"Niet allemaal aanwezig"| EXCF
+    %% ════════ V7-exceptions — waarborgenchecklist real-time RBI ════════
+    Q7_exceptions["V7-exceptions · Art. 5(2)-(3)<br/>Slachtofferzoektocht, FRIA,<br/>EU-registratie en rechterlijke<br/>machtiging allemaal aanwezig?"]:::Q
+    Q7_exceptions -->|"Alle 4 waarborgen aanwezig"| FORBEXCEPT
+    Q7_exceptions -->|"Niet allemaal aanwezig"| EXCF
 
     %% ════════ V8 — afleiding gevoelige kenmerken ════════
     Q8["V8 · Art. 5(1)(g) · Bijlage III(1)<br/>Schat ras, etniciteit,<br/>overtuigingen, seksleven, enz.?"]:::Q
@@ -103,47 +104,73 @@ flowchart LR
     %% ════════ Domein 1 — Kritieke infrastructuur (Bijlage III(2)) ════════
     Q14["V14 · Bijlage III(2.4)<br/>Veiligheidsfunctie?"]:::Q
     Q15["V15 · Bijlage III(2.5)<br/>Cyberbeveiligingssysteem?"]:::Q
-    Q15B["V15B · Bijlage III(2.6)<br/>Gebruikt door een entiteit<br/>die kritiek is onder de<br/>CER-richtlijn?"]:::Q
+    Q15_cer["V15-cer · Bijlage III(2.6)<br/>Gebruikt door een entiteit<br/>die kritiek is onder de<br/>CER-richtlijn?"]:::Q
     Q14 -->|"Ja"| Q15
     Q14 -->|"Nee"| Q29
     Q15 -->|"Ja"| Q29
-    Q15 -->|"Nee"| Q15B
-    Q15B -->|"Ja"| EXCH
-    Q15B -->|"Nee"| Q29
+    Q15 -->|"Nee"| Q15_cer
+    JEXCH_15cer@{ shape: sm-circ, label: " ", class: "junction" }
+    J29_15cer@{ shape: sm-circ, label: " ", class: "junction" }
+    Q15_cer ---|"Ja"| JEXCH_15cer
+    JEXCH_15cer --> EXCH
+    Q15_cer ---|"Nee"| J29_15cer
+    J29_15cer --> Q29
 
     %% ════════ Domein 2 — Onderwijs (Bijlage III(3)) ════════
     Q16["V16 · Bijlage III(3.uses)<br/>Onderwijscontext?"]:::Q
-    Q16 -->|"Een hoog-risico-optie"| EXCH
-    Q16 -->|"Geen van de bovenstaande"| Q29
+    JEXCH_16@{ shape: sm-circ, label: " ", class: "junction" }
+    J29_16@{ shape: sm-circ, label: " ", class: "junction" }
+    Q16 ---|"Een hoog-risico-optie"| JEXCH_16
+    JEXCH_16 --> EXCH
+    Q16 ---|"Geen van de bovenstaande"| J29_16
+    J29_16 --> Q29
 
     %% ════════ Domein 3 — Arbeid / HR (Bijlage III(4)) ════════
     Q17["V17 · Bijlage III(4.uses)<br/>Arbeidsgebruik?"]:::Q
     Q18["V18 · Bijlage III(4.monitor)<br/>Monitort of evalueert het<br/>AI-systeem de prestaties of<br/>het gedrag van werknemers?"]:::Q
     Q17 -->|"Hoog-risico-optie"| EXCH
     Q17 -->|"Geen van de bovenstaande"| Q18
-    Q18 -->|"Ja"| EXCH
-    Q18 -->|"Nee"| Q29
+    JEXCH_18@{ shape: sm-circ, label: " ", class: "junction" }
+    J29_18@{ shape: sm-circ, label: " ", class: "junction" }
+    Q18 ---|"Ja"| JEXCH_18
+    JEXCH_18 --> EXCH
+    Q18 ---|"Nee"| J29_18
+    J29_18 --> Q29
 
     %% ════════ Domein 4 — Overheidsuitkeringen (Bijlage III(5)(a)) ════════
     Q20["V20 · Bijlage III(5.decision)<br/>In-aanmerking-komen of<br/>dienstbeslissing?"]:::Q
-    Q20 -->|"Ja"| EXCH
-    Q20 -->|"Nee"| Q29
+    JEXCH_20@{ shape: sm-circ, label: " ", class: "junction" }
+    J29_20@{ shape: sm-circ, label: " ", class: "junction" }
+    Q20 ---|"Ja"| JEXCH_20
+    JEXCH_20 --> EXCH
+    Q20 ---|"Nee"| J29_20
+    J29_20 --> Q29
 
     %% ════════ Domein 5 — Krediet / verzekering / nood (Bijlage III(5)(b)–(d)) ════════
     Q21["V21 · Bijlage III(5.private)<br/>Kredietwaardigheid, verzekerings-<br/>prijzen of nood-triage?"]:::Q
-    Q21 -->|"Krediet / verzekering / nood"| EXCH
-    Q21 -->|"Geen van de bovenstaande"| Q29
+    JEXCH_21@{ shape: sm-circ, label: " ", class: "junction" }
+    J29_21@{ shape: sm-circ, label: " ", class: "junction" }
+    Q21 ---|"Krediet / verzekering / nood"| JEXCH_21
+    JEXCH_21 --> EXCH
+    Q21 ---|"Geen van de bovenstaande"| J29_21
+    J29_21 --> Q29
 
     %% ════════ Domein 6 — Wetshandhaving (Bijlage III(6) · Art. 5(1)(d)) ════════
     Q22["V22 · Art. 5 · Bijlage III(6)<br/>Voorspelt risico op<br/>(herhaling van) strafbaar feit?"]:::Q
-    Q22B["V22B · Art. 5(1)(d)<br/>Uitsluitend gebaseerd op<br/>profilering of persoonlijkheids-<br/>kenmerken?"]:::Q
+    Q22_followup["V22-follow-up · Art. 5(1)(d)<br/>Uitsluitend gebaseerd op<br/>profilering of persoonlijkheids-<br/>kenmerken?"]:::Q
     Q23["V23 · Bijlage III(6.uses)<br/>Overige wetshandhavings-<br/>doeleinden?"]:::Q
-    Q22 -->|"Ja — recidiverisico"| Q22B
+    Q22 -->|"Ja — recidiverisico"| Q22_followup
     Q22 -->|"Nee"| Q23
-    Q22B -->|"Ja — uitsluitend profilering"| EXCF
-    Q22B -->|"Nee — ook objectieve feiten"| EXCH
-    Q23 -->|"Hoog-risico-optie"| EXCH
-    Q23 -->|"Geen van de bovenstaande"| Q29
+    Q22_followup -->|"Ja — uitsluitend profilering"| EXCF
+    JEXCH_22followup@{ shape: sm-circ, label: " ", class: "junction" }
+    JEXCH_23@{ shape: sm-circ, label: " ", class: "junction" }
+    J29_23@{ shape: sm-circ, label: " ", class: "junction" }
+    Q22_followup ---|"Nee — ook objectieve feiten"| JEXCH_22followup
+    JEXCH_22followup --> EXCH
+    Q23 ---|"Hoog-risico-optie"| JEXCH_23
+    JEXCH_23 --> EXCH
+    Q23 ---|"Geen van de bovenstaande"| J29_23
+    J29_23 --> Q29
 
     %% ════════ Domein 7 — Migratie / asiel / grens (Bijlage III(7)) ════════
     Q24["V24 · Bijlage III(7.uses)<br/>Polygraaf, risico of<br/>asielverwerking?"]:::Q
@@ -153,18 +180,30 @@ flowchart LR
     Q24 -->|"Geen van de bovenstaande"| Q25
     Q25 -->|"Ja"| Q26
     Q25 -->|"Nee"| Q29
-    Q26 -->|"Ja — alleen paspoort"| Q29
-    Q26 -->|"Nee"| EXCH
+    J29_26@{ shape: sm-circ, label: " ", class: "junction" }
+    JEXCH_26@{ shape: sm-circ, label: " ", class: "junction" }
+    Q26 ---|"Ja — alleen paspoort"| J29_26
+    J29_26 --> Q29
+    Q26 ---|"Nee"| JEXCH_26
+    JEXCH_26 --> EXCH
 
     %% ════════ Domein 8 — Rechtspraak (Bijlage III(8)(a)) ════════
     Q27["V27 · Bijlage III(8.2)<br/>Alleen administratieve<br/>ondersteuning?"]:::Q
-    Q27 -->|"Ja — alleen administratie"| Q29
-    Q27 -->|"Nee"| EXCH
+    J29_27@{ shape: sm-circ, label: " ", class: "junction" }
+    JEXCH_27@{ shape: sm-circ, label: " ", class: "junction" }
+    Q27 ---|"Ja — alleen administratie"| J29_27
+    J29_27 --> Q29
+    Q27 ---|"Nee"| JEXCH_27
+    JEXCH_27 --> EXCH
 
     %% ════════ Domein 9 — Verkiezingen (Bijlage III(8)(b)) ════════
     Q28["V28 · Bijlage III(8.elections)<br/>Beïnvloedt verkiezingsuitkomst<br/>of -gedrag?"]:::Q
-    Q28 -->|"Ja"| EXCH
-    Q28 -->|"Nee"| Q29
+    JEXCH_28@{ shape: sm-circ, label: " ", class: "junction" }
+    J29_28@{ shape: sm-circ, label: " ", class: "junction" }
+    Q28 ---|"Ja"| JEXCH_28
+    JEXCH_28 --> EXCH
+    Q28 ---|"Nee"| J29_28
+    J29_28 --> Q29
 
     %% ════════ Art. 5(1)(a) en (c) verboden-praktijken-screening ════════
     Q29["V29 · Art. 5(1)(a)<br/>Subliminale of<br/>manipulatieve technieken?"]:::Q
@@ -207,10 +246,10 @@ flowchart LR
     HIGHSECB["Hoog-risico AI-systeem<br/>Bijlage I — Afdeling B<br/>(Art. 6(1), Art. 102–109,<br/>Art. 112; sectorale<br/>verordening regelt<br/>gedetailleerde verplichtingen)"]:::cat_high
     HIGHEXCEPT["Hoog-risico + mogelijke uitzondering<br/>(Art. 2, 6(3))"]:::cat_except
     FORB["Verboden AI-systeem<br/>(Art. 5)"]:::cat_forb
-    FORBEXCEPT["Verboden + mogelijke uitzondering<br/>(Art. 2)"]:::cat_except
+    FORBEXCEPT["Verboden + mogelijke uitzondering<br/>(Art. 2 · Art. 5(2)-(3))"]:::cat_except
 
-    %% ════════ Hoog-fanout Bijlage III nodes — kleurcodering uitgaande paden ════════
-    %% Lichtbruin (#b08968): Q15B/Q16/Q18/Q20/Q21/Q23/Q26/Q27/Q28 → EXCH
-    %% Paars      (#9370DB): Q15B/Q16/Q18/Q20/Q21/Q23/Q26/Q27/Q28 → Q29
-    linkStyle 49,51,55,57,59,65,72,74,75 stroke:#b08968,stroke-width:1.8px
-    linkStyle 50,52,56,58,60,66,71,73,76 stroke:#9370DB,stroke-width:1.8px
+    %% ════════ Hoog-fanout convergentiepunten — elke edge gekleurd naar bestemming ════════
+    %% Lichtbruin (#b08968): elke edge (incl. junction-hops) die eindigt bij EXCH
+    %% Paars      (#9370DB): elke edge (incl. junction-hops) die eindigt bij Q29
+    linkStyle 27,49,50,53,54,57,59,60,63,64,67,68,74,75,76,77,80,86,87,90,91,92,93 stroke:#b08968,stroke-width:1.8px
+    linkStyle 44,46,47,51,52,55,56,61,62,65,66,69,70,78,79,83,84,85,88,89,94,95 stroke:#9370DB,stroke-width:1.8px

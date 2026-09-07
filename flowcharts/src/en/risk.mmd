@@ -8,6 +8,7 @@ flowchart LR
     classDef cat_high fill:#d97706,stroke:#d97706,color:#fff,font-weight:bold
     classDef cat_except fill:#6c757d,stroke:#6c757d,color:#fff,font-weight:bold
     classDef cat_forb fill:#dc3545,stroke:#dc3545,color:#fff,font-weight:bold
+    classDef junction fill:none,stroke:none,color:transparent
     linkStyle default stroke:#005AA7,stroke-width:1.2px
 
     %% ════════ Q1 — Annex I safety-component / product check ════════
@@ -51,13 +52,13 @@ flowchart LR
 
     %% ════════ Q7 — public safety / law enforcement ════════
     Q7["Q7 · Art. 5(1)(h) · Annex III(1.2)<br/>Public safety or<br/>law enforcement?"]:::Q
-    Q7 -->|"Yes"| Q7B
+    Q7 -->|"Yes"| Q7_exceptions
     Q7 -->|"No"| Q10
 
-    %% ════════ Q7B — real-time RBI safeguard checklist ════════
-    Q7B["Q7B · Art. 5(1)(h)<br/>Victim search purpose, FRIA,<br/>EU-database registration and<br/>judicial authorisation<br/>all in place?"]:::Q
-    Q7B -->|"All 4 safeguards met"| FORBEXCEPT
-    Q7B -->|"Not all met"| EXCF
+    %% ════════ Q7_exceptions — real-time RBI safeguard checklist ════════
+    Q7_exceptions["Q7-exceptions · Art. 5(2)-(3)<br/>Victim search purpose, FRIA,<br/>EU-database registration and<br/>judicial authorisation<br/>all in place?"]:::Q
+    Q7_exceptions -->|"All 4 safeguards met"| FORBEXCEPT
+    Q7_exceptions -->|"Not all met"| EXCF
 
     %% ════════ Q8 — sensitive-attribute inference ════════
     Q8["Q8 · Art. 5(1)(g) · Annex III(1)<br/>Estimates race, ethnicity,<br/>beliefs, sex life, etc.?"]:::Q
@@ -103,47 +104,73 @@ flowchart LR
     %% ════════ Domain 1 — Critical infrastructure (Annex III(2)) ════════
     Q14["Q14 · Annex III(2.4)<br/>Safety function?"]:::Q
     Q15["Q15 · Annex III(2.5)<br/>Cybersecurity system?"]:::Q
-    Q15B["Q15B · Annex III(2.6)<br/>Used by an entity critical<br/>under the Critical Entities<br/>Resilience Directive?"]:::Q
+    Q15_cer["Q15-cer · Annex III(2.6)<br/>Used by an entity critical<br/>under the Critical Entities<br/>Resilience Directive?"]:::Q
     Q14 -->|"Yes"| Q15
     Q14 -->|"No"| Q29
     Q15 -->|"Yes"| Q29
-    Q15 -->|"No"| Q15B
-    Q15B -->|"Yes"| EXCH
-    Q15B -->|"No"| Q29
+    Q15 -->|"No"| Q15_cer
+    JEXCH_15cer@{ shape: sm-circ, label: " ", class: "junction" }
+    J29_15cer@{ shape: sm-circ, label: " ", class: "junction" }
+    Q15_cer ---|"Yes"| JEXCH_15cer
+    JEXCH_15cer --> EXCH
+    Q15_cer ---|"No"| J29_15cer
+    J29_15cer --> Q29
 
     %% ════════ Domain 2 — Education (Annex III(3)) ════════
     Q16["Q16 · Annex III(3.uses)<br/>Education context?"]:::Q
-    Q16 -->|"Any high-risk option"| EXCH
-    Q16 -->|"None of the above"| Q29
+    JEXCH_16@{ shape: sm-circ, label: " ", class: "junction" }
+    J29_16@{ shape: sm-circ, label: " ", class: "junction" }
+    Q16 ---|"Any high-risk option"| JEXCH_16
+    JEXCH_16 --> EXCH
+    Q16 ---|"None of the above"| J29_16
+    J29_16 --> Q29
 
     %% ════════ Domain 3 — Employment / HR (Annex III(4)) ════════
     Q17["Q17 · Annex III(4.uses)<br/>Employment use?"]:::Q
     Q18["Q18 · Annex III(4.monitor)<br/>Monitor or evaluate the<br/>performance or behaviour<br/>of employees?"]:::Q
     Q17 -->|"High-risk option"| EXCH
     Q17 -->|"None of the above"| Q18
-    Q18 -->|"Yes"| EXCH
-    Q18 -->|"No"| Q29
+    JEXCH_18@{ shape: sm-circ, label: " ", class: "junction" }
+    J29_18@{ shape: sm-circ, label: " ", class: "junction" }
+    Q18 ---|"Yes"| JEXCH_18
+    JEXCH_18 --> EXCH
+    Q18 ---|"No"| J29_18
+    J29_18 --> Q29
 
     %% ════════ Domain 4 — Government benefits (Annex III(5)(a)) ════════
     Q20["Q20 · Annex III(5.decision)<br/>Eligibility or<br/>service decision?"]:::Q
-    Q20 -->|"Yes"| EXCH
-    Q20 -->|"No"| Q29
+    JEXCH_20@{ shape: sm-circ, label: " ", class: "junction" }
+    J29_20@{ shape: sm-circ, label: " ", class: "junction" }
+    Q20 ---|"Yes"| JEXCH_20
+    JEXCH_20 --> EXCH
+    Q20 ---|"No"| J29_20
+    J29_20 --> Q29
 
     %% ════════ Domain 5 — Credit / insurance / emergency (Annex III(5)(b)–(d)) ════════
     Q21["Q21 · Annex III(5.private)<br/>Creditworthiness, insurance<br/>pricing or emergency triage?"]:::Q
-    Q21 -->|"Credit / insurance / emergency"| EXCH
-    Q21 -->|"None of the above"| Q29
+    JEXCH_21@{ shape: sm-circ, label: " ", class: "junction" }
+    J29_21@{ shape: sm-circ, label: " ", class: "junction" }
+    Q21 ---|"Credit / insurance / emergency"| JEXCH_21
+    JEXCH_21 --> EXCH
+    Q21 ---|"None of the above"| J29_21
+    J29_21 --> Q29
 
     %% ════════ Domain 6 — Law enforcement (Annex III(6) · Art. 5(1)(d)) ════════
     Q22["Q22 · Art. 5 · Annex III(6)<br/>Predict risk of<br/>(re)committing an offence?"]:::Q
-    Q22B["Q22B · Art. 5(1)(d)<br/>Based solely on profiling<br/>or personality traits?"]:::Q
+    Q22_followup["Q22-follow-up · Art. 5(1)(d)<br/>Based solely on profiling<br/>or personality traits?"]:::Q
     Q23["Q23 · Annex III(6.uses)<br/>Other law-enforcement<br/>uses?"]:::Q
-    Q22 -->|"Yes — recidivism risk"| Q22B
+    Q22 -->|"Yes — recidivism risk"| Q22_followup
     Q22 -->|"No"| Q23
-    Q22B -->|"Yes — solely profiling"| EXCF
-    Q22B -->|"No — objective facts too"| EXCH
-    Q23 -->|"High-risk option"| EXCH
-    Q23 -->|"None of the above"| Q29
+    Q22_followup -->|"Yes — solely profiling"| EXCF
+    JEXCH_22followup@{ shape: sm-circ, label: " ", class: "junction" }
+    JEXCH_23@{ shape: sm-circ, label: " ", class: "junction" }
+    J29_23@{ shape: sm-circ, label: " ", class: "junction" }
+    Q22_followup ---|"No — objective facts too"| JEXCH_22followup
+    JEXCH_22followup --> EXCH
+    Q23 ---|"High-risk option"| JEXCH_23
+    JEXCH_23 --> EXCH
+    Q23 ---|"None of the above"| J29_23
+    J29_23 --> Q29
 
     %% ════════ Domain 7 — Migration / asylum / border (Annex III(7)) ════════
     Q24["Q24 · Annex III(7.uses)<br/>Polygraph, risk or<br/>asylum processing?"]:::Q
@@ -153,18 +180,30 @@ flowchart LR
     Q24 -->|"None of the above"| Q25
     Q25 -->|"Yes"| Q26
     Q25 -->|"No"| Q29
-    Q26 -->|"Yes — passport only"| Q29
-    Q26 -->|"No"| EXCH
+    J29_26@{ shape: sm-circ, label: " ", class: "junction" }
+    JEXCH_26@{ shape: sm-circ, label: " ", class: "junction" }
+    Q26 ---|"Yes — passport only"| J29_26
+    J29_26 --> Q29
+    Q26 ---|"No"| JEXCH_26
+    JEXCH_26 --> EXCH
 
     %% ════════ Domain 8 — Administration of justice (Annex III(8)(a)) ════════
     Q27["Q27 · Annex III(8.2)<br/>Administrative<br/>support only?"]:::Q
-    Q27 -->|"Yes — admin only"| Q29
-    Q27 -->|"No"| EXCH
+    J29_27@{ shape: sm-circ, label: " ", class: "junction" }
+    JEXCH_27@{ shape: sm-circ, label: " ", class: "junction" }
+    Q27 ---|"Yes — admin only"| J29_27
+    J29_27 --> Q29
+    Q27 ---|"No"| JEXCH_27
+    JEXCH_27 --> EXCH
 
     %% ════════ Domain 9 — Elections (Annex III(8)(b)) ════════
     Q28["Q28 · Annex III(8.elections)<br/>Influences voting outcome<br/>or behaviour?"]:::Q
-    Q28 -->|"Yes"| EXCH
-    Q28 -->|"No"| Q29
+    JEXCH_28@{ shape: sm-circ, label: " ", class: "junction" }
+    J29_28@{ shape: sm-circ, label: " ", class: "junction" }
+    Q28 ---|"Yes"| JEXCH_28
+    JEXCH_28 --> EXCH
+    Q28 ---|"No"| J29_28
+    J29_28 --> Q29
 
     %% ════════ Art. 5(1)(a) and (c) prohibited-practices screening ════════
     Q29["Q29 · Art. 5(1)(a)<br/>Subliminal or<br/>manipulative techniques?"]:::Q
@@ -207,10 +246,10 @@ flowchart LR
     HIGHSECB["High-risk AI system<br/>Annex I — Section B<br/>(Art. 6(1), Art. 102–109,<br/>Art. 112; sectoral<br/>regulation governs<br/>detailed obligations)"]:::cat_high
     HIGHEXCEPT["High-risk + possible exception<br/>(Art. 2, 6(3))"]:::cat_except
     FORB["Prohibited AI system<br/>(Art. 5)"]:::cat_forb
-    FORBEXCEPT["Prohibited + possible exception<br/>(Art. 2)"]:::cat_except
+    FORBEXCEPT["Prohibited + possible exception<br/>(Art. 2 · Art. 5(2)-(3))"]:::cat_except
 
-    %% ════════ High-fanout Annex III nodes — colour-code outgoing destinations ════════
-    %% Light brown (#b08968): edges from Q15B/Q16/Q18/Q20/Q21/Q23/Q26/Q27/Q28 → EXCH
-    %% Purple      (#9370DB): edges from Q15B/Q16/Q18/Q20/Q21/Q23/Q26/Q27/Q28 → Q29
-    linkStyle 49,51,55,57,59,65,72,74,75 stroke:#b08968,stroke-width:1.8px
-    linkStyle 50,52,56,58,60,66,71,73,76 stroke:#9370DB,stroke-width:1.8px
+    %% ════════ High-fanout convergence nodes — colour-code every edge by destination ════════
+    %% Light brown (#b08968): every edge (incl. junction hops) that ends at EXCH
+    %% Purple      (#9370DB): every edge (incl. junction hops) that ends at Q29
+    linkStyle 27,49,50,53,54,57,59,60,63,64,67,68,74,75,76,77,80,86,87,90,91,92,93 stroke:#b08968,stroke-width:1.8px
+    linkStyle 44,46,47,51,52,55,56,61,62,65,66,69,70,78,79,83,84,85,88,89,94,95 stroke:#9370DB,stroke-width:1.8px

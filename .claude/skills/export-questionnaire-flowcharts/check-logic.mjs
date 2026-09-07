@@ -7,7 +7,7 @@
  *
  * check-coverage.mjs answers "does a node exist for every question?" This answers
  * "do the arrows actually go where the schema says they must?" — the gap that let
- * risk.mmd carry 3 real logic bugs (missing Q7B/Q15B/Q22B) while check-coverage.mjs
+ * risk.mmd carry 3 real logic bugs (missing Q7_exceptions/Q15_cer/Q22_followup) while check-coverage.mjs
  * reported it clean, because those bugs are about *destinations*, not *presence*.
  *
  * Scope: risk, role, identification (+ its 3 subset sub-charts) — the schema-backed
@@ -78,8 +78,8 @@ const questionKey = (t) =>
   t ? `${t.kind}:${t.kind === "question" ? t.uiId : t.kind === "semantic" ? t.id : t.defName}` : null;
 const sameTarget = (a, b) => questionKey(a) === questionKey(b);
 // True only when two question-targets share a cluster number but are genuinely
-// different fields — the chart-side check for these must require a *lettered* node
-// (Q22B, never bare Q22) since the bare numbered node is the source, not a valid answer.
+// different fields — the chart-side check for these must require a *suffixed drill-down*
+// node (Q22_followup, never bare Q22) since the bare numbered node is the source, not a valid answer.
 const isWithinClusterEdge = (from, to) =>
   from?.kind === "question" && to?.kind === "question" && from.n === to.n && from.uiId !== to.uiId;
 
@@ -131,7 +131,7 @@ function resolveTarget(chart, key, val, uiSchema, contextName) {
 // branch that introduces the III.1.2 field. Without a walk-wide registry, "III.1.2"'s
 // owner falls back to whatever the *enclosing* node's own owner was (Q4, the biometrics
 // gate) instead of Q6/Q7 — silently misattributing the requirement and dropping the
-// real Q7->Q7B edge. The registry is populated as soon as any field is discovered
+// real Q7->Q7_exceptions edge. The registry is populated as soon as any field is discovered
 // anywhere in the walk and is looked up (by field name) whenever a later sibling
 // `dependencies` entry needs to know who owns it.
 function walkNode(chart, node, incomingOwner, uiSchema, defs, edges, contextName, visited, registry) {
@@ -219,8 +219,8 @@ const clusterNodes = (allNodeIds, n) => allNodeIds.filter((id) => new RegExp(`^Q
 function matchesTarget(nodeId, target, adjacency, terminalMap, requireLettered) {
   if (target.kind === "question") {
     // Within-cluster edges (e.g. Q22's own follow-up "q22 follow-up") must land on a
-    // *lettered* node distinct from the bare numbered node — the bare node is the
-    // source, never a valid distinct answer to itself.
+    // *suffixed drill-down* node distinct from the bare numbered node — the bare node
+    // is the source, never a valid distinct answer to itself.
     const re = requireLettered ? new RegExp(`^Q${target.n}\\D`) : new RegExp(`^Q${target.n}(\\D|$)`);
     return re.test(nodeId);
   }
@@ -273,7 +273,7 @@ export async function checkChartLogic({ chart, lang, mmdPath }) {
     if (to.kind === "question" && !allNodeIds.some((id) => new RegExp(`^Q${to.n}(\\D|$)`).test(id))) continue; // subset chart
     const withinCluster = isWithinClusterEdge(from, to);
     // Within-cluster: start strictly from the bare numbered node, not the whole cluster —
-    // otherwise an unrelated (e.g. disconnected/mis-wired) lettered node already sitting
+    // otherwise an unrelated (e.g. disconnected/mis-wired) suffixed node already sitting
     // in the cluster would trivially satisfy its own requirement at hop 0.
     const startIds = from.kind === "question"
       ? (withinCluster ? allNodeIds.filter((id) => id === `Q${from.n}`) : clusterNodes(allNodeIds, from.n))

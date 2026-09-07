@@ -105,9 +105,14 @@ create or edit a master. The risk master (`flowcharts/src/en/risk.mmd`) is the r
    reached. Risk = 34 questions + 7 terminals (`LOW`, `HIGH`, `HIGHSECA`, `HIGHSECB`, `HIGHEXCEPT`,
    `FORB`, `FORBEXCEPT`). A chart that shows a backbone and stops is not shippable — run
    `check-coverage.mjs`.
-2. **Node ids.** `Q1..Qn` in flow order, matching the tool's `ui:id` numbering; suffix when one
-   question forks (`Q2A`/`Q2B`). Terminals and shared screens get semantic uppercase ids (`LOW`,
-   `HIGHSECA`, `EXCH`, `EXCF`, `PATH_A`, `ROLE_PD`). Never schema-key ids like `n_III_1_1`.
+2. **Node ids.** `Q1..Qn` in flow order, matching the tool's `ui:id` numbering. When one question
+   forks into independent parallel branches, suffix with a letter (`Q2A`/`Q2B`). When a node is a
+   genuine follow-up/drill-down of a single parent question — one the schema gives its own
+   descriptive `ui:id`, e.g. `"q7 exceptions"` — mirror that `ui:id` instead of a bare letter: the
+   node id sanitized to `[A-Za-z0-9_]` (`Q7_exceptions`), with the printed label's leading token
+   matching the schema's own wording/hyphenation (`Q7-exceptions`). Terminals and shared screens
+   get semantic uppercase ids (`LOW`, `HIGHSECA`, `EXCH`, `EXCF`, `PATH_A`, `ROLE_PD`). Never
+   schema-key ids like `n_III_1_1`.
 3. **Node labels — head line + condensed paraphrase.** First line is the question number plus **at
    most 2–3 short citations**, plain weight (no `<b>`). Then a paraphrase of the question in 2–4
    short lines ending in `?`. Never paste the schema `title`, and never dump the full `ui:badges`
@@ -208,7 +213,7 @@ delete a question node to make the check pass**. Report the drift and ask.
 Verifies branching *logic*, not just node presence, for `risk`, `role`, and `identification` (+ its 3
 subset sub-charts, which reuse `identification`'s required edges). For every answer branch in the
 schema that leads to another question or to a terminal outcome, the chart must have *some* path (not
-necessarily a single hop — see below) from that question's node cluster (`Q7`, `Q7B`, ... all count as
+necessarily a single hop — see below) from that question's node cluster (`Q7`, `Q7_exceptions`, ... all count as
 cluster `Q7`) to the required destination.
 
 **How it works:** recursively walks the schema's materialized `dependencies`/`oneOf`/`allOf`/`if-then`

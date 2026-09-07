@@ -94,6 +94,40 @@ const leftAlignRows = (svg) => {
   return svg.replace(ROW_RE, (_m, head, _x, sep, y, tail) => `${head}${min}${sep}${y}${tail}`);
 };
 
+// risk.mmd's high-fanout convergence points (Q29, EXCH) use `id@{ shape: sm-circ, label: " " }`
+// invisible-junction nodes to pull edge labels toward their source instead of piling up
+// at the shared destination. `sm-circ` renders as a small filled dot via a hardcoded
+// `class="state-start"` on its <circle> — confirmed by inspecting the raw SVG output that
+// no combination of classDef (`:::junction`), a `class id1,id2 junction` statement, or a
+// `class: "junction"` key inside the `@{...}` block ever gets applied to the rendered node
+// (it stays `class="node default"` regardless) — so there is no CSS-based way to hide it.
+// Zeroing the circle's radius directly in the emitted markup is the only reliable fix.
+const HIDE_JUNCTION_MARKERS = new Set(["risk"]);
+const JUNCTION_CIRCLE_RE = /(id="[^"]*(?:J29_|JEXCH_)\w+-\d+"[^>]*><circle class="state-start" r=")7(" width=")14(" height=")14("\/>)/g;
+// Hiding the circle alone leaves a real 14px gap in the line: mermaid routes the two hops
+// to the junction's boundary (7px radius on each side), not to a shared point, so with the
+// circle gone the two path ends are visibly disconnected. Weld each pair back together by
+// rewriting their touching endpoint to the junction's own (cx, cy) — the node's transform
+// gives that centre, and its id names the source/target of each hop (`L_<src>_<dst>_<n>`),
+// so both the incoming (ends at the junction) and outgoing (starts at the junction) path
+// can be found and re-pointed at exactly the same coordinate.
+const JUNCTION_NODE_RE = /id="[^"]*flowchart-((?:J29_|JEXCH_)\w+)-\d+"[^>]*transform="translate\((-?[\d.]+),\s*(-?[\d.]+)\)"/g;
+const weldJunctionEdges = (svg) => {
+  let out = svg;
+  for (const [, jid, cx, cy] of svg.matchAll(JUNCTION_NODE_RE)) {
+    out = out.replace(
+      new RegExp(`(<path d="[^"]*?)(-?[\\d.]+),(-?[\\d.]+)(" id="[^"]*L_\\w+_${jid}_\\d+")`),
+      (_m, pre, _x, _y, post) => `${pre}${cx},${cy}${post}`
+    );
+    out = out.replace(
+      new RegExp(`(<path d="M)(-?[\\d.]+),(-?[\\d.]+)([^"]*" id="[^"]*L_${jid}_\\w+_\\d+")`),
+      (_m, pre, _x, _y, post) => `${pre}${cx},${cy}${post}`
+    );
+  }
+  return out;
+};
+const hideJunctionMarkers = (svg) => weldJunctionEdges(svg).replace(JUNCTION_CIRCLE_RE, "$10$20$30$4");
+
 const pdfPageCount = (path) =>
   (readFileSync(path).toString("latin1").match(/\/Type\s*\/Page[^s]/g) || []).length;
 
@@ -168,6 +202,7 @@ for (const lang of ["en", "nl"]) {
       "-b", "white"], { stdio: "inherit" });
     let svg = readFileSync(svgPath, "utf8").replace(/<\?xml[^>]*\?>/, "");
     if (LEFT_ALIGN_ROWS.has(chart)) svg = leftAlignRows(svg);
+    if (HIDE_JUNCTION_MARKERS.has(chart)) svg = hideJunctionMarkers(svg);
     const { w, h } = svgSize(svg);
     if (w <= 40 && h <= 40) { console.warn("SKIP empty:", `${lang}/${chart}`); continue; }
     const d = DESC[lang]?.[chart] || { title: chart, text: "" };
