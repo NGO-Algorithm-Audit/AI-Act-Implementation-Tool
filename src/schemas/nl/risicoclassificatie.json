@@ -2039,7 +2039,7 @@
         "Ja": "Het AI-systeem monitort of evalueert de prestaties of het gedrag van werkenden in werkgerelateerde relaties",
         "Nee": "Het AI-systeem monitort of evalueert de prestaties of het gedrag van werkenden niet"
       },
-      "ui:id": "q18 monitor"
+      "ui:id": "q18"
     },
     "III.5.decision": {
       "ui:widget": "radio",
@@ -2056,7 +2056,7 @@
         "Ja": "Het AI-systeem beoordeelt de toegang tot essentiële publieke diensten, voorzieningen of uitkeringen",
         "Nee": "Het AI-systeem beoordeelt geen toegang tot essentiële publieke diensten, voorzieningen of uitkeringen"
       },
-      "ui:id": "q20"
+      "ui:id": "q19"
     },
     "III.5.private": {
       "ui:widget": "radio",
@@ -2081,7 +2081,7 @@
         "Beoordelen van noodoproepen, inzetten of prioriteren van hulpdiensten, of triage bij urgente medische zorg": "Het AI-systeem beoordeelt noodoproepen, zet hulpdiensten in of prioriteert deze, of triaget bij urgente medische zorg",
         "Geen van de bovenstaande": "Het AI-systeem wordt niet gebruikt voor een van de genoemde financiële of nooddienstdoeleinden"
       },
-      "ui:id": "q21"
+      "ui:id": "q20"
     },
     "III.6-5.d": {
       "ui:widget": "radio",
@@ -2102,7 +2102,7 @@
         "Ja": "Het AI-systeem beoordeelt het risico van (her)begaan van een strafbaar feit (op basis van profilering, persoonlijkheidskenmerken of eerder strafbaar gedrag)",
         "Nee": "Het AI-systeem beoordeelt geen risico van (her)begaan van een strafbaar feit"
       },
-      "ui:id": "q22"
+      "ui:id": "q21"
     },
     "III.6-5.d.solely": {
       "ui:widget": "radio",
@@ -2119,7 +2119,7 @@
         "Ja": "Risicobeoordeling uitsluitend op basis van profilering of persoonlijkheidskenmerken — verboden onder art. 5(1)(d)",
         "Nee": "Risicobeoordeling steunt op objectieve, verifieerbare feiten — hoog-risico onder Bijlage III(6)(d)"
       },
-      "ui:id": "q22 follow-up"
+      "ui:id": "q21 follow-up"
     },
     "III.6.uses": {
       "ui:widget": "radio",
@@ -2149,7 +2149,7 @@
         "Automatisch evalueren of voorspellen van kenmerken, gedrag of persoonlijke aspecten (profilering) in de context van opsporing, onderzoek of vervolging": "Het AI-systeem evalueert of voorspelt automatisch kenmerken, gedrag of persoonlijke aspecten in de context van opsporing, onderzoek of vervolging",
         "Geen van de bovenstaande": "Het AI-systeem wordt niet gebruikt voor een van de genoemde wetshandhavingstaken"
       },
-      "ui:id": "q23"
+      "ui:id": "q22"
     },
     "III.7.uses": {
       "ui:widget": "radio",
@@ -2175,7 +2175,7 @@
         "Ondersteunen van het onderzoek van asiel-, visum- of verblijfsvergunningaanvragen (of bijbehorende klachten over de toelating), inclusief beoordeling van de betrouwbaarheid van bewijs": "Het AI-systeem ondersteunt het onderzoek van asiel-, visum- of verblijfsvergunningaanvragen (of bijbehorende klachten over de toelating)",
         "Geen van de bovenstaande": "Het AI-systeem wordt niet gebruikt voor een van de genoemde migratie- of grensbeheertaken"
       },
-      "ui:id": "q24"
+      "ui:id": "q23"
     },
     "III.7.4": {
       "ui:widget": "radio",
@@ -2191,7 +2191,7 @@
         "Ja": "Het AI-systeem wordt gebruikt voor het detecteren, herkennen of identificeren van personen in migratie of grensbeheer",
         "Nee": "Het AI-systeem wordt niet gebruikt voor het detecteren, herkennen of identificeren van personen"
       },
-      "ui:id": "q25"
+      "ui:id": "q24"
     },
     "III.7.5": {
       "ui:widget": "radio",
@@ -2207,7 +2207,7 @@
         "Ja": "Het AI-systeem wordt uitsluitend gebruikt om een reis-/identiteitsdocument te verifiëren (incl. anti-spoofing binnen een één-op-één-verificatieflow)",
         "Nee": "Het AI-systeem voert identificatie, detectie of tracking uit die verder gaat dan documentverificatie"
       },
-      "ui:id": "q26"
+      "ui:id": "q25"
     },
     "III.8.2": {
       "ui:widget": "radio",
@@ -2222,7 +2222,7 @@
         "Ja": "Het AI-systeem wordt uitsluitend gebruikt ter ondersteuning van administratieve activiteiten die de rechtspraak in individuele zaken niet beïnvloeden",
         "Nee": "Het AI-systeem wordt gebruikt voor meer dan ondersteunende administratieve activiteiten in de rechtspraak"
       },
-      "ui:id": "q27"
+      "ui:id": "q26"
     },
     "III.8.elections": {
       "ui:widget": "radio",
@@ -2238,7 +2238,7 @@
         "Ja": "Het AI-systeem is bedoeld om de uitkomst van een verkiezing of referendum, of het stemgedrag van natuurlijke personen te beïnvloeden",
         "Nee": "Het AI-systeem is niet bedoeld om verkiezingen of stemgedrag te beïnvloeden"
       },
-      "ui:id": "q28"
+      "ui:id": "q27"
     },
     "5.a": {
       "ui:widget": "radio",
@@ -2252,7 +2252,7 @@
         "Ja": "Het AI-systeem gebruikt subliminale of manipulatieve technieken die werken zonder bewustzijn van de gebruiker",
         "Nee": "Het AI-systeem gebruikt geen subliminale of manipulatieve technieken"
       },
-      "ui:id": "q29"
+      "ui:id": "q28"
     },
     "5.a.4": {
       "ui:widget": "radio",
@@ -2266,7 +2266,7 @@
         "Ja": "Het AI-systeem kan potentieel negatieve gevolgen hebben voor de gebruiker of andere mensen",
         "Nee": "Het AI-systeem heeft geen potentieel negatieve gevolgen voor de gebruiker of andere mensen"
       },
-      "ui:id": "q30"
+      "ui:id": "q29"
     },
     "5.c": {
       "ui:widget": "radio",
@@ -2281,7 +2281,7 @@
         "Ja": "Het AI-systeem evalueert, scoort of classificeert personen op een manier die tot nadelige behandeling kan leiden",
         "Nee": "Het AI-systeem evalueert, scoort of classificeert personen niet op een manier die tot nadelige behandeling kan leiden"
       },
-      "ui:id": "q31"
+      "ui:id": "q30"
     },
     "5.c.treat": {
       "ui:widget": "radio",
@@ -2295,7 +2295,7 @@
         "Ja": "De nadelige behandeling vindt plaats in een niet-gerelateerde context of is onevenredig ten opzichte van het gedrag of kenmerk waarop zij is gebaseerd",
         "Nee": "De nadelige behandeling is niet in een niet-gerelateerde context en ook niet onevenredig"
       },
-      "ui:id": "q32"
+      "ui:id": "q31"
     },
     "exceptions": {
       "ui:widget": "radio",
@@ -2336,7 +2336,7 @@
         "Ja": "Profilering wordt gebruikt — het AI-systeem evalueert of voorspelt automatisch kenmerken, gedrag of persoonlijke aspecten",
         "Nee": "Profilering wordt niet gebruikt"
       },
-      "ui:id": "q33"
+      "ui:id": "q32"
     },
     "6.2": {
       "ui:widget": "radio",
@@ -2363,7 +2363,7 @@
         "Ja, het AI-systeem wordt gebruikt in een voorbereidende stap, zonder de uitkomst te beïnvloeden.": "Het AI-systeem wordt uitsluitend gebruikt in een voorbereidende stap, zonder de uitkomst te beïnvloeden",
         "Nee": "Het AI-systeem is niet beperkt tot beperkte procedurele of voorbereidende taken"
       },
-      "ui:id": "q34"
+      "ui:id": "q33"
     },
     "6.3": {
       "ui:widget": "checkboxes",
@@ -2385,7 +2385,7 @@
         "Het AI-systeem voert uitsluitend een ex-post vergelijkende beoordeling uit, waarbij wordt bepaald of een huidig besluit overeenkomt met eerdere patronen of besluiten.": "Het AI-systeem voert uitsluitend een ex-post vergelijkende beoordeling uit",
         "Het AI-systeem vervangt of beïnvloedt de eerder voltooide menselijke beoordeling niet zonder passende menselijke evaluatie.": "Het AI-systeem vervangt of beïnvloedt de eerder voltooide menselijke beoordeling niet zonder passende menselijke evaluatie"
       },
-      "ui:id": "q35"
+      "ui:id": "q34"
     },
     "intro": {
       "ui:id": "start",

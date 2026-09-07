@@ -128,7 +128,7 @@ create or edit a master. The risk master (`flowcharts/src/en/risk.mmd`) is the r
    `|"Facial-recognition database"|`, `|"None of the below"|`, `|"High-risk option"|`. Never the
    verbatim option sentence, never a placeholder count like `19 answers`.
 5. **Shared nodes, not duplicated branches.** A question or screen reached from several branches is
-   declared **once** and linked to from all of them (`EXCH`, `EXCF`, `Q29`, `Q11`). Never drop a
+   declared **once** and linked to from all of them (`EXCH`, `EXCF`, `Q28`, `Q11`). Never drop a
    branch because its follow-up questions already appear elsewhere — the convergence *is* the logic.
 6. **Line breaks are authored, not left to the renderer.** Break every label with explicit `<br/>`.
    `mmdc-config.json` sets `wrappingWidth: 2500` so mermaid-cli does not re-wrap at its 200px
@@ -142,7 +142,7 @@ create or edit a master. The risk master (`flowcharts/src/en/risk.mmd`) is the r
    `90/130`.
 9. **High-fanout edge colouring.** Where many domain branches converge on two targets, colour them
    with tail `linkStyle` lines — `#b08968` (brown) for edges into `EXCH`, `#9370DB` (purple) for
-   edges into `Q29`. Indices are 0-based in edge declaration order, so **recount them after any edge
+   edges into `Q28`. Indices are 0-based in edge declaration order, so **recount them after any edge
    is added, removed or reordered**.
 10. **Terminal wording.** Outcome nodes carry their legal basis, e.g.
     `HIGHSECA["High-risk AI system<br/>Annex I — Section A<br/>(Art. 6(1); full Art. 8–17,<br/>conformity assessment,<br/>registration, post-market<br/>monitoring)"]:::cat_high`.
@@ -223,8 +223,8 @@ schema sometimes declares a field's own follow-up logic as a flat **sibling** ke
 `dependencies` object as the field that introduces it, rather than nesting it inside that branch (Q7's
 safeguard checklist is declared this way relative to Q6) — the walker threads ownership through a
 registry shared across the whole walk, not just the current recursive call, to get this right; (2) a
-field's follow-up can share its parent's leading question number (`"q22"` vs `"q22 follow-up"` both
-read as question 22) — the walker tracks each field's *full* `ui:id` string, not just the number, so
+field's follow-up can share its parent's leading question number (`"q21"` vs `"q21 follow-up"` both
+read as question 21) — the walker tracks each field's *full* `ui:id` string, not just the number, so
 these aren't mistaken for a trivial self-loop and silently dropped. Terminal (`output.$ref`) targets
 resolve to chart node ids via a small hand-maintained `TERMINAL_MAP` per chart, because the naming
 isn't mechanical (`outputForbidden` → `FORB`, not `FORBIDDEN`) — `risk` has a full map; `role` and

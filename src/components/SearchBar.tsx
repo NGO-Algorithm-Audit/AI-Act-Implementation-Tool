@@ -216,7 +216,7 @@ function buildRiskCategoryIndex(lang: string): IndexedText[] {
 
   // Per-question badges (the chips shown at the bottom of each screen, plus
   // the question's primary article/annex label) — attribute them to the
-  // owning question so e.g. searching "Profiling" surfaces Q33 (the question
+  // owning question so e.g. searching "Profiling" surfaces Q32 (the question
   // where Profiling is a badge), not only the external GDPR link.
   const fullUiSchema = (root.uiSchema ?? {}) as Record<string, Record<string, unknown>>;
   for (const [propKey, ui] of Object.entries(fullUiSchema)) {

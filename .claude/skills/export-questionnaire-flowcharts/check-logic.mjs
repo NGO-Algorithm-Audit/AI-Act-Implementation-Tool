@@ -7,7 +7,7 @@
  *
  * check-coverage.mjs answers "does a node exist for every question?" This answers
  * "do the arrows actually go where the schema says they must?" — the gap that let
- * risk.mmd carry 3 real logic bugs (missing Q7_exceptions/Q15_cer/Q22_followup) while check-coverage.mjs
+ * risk.mmd carry 3 real logic bugs (missing Q7_exceptions/Q15_cer/Q21_followup) while check-coverage.mjs
  * reported it clean, because those bugs are about *destinations*, not *presence*.
  *
  * Scope: risk, role, identification (+ its 3 subset sub-charts) — the schema-backed
@@ -68,10 +68,10 @@ const refName = (ref) => {
 };
 
 // Identity for skip-self-loop purposes: a "question" target's true identity is its full
-// ui:id STRING, not just the leading number — "q22" and "q22 follow-up" both carry
-// number 22 but are different fields, and this exact case (a numbered field's follow-up
+// ui:id STRING, not just the leading number — "q21" and "q21 follow-up" both carry
+// number 21 but are different fields, and this exact case (a numbered field's follow-up
 // sharing its number) is what produced 3 of the 5 real bugs found this session
-// (Q7/"q7 exceptions", Q15/"q15 cer", Q22/"q22 follow-up"). Collapsing on number alone
+// (Q7/"q7 exceptions", Q15/"q15 cer", Q21/"q21 follow-up"). Collapsing on number alone
 // silently turns "field -> its own follow-up" into a false self-loop and drops the
 // required edge entirely — caught by the regression test before this was fixed.
 const questionKey = (t) =>
@@ -79,7 +79,7 @@ const questionKey = (t) =>
 const sameTarget = (a, b) => questionKey(a) === questionKey(b);
 // True only when two question-targets share a cluster number but are genuinely
 // different fields — the chart-side check for these must require a *suffixed drill-down*
-// node (Q22_followup, never bare Q22) since the bare numbered node is the source, not a valid answer.
+// node (Q21_followup, never bare Q21) since the bare numbered node is the source, not a valid answer.
 const isWithinClusterEdge = (from, to) =>
   from?.kind === "question" && to?.kind === "question" && from.n === to.n && from.uiId !== to.uiId;
 
@@ -218,7 +218,7 @@ const clusterNodes = (allNodeIds, n) => allNodeIds.filter((id) => new RegExp(`^Q
 
 function matchesTarget(nodeId, target, adjacency, terminalMap, requireLettered) {
   if (target.kind === "question") {
-    // Within-cluster edges (e.g. Q22's own follow-up "q22 follow-up") must land on a
+    // Within-cluster edges (e.g. Q21's own follow-up "q21 follow-up") must land on a
     // *suffixed drill-down* node distinct from the bare numbered node — the bare node
     // is the source, never a valid distinct answer to itself.
     const re = requireLettered ? new RegExp(`^Q${target.n}\\D`) : new RegExp(`^Q${target.n}(\\D|$)`);

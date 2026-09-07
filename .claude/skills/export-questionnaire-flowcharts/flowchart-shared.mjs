@@ -94,7 +94,7 @@ export const usedClasses = (mmd) => new Set([
 // All `A --> B` (and arrow-less `A --- B`) edges in declaration order, as { src, dst,
 // label }. The `---` form is used for the first hop into an invisible junction node
 // (declutters labels on high-fanout convergence points, e.g. risk.mmd's edges into
-// Q29/EXCH) — no arrowhead there so only the junction's own final hop shows one.
+// Q28/EXCH) — no arrowhead there so only the junction's own final hop shows one.
 // Handles Mermaid's
 // multi-node `&`-chaining on either side (`A & B & C --> D`, `A --> B & C`) by expanding
 // it to the full set of pairs — role.mmd's role-label convergence line

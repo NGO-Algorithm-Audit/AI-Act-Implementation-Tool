@@ -173,7 +173,7 @@ export default function OutputIdentification({
 
   // Persist the current Identification answers before opening the Risk
   // category questionnaire, so cross-questionnaire checks there (e.g. the
-  // Q33 profiling warning) can read this saved Identification data.
+  // Q32 profiling warning) can read this saved Identification data.
   const handleStartRiskCategory = () => {
     onSubmit(id, exportData);
     onStartQuestionnaire?.("AI1");

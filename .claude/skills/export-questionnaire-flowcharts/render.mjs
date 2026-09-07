@@ -94,7 +94,7 @@ const leftAlignRows = (svg) => {
   return svg.replace(ROW_RE, (_m, head, _x, sep, y, tail) => `${head}${min}${sep}${y}${tail}`);
 };
 
-// risk.mmd's high-fanout convergence points (Q29, EXCH) use `id@{ shape: sm-circ, label: " " }`
+// risk.mmd's high-fanout convergence points (Q28, EXCH) use `id@{ shape: sm-circ, label: " " }`
 // invisible-junction nodes to pull edge labels toward their source instead of piling up
 // at the shared destination. `sm-circ` renders as a small filled dot via a hardcoded
 // `class="state-start"` on its <circle> — confirmed by inspecting the raw SVG output that
@@ -103,7 +103,11 @@ const leftAlignRows = (svg) => {
 // (it stays `class="node default"` regardless) — so there is no CSS-based way to hide it.
 // Zeroing the circle's radius directly in the emitted markup is the only reliable fix.
 const HIDE_JUNCTION_MARKERS = new Set(["risk"]);
-const JUNCTION_CIRCLE_RE = /(id="[^"]*(?:J29_|JEXCH_)\w+-\d+"[^>]*><circle class="state-start" r=")7(" width=")14(" height=")14("\/>)/g;
+// Junction ids are `J<destination-number>_<source>` (e.g. `J28_16`) or `JEXCH_<source>` —
+// matched generically here (not hardcoded to a specific destination number) so this survives
+// the destination/source question numbers being renumbered later without needing a matching
+// edit here every time.
+const JUNCTION_CIRCLE_RE = /(id="[^"]*(?:J\d+_|JEXCH_)\w+-\d+"[^>]*><circle class="state-start" r=")7(" width=")14(" height=")14("\/>)/g;
 // Hiding the circle alone leaves a real 14px gap in the line: mermaid routes the two hops
 // to the junction's boundary (7px radius on each side), not to a shared point, so with the
 // circle gone the two path ends are visibly disconnected. Weld each pair back together by
@@ -111,7 +115,7 @@ const JUNCTION_CIRCLE_RE = /(id="[^"]*(?:J29_|JEXCH_)\w+-\d+"[^>]*><circle class
 // gives that centre, and its id names the source/target of each hop (`L_<src>_<dst>_<n>`),
 // so both the incoming (ends at the junction) and outgoing (starts at the junction) path
 // can be found and re-pointed at exactly the same coordinate.
-const JUNCTION_NODE_RE = /id="[^"]*flowchart-((?:J29_|JEXCH_)\w+)-\d+"[^>]*transform="translate\((-?[\d.]+),\s*(-?[\d.]+)\)"/g;
+const JUNCTION_NODE_RE = /id="[^"]*flowchart-((?:J\d+_|JEXCH_)\w+)-\d+"[^>]*transform="translate\((-?[\d.]+),\s*(-?[\d.]+)\)"/g;
 const weldJunctionEdges = (svg) => {
   let out = svg;
   for (const [, jid, cx, cy] of svg.matchAll(JUNCTION_NODE_RE)) {

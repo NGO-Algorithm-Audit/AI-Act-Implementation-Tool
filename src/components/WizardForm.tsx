@@ -237,7 +237,7 @@ const WizardForm = ({
   onInitialFieldConsumed?: () => void;
   // Raw answers from a completed Identification questionnaire, when this
   // form is the Risk-category one. Used to raise a cross-questionnaire
-  // warning on Q33 (property "6.1") when the user's profiling answer
+  // warning on Q32 (property "6.1") when the user's profiling answer
   // contradicts the Identification outcome.
   identificationFormData?: Record<string, any>;
   // Overrides the questionnaire name shown in the blue header tag and the
@@ -659,9 +659,9 @@ const WizardForm = ({
       }
     }
 
-    // Cross-questionnaire warning on Risk-category Q33 (property "6.1"): if
+    // Cross-questionnaire warning on Risk-category Q32 (property "6.1"): if
     // Identification told us profiling applies (Q8 ≠ "No" AND Q8b = "Yes"),
-    // the expected Q33 answer is the first enum option ("Yes"/"Ja"). Block
+    // the expected Q32 answer is the first enum option ("Yes"/"Ja"). Block
     // the user from advancing with "No" until they reconsider.
     if (currentField === "6.1" && identificationFormData && !isEmpty) {
       const idQ8 = identificationFormData.q8;
@@ -863,7 +863,7 @@ const WizardForm = ({
               // error summary box on an empty submit. The inline field errors
               // ("must NOT have fewer than 1 items", "This field is required")
               // and the red question label still render via FieldTemplate.
-              // Risk-category Q33 (property "6.1") also opts out: the only
+              // Risk-category Q32 (property "6.1") also opts out: the only
               // failure mode here is the cross-questionnaire profiling
               // warning, which already reads clearly inline — repeating it
               // in the top alert is noise.

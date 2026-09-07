@@ -2039,7 +2039,7 @@
         "Yes": "The AI system monitors or evaluates the performance or behaviour of workers in work-related relationships",
         "No": "The AI system does not monitor or evaluate the performance or behaviour of workers"
       },
-      "ui:id": "q18 monitor"
+      "ui:id": "q18"
     },
     "III.5.decision": {
       "ui:widget": "radio",
@@ -2056,7 +2056,7 @@
         "Yes": "The AI system assesses eligibility for essential public services, provisions or benefits",
         "No": "The AI system does not assess eligibility for essential public services, provisions or benefits"
       },
-      "ui:id": "q20"
+      "ui:id": "q19"
     },
     "III.5.private": {
       "ui:widget": "radio",
@@ -2081,7 +2081,7 @@
         "Evaluating emergency calls, deploying or prioritizing emergency services or triage of urgent medical care": "The AI system evaluates emergency calls, deploys or prioritizes emergency services, or triages urgent medical care",
         "None of the above": "The AI system is not used for any of the listed financial or emergency purposes"
       },
-      "ui:id": "q21"
+      "ui:id": "q20"
     },
     "III.6-5.d": {
       "ui:widget": "radio",
@@ -2102,7 +2102,7 @@
         "Yes": "The AI system assesses the risk of offending or re-offending (based on profiling, personality traits or past criminal behaviour)",
         "No": "The AI system does not assess the risk of offending or re-offending"
       },
-      "ui:id": "q22"
+      "ui:id": "q21"
     },
     "III.6-5.d.solely": {
       "ui:widget": "radio",
@@ -2119,7 +2119,7 @@
         "Yes": "Risk assessment is based solely on profiling or personality traits — prohibited under Art. 5(1)(d)",
         "No": "Risk assessment relies on objective, verifiable facts — high-risk under Annex III(6)(d)"
       },
-      "ui:id": "q22 follow-up"
+      "ui:id": "q21 follow-up"
     },
     "III.6.uses": {
       "ui:widget": "radio",
@@ -2149,7 +2149,7 @@
         "Automatically evaluate or predict characteristics, behaviour or personal aspects (profiling) in the context of crime detection, investigation or prosecution": "The AI system automatically evaluates or predicts characteristics, behaviour or personal aspects in the context of crime detection, investigation or prosecution",
         "None of the above": "The AI system is not used for any of the listed law-enforcement tasks"
       },
-      "ui:id": "q23"
+      "ui:id": "q22"
     },
     "III.7.uses": {
       "ui:widget": "radio",
@@ -2175,7 +2175,7 @@
         "Assist in the examination of asylum, visa or residence-permit applications (or associated eligibility-related complaints), including assessment of the reliability of evidence": "The AI system assists in examining asylum, visa or residence-permit applications (or associated eligibility-related complaints)",
         "None of the above": "The AI system is not used for any of the listed migration or border-control tasks"
       },
-      "ui:id": "q24"
+      "ui:id": "q23"
     },
     "III.7.4": {
       "ui:widget": "radio",
@@ -2191,7 +2191,7 @@
         "Yes": "The AI system is used for detection, recognition or identification of individuals in migration or border control",
         "No": "The AI system is not used for detection, recognition or identification of individuals"
       },
-      "ui:id": "q25"
+      "ui:id": "q24"
     },
     "III.7.5": {
       "ui:widget": "radio",
@@ -2207,7 +2207,7 @@
         "Yes": "The AI system is used solely to verify a travel/identity document (incl. anti-spoofing within a one-to-one verification flow)",
         "No": "The AI system performs identification, detection or tracking beyond document verification"
       },
-      "ui:id": "q26"
+      "ui:id": "q25"
     },
     "III.8.2": {
       "ui:widget": "radio",
@@ -2222,7 +2222,7 @@
         "Yes": "The AI system is used only for administrative activities that do not affect the judiciary in individual cases",
         "No": "The AI system is used beyond supporting administrative activities in the judiciary"
       },
-      "ui:id": "q27"
+      "ui:id": "q26"
     },
     "III.8.elections": {
       "ui:widget": "radio",
@@ -2238,7 +2238,7 @@
         "Yes": "The AI system is intended to influence the outcome of an election or referendum, or the voting behaviour of natural persons",
         "No": "The AI system is not intended to influence elections or voting behaviour"
       },
-      "ui:id": "q28"
+      "ui:id": "q27"
     },
     "5.a": {
       "ui:widget": "radio",
@@ -2252,7 +2252,7 @@
         "Yes": "The AI system uses subliminal or manipulative techniques that operate without users' awareness",
         "No": "The AI system does not use subliminal or manipulative techniques"
       },
-      "ui:id": "q29"
+      "ui:id": "q28"
     },
     "5.a.4": {
       "ui:widget": "radio",
@@ -2266,7 +2266,7 @@
         "Yes": "The AI system can potentially have negative consequences for the user or other people",
         "No": "The AI system has no potential negative consequences for the user or other people"
       },
-      "ui:id": "q30"
+      "ui:id": "q29"
     },
     "5.c": {
       "ui:widget": "radio",
@@ -2281,7 +2281,7 @@
         "Yes": "The AI system evaluates, scores or classifies individuals in a way that could lead to unfavourable treatment",
         "No": "The AI system does not evaluate, score or classify individuals in a way that could lead to unfavourable treatment"
       },
-      "ui:id": "q31"
+      "ui:id": "q30"
     },
     "5.c.treat": {
       "ui:widget": "radio",
@@ -2295,7 +2295,7 @@
         "Yes": "The unfavourable treatment occurs in an unrelated context or is disproportionate to the behaviour or characteristic it is based on",
         "No": "The unfavourable treatment is neither in an unrelated context nor disproportionate"
       },
-      "ui:id": "q32"
+      "ui:id": "q31"
     },
     "exceptions": {
       "ui:widget": "radio",
@@ -2336,7 +2336,7 @@
         "Yes": "Profiling is used — the AI system automatically evaluates or predicts characteristics, behaviour or personal aspects",
         "No": "Profiling is not used"
       },
-      "ui:id": "q33"
+      "ui:id": "q32"
     },
     "6.2": {
       "ui:widget": "radio",
@@ -2363,7 +2363,7 @@
         "Yes, the AI system is used in a preparatory step, without influencing the outcome.": "The AI system is used only in a preparatory step, without influencing the outcome",
         "No": "The AI system is not limited to narrow procedural or preparatory tasks"
       },
-      "ui:id": "q34"
+      "ui:id": "q33"
     },
     "6.3": {
       "ui:widget": "checkboxes",
@@ -2385,7 +2385,7 @@
         "The AI system only performs an ex-post comparative assessment, which involves determining whether a current decision aligns with previous patterns or decisions.": "The AI system only performs an ex-post comparative assessment",
         "The AI system doesn't replace or influence the previously completed human assessment without proper human review.": "The AI system does not replace or influence the previously completed human assessment without proper human review"
       },
-      "ui:id": "q35"
+      "ui:id": "q34"
     },
     "intro": {
       "ui:id": "start",

@@ -93,37 +93,37 @@ flowchart LR
     Q13 -->|"Kritieke fysieke en digitale infrastructuur"| Q14
     Q13 -->|"Onderwijs of beroepsopleiding"| Q16
     Q13 -->|"Arbeid of HR"| Q17
-    Q13 -->|"Overheidsuitkeringen of publieke diensten"| Q20
-    Q13 -->|"Krediet, verzekering of nooddiensten"| Q21
-    Q13 -->|"Wetshandhaving"| Q22
-    Q13 -->|"Migratie, asiel of grensbeheer"| Q24
-    Q13 -->|"Rechtspraak"| Q27
-    Q13 -->|"Verkiezingen of democratische processen"| Q28
-    Q13 -->|"Geen van de bovenstaande"| Q29
+    Q13 -->|"Overheidsuitkeringen of publieke diensten"| Q19
+    Q13 -->|"Krediet, verzekering of nooddiensten"| Q20
+    Q13 -->|"Wetshandhaving"| Q21
+    Q13 -->|"Migratie, asiel of grensbeheer"| Q23
+    Q13 -->|"Rechtspraak"| Q26
+    Q13 -->|"Verkiezingen of democratische processen"| Q27
+    Q13 -->|"Geen van de bovenstaande"| Q28
 
     %% ════════ Domein 1 — Kritieke infrastructuur (Bijlage III(2)) ════════
     Q14["V14 · Bijlage III(2.4)<br/>Veiligheidsfunctie?"]:::Q
     Q15["V15 · Bijlage III(2.5)<br/>Cyberbeveiligingssysteem?"]:::Q
     Q15_cer["V15-cer · Bijlage III(2.6)<br/>Gebruikt door een entiteit<br/>die kritiek is onder de<br/>CER-richtlijn?"]:::Q
     Q14 -->|"Ja"| Q15
-    Q14 -->|"Nee"| Q29
-    Q15 -->|"Ja"| Q29
+    Q14 -->|"Nee"| Q28
+    Q15 -->|"Ja"| Q28
     Q15 -->|"Nee"| Q15_cer
     JEXCH_15cer@{ shape: sm-circ, label: " ", class: "junction" }
-    J29_15cer@{ shape: sm-circ, label: " ", class: "junction" }
+    J28_15cer@{ shape: sm-circ, label: " ", class: "junction" }
     Q15_cer ---|"Ja"| JEXCH_15cer
     JEXCH_15cer --> EXCH
-    Q15_cer ---|"Nee"| J29_15cer
-    J29_15cer --> Q29
+    Q15_cer ---|"Nee"| J28_15cer
+    J28_15cer --> Q28
 
     %% ════════ Domein 2 — Onderwijs (Bijlage III(3)) ════════
     Q16["V16 · Bijlage III(3.uses)<br/>Onderwijscontext?"]:::Q
     JEXCH_16@{ shape: sm-circ, label: " ", class: "junction" }
-    J29_16@{ shape: sm-circ, label: " ", class: "junction" }
+    J28_16@{ shape: sm-circ, label: " ", class: "junction" }
     Q16 ---|"Een hoog-risico-optie"| JEXCH_16
     JEXCH_16 --> EXCH
-    Q16 ---|"Geen van de bovenstaande"| J29_16
-    J29_16 --> Q29
+    Q16 ---|"Geen van de bovenstaande"| J28_16
+    J28_16 --> Q28
 
     %% ════════ Domein 3 — Arbeid / HR (Bijlage III(4)) ════════
     Q17["V17 · Bijlage III(4.uses)<br/>Arbeidsgebruik?"]:::Q
@@ -131,108 +131,108 @@ flowchart LR
     Q17 -->|"Hoog-risico-optie"| EXCH
     Q17 -->|"Geen van de bovenstaande"| Q18
     JEXCH_18@{ shape: sm-circ, label: " ", class: "junction" }
-    J29_18@{ shape: sm-circ, label: " ", class: "junction" }
+    J28_18@{ shape: sm-circ, label: " ", class: "junction" }
     Q18 ---|"Ja"| JEXCH_18
     JEXCH_18 --> EXCH
-    Q18 ---|"Nee"| J29_18
-    J29_18 --> Q29
+    Q18 ---|"Nee"| J28_18
+    J28_18 --> Q28
 
     %% ════════ Domein 4 — Overheidsuitkeringen (Bijlage III(5)(a)) ════════
-    Q20["V20 · Bijlage III(5.decision)<br/>In-aanmerking-komen of<br/>dienstbeslissing?"]:::Q
-    JEXCH_20@{ shape: sm-circ, label: " ", class: "junction" }
-    J29_20@{ shape: sm-circ, label: " ", class: "junction" }
-    Q20 ---|"Ja"| JEXCH_20
-    JEXCH_20 --> EXCH
-    Q20 ---|"Nee"| J29_20
-    J29_20 --> Q29
+    Q19["V19 · Bijlage III(5.decision)<br/>In-aanmerking-komen of<br/>dienstbeslissing?"]:::Q
+    JEXCH_19@{ shape: sm-circ, label: " ", class: "junction" }
+    J28_19@{ shape: sm-circ, label: " ", class: "junction" }
+    Q19 ---|"Ja"| JEXCH_19
+    JEXCH_19 --> EXCH
+    Q19 ---|"Nee"| J28_19
+    J28_19 --> Q28
 
     %% ════════ Domein 5 — Krediet / verzekering / nood (Bijlage III(5)(b)–(d)) ════════
-    Q21["V21 · Bijlage III(5.private)<br/>Kredietwaardigheid, verzekerings-<br/>prijzen of nood-triage?"]:::Q
-    JEXCH_21@{ shape: sm-circ, label: " ", class: "junction" }
-    J29_21@{ shape: sm-circ, label: " ", class: "junction" }
-    Q21 ---|"Krediet / verzekering / nood"| JEXCH_21
-    JEXCH_21 --> EXCH
-    Q21 ---|"Geen van de bovenstaande"| J29_21
-    J29_21 --> Q29
+    Q20["V20 · Bijlage III(5.private)<br/>Kredietwaardigheid, verzekerings-<br/>prijzen of nood-triage?"]:::Q
+    JEXCH_20@{ shape: sm-circ, label: " ", class: "junction" }
+    J28_20@{ shape: sm-circ, label: " ", class: "junction" }
+    Q20 ---|"Krediet / verzekering / nood"| JEXCH_20
+    JEXCH_20 --> EXCH
+    Q20 ---|"Geen van de bovenstaande"| J28_20
+    J28_20 --> Q28
 
     %% ════════ Domein 6 — Wetshandhaving (Bijlage III(6) · Art. 5(1)(d)) ════════
-    Q22["V22 · Art. 5 · Bijlage III(6)<br/>Voorspelt risico op<br/>(herhaling van) strafbaar feit?"]:::Q
-    Q22_followup["V22-follow-up · Art. 5(1)(d)<br/>Uitsluitend gebaseerd op<br/>profilering of persoonlijkheids-<br/>kenmerken?"]:::Q
-    Q23["V23 · Bijlage III(6.uses)<br/>Overige wetshandhavings-<br/>doeleinden?"]:::Q
-    Q22 -->|"Ja — recidiverisico"| Q22_followup
-    Q22 -->|"Nee"| Q23
-    Q22_followup -->|"Ja — uitsluitend profilering"| EXCF
-    JEXCH_22followup@{ shape: sm-circ, label: " ", class: "junction" }
-    JEXCH_23@{ shape: sm-circ, label: " ", class: "junction" }
-    J29_23@{ shape: sm-circ, label: " ", class: "junction" }
-    Q22_followup ---|"Nee — ook objectieve feiten"| JEXCH_22followup
-    JEXCH_22followup --> EXCH
-    Q23 ---|"Hoog-risico-optie"| JEXCH_23
-    JEXCH_23 --> EXCH
-    Q23 ---|"Geen van de bovenstaande"| J29_23
-    J29_23 --> Q29
+    Q21["V21 · Art. 5 · Bijlage III(6)<br/>Voorspelt risico op<br/>(herhaling van) strafbaar feit?"]:::Q
+    Q21_followup["V21-follow-up · Art. 5(1)(d)<br/>Uitsluitend gebaseerd op<br/>profilering of persoonlijkheids-<br/>kenmerken?"]:::Q
+    Q22["V22 · Bijlage III(6.uses)<br/>Overige wetshandhavings-<br/>doeleinden?"]:::Q
+    Q21 -->|"Ja — recidiverisico"| Q21_followup
+    Q21 -->|"Nee"| Q22
+    Q21_followup -->|"Ja — uitsluitend profilering"| EXCF
+    JEXCH_21followup@{ shape: sm-circ, label: " ", class: "junction" }
+    JEXCH_22@{ shape: sm-circ, label: " ", class: "junction" }
+    J28_22@{ shape: sm-circ, label: " ", class: "junction" }
+    Q21_followup ---|"Nee — ook objectieve feiten"| JEXCH_21followup
+    JEXCH_21followup --> EXCH
+    Q22 ---|"Hoog-risico-optie"| JEXCH_22
+    JEXCH_22 --> EXCH
+    Q22 ---|"Geen van de bovenstaande"| J28_22
+    J28_22 --> Q28
 
     %% ════════ Domein 7 — Migratie / asiel / grens (Bijlage III(7)) ════════
-    Q24["V24 · Bijlage III(7.uses)<br/>Polygraaf, risico of<br/>asielverwerking?"]:::Q
-    Q25["V25 · Bijlage III(7.4)<br/>Detectie, herkenning of<br/>identificatie van personen?"]:::Q
-    Q26["V26 · Bijlage III(7.5)<br/>Alleen verificatie<br/>reisdocument?"]:::Q
-    Q24 -->|"Polygraaf / risico / asiel"| EXCH
-    Q24 -->|"Geen van de bovenstaande"| Q25
-    Q25 -->|"Ja"| Q26
-    Q25 -->|"Nee"| Q29
-    J29_26@{ shape: sm-circ, label: " ", class: "junction" }
+    Q23["V23 · Bijlage III(7.uses)<br/>Polygraaf, risico of<br/>asielverwerking?"]:::Q
+    Q24["V24 · Bijlage III(7.4)<br/>Detectie, herkenning of<br/>identificatie van personen?"]:::Q
+    Q25["V25 · Bijlage III(7.5)<br/>Alleen verificatie<br/>reisdocument?"]:::Q
+    Q23 -->|"Polygraaf / risico / asiel"| EXCH
+    Q23 -->|"Geen van de bovenstaande"| Q24
+    Q24 -->|"Ja"| Q25
+    Q24 -->|"Nee"| Q28
+    J28_25@{ shape: sm-circ, label: " ", class: "junction" }
+    JEXCH_25@{ shape: sm-circ, label: " ", class: "junction" }
+    Q25 ---|"Ja — alleen paspoort"| J28_25
+    J28_25 --> Q28
+    Q25 ---|"Nee"| JEXCH_25
+    JEXCH_25 --> EXCH
+
+    %% ════════ Domein 8 — Rechtspraak (Bijlage III(8)(a)) ════════
+    Q26["V26 · Bijlage III(8.2)<br/>Alleen administratieve<br/>ondersteuning?"]:::Q
+    J28_26@{ shape: sm-circ, label: " ", class: "junction" }
     JEXCH_26@{ shape: sm-circ, label: " ", class: "junction" }
-    Q26 ---|"Ja — alleen paspoort"| J29_26
-    J29_26 --> Q29
+    Q26 ---|"Ja — alleen administratie"| J28_26
+    J28_26 --> Q28
     Q26 ---|"Nee"| JEXCH_26
     JEXCH_26 --> EXCH
 
-    %% ════════ Domein 8 — Rechtspraak (Bijlage III(8)(a)) ════════
-    Q27["V27 · Bijlage III(8.2)<br/>Alleen administratieve<br/>ondersteuning?"]:::Q
-    J29_27@{ shape: sm-circ, label: " ", class: "junction" }
-    JEXCH_27@{ shape: sm-circ, label: " ", class: "junction" }
-    Q27 ---|"Ja — alleen administratie"| J29_27
-    J29_27 --> Q29
-    Q27 ---|"Nee"| JEXCH_27
-    JEXCH_27 --> EXCH
-
     %% ════════ Domein 9 — Verkiezingen (Bijlage III(8)(b)) ════════
-    Q28["V28 · Bijlage III(8.elections)<br/>Beïnvloedt verkiezingsuitkomst<br/>of -gedrag?"]:::Q
-    JEXCH_28@{ shape: sm-circ, label: " ", class: "junction" }
-    J29_28@{ shape: sm-circ, label: " ", class: "junction" }
-    Q28 ---|"Ja"| JEXCH_28
-    JEXCH_28 --> EXCH
-    Q28 ---|"Nee"| J29_28
-    J29_28 --> Q29
+    Q27["V27 · Bijlage III(8.elections)<br/>Beïnvloedt verkiezingsuitkomst<br/>of -gedrag?"]:::Q
+    JEXCH_27@{ shape: sm-circ, label: " ", class: "junction" }
+    J28_27@{ shape: sm-circ, label: " ", class: "junction" }
+    Q27 ---|"Ja"| JEXCH_27
+    JEXCH_27 --> EXCH
+    Q27 ---|"Nee"| J28_27
+    J28_27 --> Q28
 
     %% ════════ Art. 5(1)(a) en (c) verboden-praktijken-screening ════════
-    Q29["V29 · Art. 5(1)(a)<br/>Subliminale of<br/>manipulatieve technieken?"]:::Q
-    Q30["V30 · Art. 5(1)(a)<br/>Mogelijke negatieve<br/>gevolgen?"]:::Q
-    Q31["V31 · Art. 5(1)(c)<br/>Score op sociaal gedrag of<br/>kenmerken met<br/>nadelige behandeling?"]:::Q
-    Q32["V32 · Art. 5(1)(c)<br/>Niet-gerelateerde context<br/>of disproportioneel?"]:::Q
-    Q29 -->|"Ja"| Q30
-    Q29 -->|"Nee"| Q31
-    Q30 -->|"Ja"| EXCF
-    Q30 -->|"Nee"| Q31
-    Q31 -->|"Ja"| Q32
+    Q28["V28 · Art. 5(1)(a)<br/>Subliminale of<br/>manipulatieve technieken?"]:::Q
+    Q29["V29 · Art. 5(1)(a)<br/>Mogelijke negatieve<br/>gevolgen?"]:::Q
+    Q30["V30 · Art. 5(1)(c)<br/>Score op sociaal gedrag of<br/>kenmerken met<br/>nadelige behandeling?"]:::Q
+    Q31["V31 · Art. 5(1)(c)<br/>Niet-gerelateerde context<br/>of disproportioneel?"]:::Q
+    Q28 -->|"Ja"| Q29
+    Q28 -->|"Nee"| Q30
+    Q29 -->|"Ja"| EXCF
+    Q29 -->|"Nee"| Q30
+    Q30 -->|"Ja"| Q31
+    Q30 -->|"Nee"| LOW
+    Q31 -->|"Ja"| EXCF
     Q31 -->|"Nee"| LOW
-    Q32 -->|"Ja"| EXCF
-    Q32 -->|"Nee"| LOW
 
     %% ════════ Uitzonderingenscherm — hoog-risico-tak (Art. 2(3)–(8) · Art. 6(3)) ════════
     EXCH["Uitzonderingenscherm · Art. 2<br/>Onderzoek, defensie of<br/>nationale veiligheid?"]:::exc
-    Q33["V33 · Art. 6(3)<br/>Automatisch kenmerken,<br/>gedrag of aspecten<br/>evalueren of voorspellen?"]:::Q
-    Q34["V34 · Art. 6(3)<br/>Beperkte procedurele of<br/>voorbereidende taak?"]:::Q
-    Q35["V35 · Art. 6(3)<br/>Menselijke beoordeling voltooid,<br/>uitsluitend ex-post vergelijking,<br/>en geen vervanging van die<br/>beoordeling?"]:::Q
+    Q32["V32 · Art. 6(3)<br/>Automatisch kenmerken,<br/>gedrag of aspecten<br/>evalueren of voorspellen?"]:::Q
+    Q33["V33 · Art. 6(3)<br/>Beperkte procedurele of<br/>voorbereidende taak?"]:::Q
+    Q34["V34 · Art. 6(3)<br/>Menselijke beoordeling voltooid,<br/>uitsluitend ex-post vergelijking,<br/>en geen vervanging van die<br/>beoordeling?"]:::Q
     EXCH -->|"Onderzoek / defensie /<br/>nationale veiligheid"| HIGHEXCEPT
-    EXCH -->|"Geen van de bovenstaande"| Q33
-    Q33 -->|"Ja"| HIGH
-    Q33 -->|"Nee"| Q34
-    Q34 -->|"Procedureel /<br/>verbeteren / voorbereidend"| HIGHEXCEPT
-    Q34 -->|"Besluitvormings-<br/>patronen"| Q35
-    Q34 -->|"Nee"| HIGH
-    Q35 -->|"Alle 3 scenario's van toepassing"| HIGHEXCEPT
-    Q35 -->|"Niet allemaal van toepassing"| HIGH
+    EXCH -->|"Geen van de bovenstaande"| Q32
+    Q32 -->|"Ja"| HIGH
+    Q32 -->|"Nee"| Q33
+    Q33 -->|"Procedureel /<br/>verbeteren / voorbereidend"| HIGHEXCEPT
+    Q33 -->|"Besluitvormings-<br/>patronen"| Q34
+    Q33 -->|"Nee"| HIGH
+    Q34 -->|"Alle 3 scenario's van toepassing"| HIGHEXCEPT
+    Q34 -->|"Niet allemaal van toepassing"| HIGH
 
     %% ════════ Uitzonderingenscherm — verboden-tak (Art. 2(3)–(8)) ════════
     EXCF["Uitzonderingenscherm · Art. 2<br/>Onderzoek, defensie of<br/>nationale veiligheid?"]:::exc
@@ -250,6 +250,6 @@ flowchart LR
 
     %% ════════ Hoog-fanout convergentiepunten — elke edge gekleurd naar bestemming ════════
     %% Lichtbruin (#b08968): elke edge (incl. junction-hops) die eindigt bij EXCH
-    %% Paars      (#9370DB): elke edge (incl. junction-hops) die eindigt bij Q29
+    %% Paars      (#9370DB): elke edge (incl. junction-hops) die eindigt bij Q28
     linkStyle 27,49,50,53,54,57,59,60,63,64,67,68,74,75,76,77,80,86,87,90,91,92,93 stroke:#b08968,stroke-width:1.8px
     linkStyle 44,46,47,51,52,55,56,61,62,65,66,69,70,78,79,83,84,85,88,89,94,95 stroke:#9370DB,stroke-width:1.8px
