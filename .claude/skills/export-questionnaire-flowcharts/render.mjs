@@ -94,6 +94,44 @@ const leftAlignRows = (svg) => {
   return svg.replace(ROW_RE, (_m, head, _x, sep, y, tail) => `${head}${min}${sep}${y}${tail}`);
 };
 
+// risk.mmd's high-fanout convergence points (Q28, EXCH) use `id@{ shape: sm-circ, label: " " }`
+// invisible-junction nodes to pull edge labels toward their source instead of piling up
+// at the shared destination. `sm-circ` renders as a small filled dot via a hardcoded
+// `class="state-start"` on its <circle> — confirmed by inspecting the raw SVG output that
+// no combination of classDef (`:::junction`), a `class id1,id2 junction` statement, or a
+// `class: "junction"` key inside the `@{...}` block ever gets applied to the rendered node
+// (it stays `class="node default"` regardless) — so there is no CSS-based way to hide it.
+// Zeroing the circle's radius directly in the emitted markup is the only reliable fix.
+const HIDE_JUNCTION_MARKERS = new Set(["risk"]);
+// Junction ids are `J<destination-number>_<source>` (e.g. `J28_16`) or `JEXCH_<source>` —
+// matched generically here (not hardcoded to a specific destination number) so this survives
+// the destination/source question numbers being renumbered later without needing a matching
+// edit here every time.
+const JUNCTION_CIRCLE_RE = /(id="[^"]*(?:J\d+_|JEXCH_)\w+-\d+"[^>]*><circle class="state-start" r=")7(" width=")14(" height=")14("\/>)/g;
+// Hiding the circle alone leaves a real 14px gap in the line: mermaid routes the two hops
+// to the junction's boundary (7px radius on each side), not to a shared point, so with the
+// circle gone the two path ends are visibly disconnected. Weld each pair back together by
+// rewriting their touching endpoint to the junction's own (cx, cy) — the node's transform
+// gives that centre, and its id names the source/target of each hop (`L_<src>_<dst>_<n>`),
+// so both the incoming (ends at the junction) and outgoing (starts at the junction) path
+// can be found and re-pointed at exactly the same coordinate.
+const JUNCTION_NODE_RE = /id="[^"]*flowchart-((?:J\d+_|JEXCH_)\w+)-\d+"[^>]*transform="translate\((-?[\d.]+),\s*(-?[\d.]+)\)"/g;
+const weldJunctionEdges = (svg) => {
+  let out = svg;
+  for (const [, jid, cx, cy] of svg.matchAll(JUNCTION_NODE_RE)) {
+    out = out.replace(
+      new RegExp(`(<path d="[^"]*?)(-?[\\d.]+),(-?[\\d.]+)(" id="[^"]*L_\\w+_${jid}_\\d+")`),
+      (_m, pre, _x, _y, post) => `${pre}${cx},${cy}${post}`
+    );
+    out = out.replace(
+      new RegExp(`(<path d="M)(-?[\\d.]+),(-?[\\d.]+)([^"]*" id="[^"]*L_${jid}_\\w+_\\d+")`),
+      (_m, pre, _x, _y, post) => `${pre}${cx},${cy}${post}`
+    );
+  }
+  return out;
+};
+const hideJunctionMarkers = (svg) => weldJunctionEdges(svg).replace(JUNCTION_CIRCLE_RE, "$10$20$30$4");
+
 const pdfPageCount = (path) =>
   (readFileSync(path).toString("latin1").match(/\/Type\s*\/Page[^s]/g) || []).length;
 
@@ -102,6 +140,54 @@ const pdfPageCount = (path) =>
 const charts = ["identification", "identification-ai", "identification-algo", "identification-sadm", "role", "risk", "obligations",
   "nta", "nta-wenselijkheid", "nta-ontwerp", "nta-verificatie", "nta-gebruik"];
 const tmp = mkdtempSync(join(tmpdir(), "fc-"));
+
+// ── pre-export gate: node-presence + branching-logic checks, scoped to exactly the
+// chart(s) about to be rendered (the `only` filter above). Neither check touches the
+// .mmd content — they only read it. See SKILL.md's "Logic check" section for what
+// check-logic.mjs does and does not catch; check-coverage.mjs is presence-only.
+{
+  const { checkChartCoverage } = await import("./check-coverage.mjs");
+  const { checkChartLogic } = await import("./check-logic.mjs");
+  let gateFailed = false;
+  const nodesByLang = { en: {}, nl: {} };
+  for (const lang of ["en", "nl"]) {
+    const srcDir = join(outDir, "src", lang);
+    const dir = join(outDir, lang);
+    if (!existsSync(srcDir) && !existsSync(dir)) continue;
+    for (const chart of charts) {
+      if (only.length && !only.includes(chart)) continue;
+      const mmd = [join(srcDir, `${chart}.mmd`), join(dir, `${chart}.mmd`)].find(existsSync);
+      if (!mmd) continue;
+      const coverage = await checkChartCoverage({ chart, lang, srcDir: join(outDir, "src") });
+      const logic = await checkChartLogic({ chart, lang, mmdPath: mmd });
+      if (coverage.nodeIds) nodesByLang[lang][chart] = coverage.nodeIds;
+      for (const f of [...coverage.findings, ...logic.findings]) console.error(`PRECHECK ${lang}/${chart}: ${f}`);
+      if (!coverage.ok || !logic.ok) gateFailed = true;
+    }
+  }
+  // EN/NL structural parity — needs both languages' node-id sets at once, so it can't
+  // live in the per-(lang,chart) loop above (check-coverage.mjs's CLI runner does the
+  // same comparison; duplicated here in miniature since render.mjs only has one chart's
+  // worth of `only`-filtered charts to compare, not the full CHARTS list).
+  for (const chart of charts) {
+    if (only.length && !only.includes(chart)) continue;
+    const a = nodesByLang.en[chart], b = nodesByLang.nl[chart];
+    if (!a || !b) continue; // one side is a Dutch-only chart or wasn't part of this export
+    const onlyEn = [...a].filter((x) => !b.has(x)), onlyNl = [...b].filter((x) => !a.has(x));
+    if (onlyEn.length || onlyNl.length) {
+      gateFailed = true;
+      console.error(`PRECHECK ${chart}: en/nl node ids differ — only en: ${onlyEn.join(", ") || "-"} | only nl: ${onlyNl.join(", ") || "-"}`);
+    }
+  }
+  if (gateFailed) {
+    if (process.env.FLOWCHART_ALLOW_DRIFT) {
+      console.warn("\nPre-export checks failed — exporting anyway (FLOWCHART_ALLOW_DRIFT set).");
+    } else {
+      console.error("\nPre-export checks failed — see PRECHECK lines above. Fix the drift, or re-run with FLOWCHART_ALLOW_DRIFT=1 to export anyway.");
+      process.exit(1);
+    }
+  }
+}
 
 for (const lang of ["en", "nl"]) {
   // curated masters live in <outDir>/src/<lang>; PDFs are written to <outDir>/<lang>
@@ -120,6 +206,7 @@ for (const lang of ["en", "nl"]) {
       "-b", "white"], { stdio: "inherit" });
     let svg = readFileSync(svgPath, "utf8").replace(/<\?xml[^>]*\?>/, "");
     if (LEFT_ALIGN_ROWS.has(chart)) svg = leftAlignRows(svg);
+    if (HIDE_JUNCTION_MARKERS.has(chart)) svg = hideJunctionMarkers(svg);
     const { w, h } = svgSize(svg);
     if (w <= 40 && h <= 40) { console.warn("SKIP empty:", `${lang}/${chart}`); continue; }
     const d = DESC[lang]?.[chart] || { title: chart, text: "" };

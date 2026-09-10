@@ -88,7 +88,7 @@ export default function RolesOverviewSection() {
               </tr>
             </thead>
             <tbody style={{ fontSize: "0.8rem" }}>
-              {(["provider", "deployer", "importer", "distributor", "private"] as const).map((role) => (
+              {(["provider", "deployer", "importer", "distributor", "representative", "private"] as const).map((role) => (
                 <tr key={role}>
                   <td style={{ whiteSpace: "nowrap" }}><strong>{t(`aiact2 summary role ${role}`)}</strong></td>
                   {(["rms","data","logs","instructions","oversight","accuracy","qms","technical","conformity","ce","declaration","registration","postmarket","literacy","workers","transparency","fria","cooperation"] as const).map(col => (
@@ -108,6 +108,7 @@ export default function RolesOverviewSection() {
               {" "}<SourceBadge label={t("article art26 deployer label")} url={t("article art26 deployer url")} />
               {" "}<SourceBadge label={t("article art23 importer label")} url={t("article art23 importer url")} />
               {" "}<SourceBadge label={t("article art24 label")} url={t("article art24 url")} />
+              {" "}<SourceBadge label={t("article art22 label")} url={t("article art22 url")} />
               {t("aiact2 result note bullet1 after")}
             </span>
           }

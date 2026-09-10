@@ -55,15 +55,17 @@ export default function ObligationsSection({
   // long Art. 6(1) / 102-109 / 112 explainer is kept as a fallback for
   // any other role combination (e.g. Importer / Distributor only).
   if (annexIArt6Branch === "B") {
-    let shortKey: string | null = null;
-    if (has("aanbieder")) shortKey = "riskcat result annex i secB provider only";
-    else if (has("gebruiksverantwoordelijke")) shortKey = "riskcat result annex i secB deployer only";
+    const shortKeys: string[] = [];
+    if (has("aanbieder")) shortKeys.push("riskcat result annex i secB provider only");
+    if (has("gebruiksverantwoordelijke")) shortKeys.push("riskcat result annex i secB deployer only");
     return (
       <div>
         <h6 className="fw-bold mb-1 mt-2" style={{ color: "var(--cma-primary)" }}>{t("aiact2 result next steps title")}</h6>
         <div style={{ borderTop: "1px solid var(--cma-primary)", paddingTop: "8px", fontSize: "0.9rem" }}>
-          {shortKey ? (
-            <p className="mb-0">{renderLinks(t(shortKey))}</p>
+          {shortKeys.length > 0 ? (
+            shortKeys.map((k, i) => (
+              <p key={k} className={i === shortKeys.length - 1 ? "mb-0" : "mb-2"}>{renderLinks(t(k))}</p>
+            ))
           ) : (
             <>
               <p className="mb-2">{renderLinks(t("riskcat result annex i secB intro"))}</p>
@@ -121,6 +123,7 @@ export default function ObligationsSection({
                     t("aiact2 result deployer step6"),
                     t("aiact2 result deployer step7"),
                     t("aiact2 result deployer step8"),
+                    t("aiact2 result deployer step9"),
                   ].map((s, i) => <StepItem key={i} text={s} />)}
                 </ol>
                 <div className="mt-2 mb-2">{t("aiact2 result deployer source prefix")} <SourceBadge label={t("article art26 deployer label")} url={t("article art26 deployer url")} /></div>
@@ -145,6 +148,22 @@ export default function ObligationsSection({
               ].map((s, i) => <StepItem key={i} text={s} />)}
             </ol>
             <div className="mt-2">{t("aiact2 result importer source prefix")} <SourceBadge label={t("article art23 importer label")} url={t("article art23 importer url")} /></div>
+          </>
+        ) : has("vertegenwoordiger") ? (
+          <>
+            <div className="mb-2 fw-semibold">{t("aiact2 result representative heading")}</div>
+            <ol className="mb-1 ps-3">
+              {[
+                t("aiact2 result representative step1"),
+                t("aiact2 result representative step2"),
+                t("aiact2 result representative step3"),
+                t("aiact2 result representative step4"),
+                t("aiact2 result representative step5"),
+                t("aiact2 result representative step6"),
+                t("aiact2 result representative step7"),
+              ].map((s, i) => <StepItem key={i} text={s} />)}
+            </ol>
+            <div className="mt-2">{t("aiact2 result representative source prefix")} <SourceBadge label={t("article art22 label")} url={t("article art22 url")} /></div>
           </>
         ) : has("distributeur") ? (
           <>
@@ -174,6 +193,7 @@ export default function ObligationsSection({
                 t("aiact2 result deployer step6"),
                 t("aiact2 result deployer step7"),
                 t("aiact2 result deployer step8"),
+                t("aiact2 result deployer step9"),
               ].map((s, i) => <StepItem key={i} text={s} />)}
             </ol>
             <div className="mt-2">{t("aiact2 result deployer source prefix")} <SourceBadge label={t("article art26 deployer label")} url={t("article art26 deployer url")} /></div>

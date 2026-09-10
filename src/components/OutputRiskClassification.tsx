@@ -242,7 +242,7 @@ export default function OutputRiskClassification({
     : `${art50Clauses.slice(0, -1).join(", ")} ${art50Conjunction} ${art50Clauses[art50Clauses.length - 1]}`;
   const combinedArt50Heading = `${t("riskcat result art50 combined prefix")}${combinedClauses}:`;
 
-  const art50TimingExceptionLines = (
+  const art50TimingExceptionLinesFor = (exceptionItemKey: string) => (
     <div className="mt-2">
       <p className="mb-1">
         <span style={{ color: "var(--cma-primary)" }}>{t("riskcat result art50_3 deployer timing heading")}:</span>{" "}
@@ -250,10 +250,11 @@ export default function OutputRiskClassification({
       </p>
       <p className="mb-0">
         <span style={{ color: "var(--cma-primary)" }}>{t("riskcat result art50_3 deployer exception heading")}:</span>{" "}
-        {t("riskcat result art50_3 deployer exception item1")}
+        {t(exceptionItemKey)}
       </p>
     </div>
   );
+  const art50TimingExceptionLines = art50TimingExceptionLinesFor("riskcat result art50_3 deployer exception item1");
 
   const knownRoleBadges = (aiAct2Roles ?? [])
     .map((r) => ROLE_BADGES[r])
@@ -557,6 +558,9 @@ export default function OutputRiskClassification({
                     </p>
                     <ul className="mb-2 ps-3">
                       <li>{t("riskcat result art50_2 deployer exceptions item1")}</li>
+                      {(isArt50InteractiveProvider || isArt50InteractiveDeployer) && (
+                        <li>{t("riskcat result art50_1 deployer exception item1")}</li>
+                      )}
                       {(isArt50GenerativeDeployer || isArt50PublicInterestDeployer) && (
                         <>
                           <li>{t("riskcat result art50_2 deployer exceptions item2")}</li>
@@ -691,7 +695,7 @@ export default function OutputRiskClassification({
                         <li>{t("riskcat result art50_1 deployer step1")}</li>
                         <li>{t("riskcat result art50_1 deployer step2")}</li>
                       </ul>
-                      {art50TimingExceptionLines}
+                      {art50TimingExceptionLinesFor("riskcat result art50_1 deployer exception item1")}
                       {!hideSourceBadges && (
                         <div className="mt-2">
                           <a href={t("article art50_1 url")} target="_blank" rel="noreferrer" className="question-badge-link">
@@ -734,7 +738,7 @@ export default function OutputRiskClassification({
                           {t("riskcat result art50_1 guidelines source suffix")}
                         </p>
                       </AccordionSubsection>
-                      {art50TimingExceptionLines}
+                      {art50TimingExceptionLinesFor("riskcat result art50_1 deployer exception item1")}
                       {!hideSourceBadges && (
                         <div className="mt-2">
                           <a href={t("article art50_1 url")} target="_blank" rel="noreferrer" className="question-badge-link">
