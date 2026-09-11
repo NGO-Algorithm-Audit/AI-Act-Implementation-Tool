@@ -25,6 +25,7 @@ import TooltipRadioWidget from "./widgets/TooltipRadioWidget";
 import IntroWidget from "./widgets/IntroWidget";
 import RoleStatusIntroWidget from "./widgets/RoleStatusIntroWidget";
 import RiskClassificationIntroWidget from "./widgets/RiskClassificationIntroWidget";
+import NtaIntroWidget from "./widgets/NtaIntroWidget";
 import {
   ArrayFieldTemplate,
   ArrayFieldItemTemplate,
@@ -210,6 +211,7 @@ const tooltipWidgets = {
   IntroWidget,
   RoleStatusIntroWidget,
   RiskClassificationIntroWidget,
+  NtaIntroWidget,
 };
 
 const WizardForm = ({
