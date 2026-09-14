@@ -1,16 +1,18 @@
-%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'Avenir Next, Avenir, Helvetica, sans-serif', 'fontSize': '14px', 'lineColor': '#005AA7', 'primaryColor': '#005AA7', 'edgeLabelBackground': '#ffffff'}, 'flowchart': {'curve': 'basis', 'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 90, 'rankSpacing': 130, 'padding': 24}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'Avenir Next, Avenir, Helvetica, sans-serif', 'fontSize': '14px', 'lineColor': '#005AA7', 'primaryColor': '#005AA7', 'edgeLabelBackground': '#ffffff'}, 'flowchart': {'curve': 'monotoneX', 'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 100, 'rankSpacing': 140, 'padding': 24}}}%%
 flowchart LR
 
     classDef Q fill:#daeaf7,stroke:#005aa7,color:#000
+    classDef exc fill:#eff6ff,stroke:#3b82f6,color:#1e3a8a
     classDef cat_forb fill:#dc3545,stroke:#a01c2a,color:#fff,font-weight:bold
     classDef cat_high fill:#d97706,stroke:#a05705,color:#fff,font-weight:bold
     classDef cat_genai fill:#FFBF00,stroke:#b88a00,color:#fff,font-weight:bold
     classDef role_prov fill:#6f42c1,stroke:#4f2c91,color:#fff,font-weight:bold
     classDef role_dep fill:#0891b2,stroke:#076a8d,color:#fff,font-weight:bold
-    classDef scenario fill:#fff5cc,stroke:#b88a00,color:#000,font-weight:bold
     classDef oblig_forb fill:#fbe2e4,stroke:#dc3545,color:#000
     classDef oblig_high fill:#fdecd0,stroke:#d97706,color:#000
     classDef oblig_genai fill:#f1f3f5,stroke:#9aa3ab,color:#000
+    classDef cat_exempt fill:#0d9488,stroke:#0d9488,color:#fff,font-weight:bold
+    classDef cat_except fill:#6c757d,stroke:#6c757d,color:#fff,font-weight:bold
     linkStyle default stroke:#005AA7,stroke-width:1.2px
 
     Q1["Risk category<br/>(determined by the<br/>Risk-category questionnaire)"]:::Q
@@ -24,27 +26,72 @@ flowchart LR
 
     FORB --> Q2F["Role"]:::Q
     HIGH --> Q2H["Role"]:::Q
-    GENAI --> Q10["Q10 scenario<br/>(multi-select)"]:::Q
+    GENAI --> AQ1
 
     Q2F -->|"Provider"| FP
     Q2F -->|"Deployer"| FD
     Q2H -->|"Provider"| HP
     Q2H -->|"Deployer"| HD
 
-    Q10 -->|"Interacts directly<br/>with natural persons"| S1
-    Q10 -->|"Generates synthetic<br/>audio / image / video / text"| S2
-    Q10 -->|"Recognises emotions or<br/>biometric categorisation"| S3
-    Q10 -->|"Generates / manipulates<br/>public-interest content"| S4
+    %% ════════ Art. 50 detail questionnaire (started from the Obligations menu)
+    %% — its own Q1-Q7 numbering, matching the tool's live question badges ════════
+    AQ1["Q1 · Art. 50<br/>Which of the following<br/>scenarios apply to the<br/>AI system? (multi-select)"]:::Q
+    AQ1 -->|"None of the above"| NOART50
+    AQ1 -->|"At least one<br/>scenario"| EXCEPTIONS
 
-    S1["Art. 50(1)<br/>Interactive AI"]:::scenario
-    S2["Art. 50(2)<br/>Generative AI"]:::scenario
-    S3["Art. 50(3)<br/>Emotion recognition /<br/>biometric categorisation"]:::scenario
-    S4["Art. 50(4)<br/>Deep fakes /<br/>public-interest text"]:::scenario
+    NOART50["No requirements<br/>(Art. 50)"]:::cat_exempt
 
-    S1 --> S1R["Role"]:::Q
-    S2 --> S2R["Role"]:::Q
-    S3 --> S3R["Role"]:::Q
-    S4 --> S4R["Role"]:::Q
+    %% ════════ Shared Article 2 scope-exclusion screen (guidelines §2.4), asked
+    %% once right after Q1, before any scenario-specific exception check ════════
+    EXCEPTIONS["Exception screen · Art. 50<br/>Personal use, research or<br/>open-source licence?"]:::exc
+    EXCEPTIONS -->|"None —<br/>interactive AI"| AQ2
+    EXCEPTIONS -->|"None —<br/>synthetic content"| AQ3
+    EXCEPTIONS -->|"None —<br/>biometric / emotion"| AQ4
+    EXCEPTIONS -->|"None —<br/>deep fake"| AQ5
+    EXCEPTIONS -->|"None —<br/>public-interest text"| AQ6
+    EXCEPTIONS -->|"Exception applies"| EXEMPT0
+
+    %% ════════ Each scenario's own exception check (multi-select — any ground
+    %% checked resolves the same way; the shared exception screen above already
+    %% ruled out the general exception, so "None" here resolves directly, no
+    %% further screen). Every ground that resolves to exempt is merged into one
+    %% "Exception applies" edge. Each scenario gets its own identical outcome
+    %% box (rather than one shared node) so its edge never has to converge with
+    %% another scenario's — the same duplication convention already used for
+    %% Provider/Deployer/Role throughout this diagram ════════
+    AQ2["Q2 · Art. 50(1)<br/>Exception to interactive-AI<br/>disclosure? (multi-select)"]:::Q
+    AQ2 -->|"None"| S1R
+    AQ2 -->|"Exception applies"| EXEMPT2
+
+    AQ3["Q3 · Art. 50(2)<br/>Exception to synthetic-content<br/>marking? (multi-select)"]:::Q
+    AQ3 -->|"None"| S2R
+    AQ3 -->|"Exception applies"| EXEMPT3
+
+    AQ4["Q4 · Art. 50(3)<br/>Used for law-enforcement<br/>purposes?"]:::Q
+    AQ4 -->|"No"| S3R
+    AQ4 -->|"Yes"| EXEMPT4
+
+    AQ5["Q5 · Art. 50(4)<br/>Exception or attenuated<br/>regime for deep fakes?<br/>(multi-select)"]:::Q
+    AQ5 -->|"None"| S4R
+    AQ5 -->|"Evidently artistic /<br/>creative / satirical /<br/>fictional work"| S4_ATT_O
+    AQ5 -->|"Exception applies"| EXEMPT5
+
+    AQ6["Q6 · Art. 50(4)<br/>Exception to public-interest-<br/>text disclosure? (multi-select)"]:::Q
+    AQ6 -->|"None"| S5R
+    AQ6 -->|"Exception applies"| EXEMPT6
+
+    EXEMPT0["Transparency obligations<br/>+ possible exception"]:::cat_except
+    EXEMPT2["Transparency obligations<br/>+ possible exception"]:::cat_except
+    EXEMPT3["Transparency obligations<br/>+ possible exception"]:::cat_except
+    EXEMPT4["Transparency obligations<br/>+ possible exception"]:::cat_except
+    EXEMPT5["Transparency obligations<br/>+ possible exception"]:::cat_except
+    EXEMPT6["Transparency obligations<br/>+ possible exception"]:::cat_except
+
+    S1R["Role"]:::Q
+    S2R["Role"]:::Q
+    S3R["Role"]:::Q
+    S4R["Role"]:::Q
+    S5R["Role"]:::Q
 
     S1R -->|"Provider"| S1P
     S1R -->|"Deployer"| S1D
@@ -52,7 +99,10 @@ flowchart LR
     S2R -->|"Deployer"| S2D
     S3R -->|"Provider"| S3P
     S3R -->|"Deployer"| S3D
+    S4R -->|"Provider"| S4P
     S4R -->|"Deployer"| S4D
+    S5R -->|"Provider"| S5P
+    S5R -->|"Deployer"| S5D
 
     FP["Provider"]:::role_prov
     FD["Deployer"]:::role_dep
@@ -64,7 +114,10 @@ flowchart LR
     S2D["Deployer"]:::role_dep
     S3P["Provider"]:::role_prov
     S3D["Deployer"]:::role_dep
+    S4P["Provider"]:::role_prov
     S4D["Deployer"]:::role_dep
+    S5P["Provider"]:::role_prov
+    S5D["Deployer"]:::role_dep
 
     FP --> FP_O["Take the AI system out of service immediately. Do not place it on the market, put it into service or use it within the European Union.<br/>Source: Art. 5 AI Act"]:::oblig_forb
 
@@ -80,10 +133,24 @@ flowchart LR
 
     S2P --> S2P_O["Obligations for AI generating synthetic audio, image, video or text content:<br/>• Marking: outputs must be marked in a machine-readable format (e.g. watermarks, metadata, cryptographic provenance methods, fingerprints).<br/>• Detection: providers must make means available to detect that the output is AI-generated or manipulated, with human-readable results.<br/>• Both elements must be present; marking alone is insufficient.<br/>Timing: Provide information to users at the latest at the time of the first exposure to the system.<br/>Exception: Systems permitted by law to detect, prevent or investigate criminal offences, with appropriate safeguards under Union law.<br/>Source: Art. 50(2) AI Act"]:::oblig_genai
 
-    S2D --> S2D_O["Obligations for AI generating synthetic audio, image, video or text content:<br/>• Deployers of AI systems that generate deep fakes (as defined in Art. 3(60)) must disclose that the content has been artificially generated or manipulated.<br/>• Deployers of AI systems that generate or manipulate text which is published with the purpose of informing the public on matters of public interest must disclose that the text has been artificially generated or manipulated.<br/>Timing: Provide information to users at the latest at the time of the first exposure to the system.<br/>Exception:<br/>• Where the use is authorised by law to detect, prevent, investigate, or prosecute criminal offences.<br/>• Where the content forms part of an evidently artistic, creative, satirical, fictional, or analogous work or programme. The obligation is limited to disclosing the existence of such generated or manipulated content in an appropriate manner that does not hamper the display or enjoyment of the work.<br/>• Where the AI-generated content has undergone a process of human review or editorial control, and a natural or legal person holds editorial responsibility for the publication.<br/>Source: Art. 50(4) AI Act"]:::oblig_genai
+    S2D --> S2D_O["The Art. 50(2) marking &amp; detection duty rests with the provider, not the deployer — there is no separate deployer duty under this scenario as such.<br/>• If, as deployer, you also generate a deep fake or publish AI-generated public-interest text using this system, that triggers the separate Art. 50(4) deployer obligations — see 'Deep fakes' / 'Public-interest text' above.<br/>Source: Art. 50(2) AI Act"]:::oblig_genai
 
     S3P --> S3P_O["Inform exposed persons and process personal data per GDPR."]:::oblig_genai
 
     S3D --> S3D_O["Obligations for AI recognising emotions or categorising persons based on biometric data:<br/>• Inform all natural persons exposed to the system that it is being operated / used.<br/>• Provide information in a clear, distinguishable and accessible manner (Art. 50(5)).<br/>• Information may be given in writing, via standardised icons, orally, electronically or any combination, depending on the deployment context.<br/>Timing: Provide information to users at the latest at the time of the first exposure to the system.<br/>Exception: Systems permitted by law to detect, prevent or investigate criminal offences, with appropriate safeguards under Union law.<br/>Source: Art. 50(3) and Art. 50(5) AI Act"]:::oblig_genai
 
-    S4D --> S4D_O["Obligations for AI generating or manipulating image, audio, video or public-interest text content:<br/>• Deployers of AI systems that generate deep fakes (as defined in Art. 3(60)) must disclose that the content has been artificially generated or manipulated.<br/>• Deployers of AI systems that generate or manipulate text which is published with the purpose of informing the public on matters of public interest must disclose that the text has been artificially generated or manipulated.<br/>Timing: Provide information to users at the latest at the time of the first exposure to the system.<br/>Exception:<br/>• Where the use is authorised by law to detect, prevent, investigate, or prosecute criminal offences.<br/>• Where the content forms part of an evidently artistic, creative, satirical, fictional, or analogous work or programme. The obligation is limited to disclosing the existence of such generated or manipulated content in an appropriate manner that does not hamper the display or enjoyment of the work.<br/>• Where the AI-generated content has undergone a process of human review or editorial control, and a natural or legal person holds editorial responsibility for the publication.<br/>Source: Art. 50(4) AI Act"]:::oblig_genai
+    S4P --> S4P_O["The obligations under Article 50(4) only apply to deployers of the AI system"]:::oblig_genai
+
+    S4D --> S4D_O["Obligations for AI generating or manipulating a deep fake (image, audio or video):<br/>• Deployers of AI systems that generate deep fakes (as defined in Art. 3(60)) must disclose that the content has been artificially generated or manipulated.<br/>Timing: Provide information to users at the latest at the time of the first exposure to the content.<br/>Exception: Where the use is authorised by law to detect, prevent, investigate, or prosecute criminal offences.<br/>Source: Art. 50(4), 1st subparagraph, AI Act"]:::oblig_genai
+
+    S4_ATT_O["Attenuated deep-fake disclosure (any role):<br/>• The disclosure obligation is not removed, but for deep fakes that evidently form part of an artistic, creative, satirical, fictional or analogous work or programme, it can be given in a form that does not hamper the display or enjoyment of the work (e.g. in end credits rather than an on-screen banner).<br/>• Appropriate safeguards for the rights and freedoms of third parties (e.g. personal data, intellectual property) still apply.<br/>Source: Art. 50(4), 1st subparagraph, &amp; Recital 134 AI Act"]:::oblig_genai
+
+    S5P --> S5P_O["The obligations under Article 50(4) only apply to deployers of the AI system"]:::oblig_genai
+
+    S5D --> S5D_O["Obligations for AI generating or manipulating public-interest text:<br/>• Deployers must disclose that the text has been artificially generated or manipulated.<br/>Timing: Provide information to users at the latest at the time of the first exposure to the text.<br/>Exception: Where the use is authorised by law to detect, prevent, investigate, or prosecute criminal offences.<br/>Source: Art. 50(4), 2nd subparagraph, AI Act"]:::oblig_genai
+
+    %% Layout-only edge: pulls the attenuated-outcome box into the same rank
+    %% column as the other outcome nodes, without altering the real AQ5 edge
+    %% above. stroke:none makes this edge (and its arrowhead) fully invisible.
+    S4D --> S4_ATT_O
+    linkStyle 53 stroke:none

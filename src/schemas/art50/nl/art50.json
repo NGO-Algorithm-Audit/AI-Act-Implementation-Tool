@@ -1,0 +1,412 @@
+{
+  "JSONSchema": {
+    "title": "Artikel 50 — gedetailleerde controle van transparantieverplichtingen",
+    "type": "object",
+    "definitions": {
+      "outputRecorded": {
+        "type": "string",
+        "title": "Resultaat",
+        "default": "",
+        "art50Detail": true
+      },
+      "q7Block": {
+        "title": "q7Block",
+        "type": "object",
+        "properties": {
+          "generalException": {
+            "type": "string",
+            "title": "Is een van de volgende uitzonderingen van toepassing op uw toepassing?",
+            "enum": [
+              "Gebruiksverantwoordelijken die handelen in het kader van een zuiver persoonlijke, niet-professionele activiteit",
+              "Onderzoek en ontwikkeling",
+              "AI vrijgegeven onder vrije en opensource-licenties",
+              "Geen van de bovenstaande"
+            ]
+          }
+        },
+        "required": ["generalException"],
+        "allOf": [
+          {
+            "if": {
+              "properties": { "generalException": { "const": "Onderzoek en ontwikkeling" } },
+              "required": ["generalException"]
+            },
+            "then": {
+              "properties": {
+                "generalExceptionResearchDescription": {
+                  "type": "string",
+                  "title": "Geef een korte beschrijving van het onderzoek. Vermeld hierin ten minste het doel van het onderzoek, de afdeling waarbinnen dit onderzoek wordt uitgevoerd, en de betrokken onderzoeksinstellingen en/of andere partners.",
+                  "default": ""
+                }
+              },
+              "required": ["generalExceptionResearchDescription"]
+            }
+          }
+        ]
+      },
+      "generalExceptionApplies": {
+        "required": ["generalException"],
+        "anyOf": [
+          {
+            "properties": {
+              "generalException": {
+                "enum": [
+                  "Gebruiksverantwoordelijken die handelen in het kader van een zuiver persoonlijke, niet-professionele activiteit",
+                  "AI vrijgegeven onder vrije en opensource-licenties"
+                ]
+              }
+            }
+          },
+          {
+            "required": ["generalExceptionResearchDescription"],
+            "properties": { "generalException": { "const": "Onderzoek en ontwikkeling" } }
+          }
+        ]
+      }
+    },
+    "properties": {
+      "art50detail": {
+        "type": "object",
+        "title": "art50detail",
+        "properties": {
+          "scenarios": {
+            "type": "array",
+            "title": "Is een van de volgende scenario's van toepassing op het AI-systeem?",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Het interageert rechtstreeks met natuurlijke personen.",
+                "Het genereert of manipuleert synthetische audio-, beeld-, video- of tekstinhoud.",
+                "Het herkent emoties of categoriseert personen op basis van biometrische gegevens.",
+                "Het genereert of manipuleert beeld-, audio- of video-inhoud die lijkt op bestaande personen, objecten, plaatsen of gebeurtenissen (een deepfake).",
+                "Het genereert of manipuleert tekst die wordt gepubliceerd om het publiek te informeren over aangelegenheden van algemeen belang.",
+                "Geen van de bovenstaande"
+              ]
+            },
+            "uniqueItems": true,
+            "minItems": 1
+          }
+        },
+        "required": ["scenarios"],
+        "allOf": [
+          {
+            "if": {
+              "required": ["scenarios"],
+              "properties": {
+                "scenarios": {
+                  "contains": {
+                    "enum": [
+                      "Het interageert rechtstreeks met natuurlijke personen.",
+                      "Het genereert of manipuleert synthetische audio-, beeld-, video- of tekstinhoud.",
+                      "Het herkent emoties of categoriseert personen op basis van biometrische gegevens.",
+                      "Het genereert of manipuleert beeld-, audio- of video-inhoud die lijkt op bestaande personen, objecten, plaatsen of gebeurtenissen (een deepfake).",
+                      "Het genereert of manipuleert tekst die wordt gepubliceerd om het publiek te informeren over aangelegenheden van algemeen belang."
+                    ]
+                  }
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "generalExceptionBlock": { "$ref": "#/definitions/q7Block" }
+              },
+              "required": ["generalExceptionBlock"]
+            }
+          },
+          {
+            "if": {
+              "required": ["scenarios", "generalException"],
+              "properties": {
+                "scenarios": { "contains": { "enum": ["Het interageert rechtstreeks met natuurlijke personen."] } },
+                "generalException": { "const": "Geen van de bovenstaande" }
+              }
+            },
+            "then": {
+              "properties": {
+                "interactiveException": {
+                  "type": "array",
+                  "title": "Uw AI-systeem interageert rechtstreeks met natuurlijke personen. Welke van de volgende scenario's zijn van toepassing op uw AI-systeem?",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "Het is voor een goed geïnformeerde, oplettende en kritische natuurlijke persoon duidelijk dat deze interageert met een AI-systeem",
+                      "Het AI-systeem is bij wet toegestaan voor rechtshandhavingsdoeleinden",
+                      "Geen van de bovenstaande"
+                    ]
+                  },
+                  "uniqueItems": true,
+                  "minItems": 1
+                }
+              },
+              "required": ["interactiveException"]
+            }
+          },
+          {
+            "if": {
+              "required": ["scenarios", "generalException"],
+              "properties": {
+                "scenarios": { "contains": { "enum": ["Het genereert of manipuleert synthetische audio-, beeld-, video- of tekstinhoud."] } },
+                "generalException": { "const": "Geen van de bovenstaande" }
+              }
+            },
+            "then": {
+              "properties": {
+                "syntheticException": {
+                  "type": "array",
+                  "title": "Uw AI-systeem genereert of manipuleert synthetische audio-, beeld-, video- of tekstinhoud. Welke van de volgende scenario's zijn van toepassing op uw AI-systeem?",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "Het AI-systeem vervult een ondersteunende functie voor standaardbewerking",
+                      "Het AI-systeem wijzigt de door de gebruiksverantwoordelijke verstrekte inputgegevens of de betekenis daarvan niet wezenlijk",
+                      "Het AI-systeem is bij wet toegestaan om synthetische inhoud te genereren of te manipuleren met het oog op het opsporen, voorkomen, onderzoeken of vervolgen van een strafbaar feit",
+                      "Geen van de bovenstaande"
+                    ]
+                  },
+                  "uniqueItems": true,
+                  "minItems": 1
+                }
+              },
+              "required": ["syntheticException"]
+            }
+          },
+          {
+            "if": {
+              "required": ["scenarios", "generalException"],
+              "properties": {
+                "scenarios": { "contains": { "enum": ["Het herkent emoties of categoriseert personen op basis van biometrische gegevens."] } },
+                "generalException": { "const": "Geen van de bovenstaande" }
+              }
+            },
+            "then": {
+              "properties": {
+                "biometricException": {
+                  "type": "string",
+                  "title": "Uw AI-systeem herkent emoties of categoriseert personen op basis van biometrische gegevens. Wordt het gebruikt met het oog op rechtshandhaving?",
+                  "enum": ["Ja", "Nee"]
+                }
+              },
+              "required": ["biometricException"]
+            }
+          },
+          {
+            "if": {
+              "required": ["scenarios", "generalException"],
+              "properties": {
+                "scenarios": { "contains": { "enum": ["Het genereert of manipuleert beeld-, audio- of video-inhoud die lijkt op bestaande personen, objecten, plaatsen of gebeurtenissen (een deepfake)."] } },
+                "generalException": { "const": "Geen van de bovenstaande" }
+              }
+            },
+            "then": {
+              "properties": {
+                "deepfakeException": {
+                  "type": "array",
+                  "title": "Uw AI-systeem genereert of manipuleert beeld-, audio- of video-inhoud die lijkt op bestaande personen, objecten, plaatsen of gebeurtenissen (een deepfake). Welke van de volgende scenario's zijn van toepassing op uw AI-systeem?",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "De deepfake vormt onderdeel van een duidelijk artistiek, creatief, satirisch, fictief of soortgelijk werk",
+                      "De deepfake is bij wet toegestaan met het oog op het opsporen, voorkomen, onderzoeken of vervolgen van strafbare feiten",
+                      "Geen van de bovenstaande"
+                    ]
+                  },
+                  "uniqueItems": true,
+                  "minItems": 1
+                }
+              },
+              "required": ["deepfakeException"]
+            }
+          },
+          {
+            "if": {
+              "required": ["scenarios", "generalException"],
+              "properties": {
+                "scenarios": { "contains": { "enum": ["Het genereert of manipuleert tekst die wordt gepubliceerd om het publiek te informeren over aangelegenheden van algemeen belang."] } },
+                "generalException": { "const": "Geen van de bovenstaande" }
+              }
+            },
+            "then": {
+              "properties": {
+                "publicInterestTextException": {
+                  "type": "array",
+                  "title": "Uw AI-systeem genereert of manipuleert tekst die wordt gepubliceerd om het publiek te informeren over aangelegenheden van algemeen belang. Welke van de volgende scenario's zijn van toepassing op uw AI-systeem?",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "De tekst staat onder menselijke beoordeling of redactionele controle en redactionele verantwoordelijkheid",
+                      "Het gebruik van het AI-systeem voor het genereren van tekst die wordt gepubliceerd met als doel het publiek te informeren over aangelegenheden van algemeen belang, zonder menselijke beoordeling, is bij wet toegestaan met het oog op het opsporen, voorkomen, onderzoeken of vervolgen van strafbare feiten",
+                      "Geen van de bovenstaande"
+                    ]
+                  },
+                  "uniqueItems": true,
+                  "minItems": 1
+                }
+              },
+              "required": ["publicInterestTextException"]
+            }
+          },
+          {
+            "if": {
+              "required": ["scenarios"],
+              "anyOf": [
+                {
+                  "not": {
+                    "properties": {
+                      "scenarios": {
+                        "contains": {
+                          "enum": [
+                            "Het interageert rechtstreeks met natuurlijke personen.",
+                            "Het genereert of manipuleert synthetische audio-, beeld-, video- of tekstinhoud.",
+                            "Het herkent emoties of categoriseert personen op basis van biometrische gegevens.",
+                            "Het genereert of manipuleert beeld-, audio- of video-inhoud die lijkt op bestaande personen, objecten, plaatsen of gebeurtenissen (een deepfake).",
+                            "Het genereert of manipuleert tekst die wordt gepubliceerd om het publiek te informeren over aangelegenheden van algemeen belang."
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                { "$ref": "#/definitions/generalExceptionApplies" },
+                {
+                  "required": ["generalException"],
+                  "properties": { "generalException": { "const": "Geen van de bovenstaande" } },
+                  "allOf": [
+                    {
+                      "if": { "properties": { "scenarios": { "contains": { "enum": ["Het interageert rechtstreeks met natuurlijke personen."] } } } },
+                      "then": { "required": ["interactiveException"] }
+                    },
+                    {
+                      "if": { "properties": { "scenarios": { "contains": { "enum": ["Het genereert of manipuleert synthetische audio-, beeld-, video- of tekstinhoud."] } } } },
+                      "then": { "required": ["syntheticException"] }
+                    },
+                    {
+                      "if": { "properties": { "scenarios": { "contains": { "enum": ["Het herkent emoties of categoriseert personen op basis van biometrische gegevens."] } } } },
+                      "then": { "required": ["biometricException"] }
+                    },
+                    {
+                      "if": { "properties": { "scenarios": { "contains": { "enum": ["Het genereert of manipuleert beeld-, audio- of video-inhoud die lijkt op bestaande personen, objecten, plaatsen of gebeurtenissen (een deepfake)."] } } } },
+                      "then": { "required": ["deepfakeException"] }
+                    },
+                    {
+                      "if": { "properties": { "scenarios": { "contains": { "enum": ["Het genereert of manipuleert tekst die wordt gepubliceerd om het publiek te informeren over aangelegenheden van algemeen belang."] } } } },
+                      "then": { "required": ["publicInterestTextException"] }
+                    }
+                  ]
+                }
+              ]
+            },
+            "then": {
+              "properties": {
+                "output": { "$ref": "#/definitions/outputRecorded" }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "required": ["art50detail"]
+  },
+  "uiSchema": {
+    "scenarios": {
+      "ui:widget": "checkboxes",
+      "ui:description": "Selecteer alle scenario's die van toepassing zijn.",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Deze vragenlijst verfijnt de Artikel 50-scenario's die al zijn gemarkeerd in de vragenlijst Risicocategorie en doorloopt de uitzonderingen van elke toepasselijke bepaling in meer detail, zodat u precies weet welke transparantieverplichtingen van toepassing zijn.",
+      "ui:enumTooltips": [
+        "Interactie omvat het vermogen tot een tweerichtingsuitwisseling van informatie of handelingen tussen natuurlijke personen en het AI-systeem met een echt conversationeel of responsief karakter. Dit kan in verschillende vormen plaatsvinden (bijv. auditief, visueel en fysiek). Natuurlijke personen moeten input kunnen geven aan het AI-systeem, terwijl het AI-systeem in staat moet zijn om met contextuele output te reageren. De interactie tussen het AI-systeem en de natuurlijke personen moet rechtstreeks zijn. Dit betreft doorgaans real-time of bijna-real-time interactie. AI-agenten vallen hieronder als zij in staat zijn te interageren met de personen die hen instrueren of met andere natuurlijke personen bij het uitvoeren van taken (bijv. het maken van boekingen, het beheren van correspondentie, het onderhandelen over of sluiten van contracten, het doen van aankopen, enz.). Voorbeelden zijn: AI-gestuurde spraakassistenten, AI-hotline voor fraude, AI-bots op sociale media.",
+        "Contentgeneratie verwijst naar het genereren van synthetisch materiaal door het AI-systeem. Dit kan AI-systemen omvatten die zijn ontworpen met een beperkt beoogd doel om specifieke outputs te produceren, maar kan ook van toepassing zijn op AI-systemen die meerdere doelen kunnen dienen, waaronder GPAI-systemen, en die verschillende soorten inhoud kunnen produceren, evenals agentische AI-systemen, zolang zij synthetische audio-, beeld-, video- of tekstinhoud genereren. Contentmanipulatie verwijst naar reeds bestaande inhoud (al dan niet synthetisch) die door een AI-systeem wordt gewijzigd.",
+        "Het doel van de transparantieverplichting hier is ervoor te zorgen dat natuurlijke personen zich ervan bewust zijn dat zij worden blootgesteld aan emotieherkennings- en biometrische-categoriseringssystemen die inbreuk kunnen maken op hun privacy. De verplichting geldt daarom ongeacht of de personen in real-time aan dergelijke systemen worden blootgesteld of dat deze systemen achteraf worden toegepast.",
+        "Door AI gegenereerde of gemanipuleerde beeld-, audio- of video-inhoud lijkt in aanmerkelijke mate op een onderwerp als er een hoge mate van gelijkenis bestaat tussen de deepfake-inhoud en het onderwerp dat door de deepfake wordt gesimuleerd. De inhoud hoeft niet identiek te zijn aan het onderwerp. Het is voldoende dat een deepfake lijkt op iets of iemand dat bestaat, plausibel zou kunnen bestaan of plausibel zou hebben kunnen bestaan. Daarentegen worden gesimuleerde personen, objecten, plaatsen, entiteiten of gebeurtenissen die bijvoorbeeld de wetten van de natuur of natuurkunde tarten of levensvormen weergeven die biologisch niet algemeen aanvaard zijn (zoals bijv. mensen die zonder mechanische hulpmiddelen vliegen, draken, of olifanten die auto rijden) en geen enkel misleidend potentieel hebben, als onrealistisch beschouwd en vallen zij daarom buiten deze reikwijdte. Voorbeelden zijn: door AI gegenereerde audio met stemkloning van de vaste presentatoren van een nieuwspodcast en een gastspreker die actuele gebeurtenissen bespreken; een door AI gegenereerde video van een persoon die op een politicus lijkt en een toespraak houdt voor een publiek. Voorbeelden die geen deepfakes vormen: een door AI gegenereerde afbeelding van een scène met een sfinx die over de Eiffeltoren vliegt; AI-stemreplicatie voor fictieve personages (bijv. voor audioboeken, games of animatie) wanneer er geen misleiding is over de identiteit van de vertellers.",
+        "• De door AI gegenereerde of gemanipuleerde tekst moet worden gepubliceerd. Dit betekent dat de tekst toegankelijk moet zijn voor een onbepaald, vrij groot aantal niet-gerelateerde, potentiële lezers, gelijktijdig en/of achtereenvolgens, al dan niet tegen betaling. Tekst wordt daarentegen niet als gepubliceerd beschouwd als de toegang beperkt is tot specifieke personen die tot een gesloten, besloten groep behoren.\n\n• De door AI gegenereerde of gemanipuleerde gepubliceerde tekst moet erop gericht zijn het publiek te informeren. Dit houdt in dat de tekst bedoeld moet zijn om kennis, meningen of feiten over te brengen.\n\n• De tekst moet het publiek informeren 'over aangelegenheden van algemeen belang'. In het algemeen moeten dergelijke aangelegenheden worden begrepen als aangelegenheden die relevant zijn voor de samenleving als geheel, op lokaal, nationaal, EU- of internationaal niveau, en die publiek debat of toetsing verdienen. In dat verband moeten teksten worden geacht aangelegenheden van algemeen belang te behandelen als zij betrekking hebben op onderwerpen als politiek en democratische processen, openbaar bestuur en dienstverlening, de rechtsbedeling en rechtshandhaving, de bescherming van grondrechten, openbare veiligheid, volksgezondheid, milieubescherming, consumentenveiligheid, en elke economische, financiële, politieke, wetenschappelijke of culturele ontwikkeling die relevant kan zijn voor het publieke debat. Aangelegenheden die als van algemeen belang kunnen worden beschouwd, kunnen in de loop van de tijd en per context evolueren.\n\nVoorbeelden zijn: een door AI gegenereerde samenvatting van een door een mens geschreven artikel op de website van een krant over een recent besluit van een gemeenteraad; door AI gemanipuleerde delen van een lifestyle-website-artikel waarin de effecten van verschillende diëten op een bepaalde aandoening bij vrouwen van middelbare leeftijd worden vergeleken; door AI gemanipuleerde bedrijfsrapporten die op de website van een beursgenoteerde onderneming worden gepubliceerd en investeerdersinformatie bevatten; een door AI gegenereerd bericht op het social-mediaprofiel van een meteorologisch instituut dat burgers waarschuwt voor stormachtig weer en de bijbehorende voorzorgsmaatregelen."
+      ],
+      "ui:badges": [
+        { "label": "Art. 50 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50" }
+      ],
+      "ui:id": "q1"
+    },
+    "interactiveException": {
+      "ui:widget": "checkboxes",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Vraag 2 is bedoeld om te bepalen of een uitzondering op artikel 50, lid 1, van toepassing zou kunnen zijn.",
+      "ui:enumTooltips": [
+        "Houd rekening met het beoogde en redelijkerwijs te verwachten publiek, niet alleen met de doelgroep. Als kinderen, ouderen, personen met een beperking of het brede publiek kunnen worden blootgesteld, ligt de lat voor 'duidelijk' hoger. Voorbeelden waarin dit kan gelden: codeassistentietools die uitsluitend door professionele ontwikkelaars worden gebruikt; interne medewerkersassistenten voor AI-vaardig personeel; hulpmiddelen voor medische diagnose die uitsluitend door opgeleide professionals worden gebruikt; personages in een singleplayer-game waarbij geen andere persoon kan deelnemen. Dit geldt niet voor realistische companion-robots of avatars, of meeslepende VR/AR-omgevingen met mensachtige avatars, als de gelijkenis groot genoeg is om twijfel te scheppen, zelfs bij een professioneel publiek.",
+        "Om binnen dit scenario te vallen, moet het doel van het AI-systeem het opsporen, voorkomen, onderzoeken of vervolgen van strafbare feiten zijn. Het is niet beperkt tot gebruik door rechtshandhavingsinstanties, maar kan ook betrekking hebben op AI-systemen die worden gebruikt door andere EU- of nationale overheidsinstanties, mits het gebruik ervan bij wet is toegestaan voor het opsporen, voorkomen, onderzoeken of vervolgen van strafbare feiten, en met inachtneming van passende waarborgen voor de rechten en vrijheden van derden. Als het AI-systeem beschikbaar is voor het publiek en een functionaliteit biedt waarmee personen strafbare feiten kunnen melden, valt dit hier niet onder.",
+        null
+      ],
+      "ui:badges": [
+        { "label": "Art. 50 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50" }
+      ],
+      "ui:id": "q2"
+    },
+    "syntheticException": {
+      "ui:widget": "checkboxes",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Vraag 3 is bedoeld om te bepalen of een uitzondering op artikel 50, lid 2, van toepassing zou kunnen zijn.",
+      "ui:enumTooltips": [
+        "Standaardbewerking moet worden begrepen als het proces van het voorbereiden van bestaande inhoud voor publicatie of distributie (bijv. kleine bewerkingen om de leesbaarheid en grammatica, kwaliteit en opmaak te verbeteren) en houdt niet het genereren van nieuwe inhoud in. Standaardbewerking is erop gericht ervoor te zorgen dat inhoud onder meer vrij is van evidente technische of grammaticale taalfouten, aansluit bij de toepasselijke lay-out-, presentatie-, opmaak- of toegankelijkheidsvereisten, of in overeenstemming is met sectorale praktijken. Bewerking gaat verder dan standaardbewerking als de inhoud op materiële wijze wordt gewijzigd (inhoudelijke aanpassingen, structurele wijzigingen enz.) die de betekenis, stijl of intentie ervan beïnvloeden.",
+        "Een wijziging moet als wezenlijk worden beschouwd als de inputgegevens of de betekenis daarvan aanzienlijk zijn gemanipuleerd door het AI-systeem tijdens het genereren van de output. Dit moet worden gebaseerd op een beoordeling van relevante factoren, zoals het formaat, het type media-inhoud, de stijl en wijzigingen in de inhoud die de betekenis, stijl of intentie ervan beïnvloeden. Of dit het geval is, vereist een beoordeling per geval.",
+        "Om binnen dit scenario te vallen, moet het doel van het AI-systeem het opsporen, voorkomen, onderzoeken of vervolgen van strafbare feiten zijn. Het is niet beperkt tot gebruik door rechtshandhavingsinstanties, maar kan ook betrekking hebben op AI-systemen die worden gebruikt door andere EU- of nationale overheidsinstanties, mits het gebruik ervan bij wet is toegestaan voor het opsporen, voorkomen, onderzoeken of vervolgen van strafbare feiten, en met inachtneming van passende waarborgen voor de rechten en vrijheden van derden. Als het AI-systeem beschikbaar is voor het publiek en een functionaliteit biedt waarmee personen strafbare feiten kunnen melden, valt dit hier niet onder.",
+        null
+      ],
+      "ui:badges": [
+        { "label": "Art. 50 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50" }
+      ],
+      "ui:id": "q3"
+    },
+    "biometricException": {
+      "ui:widget": "radio",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Vraag 4 is bedoeld om te bepalen of een uitzondering op artikel 50, lid 3, zou kunnen worden gemaakt op grond van het doel van rechtshandhaving.\n\nWanneer het AI-systeem emotieherkenning of biometrische categorisering gebruikt die bij wet is toegestaan voor het opsporen, voorkomen of onderzoeken van strafbare feiten, met inachtneming van passende waarborgen voor de rechten en vrijheden van derden en in overeenstemming met het Unierecht, kiest u 'Ja'.\n\nDit is niet beperkt tot gebruik door rechtshandhavingsinstanties, maar kan ook betrekking hebben op AI-systemen die worden gebruikt door andere EU- of nationale overheidsinstanties, mits het gebruik ervan bij wet is toegestaan voor het opsporen, voorkomen, onderzoeken of vervolgen van strafbare feiten, en met inachtneming van passende waarborgen voor de rechten en vrijheden van derden. Als het AI-systeem beschikbaar is voor het publiek en een functionaliteit biedt waarmee personen strafbare feiten kunnen melden, kiest u 'Nee'.",
+      "ui:badges": [
+        { "label": "Art. 50 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50" }
+      ],
+      "ui:id": "q4"
+    },
+    "deepfakeException": {
+      "ui:widget": "checkboxes",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Vraag 5 is bedoeld om te bepalen of een uitzondering op artikel 50, lid 4, van toepassing zou kunnen zijn.",
+      "ui:enumTooltips": [
+        "• Artistieke werken moeten worden begrepen als werken die zijn gemaakt met het oog op kunst, waaronder muziek, cinematografische werken en beeldende kunst. Bijv. films (of filmtrailers) met door AI gegenereerde of gemanipuleerde deepfakes van verjongde, bestaande acteurs of digitale replica's van overleden acteurs of andere personen, beschikbaar in een bioscoop of op een streamingplatform.\n\n• Creatieve werken moeten worden begrepen als werken die creatieve keuzes inhouden. Werken die voornamelijk zijn ingegeven door functionele of technische overwegingen kunnen niet als creatief worden beschouwd. Bijv. door AI gegenereerde muziek in elk genre die de individuele stijl van bestaande artiesten benadert.\n\n• Satirische werken moeten worden begrepen als werken die bedoeld zijn om de samenleving, politiek, het bedrijfsleven of publieke figuren te bekritiseren door middel van humoristische technieken (waaronder ironie, sarcasme, spot, pastiche enz.). Bijv. een door AI gemanipuleerde afbeelding van een bestaande politicus in een scène die duidelijk bedoeld is om op humoristische wijze bepaalde beleidsbeslissingen te bekritiseren die door die persoon zijn genomen of gesteund.\n\n• Fictieve werken moeten worden begrepen als culturele werken waarin personen, objecten, plaatsen, entiteiten of gebeurtenissen voorkomen in een denkbeeldige, maar geloofwaardige setting. Bijv. door AI gegenereerde game-beelden met deepfake-simulaties van echte, bestaande personen.\n\n• Soortgelijke werken moeten worden begrepen als werken die kenmerken of vergelijkbare expressieve of functionele eigenschappen delen met de bovenstaande categorieën, maar niet precies in een daarvan passen.\n\nHet feit dat een deepfake binnen een of meer van de bovenstaande categorieën valt, moet duidelijk zijn voor de natuurlijke personen die eraan worden blootgesteld.",
+        "Om binnen dit scenario te vallen, moet het doel van de deepfake het opsporen, voorkomen, onderzoeken of vervolgen van strafbare feiten zijn. Het is niet beperkt tot gebruik door rechtshandhavingsinstanties, maar kan ook betrekking hebben op AI-systemen die worden gebruikt door andere EU- of nationale overheidsinstanties, mits het gebruik ervan bij wet is toegestaan voor het opsporen, voorkomen, onderzoeken of vervolgen van strafbare feiten, en met inachtneming van passende waarborgen voor de rechten en vrijheden van derden. Als het AI-systeem beschikbaar is voor het publiek en een functionaliteit biedt waarmee personen strafbare feiten kunnen melden, valt dit hier niet onder.",
+        null
+      ],
+      "ui:badges": [
+        { "label": "Art. 50 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50" }
+      ],
+      "ui:id": "q5"
+    },
+    "publicInterestTextException": {
+      "ui:widget": "checkboxes",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Vraag 6 is bedoeld om te bepalen of een uitzondering op artikel 50, lid 4, van toepassing zou kunnen zijn.",
+      "ui:enumTooltips": [
+        "Twee voorwaarden moeten voor dit scenario zijn vervuld: (i) de door AI gegenereerde of gemanipuleerde tekst moet een menselijke beoordeling of redactionele controle hebben ondergaan, en (ii) een rechtspersoon of natuurlijke persoon moet de redactionele verantwoordelijkheid dragen voor de publicatie.\n\n• Menselijke beoordeling verwijst naar het opzettelijk onderzoeken van de inhoud door een of meer natuurlijke personen met relevante kennis en professioneel oordeelsvermogen met betrekking tot het onderwerp in kwestie (bijv. academische peer review of professionele validatieprocessen). Het controleren van de feitelijke juistheid van de inhoud is een minimumvereiste die deel moet uitmaken van die beoordeling. Redactionele controle verwijst naar de controle die in de praktijk wordt uitgeoefend door een verantwoordelijke redactionele entiteit (bijv. een hoofdredacteur) over de inhoud, met de bevoegdheid om de inhoud van de tekst op inhoudelijke gronden goed te keuren, te wijzigen of af te wijzen (met inbegrip van het controleren van feiten en het waarborgen van de betrouwbaarheid van bronnen). Oppervlakkige, louter formele of procedurele controles (bijv. spellingscontrole of grammaticale correctie), het enkele bestaan van een redactioneel beleid, geautomatiseerde beoordelingsprocessen of een oppervlakkige redactionele goedkeuring zonder inhoudelijke betrokkenheid van de menselijke beoordelaar of de redactionele entiteit, voldoen niet aan de voorwaarden voor menselijke beoordeling of redactionele controle.\n\n• Redactionele verantwoordelijkheid houdt in dat de betrokken persoon de uiteindelijke juridische verantwoordelijkheid draagt voor de publicatie van de inhoud, met inbegrip van de menselijke beoordeling of redactionele controle (bijv. een individu, een redactieraad of het uitgevende bedrijf). Om publieke verantwoording en vertrouwen te waarborgen, en in lijn met bestaande professionele mediastandaarden, moeten de identiteit en contactgegevens van de rechtspersoon, de natuurlijke persoon of de functie met redactionele verantwoordelijkheid op een gemakkelijk vindbare locatie openbaar beschikbaar zijn (indien nog niet anderszins beschikbaar). Dit kan online gebeuren via bijvoorbeeld de algemene voorwaarden van een website of andere gebruikersgerichte juridische informatie. Offline kan dergelijke informatie worden opgenomen in het colofon of de impressum van een publicatie.\n\nVoorbeelden zijn: een door AI gemanipuleerd artikel in een krant of een door AI gegenereerde samenvatting van een artikel dat onderworpen is geweest aan redactionele controle van de betreffende hoofdredacteur, waarbij de redactionele verantwoordelijkheid berust bij de rechtspersoon die de krant uitgeeft; een door AI gemanipuleerde academische blog die een interne peer review heeft ondergaan en waarbij het betreffende onderzoekscentrum dat de blog beheert de redactionele verantwoordelijkheid draagt; door AI gegenereerde veiligheidswaarschuwingen die door een overheidsfunctionaris zijn goedgekeurd voordat ze aan burgers worden verspreid, onder de verantwoordelijkheid van het betreffende overheidsorgaan voor civiele bescherming; door AI gegenereerde duurzaamheidsverslagen die op de website van een beursgenoteerde onderneming zijn gepubliceerd en die een menselijke beoordeling hebben ondergaan door professionals in relevante functies (bijv. compliance); door AI ondersteunde vertaling van een door een mens geschreven artikel waarbij de vertaling een menselijke beoordeling heeft ondergaan.",
+        "Om binnen dit scenario te vallen, moet het doel van de gegenereerde tekst het opsporen, voorkomen, onderzoeken of vervolgen van strafbare feiten zijn. Het is niet beperkt tot gebruik door rechtshandhavingsinstanties, maar kan ook betrekking hebben op AI-systemen die worden gebruikt door andere EU- of nationale overheidsinstanties, mits het gebruik ervan bij wet is toegestaan voor het opsporen, voorkomen, onderzoeken of vervolgen van strafbare feiten, en met inachtneming van passende waarborgen voor de rechten en vrijheden van derden. Als het AI-systeem beschikbaar is voor het publiek en een functionaliteit biedt waarmee personen strafbare feiten kunnen melden, valt dit hier niet onder.",
+        null
+      ],
+      "ui:badges": [
+        { "label": "Art. 50 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50" }
+      ],
+      "ui:id": "q6"
+    },
+    "generalException": {
+      "ui:widget": "radio",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "Wanneer het AI-systeem wordt gebruikt voor operationele processen of reguliere bedrijfsactiviteiten, selecteert u 'Geen van de bovenstaande'.",
+      "ui:enumTooltips": [
+        "Elke activiteit waarmee natuurlijke personen op regelmatige basis economisch voordeel behalen of anderszins betrokken zijn bij een professionele, zakelijke, commerciële, beroepsmatige of freelance activiteit, moet worden beschouwd als een 'professionele' activiteit. De aanduiding 'zuiver persoonlijk' is een kwalificatie van niet-professioneel, wat betekent dat de persoon zowel in persoonlijke als in niet-professionele hoedanigheid moet handelen om binnen de reikwijdte van de uitzondering te vallen. Voorbeelden zijn: personen die een AI-systeem gebruiken om deepfakes van hun huisgenoten te genereren; personen die een AI-systeem in persoonlijke hoedanigheid gebruiken om tekst over uiteenlopende onderwerpen te genereren (bijv. studenten die AI gebruiken om hun huiswerk te maken); personen die een AI-systeem in hun persoonlijke hoedanigheid gebruiken om deepfakes te genereren die op sociale media worden verspreid.",
+        "Dit omvat AI-systemen ontwikkeld door studenten als onderdeel van hun studie of door wetenschappers verbonden aan een universiteit. In dat geval moet het onderzoek erkende ethische en professionele normen voor wetenschappelijk onderzoek volgen. Alle deelnemers moeten bijvoorbeeld worden geïnformeerd dat zij deel uitmaken van wetenschappelijk onderzoek. Dit omvat niet alleen interactieve AI-systemen, maar ook de outputs van generatieve AI-systemen (met inbegrip van deepfake-inhoud) die worden gebruikt in het kader van wetenschappelijk onderzoek. Als deze systemen echter in gebruik worden genomen of hun outputs voor andere doeleinden worden gebruikt dan uitsluitend wetenschappelijk onderzoek en ontwikkeling, is deze uitzondering niet van toepassing en moet nog steeds worden voldaan aan de relevante transparantieverplichtingen van artikel 50 van de AI-verordening.",
+        "Aanbieders van vrije en opensource AI-componenten die software, data, modellen, hulpmiddelen, diensten of processen omvatten voor aanpassing en integratie in een AI-systeem, en die zelf (geheel of gedeeltelijk) geen AI-systeem vormen, zijn niet onderworpen aan de transparantieverplichtingen van artikel 50 van de AI-verordening.",
+        null
+      ],
+      "ui:badges": [
+        { "label": "Art. 50 AI-verordening", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50" }
+      ],
+      "ui:id": "exceptions"
+    },
+    "generalExceptionResearchDescription": {
+      "ui:id": "exceptions research"
+    }
+  }
+}

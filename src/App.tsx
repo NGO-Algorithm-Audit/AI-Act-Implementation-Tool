@@ -77,6 +77,17 @@ export default function App() {
     [key: string]: Record<string, RJSFSchema>;
   }>({ nl: {}, en: {} });
   const [ntaFormData, setNtaFormData] = useState<Record<string, any>>({});
+  // Article 50 detailed-obligations questionnaire: optional, launched only from the
+  // Obligations menu when "Generative and interactive AI" applies — kept out of
+  // `forms` (and out of the main-screen card list) the same way the NTA
+  // sub-questionnaires are, via a separate import.meta.glob below.
+  const [showArt50, setShowArt50] = useState<boolean>(false);
+  // Where to land after the Art. 50 questionnaire finishes/cancels — the
+  // Obligations screen when launched from there, or straight back to the
+  // home page when launched directly from the home page's questionnaire list.
+  const [art50ReturnTo, setArt50ReturnTo] = useState<"obligations" | "home">("obligations");
+  const [art50Forms, setArt50Forms] = useState<{ [key: string]: RJSFSchema }>({});
+  const [art50FormData, setArt50FormData] = useState<Record<string, any> | undefined>(undefined);
   let formsMenu = [{ id: 0, title: t("no forms") }];
 
   const params = new URLSearchParams(window.location.search);
@@ -110,6 +121,7 @@ export default function App() {
     setShowObligations(false);
     setShowNta(false);
     setActiveNtaKey(null);
+    setShowArt50(false);
     setActiveFormIndex(index);
     setActiveForm(forms[i18n.language][index]);
   };
@@ -118,6 +130,7 @@ export default function App() {
     setActiveForm(null);
     setShowNta(false);
     setActiveNtaKey(null);
+    setShowArt50(false);
     setShowObligations(true);
   };
 
@@ -125,12 +138,45 @@ export default function App() {
     setActiveForm(null);
     setShowObligations(false);
     setActiveNtaKey(null);
+    setShowArt50(false);
     setShowNta(true);
   };
 
   const onNtaSubmit = (key: string, data?: any) => {
     setNtaFormData((prev) => ({ ...prev, [key]: data ?? null }));
     setActiveNtaKey(null);
+  };
+
+  // Launched from the Obligations menu; returns there on submit or cancel.
+  const onStartArt50 = () => {
+    setActiveForm(null);
+    setShowNta(false);
+    setActiveNtaKey(null);
+    setShowObligations(false);
+    setArt50ReturnTo("obligations");
+    setShowArt50(true);
+  };
+
+  // Launched directly from the home page's questionnaire list; returns there
+  // on submit or cancel instead of detouring through Obligations.
+  const onStartArt50FromHome = () => {
+    setActiveForm(null);
+    setShowNta(false);
+    setActiveNtaKey(null);
+    setShowObligations(false);
+    setArt50ReturnTo("home");
+    setShowArt50(true);
+  };
+
+  const onArt50Submit = (data?: any) => {
+    setArt50FormData(data ?? undefined);
+    setShowArt50(false);
+    if (art50ReturnTo === "obligations") setShowObligations(true);
+  };
+
+  const onArt50Cancel = () => {
+    setShowArt50(false);
+    if (art50ReturnTo === "obligations") setShowObligations(true);
   };
 
   // Schema titles are not always literal "Identification" / "Role and status";
@@ -146,6 +192,10 @@ export default function App() {
     }
     if (key === "NTA") {
       onStartNta();
+      return;
+    }
+    if (key === "ART50") {
+      onStartArt50();
       return;
     }
     let idx = -1;
@@ -195,6 +245,8 @@ export default function App() {
     // up — they are reached from the NTA overview screen, not the main-screen
     // card list.
     const ntaJsonFiles = import.meta.glob("/src/schemas/nta/*/*.json");
+    // Same reasoning as ntaJsonFiles above: kept out of the main glob on purpose.
+    const art50JsonFiles = import.meta.glob("/src/schemas/art50/*/*.json");
 
     const loadJsonFiles = async () => {
       const forms = {} as { [key: string]: RJSFSchema[] };
@@ -245,8 +297,25 @@ export default function App() {
       setNtaForms(byLanguage);
     };
 
+    const loadArt50JsonFiles = async () => {
+      const entries: [string, RJSFSchema][] = await Promise.all(
+        Object.entries(art50JsonFiles).map(async ([path, importFile]) => {
+          const module = await importFile();
+          return [path, (module as { default: RJSFSchema }).default];
+        })
+      );
+      // "/src/schemas/art50/nl/art50.json" -> language "nl"
+      const byLanguage = {} as { [key: string]: RJSFSchema };
+      for (const [path, data] of entries) {
+        const language: string = path.split("/")[4] ?? "nl";
+        byLanguage[language] = data;
+      }
+      setArt50Forms(byLanguage);
+    };
+
     loadJsonFiles();
     loadNtaJsonFiles();
+    loadArt50JsonFiles();
   }, []);
 
   return (
@@ -274,12 +343,27 @@ export default function App() {
                 onBack={() => setShowNta(false)}
                 onStart={(key) => setActiveNtaKey(key)}
               />
+            ) : showArt50 && art50Forms[i18n.language] ? (
+              <WizardForm
+                key="art50"
+                id={0}
+                schema={art50Forms[i18n.language].JSONSchema}
+                uiSchema={art50Forms[i18n.language].uiSchema}
+                formData={art50FormData ?? {}}
+                onSubmit={(_index, data) => onArt50Submit(data)}
+                onCancel={onArt50Cancel}
+                validator={validator}
+                badgeLabel={t("questionnaire art50 name")}
+                aiAct2Roles={role ? [role] : null}
+                onStartQuestionnaire={onStartQuestionnaire}
+              />
             ) : showObligations ? (
               <ObligationsQuestionnaire
                 roleStatusData={
                   roleStatusIndex >= 0 ? allFormData[roleStatusIndex] : undefined
                 }
                 riskData={riskIndex >= 0 ? allFormData[riskIndex] : undefined}
+                art50Data={art50FormData}
                 onBack={() => setShowObligations(false)}
                 onStartQuestionnaire={onStartQuestionnaire}
               />
@@ -306,6 +390,7 @@ export default function App() {
                 onStartQuestionnaire={onStartQuestionnaire}
                 onStartObligations={onStartObligations}
                 onStartNta={onStartNta}
+                onStartArt50={onStartArt50FromHome}
                 activeLanguage={lang ? true : false}
               />
             )}

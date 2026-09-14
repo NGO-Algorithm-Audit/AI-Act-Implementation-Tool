@@ -19,6 +19,7 @@ import Output from "./Output";
 import OutputIdentification from "./OutputIdentification";
 import OutputRoleStatus from "./OutputRoleStatus";
 import OutputRiskClassification from "./OutputRiskClassification";
+import OutputArt50Detail from "./OutputArt50Detail";
 import QuestionBadge from "./QuestionBadge";
 import TooltipCheckboxesWidget from "./widgets/TooltipCheckboxesWidget";
 import TooltipRadioWidget from "./widgets/TooltipRadioWidget";
@@ -768,6 +769,23 @@ const WizardForm = ({
               !!(firstQuestion as any)?.classification;
             const hasRoleStatus = !!(firstQuestion as any)?.roleStatus;
             const hasRiskOutcome = !!(firstQuestion as any)?.riskOutcome;
+            const hasArt50Detail = !!(firstQuestion as any)?.art50Detail;
+            if (hasArt50Detail) {
+              return (
+                <OutputArt50Detail
+                  id={String(id)}
+                  type={questions[0] as "output" | "error"}
+                  output={firstQuestion as Record<string, any>}
+                  step={step}
+                  handlePrev={handlePrev}
+                  onSubmit={(_idx, payload) => onSubmit(id, payload)}
+                  onStartQuestionnaire={onStartQuestionnaire}
+                  data={mergedData}
+                  uiSchema={uiSchema}
+                  aiAct2Roles={aiAct2Roles}
+                />
+              );
+            }
             if (hasRoleStatus) {
               return (
                 <OutputRoleStatus

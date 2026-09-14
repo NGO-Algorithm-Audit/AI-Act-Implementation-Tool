@@ -2,13 +2,25 @@ import { useState } from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useSettings } from "../context/SettingsContext";
+import type { Art50Applicable, Art50Status } from "./ObligationsQuestionnaire";
 
-// Renders the Art. 50 transparency obligations as four collapsible accordions,
-// one per sub-case (interactive / synthetic content / emotion-biometric /
-// public-interest). Used by the Obligations screen when the risk category is
-// "Generative and interactive AI" — that single badge cannot tell the four
-// sub-cases apart, so all four are shown. The obligation text is reused
-// verbatim from the Risk-category result page (riskcat result art50_* keys).
+// Renders the Art. 50 transparency obligations as five collapsible accordions,
+// one per sub-case (interactive / synthetic content / emotion-biometric / deep
+// fakes / public-interest text). Used by the Obligations screen when the risk
+// category is "Generative and interactive AI".
+//
+// The optional `applicable` prop (from the on-demand Art. 50 questionnaire,
+// src/schemas/art50/{en,nl}/art50.json — see ObligationsQuestionnaire.tsx's
+// resolveArt50Applicable) tells each sub-case whether an exception applies
+// ("exempt"), whether the standard duty applies ("applies"), or — deep fakes
+// only — whether the attenuated artistic/creative/satirical/fictional regime
+// applies ("attenuated"). A sub-case with no resolved status (questionnaire
+// not completed, `applicable` omitted entirely) falls back to showing the
+// full standard obligation content, exactly as before that questionnaire
+// existed — nothing regresses for someone who skips it.
+//
+// The obligation text is reused verbatim from the Risk-category result page
+// (riskcat result art50_* keys).
 
 function ChevronIcon({ open }: { open: boolean }) {
   return (
@@ -75,25 +87,58 @@ function InfoTooltip({ id, text }: { id: string; text: string }) {
   );
 }
 
-export default function Art50ObligationsAccordions({ roles }: { roles: string[] }) {
+function ExemptNote({ t }: { t: (key: string) => string }) {
+  return (
+    <p className="mb-0" style={{ fontStyle: "italic", color: "var(--cma-text-muted)" }}>
+      {t("obligations art50 exempt note")}
+    </p>
+  );
+}
+
+export default function Art50ObligationsAccordions({
+  roles,
+  applicable,
+}: {
+  roles: string[];
+  applicable?: Art50Applicable;
+}) {
   const { t } = useTranslation();
   const isProvider = roles.includes("aanbieder");
   const isDeployer = roles.includes("gebruiksverantwoordelijke");
   const hasRole = isProvider || isDeployer;
+  const statusOf = (key: keyof Art50Applicable): Art50Status | undefined => applicable?.[key];
+  // `applicable === undefined` means the detail questionnaire was never
+  // completed — unknown, so show every sub-case's default content (today's
+  // fallback). Once it HAS been completed, `applicable` is a real object and
+  // a missing key means "resolved: this scenario wasn't selected" — hide that
+  // sub-case entirely rather than falling through to default content.
+  const isSelected = (key: keyof Art50Applicable): boolean =>
+    applicable === undefined || statusOf(key) !== undefined;
 
-  const timingExceptionLines = (exceptionItemKey: string) => (
+  // A sub-case's exception question already ruled the exception in or out on
+  // the preceding screen — once `statusOf(key) === "applies"` (confirmed no
+  // exception), repeating the generic "Exception: ..." caveat here is
+  // redundant. Only show it when the status is unresolved (questionnaire
+  // skipped, e.g. from the Obligations menu without completing the Art. 50
+  // detail questionnaire) — there it's still useful, since nothing has ruled
+  // the exception out yet.
+  const timingLine = () => (
+    <p className="mb-1">
+      <span style={{ color: "#005AA7" }}>{t("riskcat result art50_3 deployer timing heading")}:</span>{" "}
+      {t("riskcat result art50_3 deployer timing item1")}
+    </p>
+  );
+  const timingLines = (key: keyof Art50Applicable, exceptionItemKey: string) => (
     <div className="mt-2">
-      <p className="mb-1">
-        <span style={{ color: "#005AA7" }}>{t("riskcat result art50_3 deployer timing heading")}:</span>{" "}
-        {t("riskcat result art50_3 deployer timing item1")}
-      </p>
-      <p className="mb-0">
-        <span style={{ color: "#005AA7" }}>{t("riskcat result art50_3 deployer exception heading")}:</span>{" "}
-        {t(exceptionItemKey)}
-      </p>
+      {timingLine()}
+      {statusOf(key) !== "applies" && (
+        <p className="mb-0">
+          <span style={{ color: "#005AA7" }}>{t("riskcat result art50_3 deployer exception heading")}:</span>{" "}
+          {t(exceptionItemKey)}
+        </p>
+      )}
     </div>
   );
-  const TimingExceptionLines = timingExceptionLines("riskcat result art50_3 deployer exception item1");
 
   const GuidelinesSource = ({ prefixKey, linkKey, urlKey, suffixKey }: { prefixKey: string; linkKey: string; urlKey: string; suffixKey: string }) => (
     <p className="mt-2 mb-0" style={{ fontStyle: "italic", color: "var(--cma-text-muted)", fontSize: "0.85rem" }}>
@@ -121,7 +166,12 @@ export default function Art50ObligationsAccordions({ roles }: { roles: string[] 
       )}
 
       {/* Sub-case 1 — interactive AI */}
+      {isSelected("interactive") && (
       <AccordionSubsection label={t("riskcat result art50_1 core obligation heading").replace(/:\s*$/, "")}>
+        {statusOf("interactive") === "exempt" ? (
+        <ExemptNote t={t} />
+        ) : (
+        <>
         {isProvider && (
           <div className="mb-2">
             <ul className="mb-2 ps-3">
@@ -161,16 +211,24 @@ export default function Art50ObligationsAccordions({ roles }: { roles: string[] 
         )}
         {hasRole && (
           <>
-            {timingExceptionLines("riskcat result art50_1 deployer exception item1")}
+            {timingLines("interactive", "riskcat result art50_1 deployer exception item1")}
             <div className="mt-2">
               <SourceBadge label={t("article art50_1 label")} url={t("article art50_1 url")} />
             </div>
           </>
         )}
+        </>
+        )}
       </AccordionSubsection>
+      )}
 
       {/* Sub-case 2 — synthetic audio, image, video or text content */}
+      {isSelected("synthetic") && (
       <AccordionSubsection label={t("riskcat result art50_2 core obligation heading").replace(/:\s*$/, "")}>
+        {statusOf("synthetic") === "exempt" ? (
+        <ExemptNote t={t} />
+        ) : (
+        <>
         {isProvider && (
           <div className="mb-2">
             <ul className="mb-2 ps-3">
@@ -223,10 +281,18 @@ export default function Art50ObligationsAccordions({ roles }: { roles: string[] 
             <SourceBadge label={t("article art50_2 label")} url={t("article art50_2 url")} />
           </div>
         )}
+        </>
+        )}
       </AccordionSubsection>
+      )}
 
       {/* Sub-case 3 — emotion recognition / biometric categorisation */}
+      {isSelected("biometric") && (
       <AccordionSubsection label={t("riskcat result art50_3 core obligation heading").replace(/:\s*$/, "")}>
+        {statusOf("biometric") === "exempt" ? (
+        <ExemptNote t={t} />
+        ) : (
+        <>
         {isProvider && <p className="mb-2">{t("riskcat result art50_3 provider obligation")}</p>}
         {isDeployer && (
           <>
@@ -235,7 +301,7 @@ export default function Art50ObligationsAccordions({ roles }: { roles: string[] 
               <li>{t("riskcat result art50_3 deployer core item3")}</li>
               <li>{t("riskcat result art50_3 deployer core item4")}</li>
             </ul>
-            {TimingExceptionLines}
+            {timingLines("biometric", "riskcat result art50_3 deployer exception item1")}
           </>
         )}
         {hasRole && (
@@ -244,31 +310,44 @@ export default function Art50ObligationsAccordions({ roles }: { roles: string[] 
             <SourceBadge label={t("article art50_5 label")} url={t("article art50_5 url")} />
           </div>
         )}
+        </>
+        )}
       </AccordionSubsection>
+      )}
 
-      {/* Sub-case 4 — manipulated public-interest content (deep fakes) */}
+      {/* Sub-case 4 — deep fakes */}
+      {isSelected("deepfake") && (
       <AccordionSubsection label={t("riskcat result art50_4 core obligation heading").replace(/:\s*$/, "")}>
-        {isDeployer ? (
+        {statusOf("deepfake") === "exempt" ? (
+          <ExemptNote t={t} />
+        ) : statusOf("deepfake") === "attenuated" ? (
+          isDeployer ? (
+            <>
+              <p className="mb-2">{t("riskcat result art50_4 attenuated note")}</p>
+              <div className="mt-2">
+                <SourceBadge label={t("article art50_4 label")} url={t("article art50_4 url")} />
+              </div>
+            </>
+          ) : (
+            <p className="mb-0" style={{ fontStyle: "italic", color: "var(--cma-text-muted)" }}>
+              {t("obligations art50_4 deployer only note")}
+            </p>
+          )
+        ) : isDeployer ? (
           <>
             <ul className="mb-2 ps-3">
-              <li>{t("riskcat result art50_2 deployer step1")}</li>
-              <li>{t("riskcat result art50_2 deployer step2")}</li>
+              <li>{t("riskcat result art50_4 deployer step1")}</li>
             </ul>
-            <p className="mb-2">
-              <span style={{ color: "#005AA7" }}>{t("riskcat result art50_3 deployer timing heading")}:</span>{" "}
-              {t("riskcat result art50_3 deployer timing item1")}
-            </p>
-            <p className="mb-1">
-              <span style={{ color: "#005AA7" }}>{t("riskcat result art50_2 deployer exceptions heading")}</span>
-            </p>
-            <ul className="mb-2 ps-3">
-              <li>{t("riskcat result art50_2 deployer exceptions item1")}</li>
-              <li>{t("riskcat result art50_2 deployer exceptions item2")}</li>
-              <li>
-                {t("riskcat result art50_2 deployer exceptions item3")}{" "}
-                <InfoTooltip id="art50_4-acc-exceptions-item3" text={t("riskcat result art50_2 deployer exceptions item3 tooltip")} />
-              </li>
-            </ul>
+            {statusOf("deepfake") !== "applies" && (
+              <>
+                <p className="mb-1">
+                  <span style={{ color: "#005AA7" }}>{t("riskcat result art50_4 deployer exceptions heading")}</span>
+                </p>
+                <ul className="mb-2 ps-3">
+                  <li>{t("riskcat result art50_4 deployer exceptions item1")}</li>
+                </ul>
+              </>
+            )}
             <div className="mt-2">
               <SourceBadge label={t("article art50_4 label")} url={t("article art50_4 url")} />
             </div>
@@ -279,6 +358,43 @@ export default function Art50ObligationsAccordions({ roles }: { roles: string[] 
           </p>
         )}
       </AccordionSubsection>
+      )}
+
+      {/* Sub-case 5 — public-interest text */}
+      {isSelected("publicInterestText") && (
+      <AccordionSubsection label={t("riskcat result art50_4pit core obligation heading").replace(/:\s*$/, "")}>
+        {statusOf("publicInterestText") === "exempt" ? (
+          <ExemptNote t={t} />
+        ) : isDeployer ? (
+          <>
+            <ul className="mb-2 ps-3">
+              <li>{t("riskcat result art50_4pit deployer step1")}</li>
+            </ul>
+            {statusOf("publicInterestText") !== "applies" && (
+              <>
+                <p className="mb-1">
+                  <span style={{ color: "#005AA7" }}>{t("riskcat result art50_4pit deployer exceptions heading")}</span>
+                </p>
+                <ul className="mb-2 ps-3">
+                  <li>{t("riskcat result art50_4pit deployer exceptions item1")}</li>
+                  <li>
+                    {t("riskcat result art50_4pit deployer exceptions item2")}{" "}
+                    <InfoTooltip id="art50_4pit-acc-exceptions-item2" text={t("riskcat result art50_4pit deployer exceptions item2 tooltip")} />
+                  </li>
+                </ul>
+              </>
+            )}
+            <div className="mt-2">
+              <SourceBadge label={t("article art50_4pit label")} url={t("article art50_4pit url")} />
+            </div>
+          </>
+        ) : (
+          <p className="mb-0" style={{ fontStyle: "italic", color: "var(--cma-text-muted)" }}>
+            {t("obligations art50_4pit deployer only note")}
+          </p>
+        )}
+      </AccordionSubsection>
+      )}
     </div>
   );
 }

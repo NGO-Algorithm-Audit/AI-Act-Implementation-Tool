@@ -1,16 +1,18 @@
-%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'Avenir Next, Avenir, Helvetica, sans-serif', 'fontSize': '14px', 'lineColor': '#005AA7', 'primaryColor': '#005AA7', 'edgeLabelBackground': '#ffffff'}, 'flowchart': {'curve': 'basis', 'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 90, 'rankSpacing': 130, 'padding': 24}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'Avenir Next, Avenir, Helvetica, sans-serif', 'fontSize': '14px', 'lineColor': '#005AA7', 'primaryColor': '#005AA7', 'edgeLabelBackground': '#ffffff'}, 'flowchart': {'curve': 'monotoneX', 'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 100, 'rankSpacing': 140, 'padding': 24}}}%%
 flowchart LR
 
     classDef Q fill:#daeaf7,stroke:#005aa7,color:#000
+    classDef exc fill:#eff6ff,stroke:#3b82f6,color:#1e3a8a
     classDef cat_forb fill:#dc3545,stroke:#a01c2a,color:#fff,font-weight:bold
     classDef cat_high fill:#d97706,stroke:#a05705,color:#fff,font-weight:bold
     classDef cat_genai fill:#FFBF00,stroke:#b88a00,color:#fff,font-weight:bold
     classDef role_prov fill:#6f42c1,stroke:#4f2c91,color:#fff,font-weight:bold
     classDef role_dep fill:#0891b2,stroke:#076a8d,color:#fff,font-weight:bold
-    classDef scenario fill:#fff5cc,stroke:#b88a00,color:#000,font-weight:bold
     classDef oblig_forb fill:#fbe2e4,stroke:#dc3545,color:#000
     classDef oblig_high fill:#fdecd0,stroke:#d97706,color:#000
     classDef oblig_genai fill:#f1f3f5,stroke:#9aa3ab,color:#000
+    classDef cat_exempt fill:#0d9488,stroke:#0d9488,color:#fff,font-weight:bold
+    classDef cat_except fill:#6c757d,stroke:#6c757d,color:#fff,font-weight:bold
     linkStyle default stroke:#005AA7,stroke-width:1.2px
 
     Q1["Risicocategorie<br/>(bepaald door de<br/>Risicocategorie-vragenlijst)"]:::Q
@@ -24,27 +26,74 @@ flowchart LR
 
     FORB --> Q2F["Rol"]:::Q
     HIGH --> Q2H["Rol"]:::Q
-    GENAI --> Q10["V10 scenario<br/>(meervoudige keuze)"]:::Q
+    GENAI --> AQ1
 
     Q2F -->|"Aanbieder"| FP
     Q2F -->|"Gebruiksverantwoordelijke"| FD
     Q2H -->|"Aanbieder"| HP
     Q2H -->|"Gebruiksverantwoordelijke"| HD
 
-    Q10 -->|"Interageert direct<br/>met natuurlijke personen"| S1
-    Q10 -->|"Genereert synthetische<br/>audio / beeld / video / tekst"| S2
-    Q10 -->|"Herkent emoties of<br/>biometrische categorisering"| S3
-    Q10 -->|"Genereert / manipuleert<br/>inhoud van algemeen belang"| S4
+    %% ════════ Artikel 50-vragenlijst (te starten vanuit het Verplichtingen-menu)
+    %% — eigen V1-V7-nummering, gelijk aan de live vraagbadges in de tool ════════
+    AQ1["V1 · Art. 50<br/>Welke van de volgende<br/>scenario's zijn van<br/>toepassing op het AI-systeem?<br/>(meervoudige keuze)"]:::Q
+    AQ1 -->|"Geen van de bovenstaande"| NOART50
+    AQ1 -->|"Ten minste één<br/>scenario"| EXCEPTIONS
 
-    S1["Art. 50(1)<br/>Interactieve AI"]:::scenario
-    S2["Art. 50(2)<br/>Generatieve AI"]:::scenario
-    S3["Art. 50(3)<br/>Emotieherkenning /<br/>biometrische categorisering"]:::scenario
-    S4["Art. 50(4)<br/>Deepfakes /<br/>tekst van algemeen belang"]:::scenario
+    NOART50["Geen vereisten<br/>(Art. 50)"]:::cat_exempt
 
-    S1 --> S1R["Rol"]:::Q
-    S2 --> S2R["Rol"]:::Q
-    S3 --> S3R["Rol"]:::Q
-    S4 --> S4R["Rol"]:::Q
+    %% ════════ Gedeeld uitzonderingenscherm — reikwijdte-uitsluitingen van
+    %% art. 2 (richtsnoeren §2.4), eenmaal gesteld direct na V1, vóór elke
+    %% scenariospecifieke controle ════════
+    EXCEPTIONS["Uitzonderingenscherm · Art. 50<br/>Persoonlijk gebruik, onderzoek<br/>of open-source licentie?"]:::exc
+    EXCEPTIONS -->|"Geen —<br/>interactieve AI"| AQ2
+    EXCEPTIONS -->|"Geen —<br/>synthetische inhoud"| AQ3
+    EXCEPTIONS -->|"Geen —<br/>biometrie / emotie"| AQ4
+    EXCEPTIONS -->|"Geen —<br/>deepfake"| AQ5
+    EXCEPTIONS -->|"Geen —<br/>tekst van algemeen belang"| AQ6
+    EXCEPTIONS -->|"Uitzondering<br/>van toepassing"| EXEMPT0
+
+    %% ════════ Scenariospecifieke uitzonderingscontrole (meervoudige keuze — elke
+    %% aangevinkte grond leidt tot dezelfde uitkomst; V7 hierboven heeft de
+    %% algemene uitzondering al uitgesloten, dus "Geen" hier is de eindstand).
+    %% Elke grond die tot een uitzondering leidt wordt samengevoegd tot één
+    %% edge "Uitzondering van toepassing". Elk scenario krijgt zijn eigen
+    %% identiek uitkomstblok (in plaats van één gedeeld knooppunt), zodat de
+    %% edge nooit hoeft samen te komen met die van een ander scenario — dezelfde
+    %% duplicatie-conventie die elders in dit diagram al wordt gebruikt voor
+    %% Aanbieder/Gebruiksverantwoordelijke/Rol ════════
+    AQ2["V2 · art. 50, lid 1<br/>Uitzondering op interactieve-<br/>AI-openbaarmaking?<br/>(meervoudige keuze)"]:::Q
+    AQ2 -->|"Geen"| S1R
+    AQ2 -->|"Uitzondering<br/>van toepassing"| EXEMPT2
+
+    AQ3["V3 · art. 50, lid 2<br/>Uitzondering op markering<br/>synthetische inhoud?<br/>(meervoudige keuze)"]:::Q
+    AQ3 -->|"Geen"| S2R
+    AQ3 -->|"Uitzondering<br/>van toepassing"| EXEMPT3
+
+    AQ4["V4 · art. 50, lid 3<br/>Gebruikt met het oog op<br/>rechtshandhaving?"]:::Q
+    AQ4 -->|"Nee"| S3R
+    AQ4 -->|"Ja"| EXEMPT4
+
+    AQ5["V5 · art. 50, lid 4<br/>Uitzondering of verlicht<br/>regime voor deepfakes?<br/>(meervoudige keuze)"]:::Q
+    AQ5 -->|"Geen"| S4R
+    AQ5 -->|"Duidelijk artistiek /<br/>creatief / satirisch /<br/>fictief werk"| S4_ATT_O
+    AQ5 -->|"Uitzondering<br/>van toepassing"| EXEMPT5
+
+    AQ6["V6 · art. 50, lid 4<br/>Uitzondering op openbaarmaking<br/>tekst van algemeen belang?<br/>(meervoudige keuze)"]:::Q
+    AQ6 -->|"Geen"| S5R
+    AQ6 -->|"Uitzondering<br/>van toepassing"| EXEMPT6
+
+    EXEMPT0["Transparantieverplichtingen<br/>+ mogelijke uitzondering"]:::cat_except
+    EXEMPT2["Transparantieverplichtingen<br/>+ mogelijke uitzondering"]:::cat_except
+    EXEMPT3["Transparantieverplichtingen<br/>+ mogelijke uitzondering"]:::cat_except
+    EXEMPT4["Transparantieverplichtingen<br/>+ mogelijke uitzondering"]:::cat_except
+    EXEMPT5["Transparantieverplichtingen<br/>+ mogelijke uitzondering"]:::cat_except
+    EXEMPT6["Transparantieverplichtingen<br/>+ mogelijke uitzondering"]:::cat_except
+
+    S1R["Rol"]:::Q
+    S2R["Rol"]:::Q
+    S3R["Rol"]:::Q
+    S4R["Rol"]:::Q
+    S5R["Rol"]:::Q
 
     S1R -->|"Aanbieder"| S1P
     S1R -->|"Gebruiksverantwoordelijke"| S1D
@@ -52,7 +101,10 @@ flowchart LR
     S2R -->|"Gebruiksverantwoordelijke"| S2D
     S3R -->|"Aanbieder"| S3P
     S3R -->|"Gebruiksverantwoordelijke"| S3D
+    S4R -->|"Aanbieder"| S4P
     S4R -->|"Gebruiksverantwoordelijke"| S4D
+    S5R -->|"Aanbieder"| S5P
+    S5R -->|"Gebruiksverantwoordelijke"| S5D
 
     FP["Aanbieder"]:::role_prov
     FD["Gebruiksverantwoordelijke"]:::role_dep
@@ -64,7 +116,10 @@ flowchart LR
     S2D["Gebruiksverantwoordelijke"]:::role_dep
     S3P["Aanbieder"]:::role_prov
     S3D["Gebruiksverantwoordelijke"]:::role_dep
+    S4P["Aanbieder"]:::role_prov
     S4D["Gebruiksverantwoordelijke"]:::role_dep
+    S5P["Aanbieder"]:::role_prov
+    S5D["Gebruiksverantwoordelijke"]:::role_dep
 
     FP --> FP_O["Het AI-systeem moet onmiddellijk buiten gebruik worden gesteld. Breng het niet op de markt, stel het niet in gebruik en gebruik het niet binnen de Europese Unie.<br/>Bron: Art. 5 AI-verordening"]:::oblig_forb
 
@@ -80,10 +135,24 @@ flowchart LR
 
     S2P --> S2P_O["Verplichtingen voor AI die synthetische audio-, beeld-, video- of tekstinhoud genereert:<br/>• Markering: outputs moeten worden voorzien van een machineleesbaar merkteken (bijv. watermerken, metadata, cryptografische herkomstmethoden, fingerprints).<br/>• Detectie: aanbieders moeten middelen beschikbaar stellen om vast te stellen dat de output AI-gegenereerd of gemanipuleerd is, met voor mensen leesbare resultaten.<br/>• Beide elementen moeten aanwezig zijn; alleen markering is onvoldoende.<br/>Timing: Verstrek de informatie aan gebruikers uiterlijk op het moment van de eerste blootstelling aan het systeem.<br/>Uitzondering: Systemen die bij wet zijn toegestaan voor het opsporen, voorkomen of onderzoeken van strafbare feiten, met passende waarborgen onder Unierecht.<br/>Bron: Art. 50(2) AI-verordening"]:::oblig_genai
 
-    S2D --> S2D_O["Verplichtingen voor AI die synthetische audio-, beeld-, video- of tekstinhoud genereert:<br/>• Gebruiksverantwoordelijken van AI-systemen die deepfakes (zoals gedefinieerd in art. 3(60)) genereren, moeten kenbaar maken dat de inhoud kunstmatig is gegenereerd of gemanipuleerd.<br/>• Gebruiksverantwoordelijken van AI-systemen die tekst genereren of manipuleren welke wordt gepubliceerd om het publiek te informeren over aangelegenheden van algemeen belang, moeten kenbaar maken dat de tekst kunstmatig is gegenereerd of gemanipuleerd.<br/>Timing: Verstrek de informatie aan gebruikers uiterlijk op het moment van de eerste blootstelling aan het systeem.<br/>Uitzondering:<br/>• Wanneer het gebruik bij wet is toegestaan voor het opsporen, voorkomen, onderzoeken of vervolgen van strafbare feiten.<br/>• Wanneer de inhoud onderdeel is van een kennelijk artistiek, creatief, satirisch, fictief of vergelijkbaar werk of programma. De verplichting beperkt zich dan tot het op een passende manier kenbaar maken van het bestaan van dergelijke gegenereerde of gemanipuleerde inhoud zonder de weergave of het genot van het werk te belemmeren.<br/>• Wanneer de AI-gegenereerde inhoud een proces van menselijke beoordeling of redactionele controle heeft ondergaan en een natuurlijke of rechtspersoon redactionele verantwoordelijkheid draagt voor de publicatie.<br/>Bron: Art. 50(4) AI-verordening"]:::oblig_genai
+    S2D --> S2D_O["De markerings- en detectieplicht van art. 50, lid 2, ligt bij de aanbieder, niet bij de gebruiksverantwoordelijke — er is geen aparte verplichting voor de gebruiksverantwoordelijke onder dit scenario als zodanig.<br/>• Genereert u als gebruiksverantwoordelijke met dit systeem ook een deepfake of publiceert u door AI gegenereerde tekst van algemeen belang, dan gelden de aparte verplichtingen van art. 50, lid 4, voor gebruiksverantwoordelijken — zie 'Deepfakes' / 'Tekst van algemeen belang' hierboven.<br/>Bron: Art. 50(2) AI-verordening"]:::oblig_genai
 
     S3P --> S3P_O["Informeer blootgestelde personen en verwerk persoonsgegevens conform de AVG."]:::oblig_genai
 
     S3D --> S3D_O["Verplichtingen voor AI die emoties herkent of personen categoriseert op basis van biometrische gegevens:<br/>• Informeer alle natuurlijke personen die aan het systeem worden blootgesteld dat het in werking is of wordt gebruikt.<br/>• Verstrek de informatie op een duidelijke, onderscheidbare en toegankelijke manier (Art. 50(5)).<br/>• De informatie mag schriftelijk, via gestandaardiseerde iconen, mondeling, elektronisch of in een combinatie hiervan worden gegeven, afhankelijk van de gebruikscontext.<br/>Timing: Verstrek de informatie aan gebruikers uiterlijk op het moment van de eerste blootstelling aan het systeem.<br/>Uitzondering: Systemen die bij wet zijn toegestaan voor het opsporen, voorkomen of onderzoeken van strafbare feiten, met passende waarborgen onder Unierecht.<br/>Bron: Art. 50(3) en Art. 50(5) AI-verordening"]:::oblig_genai
 
-    S4D --> S4D_O["Verplichtingen voor AI die beeld-, audio-, video- of tekstinhoud van algemeen belang genereert of manipuleert:<br/>• Gebruiksverantwoordelijken van AI-systemen die deepfakes (zoals gedefinieerd in art. 3(60)) genereren, moeten kenbaar maken dat de inhoud kunstmatig is gegenereerd of gemanipuleerd.<br/>• Gebruiksverantwoordelijken van AI-systemen die tekst genereren of manipuleren welke wordt gepubliceerd om het publiek te informeren over aangelegenheden van algemeen belang, moeten kenbaar maken dat de tekst kunstmatig is gegenereerd of gemanipuleerd.<br/>Timing: Verstrek de informatie aan gebruikers uiterlijk op het moment van de eerste blootstelling aan het systeem.<br/>Uitzondering:<br/>• Wanneer het gebruik bij wet is toegestaan voor het opsporen, voorkomen, onderzoeken of vervolgen van strafbare feiten.<br/>• Wanneer de inhoud onderdeel is van een kennelijk artistiek, creatief, satirisch, fictief of vergelijkbaar werk of programma. De verplichting beperkt zich dan tot het op een passende manier kenbaar maken van het bestaan van dergelijke gegenereerde of gemanipuleerde inhoud zonder de weergave of het genot van het werk te belemmeren.<br/>• Wanneer de AI-gegenereerde inhoud een proces van menselijke beoordeling of redactionele controle heeft ondergaan en een natuurlijke of rechtspersoon redactionele verantwoordelijkheid draagt voor de publicatie.<br/>Bron: Art. 50(4) AI-verordening"]:::oblig_genai
+    S4P --> S4P_O["De verplichtingen onder artikel 50, lid 4, gelden uitsluitend voor gebruiksverantwoordelijken van het AI-systeem"]:::oblig_genai
+
+    S4D --> S4D_O["Verplichtingen voor AI die een deepfake (beeld, audio of video) genereert of manipuleert:<br/>• Gebruiksverantwoordelijken van AI-systemen die deepfakes (zoals gedefinieerd in art. 3(60)) genereren, moeten kenbaar maken dat de inhoud kunstmatig is gegenereerd of gemanipuleerd.<br/>Timing: Verstrek de informatie aan gebruikers uiterlijk op het moment van de eerste blootstelling aan de inhoud.<br/>Uitzondering: Wanneer het gebruik bij wet is toegestaan voor het opsporen, voorkomen, onderzoeken of vervolgen van strafbare feiten.<br/>Bron: Art. 50, lid 4, eerste alinea, AI-verordening"]:::oblig_genai
+
+    S4_ATT_O["Verlichte deepfake-openbaarmaking (elke rol):<br/>• De openbaarmakingsplicht vervalt niet, maar voor deepfakes die kennelijk deel uitmaken van een artistiek, creatief, satirisch, fictief of vergelijkbaar werk of programma kan deze worden gegeven op een manier die de vertoning of het genot van het werk niet belemmert (bijv. in de aftiteling in plaats van een banner in beeld).<br/>• Passende waarborgen voor de rechten en vrijheden van derden (bijv. persoonsgegevens, intellectuele eigendom) blijven van toepassing.<br/>Bron: Art. 50, lid 4, eerste alinea, &amp; overweging 134 AI-verordening"]:::oblig_genai
+
+    S5P --> S5P_O["De verplichtingen onder artikel 50, lid 4, gelden uitsluitend voor gebruiksverantwoordelijken van het AI-systeem"]:::oblig_genai
+
+    S5D --> S5D_O["Verplichtingen voor AI die tekst van algemeen belang genereert of manipuleert:<br/>• Gebruiksverantwoordelijken moeten kenbaar maken dat de tekst kunstmatig is gegenereerd of gemanipuleerd.<br/>Timing: Verstrek de informatie aan gebruikers uiterlijk op het moment van de eerste blootstelling aan de tekst.<br/>Uitzondering: Wanneer het gebruik bij wet is toegestaan voor het opsporen, voorkomen, onderzoeken of vervolgen van strafbare feiten.<br/>Bron: Art. 50, lid 4, tweede alinea, AI-verordening"]:::oblig_genai
+
+    %% Alleen-layout edge: trekt het "verlicht regime"-blok naar dezelfde
+    %% kolom als de andere uitkomstblokken, zonder de echte V5-edge hierboven
+    %% te wijzigen. stroke:none maakt deze edge (en de pijlpunt) onzichtbaar.
+    S4D --> S4_ATT_O
+    linkStyle 53 stroke:none
