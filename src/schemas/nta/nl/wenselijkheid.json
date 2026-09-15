@@ -95,17 +95,17 @@
         "minItems": 1,
         "uniqueItems": true
       },
-      "q6-afweging-doorontwikkelen": {
+      "q6-expertises-belanghebbenden": {
         "type": "string",
-        "title": "Volgde er na de voorgaande stappen (de probleemverkenning, de doelomschrijving, het betrekken van geraakte personen en stakeholders, het onderzoeken van alternatieven) een uitgesproken beslismoment, waarbij de groep die representatief is voor de geraakte personen en stakeholders betrokken was, om af te wegen of een profileringsinstrument verder wordt ontwikkeld?",
+        "title": "Waren er bij de voorgaande stappen (de probleemverkenning, de doelomschrijving, het betrekken van geraakte personen en stakeholders, het onderzoeken van alternatieven) zowel verschillende vakgebieden betrokken — in elk geval de juridische, technische en ethische invalshoek — als de groep die representatief is voor de geraakte personen en stakeholders?",
         "enum": [
           "Ja",
           "Nee"
         ]
       },
-      "q7-expertises-belanghebbenden": {
+      "q7-afweging-doorontwikkelen": {
         "type": "string",
-        "title": "Waren er bij de voorgaande stappen (de probleemverkenning, de doelomschrijving, het betrekken van geraakte personen en stakeholders, het onderzoeken van alternatieven, het beslismoment over verder ontwikkelen) verschillende vakgebieden en stakeholders betrokken, in elk geval de juridische, technische en ethische invalshoek?",
+        "title": "Volgde er aan het eind van deze fase een afsluitend beslismoment, waarbij zowel verschillende vakgebieden — in elk geval de juridische, technische en ethische invalshoek — als de groep die representatief is voor de geraakte personen en stakeholders betrokken waren, om af te wegen of een profileringsinstrument verder wordt ontwikkeld?",
         "enum": [
           "Ja",
           "Nee"
@@ -117,7 +117,7 @@
         "default": "De inhoud van deze vragenlijst volgt."
       }
     },
-    "required": ["q6-afweging-doorontwikkelen", "q7-expertises-belanghebbenden"]
+    "required": ["q6-expertises-belanghebbenden", "q7-afweging-doorontwikkelen"]
   },
   "uiSchema": {
     "intro": {
@@ -125,13 +125,12 @@
       "ui:widget": "NtaIntroWidget",
       "ui:options": {
         "label": false,
-        "introText": "Om te kunnen beoordelen of aan dit deel van de NTA wordt voldaan, moet het bestuur de volgende procedurele en technische onderdelen omvatten:",
+        "introText": "Om te kunnen beoordelen of aan dit deel van de NTA wordt voldaan, moet het algoritme governance de volgende procedurele en technische onderdelen omvatten:",
         "items": [
-          "Analyse van het probleem, de doelstellingen  en de belangen in overweging genomen vóór de eventuele inzet van een profileringsalgoritme",
+          "Probleemverkenning, doelbepaling en het in kaart brengen van belangen, vóór de mogelijke inzet van een profileringsinstrument",
           "Inventarisatie en afweging van alternatieven",
-          "Een afsluitend beslismoment om doorontwikkeling van een profileringsalgoritme af te wegen op basis van het bovenstaande",
-          "Inzet van technische, juridische en ethische expertises in de bovenstaande stappen",
-          "Betrokkenheid van belanghebbenden/stakeholders in de bovenstaande stappen"
+          "Een afsluitend beslismoment om af te wegen of het profileringsinstrument verder wordt ontwikkeld, op basis van het bovenstaande",
+          "Betrokkenheid van zowel verschillende vakgebieden als geraakte personen en stakeholders bij alle bovenstaande stappen"
         ]
       }
     },
@@ -165,17 +164,17 @@
       "ui:group": "q5",
       "ui:groupTitle": "Alternatieven voor profilering"
     },
-    "q6-afweging-doorontwikkelen": {
+    "q6-expertises-belanghebbenden": {
       "ui:widget": "radio",
       "ui:id": "q6",
       "ui:group": "q6",
-      "ui:groupTitle": "Beslismoment over verder ontwikkelen"
+      "ui:groupTitle": "Betrokken expertise en vertegenwoordiging"
     },
-    "q7-expertises-belanghebbenden": {
+    "q7-afweging-doorontwikkelen": {
       "ui:widget": "radio",
       "ui:id": "q7",
       "ui:group": "q7",
-      "ui:groupTitle": "Betrokken vakgebieden en perspectieven"
+      "ui:groupTitle": "Beslismoment over verder ontwikkelen"
     }
   }
 }

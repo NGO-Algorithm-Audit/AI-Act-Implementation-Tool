@@ -17,7 +17,7 @@
             "De behandelend medewerkers hebben voldoende relevante training gehad om het instrument verantwoord te gebruiken",
             "Er is vastgelegd op basis van welke informatie een zaak moet worden beoordeeld",
             "De medewerker legt vast welke beslissing is genomen, op basis van welke informatie en met welke onderbouwing",
-            "De medewerker beschikt over voldoende informatie en er is bepaald welke bronnen mogen worden geraadpleegd; de menselijke beoordeling hangt niet af van de uitkomst van het instrument",
+            "De medewerker beschikt over voldoende informatie en er is bepaald welke bronnen mogen worden geraadpleegd; de handmatige beoordeling hangt niet af van de uitkomst van het instrument",
             "Gelijke gevallen worden gelijk behandeld, zonder verdere ongedocumenteerde selectie",
             "Er is een procedure voor het geval een zaak of persoon verkeerd is ingedeeld (onterecht of terecht geselecteerd)",
             "Er is bepaald of de medewerker moet weten dat een instrument wordt gebruikt; als dat niet strikt nodig is, wordt het bij voorkeur niet gemeld om meegaandheid te voorkomen",
@@ -37,11 +37,10 @@
       },
       "q2-selectie": {
         "type": "array",
-        "title": "Is de selectie van personen voor het besluitvormingsproces goed ingericht, met ruimte voor bezwaar en voor signalen over discriminatie? Vink alle opties aan die van toepassing zijn.",
+        "title": "Is de selectie van personen voor het besluitvormingsproces goed ingericht? Vink alle opties aan die van toepassing zijn.",
         "items": {
           "type": "string",
           "enum": [
-            "Het aantal personen dat het besluitvormingsproces doorloopt is vastgesteld",
             "Er is een passende verhouding bepaald tussen willekeurig geselecteerde personen en door het instrument geselecteerde personen, rekening houdend met de benodigde steekproefgrootte",
             "Er is een vaste werkwijze om signalen over mogelijke discriminatie op te pakken en af te handelen",
             "Er is een procedure voor bezwaar en beroep bij een formeel besluit, en anders een klachtenprocedure",
@@ -65,7 +64,23 @@
         "minItems": 1,
         "uniqueItems": true
       },
-      "q4-monitoren-proceswijziging": {
+      "q4-monitoren-context-wetgeving": {
+        "type": "array",
+        "title": "Is vóór ingebruikname vastgelegd wanneer en hoe wordt geëvalueerd en gevolgd? Vink alle opties aan die van toepassing zijn.",
+        "items": {
+          "type": "string",
+          "enum": [
+            "De frequentie van periodieke evaluatie en monitoring is bepaald",
+            "Er is vastgelegd hoe evaluatie en monitoring worden uitgevoerd en gedocumenteerd",
+            "Periodieke evaluatie wordt in een rapport vastgelegd",
+            "Er is bepaald welke signalen of factoren aanleiding geven tot een tussentijdse evaluatie",
+            "Geen van de bovenstaande"
+          ]
+        },
+        "minItems": 1,
+        "uniqueItems": true
+      },
+      "q5-monitoren-proceswijziging": {
         "type": "string",
         "title": "Wordt doorlopend gevolgd of het besluitvormingsproces is veranderd (bijvoorbeeld het beleid) en of het profileringsinstrument nog aan de gestelde eisen voldoet?",
         "enum": [
@@ -73,7 +88,7 @@
           "Nee"
         ]
       },
-      "q5-monitoren-organisatorisch": {
+      "q6-monitoren-organisatorisch": {
         "type": "array",
         "title": "Wordt periodiek gevolgd of er feedback of veranderingen zijn die de organisatorische waarborgen raken? Vink alle opties aan die van toepassing zijn.",
         "items": {
@@ -90,7 +105,7 @@
         "minItems": 1,
         "uniqueItems": true
       },
-      "q6-monitoren-prestaties-onderscheid": {
+      "q7-monitoren-prestaties-onderscheid": {
         "type": "array",
         "title": "Worden de prestaties en de werking van het profileringsinstrument periodiek gevolgd? Vink alle opties aan die van toepassing zijn.",
         "items": {
@@ -107,35 +122,13 @@
         "minItems": 1,
         "uniqueItems": true
       },
-      "q7-monitoren-context-wetgeving": {
-        "type": "array",
-        "title": "Is vóór ingebruikname vastgelegd wanneer en hoe wordt geëvalueerd en gevolgd, met oog voor veranderingen in de gebruikscontext en in wet- en regelgeving? Vink alle opties aan die van toepassing zijn.",
-        "items": {
-          "type": "string",
-          "enum": [
-            "De frequentie van periodieke evaluatie en monitoring is bepaald",
-            "Er is vastgelegd hoe evaluatie en monitoring worden uitgevoerd en gedocumenteerd",
-            "Er wordt periodiek een evaluatie uitgevoerd en een rapport opgesteld",
-            "Er is bepaald welke signalen of factoren aanleiding geven tot een tussentijdse evaluatie",
-            "Geen van de bovenstaande"
-          ]
-        },
-        "minItems": 1,
-        "uniqueItems": true
-      },
-      "q8-documentatie": {
-        "type": "array",
-        "title": "Worden de resultaten die uit de eisen van deze norm voortkomen vastgelegd in een dossier voor interne en externe controleerbaarheid? Vink alle opties aan die van toepassing zijn.",
-        "items": {
-          "type": "string",
-          "enum": [
-            "De resultaten worden bijeengebracht in een dossier dat interne en externe controle mogelijk maakt",
-            "De stukken zijn zo veel mogelijk samengebracht in één samenvattend hoofddocument, of er is een centrale index die naar alle losse onderdelen wijst: documenten, datasets, scripts, rapporten van de validatie in de praktijk en notities over genomen besluiten",
-            "Geen van de bovenstaande"
-          ]
-        },
-        "minItems": 1,
-        "uniqueItems": true
+      "q8-herevaluatie-toetsing": {
+        "type": "string",
+        "title": "Wordt de juridische toets na elke monitoringcyclus opnieuw beoordeeld, waarbij zowel verschillende vakgebieden — in elk geval de juridische, technische en ethische invalshoek — als de groep die representatief is voor de geraakte personen en stakeholders betrokken zijn?",
+        "enum": [
+          "Ja",
+          "Nee"
+        ]
       },
       "output": {
         "type": "string",
@@ -143,7 +136,7 @@
         "default": "De inhoud van deze vragenlijst volgt."
       }
     },
-    "required": ["q4-monitoren-proceswijziging"]
+    "required": ["q5-monitoren-proceswijziging", "q8-herevaluatie-toetsing"]
   },
   "uiSchema": {
     "intro": {
@@ -151,17 +144,16 @@
       "ui:widget": "NtaIntroWidget",
       "ui:options": {
         "label": false,
-        "introText": "Om te kunnen beoordelen of aan dit deel van de NTA wordt voldaan, moet het bestuur de volgende procedurele en technische onderdelen omvatten:",
+        "introText": "Om te kunnen beoordelen of aan dit deel van de NTA wordt voldaan, moet het algoritme governance de volgende procedurele en technische onderdelen omvatten:",
         "items": [
           "Waarborgen voor consistente uitkomsten bij de behandelend medewerkers",
-          "Selectieprocess met passende aandeel van willekeurige selecties naast het profileringsalgoritme",
-          "Waarborgen voor het indienen en behandelen van bewzwaar en beroep",
+          "Selectieproces met een passend aandeel willekeurige selecties naast het profileringsinstrument",
+          "Waarborgen voor het indienen en behandelen van bezwaar en beroep",
           "Transparantieverplichtingen",
-          "Monitoren van wijzigingen in het besluitvormingsproces, organisatorische waarborgen en veranderingen, prestaties en onderscheid",
-          "Pereiodieke herevalueren van de juridische toets op basis van de monitoren",
-          "Een afgestemd op de monitoring en herevaluatie beslissingsmoment, om continu gebruik van het profileringsalgoritme af te wegen",
-          "Inzet van technische, juridische en ethische expertises in de bovenstaande stappen",
-          "Betrokkenheid van belanghebbenden/stakeholders bij ten minste de periodieke afweging continu gebruik"
+          "Monitoren van wijzigingen in het besluitvormingsproces, de organisatorische waarborgen, de prestaties en het onderscheid",
+          "Periodieke herevaluatie van de juridische toets op basis van de monitoring",
+          "Een beslismoment, afgestemd op de monitoring en herevaluatie, om het voortgezette gebruik van het profileringsinstrument af te wegen",
+          "Betrokkenheid van zowel verschillende vakgebieden als geraakte personen en stakeholders bij ten minste de periodieke afweging over voortgezet gebruik"
         ]
       }
     },
@@ -183,35 +175,35 @@
       "ui:group": "q3",
       "ui:groupTitle": "Transparantie richting geraakte personen en stakeholders"
     },
-    "q4-monitoren-proceswijziging": {
-      "ui:widget": "radio",
+    "q4-monitoren-context-wetgeving": {
+      "ui:widget": "checkboxes",
       "ui:id": "q4",
       "ui:group": "q4",
-      "ui:groupTitle": "Volgen of het besluitvormingsproces verandert"
+      "ui:groupTitle": "Afspraken over evaluatie en monitoring"
     },
-    "q5-monitoren-organisatorisch": {
-      "ui:widget": "checkboxes",
+    "q5-monitoren-proceswijziging": {
+      "ui:widget": "radio",
       "ui:id": "q5",
       "ui:group": "q5",
-      "ui:groupTitle": "Volgen van organisatorische waarborgen"
+      "ui:groupTitle": "Volgen of het besluitvormingsproces verandert"
     },
-    "q6-monitoren-prestaties-onderscheid": {
+    "q6-monitoren-organisatorisch": {
       "ui:widget": "checkboxes",
       "ui:id": "q6",
       "ui:group": "q6",
-      "ui:groupTitle": "Volgen van prestaties en onderscheid"
+      "ui:groupTitle": "Volgen van organisatorische waarborgen"
     },
-    "q7-monitoren-context-wetgeving": {
+    "q7-monitoren-prestaties-onderscheid": {
       "ui:widget": "checkboxes",
       "ui:id": "q7",
       "ui:group": "q7",
-      "ui:groupTitle": "Afspraken over evaluatie en monitoring"
+      "ui:groupTitle": "Volgen van prestaties en onderscheid"
     },
-    "q8-documentatie": {
-      "ui:widget": "checkboxes",
+    "q8-herevaluatie-toetsing": {
+      "ui:widget": "radio",
       "ui:id": "q8",
       "ui:group": "q8",
-      "ui:groupTitle": "Dossiervorming"
+      "ui:groupTitle": "Herevaluatie van de juridische toets"
     }
   }
 }

@@ -17,17 +17,25 @@
             "Hoe het juist voorspellen van het verschijnsel dat de doelvariabele meet, bijdraagt aan het doel van het besluitvormingsproces",
             "Een inschatting of er een noemenswaardig statistisch verband is tussen dat verschijnsel en beschermde gronden, en hoe sterk dat verband dan is",
             "Een sluitende definitie van de doelvariabele en de navolgbare relatie tussen haar waarden en het beoogde doel",
-            "Een toelichting waarom de doelvariabele niet in categorieën kan worden uitgedrukt, als daar niet voor is gekozen",
             "Een beoordeling of de doelvariabele voldoende waarneembaar of meetbaar is voor het beoogde doel, inclusief een beoordeling of die waarneembaarheid of meetbaarheid voor alle geraakte personen gelijk is, met een onderbouwing als er geen alternatief met gelijke meetbaarheid mogelijk is",
             "Duidelijke handelingsinstructies wanneer een behandelend medewerker de doelvariabele vaststelt",
-            "Een controle of eerder toegekende waarden van de doelvariabele volgens instructies zijn bepaald die aan de huidige eisen voldoen",
+            "Een controle of in het verleden toegekende waarden van de doelvariabele volgens instructies zijn bepaald die aan de huidige eisen voldoen",
             "Geen van de bovenstaande"
           ]
         },
         "minItems": 1,
         "uniqueItems": true
       },
-      "q2-datasets": {
+      "q2-niet-categorische-doelvariabele": {
+        "type": "string",
+        "title": "Is de doelvariabele uiteindelijk niet als categorische variabele vastgesteld? Zo ja, is afzonderlijk vastgelegd waarom het niet mogelijk of wenselijk was om de doelvariabele als categorische variabele weer te geven?",
+        "enum": [
+          "Ja",
+          "Nee",
+          "Niet van toepassing, de doelvariabele is als categorische variabele vastgesteld"
+        ]
+      },
+      "q3-datasets": {
         "type": "array",
         "title": "Is er tijdens ontwerp en ontwikkeling met meerdere datasets gewerkt en zijn die datasets goed afgebakend, en zo ja, welke onderdelen zijn vastgelegd? Vink alle opties aan die van toepassing zijn.",
         "items": {
@@ -35,68 +43,64 @@
           "enum": [
             "Een definitie van de populatie en van de referentiepopulatie",
             "De keuze van de steekproef uit de referentiepopulatie die als dataset dient, inclusief het verzamelproces bij nieuwe data",
-            "Toekenning van de doelvariabele voor alle steekproefeenheden volgens de handelingsinstructies, met extra aandacht voor de kwaliteit van historische data",
+            "Toekenning van de doelvariabele voor alle steekproefeenheden volgens de huidige handelingsinstructies, met extra aandacht voor de kwaliteit van historische data",
             "Een willekeurige steekproef uit de referentiepopulatie die het hele besluitvormingsproces doorloopt, zodat de werkelijke waarden van de doelvariabele bekend worden",
-            "Een onderverdeling in een ontwikkel-, een validatie- en een testdeel",
-            "Een onderbouwing en een beschrijving van de gevolgen voor het ontwikkeltraject als het niet lukt om met meerdere datasets te werken",
+            "Een onderverdeling van data in een ontwikkel-, een validatie- en een testdeel",
             "Geen van de bovenstaande"
           ]
         },
         "minItems": 1,
         "uniqueItems": true
       },
-      "q3-geen-willekeurige-steekproef": {
+      "q4-geen-willekeurige-steekproef": {
         "type": "string",
         "title": "Als het profileringsinstrument wordt afgeleid uit één (historische) dataset zonder willekeurige steekproef: is afgewogen of ontwikkeling opweegt tegen de alternatieven, en is de keuze om toch met één dataset te werken gemotiveerd vastgelegd?",
         "enum": [
           "Ja",
-          "Nee"
+          "Nee",
+          "Niet van toepassing, er is een willekeurige steekproef gebruikt"
         ]
       },
-      "q4-datakwaliteit": {
+      "q5-datakwaliteit": {
         "type": "array",
-        "title": "Is de kwaliteit van de gebruikte dataset beoordeeld, en zo ja, op welke punten? Vink alle opties aan die van toepassing zijn.",
+        "title": "Is de kwaliteit van de gebruikte data beoordeeld, en zo ja, op welke punten? De onderdelen van datakwaliteit worden hieronder toegelicht. Vink alle opties aan die van toepassing zijn.",
         "items": {
           "type": "string",
           "enum": [
-            "Juistheid: is nagegaan of de data de werkelijke waarden weergeven, via een domeinexpert, inspectie van de data, of vergelijking met een betrouwbare bron",
-            "Volledigheid: is het aantal ontbrekende waarden bepaald, beoordeeld of dat aanvaardbaar is, gekeken of ontbrekende waarden per beschermde grond verschillen, en de oorzaak onderzocht",
-            "Representativiteit: is nagegaan of de verdeling van kenmerken in de dataset overeenkomt met de referentiepopulatie of de willekeurige steekproef, en of andere data of processen de dataset kleuren",
-            "Samenhang: is het verzamelproces beschreven en consistent voor alle geraakte personen, en zijn tegenstrijdigheden, dubbelingen en uitschieters onderzocht en afgehandeld",
-            "Actualiteit: is vastgelegd hoe lang de dataset geldig is en welke kenmerken tijdgevoelig zijn en regelmatig moeten worden bijgewerkt",
+            "Juistheid",
+            "Volledigheid",
+            "Representativiteit",
+            "Samenhang",
+            "Actualiteit",
             "Geen van de bovenstaande"
           ]
         },
         "minItems": 1,
         "uniqueItems": true
       },
-      "q5-datasetdocumentatie": {
+      "q6-datasetdocumentatie": {
         "type": "array",
-        "title": "Zijn de gebruikte datasets zo gedocumenteerd dat herkomst, opbouw en bewerkingen navolgbaar zijn en het risico op vertekening kan worden beoordeeld? Vink alle opties aan die van toepassing zijn.",
+        "title": "Zijn de gebruikte datasets zo gedocumenteerd dat het risico op vertekening kan worden beoordeeld? Vink alle aspecten van de datasetdocumentatie die aan bod zijn gekomen. Hieronder vind je gedetailleerde uitleg over wat elk aspect precies inhoudt.",
         "items": {
           "type": "string",
           "enum": [
-            "Waar de data vandaan komen en wie verantwoordelijk is voor het verzamelen, beheren en beschikbaar stellen ervan",
-            "Met welk oorspronkelijk doel en in welk proces de data zijn verzameld, en op welke juridische grondslag ze nu worden gebruikt",
-            "Uit welke regio en bevolkingsgroepen de data komen, welke periode ze beslaan en welke beperkingen of vertekeningen bekend zijn",
-            "Wanneer datasets zijn afgeleid, verrijkt of samengevoegd is dat apart vastgelegd",
-            "Hoe groot de dataset is, in aantal eenheden en aantal kenmerken",
-            "Per kenmerk en per doelvariabele: wat het betekent, welk type het is, welke waarden voorkomen, of er samenhang is met beschermde gronden, en hoe vaak en op welke manier waarden ontbreken",
-            "Elke bewerking op de data, met de reden waarom die keuze is gemaakt",
+            "Herkomst",
+            "Opbouw",
+            "Bewerkingen",
             "Geen van de bovenstaande"
           ]
         },
         "minItems": 1,
         "uniqueItems": true
       },
-      "q6-kwalitatieve-analyse": {
+      "q7-kwalitatieve-analyse": {
         "type": "array",
-        "title": "Is voor elk mogelijk profileringskenmerk samen met domein-, ethische en juridische deskundigen bekeken of er zwaarwegende bezwaren tegen gebruik zijn? Vink alle opties aan die van toepassing zijn.",
+        "title": "Is voor elk mogelijk selectiekenmerk samen met domein-, ethische en juridische deskundigen bekeken of er zwaarwegende bezwaren tegen gebruik zijn? Vink alle opties aan die van toepassing zijn.",
         "items": {
           "type": "string",
           "enum": [
             "Is vastgesteld of verwerking verboden is op grond van de AVG (bijzondere of strafrechtelijke persoonsgegevens) zonder wettelijke uitzondering",
-            "Is nagegaan of het kenmerk direct of indirect onderscheid oplevert waartegen zwaarwegende juridische bezwaren of haalbaarheidsrisico's bestaan, bijvoorbeeld omdat het een bekend proxykenmerk is",
+            "Is nagegaan of het kenmerk direct of indirect onderscheid oplevert waartegen zwaarwegende juridische bezwaren of haalbaarheidsrisico's bestaan, bijvoorbeeld omdat het kenmerk een bekende proxyvariabele is",
             "Is gekeken naar eerder vastgestelde ethische of juridische bezwaren in vergelijkbare zaken",
             "Is beoordeeld of een inhoudelijk verband met het legitieme doel te beredeneren valt",
             "Is de ontwikkeling waar mogelijk voortgezet zonder de kenmerken waartegen bezwaren bestaan",
@@ -106,36 +110,47 @@
         "minItems": 1,
         "uniqueItems": true
       },
-      "q7-kwantitatieve-analyse": {
+      "q8-kwantitatieve-analyse": {
         "type": "array",
-        "title": "Is er een kwantitatieve toets van de profileringskenmerken uitgevoerd? Vink alle opties aan die van toepassing zijn.",
+        "title": "Is er een kwantitatieve toets van de selectiekenmerken uitgevoerd? Vink alle opties aan die van toepassing zijn.",
         "items": {
           "type": "string",
           "enum": [
-            "Voor elk kenmerk is bepaald of er op zichzelf een verband met een beschermde grond bestaat; bij een sterk verband heeft het kenmerk een proxykarakter en is de ontwikkeling waar mogelijk zonder dat kenmerk voortgezet",
-            "Het aantal profileringskenmerken is waar mogelijk beperkt en hun onderlinge samenhang is onderzocht, waarbij bij sterk samenhangende kenmerken het minst bijdragende kan vervallen",
+            "Voor elk kenmerk is bepaald of er op zichzelf een verband met een beschermde grond bestaat; bij een sterk verband is het kenmerk een proxyvariabele en is de ontwikkeling waar mogelijk zonder dat kenmerk voortgezet",
+            "Het aantal selectiekenmerken is waar mogelijk beperkt en hun onderlinge samenhang is onderzocht, waarbij bij sterk samenhangende kenmerken het minst bijdragende kan vervallen",
             "Geen van de bovenstaande"
           ]
         },
         "minItems": 1,
         "uniqueItems": true
       },
-      "q8-algoritmekeuze": {
+      "q9-algoritmekeuze": {
         "type": "array",
-        "title": "Is onderbouwd welk type instrument wordt ingezet en zijn onderdelen op basis van vaste regels navolgbaar vastgelegd? Vink alle opties aan die van toepassing zijn.",
+        "title": "Is er een keuze gemaakt en onderbouwd tussen een instrument op basis van vaste regels, een instrument dat uit data leert, of een combinatie? Vink de criteria aan die in die onderbouwing zijn meegewogen.",
         "items": {
           "type": "string",
           "enum": [
-            "Er is gekozen tussen een instrument op basis van vaste regels, een instrument dat uit data leert of een combinatie, met een onderbouwing",
-            "In die onderbouwing zijn uitlegbaarheid, complexiteit, de beschikbare data, de beschikbare domeinkennis en de aansluiting op het werkproces meegewogen",
-            "Bij een instrument op basis van vaste regels is per regel de onderbouwing vastgelegd, inclusief de gebruikte kenmerken, drempelwaarden en gewichten",
+            "Uitlegbaarheid van het instrument voor verschillende doelgroepen",
+            "Complexiteit, afgewogen tegen prestaties en onderscheid",
+            "Beschikbaarheid van geschikte data voor ontwikkeling en evaluatie",
+            "Beschikbaarheid, betrouwbaarheid en objectiviteit van domeinexpertise",
+            "Aansluiting van het instrument op de beoogde toepassing en het werkproces",
             "Geen van de bovenstaande"
           ]
         },
         "minItems": 1,
         "uniqueItems": true
       },
-      "q9-prestaties": {
+      "q10-regelgebaseerd-onderbouwing": {
+        "type": "string",
+        "title": "Is het gekozen instrument (mede) gebaseerd op vaste regels? Zo ja, is er per regel een onderbouwing vastgelegd, inclusief de gebruikte kenmerken, drempelwaarden en gewichten?",
+        "enum": [
+          "Ja",
+          "Nee",
+          "Niet van toepassing, het instrument is niet (mede) gebaseerd op vaste regels"
+        ]
+      },
+      "q11-prestaties": {
         "type": "array",
         "title": "Zijn de prestaties van het profileringsinstrument op de validatiedataset gemeten en vastgelegd? Vink alle opties aan die van toepassing zijn.",
         "items": {
@@ -145,7 +160,7 @@
             "Er is bepaald voor welke uitkomsten in het besluitvormingsproces de prestaties worden gemeten, ten minste de uitkomst van het instrument zelf",
             "Er zijn per prestatiemaatstaf toegestane marges vastgelegd, met een motivatie waarom prestaties binnen die marge het doel voldoende dichterbij brengen",
             "De prestaties zijn gemeten door het instrument toe te passen op de validatiedataset en de toegekende labels te vergelijken met de werkelijke waarden",
-            "Er is beoordeeld of de resultaten binnen de marges vallen en beter zijn dan een willekeurige steekproef, met een nieuwe ronde of een stopbesluit als dat niet zo is",
+            "Er is beoordeeld of de resultaten binnen de marges vallen en beter zijn dan een willekeurige steekproef, met een nieuwe iteratie of een stopbesluit als dat niet zo is",
             "De resultaten van het definitieve instrument zijn vastgelegd en in heldere taal toegelicht",
             "Geen van de bovenstaande"
           ]
@@ -153,9 +168,9 @@
         "minItems": 1,
         "uniqueItems": true
       },
-      "q10-indirect-onderscheid": {
+      "q12-indirect-onderscheid": {
         "type": "array",
-        "title": "Is gemeten in hoeverre het profileringsinstrument indirect onderscheid tussen groepen maakt? Vink alle opties aan die van toepassing zijn.",
+        "title": "Is, met inbreng van verschillende vakgebieden — in elk geval de juridische, technische en ethische invalshoek — gemeten in hoeverre het profileringsinstrument indirect onderscheid tussen groepen maakt? Vink alle opties aan die van toepassing zijn.",
         "items": {
           "type": "string",
           "enum": [
@@ -163,16 +178,33 @@
             "Er is bepaald voor welke stappen in het besluitvormingsproces het onderscheid wordt gemeten, ten minste de uitkomst van het instrument zelf",
             "De benodigde persoonskenmerken zijn waar redelijkerwijs mogelijk verkregen, met de aanbeveling de ontwikkeling te stoppen als die gegevens tekortschieten",
             "Er zijn passende gelijkheidsmaatstaven gekozen, ten minste demografische pariteit, met een motivatie voor aanvullende maatstaven",
-            "De maatstaven zijn berekend door groepen en groepscombinaties te vergelijken, met een nieuwe ronde of een stopbesluit als de verschillen te groot zijn",
+            "De maatstaven zijn berekend door groepen en groepscombinaties te vergelijken, met een nieuwe iteratie of een stopbesluit als de verschillen te groot zijn",
             "De resultaten van het definitieve instrument zijn vastgelegd en in heldere taal toegelicht",
-            "Als toch zonder meting van onderscheid wordt doorgegaan, is dat onderbouwd met redenen, risicobeperkende maatregelen, actieve monitoring en klachtafhandeling",
             "Geen van de bovenstaande"
           ]
         },
         "minItems": 1,
         "uniqueItems": true
       },
-      "q11-statistisch-toetsen": {
+      "q13-doorgaan-zonder-meting": {
+        "type": "array",
+        "title": "Is er toch doorgegaan zonder dat het mogelijk was om onderscheid te meten? Zo ja, is dat onderbouwd en gedocumenteerd? Vink de onderdelen aan die zijn vastgelegd.",
+        "items": {
+          "type": "string",
+          "enum": [
+            "De gegronde redenen waarom het haalbaar en wenselijk was om toch door te gaan",
+            "In hoeverre de kwalitatieve en kwantitatieve toetsen van de gebruikte selectiekenmerken voldoende zorgvuldig zijn onderbouwd en gedocumenteerd om ze te kunnen gebruiken",
+            "De ingevoerde risicobeperkende maatregelen om onderscheid in het gebruik te voorkomen, zoals menselijke tussenkomst",
+            "Hoe actief wordt gemonitord op onderscheid, bijvoorbeeld door klachten en signalen actief op te halen",
+            "Welke aspecten een verantwoorde inzet mogelijk maken",
+            "Geen van de bovenstaande",
+            "Niet van toepassing, het onderscheid is wel gemeten"
+          ]
+        },
+        "minItems": 1,
+        "uniqueItems": true
+      },
+      "q14-statistisch-toetsen": {
         "type": "string",
         "title": "Zijn de gemeten prestaties en het gemeten onderscheid met hypothesetoetsen getoetst, om vast te stellen dat de resultaten niet op toeval berusten en dat prestaties voor alle groepen binnen de marges vallen?",
         "enum": [
@@ -180,34 +212,25 @@
           "Nee"
         ]
       },
-      "q12-herziening-maten": {
-        "type": "array",
-        "title": "Zijn de maatstaven en marges vooraf vastgelegd en is elke latere herziening zorgvuldig verantwoord? Vink alle opties aan die van toepassing zijn.",
-        "items": {
-          "type": "string",
-          "enum": [
-            "De maatstaven en marges zijn gekozen vóór de metingen en toetsing",
-            "De motivatie voor een herziening is vastgelegd vóór de start van de verificatie- en validatiefase",
-            "Latere aanpassingen gebeuren alleen na incidenten, klachten of aanwijzingen van ongewenste effecten, of bij een aantoonbaar betere meetmethode",
-            "Bij incidenten of klachten leidt een herziening uitsluitend tot een striktere of beperktere toepassing",
-            "Aan elke herziening ligt een risicoanalyse en een expliciet, gemotiveerd besluit met overwegingen en gevolgen ten grondslag",
-            "Geen van de bovenstaande"
-          ]
-        },
-        "minItems": 1,
-        "uniqueItems": true
-      },
-      "q13-iteratieve-aanpak": {
+      "q15-herziening-maten": {
         "type": "string",
-        "title": "Zijn na elke ronde van het instrument zowel de prestaties als het onderscheid opnieuw gemeten, en is telkens besloten om verder te ontwikkelen of te stoppen totdat beide op de validatiedataset aanvaardbaar zijn?",
+        "title": "Zijn de maatstaven en marges gekozen vóór de metingen en toetsing, en is de motivatie voor een eventuele latere herziening vastgelegd vóór de start van de verificatie- en validatiefase?",
         "enum": [
           "Ja",
           "Nee"
         ]
       },
-      "q14-afweging-doorontwikkelen": {
+      "q16-iteratieve-aanpak": {
         "type": "string",
-        "title": "Volgde er aan het eind van deze fase een uitgesproken beslismoment, met structurele weging van verschillende invalshoeken en belangen en met betrokkenheid van partijen van buiten de organisatie, om te bepalen of het traject verdergaat?",
+        "title": "Zijn na elke iteratie van het instrument zowel de prestaties als het onderscheid opnieuw gemeten, en is telkens besloten om verder te ontwikkelen of te stoppen totdat beide op de validatiedataset aanvaardbaar zijn?",
+        "enum": [
+          "Ja",
+          "Nee"
+        ]
+      },
+      "q17-afweging-doorontwikkelen": {
+        "type": "string",
+        "title": "Volgde er aan het eind van deze fase een afsluitend beslismoment, waarbij de groep die representatief is voor de geraakte personen en stakeholders betrokken was, om af te wegen of een profileringsinstrument verder wordt ontwikkeld?",
         "enum": [
           "Ja",
           "Nee"
@@ -220,10 +243,13 @@
       }
     },
     "required": [
-      "q3-geen-willekeurige-steekproef",
-      "q11-statistisch-toetsen",
-      "q13-iteratieve-aanpak",
-      "q14-afweging-doorontwikkelen"
+      "q2-niet-categorische-doelvariabele",
+      "q4-geen-willekeurige-steekproef",
+      "q10-regelgebaseerd-onderbouwing",
+      "q14-statistisch-toetsen",
+      "q15-herziening-maten",
+      "q16-iteratieve-aanpak",
+      "q17-afweging-doorontwikkelen"
     ]
   },
   "uiSchema": {
@@ -232,18 +258,17 @@
       "ui:widget": "NtaIntroWidget",
       "ui:options": {
         "label": false,
-        "introText": "Om te kunnen beoordelen of aan dit deel van de NTA wordt voldaan, moet het bestuur de volgende procedurele en technische onderdelen omvatten:",
+        "introText": "Om te kunnen beoordelen of aan dit deel van de NTA wordt voldaan, moet het algoritme governance de volgende procedurele en technische onderdelen omvatten:",
         "items": [
           "Onderbouwing keuzes doelvariabele en datasets gebruikt tijdens ontwikkeling",
           "Datakwaliteit beoordeling en datasetdocumentatie",
           "Extra beoordeling van de gebruik en kwaliteit van historische data",
-          "Kwalitatieve weging, proxyanalyse en dataminimalisatie profileringskenmerken",
-          "Onderbouwing keuze type algoritme",
-          "Onderbouwing keuzes profileringskenmerken",
-          "Prestatiemeting en biasanalyse incl. statistische toetsing, voor elke ontworpen iteratie van het algoritme",
-          "Een afsluitend beslismoment om doorontwikkeling van een profileringsalgoritme af te wegen op basis van het bovenstaande",
-          "Inzet van technische, juridische en ethische expertises in de bovenstaande stappen",
-          "Betrokkenheid van belanghebbenden/stakeholders bij ten minste de afweging doorontwikkelen"
+          "Kwalitatieve toets, toets op proxyvariabelen en dataminimalisatie van selectiekenmerken",
+          "Onderbouwing keuze type instrument",
+          "Onderbouwing van gekozen selectiekenmerken",
+          "Prestatiemeting en biasanalyse incl. statistische toetsing, voor elke iteratie van het instrument",
+          "Een afsluitend beslismoment om af te wegen of het profileringsinstrument verder wordt ontwikkeld, op basis van het bovenstaande",
+          "Betrokkenheid van zowel verschillende vakgebieden als geraakte personen en stakeholders bij ten minste het beslismoment over verder ontwikkelen"
         ]
       }
     },
@@ -253,82 +278,104 @@
       "ui:group": "q1",
       "ui:groupTitle": "Doelvariabele en dataset"
     },
-    "q2-datasets": {
-      "ui:widget": "checkboxes",
+    "q2-niet-categorische-doelvariabele": {
+      "ui:widget": "radio",
       "ui:id": "q2",
       "ui:group": "q2",
-      "ui:groupTitle": "Werken met meerdere datasets"
+      "ui:groupTitle": "Niet-categorische doelvariabele"
     },
-    "q3-geen-willekeurige-steekproef": {
-      "ui:widget": "radio",
+    "q3-datasets": {
+      "ui:widget": "checkboxes",
       "ui:id": "q3",
       "ui:group": "q3",
-      "ui:groupTitle": "Ontwikkeling zonder willekeurige steekproef"
+      "ui:groupTitle": "Werken met meerdere datasets"
     },
-    "q4-datakwaliteit": {
-      "ui:widget": "checkboxes",
+    "q4-geen-willekeurige-steekproef": {
+      "ui:widget": "radio",
       "ui:id": "q4",
       "ui:group": "q4",
-      "ui:groupTitle": "Kwaliteit van de data"
+      "ui:groupTitle": "Ontwikkeling zonder willekeurige steekproef"
     },
-    "q5-datasetdocumentatie": {
+    "q5-datakwaliteit": {
       "ui:widget": "checkboxes",
       "ui:id": "q5",
       "ui:group": "q5",
-      "ui:groupTitle": "Documentatie van de datasets"
+      "ui:groupTitle": "Kwaliteit van de data",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "**Juistheid**: ga na of de data de werkelijke waarde van de selectiekenmerken en de doelvariabele goed weergeven. Doe dat op ten minste één manier: laat een domeinexpert beoordelen of de data overeenkomen met de praktijk, inspecteer de data zelf (bijvoorbeeld op uitschieters, spelfouten in categorieën of vreemde onderlinge verbanden), of vergelijk de waarden met een betrouwbare andere bron.\n\n**Volledigheid**: ga na in hoeverre de dataset voor alle geraakte personen waarden bevat: bepaal hoeveel waarden ontbreken, beoordeel of dat aanvaardbaar is, kijk of het ontbreken van waarden verschilt per beschermde grond, en onderzoek en documenteer de oorzaak van de ontbrekende data.\n\n**Representativiteit**: ga na of de dataset voldoende representatief is voor de referentiepopulatie: vergelijk de verdeling van de selectiekenmerken in de dataset met die in de referentiepopulatie, of — als die niet voor de hele referentiepopulatie bekend is — met de willekeurige steekproef. Beschrijf ook in hoeverre de data zijn beïnvloed door andere datasets of andere besluitvormingsprocessen.\n\n**Samenhang**: ga na of de data in de dataset onderling logisch kloppen en niet in tegenspraak zijn met hoe het besluitvormingsproces in de praktijk werkt: beschrijf hoe de data zijn verzameld en zorg dat dit verzamelproces voor alle geraakte personen hetzelfde is, controleer de data op tegenstrijdigheden, dubbele waarden en uitschieters, en leg vast hoe met gevonden inconsistenties wordt omgegaan.\n\n**Actualiteit**: ga na of de dataset actueel genoeg is om het profileringsinstrument mee te ontwerpen en te ontwikkelen: leg vast hoe lang de dataset geldig is en wat er moet gebeuren als die geldigheidsperiode is verstreken, en leg vast welke kenmerken tijdsafhankelijk zijn en regelmatig moeten worden bijgewerkt."
     },
-    "q6-kwalitatieve-analyse": {
+    "q6-datasetdocumentatie": {
       "ui:widget": "checkboxes",
       "ui:id": "q6",
       "ui:group": "q6",
-      "ui:groupTitle": "Kwalitatieve toets van kenmerken"
+      "ui:groupTitle": "Documentatie van de datasets",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "**Herkomst**: leg vast uit welke bron(nen) de data komen en wie verantwoordelijk is voor het verzamelen, beheren en beschikbaar stellen ervan; met welk oorspronkelijk doel en in welk proces de data zijn verzameld en op welke juridische grondslag ze nu worden gebruikt; uit welke regio en welke bevolkingsgroepen de data komen, welke periode ze beslaan en welke beperkingen of vertekeningen in de verzameling bekend zijn; en leg apart vast wanneer datasets zijn afgeleid, verrijkt of samengevoegd.\n\n**Opbouw**: leg de omvang van de dataset vast (het aantal eenheden en het aantal kenmerken), en leg per kenmerk en per doelvariabele vast wat het betekent, welk type het is (categorisch of numeriek), welke waarden voorkomen, of er samenhang is met beschermde gronden, en hoe vaak en op welke manier waarden ontbreken.\n\n**Bewerkingen**: leg elke bewerking op de data vast — bijvoorbeeld de omgang met ontbrekende waarden, normalisatie, filtering of herindeling — met de reden waarom die keuze is gemaakt."
     },
-    "q7-kwantitatieve-analyse": {
+    "q7-kwalitatieve-analyse": {
       "ui:widget": "checkboxes",
       "ui:id": "q7",
       "ui:group": "q7",
-      "ui:groupTitle": "Kwantitatieve toets van kenmerken"
+      "ui:groupTitle": "Kwalitatieve toets van kenmerken"
     },
-    "q8-algoritmekeuze": {
+    "q8-kwantitatieve-analyse": {
       "ui:widget": "checkboxes",
       "ui:id": "q8",
       "ui:group": "q8",
-      "ui:groupTitle": "Keuze en onderbouwing van het type instrument"
+      "ui:groupTitle": "Kwantitatieve toets van kenmerken"
     },
-    "q9-prestaties": {
+    "q9-algoritmekeuze": {
       "ui:widget": "checkboxes",
       "ui:id": "q9",
       "ui:group": "q9",
-      "ui:groupTitle": "Prestaties meten"
+      "ui:groupTitle": "Keuze en onderbouwing van het type instrument"
     },
-    "q10-indirect-onderscheid": {
-      "ui:widget": "checkboxes",
+    "q10-regelgebaseerd-onderbouwing": {
+      "ui:widget": "radio",
       "ui:id": "q10",
       "ui:group": "q10",
-      "ui:groupTitle": "Indirect onderscheid meten"
+      "ui:groupTitle": "Onderbouwing bij een regelgebaseerd instrument"
     },
-    "q11-statistisch-toetsen": {
-      "ui:widget": "radio",
+    "q11-prestaties": {
+      "ui:widget": "checkboxes",
       "ui:id": "q11",
       "ui:group": "q11",
-      "ui:groupTitle": "Statistisch toetsen van de metingen"
+      "ui:groupTitle": "Prestaties meten"
     },
-    "q12-herziening-maten": {
+    "q12-indirect-onderscheid": {
       "ui:widget": "checkboxes",
       "ui:id": "q12",
       "ui:group": "q12",
-      "ui:groupTitle": "Herziening van maatstaven en marges"
+      "ui:groupTitle": "Indirect onderscheid meten"
     },
-    "q13-iteratieve-aanpak": {
-      "ui:widget": "radio",
+    "q13-doorgaan-zonder-meting": {
+      "ui:widget": "checkboxes",
       "ui:id": "q13",
       "ui:group": "q13",
-      "ui:groupTitle": "Stapsgewijs meten en beslissen"
+      "ui:groupTitle": "Doorgaan zonder meting van onderscheid"
     },
-    "q14-afweging-doorontwikkelen": {
+    "q14-statistisch-toetsen": {
       "ui:widget": "radio",
       "ui:id": "q14",
       "ui:group": "q14",
+      "ui:groupTitle": "Statistisch toetsen van de metingen"
+    },
+    "q15-herziening-maten": {
+      "ui:widget": "radio",
+      "ui:id": "q15",
+      "ui:group": "q15",
+      "ui:groupTitle": "Herziening van maatstaven en marges"
+    },
+    "q16-iteratieve-aanpak": {
+      "ui:widget": "radio",
+      "ui:id": "q16",
+      "ui:group": "q16",
+      "ui:groupTitle": "Iteratief meten en beslissen"
+    },
+    "q17-afweging-doorontwikkelen": {
+      "ui:widget": "radio",
+      "ui:id": "q17",
+      "ui:group": "q17",
       "ui:groupTitle": "Beslismoment over verder ontwikkelen"
     }
   }

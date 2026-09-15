@@ -9,24 +9,16 @@
         "default": ""
       },
       "q1-prestaties-onderscheid-testdataset": {
-        "type": "array",
-        "title": "Zijn de technische prestaties en de mate van onderscheid opnieuw bepaald op de testdataset, en zo ja, welke onderdelen zijn vastgelegd? Vink alle opties aan die van toepassing zijn.",
-        "items": {
-          "type": "string",
-          "enum": [
-            "De prestaties zijn op dezelfde manier als eerder berekend, nu op de testdataset",
-            "Er is vastgesteld of die prestaties binnen de vooraf bepaalde marges vallen",
-            "Het onderscheid tussen groepen is op dezelfde manier als eerder berekend, nu op de testdataset",
-            "Er is vastgelegd dat alleen bij voldoende prestaties naar de volgende stap wordt gegaan",
-            "Geen van de bovenstaande"
-          ]
-        },
-        "minItems": 1,
-        "uniqueItems": true
+        "type": "string",
+        "title": "Zijn de technische prestaties en de mate van onderscheid opnieuw bepaald op de testdataset, op dezelfde manier als eerder tijdens het ontwerp, en is vastgesteld dat de resultaten binnen de vooraf bepaalde marges vallen voordat naar de volgende stap wordt gegaan? Hieronder wordt toegelicht wat dit inhoudt.",
+        "enum": [
+          "Ja",
+          "Nee"
+        ]
       },
       "q2-juridische-toets": {
         "type": "array",
-        "title": "Is getoetst of het profileringsinstrument voldoet aan het verbod op discriminatie, aan de hand van alle vier de voorwaarden? Vink alle opties aan die van toepassing zijn.",
+        "title": "Is getoetst of het profileringsinstrument voldoet aan het verbod op discriminatie, aan de hand van alle vier de voorwaarden? Hieronder is per voorwaarde aangegeven welke eerdere uitkomsten daarvoor relevant zijn. Vink alle opties aan die van toepassing zijn.",
         "items": {
           "type": "string",
           "enum": [
@@ -40,20 +32,26 @@
         "minItems": 1,
         "uniqueItems": true
       },
-      "q3-praktijkvalidatie": {
+      "q3-uitkomst-juridische-toets": {
+        "type": "string",
+        "title": "Voldoet het profileringsinstrument aan alle vier de voorwaarden van de juridische toets? Bij een nee is er sprake van strijd met het discriminatieverbod en mag het instrument niet in gebruik worden genomen.",
+        "enum": [
+          "Ja",
+          "Nee"
+        ]
+      },
+      "q4-praktijkvalidatie": {
         "type": "array",
-        "title": "Is het profileringsinstrument in de praktijk gevalideerd met voldoende risicobeperkende maatregelen, en zo ja, welke onderdelen zijn ingericht en vastgelegd? Vink alle opties aan die van toepassing zijn.",
+        "title": "Is het profileringsinstrument in de praktijk gevalideerd middels een pilot met voldoende risicobeperkende maatregelen, en zo ja, welke onderdelen zijn ingericht en vastgelegd? Vink alle opties aan die van toepassing zijn.",
         "items": {
           "type": "string",
           "enum": [
-            "De noodzaak van een pilot is bewust afgewogen, gezien de impact ervan",
-            "Een eventuele pilot is bewust klein en kort gehouden",
-            "Alle uitkomsten en verwerkingen worden tijdens de pilot doorlopend vastgelegd en gevolgd",
+            "De pilot is bewust klein en kort gehouden",
+            "Alle uitkomsten en verwerkingen tijdens de pilot zijn doorlopend vastgelegd en gevolgd",
             "Er zijn vooraf stopcriteria vastgesteld en er zijn waarborgen voor herstelmaatregelen",
             "Geraakte personen en stakeholders zijn vooraf ingelicht over waarom de pilot plaatsvindt, hoe lang die loopt en wat er met hun gegevens gebeurt, tenzij er zwaarwegende en vastgelegde redenen zijn om dat niet te doen",
             "Er is vastgelegd wie verantwoordelijk is voor uitvoering en documentatie en wie ingrijpt",
-            "Waar mogelijk is een controlegroep opgenomen die zonder instrument wordt behandeld",
-            "De pilot is geëvalueerd door de eerdere beoordelingen opnieuw te doorlopen, de impact op het hele besluitvormingsproces te analyseren en te kijken naar onvoorziene gevolgen",
+            "De pilot is geëvalueerd door de eerdere beoordelingen over prestaties en onderscheid opnieuw te doorlopen, de impact op het hele besluitvormingsproces te analyseren en te kijken naar onvoorziene gevolgen",
             "Opzet en uitkomsten zijn vastgelegd in een apart rapport over de validatie in de praktijk dat deel uitmaakt van het dossier voor verantwoording",
             "Geen van de bovenstaande"
           ]
@@ -61,15 +59,13 @@
         "minItems": 1,
         "uniqueItems": true
       },
-      "q4-onafhankelijke-beoordeling": {
+      "q5-onafhankelijke-beoordeling": {
         "type": "array",
-        "title": "Is het ontwikkelproces beoordeeld door een onafhankelijke partij (of intern bij lage impact), en waaraan is het profileringsinstrument daarbij getoetst? Vink alle opties aan die van toepassing zijn.",
+        "title": "Is het ontwikkelproces onderworpen aan een onafhankelijke audit (of, bij lage impact, een interne beoordeling), en waaraan is het profileringsinstrument daarbij getoetst? Vink alle opties aan die van toepassing zijn.",
         "items": {
           "type": "string",
           "enum": [
-            "Het ontwikkelproces is getoetst aan deze norm en aan relevante wet- en regelgeving",
-            "Bij lage impact is bewust gekozen voor een interne beoordeling in plaats van een onafhankelijke",
-            "Het instrument is getoetst aan de stappen van deze norm",
+            "Het ontwikkelproces is getoetst aan de normen, uitgangspunten en processtapen van NTA 8047",
             "Het instrument is getoetst aan het algoritmebeleid van de organisatie",
             "Het instrument is getoetst aan relevant extern beleid en relevante externe richtlijnen en kaders",
             "Geen van de bovenstaande"
@@ -78,9 +74,17 @@
         "minItems": 1,
         "uniqueItems": true
       },
-      "q5-definitieve-afweging": {
+      "q6-expertises": {
         "type": "string",
-        "title": "Is met alle inzichten uit de voorgaande fasen de juridische toets nogmaals doorlopen om tot een eindoordeel te komen, en is op basis daarvan besloten of het instrument gereed is, moet worden aangepast of (nog) niet voldoet, met oog voor overgebleven risico's op discriminerende effecten in de omliggende processen?",
+        "title": "Waren er bij de voorgaande stappen (de prestaties en het onderscheid op de testdataset, de juridische toets, de uitkomst daarvan, de validatie in de praktijk, de onafhankelijke audit) verschillende vakgebieden betrokken, in elk geval de juridische, technische en ethische invalshoek?",
+        "enum": [
+          "Ja",
+          "Nee"
+        ]
+      },
+      "q7-definitieve-afweging": {
+        "type": "string",
+        "title": "Is met alle inzichten uit de voorgaande stappen de juridische toets nogmaals doorlopen, waarbij verschillende vakgebieden — in elk geval de juridische, technische en ethische invalshoek — betrokken waren, om tot een eindoordeel te komen en te besluiten of het instrument gereed is, moet worden aangepast of (nog) niet voldoet, met oog voor overgebleven risico's op discriminerende effecten in de omliggende processen?",
         "enum": [
           "Ja",
           "Nee"
@@ -92,7 +96,7 @@
         "default": "De inhoud van deze vragenlijst volgt."
       }
     },
-    "required": ["q5-definitieve-afweging"]
+    "required": ["q1-prestaties-onderscheid-testdataset", "q3-uitkomst-juridische-toets", "q6-expertises", "q7-definitieve-afweging"]
   },
   "uiSchema": {
     "intro": {
@@ -100,47 +104,63 @@
       "ui:widget": "NtaIntroWidget",
       "ui:options": {
         "label": false,
-        "introText": "Om te kunnen beoordelen of aan dit deel van de NTA wordt voldaan, moet het bestuur de volgende procedurele en technische onderdelen omvatten:",
+        "introText": "Om te kunnen beoordelen of aan dit deel van de NTA wordt voldaan, moet het algoritme governance de volgende procedurele en technische onderdelen omvatten:",
         "items": [
           "Voorziening van testdataset niet gebruikt tijdens ontwikkeling",
           "Onafhankelijke prestatiemeting en biasanalyse op de testdataset",
           "Juridische toets",
-          "Praktijkvalidatie",
+          "Validatie in de praktijk",
           "Onafhankelijke audit",
-          "Een definitief beslismoment om ingebruikneming van een profileringsalgoritme af te wegen op basis van het bovenstaande",
-          "Inzet van technische, juridische en ethische expertises in de bovenstaande stappen",
-          "Betrokkenheid van belanghebbenden/stakeholders bij ten minste de afweging ingebruikneming"
+          "Een definitief beslismoment om af te wegen of het profileringsinstrument in gebruik wordt genomen, op basis van het bovenstaande",
+          "Inzet van technische, juridische en ethische expertises in alle bovenstaande stappen",
+          "Betrokkenheid van zowel verschillende vakgebieden als geraakte personen en stakeholders bij ten minste het beslismoment over ingebruikname"          
         ]
       }
     },
     "q1-prestaties-onderscheid-testdataset": {
-      "ui:widget": "checkboxes",
+      "ui:widget": "radio",
       "ui:id": "q1",
       "ui:group": "q1",
-      "ui:groupTitle": "Prestaties en onderscheid op de testdataset"
+      "ui:groupTitle": "Prestaties en onderscheid op de testdataset",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "**Prestaties**: bereken de prestatiematen die tijdens het ontwerp zijn vastgelegd (zoals nauwkeurigheid, precisie, sensitiviteit, specificiteit of AUC) opnieuw, nu door het instrument toe te passen op de testdataset en de toegekende labels te vergelijken met de werkelijke waarden. Stel vast of het resultaat binnen de eerder afgesproken marges valt.\n\n**Onderscheid**: bereken de gelijkheidsmaatstaven die tijdens het ontwerp zijn vastgelegd (ten minste demografische pariteit) opnieuw op de testdataset, door de relevante groepen en groepscombinaties met elkaar te vergelijken, en beoordeel of de gevonden verschillen aanvaardbaar blijven."
     },
     "q2-juridische-toets": {
       "ui:widget": "checkboxes",
       "ui:id": "q2",
       "ui:group": "q2",
-      "ui:groupTitle": "Juridische toets"
+      "ui:groupTitle": "Juridische toets",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "**Legitiem doel**: baseer dit oordeel op de probleemverkenning; op de beschrijving van doel en grondslag van het besluitvormingsproces, inclusief — waar van toepassing — de onderbouwing bij toezicht of handhaving die op gedragsverandering is gericht; en op de belangen van geraakte personen en stakeholders die eerder in kaart zijn gebracht.\n\n**Geschiktheid**: baseer dit oordeel op dezelfde doelbeschrijving en de belangen van geraakte personen en stakeholders; op het eerdere onderzoek naar alternatieven voor profilering; op de prestaties en het onderscheid die tijdens het ontwerp zijn gemeten en statistisch getoetst, met eventuele iteraties daarop; en op de prestaties en het onderscheid zoals die opnieuw zijn bepaald op de testdataset.\n\n**Subsidiariteit**: baseer dit oordeel op het eerdere onderzoek naar alternatieven voor profilering en op de afweging van het instrument tegen die alternatieven.\n\n**Proportionaliteit**: weeg het gemaakte onderscheid en de voorzienbare nadelen af tegen de bijdrage aan het doel en het maatschappelijk gewicht daarvan. Baseer die afweging op de volledige probleemverkenning en doelbepaling; op de belangen en alternatieven die daarbij zijn betrokken; en op de prestaties en het onderscheid zoals gemeten op de testdataset."
     },
-    "q3-praktijkvalidatie": {
-      "ui:widget": "checkboxes",
+    "q3-uitkomst-juridische-toets": {
+      "ui:widget": "radio",
       "ui:id": "q3",
       "ui:group": "q3",
-      "ui:groupTitle": "Validatie in de praktijk"
+      "ui:groupTitle": "Uitkomst van de juridische toets"
     },
-    "q4-onafhankelijke-beoordeling": {
+    "q4-praktijkvalidatie": {
       "ui:widget": "checkboxes",
       "ui:id": "q4",
       "ui:group": "q4",
-      "ui:groupTitle": "Onafhankelijke beoordeling"
+      "ui:groupTitle": "Validatie in de praktijk"
     },
-    "q5-definitieve-afweging": {
-      "ui:widget": "radio",
+    "q5-onafhankelijke-beoordeling": {
+      "ui:widget": "checkboxes",
       "ui:id": "q5",
       "ui:group": "q5",
+      "ui:groupTitle": "Onafhankelijke audit"
+    },
+    "q6-expertises": {
+      "ui:widget": "radio",
+      "ui:id": "q6",
+      "ui:group": "q6",
+      "ui:groupTitle": "Betrokken vakgebieden"
+    },
+    "q7-definitieve-afweging": {
+      "ui:widget": "radio",
+      "ui:id": "q7",
+      "ui:group": "q7",
       "ui:groupTitle": "Eindoordeel"
     }
   }
