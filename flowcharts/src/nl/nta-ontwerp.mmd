@@ -5,57 +5,73 @@ flowchart LR
     classDef cat_result fill:#005AA7,stroke:#003c70,color:#fff,font-weight:bold
     linkStyle default stroke:#005AA7,stroke-width:1.2px
 
-    %% ════════ Q1 — 7.2 Doelvariabele ════════
-    Q1["NTA 8047 § 7.2 · Definieer en<br/>onderbouw doelvariabele<br/>Relatie met het doel, definitie,<br/>meetbaarheid, datakwaliteit en<br/>werkinstructies<br/>(5 vereisten)"]:::Q
+    %% ════════ Q1 — Doelvariabele en dataset ════════
+    Q1["Doelvariabele en dataset<br/>Keuze doelvariabele en dataset<br/>onderbouwd: relatie met doel,<br/>definitie, meetbaarheid en<br/>datakwaliteit?<br/>(6 vereisten)"]:::Q
     Q1 --> Q2
 
-    %% ════════ Q2 — 7.3.1 Datasets ════════
-    Q2["NTA 8047 § 7.3.1 · Datasets<br/>Populatie en referentiepopulatie,<br/>(aselecte) steekproef, ontwikkel-,<br/>validatie- en testdataset<br/>(5 vereisten)"]:::Q
+    %% ════════ Q2 — Niet-categorische doelvariabele ════════
+    Q2["Niet-categorische doelvariabele<br/>Als de doelvariabele niet<br/>categorisch is: onderbouwd<br/>waarom dat niet mogelijk of<br/>wenselijk was?<br/>(1 vereiste)"]:::Q
     Q2 --> Q3
 
-    %% ════════ Q3 — 7.3.2 Datakwaliteit ════════
-    Q3["NTA 8047 § 7.3.2 · Datakwaliteit<br/>Accuraatheid, compleetheid,<br/>representativiteit, consistentie<br/>en actualiteit<br/>(5 vereisten)"]:::Q
+    %% ════════ Q3 — Werken met meerdere datasets ════════
+    Q3["Werken met meerdere datasets<br/>Populatie, steekproef,<br/>ontwikkel-, validatie- en<br/>testdataset afgebakend?<br/>(5 vereisten)"]:::Q
     Q3 --> Q4
 
-    %% ════════ Q4 — 7.3.3 Documentatie van datasets ════════
-    Q4["NTA 8047 § 7.3.3 · Documentatie<br/>van datasets<br/>Herkomst en dataverzameling,<br/>samenstelling en bewerkingen<br/>(3 vereisten)"]:::Q
+    %% ════════ Q4 — Ontwikkeling zonder willekeurige steekproef ════════
+    Q4["Ontwikkeling zonder willekeurige steekproef<br/>Bij één dataset zonder<br/>willekeurige steekproef:<br/>afweging tegen alternatieven<br/>gemotiveerd vastgelegd?<br/>(1 vereiste)"]:::Q
     Q4 --> Q5
 
-    %% ════════ Q5 — 7.4.2 Kwalitatieve analyse ════════
-    Q5["NTA 8047 § 7.4.2 · Kwalitatieve<br/>analyse<br/>Profileringskenmerken inventariseren,<br/>bezwaren wegen en de gemaakte<br/>keuzes onderbouwen<br/>(3 vereisten)"]:::Q
+    %% ════════ Q5 — Kwaliteit van de data ════════
+    Q5["Kwaliteit van de data<br/>Datakwaliteit beoordeeld op<br/>juistheid, volledigheid,<br/>representativiteit, samenhang<br/>en actualiteit?<br/>(5 vereisten)"]:::Q
     Q5 --> Q6
 
-    %% ════════ Q6 — 7.4.3 Kwantitatieve analyse ════════
-    Q6["NTA 8047 § 7.4.3 · Kwantitatieve<br/>analyse<br/>Proxyanalyse op relevante gronden<br/>en dataminimalisatie<br/>(2 vereisten)"]:::Q
+    %% ════════ Q6 — Documentatie van de datasets ════════
+    Q6["Documentatie van de datasets<br/>Datasets gedocumenteerd op<br/>herkomst, opbouw en<br/>bewerkingen?<br/>(3 vereisten)"]:::Q
     Q6 --> Q7
 
-    %% ════════ Q7 — 7.5 Algoritmekeuze ════════
-    Q7["NTA 8047 § 7.5 · Algoritmekeuze<br/>Type algoritme onderbouwen en<br/>bepalen of het onderdeel is van een<br/>AI-systeem volgens de AI-verordening<br/>(2 vereisten)"]:::Q
+    %% ════════ Q7 — Kwalitatieve toets van kenmerken ════════
+    Q7["Kwalitatieve toets van kenmerken<br/>Selectiekenmerken<br/>multidisciplinair getoetst op<br/>juridische en ethische<br/>bezwaren?<br/>(5 vereisten)"]:::Q
     Q7 --> Q8
 
-    %% ════════ Q8 — 7.6 Opstellen van profileringsalgoritme ════════
-    Q8["NTA 8047 § 7.6 · Opstellen van<br/>profileringsalgoritme<br/>Regelgebaseerd: regels, drempel-<br/>waarden en gewichten. Datagebaseerd:<br/>training en gemaakte keuzes<br/>(2 vereisten)"]:::Q
+    %% ════════ Q8 — Kwantitatieve toets van kenmerken ════════
+    Q8["Kwantitatieve toets van kenmerken<br/>Selectiekenmerken kwantitatief<br/>getoetst op verband met<br/>beschermde gronden<br/>(proxyanalyse)?<br/>(2 vereisten)"]:::Q
     Q8 --> Q9
 
-    %% ════════ Q9 — 7.7.2 Prestaties ════════
-    Q9["NTA 8047 § 7.7.2 · Prestaties voor<br/>de doelvariabele<br/>Prestatiemetrieken en bandbreedtes<br/>bepalen, meten op de validatiedataset<br/>en resultaten uitleggen<br/>(6 vereisten)"]:::Q
+    %% ════════ Q9 — Keuze en onderbouwing van het type instrument ════════
+    Q9["Keuze en onderbouwing van het type instrument<br/>Type instrument (regels, data-<br/>gedreven of combinatie)<br/>gekozen en onderbouwd?<br/>(5 vereisten)"]:::Q
     Q9 --> Q10
 
-    %% ════════ Q10 — 7.7.3 Indirect onderscheid ════════
-    Q10["NTA 8047 § 7.7.3 · Meten van<br/>indirect onderscheid<br/>Relevante gronden en gelijkheids-<br/>metrieken bepalen, onderscheid meten<br/>en resultaten uitleggen<br/>(6 vereisten)"]:::Q
+    %% ════════ Q10 — Onderbouwing bij een regelgebaseerd instrument ════════
+    Q10["Onderbouwing bij een regelgebaseerd instrument<br/>Bij een regelgebaseerd<br/>instrument: elke regel,<br/>drempelwaarde en gewicht<br/>onderbouwd?<br/>(1 vereiste)"]:::Q
     Q10 --> Q11
 
-    %% ════════ Q11 — 7.7.4 Statistisch toetsen ════════
-    Q11["NTA 8047 § 7.7.4 · Statistisch<br/>toetsen<br/>Effectgrootte, statistische<br/>significantie en hypothesetoetsen<br/>(3 vereisten)"]:::Q
+    %% ════════ Q11 — Prestaties meten ════════
+    Q11["Prestaties meten<br/>Prestaties gemeten op de<br/>validatiedataset, getoetst aan<br/>vooraf bepaalde marges?<br/>(6 vereisten)"]:::Q
     Q11 --> Q12
 
-    %% ════════ Q12 — 7.7.5 Herziening metrieken en bandbreedtes ════════
-    Q12["NTA 8047 § 7.7.5 · Herziening van<br/>metrieken en bandbreedtes<br/>Motivatie vóór de fase Verificatie<br/>en validatie, en bij latere aanpassing<br/>in de levenscyclus<br/>(2 vereisten)"]:::Q
+    %% ════════ Q12 — Indirect onderscheid meten ════════
+    Q12["Indirect onderscheid meten<br/>Indirect onderscheid tussen<br/>groepen multidisciplinair<br/>gemeten en getoetst aan<br/>marges?<br/>(6 vereisten)"]:::Q
     Q12 --> Q13
 
-    %% ════════ Q13 — 7.8 Documentatie ontwikkeling ════════
-    Q13["NTA 8047 § 7.8 · Documenteer<br/>ontwikkeling profileringsalgoritme<br/>Doelvariabele, algoritmetype,<br/>profileringskenmerken, methode<br/>en definitief algoritme<br/>(5 vereisten)"]:::Q
-    Q13 --> RES
+    %% ════════ Q13 — Doorgaan zonder meting van onderscheid ════════
+    Q13["Doorgaan zonder meting van onderscheid<br/>Als onderscheid niet meetbaar<br/>was: doorgaan onderbouwd met<br/>risicobeperkende maatregelen<br/>en monitoring?<br/>(5 vereisten)"]:::Q
+    Q13 --> Q14
+
+    %% ════════ Q14 — Statistisch toetsen van de metingen ════════
+    Q14["Statistisch toetsen van de metingen<br/>Prestaties en onderscheid<br/>statistisch getoetst op toeval?<br/>(1 vereiste)"]:::Q
+    Q14 --> Q15
+
+    %% ════════ Q15 — Herziening van maatstaven en marges ════════
+    Q15["Herziening van maatstaven en marges<br/>Maatstaven en marges vooraf<br/>vastgesteld, met motivatie voor<br/>latere herziening?<br/>(1 vereiste)"]:::Q
+    Q15 --> Q16
+
+    %% ════════ Q16 — Iteratief meten en beslissen ════════
+    Q16["Iteratief meten en beslissen<br/>Na elke iteratie prestaties en<br/>onderscheid herhaald tot beide<br/>aanvaardbaar zijn?<br/>(1 vereiste)"]:::Q
+    Q16 --> Q17
+
+    %% ════════ Q17 — Beslismoment over verder ontwikkelen ════════
+    Q17["Beslismoment over verder ontwikkelen<br/>Afsluitend, multidisciplinair<br/>beslismoment over verder<br/>ontwikkelen gehouden?<br/>(1 vereiste)"]:::Q
+    Q17 --> RES
 
     %% ════════ Afsluiting ════════
-    RES["Resultaat<br/>Hoofdstuk 7 vastgelegd<br/>(inhoud van de resultaten-<br/>pagina volgt)"]:::cat_result
+    RES["Resultaat<br/>vastgelegd<br/>(inhoud van de resultaten-<br/>pagina volgt)"]:::cat_result

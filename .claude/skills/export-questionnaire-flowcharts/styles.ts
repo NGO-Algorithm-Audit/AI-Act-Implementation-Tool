@@ -3,8 +3,12 @@
 // Terminal-node colours are applied by mapping each questionnaire outcome to one
 // of these classDef names (see generate.ts -> outcomeClass()).
 
-const init = (nodeSpacing: number, rankSpacing: number) =>
-  `%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'Avenir Next, Avenir, Helvetica, sans-serif', 'fontSize': '14px', 'lineColor': '#005AA7', 'primaryColor': '#005AA7', 'edgeLabelBackground': '#ffffff'}, 'flowchart': {'curve': 'basis', 'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': ${nodeSpacing}, 'rankSpacing': ${rankSpacing}, 'padding': 24}}}%%`;
+const init = (nodeSpacing: number, rankSpacing: number, extraThemeVars = "") =>
+  `%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'Avenir Next, Avenir, Helvetica, sans-serif', 'fontSize': '14px', 'lineColor': '#005AA7', 'primaryColor': '#005AA7', 'edgeLabelBackground': '#ffffff'${extraThemeVars}}, 'flowchart': {'curve': 'basis', 'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': ${nodeSpacing}, 'rankSpacing': ${rankSpacing}, 'padding': 24}}}%%`;
+
+// Only charts with subgraphs (currently just the merged `nta` chart) need cluster
+// theming — Mermaid's default cluster orange is not house style (see SKILL.md).
+const CLUSTER_THEME_VARS = ", 'clusterBkg': '#f2f7fb', 'clusterBorder': '#9dbcd8', 'titleColor': '#005AA7'";
 
 const Q = "classDef Q fill:#daeaf7,stroke:#005aa7,color:#000";
 const linkDefault = "linkStyle default stroke:#005AA7,stroke-width:1.2px";
@@ -119,17 +123,26 @@ export const STYLES: Record<string, ChartStyle> = {
   // The four NTA 8047 chapter charts share one style: they are linear documentation
   // forms, so there is a single question class and one terminal (the result screen).
   ...Object.fromEntries(
-    ["nta", "nta-wenselijkheid", "nta-ontwerp", "nta-verificatie", "nta-gebruik"].map((k) => [
+    ["nta-wenselijkheid", "nta-ontwerp", "nta-verificatie", "nta-gebruik"].map((k) => [
       k,
       {
         init: init(80, 110),
-        classDefs: [
-          Q,
-          "classDef entry fill:#e0f2fe,stroke:#0284c7,color:#0c4a6e,font-weight:bold",
-          "classDef cat_result fill:#005AA7,stroke:#003c70,color:#fff,font-weight:bold",
-          linkDefault,
-        ],
+        // No `entry` classDef here: unlike the merged chart, a standalone chapter
+        // chart has no entry-connector node (it opens straight at its first question).
+        classDefs: [Q, "classDef cat_result fill:#005AA7,stroke:#003c70,color:#fff,font-weight:bold", linkDefault],
       },
     ])
   ),
+
+  // The merged chart draws the four chapters as clustered subgraphs, so — unlike the
+  // four standalone chapter charts above — it needs the cluster theme variables too.
+  nta: {
+    init: init(80, 110, CLUSTER_THEME_VARS),
+    classDefs: [
+      Q,
+      "classDef entry fill:#e0f2fe,stroke:#0284c7,color:#0c4a6e,font-weight:bold",
+      "classDef cat_result fill:#005AA7,stroke:#003c70,color:#fff,font-weight:bold",
+      linkDefault,
+    ],
+  },
 };

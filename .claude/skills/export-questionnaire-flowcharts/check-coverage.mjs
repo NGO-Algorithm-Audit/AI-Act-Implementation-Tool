@@ -140,5 +140,43 @@ for (const chart of CHARTS) {
   } else console.log(`  ${chart}: ok (${a.size} nodes both languages)`);
 }
 
+// ── NTA content + requirement-count coverage ─────────────────────────────────────
+// The nta-* charts are built by nta-generate.mjs from the schema + nta-content.ts, not
+// hand-edited, so what matters here is: (a) does every schema question have a written
+// paraphrase yet, and (b) does the "(n vereisten)" on each box still match what the
+// schema says now — which only goes stale if the schema changed since the last
+// `nta-generate.mjs` run.
+console.log("\n── nta content & requirement counts ──");
+{
+  const { NTA_CONTENT } = await import("./nta-content.ts");
+  const { extractQuestions, vereistenLabel } = await import("./nta-schema.ts");
+  for (const [chart, file] of Object.entries(NTA)) {
+    const schema = readJSON(`src/schemas/nta/nl/${file}.json`);
+    const questions = extractQuestions(schema);
+    const msgs = [];
+
+    const missingContent = questions.filter((q) => !NTA_CONTENT[file]?.[q.qid]).map((q) => q.qid);
+    if (missingContent.length) msgs.push(`no nta-content.ts entry yet for: ${missingContent.join(", ")}`);
+
+    const mmdPath = join(SRC, "nl", `${chart}.mmd`);
+    if (!existsSync(mmdPath)) {
+      msgs.push(`MISSING master ${mmdPath} — run nta-generate.mjs`);
+    } else {
+      const mmd = readFileSync(mmdPath, "utf8");
+      questions.forEach((q, i) => {
+        const nid = `Q${i + 1}`;
+        const m = mmd.match(new RegExp(`^\\s*${nid}\\[.*?\\((\\d+) vereiste`, "m"));
+        if (!m) return; // node itself is reported by the Q-number check above
+        const shown = +m[1];
+        if (shown !== q.count)
+          msgs.push(`${nid} (${q.qid}) shows (${shown} vereiste(n)) but the schema now has ${q.count} — rerun nta-generate.mjs`);
+      });
+    }
+
+    if (msgs.length) { problems += msgs.length; msgs.forEach((m) => console.error(`  ${chart}: ${m}`)); }
+    else console.log(`  ${chart}: ok (${questions.length} questions, content + counts match)`);
+  }
+}
+
 console.log(problems ? `\n${problems} issue(s) — review before exporting.` : "\nAll charts in sync with the schemas.");
 process.exit(problems ? 1 : 0);

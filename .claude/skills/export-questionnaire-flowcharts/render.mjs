@@ -14,9 +14,24 @@ import { tmpdir } from "node:os";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO = resolve(__dirname, "../../..");
-const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
-const LOGO = "/Users/jurriaan/Library/CloudStorage/OneDrive-AlgorithmAudit/Team Algorithm Audit/House style/01 Logo/logo_MAIN.svg";
-const outDir = process.argv[2] || resolve(REPO, "flowcharts");
+// Chrome + the logo asset live at per-machine paths (this is a local OneDrive sync of
+// the house-style folder) — the candidates below cover the machines this has been run
+// from so far. Add yours if neither resolves; see "Customising" in SKILL.md.
+const CHROME_CANDIDATES = [
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+  "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+  "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+];
+const LOGO_CANDIDATES = [
+  "/Users/jurriaan/Library/CloudStorage/OneDrive-AlgorithmAudit/Team Algorithm Audit/House style/01 Logo/logo_MAIN.svg",
+  "C:\\Users\\kaloj\\Algorithm Audit\\Team Algorithm Audit - Documents\\House style\\01 Logo\\logo_MAIN.svg",
+];
+const CHROME = CHROME_CANDIDATES.find(existsSync) || CHROME_CANDIDATES[0];
+const LOGO = LOGO_CANDIDATES.find(existsSync) || LOGO_CANDIDATES[0];
+// mermaid-cli is invoked through npx; on Windows that resolves to npx.cmd, which
+// execFileSync can only launch via a shell.
+const NPX = process.platform === "win32" ? "npx.cmd" : "npx";
+const outDir = process.argv[2] ? resolve(REPO, process.argv[2]) : resolve(REPO, "flowcharts");
 // Optional chart filter: any further arguments limit the run to those chart keys,
 // so a single chapter can be re-exported without rewriting every other PDF.
 const only = process.argv.slice(3);
@@ -103,6 +118,15 @@ const charts = ["identification", "identification-ai", "identification-algo", "i
   "nta", "nta-wenselijkheid", "nta-ontwerp", "nta-verificatie", "nta-gebruik"];
 const tmp = mkdtempSync(join(tmpdir(), "fc-"));
 
+// mermaid-cli's own puppeteer-config.json hardcodes a Chrome path too (separate from
+// CHROME above, which only covers the header/PDF steps run directly by this script) —
+// write a per-run copy with the resolved path instead of editing the committed file.
+const puppeteerConfigPath = join(tmp, "puppeteer-config.json");
+writeFileSync(
+  puppeteerConfigPath,
+  JSON.stringify({ ...JSON.parse(readFileSync(join(__dirname, "puppeteer-config.json"), "utf8")), executablePath: CHROME })
+);
+
 for (const lang of ["en", "nl"]) {
   // curated masters live in <outDir>/src/<lang>; PDFs are written to <outDir>/<lang>
   const srcDir = join(outDir, "src", lang);
@@ -115,9 +139,9 @@ for (const lang of ["en", "nl"]) {
     if (!mmd) continue;
     const svgPath = join(tmp, `${lang}-${chart}.svg`);
     // 1) mermaid -> svg (Avenir themeCSS, installed Chrome)
-    execFileSync("npx", ["--yes", "@mermaid-js/mermaid-cli", "-i", mmd, "-o", svgPath,
-      "-c", join(__dirname, "mmdc-config.json"), "-p", join(__dirname, "puppeteer-config.json"),
-      "-b", "white"], { stdio: "inherit" });
+    execFileSync(NPX, ["--yes", "@mermaid-js/mermaid-cli", "-i", mmd, "-o", svgPath,
+      "-c", join(__dirname, "mmdc-config.json"), "-p", puppeteerConfigPath,
+      "-b", "white"], { stdio: "inherit", shell: process.platform === "win32" });
     let svg = readFileSync(svgPath, "utf8").replace(/<\?xml[^>]*\?>/, "");
     if (LEFT_ALIGN_ROWS.has(chart)) svg = leftAlignRows(svg);
     const { w, h } = svgSize(svg);
