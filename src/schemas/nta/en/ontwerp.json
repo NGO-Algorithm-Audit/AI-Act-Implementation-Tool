@@ -3,6 +3,11 @@
     "title": "Ontwerp en ontwikkeling",
     "type": "object",
     "properties": {
+      "intro": {
+        "type": "string",
+        "title": "",
+        "default": ""
+      },
       "q1-relatie-doel": {
         "type": "string",
         "title": "1) Relatie met doel: leg uit waarom een juiste voorspelling van het fenomeen achter de doelvariabele helpt om het doel te bereiken. Gebruik daarbij de uitkomsten van 6.2 en 6.3.",
@@ -326,6 +331,29 @@
     }
   },
   "uiSchema": {
+    "intro": {
+      "ui:id": "start",
+      "ui:widget": "NtaIntroWidget",
+      "ui:options": {
+        "label": false,
+        "introText": "To assess whether this part of the NTA is met, the following information must be available:",
+        "items": [
+          "Justification of the target variable and its relation to the intended objective and to historical data",
+          "Data quality assessment and dataset documentation",
+          "Working instructions/the role of humans in assigning labels in the dataset",
+          "Qualitative assessment of profiling characteristics, including proxy analysis and data minimisation",
+          "Justification of the type of algorithm",
+          "Bias analysis, including the choice of protected grounds",
+          "Random sample and control group (where possible)",
+          "Justification of the choice of profiling characteristics",
+          "Performance measurement and bias analysis, including statistical testing",
+          "Legal justification of the distinction made (objective justification)",
+          "A concluding decision point to weigh further development of a profiling algorithm on the basis of the above",
+          "Involvement of technical, legal and ethical expertise in the above steps",
+          "Involvement of interested parties/stakeholders in the above steps"
+        ]
+      }
+    },
     "q1-relatie-doel": {
       "ui:widget": "textarea",
       "ui:id": "q1",

@@ -143,11 +143,13 @@
       "ui:widget": "NtaIntroWidget",
       "ui:options": {
         "label": false,
-        "introText": "Om te kunnen beoordelen of aan dit deel van de NTA wordt voldaan, moet het bestuur de volgende procedurele en technische onderdelen omvatten:",
+        "introText": "Om te kunnen beoordelen of aan dit deel van de NTA wordt voldaan, moet de volgende informatie beschikbaar zijn:",
         "items": [
-          "Analyse van het probleem, de doelstellingen  en de belangen in overweging genomen vóór de eventuele inzet van een profileringsalgoritme",
-          "Inventarisatie en afweging van alternatieven",
-          "Een afsluitend beslismoment om doorontwikkeling van een profileringsalgoritme af te wegen op basis van het bovenstaande",
+          "Governancekader voor gebruik van profileringsalgoritmes in verschillende stappen van levenscyclus, incl. documentatievereisten",
+          "Data Protection Impact Assessment (DPIA)",
+          "Probleemanalyse waarom inzet profileringsalgoritme nodig is, incl. doelbeschrijving en succescriteria",
+          "Overzicht en afweging van alternatieven",
+          "Een afsluitend beslismoment om doorontwikkeling van een profileringsalgoritme af te wegen op basis van bovenstaande informatie",
           "Inzet van technische, juridische en ethische expertises in de bovenstaande stappen",
           "Betrokkenheid van belanghebbenden/stakeholders in de bovenstaande stappen"
         ]

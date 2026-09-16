@@ -88,6 +88,7 @@
   "category gdpr": "GDPR",
   "badge sadm": "Solely automated decision-making (sADM)",
   "badge profiling": "Profiling",
+  "badge checklist": "Checklist",
   "meta data ai note tooltip": "AI will assess whether questions from the compliance questionnaires can be answered and pre-filled with confidence, based on the user's input and uploaded documents. If the AI is uncertain about an answer, that question will be left blank. All pre-filled answers are clearly flagged for the user for verification.",
   "questionnaire 3 name": "Role and status",
   "questionnaire 4 name": "Obligations",
