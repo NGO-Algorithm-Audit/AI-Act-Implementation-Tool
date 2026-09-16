@@ -156,14 +156,13 @@
       "ui:widget": "NtaIntroWidget",
       "ui:options": {
         "label": false,
-        "introText": "Om te kunnen beoordelen of aan dit deel van de NTA wordt voldaan, moet het bestuur de volgende procedurele en technische onderdelen omvatten:",
+        "introText": "Om te kunnen beoordelen of aan dit deel van de NTA wordt voldaan, moet de volgende informatie beschikbaar zijn:",
         "items": [
-          "Voorziening van testdataset niet gebruikt tijdens ontwikkeling",
-          "Onafhankelijke prestatiemeting en biasanalyse op de testdataset",
-          "Juridische toets",
+          "Testdataset die niet gebruikt is tijdens ontwikkeling, incl. prestatiemeting en biasanalyse op de testdataset",
+          "Toets door juridisch experts vanuit o.a. AVG, Awb en Europees non-discriminatierecht",
           "Praktijkvalidatie",
           "Onafhankelijke audit",
-          "Een definitief beslismoment om ingebruikneming van een profileringsalgoritme af te wegen op basis van het bovenstaande",
+          "Een definitief beslismoment om het profileringsalgoritme in gebruik te gaan nemen geïnformeerd op basis van bovenstaande informatie",
           "Inzet van technische, juridische en ethische expertises in de bovenstaande stappen",
           "Betrokkenheid van belanghebbenden/stakeholders bij ten minste de afweging ingebruikneming"
         ]

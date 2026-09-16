@@ -196,15 +196,14 @@
       "ui:widget": "NtaIntroWidget",
       "ui:options": {
         "label": false,
-        "introText": "Om te kunnen beoordelen of aan dit deel van de NTA wordt voldaan, moet het bestuur de volgende procedurele en technische onderdelen omvatten:",
+        "introText": "Om te kunnen beoordelen of aan dit deel van de NTA wordt voldaan, moet de volgende informatie beschikbaar zijn:",
         "items": [
-          "Waarborgen voor consistente uitkomsten bij de behandelend medewerkers",
-          "Selectieprocess met passende aandeel van willekeurige selecties naast het profileringsalgoritme",
+          "Werkinstructies beslismedewerkers, incl. training, hoe om te gaan met output profileringsalgoritme en feedbackmechanisme",
+          "Keuze over aandeel van willekeurige selecties naast het profileringsalgoritme (indien mogelijk)",
           "Waarborgen voor het indienen en behandelen van bewzwaar en beroep",
           "Transparantieverplichtingen",
-          "Monitoren van wijzigingen in het besluitvormingsproces, organisatorische waarborgen en veranderingen, prestaties en onderscheid",
-          "Pereiodieke herevalueren van de juridische toets op basis van de monitoren",
-          "Een afgestemd op de monitoring en herevaluatie beslissingsmoment, om continu gebruik van het profileringsalgoritme af te wegen",
+          "Monitoring, met betrekking tot wijzigingen in het besluitvormingsproces, organisatorische waarborgen, prestaties en gemaakt onderscheid",
+          "Periodieke herevaluatie van de juridische toets op basis van monitoring",
           "Inzet van technische, juridische en ethische expertises in de bovenstaande stappen",
           "Betrokkenheid van belanghebbenden/stakeholders bij ten minste de periodieke afweging continu gebruik"
         ]
