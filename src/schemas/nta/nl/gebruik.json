@@ -3,6 +3,11 @@
     "title": "Gebruik profileringsalgoritme",
     "type": "object",
     "properties": {
+      "intro": {
+        "type": "string",
+        "title": "",
+        "default": ""
+      },
       "q1-informatie-beoordeling": {
         "type": "string",
         "title": "1) Leg vast welke informatie een beslismedewerker gebruikt bij het beoordelen van een zaak.",
@@ -186,6 +191,24 @@
     }
   },
   "uiSchema": {
+    "intro": {
+      "ui:id": "start",
+      "ui:widget": "NtaIntroWidget",
+      "ui:options": {
+        "label": false,
+        "introText": "Om te kunnen beoordelen of aan dit deel van de NTA wordt voldaan, moet de volgende informatie beschikbaar zijn:",
+        "items": [
+          "Werkinstructies beslismedewerkers, incl. training, hoe om te gaan met output profileringsalgoritme en feedbackmechanisme",
+          "Keuze over aandeel van willekeurige selecties naast het profileringsalgoritme (indien mogelijk)",
+          "Waarborgen voor het indienen en behandelen van bewzwaar en beroep",
+          "Transparantieverplichtingen",
+          "Monitoring, met betrekking tot wijzigingen in het besluitvormingsproces, organisatorische waarborgen, prestaties en gemaakt onderscheid",
+          "Periodieke herevaluatie van de juridische toets op basis van monitoring",
+          "Inzet van technische, juridische en ethische expertises in de bovenstaande stappen",
+          "Betrokkenheid van belanghebbenden/stakeholders bij ten minste de periodieke afweging continu gebruik"
+        ]
+      }
+    },
     "q1-informatie-beoordeling": {
       "ui:widget": "textarea",
       "ui:id": "q1",

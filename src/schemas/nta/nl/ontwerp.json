@@ -3,6 +3,11 @@
     "title": "Ontwerp en ontwikkeling",
     "type": "object",
     "properties": {
+      "intro": {
+        "type": "string",
+        "title": "",
+        "default": ""
+      },
       "q1-relatie-doel": {
         "type": "string",
         "title": "1) Relatie met doel: leg uit waarom een juiste voorspelling van het fenomeen achter de doelvariabele helpt om het doel te bereiken. Gebruik daarbij de uitkomsten van 6.2 en 6.3.",
@@ -326,6 +331,29 @@
     }
   },
   "uiSchema": {
+    "intro": {
+      "ui:id": "start",
+      "ui:widget": "NtaIntroWidget",
+      "ui:options": {
+        "label": false,
+        "introText": "Om te kunnen beoordelen of aan dit deel van de NTA wordt voldaan, moet de volgende informatie beschikbaar zijn:",
+        "items": [
+          "Onderbouwing van doelvariabele en relatie tot nagestreefde doel en gebruik van historische data",
+          "Datakwaliteit beoordeling en datasetdocumentatie",
+          "Werkinstructies/rol van de mens met betrekking tot toekennen labels in dataset",
+          "Kwalitatieve weging profileringskenmerken, incl. proxyanalyse en dataminimalisatie",
+          "Onderbouwing type algoritme",
+          "Biasanalyse, incl. keuze beschermde gronden",
+          "Aselecte steekproef en controlegroep (indien mogelijk)",
+          "Onderbouwing keuzes profileringskenmerken",
+          "Prestatiemeting en biasanalyse incl. statistische toetsing",
+          "Juridische onderbouwing gemaakt onderscheid (objectieve rechtvaardiging)",
+          "Een afsluitend beslismoment om doorontwikkeling van een profileringsalgoritme af te wegen op basis van bovenstaande informatie",
+          "Inzet van technische, juridische en ethische expertises in de bovenstaande stappen",
+          "Betrokkenheid van belanghebbenden/stakeholders in bovenstaande stappen"
+        ]
+      }
+    },
     "q1-relatie-doel": {
       "ui:widget": "textarea",
       "ui:id": "q1",

@@ -3,6 +3,11 @@
     "title": "Toetsing",
     "type": "object",
     "properties": {
+      "intro": {
+        "type": "string",
+        "title": "",
+        "default": ""
+      },
       "q1-mandaat": {
         "type": "string",
         "title": "1) Benoem wie bevoegd is te besluiten of het profileringsalgoritme in gebruik wordt genomen.",
@@ -146,6 +151,23 @@
     }
   },
   "uiSchema": {
+    "intro": {
+      "ui:id": "start",
+      "ui:widget": "NtaIntroWidget",
+      "ui:options": {
+        "label": false,
+        "introText": "To assess whether this part of the NTA is met, the following information must be available:",
+        "items": [
+          "A test dataset not used during development, including performance measurement and bias analysis on that test dataset",
+          "Review by legal experts from, among others, a GDPR, General Administrative Law Act (Awb) and non-discrimination perspective",
+          "Validation in practice",
+          "Independent audit",
+          "A final decision point on putting the profiling algorithm into use, informed by the above information",
+          "Involvement of technical, legal and ethical expertise in the above steps",
+          "Involvement of interested parties/stakeholders in at least the decision on putting the algorithm into use"
+        ]
+      }
+    },
     "q1-mandaat": {
       "ui:widget": "textarea",
       "ui:id": "q1",

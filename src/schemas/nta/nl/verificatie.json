@@ -3,6 +3,11 @@
     "title": "Toetsing",
     "type": "object",
     "properties": {
+      "intro": {
+        "type": "string",
+        "title": "",
+        "default": ""
+      },
       "q1-mandaat": {
         "type": "string",
         "title": "1) Benoem wie bevoegd is te besluiten of het profileringsalgoritme in gebruik wordt genomen.",
@@ -146,6 +151,23 @@
     }
   },
   "uiSchema": {
+    "intro": {
+      "ui:id": "start",
+      "ui:widget": "NtaIntroWidget",
+      "ui:options": {
+        "label": false,
+        "introText": "Om te kunnen beoordelen of aan dit deel van de NTA wordt voldaan, moet de volgende informatie beschikbaar zijn:",
+        "items": [
+          "Testdataset die niet gebruikt is tijdens ontwikkeling, incl. prestatiemeting en biasanalyse op de testdataset",
+          "Toets door juridisch experts vanuit o.a. AVG, Awb en Europees non-discriminatierecht",
+          "Praktijkvalidatie",
+          "Onafhankelijke audit",
+          "Een definitief beslismoment om het profileringsalgoritme in gebruik te gaan nemen geïnformeerd op basis van bovenstaande informatie",
+          "Inzet van technische, juridische en ethische expertises in de bovenstaande stappen",
+          "Betrokkenheid van belanghebbenden/stakeholders bij ten minste de afweging ingebruikneming"
+        ]
+      }
+    },
     "q1-mandaat": {
       "ui:widget": "textarea",
       "ui:id": "q1",

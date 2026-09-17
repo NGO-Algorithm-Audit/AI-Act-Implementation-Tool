@@ -3,6 +3,11 @@
     "title": "Wenselijkheid en noodzakelijkheid",
     "type": "object",
     "properties": {
+      "intro": {
+        "type": "string",
+        "title": "",
+        "default": ""
+      },
       "q1-probleem": {
         "type": "string",
         "title": "1) Omschrijf welk probleem met de (eventuele) inzet van een profileringsalgoritme moet worden aangepakt.",
@@ -133,6 +138,23 @@
     }
   },
   "uiSchema": {
+    "intro": {
+      "ui:id": "start",
+      "ui:widget": "NtaIntroWidget",
+      "ui:options": {
+        "label": false,
+        "introText": "Om te kunnen beoordelen of aan dit deel van de NTA wordt voldaan, moet de volgende informatie beschikbaar zijn:",
+        "items": [
+          "Governancekader voor gebruik van profileringsalgoritmes in verschillende stappen van levenscyclus, incl. documentatievereisten",
+          "Data Protection Impact Assessment (DPIA)",
+          "Probleemanalyse waarom inzet profileringsalgoritme nodig is, incl. doelbeschrijving en succescriteria",
+          "Overzicht en afweging van alternatieven",
+          "Een afsluitend beslismoment om doorontwikkeling van een profileringsalgoritme af te wegen op basis van bovenstaande informatie",
+          "Inzet van technische, juridische en ethische expertises in de bovenstaande stappen",
+          "Betrokkenheid van belanghebbenden/stakeholders in de bovenstaande stappen"
+        ]
+      }
+    },
     "q1-probleem": {
       "ui:widget": "textarea",
       "ui:id": "q1",

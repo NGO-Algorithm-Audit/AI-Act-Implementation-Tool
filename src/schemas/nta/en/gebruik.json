@@ -3,6 +3,11 @@
     "title": "Gebruik profileringsalgoritme",
     "type": "object",
     "properties": {
+      "intro": {
+        "type": "string",
+        "title": "",
+        "default": ""
+      },
       "q1-informatie-beoordeling": {
         "type": "string",
         "title": "1) Leg vast welke informatie een beslismedewerker gebruikt bij het beoordelen van een zaak.",
@@ -186,6 +191,24 @@
     }
   },
   "uiSchema": {
+    "intro": {
+      "ui:id": "start",
+      "ui:widget": "NtaIntroWidget",
+      "ui:options": {
+        "label": false,
+        "introText": "To assess whether this part of the NTA is met, the following information must be available:",
+        "items": [
+          "Working instructions for case handlers, including training, how to deal with the output of the profiling algorithm and a feedback mechanism",
+          "A decision on the proportion of random selections alongside the profiling algorithm (where possible)",
+          "Safeguards for lodging and handling objections and appeals",
+          "Transparency obligations",
+          "Monitoring of changes in the decision-making process, organisational safeguards, performance and the distinctions made",
+          "Periodic re-evaluation of the legal review on the basis of monitoring",
+          "Involvement of technical, legal and ethical expertise in the above steps",
+          "Involvement of interested parties/stakeholders in at least the periodic decision on continued use"
+        ]
+      }
+    },
     "q1-informatie-beoordeling": {
       "ui:widget": "textarea",
       "ui:id": "q1",

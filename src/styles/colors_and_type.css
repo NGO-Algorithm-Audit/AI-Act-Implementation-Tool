@@ -74,6 +74,10 @@
   --cma-status-in-use:         #2563eb;
   --cma-status-in-development: #8b5cf6;
 
+  /* Chapter-opener badges */
+  --cma-badge-checklist-bg: #d9e8f3;  /* neutral light blue — "Checklist" */
+  --cma-badge-checklist-fg: #1f4e6b;
+
   /* Legal source badges (inline article references) */
   --cma-source-legal: #f37962;        /* coral — "Art. 6", "Annex III" */
 
