@@ -22,6 +22,7 @@ export default function ({
   onStartQuestionnaire,
   onStartObligations,
   onStartNta,
+  onStartArt50,
   activeLanguage = false,
 }: {
   forms: { id: number; title: string }[];
@@ -29,6 +30,7 @@ export default function ({
   onStartQuestionnaire?: (key: string) => void;
   onStartObligations?: () => void;
   onStartNta?: () => void;
+  onStartArt50?: () => void;
   activeLanguage?: boolean;
 }) {
   const { t, i18n } = useTranslation();
@@ -198,6 +200,34 @@ export default function ({
                     onClick={(e) => {
                       e.stopPropagation();
                       onStartObligations?.();
+                    }}
+                  >
+                    {t("startButton")}
+                  </Button>
+                </ListGroup.Item>
+                {/* Fifth entry: the optional Art. 50 detail questionnaire.
+                    Also not a JSON-Schema wizard picked up via `forms` (it is
+                    loaded separately, see App.tsx's art50Forms), so it too is
+                    rendered as its own fixed entry. */}
+                <ListGroup.Item
+                  className="d-flex flex-row justify-content-between align-items-center"
+                  onClick={() => onStartArt50?.()}
+                  style={{ cursor: "pointer" }}
+                >
+                  <p className="m-0 mr-4">
+                    <span
+                      className="badge me-2"
+                      style={{ backgroundColor: "#005AA7", color: "#fff" }}
+                    >
+                      {t("questionnaire art50 name")}
+                    </span>
+                    <span style={{ marginLeft: "8px" }}>{t("questionnaire art50 title")}</span>
+                  </p>
+                  <Button
+                    variant="primary"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onStartArt50?.();
                     }}
                   >
                     {t("startButton")}

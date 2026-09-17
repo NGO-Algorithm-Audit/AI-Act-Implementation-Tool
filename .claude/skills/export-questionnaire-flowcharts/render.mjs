@@ -15,7 +15,7 @@ import { tmpdir } from "node:os";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO = resolve(__dirname, "../../..");
 const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
-const LOGO = "/Users/jurriaan/Library/CloudStorage/OneDrive-AlgorithmAudit/Team Algorithm Audit/House style/01 Logo/logo_MAIN.svg";
+const LOGO = join(__dirname, "logo_MAIN.svg");
 const outDir = process.argv[2] || resolve(REPO, "flowcharts");
 // Optional chart filter: any further arguments limit the run to those chart keys,
 // so a single chapter can be re-exported without rewriting every other PDF.
@@ -24,9 +24,14 @@ const only = process.argv.slice(3);
 const DESC = (await import("./descriptions.ts")).DESCRIPTIONS ??
   (await import("./descriptions.js")).DESCRIPTIONS;
 
-const logoDataUri = existsSync(LOGO)
-  ? "data:image/svg+xml;base64," + readFileSync(LOGO).toString("base64")
-  : "";
+if (!existsSync(LOGO)) {
+  console.error(
+    `Logo asset not found at ${LOGO} — the Algorithm Audit logo must be vendored ` +
+    `alongside render.mjs. Every exported chart needs it; nothing was rendered.`
+  );
+  process.exit(1);
+}
+const logoDataUri = "data:image/svg+xml;base64," + readFileSync(LOGO).toString("base64");
 
 const svgSize = (svg) => {
   let w = +(svg.match(/<svg[^>]*\swidth="([\d.]+)"/)?.[1] || 0);
@@ -57,7 +62,7 @@ const html = (svg, w, h, title, desc, pageH) => {
   .diagram { }
   .diagram svg { max-width:none !important; }
   </style></head><body><div class="page">
-    <div class="hdr">${logoDataUri ? `<img src="${logoDataUri}" alt="Algorithm Audit"/>` : ""}
+    <div class="hdr"><img src="${logoDataUri}" alt="Algorithm Audit"/>
       <h1>${title}</h1><p>${desc}</p></div>
     <div class="diagram">${svg}</div>
   </div></body></html>${pageH ? "" : `<script>document.title = "H=" + Math.ceil(document.querySelector(".page").getBoundingClientRect().height)</script>`}`;
@@ -74,8 +79,8 @@ const measurePageHeight = (htmlPath, h) => {
   } catch (e) {
     console.warn("measure failed:", e.message);
   }
-  const logo = logoDataUri ? svgSize(readFileSync(LOGO, "utf8")) : { w: 1, h: 0 };
-  const logoH = logoDataUri ? Math.ceil(LOGO_W * (logo.h / logo.w)) + 10 : 0;
+  const logo = svgSize(readFileSync(LOGO, "utf8"));
+  const logoH = Math.ceil(LOGO_W * (logo.h / logo.w)) + 10;
   console.warn("using estimated header height");
   return PAD * 2 + logoH + 130 + h;
 };

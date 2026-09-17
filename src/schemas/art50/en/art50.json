@@ -1,0 +1,407 @@
+{
+  "JSONSchema": {
+    "title": "Article 50 — detailed transparency-obligation check",
+    "type": "object",
+    "definitions": {
+      "outputRecorded": {
+        "type": "string",
+        "title": "Result",
+        "default": "",
+        "art50Detail": true
+      },
+      "q7Block": {
+        "title": "q7Block",
+        "type": "object",
+        "properties": {
+          "generalException": {
+            "type": "string",
+            "title": "Does one of the following exceptions apply to your application?",
+            "enum": [
+              "Deployers acting in the context of purely personal non-professional activity",
+              "Research and development",
+              "AI released under free and open-source licenses",
+              "None of the above"
+            ]
+          }
+        },
+        "required": ["generalException"],
+        "allOf": [
+          {
+            "if": {
+              "properties": { "generalException": { "const": "Research and development" } },
+              "required": ["generalException"]
+            },
+            "then": {
+              "properties": {
+                "generalExceptionResearchDescription": {
+                  "type": "string",
+                  "title": "Provide a brief description of the research. Include in this description at least the purpose of the research, the department within which this research is conducted, and the involved research institutes and/or other partners.",
+                  "default": ""
+                }
+              },
+              "required": ["generalExceptionResearchDescription"]
+            }
+          }
+        ]
+      },
+      "generalExceptionApplies": {
+        "required": ["generalException"],
+        "anyOf": [
+          {
+            "properties": {
+              "generalException": {
+                "enum": [
+                  "Deployers acting in the context of purely personal non-professional activity",
+                  "AI released under free and open-source licenses"
+                ]
+              }
+            }
+          },
+          {
+            "required": ["generalExceptionResearchDescription"],
+            "properties": { "generalException": { "const": "Research and development" } }
+          }
+        ]
+      }
+    },
+    "properties": {
+      "art50detail": {
+        "type": "object",
+        "title": "art50detail",
+        "properties": {
+          "scenarios": {
+            "type": "array",
+            "title": "Does one of the following scenarios apply to the AI system?",
+            "items": {
+              "type": "string",
+              "enum": [
+                "It interacts directly with natural persons.",
+                "It generates or manipulates synthetic audio, image, video or text content.",
+                "It recognises emotions or categorises persons based on biometric data.",
+                "It generates or manipulates image, audio or video content that resembles real people, objects, places or events (a deep fake).",
+                "It generates or manipulates text published to inform the public on matters of public interest.",
+                "None of the above"
+              ]
+            },
+            "uniqueItems": true,
+            "minItems": 1
+          }
+        },
+        "required": ["scenarios"],
+        "allOf": [
+          {
+            "if": {
+              "required": ["scenarios"],
+              "properties": {
+                "scenarios": {
+                  "contains": {
+                    "enum": [
+                      "It interacts directly with natural persons.",
+                      "It generates or manipulates synthetic audio, image, video or text content.",
+                      "It recognises emotions or categorises persons based on biometric data.",
+                      "It generates or manipulates image, audio or video content that resembles real people, objects, places or events (a deep fake).",
+                      "It generates or manipulates text published to inform the public on matters of public interest."
+                    ]
+                  }
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "generalExceptionBlock": { "$ref": "#/definitions/q7Block" }
+              },
+              "required": ["generalExceptionBlock"]
+            }
+          },
+          {
+            "if": {
+              "required": ["scenarios", "generalException"],
+              "properties": {
+                "scenarios": { "contains": { "enum": ["It interacts directly with natural persons."] } },
+                "generalException": { "const": "None of the above" }
+              }
+            },
+            "then": {
+              "properties": {
+                "interactiveException": {
+                  "type": "array",
+                  "title": "Your AI system interacts directly with natural persons. Which of the following scenarios apply to your AI system?",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "It is obvious to a well-informed, observant and circumspect natural person that it is interacting with an AI system",
+                      "The AI system is authorised by law for law enforcement purposes",
+                      "None of the above"
+                    ]
+                  },
+                  "uniqueItems": true,
+                  "minItems": 1
+                }
+              },
+              "required": ["interactiveException"]
+            }
+          },
+          {
+            "if": {
+              "required": ["scenarios", "generalException"],
+              "properties": {
+                "scenarios": { "contains": { "enum": ["It generates or manipulates synthetic audio, image, video or text content."] } },
+                "generalException": { "const": "None of the above" }
+              }
+            },
+            "then": {
+              "properties": {
+                "syntheticException": {
+                  "type": "array",
+                  "title": "Your AI system generates or manipulates synthetic audio, image, video or text content. Which of the following scenarios apply to your AI system?",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "The AI system performs an assistive function for standard editing",
+                      "The AI system does not substantially alter the input data provided by the deployer or the semantics thereof",
+                      "The AI system is authorised by law to generate or manipulate synthetic content to detect, prevent, investigate or prosecute criminal offence",
+                      "None of the above"
+                    ]
+                  },
+                  "uniqueItems": true,
+                  "minItems": 1
+                }
+              },
+              "required": ["syntheticException"]
+            }
+          },
+          {
+            "if": {
+              "required": ["scenarios", "generalException"],
+              "properties": {
+                "scenarios": { "contains": { "enum": ["It recognises emotions or categorises persons based on biometric data."] } },
+                "generalException": { "const": "None of the above" }
+              }
+            },
+            "then": {
+              "properties": {
+                "biometricException": {
+                  "type": "string",
+                  "title": "Your AI system recognises emotions or categorises persons based on biometric data. Is it used for the purpose of law enforcement?",
+                  "enum": ["Yes", "No"]
+                }
+              },
+              "required": ["biometricException"]
+            }
+          },
+          {
+            "if": {
+              "required": ["scenarios", "generalException"],
+              "properties": {
+                "scenarios": { "contains": { "enum": ["It generates or manipulates image, audio or video content that resembles real people, objects, places or events (a deep fake)."] } },
+                "generalException": { "const": "None of the above" }
+              }
+            },
+            "then": {
+              "properties": {
+                "deepfakeException": {
+                  "type": "array",
+                  "title": "Your AI system generates or manipulates image, audio or video content that resembles real people, objects, places or events (a deep fake). Which of the following scenarios apply to your AI system?",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "The deep fake forms a part of evidently artistic, creative, satirical, fictional or analogous work",
+                      "The deep fake is authorised by law to detect, prevent, investigate or prosecute criminal offences",
+                      "None of the above"
+                    ]
+                  },
+                  "uniqueItems": true,
+                  "minItems": 1
+                }
+              },
+              "required": ["deepfakeException"]
+            }
+          },
+          {
+            "if": {
+              "required": ["scenarios", "generalException"],
+              "properties": {
+                "scenarios": { "contains": { "enum": ["It generates or manipulates text published to inform the public on matters of public interest."] } },
+                "generalException": { "const": "None of the above" }
+              }
+            },
+            "then": {
+              "properties": {
+                "publicInterestTextException": {
+                  "type": "array",
+                  "title": "Your AI system generates or manipulates text published to inform the public on matters of public interest. Which of the following scenarios apply to your AI system?",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "The text is under human review or editorial control and editorial responsibility",
+                      "The use of the AI system for generating text published with the purpose of informing the public on matters of public interest without human review is authorised by law to detect, prevent, investigate or prosecute criminal offences",
+                      "None of the above"
+                    ]
+                  },
+                  "uniqueItems": true,
+                  "minItems": 1
+                }
+              },
+              "required": ["publicInterestTextException"]
+            }
+          },
+          {
+            "if": {
+              "required": ["scenarios"],
+              "anyOf": [
+                {
+                  "not": {
+                    "properties": {
+                      "scenarios": {
+                        "contains": {
+                          "enum": [
+                            "It interacts directly with natural persons.",
+                            "It generates or manipulates synthetic audio, image, video or text content.",
+                            "It recognises emotions or categorises persons based on biometric data.",
+                            "It generates or manipulates image, audio or video content that resembles real people, objects, places or events (a deep fake).",
+                            "It generates or manipulates text published to inform the public on matters of public interest."
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                { "$ref": "#/definitions/generalExceptionApplies" },
+                {
+                  "required": ["generalException"],
+                  "properties": { "generalException": { "const": "None of the above" } },
+                  "allOf": [
+                    {
+                      "if": { "properties": { "scenarios": { "contains": { "enum": ["It interacts directly with natural persons."] } } } },
+                      "then": { "required": ["interactiveException"] }
+                    },
+                    {
+                      "if": { "properties": { "scenarios": { "contains": { "enum": ["It generates or manipulates synthetic audio, image, video or text content."] } } } },
+                      "then": { "required": ["syntheticException"] }
+                    },
+                    {
+                      "if": { "properties": { "scenarios": { "contains": { "enum": ["It recognises emotions or categorises persons based on biometric data."] } } } },
+                      "then": { "required": ["biometricException"] }
+                    },
+                    {
+                      "if": { "properties": { "scenarios": { "contains": { "enum": ["It generates or manipulates image, audio or video content that resembles real people, objects, places or events (a deep fake)."] } } } },
+                      "then": { "required": ["deepfakeException"] }
+                    },
+                    {
+                      "if": { "properties": { "scenarios": { "contains": { "enum": ["It generates or manipulates text published to inform the public on matters of public interest."] } } } },
+                      "then": { "required": ["publicInterestTextException"] }
+                    }
+                  ]
+                }
+              ]
+            },
+            "then": {
+              "properties": {
+                "output": { "$ref": "#/definitions/outputRecorded" }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "required": ["art50detail"]
+  },
+  "uiSchema": {
+    "scenarios": {
+      "ui:widget": "checkboxes",
+      "ui:description": "Select all scenarios that apply.",
+      "ui:descriptionStyle": "plain",
+      "ui:enumTooltips": [
+        "Interaction entails the capability of a bidirectional exchange of information or actions between natural persons and the AI system with a genuine conversational or responsive character. It can occur in various forms (e.g. auditory, visual and physical). Natural persons should be able to provide input to the AI system, while the AI system should be capable of responding with contextual output. The interaction between the AI system and the natural persons must be direct. This typically involves real-time or near real-time interaction. AI agents are covered if they are capable of interacting with the persons instructing them or with other natural persons in the execution of the tasks (e.g. making bookings, managing correspondence, negotiating or concluding contracts, executing purchases, etc). Examples include: AI-enabled voice assistants, AI hotline for fraud, AI bots on social media.",
+        "Content generation refers to the generation of synthetic material by the AI system. It may include AI systems designed with a narrow intended purpose to produce specific outputs, but it may apply to AI systems that may serve multiple purposes, including GPAI systems and can produce a variety of types of content, as well as agentic AI systems, so long as they generate synthetic audio, image, video or text content. Content manipulation refers to already existing content (whether synthetic or not) that is altered by an AI system.",
+        "The purpose of the transparency obligation here is to ensure that natural persons are aware that they are exposed to emotion recognition and biometric categorisation systems that can be intrusive for their privacy. The obligation therefore applies regardless of whether the persons are exposed to such systems in real-time or those systems are operated ex post.",
+        "AI-generated or manipulated image, audio or video content appreciably resembles a subject if there is a high level of similarity between the deep fake content and the subject being simulated by the deep fake. The content does not need to be identical to the subject. It is sufficient for a deep fake to resemble someone or something that exists, can plausibly exist or could have plausibly existed. By contrast, simulated persons, objects, places, entities or events that, for example, defy the laws of nature or physics or depict lifeforms that are not commonly accepted in biology (such as e.g. humans flying without mechanical aids, dragons, or elephants driving cars) and have no potential to mislead are considered unrealistic and therefore fall outside this scope. Examples include: AI-generated audio involving voice cloning of a newspaper podcast's regular presenters and a guest interlocutor discussing some news events; AI-generated video of an individual resembling a politician, holding a speech in front of an audience. Examples that do not constitute deep fakes: AI-generated image of a scene involving a sphinx flying over the Eiffel Tower; AI voice replication for fictional characters (e.g., for audiobooks, games or animation) when there is no deception as to the identity of the narrators.",
+        "• The AI-generated or manipulated text should be published. This means that the text should be accessible by an indeterminate, fairly large number of unrelated, potential readers simultaneously and/or successively, whether or not against payment. By contrast, text is not considered published if access is restricted to specific individuals belonging to a closed, private group.\n\n• The AI-generated or manipulated published text should aim to inform the public. This entails that the text should intend to communicate knowledge, opinions or facts.\n\n• The text should inform the public 'on matters of public interest'. In general, such matters should be understood to cover those relevant to society at large, whether at a local, national, Union or international level, and meriting public debate or scrutiny. In that regard, texts should be considered to address public interest matters if they cover topics on politics and democratic processes, public administration and services, the administration of justice and law enforcement, the protection of fundamental rights, public security, public health, environmental protection, consumer safety, and any economic, financial, political, scientific, or cultural development that may be relevant subject of public debate. Matters that may be considered to be of public interest can evolve over time and across contexts.\n\nExamples include: AI-generated summary of a human-authored article on a newspaper's website discussing a recent decision by a town council; AI-manipulated parts of a lifestyle-website article comparing the effects of various diets on a particular disease in middle-aged women; AI-manipulated corporate reports published on a listed company's website containing investor information; AI-generated message on a meteorological institute's social media profile warning citizens about stormy weather and related precautionary measures."
+      ],
+      "ui:badges": [
+        { "label": "Art. 50 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50" }
+      ],
+      "ui:id": "q1"
+    },
+    "interactiveException": {
+      "ui:widget": "checkboxes",
+      "ui:descriptionStyle": "plain",
+      "ui:enumTooltips": [
+        "Consider the intended and reasonably foreseeable audience, not just the target audience. If children, elderly people, persons with disabilities or the general public could be exposed, the bar for 'obvious' is higher. Examples where this can apply: code-assistance tools used only by professional developers; internal staff assistants for AI-literate employees; medical-diagnosis support tools used only by trained professionals; single-player game characters where no other person can participate. It does not apply to realistic companion robots or avatars, or immersive VR/AR environments with human-like avatars, if the resemblance is high enough to create doubt, even for a professional audience.",
+        "To fall within this scenario, the purpose of the AI system must be to detect, prevent, investigate, or prosecute criminal offences. It is not restricted only to be used by law enforcement authorities but may also cover AI systems used by other Union or national public authorities, so long as their use is authorised by law to detect, prevent, investigate, or prosecute criminal offences, and subject to appropriate safeguards to protect the rights and freedoms of third parties. If the AI system is available to the public and offers a functionality to individuals to report criminal offences it is not included.",
+        null
+      ],
+      "ui:badges": [
+        { "label": "Art. 50 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50" }
+      ],
+      "ui:id": "q2"
+    },
+    "syntheticException": {
+      "ui:widget": "checkboxes",
+      "ui:descriptionStyle": "plain",
+      "ui:enumTooltips": [
+        "Standard editing should be understood as the process of preparing existing content for publication or distribution (e.g., small edits to improve readability and grammar, quality and format) and does not involve generating new content. Standard editing aims at ensuring that content is, among others, free from obvious technical or grammatical linguistic errors, is aligned with applicable lay-out, presentation, formatting or accessibility requirements, or in conformity with sectoral practices. Editing goes beyond standard editing if the content is changed in a material way (substantive modifications, structural changes etc.) that affect its meaning, style or intent.",
+        "An alteration should be considered substantial if the input data or its semantics have been manipulated significantly by the AI system during its output generation process. This must be based on an assessment of relevant factors, such as the format, media content type, style and changes in the content that affect its meaning, style or intent. Whether that is the case requires a case-specific assessment.",
+        "To fall within this scenario, the purpose of the AI system must be to detect, prevent, investigate, or prosecute criminal offences. It is not restricted only to be used by law enforcement authorities but may also cover AI systems used by other Union or national public authorities, so long as their use is authorised by law to detect, prevent, investigate, or prosecute criminal offences, and subject to appropriate safeguards to protect the rights and freedoms of third parties. If the AI system is available to the public and offers a functionality to individuals to report criminal offences it is not included.",
+        null
+      ],
+      "ui:badges": [
+        { "label": "Art. 50 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50" }
+      ],
+      "ui:id": "q3"
+    },
+    "biometricException": {
+      "ui:widget": "radio",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "When the AI system uses emotion recognition or biometric categorisation that is permitted by law to detect, prevent or investigate criminal offences subject to appropriate safeguards for the rights and freedoms of third parties and in accordance with Union law, choose 'Yes'.\nIt is not restricted only to be used by law enforcement authorities but may also cover AI systems used by other Union or national public authorities, so long as their use is authorised by law to detect, prevent, investigate, or prosecute criminal offences, and subject to appropriate safeguards to protect the rights and freedoms of third parties. If the AI system is available to the public and offers a functionality to individuals to report criminal offences, choose 'No'.",
+      "ui:badges": [
+        { "label": "Art. 50 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50" }
+      ],
+      "ui:id": "q4"
+    },
+    "deepfakeException": {
+      "ui:widget": "checkboxes",
+      "ui:descriptionStyle": "plain",
+      "ui:enumTooltips": [
+        "• Artistic works are to be understood as works that have been created for the purpose of art, including music, cinematographic works, and visual arts. E.g., movies (or movie trailers) featuring AI-generated or manipulated deep fakes of de-aged, existing actors or digital replicas of dead actors or other persons, available in a cinema or on a streaming platform.\n\n• Creative works are to be understood as works that involve creative choices. Works that are mainly motivated by functional or technical considerations cannot be regarded as creative. E.g., AI-generated music in any kind of genre resembling the individual style of existing artists.\n\n• Satirical works are to be understood as works that are intended to criticise society, politics, business or public figures through the use of humoristic techniques (including irony, sarcasm, mockery, pastiche etc.). E.g., AI-manipulated image of an existing politician placing him in a scene clearly meant to criticise in a humorous manner certain policy decisions taken or supported by that person.\n\n• Fictional works are to be understood as cultural works that involve persons, objects, places, entities or events, in an imaginary, but verisimilitude setting. E.g., AI-generated gaming imagery involving deep fake simulations of real, existing persons.\n\n• Analogous works are to be understood as works sharing core traits or similar expressive or functional characteristics with the above categories but not fitting neatly into one.\n\nThe fact that a deep fake falls within one (or more) of the above categories should be evident to the natural persons exposed to it.",
+        "To fall within this scenario, the purpose of the deep fake must be to detect, prevent, investigate, or prosecute criminal offences. It is not restricted only to be used by law enforcement authorities but may also cover AI systems used by other Union or national public authorities, so long as their use is authorised by law to detect, prevent, investigate, or prosecute criminal offences, and subject to appropriate safeguards to protect the rights and freedoms of third parties. If the AI system is available to the public and offers a functionality to individuals to report criminal offences it is not included.",
+        null
+      ],
+      "ui:badges": [
+        { "label": "Art. 50 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50" }
+      ],
+      "ui:id": "q5"
+    },
+    "publicInterestTextException": {
+      "ui:widget": "checkboxes",
+      "ui:descriptionStyle": "plain",
+      "ui:enumTooltips": [
+        "Two conditions must be met for this scenario: (i) the AI generated or manipulated text must have undergone human review or editorial control and (ii) a legal or natural person must hold editorial responsibility for the publication.\n\n• Human review refers to the deliberate examination of the substance of the content by one or more natural persons possessing relevant knowledge and professional judgement pertaining to the subject matter under scrutiny (e.g. academic peer review or professional validation chains). Fact-checking the accuracy of the content is a minimum requirement that should be part of that review. Editorial control refers to the control exercised in practice by a responsible editorial entity (e.g. an editor-in-chief) over the content having the authority to approve, alter or reject the substance of the text based on substantive grounds (incl. fact-checking of information and ensuring the trustworthiness of sources). Superficial, solely formal or procedural checks (e.g. spell-checking or grammatical correction), the mere existence of an editorial policy, automated review processes or cursory editorial approval without substantive engagement by the human reviewer or the editorial entity, cannot fulfil the conditions for human review or editorial control.\n\n• Editorial responsibility entails that said person must hold the ultimate legal responsibility over the publication of the content, including the human review or editorial control (e.g. an individual, editorial board, or the publishing company). To ensure public accountability and trust, and in line with existing media professional standards, the identity and contact details of the legal person, the natural person or the function with editorial responsibility should be made publicly available on an easily findable location (if not yet otherwise available). This can happen online through e.g. a website's terms and conditions or other user-facing legal information. Offline, such information can be included in a publication's colophon or edition notice.\n\nExamples include: An AI-manipulated article in a newspaper or AI-generated summary of an article that has been subject to editorial control of the respective editor-in-chief with editorial responsibility held by the legal person that publishes the newspaper; An AI-manipulated academic blog which has undergone internal peer review and where the respective research centre managing the blog holds editorial responsibility; AI-generated public safety warnings approved by a public official before being distributed to citizens, under the responsibility of the relevant public agency for civil protection; AI-generated sustainability reports published on a listed company's website having undergone human review by professionals in relevant functions (e.g. compliance); AI-supported translation of a human-written article whereby the translation has undergone human review.",
+        "To fall within this scenario, the purpose of the generated text must be to detect, prevent, investigate, or prosecute criminal offences. It is not restricted only to be used by law enforcement authorities but may also cover AI systems used by other Union or national public authorities, so long as their use is authorised by law to detect, prevent, investigate, or prosecute criminal offences, and subject to appropriate safeguards to protect the rights and freedoms of third parties. If the AI system is available to the public and offers a functionality to individuals to report criminal offences it is not included.",
+        null
+      ],
+      "ui:badges": [
+        { "label": "Art. 50 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50" }
+      ],
+      "ui:id": "q6"
+    },
+    "generalException": {
+      "ui:widget": "radio",
+      "ui:descriptionStyle": "plain",
+      "ui:alertDescription": "When the AI system is used for operational processes or regular business operations, select 'None of the above'.",
+      "ui:enumTooltips": [
+        "Any activity through which natural persons gain an economic benefit on a regular basis or are otherwise involved in a professional, business, trade, occupational or freelance activity should be considered as a 'professional' activity. The specification of 'purely personal' is a qualifier of non-professional, meaning that the person should act in both a personal and a non-professional capacity to fall within the scope of the exception. Examples include: individuals using an AI system to generate deep fakes of the members of their household; individuals using an AI system in a personal capacity to generate text on various topics (e.g. students using AI to write their homework); individuals using an AI system in their personal capacity to generate deep fakes disseminated on social media.",
+        "This includes AI systems developed by students as part of their studies or by scientists affiliated with a university. In that case, the research must follow recognized ethical and professional standards for scientific research. For example, all participants must be informed that they are part of scientific research. This covers not only interactive AI systems, but also the outputs of generative AI systems (including deep fake content) used in the context of scientific research. However, if these systems are put into service or their outputs are being used for other purposes than the sole purpose of scientific research and development, this exception does not apply and the relevant transparency obligations as stated by Article 50 of the AI Act would still need to be complied with.",
+        "Providers of free and open-source AI components that cover software, data, models, tools, services or processes for customisation and integration into an AI system and that do not constitute in themselves (in part or in whole) an AI system, are not subject to the transparency obligations in Article 50 of the AI Act.",
+        null
+      ],
+      "ui:badges": [
+        { "label": "Art. 50 AI Act", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50" }
+      ],
+      "ui:id": "exceptions"
+    },
+    "generalExceptionResearchDescription": {
+      "ui:id": "exceptions research"
+    }
+  }
+}
