@@ -284,7 +284,10 @@ labels — noise, not signal, so it isn't attempted. `nta`/`nta-*` are out of sc
 - Chart content, wording, structure → the masters in `flowcharts/src/`.
 - Colours / node & terminal styling → `styles.ts` (per chart key).
 - Header title + description → `descriptions.ts`.
-- Logo path, page padding, output dir → top of `render.mjs`.
+- Logo asset, page padding, output dir → top of `render.mjs`. The logo SVG itself is vendored at
+  `.claude/skills/export-questionnaire-flowcharts/logo_MAIN.svg` — replace that file to update
+  branding; do not hardcode a personal machine path here again (render.mjs exits loudly if the
+  vendored file is missing).
 
 ## Known drift (as of the last export)
 - `risk` (EN + NL): fixed — was missing `q35` (`6.3`)'s node, plus 3 real branching-logic bugs

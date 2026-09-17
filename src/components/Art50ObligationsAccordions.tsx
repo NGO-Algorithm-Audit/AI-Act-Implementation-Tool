@@ -174,6 +174,9 @@ export default function Art50ObligationsAccordions({
         <>
         {isProvider && (
           <div className="mb-2">
+            <div className="fw-semibold mb-1" style={{ color: "#000" }}>
+              {t("riskcat result art50_1 provider label")}
+            </div>
             <ul className="mb-2 ps-3">
               <li>{t("riskcat result art50_1 core obligation step1")}</li>
               <li>{t("riskcat result art50_1 core obligation step2")}</li>
@@ -204,10 +207,17 @@ export default function Art50ObligationsAccordions({
           </div>
         )}
         {isDeployer && (
-          <ul className="mb-2 ps-3">
-            <li>{t("riskcat result art50_1 deployer step1")}</li>
-            <li>{t("riskcat result art50_1 deployer step2")}</li>
-          </ul>
+          <div className="mb-2">
+            <div className="fw-semibold mb-1" style={{ color: "#000" }}>
+              {t("riskcat result art50_1 deployer label")}
+            </div>
+            <AccordionSubsection label={t("riskcat result art50_1 deployer checklist title")}>
+              <ul className="mb-2 ps-3">
+                <li>{t("riskcat result art50_1 deployer step1")}</li>
+                <li>{t("riskcat result art50_1 deployer step2")}</li>
+              </ul>
+            </AccordionSubsection>
+          </div>
         )}
         {hasRole && (
           <>
@@ -231,6 +241,9 @@ export default function Art50ObligationsAccordions({
         <>
         {isProvider && (
           <div className="mb-2">
+            <div className="fw-semibold mb-1" style={{ color: "#000" }}>
+              {t("riskcat result art50_2 provider label")}
+            </div>
             <ul className="mb-2 ps-3">
               <li>{t("riskcat result art50_2 core obligation step1")}</li>
               <li>{t("riskcat result art50_2 core obligation step2")}</li>
@@ -257,9 +270,13 @@ export default function Art50ObligationsAccordions({
               </ul>
               <div className="fw-semibold mb-1">{t("riskcat result art50_2 guidelines exceptions heading")}</div>
               <ul className="mb-2 ps-3">
-                <li>{t("riskcat result art50_2 guidelines exceptions item1")}</li>
-                <li>{t("riskcat result art50_2 guidelines exceptions item2")}</li>
-                <li>{t("riskcat result art50_2 guidelines exceptions item3")}</li>
+                {statusOf("synthetic") !== "applies" && (
+                  <>
+                    <li>{t("riskcat result art50_2 guidelines exceptions item1")}</li>
+                    <li>{t("riskcat result art50_2 guidelines exceptions item2")}</li>
+                    <li>{t("riskcat result art50_2 guidelines exceptions item3")}</li>
+                  </>
+                )}
                 <li>{t("riskcat result art50_2 guidelines exceptions item4")}</li>
               </ul>
               <GuidelinesSource
@@ -271,10 +288,17 @@ export default function Art50ObligationsAccordions({
             </AccordionSubsection>
           </div>
         )}
-        {!isProvider && (
-          <p className="mb-0" style={{ fontStyle: "italic", color: "var(--cma-text-muted)" }}>
-            {t("obligations art50_2 provider only note")}
-          </p>
+        {isDeployer && (
+          <div className="mb-2">
+            <div className="fw-semibold mb-1" style={{ color: "#000" }}>
+              {t("riskcat result art50_2 deployer label")}
+            </div>
+            <p className="mb-0" style={{ fontStyle: "italic", color: "var(--cma-text-muted)" }}>
+              {isProvider
+                ? t("obligations art50_2 deployer no separate duty note")
+                : t("obligations art50_2 provider only note")}
+            </p>
+          </div>
         )}
         {isProvider && (
           <div className="mt-2">
@@ -293,16 +317,28 @@ export default function Art50ObligationsAccordions({
         <ExemptNote t={t} />
         ) : (
         <>
-        {isProvider && <p className="mb-2">{t("riskcat result art50_3 provider obligation")}</p>}
+        {isProvider && (
+          <div className="mb-2">
+            <div className="fw-semibold mb-1" style={{ color: "#000" }}>
+              {t("riskcat result art50_3 provider label")}
+            </div>
+            <ul className="mb-2 ps-3">
+              <li>{t("riskcat result art50_3 provider obligation")}</li>
+            </ul>
+          </div>
+        )}
         {isDeployer && (
-          <>
+          <div className="mb-2">
+            <div className="fw-semibold mb-1" style={{ color: "#000" }}>
+              {t("riskcat result art50_3 deployer label")}
+            </div>
             <ul className="mb-2 ps-3">
               <li>{t("riskcat result art50_3 deployer core item1")}</li>
               <li>{t("riskcat result art50_3 deployer core item3")}</li>
               <li>{t("riskcat result art50_3 deployer core item4")}</li>
             </ul>
             {timingLines("biometric", "riskcat result art50_3 deployer exception item1")}
-          </>
+          </div>
         )}
         {hasRole && (
           <div className="mt-2 d-flex flex-wrap gap-1">
@@ -322,19 +358,31 @@ export default function Art50ObligationsAccordions({
           <ExemptNote t={t} />
         ) : statusOf("deepfake") === "attenuated" ? (
           isDeployer ? (
-            <>
+            <div className="mb-2">
+              <div className="fw-semibold mb-1" style={{ color: "#000" }}>
+                {t("riskcat result art50_4 deployer label")}
+              </div>
               <p className="mb-2">{t("riskcat result art50_4 attenuated note")}</p>
+              <p className="mb-2">{t("riskcat result art50_4 attenuated safeguards note")}</p>
               <div className="mt-2">
                 <SourceBadge label={t("article art50_4 label")} url={t("article art50_4 url")} />
               </div>
-            </>
+            </div>
           ) : (
-            <p className="mb-0" style={{ fontStyle: "italic", color: "var(--cma-text-muted)" }}>
-              {t("obligations art50_4 deployer only note")}
-            </p>
+            <div className="mb-2">
+              <div className="fw-semibold mb-1" style={{ color: "#000" }}>
+                {t("riskcat result art50_4 provider label")}
+              </div>
+              <p className="mb-0" style={{ fontStyle: "italic", color: "var(--cma-text-muted)" }}>
+                {t("obligations art50_4 deployer only note")}
+              </p>
+            </div>
           )
         ) : isDeployer ? (
-          <>
+          <div className="mb-2">
+            <div className="fw-semibold mb-1" style={{ color: "#000" }}>
+              {t("riskcat result art50_4 deployer label")}
+            </div>
             <ul className="mb-2 ps-3">
               <li>{t("riskcat result art50_4 deployer step1")}</li>
             </ul>
@@ -351,11 +399,16 @@ export default function Art50ObligationsAccordions({
             <div className="mt-2">
               <SourceBadge label={t("article art50_4 label")} url={t("article art50_4 url")} />
             </div>
-          </>
+          </div>
         ) : (
-          <p className="mb-0" style={{ fontStyle: "italic", color: "var(--cma-text-muted)" }}>
-            {t("obligations art50_4 deployer only note")}
-          </p>
+          <div className="mb-2">
+            <div className="fw-semibold mb-1" style={{ color: "#000" }}>
+              {t("riskcat result art50_4 provider label")}
+            </div>
+            <p className="mb-0" style={{ fontStyle: "italic", color: "var(--cma-text-muted)" }}>
+              {t("obligations art50_4 deployer only note")}
+            </p>
+          </div>
         )}
       </AccordionSubsection>
       )}
@@ -366,7 +419,10 @@ export default function Art50ObligationsAccordions({
         {statusOf("publicInterestText") === "exempt" ? (
           <ExemptNote t={t} />
         ) : isDeployer ? (
-          <>
+          <div className="mb-2">
+            <div className="fw-semibold mb-1" style={{ color: "#000" }}>
+              {t("riskcat result art50_4pit deployer label")}
+            </div>
             <ul className="mb-2 ps-3">
               <li>{t("riskcat result art50_4pit deployer step1")}</li>
             </ul>
@@ -387,11 +443,16 @@ export default function Art50ObligationsAccordions({
             <div className="mt-2">
               <SourceBadge label={t("article art50_4pit label")} url={t("article art50_4pit url")} />
             </div>
-          </>
+          </div>
         ) : (
-          <p className="mb-0" style={{ fontStyle: "italic", color: "var(--cma-text-muted)" }}>
-            {t("obligations art50_4pit deployer only note")}
-          </p>
+          <div className="mb-2">
+            <div className="fw-semibold mb-1" style={{ color: "#000" }}>
+              {t("riskcat result art50_4pit provider label")}
+            </div>
+            <p className="mb-0" style={{ fontStyle: "italic", color: "var(--cma-text-muted)" }}>
+              {t("obligations art50_4pit deployer only note")}
+            </p>
+          </div>
         )}
       </AccordionSubsection>
       )}
