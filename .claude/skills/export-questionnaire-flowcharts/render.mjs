@@ -48,7 +48,7 @@ const pageWidth = (w) => Math.max(w + PAD * 2, LOGO_W + PAD * 2 + 40, 640);
 
 // pageH === null -> measure mode: no @page rule, page height is auto and the measured
 // height of .page is reported back through <title> (read via Chrome --dump-dom).
-const html = (svg, w, h, title, desc, pageH) => {
+const html = (svg, w, h, title, desc, pageH, alignSel = []) => {
   const pageW = pageWidth(w);
   return `<!doctype html><html><head><meta charset="utf-8"><style>
   ${pageH ? `@page { size: ${pageW}px ${pageH}px; margin: 0; }` : ""}
@@ -61,6 +61,8 @@ const html = (svg, w, h, title, desc, pageH) => {
   .hdr p { font-size:13px; line-height:1.45; margin:0; max-width:${Math.min(pageW - PAD * 2, 900)}px; color:#333; }
   .diagram { }
   .diagram svg { max-width:none !important; }
+  ${alignSel.map((sel) => `.diagram ${sel} foreignObject div, .diagram ${sel} .nodeLabel, .diagram ${sel} .nodeLabel p`)
+      .join(",\n  ")}${alignSel.length ? " { text-align:left !important; }" : ""}
   </style></head><body><div class="page">
     <div class="hdr"><img src="${logoDataUri}" alt="Algorithm Audit"/>
       <h1>${title}</h1><p>${desc}</p></div>
@@ -97,6 +99,17 @@ const leftAlignRows = (svg) => {
   if (xs.length < 2) return svg;
   const min = Math.min(...xs);
   return svg.replace(ROW_RE, (_m, head, _x, sep, y, tail) => `${head}${min}${sep}${y}${tail}`);
+};
+
+// Charts whose outcome boxes read as a list and must be flush left instead of centred.
+// A classDef cannot express alignment (it only carries fill/stroke/color/font-weight), and with
+// htmlLabels mermaid puts the label in a <foreignObject> div carrying an *inline*
+// `text-align: center` — so the override has to be an !important rule, and it has to sit in the
+// wrapper page's CSS rather than in the .mmd. The classDef name lands on the node group
+// (`<g class="node default oblig_high" id="my-svg-flowchart-HP_O-120">`), so the classes below are
+// enough to select exactly the outcome boxes; the short cat_except/cat_exempt chips stay centred.
+const LEFT_ALIGN_LABELS = {
+  obligations: [".oblig_forb", ".oblig_high", ".oblig_genai"],
 };
 
 // risk.mmd's high-fanout convergence points (Q28, EXCH) use `id@{ shape: sm-circ, label: " " }`
@@ -217,14 +230,15 @@ for (const lang of ["en", "nl"]) {
     const d = DESC[lang]?.[chart] || { title: chart, text: "" };
     // 2) measure the real content height (header wraps differently per chart/language)
     const measure = join(tmp, `${lang}-${chart}.measure.html`);
-    writeFileSync(measure, html(svg, w, h, d.title, d.text, null));
+    const alignSel = LEFT_ALIGN_LABELS[chart] || [];
+    writeFileSync(measure, html(svg, w, h, d.title, d.text, null, alignSel));
     let pageH = measurePageHeight(measure, h);
     // 3) html -> pdf (Chrome, page sized to content); retry once if it still splits
     const page = join(tmp, `${lang}-${chart}.html`);
     const pdf = join(dir, `${chart}.pdf`);
     let pages = 0;
     for (const attempt of [0, 1]) {
-      writeFileSync(page, html(svg, w, h, d.title, d.text, pageH));
+      writeFileSync(page, html(svg, w, h, d.title, d.text, pageH, alignSel));
       execFileSync(CHROME, ["--headless=new", "--disable-gpu", "--no-pdf-header-footer",
         `--print-to-pdf=${pdf}`, `file://${page}`], { stdio: "inherit" });
       pages = pdfPageCount(pdf);

@@ -195,6 +195,45 @@ these additions. They apply to the NTA charts and to nothing else.
 5. **Cluster styling** comes from the init block: `clusterBkg #f2f7fb`, `clusterBorder #9dbcd8`,
    `titleColor #005AA7` (Mermaid's default cluster orange is not house style).
 
+## Obligations chart only (`obligations`)
+
+The obligations chart ends in 15 **outcome boxes** (`FP_O`, `FD_O`, `HP_O`, `HD_O`, `S1P_O` … `S5D_O`,
+`S4_ATT_O`) that spell out the duties attaching to a risk category + role. They are the only labels in
+any chart that carry a *list*, so they have two rules of their own on top of the house rules above.
+
+1. **Outcome boxes are numbered lists, never bullets.** Each item is `<br/>1. `, `<br/>2. `, … and the
+   numbering **restarts at 1 in every box**. The opening line (the sentence ending in `:`) and the
+   trailing `Timing:` / `Exception:` / `Source:` lines — `Timing:` / `Uitzondering:` / `Bron:` in NL —
+   are labelled notes, not list items, and stay unnumbered. Never use `•`: the numbers are what lets a
+   reader cite "obligation 7" and count how many duties a role carries. EN and NL must have the same
+   items, in the same boxes, in the same order (house rule 11), so renumber both masters together.
+
+   ```
+   HP --> HP_O["Obligations for the provider of a high-risk AI system:<br/>1. Risk management system (Art. 9)<br/>2. Data and data governance (Art. 10)<br/>…<br/>14. AI literacy of staff (Art. 4)<br/>Source: Art. 16 AI Act"]:::oblig_high
+   ```
+
+2. **Outcome-box text is left-aligned; everything else stays centred.** A numbered list read as a
+   centred block is unusable — the numbers have to line up in one column. A `classDef` cannot express
+   this (it only carries `fill`/`stroke`/`color`/`font-weight`), and with `htmlLabels: true` mermaid
+   puts the label in a `<foreignObject>` div carrying an **inline** `text-align: center`, so the only
+   thing that overrides it is an `!important` rule in the wrapper page's CSS. That lives in
+   `LEFT_ALIGN_LABELS` in `render.mjs`, which maps a chart key to the classDef classes to left-align —
+   for `obligations`: `.oblig_forb`, `.oblig_high`, `.oblig_genai`. The classDef name lands on the node
+   group (`<g class="node default oblig_high" id="my-svg-flowchart-HP_O-120">`), so those three classes
+   select exactly the outcome boxes. The short `cat_except` / `cat_exempt` chips ("Transparency
+   obligations + possible exception", "No requirements (Art. 50)") and every `Q` / role node **stay
+   centred** — do not add their classes to the map.
+
+   Alignment does not change any node's measured width, so it cannot break the one-page rule; the
+   numbers themselves do widen the longest line slightly, which the measured page height absorbs.
+
+3. **Nothing checks this chart.** `obligations` has no declarative source, so `check-coverage.mjs`
+   skips it and `check-logic.mjs` prints "not logic-checked … verify by hand" — the pre-export gate
+   will *not* catch a mis-numbered item, a dropped obligation or EN/NL drift here. Proofread the
+   rendered PDF against the master. Also re-check `linkStyle 53 stroke:none` at the end of both
+   masters after any edit: it is 0-based over all `-->` edges in declaration order and must still be
+   the invisible `S4D --> S4_ATT_O` layout edge.
+
 ## Keeping charts in sync with the questionnaires
 
 `check-coverage.mjs` reads each chart's schema (risk/role: plain JSON; identification: the TS
@@ -265,7 +304,9 @@ labels — noise, not signal, so it isn't attempted. `nta`/`nta-*` are out of sc
   `checkChartLogic()`, called by `render.mjs`'s pre-export gate.
 - `render.mjs` — runs the pre-export gate (both checks above, scoped to the chart(s) being exported),
   then mermaid-cli → SVG → HTML wrapper → Chrome `--print-to-pdf`. Also holds
-  `LEFT_ALIGN_ROWS`, the set of charts whose subgraph rows are left-aligned after rendering. The page height is
+  `LEFT_ALIGN_ROWS`, the set of charts whose subgraph rows are left-aligned after rendering, and
+  `LEFT_ALIGN_LABELS`, the chart → classDef-class map whose labels are left-aligned inside their
+  node (see the obligations rules above). The page height is
   **measured** in a headless-Chrome `--dump-dom` pass (the header wraps differently per chart and
   language), so header + diagram always land on a single page; the page count of each PDF is
   checked afterwards and re-rendered once, taller, if it ever splits.
@@ -282,7 +323,8 @@ labels — noise, not signal, so it isn't attempted. `nta`/`nta-*` are out of sc
 
 ## Customising
 - Chart content, wording, structure → the masters in `flowcharts/src/`.
-- Colours / node & terminal styling → `styles.ts` (per chart key).
+- Colours / node & terminal styling → `styles.ts` (per chart key). **Text alignment inside a node is
+  not a `classDef` property** — it lives in `LEFT_ALIGN_LABELS` in `render.mjs`.
 - Header title + description → `descriptions.ts`.
 - Logo asset, page padding, output dir → top of `render.mjs`. The logo SVG itself is vendored at
   `.claude/skills/export-questionnaire-flowcharts/logo_MAIN.svg` — replace that file to update
