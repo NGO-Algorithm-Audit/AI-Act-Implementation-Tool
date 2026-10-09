@@ -98,14 +98,27 @@ function ExemptNote({ t }: { t: (key: string) => string }) {
 export default function Art50ObligationsAccordions({
   roles,
   applicable,
+  onStartRoleQuestionnaire,
 }: {
   roles: string[];
   applicable?: Art50Applicable;
+  // When provided, the "role not yet known" warning links out to the Role and
+  // status questionnaire via this callback instead of the default "select
+  // above" wording — see the Risk-category result screen, which has no role
+  // selector of its own (unlike the Obligations menu, where this is omitted).
+  onStartRoleQuestionnaire?: () => void;
 }) {
   const { t } = useTranslation();
-  const isProvider = roles.includes("aanbieder");
-  const isDeployer = roles.includes("gebruiksverantwoordelijke");
-  const hasRole = isProvider || isDeployer;
+  const selectedProvider = roles.includes("aanbieder");
+  const selectedDeployer = roles.includes("gebruiksverantwoordelijke");
+  const hasRole = selectedProvider || selectedDeployer;
+  // No role known yet: show both roles' obligations below (so the user can
+  // still see what could apply) rather than leaving every sub-case empty —
+  // the warning banner above tells them to pin down their role to narrow it
+  // down. Every existing isProvider/isDeployer gate further down keeps
+  // working unmodified and simply renders both sides.
+  const isProvider = selectedProvider || !hasRole;
+  const isDeployer = selectedDeployer || !hasRole;
   const statusOf = (key: keyof Art50Applicable): Art50Status | undefined => applicable?.[key];
   // `applicable === undefined` means the detail questionnaire was never
   // completed — unknown, so show every sub-case's default content (today's
@@ -160,8 +173,37 @@ export default function Art50ObligationsAccordions({
           {t("obligations art50 heading", { role: roleText })}
         </div>
       ) : (
-        <p className="mb-2" style={{ fontStyle: "italic", color: "var(--cma-text-muted)" }}>
-          {t("obligations art50 role note")}
+        <p className="mb-2">
+          {onStartRoleQuestionnaire ? (
+            <>
+              {t("obligations art50 role note intro")}{" "}
+              {t("obligations art50 role hint prefix")}{" "}
+              <span
+                role="button"
+                tabIndex={0}
+                onClick={onStartRoleQuestionnaire}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    onStartRoleQuestionnaire();
+                  }
+                }}
+                className="badge"
+                style={{
+                  backgroundColor: "var(--cma-primary)",
+                  color: "#fff",
+                  fontSize: "0.85rem",
+                  padding: "3.2px 5.12px",
+                  cursor: "pointer",
+                  verticalAlign: "middle",
+                }}
+              >
+                {t("questionnaire 3 name")}
+              </span>
+            </>
+          ) : (
+            t("obligations art50 role note")
+          )}
         </p>
       )}
 
