@@ -444,11 +444,20 @@ export default function OutputRiskClassification({
             {questionnaireBadge(
               t("questionnaire 3 name"),
               onStartQuestionnaire ? () => onStartQuestionnaire("AI2") : undefined
-            )}{" "}
-            {t("and")}{" "}
+            )}
+            {hasArt50Scenario ? ", " : <>{" "}{t("and")}{" "}</>}
             {questionnaireBadge(
               t("questionnaire 4 name"),
               onStartQuestionnaire ? handleStartObligations : undefined
+            )}
+            {hasArt50Scenario && (
+              <>
+                {" "}{t("and")}{" "}
+                {questionnaireBadge(
+                  t("questionnaire art50 name"),
+                  onStartQuestionnaire ? () => onStartQuestionnaire("ART50") : undefined
+                )}
+              </>
             )}
             {t("aiact2 result next steps suffix")}
           </p>
@@ -456,52 +465,44 @@ export default function OutputRiskClassification({
       </div>
 
       {outcome === "low" && (
-        <>
-          <div>
-            <h6 className="fw-bold mb-1 mt-2" style={{ color: "var(--cma-primary)" }}>{t("aiact2 result provider continue label")}</h6>
-            <div style={{ borderTop: "1px solid var(--cma-primary)", paddingTop: "8px", fontSize: "0.9rem" }}>
+        <div>
+          <h6 className="fw-bold mb-1 mt-2" style={{ color: "var(--cma-primary)" }}>{t("aiact2 result next steps title")}</h6>
+          <div style={{ borderTop: "1px solid var(--cma-primary)", paddingTop: "8px", fontSize: "0.9rem" }}>
+            {hasArt50Scenario ? (
+              <Art50ObligationsAccordions
+                roles={aiAct2Roles ?? []}
+                applicable={legacyArt50Applicable}
+                onStartRoleQuestionnaire={onStartQuestionnaire ? () => onStartQuestionnaire("AI2") : undefined}
+              />
+            ) : (
               <p className="mb-0">
-                {t("riskcat result low next steps")}
+                {t("riskcat result low obligations")}
               </p>
-            </div>
+            )}
           </div>
-          <div>
-            <h6 className="fw-bold mb-1 mt-2" style={{ color: "var(--cma-primary)" }}>{t("aiact2 result next steps title")}</h6>
-            <div style={{ borderTop: "1px solid var(--cma-primary)", paddingTop: "8px", fontSize: "0.9rem" }}>
-              {hasArt50Scenario ? (
+        </div>
+      )}
+
+      {(outcome === "high" || outcome === "highExcept") && (
+        <>
+          {knownRoleBadges.length > 0 && (
+            <>
+              <NextStepsSection roles={aiAct2Roles ?? []} onStartQuestionnaire={onStartQuestionnaire} annexIArt6Branch={annexIArt6Branch} />
+              <ObligationsSection roles={aiAct2Roles ?? []} annexIArt6Branch={annexIArt6Branch} />
+            </>
+          )}
+          {hasArt50Scenario && (
+            <div>
+              <h6 className="fw-bold mb-1 mt-2" style={{ color: "var(--cma-primary)" }}>{t("aiact2 result next steps title")}</h6>
+              <div style={{ borderTop: "1px solid var(--cma-primary)", paddingTop: "8px", fontSize: "0.9rem" }}>
                 <Art50ObligationsAccordions
                   roles={aiAct2Roles ?? []}
                   applicable={legacyArt50Applicable}
+                  onStartRoleQuestionnaire={onStartQuestionnaire ? () => onStartQuestionnaire("AI2") : undefined}
                 />
-              ) : (
-                <p className="mb-0">
-                  {t("riskcat result low obligations")}
-                </p>
-              )}
-            </div>
-          </div>
-        </>
-      )}
-
-      {knownRoleBadges.length > 0 && (outcome === "high" || outcome === "highExcept") && (
-        <>
-          <NextStepsSection roles={aiAct2Roles ?? []} onStartQuestionnaire={onStartQuestionnaire} annexIArt6Branch={annexIArt6Branch} />
-          <ObligationsSection
-            roles={aiAct2Roles ?? []}
-            annexIArt6Branch={annexIArt6Branch}
-            footer={hasArt50Scenario ? (
-              <div className="mt-3">
-                <p className="mb-1">
-                  <span style={{ color: "var(--cma-primary)" }}>{t("riskcat result art50_3 deployer timing heading")}:</span>{" "}
-                  {t("riskcat result art50_3 deployer timing item1")}
-                </p>
-                <p className="mb-0">
-                  <span style={{ color: "var(--cma-primary)" }}>{t("riskcat result art50_3 deployer exception heading")}:</span>{" "}
-                  {t("riskcat result art50_3 deployer exception item1")}
-                </p>
               </div>
-            ) : undefined}
-          />
+            </div>
+          )}
         </>
       )}
 
