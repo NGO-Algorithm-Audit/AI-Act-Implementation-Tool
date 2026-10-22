@@ -1,0 +1,550 @@
+{
+  "JSONSchema": {
+    "title": "NIS2",
+    "type": "object",
+    "definitions": {
+      "outputEssential": {
+        "type": "string",
+        "title": "Uitkomst",
+        "default": "Op basis van uw antwoorden is uw organisatie waarschijnlijk een **essentiële entiteit** onder NIS2. Dit betekent onder meer:\n\n- **Zorgplicht**: passende en evenredige maatregelen voor het beheer van cyberrisico's (art. 21 NIS2);\n- **Meldplicht**: significante incidenten melden bij het CSIRT of de bevoegde autoriteit (art. 23 NIS2);\n- **Bestuurdersverantwoordelijkheid**: het bestuur keurt de maatregelen goed en volgt hierover training (art. 20 NIS2);\n- **Registratieplicht** bij de bevoegde autoriteit (art. 3, lid 4, en art. 27 NIS2);\n- **Proactief toezicht** (ex ante) door de toezichthouder (art. 32 NIS2).\n\nIn Nederland is NIS2 geïmplementeerd in de [Cyberbeveiligingswet (Cbw)](https://www.digitaleoverheid.nl/overzicht-van-alle-onderwerpen/cybersecurity/kaders-voor-cybersecurity/cyberbeveiligingswet/). Deze uitkomst is een indicatie; raadpleeg de wet en de bevoegde toezichthouder voor uw sector."
+      },
+      "outputImportant": {
+        "type": "string",
+        "title": "Uitkomst",
+        "default": "Op basis van uw antwoorden is uw organisatie waarschijnlijk een **belangrijke entiteit** onder NIS2. Dit betekent onder meer:\n\n- **Zorgplicht**: passende en evenredige maatregelen voor het beheer van cyberrisico's (art. 21 NIS2);\n- **Meldplicht**: significante incidenten melden bij het CSIRT of de bevoegde autoriteit (art. 23 NIS2);\n- **Bestuurdersverantwoordelijkheid**: het bestuur keurt de maatregelen goed en volgt hierover training (art. 20 NIS2);\n- **Registratieplicht** bij de bevoegde autoriteit (art. 3, lid 4, en art. 27 NIS2);\n- **Reactief toezicht** (ex post), bijvoorbeeld na een incident of signaal (art. 33 NIS2).\n\nIn Nederland is NIS2 geïmplementeerd in de [Cyberbeveiligingswet (Cbw)](https://www.digitaleoverheid.nl/overzicht-van-alle-onderwerpen/cybersecurity/kaders-voor-cybersecurity/cyberbeveiligingswet/). Deze uitkomst is een indicatie; raadpleeg de wet en de bevoegde toezichthouder voor uw sector."
+      },
+      "outputNotInScope": {
+        "type": "string",
+        "title": "Uitkomst",
+        "default": "Op basis van uw antwoorden valt uw organisatie waarschijnlijk **niet onder NIS2**.\n\nLet op: een lidstaat kan een organisatie alsnog aanwijzen (art. 2, lid 2, NIS2). Daarnaast kunnen klanten die wel onder NIS2 vallen eisen stellen aan de beveiliging van hun toeleveringsketen (art. 21, lid 2, onder d, NIS2).\n\nIn Nederland is NIS2 geïmplementeerd in de [Cyberbeveiligingswet (Cbw)](https://www.digitaleoverheid.nl/overzicht-van-alle-onderwerpen/cybersecurity/kaders-voor-cybersecurity/cyberbeveiligingswet/). Deze uitkomst is een indicatie; raadpleeg de wet en de bevoegde toezichthouder voor uw sector."
+      },
+      "outputNotInScopeSmall": {
+        "type": "string",
+        "title": "Uitkomst",
+        "default": "Op basis van uw antwoorden valt uw organisatie vanwege haar omvang waarschijnlijk **niet onder NIS2**.\n\nLet op: een kleine organisatie valt toch onder NIS2 als zij bijvoorbeeld de enige aanbieder is van een dienst die essentieel is voor kritieke maatschappelijke of economische activiteiten, als een verstoring van haar dienst aanzienlijke gevolgen kan hebben voor de openbare veiligheid of de volksgezondheid, of als zij een systeemrisico kan veroorzaken (art. 2, lid 2, onder b tot en met e, NIS2). De lidstaat wijst zulke organisaties aan. Daarnaast kunnen klanten die wel onder NIS2 vallen eisen stellen aan de beveiliging van hun toeleveringsketen.\n\nIn Nederland is NIS2 geïmplementeerd in de [Cyberbeveiligingswet (Cbw)](https://www.digitaleoverheid.nl/overzicht-van-alle-onderwerpen/cybersecurity/kaders-voor-cybersecurity/cyberbeveiligingswet/). Deze uitkomst is een indicatie; raadpleeg de wet en de bevoegde toezichthouder voor uw sector."
+      },
+      "outputPublicAdmin": {
+        "type": "string",
+        "title": "Uitkomst",
+        "default": "Of decentrale en andere overheidsinstanties onder NIS2 vallen, bepaalt de lidstaat (art. 2, lid 5, NIS2). Raadpleeg de Cyberbeveiligingswet om na te gaan of uw organisatie is aangewezen.\n\nIn Nederland is NIS2 geïmplementeerd in de [Cyberbeveiligingswet (Cbw)](https://www.digitaleoverheid.nl/overzicht-van-alle-onderwerpen/cybersecurity/kaders-voor-cybersecurity/cyberbeveiligingswet/). Deze uitkomst is een indicatie; raadpleeg de wet en de bevoegde toezichthouder voor uw sector."
+      },
+      "outputNotEu": {
+        "type": "string",
+        "title": "Uitkomst",
+        "default": "Op basis van uw antwoorden is NIS2 **niet van toepassing** op uw organisatie, omdat zij geen diensten verleent of activiteiten verricht in de Europese Unie."
+      }
+    },
+    "properties": {
+      "q1": {
+        "type": "string",
+        "title": "Is uw organisatie gevestigd in de Europese Unie, of levert zij diensten of verricht zij activiteiten in de Europese Unie?",
+        "enum": [
+          "Ja",
+          "Nee"
+        ]
+      }
+    },
+    "required": [
+      "q1"
+    ],
+    "dependencies": {
+      "q1": {
+        "oneOf": [
+          {
+            "properties": {
+              "q1": {
+                "enum": [
+                  "Nee"
+                ]
+              },
+              "output": {
+                "$ref": "#/definitions/outputNotEu"
+              }
+            }
+          },
+          {
+            "properties": {
+              "q1": {
+                "enum": [
+                  "Ja"
+                ]
+              },
+              "q2": {
+                "type": "string",
+                "title": "Behoort uw organisatie tot een van de volgende categorieën?",
+                "enum": [
+                  "Gekwalificeerde verlener van vertrouwensdiensten, register voor topleveldomeinnamen of DNS-dienstverlener",
+                  "Overheidsinstantie van de centrale overheid",
+                  "Door de overheid aangewezen als kritieke entiteit (CER-richtlijn)",
+                  "Aanbieder van openbare elektronische communicatienetwerken of van openbare elektronische communicatiediensten",
+                  "Niet-gekwalificeerde verlener van vertrouwensdiensten",
+                  "Geen van de bovenstaande"
+                ]
+              }
+            },
+            "required": [
+              "q2"
+            ]
+          }
+        ]
+      },
+      "q2": {
+        "oneOf": [
+          {
+            "properties": {
+              "q2": {
+                "enum": [
+                  "Gekwalificeerde verlener van vertrouwensdiensten, register voor topleveldomeinnamen of DNS-dienstverlener",
+                  "Overheidsinstantie van de centrale overheid",
+                  "Door de overheid aangewezen als kritieke entiteit (CER-richtlijn)"
+                ]
+              },
+              "output": {
+                "$ref": "#/definitions/outputEssential"
+              }
+            }
+          },
+          {
+            "properties": {
+              "q2": {
+                "enum": [
+                  "Aanbieder van openbare elektronische communicatienetwerken of van openbare elektronische communicatiediensten"
+                ]
+              },
+              "q4ecomms": {
+                "type": "string",
+                "title": "Wat is de omvang van uw organisatie?",
+                "enum": [
+                  "Groot: 250 of meer werknemers, of een jaaromzet van meer dan € 50 miljoen én een balanstotaal van meer dan € 43 miljoen",
+                  "Middelgroot: 50 tot 250 werknemers, of een jaaromzet én een balanstotaal van meer dan € 10 miljoen",
+                  "Klein of micro: minder dan 50 werknemers, en een jaaromzet of balanstotaal van ten hoogste € 10 miljoen"
+                ]
+              }
+            },
+            "required": [
+              "q4ecomms"
+            ]
+          },
+          {
+            "properties": {
+              "q2": {
+                "enum": [
+                  "Niet-gekwalificeerde verlener van vertrouwensdiensten"
+                ]
+              },
+              "q4tsp": {
+                "type": "string",
+                "title": "Wat is de omvang van uw organisatie?",
+                "enum": [
+                  "Groot: 250 of meer werknemers, of een jaaromzet van meer dan € 50 miljoen én een balanstotaal van meer dan € 43 miljoen",
+                  "Middelgroot: 50 tot 250 werknemers, of een jaaromzet én een balanstotaal van meer dan € 10 miljoen",
+                  "Klein of micro: minder dan 50 werknemers, en een jaaromzet of balanstotaal van ten hoogste € 10 miljoen"
+                ]
+              }
+            },
+            "required": [
+              "q4tsp"
+            ]
+          },
+          {
+            "properties": {
+              "q2": {
+                "enum": [
+                  "Geen van de bovenstaande"
+                ]
+              },
+              "q3": {
+                "type": "string",
+                "title": "In welke sector is uw organisatie actief?",
+                "enum": [
+                  "Energie",
+                  "Vervoer",
+                  "Bankwezen",
+                  "Infrastructuur voor de financiële markt",
+                  "Gezondheidszorg",
+                  "Drinkwater",
+                  "Afvalwater",
+                  "Digitale infrastructuur",
+                  "Beheer van ICT-diensten (business-to-business)",
+                  "Ruimtevaart",
+                  "Overheid (decentrale of andere overheidsinstanties)",
+                  "Post- en koeriersdiensten",
+                  "Afvalstoffenbeheer",
+                  "Vervaardiging, productie en distributie van chemische stoffen",
+                  "Productie, verwerking en distributie van levensmiddelen",
+                  "Vervaardiging",
+                  "Digitale aanbieders",
+                  "Onderzoek",
+                  "Geen van deze sectoren"
+                ]
+              }
+            },
+            "required": [
+              "q3"
+            ]
+          }
+        ]
+      },
+      "q3": {
+        "oneOf": [
+          {
+            "properties": {
+              "q3": {
+                "enum": [
+                  "Energie",
+                  "Vervoer",
+                  "Bankwezen",
+                  "Infrastructuur voor de financiële markt",
+                  "Gezondheidszorg",
+                  "Drinkwater",
+                  "Afvalwater",
+                  "Digitale infrastructuur",
+                  "Beheer van ICT-diensten (business-to-business)",
+                  "Ruimtevaart"
+                ]
+              },
+              "q4annex1": {
+                "type": "string",
+                "title": "Wat is de omvang van uw organisatie?",
+                "enum": [
+                  "Groot: 250 of meer werknemers, of een jaaromzet van meer dan € 50 miljoen én een balanstotaal van meer dan € 43 miljoen",
+                  "Middelgroot: 50 tot 250 werknemers, of een jaaromzet én een balanstotaal van meer dan € 10 miljoen",
+                  "Klein of micro: minder dan 50 werknemers, en een jaaromzet of balanstotaal van ten hoogste € 10 miljoen"
+                ]
+              }
+            },
+            "required": [
+              "q4annex1"
+            ]
+          },
+          {
+            "properties": {
+              "q3": {
+                "enum": [
+                  "Post- en koeriersdiensten",
+                  "Afvalstoffenbeheer",
+                  "Vervaardiging, productie en distributie van chemische stoffen",
+                  "Productie, verwerking en distributie van levensmiddelen",
+                  "Vervaardiging",
+                  "Digitale aanbieders",
+                  "Onderzoek"
+                ]
+              },
+              "q4annex2": {
+                "type": "string",
+                "title": "Wat is de omvang van uw organisatie?",
+                "enum": [
+                  "Groot: 250 of meer werknemers, of een jaaromzet van meer dan € 50 miljoen én een balanstotaal van meer dan € 43 miljoen",
+                  "Middelgroot: 50 tot 250 werknemers, of een jaaromzet én een balanstotaal van meer dan € 10 miljoen",
+                  "Klein of micro: minder dan 50 werknemers, en een jaaromzet of balanstotaal van ten hoogste € 10 miljoen"
+                ]
+              }
+            },
+            "required": [
+              "q4annex2"
+            ]
+          },
+          {
+            "properties": {
+              "q3": {
+                "enum": [
+                  "Overheid (decentrale of andere overheidsinstanties)"
+                ]
+              },
+              "output": {
+                "$ref": "#/definitions/outputPublicAdmin"
+              }
+            }
+          },
+          {
+            "properties": {
+              "q3": {
+                "enum": [
+                  "Geen van deze sectoren"
+                ]
+              },
+              "output": {
+                "$ref": "#/definitions/outputNotInScope"
+              }
+            }
+          }
+        ]
+      },
+      "q4ecomms": {
+        "oneOf": [
+          {
+            "properties": {
+              "q4ecomms": {
+                "enum": [
+                  "Groot: 250 of meer werknemers, of een jaaromzet van meer dan € 50 miljoen én een balanstotaal van meer dan € 43 miljoen",
+                  "Middelgroot: 50 tot 250 werknemers, of een jaaromzet én een balanstotaal van meer dan € 10 miljoen"
+                ]
+              },
+              "output": {
+                "$ref": "#/definitions/outputEssential"
+              }
+            }
+          },
+          {
+            "properties": {
+              "q4ecomms": {
+                "enum": [
+                  "Klein of micro: minder dan 50 werknemers, en een jaaromzet of balanstotaal van ten hoogste € 10 miljoen"
+                ]
+              },
+              "output": {
+                "$ref": "#/definitions/outputImportant"
+              }
+            }
+          }
+        ]
+      },
+      "q4tsp": {
+        "oneOf": [
+          {
+            "properties": {
+              "q4tsp": {
+                "enum": [
+                  "Groot: 250 of meer werknemers, of een jaaromzet van meer dan € 50 miljoen én een balanstotaal van meer dan € 43 miljoen"
+                ]
+              },
+              "output": {
+                "$ref": "#/definitions/outputEssential"
+              }
+            }
+          },
+          {
+            "properties": {
+              "q4tsp": {
+                "enum": [
+                  "Middelgroot: 50 tot 250 werknemers, of een jaaromzet én een balanstotaal van meer dan € 10 miljoen",
+                  "Klein of micro: minder dan 50 werknemers, en een jaaromzet of balanstotaal van ten hoogste € 10 miljoen"
+                ]
+              },
+              "output": {
+                "$ref": "#/definitions/outputImportant"
+              }
+            }
+          }
+        ]
+      },
+      "q4annex1": {
+        "oneOf": [
+          {
+            "properties": {
+              "q4annex1": {
+                "enum": [
+                  "Groot: 250 of meer werknemers, of een jaaromzet van meer dan € 50 miljoen én een balanstotaal van meer dan € 43 miljoen"
+                ]
+              },
+              "output": {
+                "$ref": "#/definitions/outputEssential"
+              }
+            }
+          },
+          {
+            "properties": {
+              "q4annex1": {
+                "enum": [
+                  "Middelgroot: 50 tot 250 werknemers, of een jaaromzet én een balanstotaal van meer dan € 10 miljoen"
+                ]
+              },
+              "output": {
+                "$ref": "#/definitions/outputImportant"
+              }
+            }
+          },
+          {
+            "properties": {
+              "q4annex1": {
+                "enum": [
+                  "Klein of micro: minder dan 50 werknemers, en een jaaromzet of balanstotaal van ten hoogste € 10 miljoen"
+                ]
+              },
+              "output": {
+                "$ref": "#/definitions/outputNotInScopeSmall"
+              }
+            }
+          }
+        ]
+      },
+      "q4annex2": {
+        "oneOf": [
+          {
+            "properties": {
+              "q4annex2": {
+                "enum": [
+                  "Groot: 250 of meer werknemers, of een jaaromzet van meer dan € 50 miljoen én een balanstotaal van meer dan € 43 miljoen",
+                  "Middelgroot: 50 tot 250 werknemers, of een jaaromzet én een balanstotaal van meer dan € 10 miljoen"
+                ]
+              },
+              "output": {
+                "$ref": "#/definitions/outputImportant"
+              }
+            }
+          },
+          {
+            "properties": {
+              "q4annex2": {
+                "enum": [
+                  "Klein of micro: minder dan 50 werknemers, en een jaaromzet of balanstotaal van ten hoogste € 10 miljoen"
+                ]
+              },
+              "output": {
+                "$ref": "#/definitions/outputNotInScopeSmall"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "uiSchema": {
+    "q1": {
+      "ui:widget": "radio",
+      "ui:id": "Q1",
+      "ui:description": "NIS2 is van toepassing op organisaties die hun diensten verlenen of hun activiteiten verrichten in de EU. In Nederland is NIS2 geïmplementeerd in de Cyberbeveiligingswet (Cbw).",
+      "ui:badges": [
+        {
+          "label": "Art. 2 NIS2 - Toepassingsgebied",
+          "color": "#6f42c1",
+          "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32022L2555"
+        },
+        {
+          "label": "Art. 26 NIS2 - Jurisdictie",
+          "color": "#6f42c1",
+          "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32022L2555"
+        }
+      ]
+    },
+    "q2": {
+      "ui:widget": "radio",
+      "ui:id": "Q2",
+      "ui:description": "Deze categorieën vallen onder NIS2 ongeacht de omvang van de organisatie (art. 2, lid 2 tot en met 4, NIS2).",
+      "ui:enumTooltips": [
+        "Bijvoorbeeld een verlener van gekwalificeerde elektronische handtekeningen, een beheerder van een topleveldomein (zoals .nl) of een aanbieder van DNS-diensten (met uitzondering van operators van root-naamservers).",
+        "Ministeries en andere instanties van de centrale overheid.",
+        "Een entiteit die op grond van de CER-richtlijn (EU) 2022/2557, in Nederland de Wet weerbaarheid kritieke entiteiten, als kritieke entiteit is aangewezen.",
+        "Bijvoorbeeld telecomaanbieders en internetproviders.",
+        "Een verlener van vertrouwensdiensten die (nog) niet als gekwalificeerd is aangemerkt.",
+        null
+      ],
+      "ui:badges": [
+        {
+          "label": "Art. 2 NIS2 - Toepassingsgebied",
+          "color": "#6f42c1",
+          "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32022L2555"
+        },
+        {
+          "label": "Art. 3 NIS2 - Essentiële en belangrijke entiteiten",
+          "color": "#6f42c1",
+          "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32022L2555"
+        }
+      ]
+    },
+    "q3": {
+      "ui:widget": "radio",
+      "ui:id": "Q3",
+      "ui:description": "Kies de sector waarin uw organisatie haar belangrijkste dienstverlening of activiteit heeft. De sectoren komen uit bijlage I (sectoren met een hoge kriticiteit) en bijlage II (andere kritieke sectoren) van NIS2.",
+      "ui:enumTooltips": [
+        "Elektriciteit, stadsverwarming en -koeling, aardolie, aardgas en waterstof.",
+        "Luchtvervoer, spoorvervoer, vervoer over water en wegvervoer.",
+        "Kredietinstellingen.",
+        "Exploitanten van handelsplatformen en centrale tegenpartijen.",
+        "Zorgaanbieders, EU-referentielaboratoria, onderzoek en ontwikkeling van geneesmiddelen, vervaardiging van farmaceutische producten en van kritieke medische hulpmiddelen.",
+        "Leveranciers en distributeurs van water voor menselijke consumptie.",
+        "Ondernemingen die stedelijk, huishoudelijk of industrieel afvalwater opvangen, lozen of behandelen.",
+        "Internetknooppunten, cloudcomputingdiensten, datacentra en netwerken voor de levering van content.",
+        "Aanbieders van beheerde diensten (managed service providers) en van beheerde beveiligingsdiensten (managed security service providers).",
+        "Exploitanten van grondinfrastructuur ter ondersteuning van diensten in de ruimte.",
+        "Bijvoorbeeld gemeenten, provincies en waterschappen. Instanties van de centrale overheid kiest u bij de vorige vraag.",
+        "Aanbieders van post- en koeriersdiensten.",
+        "Ondernemingen die afvalbeheer als hoofdactiviteit uitvoeren.",
+        "Vervaardiging, productie en distributie van stoffen en mengsels.",
+        "Groothandel, industriële productie en verwerking van levensmiddelen.",
+        "Medische hulpmiddelen en medische hulpmiddelen voor in-vitrodiagnostiek, informaticaproducten en elektronische en optische producten, elektrische apparatuur, machines, motorvoertuigen, aanhangwagens en opleggers, en overige transportmiddelen.",
+        "Onlinemarktplaatsen, onlinezoekmachines en platforms voor socialenetwerkdiensten.",
+        "Onderzoeksorganisaties.",
+        null
+      ],
+      "ui:badges": [
+        {
+          "label": "Bijlage I en II NIS2 - Sectoren",
+          "color": "#6f42c1",
+          "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32022L2555"
+        }
+      ]
+    },
+    "q4ecomms": {
+      "ui:widget": "radio",
+      "ui:id": "Q4",
+      "ui:description": "De omvang wordt bepaald volgens de Europese mkb-definitie (aanbeveling 2003/361/EG). Tel daarbij ook partner- en verbonden ondernemingen mee.",
+      "ui:badges": [
+        {
+          "label": "Art. 2 NIS2 - Toepassingsgebied",
+          "color": "#6f42c1",
+          "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32022L2555"
+        },
+        {
+          "label": "Art. 3 NIS2 - Essentiële en belangrijke entiteiten",
+          "color": "#6f42c1",
+          "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32022L2555"
+        }
+      ]
+    },
+    "q4tsp": {
+      "ui:widget": "radio",
+      "ui:id": "Q4",
+      "ui:description": "De omvang wordt bepaald volgens de Europese mkb-definitie (aanbeveling 2003/361/EG). Tel daarbij ook partner- en verbonden ondernemingen mee.",
+      "ui:badges": [
+        {
+          "label": "Art. 2 NIS2 - Toepassingsgebied",
+          "color": "#6f42c1",
+          "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32022L2555"
+        },
+        {
+          "label": "Art. 3 NIS2 - Essentiële en belangrijke entiteiten",
+          "color": "#6f42c1",
+          "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32022L2555"
+        }
+      ]
+    },
+    "q4annex1": {
+      "ui:widget": "radio",
+      "ui:id": "Q4",
+      "ui:description": "De omvang wordt bepaald volgens de Europese mkb-definitie (aanbeveling 2003/361/EG). Tel daarbij ook partner- en verbonden ondernemingen mee.",
+      "ui:badges": [
+        {
+          "label": "Art. 2 NIS2 - Toepassingsgebied",
+          "color": "#6f42c1",
+          "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32022L2555"
+        },
+        {
+          "label": "Art. 3 NIS2 - Essentiële en belangrijke entiteiten",
+          "color": "#6f42c1",
+          "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32022L2555"
+        }
+      ]
+    },
+    "q4annex2": {
+      "ui:widget": "radio",
+      "ui:id": "Q4",
+      "ui:description": "De omvang wordt bepaald volgens de Europese mkb-definitie (aanbeveling 2003/361/EG). Tel daarbij ook partner- en verbonden ondernemingen mee.",
+      "ui:badges": [
+        {
+          "label": "Art. 2 NIS2 - Toepassingsgebied",
+          "color": "#6f42c1",
+          "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32022L2555"
+        },
+        {
+          "label": "Art. 3 NIS2 - Essentiële en belangrijke entiteiten",
+          "color": "#6f42c1",
+          "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32022L2555"
+        }
+      ]
+    },
+    "output": {
+      "ui:id": "uitkomst"
+    }
+  }
+}

@@ -88,6 +88,12 @@ export default function App() {
   const [art50ReturnTo, setArt50ReturnTo] = useState<"obligations" | "home">("obligations");
   const [art50Forms, setArt50Forms] = useState<{ [key: string]: RJSFSchema }>({});
   const [art50FormData, setArt50FormData] = useState<Record<string, any> | undefined>(undefined);
+  // NIS2 scope questionnaire, listed under its own "Cybersecurity" section on the
+  // main screen. Kept out of `forms` the same way as the NTA and Art. 50 schemas,
+  // via a separate import.meta.glob below (src/schemas/nis2/<lang>/nis2.json).
+  const [showNis2, setShowNis2] = useState<boolean>(false);
+  const [nis2Forms, setNis2Forms] = useState<{ [key: string]: RJSFSchema }>({});
+  const [nis2FormData, setNis2FormData] = useState<Record<string, unknown> | undefined>(undefined);
   let formsMenu = [{ id: 0, title: t("no forms") }];
 
   const params = new URLSearchParams(window.location.search);
@@ -118,6 +124,7 @@ export default function App() {
   };
 
   const onFormActivate = (index: number) => {
+    setShowNis2(false);
     setShowObligations(false);
     setShowNta(false);
     setActiveNtaKey(null);
@@ -168,6 +175,20 @@ export default function App() {
     setShowArt50(true);
   };
 
+  const onStartNis2 = () => {
+    setActiveForm(null);
+    setShowObligations(false);
+    setShowNta(false);
+    setActiveNtaKey(null);
+    setShowArt50(false);
+    setShowNis2(true);
+  };
+
+  const onNis2Submit = (data?: Record<string, unknown>) => {
+    setNis2FormData(data ?? undefined);
+    setShowNis2(false);
+  };
+
   const onArt50Submit = (data?: any) => {
     setArt50FormData(data ?? undefined);
     setShowArt50(false);
@@ -196,6 +217,10 @@ export default function App() {
     }
     if (key === "ART50") {
       onStartArt50();
+      return;
+    }
+    if (key === "NIS2") {
+      onStartNis2();
       return;
     }
     let idx = -1;
@@ -247,6 +272,7 @@ export default function App() {
     const ntaJsonFiles = import.meta.glob("/src/schemas/nta/*/*.json");
     // Same reasoning as ntaJsonFiles above: kept out of the main glob on purpose.
     const art50JsonFiles = import.meta.glob("/src/schemas/art50/*/*.json");
+    const nis2JsonFiles = import.meta.glob("/src/schemas/nis2/*/*.json");
 
     const loadJsonFiles = async () => {
       const forms = {} as { [key: string]: RJSFSchema[] };
@@ -313,9 +339,26 @@ export default function App() {
       setArt50Forms(byLanguage);
     };
 
+    const loadNis2JsonFiles = async () => {
+      const entries: [string, RJSFSchema][] = await Promise.all(
+        Object.entries(nis2JsonFiles).map(async ([path, importFile]) => {
+          const module = await importFile();
+          return [path, (module as { default: RJSFSchema }).default];
+        })
+      );
+      // "/src/schemas/nis2/nl/nis2.json" -> language "nl"
+      const byLanguage = {} as { [key: string]: RJSFSchema };
+      for (const [path, data] of entries) {
+        const language: string = path.split("/")[4] ?? "nl";
+        byLanguage[language] = data;
+      }
+      setNis2Forms(byLanguage);
+    };
+
     loadJsonFiles();
     loadNtaJsonFiles();
     loadArt50JsonFiles();
+    loadNis2JsonFiles();
   }, []);
 
   return (
@@ -326,7 +369,19 @@ export default function App() {
       <Container fluid className="vh-100 mx-0">
         <Row className="justify-content-center align-items-center h-100">
           <Col xs={12} className="">
-            {showNta && activeNtaKey && activeNtaSchema ? (
+            {showNis2 && nis2Forms[i18n.language] ? (
+              <WizardForm
+                key="nis2"
+                id={0}
+                schema={nis2Forms[i18n.language].JSONSchema}
+                uiSchema={nis2Forms[i18n.language].uiSchema}
+                formData={nis2FormData ?? {}}
+                onSubmit={(_index, data) => onNis2Submit(data)}
+                onCancel={() => setShowNis2(false)}
+                validator={validator}
+                badgeLabel={t("questionnaire nis2 name")}
+              />
+            ) : showNta && activeNtaKey && activeNtaSchema ? (
               <WizardForm
                 key={`nta-${activeNtaKey}`}
                 id={0}
@@ -391,6 +446,7 @@ export default function App() {
                 onStartObligations={onStartObligations}
                 onStartNta={onStartNta}
                 onStartArt50={onStartArt50FromHome}
+                onStartNis2={onStartNis2}
                 activeLanguage={lang ? true : false}
               />
             )}
