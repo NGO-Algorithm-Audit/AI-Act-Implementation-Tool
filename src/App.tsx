@@ -88,6 +88,14 @@ export default function App() {
   const [art50ReturnTo, setArt50ReturnTo] = useState<"obligations" | "home">("obligations");
   const [art50Forms, setArt50Forms] = useState<{ [key: string]: RJSFSchema }>({});
   const [art50FormData, setArt50FormData] = useState<Record<string, any> | undefined>(undefined);
+  // GDPR (AVG) questionnaires, listed under their own "AVG" section on the main
+  // screen: src/schemas/avg/<lang>/<key>.json, loaded via a separate glob like
+  // the NTA and Art. 50 schemas so they stay out of `forms`.
+  const [activeAvgKey, setActiveAvgKey] = useState<string | null>(null);
+  const [avgForms, setAvgForms] = useState<{
+    [key: string]: Record<string, RJSFSchema>;
+  }>({ nl: {}, en: {} });
+  const [avgFormData, setAvgFormData] = useState<Record<string, any>>({});
   let formsMenu = [{ id: 0, title: t("no forms") }];
 
   const params = new URLSearchParams(window.location.search);
@@ -118,6 +126,7 @@ export default function App() {
   };
 
   const onFormActivate = (index: number) => {
+    setActiveAvgKey(null);
     setShowObligations(false);
     setShowNta(false);
     setActiveNtaKey(null);
@@ -140,6 +149,20 @@ export default function App() {
     setActiveNtaKey(null);
     setShowArt50(false);
     setShowNta(true);
+  };
+
+  const onStartAvg = (key: string) => {
+    setActiveForm(null);
+    setShowObligations(false);
+    setShowNta(false);
+    setActiveNtaKey(null);
+    setShowArt50(false);
+    setActiveAvgKey(key);
+  };
+
+  const onAvgSubmit = (key: string, data?: any) => {
+    setAvgFormData((prev) => ({ ...prev, [key]: data ?? null }));
+    setActiveAvgKey(null);
   };
 
   const onNtaSubmit = (key: string, data?: any) => {
@@ -198,6 +221,10 @@ export default function App() {
       onStartArt50();
       return;
     }
+    if (key === "PRESCAN") {
+      onStartAvg("prescan-dpia");
+      return;
+    }
     let idx = -1;
     if (key === "AI2") idx = findFormIndexByTitlePrefix(ROLE_AND_STATUS_TITLE_RE);
     else if (key === "AI1") idx = findFormIndexByTitlePrefix(RISK_CATEGORY_TITLE_RE);
@@ -247,6 +274,7 @@ export default function App() {
     const ntaJsonFiles = import.meta.glob("/src/schemas/nta/*/*.json");
     // Same reasoning as ntaJsonFiles above: kept out of the main glob on purpose.
     const art50JsonFiles = import.meta.glob("/src/schemas/art50/*/*.json");
+    const avgJsonFiles = import.meta.glob("/src/schemas/avg/*/*.json");
 
     const loadJsonFiles = async () => {
       const forms = {} as { [key: string]: RJSFSchema[] };
@@ -313,9 +341,28 @@ export default function App() {
       setArt50Forms(byLanguage);
     };
 
+    const loadAvgJsonFiles = async () => {
+      const entries: [string, RJSFSchema][] = await Promise.all(
+        Object.entries(avgJsonFiles).map(async ([path, importFile]) => {
+          const module = await importFile();
+          return [path, (module as { default: RJSFSchema }).default];
+        })
+      );
+      // "/src/schemas/avg/nl/prescan-dpia.json" -> language "nl", key "prescan-dpia"
+      const byLanguage = {} as { [key: string]: Record<string, RJSFSchema> };
+      for (const [path, data] of entries) {
+        const segments = path.split("/");
+        const language: string = segments[4] ?? "nl";
+        const key = (segments[5] ?? "").replace(/\.json$/, "");
+        byLanguage[language] = { ...(byLanguage[language] ?? {}), [key]: data };
+      }
+      setAvgForms(byLanguage);
+    };
+
     loadJsonFiles();
     loadNtaJsonFiles();
     loadArt50JsonFiles();
+    loadAvgJsonFiles();
   }, []);
 
   return (
@@ -326,7 +373,19 @@ export default function App() {
       <Container fluid className="vh-100 mx-0">
         <Row className="justify-content-center align-items-center h-100">
           <Col xs={12} className="">
-            {showNta && activeNtaKey && activeNtaSchema ? (
+            {activeAvgKey && avgForms[i18n.language]?.[activeAvgKey] ? (
+              <WizardForm
+                key={`avg-${activeAvgKey}`}
+                id={0}
+                schema={avgForms[i18n.language][activeAvgKey].JSONSchema}
+                uiSchema={avgForms[i18n.language][activeAvgKey].uiSchema}
+                formData={avgFormData[activeAvgKey] ?? {}}
+                onSubmit={(_index, data) => onAvgSubmit(activeAvgKey, data)}
+                onCancel={() => setActiveAvgKey(null)}
+                validator={validator}
+                badgeLabel={t("questionnaire prescan name")}
+              />
+            ) : showNta && activeNtaKey && activeNtaSchema ? (
               <WizardForm
                 key={`nta-${activeNtaKey}`}
                 id={0}
@@ -391,6 +450,7 @@ export default function App() {
                 onStartObligations={onStartObligations}
                 onStartNta={onStartNta}
                 onStartArt50={onStartArt50FromHome}
+                onStartAvg={onStartAvg}
                 activeLanguage={lang ? true : false}
               />
             )}
