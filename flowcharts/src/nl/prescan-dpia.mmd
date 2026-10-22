@@ -1,0 +1,54 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'Avenir Next, Avenir, Helvetica, sans-serif', 'fontSize': '14px', 'lineColor': '#005AA7', 'primaryColor': '#005AA7', 'edgeLabelBackground': '#ffffff', 'clusterBkg': '#f2f7fb', 'clusterBorder': '#9dbcd8', 'titleColor': '#005AA7'}, 'flowchart': {'curve': 'basis', 'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 50, 'rankSpacing': 80, 'padding': 20}}}%%
+flowchart LR
+
+    classDef Q fill:#daeaf7,stroke:#005aa7,color:#000
+    classDef score fill:#ffffff,stroke:#9dbcd8,color:#1e3a8a
+    classDef gate fill:#e0f2fe,stroke:#0284c7,color:#0c4a6e,font-weight:bold
+    classDef req fill:#dc3545,stroke:#dc3545,color:#fff,font-weight:bold
+    classDef rec fill:#0d9488,stroke:#0d9488,color:#fff,font-weight:bold
+    classDef none fill:#6c757d,stroke:#6c757d,color:#fff
+    linkStyle default stroke:#005AA7,stroke-width:1.2px
+
+    START(["Start pre-scan"]):::gate
+
+    %% ════════ Q1 — nieuwe wet- of regelgeving ════════
+    Q1["1 · Scope<br/>Nieuwe wet- of<br/>regelgeving?"]:::Q
+    DPIA_V["DPIA verplicht"]:::req
+    DPIA_A["DPIA aanbevolen"]:::rec
+    DPIA_N["Geen DPIA-advies"]:::none
+    START --> Q1
+    Q1 -->|"Ja"| DPIA_V
+    Q1 -->|"Nee"| RS
+
+    %% ════════ Q2–Q12 — risicoscore-vragen, opgeteld in Σ ════════
+    subgraph RS["Risicoscore per vraag (0 / 1 / 2) — opgeteld in Σ"]
+        direction TB
+        Q2["2 · Gewone persoonsgegevens<br/>≥ 6 categorieën → 1"]:::score
+        Q3["3 · Bijzondere persoonsgegevens<br/>1–6 → 1 & > 6 → 2"]:::score
+        Q4["4 · Gevoelige persoonsgegevens<br/>1–6 → 1 & > 6 → 2"]:::score
+        Q5["5 · Categorieën betrokkenen (gewogen;<br/>kinderen < 16 en kwetsbare groepen × 3)<br/>= 3 → 1 & ≥ 4 → 2"]:::score
+        Q6["6 · ≥ 10.000 betrokkenen → 1"]:::score
+        Q7["7 · Hoeveelheid gegevens ≥ 10.000<br/>telt niet mee in Σ"]:::score
+        Q8["8 · Frequentie ≥ maandelijks → 1"]:::score
+        Q9["9 · Bewaartermijn jaar of langer → 1"]:::score
+        Q10["10 · Doorgifte buiten EER → 1<br/>incl. bijzondere persoonsgegevens → 2"]:::score
+        Q11["11 · Basisregistratie BRI, BRK, BRP,<br/>BRV, WOZ of HR → 1"]:::score
+        Q12["12 · Digitale dienst → 1<br/>primair voor < 18 jaar → 2"]:::score
+        Q2 ~~~ Q3 ~~~ Q4 ~~~ Q5 ~~~ Q6 ~~~ Q7 ~~~ Q8 ~~~ Q9 ~~~ Q10 ~~~ Q11 ~~~ Q12
+    end
+
+    %% ════════ Σ-toets, AP-lijst (Q13) en EDPB-lijst (Q14) ════════
+    SUM["Σ risicoscore > 4?"]:::gate
+    Q13["13 · Lijst AP<br/>≥ 1 item geselecteerd?"]:::Q
+    Q14["14 · Lijst EDPB<br/>Aantal items?"]:::Q
+    RS --> SUM
+    SUM -->|"Ja"| DPIA_V
+    SUM -->|"Nee"| Q13
+    Q13 -->|"Ja"| DPIA_V
+    Q13 -->|"Nee"| Q14
+    Q14 -->|"≥ 2"| DPIA_V
+    Q14 -->|"1"| DPIA_A
+    Q14 -->|"0"| DPIA_N
+
+    %% De onzichtbare ~~~-keten (Q2–Q12, link 3–12) erft linkStyle default; expliciet verbergen.
+    linkStyle 3,4,5,6,7,8,9,10,11,12 stroke:none,stroke-width:0px

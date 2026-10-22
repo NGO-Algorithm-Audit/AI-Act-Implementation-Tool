@@ -93,5 +93,13 @@ export const DESCRIPTIONS: Record<"en" | "nl", Record<string, Desc>> = {
       title: "Stroomschema \u2014 NTA 8047 hoofdstuk 9: Gebruik profileringsalgoritme (\u00a7 9.2.1\u20139.3.4)",
       text: "Dit schema toont de schermen van de vragenlijst Gebruik profileringsalgoritme, in de volgorde waarin ze in de tool worden doorlopen: duidelijke werkinstructies en consistente uitkomsten (9.2.1), selectie voor het besluitvormingsproces (9.2.2), transparantieverplichtingen (9.2.3), monitoren op organisatorische waarborgen en veranderingen (9.3.2), monitoren van prestaties en onderscheid (9.3.3) en het herevalueren van de toetsing (9.3.4). Per scherm is aangegeven hoeveel vereisten uit de NTA moeten worden vastgelegd. Deze vragenlijst is een lineair documentatieformulier: er zijn geen vertakkingen of uitkomsten. Het auteursrecht op de vereisten en de NTA 8047 berust bij NEN. De volledige vragen zijn te vinden in de AI AQT tool zelf.",
     },
+    "prescan-dpia": {
+      title: "Stroomschema — Pre-scan DPIA (Art. 35 AVG, Model DPIA Rijksdienst)",
+      text: "Dit schema toont de logica waarmee de Pre-scan DPIA bepaalt of een DPIA verplicht of aanbevolen is: de toets op nieuwe wet- of regelgeving, de optelsom van de risicoscores per vraag (persoonsgegevens, betrokkenen, omvang, frequentie, bewaartermijn, doorgifte, basisregistraties en digitale diensten voor minderjarigen), de AP-lijst en de EDPB-lijst. De volledige vragen zijn te vinden in de Pre-scan DPIA-tool zelf.",
+    },
+    fria: {
+      title: "Stroomschema — FRIA (Art. 27 AI-verordening)",
+      text: "Dit schema toont de opbouw van de FRIA (grondrechteneffectbeoordeling): de beschrijving van de gebruikscontext, de impactanalyse van de betrokken grondrechten en de passende maatregelen om de inbreuk op de grondrechten te beperken. De volledige vragen zijn te vinden in de tool zelf.",
+    },
   },
 };

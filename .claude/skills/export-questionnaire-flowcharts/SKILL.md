@@ -29,6 +29,11 @@ NTA sections, so the charts are a chain of screen nodes (section number, condens
 number of requirements) ending in the result screen — no branches, no edge labels, one `Q` class
 plus one terminal class. See the NTA rules below for how the merged `nta` chart is wired.
 
+Charts (NL only, standalone): `prescan-dpia` — the DPIA decision logic of the MinBZK Pre-scan DPIA
+(PAR Assessments, `sources/prescan.yaml` in that repo), questions renumbered 1–14 — and `fria`, the
+three-question FRIA (Art. 27 AI Act) as a linear chain. Neither has an AI AQT schema behind it, so the
+pre-export gate only runs the classDef check for them (`STANDALONE_NL` in `flowchart-shared.mjs`).
+
 **Hard requirement: each PDF is exactly one page — the header and the diagram must never be split
 across pages.** The page height is measured from the actual rendered layout rather than assumed, and
 `render.mjs` verifies the page count of every PDF it writes.
@@ -94,6 +99,27 @@ import re, glob
 for f in sorted(glob.glob('flowcharts/*/*.pdf')):
     d = open(f,'rb').read()
     print(f, len(re.findall(rb'/Type\s*/Page[^s]', d)))"
+```
+
+## Path figures (communication)
+
+`path-figure.mjs` derives a figure from a master: every node as a blank grey shape, edge labels
+removed, and one path highlighted up to a labelled terminal. It is styled after the ClassifymyAI slide
+deck (Inter, `#F4F4F0` background, `#295B55` accent) and writes `flowcharts/<lang>/<outName>.{svg,png,pdf}`.
+Write `ID@label` to choose between parallel edges. The script fails if a hop is not in the master.
+
+```bash
+node .claude/skills/export-questionnaire-flowcharts/path-figure.mjs risk \
+  "Q1@None,Q3,Q11@None of the above,Q13@None of the above,Q28,Q30,LOW" risk-path-low "No requirements"
+```
+
+`--concise` collapses each multi-question block (biometric drill-down, each Annex III domain, the
+Art. 5 screen `Q28`–`Q31`, the exception screen `EXCH`+`Q32`–`Q34`) into one shape (`GROUPS` in the
+script). It also merges parallel edges, so `@label` is ignored. Use the block's key id in the path:
+
+```bash
+node .claude/skills/export-questionnaire-flowcharts/path-figure.mjs --concise risk \
+  "Q1,Q3,Q11,Q13,Q28,LOW" risk-path-low-concise "No requirements"
 ```
 
 ## Chart authoring rules (house style)
