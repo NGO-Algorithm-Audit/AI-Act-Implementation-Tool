@@ -116,6 +116,23 @@ export const STYLES: Record<string, ChartStyle> = {
     ],
   },
 
+  // NIS2 scope (Cybersecurity section): four Q4 size screens, one per route, ending in
+  // essential / important / designated / domain-registration / member-state-decides /
+  // not-in-scope outcomes.
+  nis2: {
+    init: init(100, 140),
+    classDefs: [
+      Q,
+      "classDef cat_ess fill:#6f42c1,stroke:#4f2c91,color:#fff,font-weight:bold",
+      "classDef cat_imp fill:#0891b2,stroke:#076a8d,color:#fff,font-weight:bold",
+      "classDef cat_member fill:#6c757d,stroke:#6c757d,color:#fff,font-weight:bold",
+      "classDef cat_out fill:#f5f5f5,stroke:#adb5bd,color:#495057,font-weight:bold",
+      "classDef cat_desig fill:#4f46e5,stroke:#3730a3,color:#fff,font-weight:bold",
+      "classDef cat_reg fill:#e0e7ff,stroke:#4f46e5,color:#1e1b4b,font-weight:bold",
+      linkDefault,
+    ],
+  },
+
   // The four NTA 8047 chapter charts share one style: they are linear documentation
   // forms, so there is a single question class and one terminal (the result screen).
   ...Object.fromEntries(

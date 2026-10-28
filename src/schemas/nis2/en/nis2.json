@@ -6,12 +6,12 @@
       "outputEssential": {
         "type": "string",
         "title": "Outcome",
-        "default": "Based on your answers, your organisation is likely an **essential entity** under NIS2. This means, among other things:\n\n- **Duty of care**: appropriate and proportionate cybersecurity risk-management measures (Art. 21 NIS2);\n- **Reporting obligation**: report significant incidents to the CSIRT or competent authority (Art. 23 NIS2);\n- **Management accountability**: management bodies approve the measures and follow training (Art. 20 NIS2);\n- **Registration obligation** with the competent authority (Art. 3(4) and Art. 27 NIS2);\n- **Proactive supervision** (ex ante) by the supervisory authority (Art. 32 NIS2).\n\nIn the Netherlands, NIS2 is implemented in the [Cyberbeveiligingswet (Cbw)](https://www.digitaleoverheid.nl/overzicht-van-alle-onderwerpen/cybersecurity/kaders-voor-cybersecurity/cyberbeveiligingswet/). This outcome is indicative; consult the law and the competent supervisory authority for your sector."
+        "default": "Based on your answers, your organisation is likely an **essential entity** under NIS2. This means, among other things:\n\n- **Duty of care**: appropriate and proportionate cybersecurity risk-management measures (Art. 21 NIS2);\n- **Reporting obligation**: report significant incidents to the CSIRT or competent authority (Art. 23 NIS2);\n- **Management accountability**: management bodies approve the measures and follow training (Art. 20 NIS2);\n- **Registration obligation** with the competent authority (Art. 3(4) NIS2; for certain digital service providers also Art. 27 NIS2);\n- **Proactive supervision** (ex ante) by the supervisory authority (Art. 32 NIS2).\n\nIf a sector-specific EU act imposes cybersecurity requirements that are at least equivalent, such as DORA (Regulation (EU) 2022/2554) for banking and financial market infrastructures, those requirements apply instead of the duty of care, the reporting obligation and the supervision under NIS2 (Art. 4 NIS2).\n\nIn the Netherlands, NIS2 is implemented in the [Cyberbeveiligingswet (Cbw)](https://www.digitaleoverheid.nl/overzicht-van-alle-onderwerpen/cybersecurity/kaders-voor-cybersecurity/cyberbeveiligingswet/). This outcome is indicative; consult the law and the competent supervisory authority for your sector."
       },
       "outputImportant": {
         "type": "string",
         "title": "Outcome",
-        "default": "Based on your answers, your organisation is likely an **important entity** under NIS2. This means, among other things:\n\n- **Duty of care**: appropriate and proportionate cybersecurity risk-management measures (Art. 21 NIS2);\n- **Reporting obligation**: report significant incidents to the CSIRT or competent authority (Art. 23 NIS2);\n- **Management accountability**: management bodies approve the measures and follow training (Art. 20 NIS2);\n- **Registration obligation** with the competent authority (Art. 3(4) and Art. 27 NIS2);\n- **Reactive supervision** (ex post), for example after an incident or indication (Art. 33 NIS2).\n\nIn the Netherlands, NIS2 is implemented in the [Cyberbeveiligingswet (Cbw)](https://www.digitaleoverheid.nl/overzicht-van-alle-onderwerpen/cybersecurity/kaders-voor-cybersecurity/cyberbeveiligingswet/). This outcome is indicative; consult the law and the competent supervisory authority for your sector."
+        "default": "Based on your answers, your organisation is likely an **important entity** under NIS2. This means, among other things:\n\n- **Duty of care**: appropriate and proportionate cybersecurity risk-management measures (Art. 21 NIS2);\n- **Reporting obligation**: report significant incidents to the CSIRT or competent authority (Art. 23 NIS2);\n- **Management accountability**: management bodies approve the measures and follow training (Art. 20 NIS2);\n- **Registration obligation** with the competent authority (Art. 3(4) NIS2; for certain digital service providers also Art. 27 NIS2);\n- **Reactive supervision** (ex post), for example after an incident or indication (Art. 33 NIS2).\n\nIf a sector-specific EU act imposes cybersecurity requirements that are at least equivalent, such as DORA (Regulation (EU) 2022/2554) for banking and financial market infrastructures, those requirements apply instead of the duty of care, the reporting obligation and the supervision under NIS2 (Art. 4 NIS2).\n\nIn the Netherlands, NIS2 is implemented in the [Cyberbeveiligingswet (Cbw)](https://www.digitaleoverheid.nl/overzicht-van-alle-onderwerpen/cybersecurity/kaders-voor-cybersecurity/cyberbeveiligingswet/). This outcome is indicative; consult the law and the competent supervisory authority for your sector."
       },
       "outputNotInScope": {
         "type": "string",
@@ -26,12 +26,22 @@
       "outputPublicAdmin": {
         "type": "string",
         "title": "Outcome",
-        "default": "Whether regional, local and other public administration entities fall under NIS2 is decided by the member state (Art. 2(5) NIS2). Consult the Cyberbeveiligingswet to check whether your organisation has been designated.\n\nIn the Netherlands, NIS2 is implemented in the [Cyberbeveiligingswet (Cbw)](https://www.digitaleoverheid.nl/overzicht-van-alle-onderwerpen/cybersecurity/kaders-voor-cybersecurity/cyberbeveiligingswet/). This outcome is indicative; consult the law and the competent supervisory authority for your sector."
+        "default": "Whether regional, local and other public administration entities fall under NIS2 is decided by the member state. Public administration entities at regional level fall under NIS2 if, following a risk-based assessment, they provide services the disruption of which could have a significant impact on critical societal or economic activities (Art. 2(2)(f)(ii) NIS2). In that case they are an important entity (Art. 3(2) NIS2). The member state may also apply NIS2 to public administration entities at local level (Art. 2(5)(a) NIS2). Their classification then follows from national law. Consult the Cyberbeveiligingswet to check whether your organisation has been designated.\n\nIn the Netherlands, NIS2 is implemented in the [Cyberbeveiligingswet (Cbw)](https://www.digitaleoverheid.nl/overzicht-van-alle-onderwerpen/cybersecurity/kaders-voor-cybersecurity/cyberbeveiligingswet/). This outcome is indicative; consult the law and the competent supervisory authority for your sector."
       },
       "outputNotEu": {
         "type": "string",
         "title": "Outcome",
         "default": "Based on your answers, NIS2 **does not apply** to your organisation, because it does not provide services or carry out activities in the European Union."
+      },
+      "outputDomainRegistration": {
+        "type": "string",
+        "title": "Outcome",
+        "default": "Based on your answers, your organisation falls under NIS2 as a **provider of domain name registration services** (Art. 2(4) NIS2). On that basis alone it is not an essential or important entity (Art. 3(3) NIS2), but it does have specific obligations, among other things:\n\n- **Registration obligation**: submit information to the competent authority (Art. 3(4) NIS2) and to the registry of ENISA (Art. 27 NIS2);\n- **Domain name registration data**: collect accurate and complete registration data and maintain it in a dedicated database, make non-personal registration data publicly available and respond to requests from legitimate access seekers without undue delay (Art. 28 NIS2).\n\nIf your organisation also carries out other activities from Annex I or II of NIS2 (for example as a DNS service provider), it may also be an essential or important entity for those activities.\n\nIn the Netherlands, NIS2 is implemented in the [Cyberbeveiligingswet (Cbw)](https://www.digitaleoverheid.nl/overzicht-van-alle-onderwerpen/cybersecurity/kaders-voor-cybersecurity/cyberbeveiligingswet/). This outcome is indicative; consult the law and the competent supervisory authority for your sector."
+      },
+      "outputDesignated": {
+        "type": "string",
+        "title": "Outcome",
+        "default": "Based on your answers, your organisation falls under NIS2 because it has been **identified by the member state** (Art. 2(2)(b) to (e) NIS2). The identification states whether your organisation is an **essential entity** (Art. 3(1)(e) NIS2) or an **important entity** (Art. 3(2) NIS2). This means, among other things:\n\n- **Duty of care**: appropriate and proportionate cybersecurity risk-management measures (Art. 21 NIS2);\n- **Reporting obligation**: report significant incidents to the CSIRT or competent authority (Art. 23 NIS2);\n- **Management accountability**: management bodies approve the measures and follow training (Art. 20 NIS2);\n- **Registration obligation** with the competent authority (Art. 3(4) NIS2; for certain digital service providers also Art. 27 NIS2);\n- **Supervision**: proactive (ex ante) for essential entities (Art. 32 NIS2), reactive (ex post) for important entities (Art. 33 NIS2).\n\nIf a sector-specific EU act imposes cybersecurity requirements that are at least equivalent, such as DORA (Regulation (EU) 2022/2554) for banking and financial market infrastructures, those requirements apply instead of the duty of care, the reporting obligation and the supervision under NIS2 (Art. 4 NIS2).\n\nIn the Netherlands, NIS2 is implemented in the [Cyberbeveiligingswet (Cbw)](https://www.digitaleoverheid.nl/overzicht-van-alle-onderwerpen/cybersecurity/kaders-voor-cybersecurity/cyberbeveiligingswet/). This outcome is indicative; consult the law and the competent supervisory authority for your sector."
       }
     },
     "properties": {
@@ -75,9 +85,11 @@
                 "enum": [
                   "Qualified trust service provider, top-level domain name registry or DNS service provider",
                   "Public administration entity of central government",
-                  "Identified as a critical entity by the government (CER Directive)",
+                  "Identified as a critical entity by the government ([CER Directive](https://eur-lex.europa.eu/eli/dir/2022/2557/oj/eng))",
+                  "Identified by the government as an essential or important entity (Art. 2(2)(b) to (e) NIS2)",
                   "Provider of public electronic communications networks or of publicly available electronic communications services",
                   "Non-qualified trust service provider",
+                  "Provider of domain name registration services",
                   "None of the above"
                 ]
               }
@@ -96,7 +108,7 @@
                 "enum": [
                   "Qualified trust service provider, top-level domain name registry or DNS service provider",
                   "Public administration entity of central government",
-                  "Identified as a critical entity by the government (CER Directive)"
+                  "Identified as a critical entity by the government ([CER Directive](https://eur-lex.europa.eu/eli/dir/2022/2557/oj/eng))"
                 ]
               },
               "output": {
@@ -116,7 +128,7 @@
                 "title": "What is the size of your organisation?",
                 "enum": [
                   "Large: 250 or more employees, or an annual turnover above € 50 million and a balance sheet total above € 43 million",
-                  "Medium-sized: 50 to 250 employees, or an annual turnover and a balance sheet total above € 10 million",
+                  "Medium-sized: 50 to 249 employees, or fewer than 50 employees with an annual turnover and a balance sheet total above € 10 million",
                   "Small or micro: fewer than 50 employees, and an annual turnover or balance sheet total of at most € 10 million"
                 ]
               }
@@ -137,7 +149,7 @@
                 "title": "What is the size of your organisation?",
                 "enum": [
                   "Large: 250 or more employees, or an annual turnover above € 50 million and a balance sheet total above € 43 million",
-                  "Medium-sized: 50 to 250 employees, or an annual turnover and a balance sheet total above € 10 million",
+                  "Medium-sized: 50 to 249 employees, or fewer than 50 employees with an annual turnover and a balance sheet total above € 10 million",
                   "Small or micro: fewer than 50 employees, and an annual turnover or balance sheet total of at most € 10 million"
                 ]
               }
@@ -145,6 +157,30 @@
             "required": [
               "q4tsp"
             ]
+          },
+          {
+            "properties": {
+              "q2": {
+                "enum": [
+                  "Provider of domain name registration services"
+                ]
+              },
+              "output": {
+                "$ref": "#/definitions/outputDomainRegistration"
+              }
+            }
+          },
+          {
+            "properties": {
+              "q2": {
+                "enum": [
+                  "Identified by the government as an essential or important entity (Art. 2(2)(b) to (e) NIS2)"
+                ]
+              },
+              "output": {
+                "$ref": "#/definitions/outputDesignated"
+              }
+            }
           },
           {
             "properties": {
@@ -167,7 +203,7 @@
                   "Digital infrastructure",
                   "ICT service management (business-to-business)",
                   "Space",
-                  "Public administration (regional, local or other public entities)",
+                  "Public administration at regional or local level",
                   "Postal and courier services",
                   "Waste management",
                   "Manufacture, production and distribution of chemicals",
@@ -208,7 +244,7 @@
                 "title": "What is the size of your organisation?",
                 "enum": [
                   "Large: 250 or more employees, or an annual turnover above € 50 million and a balance sheet total above € 43 million",
-                  "Medium-sized: 50 to 250 employees, or an annual turnover and a balance sheet total above € 10 million",
+                  "Medium-sized: 50 to 249 employees, or fewer than 50 employees with an annual turnover and a balance sheet total above € 10 million",
                   "Small or micro: fewer than 50 employees, and an annual turnover or balance sheet total of at most € 10 million"
                 ]
               }
@@ -235,7 +271,7 @@
                 "title": "What is the size of your organisation?",
                 "enum": [
                   "Large: 250 or more employees, or an annual turnover above € 50 million and a balance sheet total above € 43 million",
-                  "Medium-sized: 50 to 250 employees, or an annual turnover and a balance sheet total above € 10 million",
+                  "Medium-sized: 50 to 249 employees, or fewer than 50 employees with an annual turnover and a balance sheet total above € 10 million",
                   "Small or micro: fewer than 50 employees, and an annual turnover or balance sheet total of at most € 10 million"
                 ]
               }
@@ -248,7 +284,7 @@
             "properties": {
               "q3": {
                 "enum": [
-                  "Public administration (regional, local or other public entities)"
+                  "Public administration at regional or local level"
                 ]
               },
               "output": {
@@ -277,7 +313,7 @@
               "q4ecomms": {
                 "enum": [
                   "Large: 250 or more employees, or an annual turnover above € 50 million and a balance sheet total above € 43 million",
-                  "Medium-sized: 50 to 250 employees, or an annual turnover and a balance sheet total above € 10 million"
+                  "Medium-sized: 50 to 249 employees, or fewer than 50 employees with an annual turnover and a balance sheet total above € 10 million"
                 ]
               },
               "output": {
@@ -317,7 +353,7 @@
             "properties": {
               "q4tsp": {
                 "enum": [
-                  "Medium-sized: 50 to 250 employees, or an annual turnover and a balance sheet total above € 10 million",
+                  "Medium-sized: 50 to 249 employees, or fewer than 50 employees with an annual turnover and a balance sheet total above € 10 million",
                   "Small or micro: fewer than 50 employees, and an annual turnover or balance sheet total of at most € 10 million"
                 ]
               },
@@ -346,7 +382,7 @@
             "properties": {
               "q4annex1": {
                 "enum": [
-                  "Medium-sized: 50 to 250 employees, or an annual turnover and a balance sheet total above € 10 million"
+                  "Medium-sized: 50 to 249 employees, or fewer than 50 employees with an annual turnover and a balance sheet total above € 10 million"
                 ]
               },
               "output": {
@@ -375,7 +411,7 @@
               "q4annex2": {
                 "enum": [
                   "Large: 250 or more employees, or an annual turnover above € 50 million and a balance sheet total above € 43 million",
-                  "Medium-sized: 50 to 250 employees, or an annual turnover and a balance sheet total above € 10 million"
+                  "Medium-sized: 50 to 249 employees, or fewer than 50 employees with an annual turnover and a balance sheet total above € 10 million"
                 ]
               },
               "output": {
@@ -403,48 +439,55 @@
     "q1": {
       "ui:widget": "radio",
       "ui:id": "Q1",
-      "ui:description": "NIS2 applies to organisations that provide their services or carry out their activities in the EU. In the Netherlands, NIS2 is implemented in the Cyberbeveiligingswet (Cbw, Cybersecurity Act).",
+      "ui:description": "NIS2 applies to organisations that provide their services or carry out their activities in the EU. In the Netherlands, NIS2 is implemented in the Cyberbeveiligingswet (Cbw, Cybersecurity Act). Providers of DNS services, top-level domain name registries, domain name registration services, cloud computing, data centre and content delivery network services, managed (security) service providers, online marketplaces, online search engines and social networking services platforms that are not established in the EU but offer services in the EU must designate a representative in the EU (Art. 26(3) NIS2).",
       "ui:badges": [
         {
           "label": "Art. 2 NIS2 - Scope",
           "color": "#6f42c1",
-          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022L2555"
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02022L2555-20221227"
         },
         {
           "label": "Art. 26 NIS2 - Jurisdiction",
           "color": "#6f42c1",
-          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022L2555"
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02022L2555-20221227"
         }
       ]
     },
     "q2": {
       "ui:widget": "radio",
       "ui:id": "Q2",
-      "ui:description": "These categories fall under NIS2 regardless of the size of the organisation (Art. 2(2) to (4) NIS2).",
+      "ui:description": "These categories always fall under NIS2, whatever the size of the organisation (Art. 2(2) to (4) NIS2). For some of them, the size still determines whether the organisation is an essential or an important entity (Art. 3 NIS2): for example, qualified trust service providers are always an essential entity, while for non-qualified trust service providers the size determines the classification. If more than one category applies, choose the first one that applies.",
       "ui:enumTooltips": [
-        "For example a provider of qualified electronic signatures, the registry of a top-level domain (such as .nl) or a DNS service provider (excluding operators of root name servers).",
-        "Ministries and other entities of central government.",
+        "For example a provider of qualified electronic signatures, the registry of a top-level domain (such as .nl) or a DNS service provider (for authoritative DNS services, operators of root name servers are excluded).",
+        "Ministries and other entities of central government. Not included: the judiciary, parliaments and central banks (Art. 6(35) NIS2), and public administration entities that carry out activities in the areas of national security, public security, defence or law enforcement (Art. 2(7) NIS2).",
         "An entity identified as a critical entity under the CER Directive (EU) 2022/2557, in the Netherlands the Critical Entities Resilience Act (Wet weerbaarheid kritieke entiteiten).",
+        "The member state can identify an organisation regardless of its size, for example if it is the sole provider of an essential service in the member state, if a disruption could have a significant impact on public safety, public security or public health, if it could induce a significant systemic risk, or if the organisation is critical because of its specific importance at national or regional level.",
         "For example telecom operators and internet service providers.",
         "A trust service provider that is not (yet) qualified.",
+        "For example a registrar or reseller that registers domain names on behalf of customers. If your organisation is also a top-level domain name registry or DNS service provider, choose the first option.",
         null
       ],
       "ui:badges": [
         {
           "label": "Art. 2 NIS2 - Scope",
           "color": "#6f42c1",
-          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022L2555"
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02022L2555-20221227"
         },
         {
           "label": "Art. 3 NIS2 - Essential and important entities",
           "color": "#6f42c1",
-          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022L2555"
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02022L2555-20221227"
         }
       ]
     },
     "q3": {
       "ui:widget": "radio",
       "ui:id": "Q3",
+      "ui:optionHeaders": {
+        "0": "Annex I – Sectors of high criticality",
+        "11": "Annex II – Other critical sectors",
+        "18": "Other"
+      },
       "ui:description": "Choose the sector of your organisation's main service or activity. The sectors come from Annex I (sectors of high criticality) and Annex II (other critical sectors) of NIS2.",
       "ui:enumTooltips": [
         "Electricity, district heating and cooling, oil, gas and hydrogen.",
@@ -457,7 +500,7 @@
         "Internet exchange points, cloud computing services, data centres and content delivery networks.",
         "Managed service providers and managed security service providers.",
         "Operators of ground-based infrastructure that support the provision of space-based services.",
-        "For example municipalities, provinces and water authorities. Entities of central government are chosen in the previous question.",
+        "For example municipalities, provinces and water authorities. Entities of central government are chosen in the previous question. Not included: the judiciary, parliaments and central banks (Art. 6(35) NIS2), and public administration entities that carry out activities in the areas of national security, public security, defence or law enforcement (Art. 2(7) NIS2).",
         "Postal and courier service providers.",
         "Undertakings carrying out waste management as their principal economic activity.",
         "Manufacture, production and distribution of substances and mixtures.",
@@ -471,41 +514,41 @@
         {
           "label": "Annex I and II NIS2 - Sectors",
           "color": "#6f42c1",
-          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022L2555"
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02022L2555-20221227"
         }
       ]
     },
     "q4ecomms": {
       "ui:widget": "radio",
       "ui:id": "Q4",
-      "ui:description": "Size is determined according to the EU SME definition (Recommendation 2003/361/EC). Include partner and linked enterprises.",
+      "ui:description": "Your organisation falls under NIS2 regardless of its size. The size only determines whether it is an essential or an important entity. Size is determined according to the EU SME definition (Recommendation 2003/361/EC). Include partner and linked enterprises.",
       "ui:badges": [
         {
           "label": "Art. 2 NIS2 - Scope",
           "color": "#6f42c1",
-          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022L2555"
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02022L2555-20221227"
         },
         {
           "label": "Art. 3 NIS2 - Essential and important entities",
           "color": "#6f42c1",
-          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022L2555"
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02022L2555-20221227"
         }
       ]
     },
     "q4tsp": {
       "ui:widget": "radio",
       "ui:id": "Q4",
-      "ui:description": "Size is determined according to the EU SME definition (Recommendation 2003/361/EC). Include partner and linked enterprises.",
+      "ui:description": "Your organisation falls under NIS2 regardless of its size. The size only determines whether it is an essential or an important entity. Size is determined according to the EU SME definition (Recommendation 2003/361/EC). Include partner and linked enterprises.",
       "ui:badges": [
         {
           "label": "Art. 2 NIS2 - Scope",
           "color": "#6f42c1",
-          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022L2555"
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02022L2555-20221227"
         },
         {
           "label": "Art. 3 NIS2 - Essential and important entities",
           "color": "#6f42c1",
-          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022L2555"
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02022L2555-20221227"
         }
       ]
     },
@@ -517,12 +560,12 @@
         {
           "label": "Art. 2 NIS2 - Scope",
           "color": "#6f42c1",
-          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022L2555"
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02022L2555-20221227"
         },
         {
           "label": "Art. 3 NIS2 - Essential and important entities",
           "color": "#6f42c1",
-          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022L2555"
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02022L2555-20221227"
         }
       ]
     },
@@ -534,12 +577,12 @@
         {
           "label": "Art. 2 NIS2 - Scope",
           "color": "#6f42c1",
-          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022L2555"
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02022L2555-20221227"
         },
         {
           "label": "Art. 3 NIS2 - Essential and important entities",
           "color": "#6f42c1",
-          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022L2555"
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02022L2555-20221227"
         }
       ]
     },

@@ -155,7 +155,7 @@ const pdfPageCount = (path) =>
 
 // nta-* masters exist in Dutch only (see descriptions.ts); the per-language loop below
 // simply skips a chart when its master is missing for that language.
-const charts = ["identification", "identification-ai", "identification-algo", "identification-sadm", "role", "risk", "obligations",
+const charts = ["identification", "identification-ai", "identification-algo", "identification-sadm", "role", "risk", "obligations", "nis2",
   "nta", "nta-wenselijkheid", "nta-ontwerp", "nta-verificatie", "nta-gebruik"];
 const tmp = mkdtempSync(join(tmpdir(), "fc-"));
 

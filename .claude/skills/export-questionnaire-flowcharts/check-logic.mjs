@@ -35,7 +35,7 @@ import { REPO, loadSchema, chartEdges, QUESTION_SOURCE } from "./flowchart-share
 // required-edge set (same source schema) but, like check-coverage.mjs's SUBSET_OK,
 // silently skip a required edge whose endpoints aren't even nodes in that sub-chart —
 // showing a deliberate subset is not drift.
-export const LOGIC_CHARTS = ["risk", "role", "identification", "identification-ai", "identification-algo", "identification-sadm"];
+export const LOGIC_CHARTS = ["risk", "role", "identification", "identification-ai", "identification-algo", "identification-sadm", "nis2"];
 
 // ── per-chart config: how to resolve output-definition names and semantic (non-numeric
 // ui:id) fields to chart node ids. Hand-maintained because neither mapping is a
@@ -51,12 +51,18 @@ const TERMINAL_MAP = {
   },
   role: {}, // q13block's both branches share outputResult; q12's natural-person branch too — weak-only
   identification: {}, // many-to-one against chart terminals; TODO precise map, fast-follow
+  nis2: {
+    outputEssential: "ESS", outputImportant: "IMP", outputPublicAdmin: "PUBADM",
+    outputNotInScope: "OUT", outputNotInScopeSmall: "OUTSMALL", outputNotEu: "NOTEU",
+    outputDesignated: "DESIG", outputDomainRegistration: "REG",
+  },
 };
 // key = "<definitionNameOrRoot>.<fieldKey>" (checked first) or bare "<fieldKey>" (fallback).
 const SEMANTIC_NODE_MAP = {
   risk: { "exceptionHigh.exceptions": "EXCH", "exceptionForbidden.exceptions": "EXCF" },
   role: {},
   identification: { "root.intro": "START" },
+  nis2: {},
 };
 
 const defsFor = (schema) => schema.JSONSchema.definitions || {};
