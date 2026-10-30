@@ -88,6 +88,14 @@ export default function App() {
   const [art50ReturnTo, setArt50ReturnTo] = useState<"obligations" | "home">("obligations");
   const [art50Forms, setArt50Forms] = useState<{ [key: string]: RJSFSchema }>({});
   const [art50FormData, setArt50FormData] = useState<Record<string, any> | undefined>(undefined);
+  // GDPR (AVG) questionnaires, listed under their own "AVG" section on the main
+  // screen: src/schemas/avg/<lang>/<key>.json, loaded via a separate glob like
+  // the NTA and Art. 50 schemas so they stay out of `forms`.
+  const [activeAvgKey, setActiveAvgKey] = useState<string | null>(null);
+  const [avgForms, setAvgForms] = useState<{
+    [key: string]: Record<string, RJSFSchema>;
+  }>({ nl: {}, en: {} });
+  const [avgFormData, setAvgFormData] = useState<Record<string, any>>({});
   // NIS2 scope questionnaire, listed under its own "Cybersecurity" section on the
   // main screen. Kept out of `forms` the same way as the NTA and Art. 50 schemas,
   // via a separate import.meta.glob below (src/schemas/nis2/<lang>/nis2.json).
@@ -124,6 +132,7 @@ export default function App() {
   };
 
   const onFormActivate = (index: number) => {
+    setActiveAvgKey(null);
     setShowNis2(false);
     setShowObligations(false);
     setShowNta(false);
@@ -147,6 +156,21 @@ export default function App() {
     setActiveNtaKey(null);
     setShowArt50(false);
     setShowNta(true);
+  };
+
+  const onStartAvg = (key: string) => {
+    setActiveForm(null);
+    setShowObligations(false);
+    setShowNta(false);
+    setActiveNtaKey(null);
+    setShowArt50(false);
+    setShowNis2(false);
+    setActiveAvgKey(key);
+  };
+
+  const onAvgSubmit = (key: string, data?: any) => {
+    setAvgFormData((prev) => ({ ...prev, [key]: data ?? null }));
+    setActiveAvgKey(null);
   };
 
   const onNtaSubmit = (key: string, data?: any) => {
@@ -181,6 +205,7 @@ export default function App() {
     setShowNta(false);
     setActiveNtaKey(null);
     setShowArt50(false);
+    setActiveAvgKey(null);
     setShowNis2(true);
   };
 
@@ -217,6 +242,10 @@ export default function App() {
     }
     if (key === "ART50") {
       onStartArt50();
+      return;
+    }
+    if (key === "PRESCAN") {
+      onStartAvg("prescan-dpia");
       return;
     }
     if (key === "NIS2") {
@@ -272,6 +301,7 @@ export default function App() {
     const ntaJsonFiles = import.meta.glob("/src/schemas/nta/*/*.json");
     // Same reasoning as ntaJsonFiles above: kept out of the main glob on purpose.
     const art50JsonFiles = import.meta.glob("/src/schemas/art50/*/*.json");
+    const avgJsonFiles = import.meta.glob("/src/schemas/avg/*/*.json");
     const nis2JsonFiles = import.meta.glob("/src/schemas/nis2/*/*.json");
 
     const loadJsonFiles = async () => {
@@ -339,6 +369,24 @@ export default function App() {
       setArt50Forms(byLanguage);
     };
 
+    const loadAvgJsonFiles = async () => {
+      const entries: [string, RJSFSchema][] = await Promise.all(
+        Object.entries(avgJsonFiles).map(async ([path, importFile]) => {
+          const module = await importFile();
+          return [path, (module as { default: RJSFSchema }).default];
+        })
+      );
+      // "/src/schemas/avg/nl/prescan-dpia.json" -> language "nl", key "prescan-dpia"
+      const byLanguage = {} as { [key: string]: Record<string, RJSFSchema> };
+      for (const [path, data] of entries) {
+        const segments = path.split("/");
+        const language: string = segments[4] ?? "nl";
+        const key = (segments[5] ?? "").replace(/\.json$/, "");
+        byLanguage[language] = { ...(byLanguage[language] ?? {}), [key]: data };
+      }
+      setAvgForms(byLanguage);
+    };
+
     const loadNis2JsonFiles = async () => {
       const entries: [string, RJSFSchema][] = await Promise.all(
         Object.entries(nis2JsonFiles).map(async ([path, importFile]) => {
@@ -358,6 +406,7 @@ export default function App() {
     loadJsonFiles();
     loadNtaJsonFiles();
     loadArt50JsonFiles();
+    loadAvgJsonFiles();
     loadNis2JsonFiles();
   }, []);
 
@@ -369,7 +418,19 @@ export default function App() {
       <Container fluid className="vh-100 mx-0">
         <Row className="justify-content-center align-items-center h-100">
           <Col xs={12} className="">
-            {showNis2 && nis2Forms[i18n.language] ? (
+            {activeAvgKey && avgForms[i18n.language]?.[activeAvgKey] ? (
+              <WizardForm
+                key={`avg-${activeAvgKey}`}
+                id={0}
+                schema={avgForms[i18n.language][activeAvgKey].JSONSchema}
+                uiSchema={avgForms[i18n.language][activeAvgKey].uiSchema}
+                formData={avgFormData[activeAvgKey] ?? {}}
+                onSubmit={(_index, data) => onAvgSubmit(activeAvgKey, data)}
+                onCancel={() => setActiveAvgKey(null)}
+                validator={validator}
+                badgeLabel={t("questionnaire prescan name")}
+              />
+            ) : showNis2 && nis2Forms[i18n.language] ? (
               <WizardForm
                 key="nis2"
                 id={0}
@@ -446,6 +507,7 @@ export default function App() {
                 onStartObligations={onStartObligations}
                 onStartNta={onStartNta}
                 onStartArt50={onStartArt50FromHome}
+                onStartAvg={onStartAvg}
                 onStartNis2={onStartNis2}
                 activeLanguage={lang ? true : false}
               />

@@ -1,0 +1,293 @@
+{
+  "JSONSchema": {
+    "title": "Pre-scan DPIA",
+    "type": "object",
+    "definitions": {
+      "outputPrescanDpia": {
+        "type": "string",
+        "title": "Uitkomst",
+        "default": "",
+        "prescanDpia": true
+      }
+    },
+    "properties": {
+      "q1": {
+        "type": "string",
+        "title": "Betreft de scope van de verwerking nieuwe wet- of regelgeving?",
+        "enum": [
+          "Ja",
+          "Nee"
+        ]
+      }
+    },
+    "required": [
+      "q1"
+    ],
+    "dependencies": {
+      "q1": {
+        "oneOf": [
+          {
+            "properties": {
+              "q1": {
+                "enum": [
+                  "Ja"
+                ]
+              },
+              "output": {
+                "$ref": "#/definitions/outputPrescanDpia"
+              }
+            }
+          },
+          {
+            "properties": {
+              "q1": {
+                "enum": [
+                  "Nee"
+                ]
+              },
+              "q2": {
+                "type": "array",
+                "title": "Welke gewone persoonsgegevens gaat het systeem verwerken?",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "Apparaat- en internetgegevens",
+                    "Content",
+                    "Demografische gegevens",
+                    "Diagnostische gegevens of telemetrie",
+                    "Gegevens verzameld via een website",
+                    "Helpdeskgegevens",
+                    "Logging",
+                    "Naam, contactgegevens",
+                    "Overige",
+                    "Geen van de bovenstaande"
+                  ]
+                },
+                "uniqueItems": true,
+                "minItems": 1
+              },
+              "q3": {
+                "type": "array",
+                "title": "Welke bijzondere persoonsgegevens gaat het systeem verwerken?",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "Biometrische gegevens met het oog op de unieke identificatie van een persoon",
+                    "Gegevens met betrekking tot iemands seksueel gedrag of seksuele gerichtheid",
+                    "Gegevens over gezondheid",
+                    "Genetische gegevens",
+                    "Persoonsgegevens waaruit het lidmaatschap van een vakbond blijkt",
+                    "Persoonsgegevens waaruit politieke opvattingen blijken",
+                    "Persoonsgegevens waaruit ras of etnische afkomst blijkt",
+                    "Persoonsgegevens waaruit religieuze of levensbeschouwelijke overtuigingen blijken",
+                    "Geen van de bovenstaande"
+                  ]
+                },
+                "uniqueItems": true,
+                "minItems": 1
+              },
+              "q4": {
+                "type": "array",
+                "title": "Welke andere gevoelige persoonsgegevens gaat het systeem verwerken?",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "Surfgedrag",
+                    "Gegevens over de financiële situatie van de betrokkene",
+                    "Gegevens die kunnen worden gebruikt voor (identiteits)fraude",
+                    "Gegevens die betrekking hebben op kwetsbare groepen",
+                    "Gebruikersnamen, wachtwoorden en andere inloggegevens",
+                    "Communicatie- en locatiegegevens",
+                    "Nationale identificatienummers (bijv. BSN)",
+                    "Strafrechtelijke gegevens",
+                    "Andere gegevens die kunnen leiden tot stigmatisering of uitsluiting van de betrokkene",
+                    "Geen van de bovenstaande"
+                  ]
+                },
+                "uniqueItems": true,
+                "minItems": 1
+              },
+              "q5": {
+                "type": "array",
+                "title": "Welke categorieën betrokkenen kun je onderscheiden?",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "Medewerkers",
+                    "Betrokkenen wiens gegevens worden verwerkt in het proces/systeem/applicatie",
+                    "Kinderen jonger dan 16 jaar",
+                    "Andere kwetsbare groepen (gehandicapten, minderheden, etc.)",
+                    "Geen van de bovenstaande"
+                  ]
+                },
+                "uniqueItems": true,
+                "minItems": 1
+              },
+              "q6": {
+                "type": "string",
+                "title": "Is het totale aantal betrokkenen gelijk aan of groter dan 10.000?",
+                "enum": [
+                  "Ja",
+                  "Nee"
+                ]
+              },
+              "q7": {
+                "type": "string",
+                "title": "Worden in totaal 10.000 of meer gegevensregels (records) van alle betrokkenen samen verwerkt?",
+                "enum": [
+                  "Ja",
+                  "Nee"
+                ]
+              },
+              "q8": {
+                "type": "string",
+                "title": "Wat is de frequentie van de verwerking?",
+                "enum": [
+                  "Continu (doorlopend)",
+                  "Dagelijks of wekelijks",
+                  "Maandelijks",
+                  "Eén of enkele keren per jaar",
+                  "Onregelmatig",
+                  "Eenmalig"
+                ]
+              },
+              "q9": {
+                "type": "string",
+                "title": "Wat is de bewaartermijn van de gegevens?",
+                "enum": [
+                  "Aantal jaren",
+                  "Jaar",
+                  "Minder dan 1 maand",
+                  "Minder dan 1 week",
+                  "Minder dan 24 uur"
+                ]
+              },
+              "q10": {
+                "type": "string",
+                "title": "Is er sprake van internationale doorgifte van persoonsgegevens buiten de Europese Economische Ruimte (EER)?",
+                "enum": [
+                  "Ja, inclusief bijzondere persoonsgegevens",
+                  "Ja, zonder bijzondere persoonsgegevens",
+                  "Nee"
+                ]
+              },
+              "q11": {
+                "type": "array",
+                "title": "Welke van de volgende verwerkingen zijn van toepassing?",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "Cameratoezicht, vast of flexibel (bijv. bodycams, drones)",
+                    "Stelselmatig volgen van gedrag, locatie of communicatie van medewerkers",
+                    "Heimelijk onderzoek naar personen",
+                    "Observeren of beïnvloeden van gedrag (bijv. online tracking, gepersonaliseerde beïnvloeding)",
+                    "Profilering of beoordelen van personen op persoonskenmerken (scoring)",
+                    "Bepalen van kredietwaardigheid (creditscores)",
+                    "Fraudebestrijding",
+                    "Zwarte lijsten: registratie van personen die tot uitsluiting kan leiden",
+                    "Besluiten die iemand een dienst, recht of contract kunnen ontzeggen",
+                    "Geautomatiseerde besluitvorming met rechtsgevolgen of vergelijkbare gevolgen",
+                    "Uitwisselen of koppelen van gegevens tussen organisaties (samenwerkingsverband)",
+                    "Koppelen of combineren van datasets binnen de eigen organisatie",
+                    "Internet of things (slimme apparaten, sensoren)",
+                    "Andere nieuwe technologie (bijv. AI, gezichtsherkenning)",
+                    "Geen van de bovenstaande"
+                  ]
+                },
+                "uniqueItems": true,
+                "minItems": 1
+              },
+              "output": {
+                "$ref": "#/definitions/outputPrescanDpia"
+              }
+            },
+            "required": [
+              "q2",
+              "q3",
+              "q4",
+              "q5",
+              "q6",
+              "q7",
+              "q8",
+              "q9",
+              "q10",
+              "q11"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "uiSchema": {
+    "q1": {
+      "ui:widget": "radio",
+      "ui:id": "Q1",
+      "ui:alertDescription": "Met deze pre-scan beoordeelt u of de beoogde verwerking van persoonsgegevens mogelijk een hoog risico kent voor de rechten en vrijheden van betrokkenen, zoals beschreven in de AVG. Is dat het geval, dan is de organisatie verplicht een DPIA uit te voeren. De vragen en de beslislogica zijn ontleend aan de Pre-scan DPIA van het Ministerie van BZK (PAR Assessments)."
+    },
+    "q2": {
+      "ui:widget": "checkboxes",
+      "ui:id": "Q2",
+      "ui:description": "*Selecteer alle categorieën die van toepassing zijn.*",
+      "ui:descriptionStyle": "plain"
+    },
+    "q3": {
+      "ui:widget": "checkboxes",
+      "ui:id": "Q3",
+      "ui:description": "*Selecteer alle categorieën die van toepassing zijn.*",
+      "ui:descriptionStyle": "plain"
+    },
+    "q4": {
+      "ui:widget": "checkboxes",
+      "ui:id": "Q4",
+      "ui:description": "*Selecteer alle categorieën die van toepassing zijn.*",
+      "ui:descriptionStyle": "plain"
+    },
+    "q5": {
+      "ui:widget": "checkboxes",
+      "ui:id": "Q5",
+      "ui:description": "*Selecteer alle categorieën die van toepassing zijn.*",
+      "ui:descriptionStyle": "plain"
+    },
+    "q6": {
+      "ui:widget": "radio",
+      "ui:id": "Q6"
+    },
+    "q7": {
+      "ui:widget": "radio",
+      "ui:id": "Q7",
+      "ui:description": "Tel alle records die de toepassing verwerkt bij elkaar op, ook als die van dezelfde persoon komen."
+    },
+    "q8": {
+      "ui:widget": "radio",
+      "ui:id": "Q8"
+    },
+    "q9": {
+      "ui:widget": "radio",
+      "ui:id": "Q9"
+    },
+    "q10": {
+      "ui:widget": "radio",
+      "ui:id": "Q10"
+    },
+    "q11": {
+      "ui:widget": "checkboxes",
+      "ui:id": "Q11",
+      "ui:description": "Selecteer alle verwerkingen die van toepassing zijn. De soorten gegevens, kwetsbare groepen en de omvang van de verwerking hoeft u hier niet opnieuw aan te geven: die volgen uit uw antwoorden op vraag 3 tot en met 8.",
+      "ui:badges": [
+        {
+          "label": "Lijst AP - Verwerkingen waarvoor een DPIA verplicht is",
+          "color": "#6c757d",
+          "url": "https://zoek.officielebekendmakingen.nl/stcrt-2019-64418.html"
+        },
+        {
+          "label": "EDPB - Richtsnoeren DPIA (WP248 rev.01)",
+          "color": "#6c757d",
+          "url": "https://ec.europa.eu/newsroom/article29/items/611236/en"
+        }
+      ]
+    },
+    "output": {
+      "ui:id": "uitkomst"
+    }
+  }
+}

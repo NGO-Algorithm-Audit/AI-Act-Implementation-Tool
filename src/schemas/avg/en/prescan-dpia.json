@@ -1,0 +1,293 @@
+{
+  "JSONSchema": {
+    "title": "Pre-scan DPIA",
+    "type": "object",
+    "definitions": {
+      "outputPrescanDpia": {
+        "type": "string",
+        "title": "Outcome",
+        "default": "",
+        "prescanDpia": true
+      }
+    },
+    "properties": {
+      "q1": {
+        "type": "string",
+        "title": "Does the scope of the processing concern new legislation or regulations?",
+        "enum": [
+          "Yes",
+          "No"
+        ]
+      }
+    },
+    "required": [
+      "q1"
+    ],
+    "dependencies": {
+      "q1": {
+        "oneOf": [
+          {
+            "properties": {
+              "q1": {
+                "enum": [
+                  "Yes"
+                ]
+              },
+              "output": {
+                "$ref": "#/definitions/outputPrescanDpia"
+              }
+            }
+          },
+          {
+            "properties": {
+              "q1": {
+                "enum": [
+                  "No"
+                ]
+              },
+              "q2": {
+                "type": "array",
+                "title": "Which ordinary personal data will the system process?",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "Device and internet data",
+                    "Content",
+                    "Demographic data",
+                    "Diagnostic data or telemetry",
+                    "Data collected via a website",
+                    "Helpdesk data",
+                    "Logging",
+                    "Name, contact details",
+                    "Other",
+                    "None of the above"
+                  ]
+                },
+                "uniqueItems": true,
+                "minItems": 1
+              },
+              "q3": {
+                "type": "array",
+                "title": "Which special categories of personal data will the system process?",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "Biometric data for the purpose of uniquely identifying a person",
+                    "Data concerning a person's sex life or sexual orientation",
+                    "Data concerning health",
+                    "Genetic data",
+                    "Personal data revealing trade union membership",
+                    "Personal data revealing political opinions",
+                    "Personal data revealing racial or ethnic origin",
+                    "Personal data revealing religious or philosophical beliefs",
+                    "None of the above"
+                  ]
+                },
+                "uniqueItems": true,
+                "minItems": 1
+              },
+              "q4": {
+                "type": "array",
+                "title": "Which other sensitive personal data will the system process?",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "Browsing behaviour",
+                    "Data about the data subject's financial situation",
+                    "Data that can be used for (identity) fraud",
+                    "Data relating to vulnerable groups",
+                    "Usernames, passwords and other login credentials",
+                    "Communication and location data",
+                    "National identification numbers (e.g. Dutch citizen service number, BSN)",
+                    "Criminal records data",
+                    "Other data that may lead to stigmatisation or exclusion of the data subject",
+                    "None of the above"
+                  ]
+                },
+                "uniqueItems": true,
+                "minItems": 1
+              },
+              "q5": {
+                "type": "array",
+                "title": "Which categories of data subjects can you distinguish?",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "Employees",
+                    "Data subjects whose data is processed in the process/system/application",
+                    "Children under 16",
+                    "Other vulnerable groups (people with disabilities, minorities, etc.)",
+                    "None of the above"
+                  ]
+                },
+                "uniqueItems": true,
+                "minItems": 1
+              },
+              "q6": {
+                "type": "string",
+                "title": "Is the total number of data subjects 10,000 or more?",
+                "enum": [
+                  "Yes",
+                  "No"
+                ]
+              },
+              "q7": {
+                "type": "string",
+                "title": "Are 10,000 or more records processed in total, for all data subjects combined?",
+                "enum": [
+                  "Yes",
+                  "No"
+                ]
+              },
+              "q8": {
+                "type": "string",
+                "title": "How often does the processing take place?",
+                "enum": [
+                  "Continuously (ongoing)",
+                  "Daily or weekly",
+                  "Monthly",
+                  "Once or a few times a year",
+                  "Irregularly",
+                  "Once only"
+                ]
+              },
+              "q9": {
+                "type": "string",
+                "title": "What is the retention period of the data?",
+                "enum": [
+                  "Several years",
+                  "One year",
+                  "Less than 1 month",
+                  "Less than 1 week",
+                  "Less than 24 hours"
+                ]
+              },
+              "q10": {
+                "type": "string",
+                "title": "Are personal data transferred outside the European Economic Area (EEA)?",
+                "enum": [
+                  "Yes, including special categories of personal data",
+                  "Yes, without special categories of personal data",
+                  "No"
+                ]
+              },
+              "q11": {
+                "type": "array",
+                "title": "Which of the following processing operations apply?",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "Camera surveillance, fixed or flexible (e.g. body cams, drones)",
+                    "Systematic monitoring of employees' behaviour, location or communication",
+                    "Covert investigation of individuals",
+                    "Observing or influencing behaviour (e.g. online tracking, personalised nudging)",
+                    "Profiling or evaluating individuals based on personal characteristics (scoring)",
+                    "Assessing creditworthiness (credit scores)",
+                    "Fraud prevention",
+                    "Blacklists: registering individuals in a way that may lead to exclusion",
+                    "Decisions that may deny someone a service, right or contract",
+                    "Automated decision-making with legal or similarly significant effects",
+                    "Sharing or linking data between organisations (partnership)",
+                    "Linking or combining datasets within your own organisation",
+                    "Internet of things (smart devices, sensors)",
+                    "Other new technology (e.g. AI, facial recognition)",
+                    "None of the above"
+                  ]
+                },
+                "uniqueItems": true,
+                "minItems": 1
+              },
+              "output": {
+                "$ref": "#/definitions/outputPrescanDpia"
+              }
+            },
+            "required": [
+              "q2",
+              "q3",
+              "q4",
+              "q5",
+              "q6",
+              "q7",
+              "q8",
+              "q9",
+              "q10",
+              "q11"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "uiSchema": {
+    "q1": {
+      "ui:widget": "radio",
+      "ui:id": "Q1",
+      "ui:alertDescription": "With this pre-scan you assess whether the intended processing of personal data is likely to result in a high risk to the rights and freedoms of data subjects, as described in the GDPR. If so, the organisation is required to carry out a DPIA. The questions and the decision logic are taken from the Pre-scan DPIA of the Dutch Ministry of the Interior and Kingdom Relations (BZK) (PAR Assessments)."
+    },
+    "q2": {
+      "ui:widget": "checkboxes",
+      "ui:id": "Q2",
+      "ui:description": "*Select all categories that apply.*",
+      "ui:descriptionStyle": "plain"
+    },
+    "q3": {
+      "ui:widget": "checkboxes",
+      "ui:id": "Q3",
+      "ui:description": "*Select all categories that apply.*",
+      "ui:descriptionStyle": "plain"
+    },
+    "q4": {
+      "ui:widget": "checkboxes",
+      "ui:id": "Q4",
+      "ui:description": "*Select all categories that apply.*",
+      "ui:descriptionStyle": "plain"
+    },
+    "q5": {
+      "ui:widget": "checkboxes",
+      "ui:id": "Q5",
+      "ui:description": "*Select all categories that apply.*",
+      "ui:descriptionStyle": "plain"
+    },
+    "q6": {
+      "ui:widget": "radio",
+      "ui:id": "Q6"
+    },
+    "q7": {
+      "ui:widget": "radio",
+      "ui:id": "Q7",
+      "ui:description": "Add up all records the application processes, even if they relate to the same person."
+    },
+    "q8": {
+      "ui:widget": "radio",
+      "ui:id": "Q8"
+    },
+    "q9": {
+      "ui:widget": "radio",
+      "ui:id": "Q9"
+    },
+    "q10": {
+      "ui:widget": "radio",
+      "ui:id": "Q10"
+    },
+    "q11": {
+      "ui:widget": "checkboxes",
+      "ui:id": "Q11",
+      "ui:description": "Select all processing operations that apply. You do not need to indicate the kinds of data, vulnerable groups or the scale of the processing again here: these follow from your answers to questions 3 to 8.",
+      "ui:badges": [
+        {
+          "label": "Dutch DPA (AP) list - Processing operations requiring a DPIA",
+          "color": "#6c757d",
+          "url": "https://zoek.officielebekendmakingen.nl/stcrt-2019-64418.html"
+        },
+        {
+          "label": "EDPB - DPIA Guidelines (WP248 rev.01)",
+          "color": "#6c757d",
+          "url": "https://ec.europa.eu/newsroom/article29/items/611236/en"
+        }
+      ]
+    },
+    "output": {
+      "ui:id": "uitkomst"
+    }
+  }
+}

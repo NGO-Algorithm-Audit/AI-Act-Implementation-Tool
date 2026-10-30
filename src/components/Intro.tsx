@@ -23,6 +23,7 @@ export default function ({
   onStartObligations,
   onStartNta,
   onStartArt50,
+  onStartAvg,
   onStartNis2,
   activeLanguage = false,
 }: {
@@ -32,6 +33,7 @@ export default function ({
   onStartObligations?: () => void;
   onStartNta?: () => void;
   onStartArt50?: () => void;
+  onStartAvg?: (key: string) => void;
   onStartNis2?: () => void;
   activeLanguage?: boolean;
 }) {
@@ -174,7 +176,36 @@ export default function ({
               <h6 className="mt-3 mb-1 fw-bold" style={{ color: "#005AA7" }}>
                 {t("intro section identification")}
               </h6>
-              <ListGroup>{identForms.map(renderFormItem)}</ListGroup>
+              <ListGroup>
+                {identForms.map(renderFormItem)}
+                {/* NIS2 scope questionnaire: a JSON-Schema wizard in src/schemas/nis2/,
+                    kept out of `forms` (see App.tsx's nis2Forms), so rendered as a
+                    fixed entry. */}
+                <ListGroup.Item
+                  className="d-flex flex-row justify-content-between align-items-center"
+                  onClick={() => onStartNis2?.()}
+                  style={{ cursor: "pointer" }}
+                >
+                  <p className="m-0 mr-4">
+                    <span
+                      className="badge me-2"
+                      style={{ backgroundColor: "#005AA7", color: "#fff" }}
+                    >
+                      {t("questionnaire nis2 name")}
+                    </span>
+                    <span style={{ marginLeft: "8px" }}>{t("questionnaire nis2 title")}</span>
+                  </p>
+                  <Button
+                    variant="primary"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onStartNis2?.();
+                    }}
+                  >
+                    {t("startButton")}
+                  </Button>
+                </ListGroup.Item>
+              </ListGroup>
 
               <h6 className="mt-4 mb-1 fw-bold" style={{ color: "#005AA7" }}>
                 {t("intro section next steps subtitle")}
@@ -238,6 +269,38 @@ export default function ({
               </ListGroup>
 
               <h6 className="mt-4 mb-1 fw-bold" style={{ color: "#005AA7" }}>
+                {t("intro section gdpr")}
+              </h6>
+              <ListGroup>
+                {/* Pre-scan DPIA: a JSON-Schema wizard in src/schemas/avg/, kept out
+                    of `forms` (see App.tsx's avgForms), so rendered as a fixed entry. */}
+                <ListGroup.Item
+                  className="d-flex flex-row justify-content-between align-items-center"
+                  onClick={() => onStartAvg?.("prescan-dpia")}
+                  style={{ cursor: "pointer" }}
+                >
+                  <p className="m-0 mr-4">
+                    <span
+                      className="badge me-2"
+                      style={{ backgroundColor: "#005AA7", color: "#fff" }}
+                    >
+                      {t("questionnaire prescan name")}
+                    </span>
+                    <span style={{ marginLeft: "8px" }}>{t("questionnaire prescan title")}</span>
+                  </p>
+                  <Button
+                    variant="primary"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onStartAvg?.("prescan-dpia");
+                    }}
+                  >
+                    {t("startButton")}
+                  </Button>
+                </ListGroup.Item>
+              </ListGroup>
+
+              <h6 className="mt-4 mb-1 fw-bold" style={{ color: "#005AA7" }}>
                 {t("intro section high impact algorithms")}
               </h6>
               <ListGroup>
@@ -263,39 +326,6 @@ export default function ({
                     onClick={(e) => {
                       e.stopPropagation();
                       onStartNta?.();
-                    }}
-                  >
-                    {t("startButton")}
-                  </Button>
-                </ListGroup.Item>
-              </ListGroup>
-
-              <h6 className="mt-4 mb-1 fw-bold" style={{ color: "#005AA7" }}>
-                {t("intro section cybersecurity")}
-              </h6>
-              <ListGroup>
-                {/* NIS2 scope questionnaire: a JSON-Schema wizard in src/schemas/nis2/,
-                    kept out of `forms` (see App.tsx's nis2Forms), so rendered as a
-                    fixed entry. */}
-                <ListGroup.Item
-                  className="d-flex flex-row justify-content-between align-items-center"
-                  onClick={() => onStartNis2?.()}
-                  style={{ cursor: "pointer" }}
-                >
-                  <p className="m-0 mr-4">
-                    <span
-                      className="badge me-2"
-                      style={{ backgroundColor: "#005AA7", color: "#fff" }}
-                    >
-                      {t("questionnaire nis2 name")}
-                    </span>
-                    <span style={{ marginLeft: "8px" }}>{t("questionnaire nis2 title")}</span>
-                  </p>
-                  <Button
-                    variant="primary"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onStartNis2?.();
                     }}
                   >
                     {t("startButton")}

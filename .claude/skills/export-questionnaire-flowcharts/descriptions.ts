@@ -43,6 +43,10 @@ export const DESCRIPTIONS: Record<"en" | "nl", Record<string, Desc>> = {
       title: "Flowchart — Obligations by risk category, role and Article 50 scenario (Art. 4, 5, 9, 10-17, 26, 27, 43, 47-50, 72 and Annex III, IV AI Act)",
       text: "This schematic representation shows the obligations that apply, depending on the role of the actor (provider or deployer) and the risk category (prohibited, high-risk or generative and interactive AI), mirroring the conditional logic of the “Risk category results” page based on the Risk category questionnaire and Role and status questionnaire. The complete questions and result page text can be found in the AI AQT itself.",
     },
+    "prescan-dpia": {
+      title: "Flowchart — Pre-scan DPIA (Art. 35 GDPR)",
+      text: "This schematic representation shows the logic the Pre-scan DPIA uses to determine whether a DPIA is mandatory or recommended: the check for new legislation or regulations, the sum of the risk scores per question (personal data, data subjects, scale, frequency, retention period, transfer) and guidelines of the Dutch Data Protection Authority (AP) and the EDPB. The complete questions can be found in the Pre-scan DPIA tool itself.",
+    },
     nis2: {
       title: "Flowchart — NIS2 scope (Art. 2, 3, 26 and Annex I, II NIS2 Directive (EU) 2022/2555)",
       text: "This schematic representation shows the logic required to determine whether an organisation is an essential entity, an important entity or not in scope of the NIS2 Directive (EU) 2022/2555, implemented in the Netherlands as the Cyberbeveiligingswet (Cbw): the EU-presence check of Article 2 and 26, the categories that fall under NIS2 regardless of size (Article 2(2) to (4) and 3(1)), including domain name registration service providers (Article 2(4)) and entities identified by the member state (Article 2(2)(b) to (e)), the sector of Annex I (energy, transport, banking, financial market infrastructures, health, drinking water, waste water, digital infrastructure, ICT service management, space) or Annex II (postal and courier services, waste management, chemicals, food, manufacturing, digital providers, research), and the size of the organisation according to the EU SME definition (Recommendation 2003/361/EC). The outcomes are indicative. The complete questions can be found in the AI AQT tool itself.",
@@ -100,6 +104,14 @@ export const DESCRIPTIONS: Record<"en" | "nl", Record<string, Desc>> = {
     "nta-gebruik": {
       title: "Stroomschema \u2014 NTA 8047 hoofdstuk 9: Gebruik profileringsalgoritme (\u00a7 9.2.1\u20139.3.4)",
       text: "Dit schema toont de schermen van de vragenlijst Gebruik profileringsalgoritme, in de volgorde waarin ze in de tool worden doorlopen: duidelijke werkinstructies en consistente uitkomsten (9.2.1), selectie voor het besluitvormingsproces (9.2.2), transparantieverplichtingen (9.2.3), monitoren op organisatorische waarborgen en veranderingen (9.3.2), monitoren van prestaties en onderscheid (9.3.3) en het herevalueren van de toetsing (9.3.4). Per scherm is aangegeven hoeveel vereisten uit de NTA moeten worden vastgelegd. Deze vragenlijst is een lineair documentatieformulier: er zijn geen vertakkingen of uitkomsten. Het auteursrecht op de vereisten en de NTA 8047 berust bij NEN. De volledige vragen zijn te vinden in de AI AQT tool zelf.",
+    },
+    "prescan-dpia": {
+      title: "Stroomschema — Pre-scan DPIA (Art. 35 AVG)",
+      text: "Dit schema toont de logica waarmee de Pre-scan DPIA bepaalt of een DPIA verplicht of aanbevolen is: de toets op nieuwe wet- of regelgeving, de optelsom van de risicoscores per vraag (persoonsgegevens, betrokkenen, omvang, frequentie, bewaartermijn, doorgifte) en richtlijnen van de AP en de EDPB. De volledige vragen zijn te vinden in de Pre-scan DPIA-tool zelf.",
+    },
+    fria: {
+      title: "Stroomschema — FRIA (Art. 27 AI-verordening)",
+      text: "Dit schema toont de opbouw van de FRIA (grondrechteneffectbeoordeling): de beschrijving van de gebruikscontext, de impactanalyse van de betrokken grondrechten en de passende maatregelen om de inbreuk op de grondrechten te beperken. De volledige vragen zijn te vinden in de tool zelf.",
     },
   },
 };

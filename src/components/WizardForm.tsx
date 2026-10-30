@@ -20,6 +20,7 @@ import OutputIdentification from "./OutputIdentification";
 import OutputRoleStatus from "./OutputRoleStatus";
 import OutputRiskClassification from "./OutputRiskClassification";
 import OutputArt50Detail from "./OutputArt50Detail";
+import { evaluatePrescanDpia } from "../utils/prescanDpia";
 import QuestionBadge from "./QuestionBadge";
 import TooltipCheckboxesWidget from "./widgets/TooltipCheckboxesWidget";
 import TooltipRadioWidget from "./widgets/TooltipRadioWidget";
@@ -772,6 +773,35 @@ const WizardForm = ({
             const hasRoleStatus = !!(firstQuestion as any)?.roleStatus;
             const hasRiskOutcome = !!(firstQuestion as any)?.riskOutcome;
             const hasArt50Detail = !!(firstQuestion as any)?.art50Detail;
+            // Pre-scan DPIA: the outcome depends on a sum of risk scores, which
+            // the schema cannot express, so it is computed from the answers here.
+            if ((firstQuestion as any)?.prescanDpia) {
+              const result = evaluatePrescanDpia(mergedData);
+              const reasons = result.reasons
+                .map((r) => `- ${t(`prescan reason ${r}`, { score: result.riskScore })}`)
+                .join("\n");
+              const text = [
+                t(`prescan outcome ${result.level}`),
+                reasons,
+                result.level === "none" ? t("prescan score total", { score: result.riskScore }) : "",
+                t("prescan outcome note"),
+              ]
+                .filter(Boolean)
+                .join("\n\n");
+              return (
+                <Output
+                  id={id}
+                  type={questions[0] as "output" | "error"}
+                  output={{ ...(firstQuestion as Record<string, string>), default: text }}
+                  step={step}
+                  handlePrev={handlePrev}
+                  onSubmit={(_idx, payload) =>
+                    onSubmit(id, { ...payload, risicoscore: result.riskScore, uitkomst: result.level })
+                  }
+                  data={mergedData}
+                />
+              );
+            }
             if (hasArt50Detail) {
               return (
                 <OutputArt50Detail
