@@ -31,11 +31,12 @@ export const NTA = {
 // the bilingual one, en/nl parity apply): the Pre-scan DPIA decision logic (MinBZK PAR
 // Assessments, sources/prescan.yaml), in EN + NL, and the Dutch-only three-question FRIA.
 export const STANDALONE = ["prescan-dpia"];
-export const STANDALONE_NL = ["fria"];
+// FRIA is parked for now; re-enable by restoring "fria" here and in render.mjs.
+export const STANDALONE_NL = [/* "fria" */];
 export const NL_ONLY = new Set([...Object.keys(NTA), "nta", ...STANDALONE_NL]);
 
 export const CHARTS = ["identification", "identification-ai", "identification-algo", "identification-sadm",
-  "role", "risk", "obligations", "nta", ...Object.keys(NTA), ...STANDALONE, ...STANDALONE_NL];
+  "role", "risk", "obligations", "nis2", "nta", ...Object.keys(NTA), ...STANDALONE, ...STANDALONE_NL];
 
 // Charts whose questions are numbered from a schema (obligations comes from imperative
 // code — see check-logic.mjs's LOGIC_CHARTS / the "not logic-checked" notice).
@@ -46,6 +47,7 @@ export const QUESTION_SOURCE = {
   "identification-ai": "identification",
   "identification-algo": "identification",
   "identification-sadm": "identification",
+  nis2: "nis2",
   ...Object.fromEntries(Object.keys(NTA).map((k) => [k, k])),
 };
 // Sub-charts show a subset of the questionnaire on purpose.
@@ -71,6 +73,7 @@ export async function loadSchema(chart, lang) {
     );
     return idMod.identificationSchema ?? idMod.default;
   }
+  if (src === "nis2") return readJSON(`src/schemas/nis2/${lang}/nis2.json`);
   if (Object.prototype.hasOwnProperty.call(NTA, src)) {
     return readJSON(`src/schemas/nta/${lang}/${NTA[src]}.json`);
   }

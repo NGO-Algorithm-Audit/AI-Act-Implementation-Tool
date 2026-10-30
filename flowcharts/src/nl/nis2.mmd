@@ -1,0 +1,62 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'Avenir Next, Avenir, Helvetica, sans-serif', 'fontSize': '14px', 'lineColor': '#005AA7', 'primaryColor': '#005AA7', 'edgeLabelBackground': '#ffffff'}, 'flowchart': {'curve': 'basis', 'useMaxWidth': false, 'htmlLabels': true, 'nodeSpacing': 100, 'rankSpacing': 140, 'padding': 24}}}%%
+flowchart LR
+
+    classDef Q fill:#daeaf7,stroke:#005aa7,color:#000
+    classDef cat_ess fill:#6f42c1,stroke:#4f2c91,color:#fff,font-weight:bold
+    classDef cat_imp fill:#0891b2,stroke:#076a8d,color:#fff,font-weight:bold
+    classDef cat_member fill:#6c757d,stroke:#6c757d,color:#fff,font-weight:bold
+    classDef cat_out fill:#f5f5f5,stroke:#adb5bd,color:#495057,font-weight:bold
+    classDef cat_desig fill:#4f46e5,stroke:#3730a3,color:#fff,font-weight:bold
+    classDef cat_reg fill:#e0e7ff,stroke:#4f46e5,color:#1e1b4b,font-weight:bold
+    linkStyle default stroke:#005AA7,stroke-width:1.2px
+
+    %% ════════ V1 — aanwezigheid in de EU ════════
+    Q1["V1 · Art. 2 · Art. 26 NIS2<br/>Gevestigd in de EU, of diensten<br/>of activiteiten in de EU?"]:::Q
+    Q1 -->|"Nee"| NOTEU
+    Q1 -->|"Ja"| Q2
+
+    %% ════════ V2 — categorieën die altijd onder NIS2 vallen (omvang kan essentieel/belangrijk bepalen) ════════
+    Q2["V2 · Art. 2(2)–(4) · Art. 3(1) NIS2<br/>Behoort de organisatie tot een<br/>categorie die altijd<br/>onder NIS2 valt?"]:::Q
+    Q2 -->|"Gekwalificeerde vertrouwensdienst,<br/>TLD-register of DNS-dienst"| ESS
+    Q2 -->|"Centrale<br/>overheid"| ESS
+    Q2 -->|"Kritieke entiteit<br/>(CER-richtlijn)"| ESS
+    Q2 -->|"Aangewezen door de overheid<br/>(art. 2(2)(b)–(e))"| DESIG
+    Q2 -->|"Aanbieder openbare<br/>elektronische communicatie"| Q4A
+    Q2 -->|"Niet-gekwalificeerde<br/>verlener vertrouwensdiensten"| Q4B
+    Q2 -->|"Domeinnaam-<br/>registratiediensten"| REG
+    Q2 -->|"Geen van de bovenstaande"| Q3
+
+    %% ════════ V3 — sector ════════
+    Q3["V3 · Bijlage I · Bijlage II NIS2<br/>In welke sector is de<br/>organisatie actief?"]:::Q
+    Q3 -->|"Sector uit bijlage I<br/>(hoge kriticiteit)"| Q4C
+    Q3 -->|"Sector uit bijlage II<br/>(andere kritieke)"| Q4D
+    Q3 -->|"Regionale of lokale<br/>overheid"| PUBADM
+    Q3 -->|"Geen van deze sectoren"| OUT
+
+    %% ════════ V4 — omvang (mkb-aanbeveling 2003/361/EG), één scherm per route ════════
+    Q4A["V4 · Art. 3(1)(a), (c) · 3(2) NIS2<br/>Essentieel of belangrijk?<br/>Omvang van de organisatie<br/>(elektronische communicatie)"]:::Q
+    Q4A -->|"Groot of middelgroot"| ESS
+    Q4A -->|"Klein of micro"| IMP
+
+    Q4B["V4 · Art. 3(1)(a) · 3(2) NIS2<br/>Essentieel of belangrijk?<br/>Omvang van de organisatie<br/>(niet-gekwalificeerde<br/>vertrouwensdienstverlener)"]:::Q
+    Q4B -->|"Groot"| ESS
+    Q4B -->|"Middelgroot, klein of micro"| IMP
+
+    Q4C["V4 · Art. 2(1) · Art. 3(1)(a) NIS2<br/>Omvang van de organisatie?<br/>(sector uit bijlage I)"]:::Q
+    Q4C -->|"Groot"| ESS
+    Q4C -->|"Middelgroot"| IMP
+    Q4C -->|"Klein of micro"| OUTSMALL
+
+    Q4D["V4 · Art. 2(1) · Art. 3(2) NIS2<br/>Omvang van de organisatie?<br/>(sector uit bijlage II)"]:::Q
+    Q4D -->|"Groot of middelgroot"| IMP
+    Q4D -->|"Klein of micro"| OUTSMALL
+
+    %% ════════ Uitkomsten ════════
+    ESS["Essentiële entiteit<br/>(Art. 3(1) NIS2; zorgplicht,<br/>meldplicht, registratieplicht,<br/>proactief toezicht — art. 32)"]:::cat_ess
+    IMP["Belangrijke entiteit<br/>(Art. 3(2) NIS2; zorgplicht,<br/>meldplicht, registratieplicht,<br/>reactief toezicht — art. 33)"]:::cat_imp
+    DESIG["Essentiële of belangrijke entiteit<br/>volgens de aanwijzing<br/>(Art. 3(1)(e) of 3(2) NIS2)"]:::cat_desig
+    REG["Onder NIS2 — domeinnaamregistratie<br/>(Art. 2(4), 3(3) NIS2; geen essentiële of<br/>belangrijke entiteit; registratie art. 27,<br/>registratiegegevens art. 28)"]:::cat_reg
+    PUBADM["Lidstaat beslist<br/>(regionaal: art. 2(2)(f)(ii) NIS2,<br/>belangrijke entiteit indien onder NIS2;<br/>lokaal: art. 2(5)(a) NIS2;<br/>controleer aanwijzing in de Cbw)"]:::cat_member
+    OUTSMALL["Niet onder NIS2 — omvang<br/>(Art. 2(1) NIS2; tenzij aangewezen<br/>op grond van art. 2(2)(b)–(e))"]:::cat_out
+    OUT["Niet onder NIS2<br/>(lidstaat kan alsnog<br/>aanwijzen — art. 2(2))"]:::cat_out
+    NOTEU["NIS2 niet van toepassing<br/>(geen diensten of activiteiten<br/>in de EU)"]:::cat_out

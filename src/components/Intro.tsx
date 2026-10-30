@@ -24,6 +24,7 @@ export default function ({
   onStartNta,
   onStartArt50,
   onStartAvg,
+  onStartNis2,
   activeLanguage = false,
 }: {
   forms: { id: number; title: string }[];
@@ -33,6 +34,7 @@ export default function ({
   onStartNta?: () => void;
   onStartArt50?: () => void;
   onStartAvg?: (key: string) => void;
+  onStartNis2?: () => void;
   activeLanguage?: boolean;
 }) {
   const { t, i18n } = useTranslation();
@@ -295,6 +297,39 @@ export default function ({
                     onClick={(e) => {
                       e.stopPropagation();
                       onStartNta?.();
+                    }}
+                  >
+                    {t("startButton")}
+                  </Button>
+                </ListGroup.Item>
+              </ListGroup>
+
+              <h6 className="mt-4 mb-1 fw-bold" style={{ color: "#005AA7" }}>
+                {t("intro section cybersecurity")}
+              </h6>
+              <ListGroup>
+                {/* NIS2 scope questionnaire: a JSON-Schema wizard in src/schemas/nis2/,
+                    kept out of `forms` (see App.tsx's nis2Forms), so rendered as a
+                    fixed entry. */}
+                <ListGroup.Item
+                  className="d-flex flex-row justify-content-between align-items-center"
+                  onClick={() => onStartNis2?.()}
+                  style={{ cursor: "pointer" }}
+                >
+                  <p className="m-0 mr-4">
+                    <span
+                      className="badge me-2"
+                      style={{ backgroundColor: "#005AA7", color: "#fff" }}
+                    >
+                      {t("questionnaire nis2 name")}
+                    </span>
+                    <span style={{ marginLeft: "8px" }}>{t("questionnaire nis2 title")}</span>
+                  </p>
+                  <Button
+                    variant="primary"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onStartNis2?.();
                     }}
                   >
                     {t("startButton")}

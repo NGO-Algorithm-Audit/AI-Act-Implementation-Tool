@@ -47,6 +47,10 @@ export const DESCRIPTIONS: Record<"en" | "nl", Record<string, Desc>> = {
       title: "Flowchart — Pre-scan DPIA (Art. 35 GDPR)",
       text: "This schematic representation shows the logic the Pre-scan DPIA uses to determine whether a DPIA is mandatory or recommended: the check for new legislation or regulations, the sum of the risk scores per question (personal data, data subjects, scale, frequency, retention period, transfer) and guidelines of the Dutch Data Protection Authority (AP) and the EDPB. The complete questions can be found in the Pre-scan DPIA tool itself.",
     },
+    nis2: {
+      title: "Flowchart — NIS2 scope (Art. 2, 3, 26 and Annex I, II NIS2 Directive (EU) 2022/2555)",
+      text: "This schematic representation shows the logic required to determine whether an organisation is an essential entity, an important entity or not in scope of the NIS2 Directive (EU) 2022/2555, implemented in the Netherlands as the Cyberbeveiligingswet (Cbw): the EU-presence check of Article 2 and 26, the categories that fall under NIS2 regardless of size (Article 2(2) to (4) and 3(1)), including domain name registration service providers (Article 2(4)) and entities identified by the member state (Article 2(2)(b) to (e)), the sector of Annex I (energy, transport, banking, financial market infrastructures, health, drinking water, waste water, digital infrastructure, ICT service management, space) or Annex II (postal and courier services, waste management, chemicals, food, manufacturing, digital providers, research), and the size of the organisation according to the EU SME definition (Recommendation 2003/361/EC). The outcomes are indicative. The complete questions can be found in the AI AQT tool itself.",
+    },
   },
   nl: {
     identification: {
@@ -76,6 +80,10 @@ export const DESCRIPTIONS: Record<"en" | "nl", Record<string, Desc>> = {
     obligations: {
       title: "Stroomschema — Verplichtingen per risicocategorie, rol en Artikel 50-scenario (Art. 4, 5, 9, 10-17, 26, 27, 43, 47-50, 72 en Bijlage III, IV AI-verordening)",
       text: "Dit schema toont de verplichtingen die van toepassing zijn, afhankelijk van de rol van de actor (aanbieder of gebruiksverantwoordelijke) en de risicocategorie (verboden, hoog-risico of generatieve en interactieve AI), en weerspiegelt de conditionele logica van de pagina “Risicocategorie-resultaten” op basis van de Risicocategorie-vragenlijst en de Rol en status-vragenlijst. De volledige vragen en de tekst van de resultaten-pagina zijn te vinden in de AI AQT tool zelf.",
+    },
+    nis2: {
+      title: "Stroomschema — Reikwijdte NIS2 (Art. 2, 3, 26 en bijlage I, II NIS2-richtlijn (EU) 2022/2555)",
+      text: "Dit schema toont de logica om te bepalen of een organisatie een essentiële entiteit, een belangrijke entiteit of niet onder de NIS2-richtlijn (EU) 2022/2555 valt, in Nederland geïmplementeerd in de Cyberbeveiligingswet (Cbw): de controle op aanwezigheid in de EU uit artikel 2 en 26, de categorieën die ongeacht hun omvang onder NIS2 vallen (artikel 2, lid 2 tot en met 4, en artikel 3, lid 1), waaronder aanbieders van domeinnaamregistratiediensten (artikel 2, lid 4) en door de lidstaat aangewezen entiteiten (artikel 2, lid 2, onder b tot en met e), de sector uit bijlage I (energie, vervoer, bankwezen, infrastructuur voor de financiële markt, gezondheidszorg, drinkwater, afvalwater, digitale infrastructuur, beheer van ICT-diensten, ruimtevaart) of bijlage II (post- en koeriersdiensten, afvalstoffenbeheer, chemische stoffen, levensmiddelen, vervaardiging, digitale aanbieders, onderzoek), en de omvang van de organisatie volgens de Europese mkb-definitie (Aanbeveling 2003/361/EG). De uitkomsten zijn een indicatie. De volledige vragen zijn te vinden in de AI AQT tool zelf.",
     },
     nta: {
       title: "Stroomschema \u2014 NTA 8047 voor profileringsalgoritmes (hoofdstukken 6\u20139)",

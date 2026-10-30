@@ -18,7 +18,11 @@ for every question?) and `check-logic.mjs` (do a node's *arrows* actually go whe
 they must? — see "Logic check" below).
 
 Charts (EN + NL): `identification`, `identification-ai`, `identification-algo`,
-`identification-sadm`, `role`, `risk`, `obligations` → `flowcharts/{en,nl}/<chart>.pdf`.
+`identification-sadm`, `role`, `risk`, `obligations`, `nis2` → `flowcharts/{en,nl}/<chart>.pdf`.
+`nis2` (Cybersecurity section, `src/schemas/nis2/{en,nl}/nis2.json`) has four size screens that
+all carry `ui:id` "Q4" — one per route — so they are drawn as `Q4A`–`Q4D` and the logic check sees
+them as one cluster: it verifies Q4 reaches each outcome, not which Q4 variant does. Check the
+per-route size → outcome arrows by hand after any edit.
 Charts (NL only): `nta-wenselijkheid` (NTA 8047 ch. 6), `nta-ontwerp` (ch. 7),
 `nta-verificatie` (ch. 8), `nta-gebruik` (ch. 9), plus `nta` — the four chapters merged into one
 diagram — → `flowcharts/nl/<chart>.pdf`. These four are
