@@ -286,20 +286,15 @@
           "label": "Art. 35 AVG - Gegevensbeschermingseffectbeoordeling",
           "color": "#6c757d",
           "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32016R0679#d1e3264-1-1"
-        },
-        {
-          "label": "Model DPIA Rijksdienst",
-          "color": "#6c757d",
-          "url": "https://www.kcbr.nl/sites/default/files/2026-08/088_T1_20260818%20Model%20DPIA%20Rijksdienst.pdf"
         }
       ],
-      "ui:description": "Bij nieuwe wet- of regelgeving is een DPIA altijd verplicht.",
       "ui:alertDescription": "Met deze pre-scan beoordeelt u of de beoogde verwerking van persoonsgegevens mogelijk een hoog risico kent voor de rechten en vrijheden van betrokkenen, zoals beschreven in de AVG. Is dat het geval, dan is de organisatie verplicht een DPIA uit te voeren. De vragen en de beslislogica zijn ontleend aan de Pre-scan DPIA van het Ministerie van BZK (PAR Assessments)."
     },
     "q2": {
       "ui:widget": "checkboxes",
       "ui:id": "Q2",
-      "ui:description": "Selecteer alle categorieën die van toepassing zijn.",
+      "ui:description": "*Selecteer alle categorieën die van toepassing zijn.*",
+      "ui:descriptionStyle": "plain",
       "ui:badges": [
         {
           "label": "Art. 35 AVG - Gegevensbeschermingseffectbeoordeling",
@@ -311,7 +306,8 @@
     "q3": {
       "ui:widget": "checkboxes",
       "ui:id": "Q3",
-      "ui:description": "Selecteer alle categorieën die van toepassing zijn.",
+      "ui:description": "*Selecteer alle categorieën die van toepassing zijn.*",
+      "ui:descriptionStyle": "plain",
       "ui:badges": [
         {
           "label": "Art. 35 AVG - Gegevensbeschermingseffectbeoordeling",
@@ -323,7 +319,8 @@
     "q4": {
       "ui:widget": "checkboxes",
       "ui:id": "Q4",
-      "ui:description": "Selecteer alle categorieën die van toepassing zijn.",
+      "ui:description": "*Selecteer alle categorieën die van toepassing zijn.*",
+      "ui:descriptionStyle": "plain",
       "ui:badges": [
         {
           "label": "Art. 35 AVG - Gegevensbeschermingseffectbeoordeling",
@@ -335,7 +332,8 @@
     "q5": {
       "ui:widget": "checkboxes",
       "ui:id": "Q5",
-      "ui:description": "Selecteer alle categorieën die van toepassing zijn.",
+      "ui:description": "*Selecteer alle categorieën die van toepassing zijn.*",
+      "ui:descriptionStyle": "plain",
       "ui:badges": [
         {
           "label": "Art. 35 AVG - Gegevensbeschermingseffectbeoordeling",
@@ -404,7 +402,8 @@
     "q11": {
       "ui:widget": "checkboxes",
       "ui:id": "Q11",
-      "ui:description": "Selecteer alle basisregistraties die van toepassing zijn.",
+      "ui:description": "*Selecteer alle basisregistraties die van toepassing zijn.*",
+      "ui:descriptionStyle": "plain",
       "ui:badges": [
         {
           "label": "Art. 35 AVG - Gegevensbeschermingseffectbeoordeling",

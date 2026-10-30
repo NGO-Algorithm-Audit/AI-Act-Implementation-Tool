@@ -29,10 +29,11 @@ NTA sections, so the charts are a chain of screen nodes (section number, condens
 number of requirements) ending in the result screen — no branches, no edge labels, one `Q` class
 plus one terminal class. See the NTA rules below for how the merged `nta` chart is wired.
 
-Charts (NL only, standalone): `prescan-dpia` — the DPIA decision logic of the MinBZK Pre-scan DPIA
-(PAR Assessments, `sources/prescan.yaml` in that repo), questions renumbered 1–14 — and `fria`, the
-three-question FRIA (Art. 27 AI Act) as a linear chain. Neither has an AI AQT schema behind it, so the
-pre-export gate only runs the classDef check for them (`STANDALONE_NL` in `flowchart-shared.mjs`).
+Charts (standalone): `prescan-dpia` (EN + NL) — the DPIA decision logic of the MinBZK Pre-scan DPIA
+(PAR Assessments, `sources/prescan.yaml` in that repo), questions renumbered 1–14 — and `fria` (NL only),
+the three-question FRIA (Art. 27 AI Act) as a linear chain. Neither has an AI AQT schema behind it, so the
+pre-export gate only runs the classDef check (plus en/nl node-id parity for `prescan-dpia`) for them
+(`STANDALONE` / `STANDALONE_NL` in `flowchart-shared.mjs`).
 
 **Hard requirement: each PDF is exactly one page — the header and the diagram must never be split
 across pages.** The page height is measured from the actual rendered layout rather than assumed, and

@@ -27,14 +27,15 @@ export const NTA = {
 // "nta" merges the four chapter charts into one diagram; its node ids are prefixed per
 // chapter (W/O/T/G), so it carries no Q-numbers of its own — the chapter charts below
 // are what the schema check runs against.
-// Standalone Dutch charts with no AI AQT schema behind them (only the classDef check
-// applies): the Pre-scan DPIA decision logic (MinBZK PAR Assessments, sources/prescan.yaml)
-// and the three-question FRIA.
-export const STANDALONE_NL = ["prescan-dpia", "fria"];
+// Standalone charts with no AI AQT schema behind them (only the classDef check and, for
+// the bilingual one, en/nl parity apply): the Pre-scan DPIA decision logic (MinBZK PAR
+// Assessments, sources/prescan.yaml), in EN + NL, and the Dutch-only three-question FRIA.
+export const STANDALONE = ["prescan-dpia"];
+export const STANDALONE_NL = ["fria"];
 export const NL_ONLY = new Set([...Object.keys(NTA), "nta", ...STANDALONE_NL]);
 
 export const CHARTS = ["identification", "identification-ai", "identification-algo", "identification-sadm",
-  "role", "risk", "obligations", "nta", ...Object.keys(NTA), ...STANDALONE_NL];
+  "role", "risk", "obligations", "nta", ...Object.keys(NTA), ...STANDALONE, ...STANDALONE_NL];
 
 // Charts whose questions are numbered from a schema (obligations comes from imperative
 // code — see check-logic.mjs's LOGIC_CHARTS / the "not logic-checked" notice).
