@@ -20,7 +20,7 @@ flowchart LR
     Q1 -->|"Yes"| DPIA_V
     Q1 -->|"No"| RS
 
-    %% ════════ Q2–Q12 — risk-score questions, summed in Σ ════════
+    %% ════════ Q2–Q10 — risk-score questions, summed in Σ ════════
     subgraph RS["Risk score per question (0 / 1 / 2) — summed in Σ"]
         direction TB
         Q2["2 · Ordinary personal data<br/>≥ 6 categories → 1"]:::score
@@ -32,23 +32,23 @@ flowchart LR
         Q8["8 · Frequency ≥ monthly → 1"]:::score
         Q9["9 · Retention period one year or longer → 1"]:::score
         Q10["10 · Transfer outside the EEA → 1<br/>incl. special categories → 2"]:::score
-        Q11["11 · Base registry BRI, BRK, BRP,<br/>BRV, WOZ or HR → 1"]:::score
-        Q12["12 · Digital service → 1<br/>primarily for < 18 years → 2"]:::score
-        Q2 ~~~ Q3 ~~~ Q4 ~~~ Q5 ~~~ Q6 ~~~ Q7 ~~~ Q8 ~~~ Q9 ~~~ Q10 ~~~ Q11 ~~~ Q12
+        Q2 ~~~ Q3 ~~~ Q4 ~~~ Q5 ~~~ Q6 ~~~ Q7 ~~~ Q8 ~~~ Q9 ~~~ Q10
     end
 
-    %% ════════ Σ check, AP list (Q13) and EDPB list (Q14) ════════
+    %% ════════ Σ check, Q11 processing activities, AP list and EDPB criteria ════════
     SUM["Σ risk score > 4?"]:::gate
-    Q13["13 · AP list<br/>≥ 1 item selected?"]:::Q
-    Q14["14 · EDPB list<br/>Number of items?"]:::Q
+    Q11["11 · Processing activities<br/>(camera surveillance, profiling,<br/>linking datasets, …)"]:::Q
+    AP["AP list ≥ 1 item?<br/>Q11 + Q3/Q4 data if<br/>large-scale or systematic"]:::gate
+    EDPB["EDPB criteria<br/>Q11 + Q3–Q7<br/>Number of criteria?"]:::gate
     RS --> SUM
     SUM -->|"Yes"| DPIA_V
-    SUM -->|"No"| Q13
-    Q13 -->|"Yes"| DPIA_V
-    Q13 -->|"No"| Q14
-    Q14 -->|"≥ 2"| DPIA_V
-    Q14 -->|"1"| DPIA_A
-    Q14 -->|"0"| DPIA_N
+    SUM -->|"No"| Q11
+    Q11 --> AP
+    AP -->|"Yes"| DPIA_V
+    AP -->|"No"| EDPB
+    EDPB -->|"≥ 2"| DPIA_V
+    EDPB -->|"1"| DPIA_A
+    EDPB -->|"0"| DPIA_N
 
-    %% The invisible ~~~ chain (Q2–Q12, links 3–12) inherits linkStyle default; hide it explicitly.
-    linkStyle 3,4,5,6,7,8,9,10,11,12 stroke:none,stroke-width:0px
+    %% The invisible ~~~ chain (Q2–Q10, links 3–10) inherits linkStyle default; hide it explicitly.
+    linkStyle 3,4,5,6,7,8,9,10 stroke:none,stroke-width:0px

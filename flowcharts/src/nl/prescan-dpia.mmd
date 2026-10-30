@@ -20,7 +20,7 @@ flowchart LR
     Q1 -->|"Ja"| DPIA_V
     Q1 -->|"Nee"| RS
 
-    %% ════════ Q2–Q12 — risicoscore-vragen, opgeteld in Σ ════════
+    %% ════════ Q2–Q10 — risicoscore-vragen, opgeteld in Σ ════════
     subgraph RS["Risicoscore per vraag (0 / 1 / 2) — opgeteld in Σ"]
         direction TB
         Q2["2 · Gewone persoonsgegevens<br/>≥ 6 categorieën → 1"]:::score
@@ -32,23 +32,23 @@ flowchart LR
         Q8["8 · Frequentie ≥ maandelijks → 1"]:::score
         Q9["9 · Bewaartermijn jaar of langer → 1"]:::score
         Q10["10 · Doorgifte buiten EER → 1<br/>incl. bijzondere persoonsgegevens → 2"]:::score
-        Q11["11 · Basisregistratie BRI, BRK, BRP,<br/>BRV, WOZ of HR → 1"]:::score
-        Q12["12 · Digitale dienst → 1<br/>primair voor < 18 jaar → 2"]:::score
-        Q2 ~~~ Q3 ~~~ Q4 ~~~ Q5 ~~~ Q6 ~~~ Q7 ~~~ Q8 ~~~ Q9 ~~~ Q10 ~~~ Q11 ~~~ Q12
+        Q2 ~~~ Q3 ~~~ Q4 ~~~ Q5 ~~~ Q6 ~~~ Q7 ~~~ Q8 ~~~ Q9 ~~~ Q10
     end
 
-    %% ════════ Σ-toets, AP-lijst (Q13) en EDPB-lijst (Q14) ════════
+    %% ════════ Σ-toets, Q11 verwerkingen, AP-lijst en EDPB-criteria ════════
     SUM["Σ risicoscore > 4?"]:::gate
-    Q13["13 · Lijst AP<br/>≥ 1 item geselecteerd?"]:::Q
-    Q14["14 · Lijst EDPB<br/>Aantal items?"]:::Q
+    Q11["11 · Verwerkingen<br/>(cameratoezicht, profilering,<br/>koppelen van datasets, …)"]:::Q
+    AP["AP-lijst ≥ 1 item?<br/>Q11 + gegevens uit Q3/Q4 bij<br/>grootschalig of stelselmatig"]:::gate
+    EDPB["EDPB-criteria<br/>Q11 + Q3–Q7<br/>Aantal criteria?"]:::gate
     RS --> SUM
     SUM -->|"Ja"| DPIA_V
-    SUM -->|"Nee"| Q13
-    Q13 -->|"Ja"| DPIA_V
-    Q13 -->|"Nee"| Q14
-    Q14 -->|"≥ 2"| DPIA_V
-    Q14 -->|"1"| DPIA_A
-    Q14 -->|"0"| DPIA_N
+    SUM -->|"Nee"| Q11
+    Q11 --> AP
+    AP -->|"Ja"| DPIA_V
+    AP -->|"Nee"| EDPB
+    EDPB -->|"≥ 2"| DPIA_V
+    EDPB -->|"1"| DPIA_A
+    EDPB -->|"0"| DPIA_N
 
-    %% De onzichtbare ~~~-keten (Q2–Q12, link 3–12) erft linkStyle default; expliciet verbergen.
-    linkStyle 3,4,5,6,7,8,9,10,11,12 stroke:none,stroke-width:0px
+    %% De onzichtbare ~~~-keten (Q2–Q10, link 3–10) erft linkStyle default; expliciet verbergen.
+    linkStyle 3,4,5,6,7,8,9,10 stroke:none,stroke-width:0px

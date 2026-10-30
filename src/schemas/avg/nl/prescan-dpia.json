@@ -113,11 +113,10 @@
                 "items": {
                   "type": "string",
                   "enum": [
-                    "Medewerkers/bewindspersonen",
-                    "Burgers over wie gegevens worden verwerkt in het proces/systeem/applicatie",
+                    "Medewerkers",
+                    "Betrokkenen wiens gegevens worden verwerkt in het proces/systeem/applicatie",
                     "Kinderen jonger dan 16 jaar",
                     "Andere kwetsbare groepen (gehandicapten, minderheden, etc.)",
-                    "Specificatie categorie betrokkenen (bijv. vanuit uitvoeringswetgeving)",
                     "Geen van de bovenstaande"
                   ]
                 },
@@ -134,7 +133,7 @@
               },
               "q7": {
                 "type": "string",
-                "title": "Is de hoeveelheid gegevens die wordt verwerkt van alle betrokkenen gelijk aan of groter dan 10.000?",
+                "title": "Worden in totaal 10.000 of meer gegevensregels (records) van alle betrokkenen samen verwerkt?",
                 "enum": [
                   "Ja",
                   "Nee"
@@ -144,10 +143,10 @@
                 "type": "string",
                 "title": "Wat is de frequentie van de verwerking?",
                 "enum": [
-                  "Continu",
-                  "Vaker dan maandelijks",
-                  "Minstens maandelijks",
-                  "Minstens jaarlijks",
+                  "Continu (doorlopend)",
+                  "Dagelijks of wekelijks",
+                  "Maandelijks",
+                  "Eén of enkele keren per jaar",
                   "Onregelmatig",
                   "Eenmalig"
                 ]
@@ -174,79 +173,24 @@
               },
               "q11": {
                 "type": "array",
-                "title": "Van welke basisregistraties wordt gebruikgemaakt?",
+                "title": "Welke van de volgende verwerkingen zijn van toepassing?",
                 "items": {
                   "type": "string",
                   "enum": [
-                    "Basisregistratie Grootschalige Topografie (BGT)",
-                    "Basisregistratie Inkomen (BRI)",
-                    "Basisregistratie Kadaster (BRK)",
-                    "Basisregistratie Ondergrond (BRO)",
-                    "Basisregistratie Personen (BRP)",
-                    "Basisregistratie Topografie (BRT)",
-                    "Basisregistratie Voertuigen (BRV)",
-                    "Basisregistratie Waarde Onroerende Zaken (WOZ)",
-                    "Handelsregister (HR)",
-                    "Basisregistratie Adressen en Gebouwen (BAG)",
-                    "Geen van de bovenstaande"
-                  ]
-                },
-                "uniqueItems": true,
-                "minItems": 1
-              },
-              "q12": {
-                "type": "string",
-                "title": "Biedt u een digitale dienst aan of gebruikt u deze?",
-                "enum": [
-                  "Ja, primair bedoeld voor gebruik door personen jonger dan 18 jaar",
-                  "Ja, niet primair bedoeld voor personen jonger dan 18 jaar",
-                  "Nee"
-                ]
-              },
-              "q13": {
-                "type": "array",
-                "title": "Valt de verwerking onder een of meer categorieën van de lijst van de Autoriteit Persoonsgegevens (AP)?",
-                "items": {
-                  "type": "string",
-                  "enum": [
-                    "Biometrische gegevens",
-                    "Cameratoezicht",
-                    "Communicatiegegevens",
-                    "Controle werknemers",
-                    "Creditscores",
-                    "Financiële situatie",
-                    "Flexibel cameratoezicht",
+                    "Cameratoezicht, vast of flexibel (bijv. bodycams, drones)",
+                    "Stelselmatig volgen van gedrag, locatie of communicatie van medewerkers",
+                    "Heimelijk onderzoek naar personen",
+                    "Observeren of beïnvloeden van gedrag (bijv. online tracking, gepersonaliseerde beïnvloeding)",
+                    "Profilering of beoordelen van personen op persoonskenmerken (scoring)",
+                    "Bepalen van kredietwaardigheid (creditscores)",
                     "Fraudebestrijding",
-                    "Genetische persoonsgegevens",
-                    "Gezondheidsgegevens",
-                    "Heimelijk onderzoek",
-                    "Internet of things",
-                    "Profilering",
-                    "Observatie en beïnvloeding van gedrag",
-                    "Locatiegegevens",
-                    "Samenwerkingsverbanden",
-                    "Zwarte lijsten",
-                    "Geen van de bovenstaande"
-                  ]
-                },
-                "uniqueItems": true,
-                "minItems": 1
-              },
-              "q14": {
-                "type": "array",
-                "title": "Valt de verwerking onder een of meer criteria van de lijst van de EDPB?",
-                "items": {
-                  "type": "string",
-                  "enum": [
-                    "Bijzondere persoonsgegevens of zeer gevoelige persoonsgegevens",
-                    "Blokkering van een dienst, recht of contract",
-                    "Geautomatiseerde besluitvorming",
-                    "Gebruik van nieuwe technologieën",
-                    "Grootschalige gegevensverwerkingen",
-                    "Koppelen van datasets",
-                    "Mensen beoordelen met persoonskenmerken (evaluatie of scoring)",
-                    "Stelselmatige en grootschalige monitoring",
-                    "Verwerking van persoonsgegevens over kwetsbare groepen of personen",
+                    "Zwarte lijsten: registratie van personen die tot uitsluiting kan leiden",
+                    "Besluiten die iemand een dienst, recht of contract kunnen ontzeggen",
+                    "Geautomatiseerde besluitvorming met rechtsgevolgen of vergelijkbare gevolgen",
+                    "Uitwisselen of koppelen van gegevens tussen organisaties (samenwerkingsverband)",
+                    "Koppelen of combineren van datasets binnen de eigen organisatie",
+                    "Internet of things (slimme apparaten, sensoren)",
+                    "Andere nieuwe technologie (bijv. AI, gezichtsherkenning)",
                     "Geen van de bovenstaande"
                   ]
                 },
@@ -267,10 +211,7 @@
               "q8",
               "q9",
               "q10",
-              "q11",
-              "q12",
-              "q13",
-              "q14"
+              "q11"
             ]
           }
         ]
@@ -281,169 +222,67 @@
     "q1": {
       "ui:widget": "radio",
       "ui:id": "Q1",
-      "ui:badges": [
-        {
-          "label": "Art. 35 AVG - Gegevensbeschermingseffectbeoordeling",
-          "color": "#6c757d",
-          "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32016R0679#d1e3264-1-1"
-        }
-      ],
       "ui:alertDescription": "Met deze pre-scan beoordeelt u of de beoogde verwerking van persoonsgegevens mogelijk een hoog risico kent voor de rechten en vrijheden van betrokkenen, zoals beschreven in de AVG. Is dat het geval, dan is de organisatie verplicht een DPIA uit te voeren. De vragen en de beslislogica zijn ontleend aan de Pre-scan DPIA van het Ministerie van BZK (PAR Assessments)."
     },
     "q2": {
       "ui:widget": "checkboxes",
       "ui:id": "Q2",
       "ui:description": "*Selecteer alle categorieën die van toepassing zijn.*",
-      "ui:descriptionStyle": "plain",
-      "ui:badges": [
-        {
-          "label": "Art. 35 AVG - Gegevensbeschermingseffectbeoordeling",
-          "color": "#6c757d",
-          "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32016R0679#d1e3264-1-1"
-        }
-      ]
+      "ui:descriptionStyle": "plain"
     },
     "q3": {
       "ui:widget": "checkboxes",
       "ui:id": "Q3",
       "ui:description": "*Selecteer alle categorieën die van toepassing zijn.*",
-      "ui:descriptionStyle": "plain",
-      "ui:badges": [
-        {
-          "label": "Art. 35 AVG - Gegevensbeschermingseffectbeoordeling",
-          "color": "#6c757d",
-          "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32016R0679#d1e3264-1-1"
-        }
-      ]
+      "ui:descriptionStyle": "plain"
     },
     "q4": {
       "ui:widget": "checkboxes",
       "ui:id": "Q4",
       "ui:description": "*Selecteer alle categorieën die van toepassing zijn.*",
-      "ui:descriptionStyle": "plain",
-      "ui:badges": [
-        {
-          "label": "Art. 35 AVG - Gegevensbeschermingseffectbeoordeling",
-          "color": "#6c757d",
-          "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32016R0679#d1e3264-1-1"
-        }
-      ]
+      "ui:descriptionStyle": "plain"
     },
     "q5": {
       "ui:widget": "checkboxes",
       "ui:id": "Q5",
       "ui:description": "*Selecteer alle categorieën die van toepassing zijn.*",
-      "ui:descriptionStyle": "plain",
-      "ui:badges": [
-        {
-          "label": "Art. 35 AVG - Gegevensbeschermingseffectbeoordeling",
-          "color": "#6c757d",
-          "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32016R0679#d1e3264-1-1"
-        }
-      ]
+      "ui:descriptionStyle": "plain"
     },
     "q6": {
       "ui:widget": "radio",
-      "ui:id": "Q6",
-      "ui:description": "Hieronder vallen: medewerkers/bewindspersonen, burgers over wie gegevens worden verwerkt in het proces/systeem/applicatie, kinderen jonger dan 16 jaar, andere kwetsbare groepen (gehandicapten, minderheden, etc.) en specificatie categorie betrokkenen (bijv. vanuit uitvoeringswetgeving).",
-      "ui:badges": [
-        {
-          "label": "Art. 35 AVG - Gegevensbeschermingseffectbeoordeling",
-          "color": "#6c757d",
-          "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32016R0679#d1e3264-1-1"
-        }
-      ]
+      "ui:id": "Q6"
     },
     "q7": {
       "ui:widget": "radio",
       "ui:id": "Q7",
-      "ui:description": "Hieronder vallen: medewerkers/bewindspersonen, burgers over wie gegevens worden verwerkt in het proces/systeem/applicatie, kinderen jonger dan 16 jaar, andere kwetsbare groepen (gehandicapten, minderheden, etc.) en specificatie categorie betrokkenen (bijv. vanuit uitvoeringswetgeving). Deze vraag heeft geen invloed op de uitkomst van de pre-scan.",
-      "ui:badges": [
-        {
-          "label": "Art. 35 AVG - Gegevensbeschermingseffectbeoordeling",
-          "color": "#6c757d",
-          "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32016R0679#d1e3264-1-1"
-        }
-      ]
+      "ui:description": "Tel alle records die de toepassing verwerkt bij elkaar op, ook als die van dezelfde persoon komen."
     },
     "q8": {
       "ui:widget": "radio",
-      "ui:id": "Q8",
-      "ui:badges": [
-        {
-          "label": "Art. 35 AVG - Gegevensbeschermingseffectbeoordeling",
-          "color": "#6c757d",
-          "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32016R0679#d1e3264-1-1"
-        }
-      ]
+      "ui:id": "Q8"
     },
     "q9": {
       "ui:widget": "radio",
-      "ui:id": "Q9",
-      "ui:badges": [
-        {
-          "label": "Art. 35 AVG - Gegevensbeschermingseffectbeoordeling",
-          "color": "#6c757d",
-          "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32016R0679#d1e3264-1-1"
-        }
-      ]
+      "ui:id": "Q9"
     },
     "q10": {
       "ui:widget": "radio",
-      "ui:id": "Q10",
-      "ui:badges": [
-        {
-          "label": "Art. 35 AVG - Gegevensbeschermingseffectbeoordeling",
-          "color": "#6c757d",
-          "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32016R0679#d1e3264-1-1"
-        }
-      ]
+      "ui:id": "Q10"
     },
     "q11": {
       "ui:widget": "checkboxes",
       "ui:id": "Q11",
-      "ui:description": "*Selecteer alle basisregistraties die van toepassing zijn.*",
-      "ui:descriptionStyle": "plain",
+      "ui:description": "Selecteer alle verwerkingen die van toepassing zijn. De soorten gegevens, kwetsbare groepen en de omvang van de verwerking hoeft u hier niet opnieuw aan te geven: die volgen uit uw antwoorden op vraag 3 tot en met 8.",
       "ui:badges": [
         {
-          "label": "Art. 35 AVG - Gegevensbeschermingseffectbeoordeling",
+          "label": "Lijst AP - Verwerkingen waarvoor een DPIA verplicht is",
           "color": "#6c757d",
-          "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32016R0679#d1e3264-1-1"
-        }
-      ]
-    },
-    "q12": {
-      "ui:widget": "radio",
-      "ui:id": "Q12",
-      "ui:badges": [
+          "url": "https://zoek.officielebekendmakingen.nl/stcrt-2019-64418.html"
+        },
         {
-          "label": "Art. 35 AVG - Gegevensbeschermingseffectbeoordeling",
+          "label": "EDPB - Richtsnoeren DPIA (WP248 rev.01)",
           "color": "#6c757d",
-          "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32016R0679#d1e3264-1-1"
-        }
-      ]
-    },
-    "q13": {
-      "ui:widget": "checkboxes",
-      "ui:id": "Q13",
-      "ui:description": "Deze lijst van de Autoriteit Persoonsgegevens bevat soorten gegevensverwerkingen waarvoor een DPIA verplicht is.",
-      "ui:badges": [
-        {
-          "label": "Art. 35 AVG - Gegevensbeschermingseffectbeoordeling",
-          "color": "#6c757d",
-          "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32016R0679#d1e3264-1-1"
-        }
-      ]
-    },
-    "q14": {
-      "ui:widget": "checkboxes",
-      "ui:id": "Q14",
-      "ui:description": "Deze lijst van de European Data Protection Board (EDPB) bevat criteria voor verwerkingen waarvoor mogelijk een DPIA verplicht is.",
-      "ui:badges": [
-        {
-          "label": "Art. 35 AVG - Gegevensbeschermingseffectbeoordeling",
-          "color": "#6c757d",
-          "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32016R0679#d1e3264-1-1"
+          "url": "https://ec.europa.eu/newsroom/article29/items/611236/en"
         }
       ]
     },
