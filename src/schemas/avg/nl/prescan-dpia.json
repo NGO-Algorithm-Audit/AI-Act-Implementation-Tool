@@ -11,6 +11,11 @@
       }
     },
     "properties": {
+      "intro": {
+        "type": "string",
+        "title": "",
+        "default": ""
+      },
       "q1": {
         "type": "string",
         "title": "Betreft de scope van de verwerking nieuwe wet- of regelgeving?",
@@ -219,10 +224,37 @@
     }
   },
   "uiSchema": {
+    "intro": {
+      "ui:id": "start",
+      "ui:widget": "OutcomeIntroWidget",
+      "ui:options": {
+        "label": false,
+        "introText": "Met deze pre-scan beoordeelt u of de beoogde verwerking van persoonsgegevens mogelijk een hoog risico kent voor de rechten en vrijheden van betrokkenen, zoals beschreven in de AVG. Is dat het geval, dan is de organisatie verplicht een DPIA uit te voeren. De vragen en de beslislogica zijn ontleend aan de Pre-scan DPIA van het Ministerie van BZK (PAR Assessments).\n\nDe vragen gaan over de persoonsgegevens en betrokkenen, de omvang, frequentie en bewaartermijn van de verwerking, doorgifte buiten de EER en verwerkingen die op de lijst van de Autoriteit Persoonsgegevens of van de EDPB staan. Mogelijke uitkomsten:",
+        "outcomes": [
+          {
+            "label": "DPIA verplicht",
+            "color": "#dc3545",
+            "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32016R0679#d1e3264-1-1",
+            "description": "De verwerking betreft nieuwe wet- of regelgeving, de som van de risicoscores is groter dan 4, er is minimaal 1 verwerking van de AP-lijst van toepassing of er zijn minimaal 2 EDPB-criteria van toepassing (art. 35 AVG)."
+          },
+          {
+            "label": "DPIA aanbevolen",
+            "color": "#0d9488",
+            "url": "https://ec.europa.eu/newsroom/article29/items/611236/en",
+            "description": "Er is precies 1 EDPB-criterium van toepassing. Een DPIA is dan niet verplicht, maar wel verstandig (EDPB-richtsnoeren DPIA, WP248 rev.01)."
+          },
+          {
+            "label": "Geen DPIA-advies",
+            "color": "#6c757d",
+            "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32016R0679",
+            "description": "Geen van de bovenstaande situaties doet zich voor. Leg vast waarom u geen DPIA uitvoert (art. 5, lid 2 AVG)."
+          }
+        ]
+      }
+    },
     "q1": {
       "ui:widget": "radio",
-      "ui:id": "Q1",
-      "ui:alertDescription": "Met deze pre-scan beoordeelt u of de beoogde verwerking van persoonsgegevens mogelijk een hoog risico kent voor de rechten en vrijheden van betrokkenen, zoals beschreven in de AVG. Is dat het geval, dan is de organisatie verplicht een DPIA uit te voeren. De vragen en de beslislogica zijn ontleend aan de Pre-scan DPIA van het Ministerie van BZK (PAR Assessments)."
+      "ui:id": "Q1"
     },
     "q2": {
       "ui:widget": "checkboxes",

@@ -45,6 +45,11 @@
       }
     },
     "properties": {
+      "intro": {
+        "type": "string",
+        "title": "",
+        "default": ""
+      },
       "q1": {
         "type": "string",
         "title": "Is uw organisatie gevestigd in de Europese Unie, of levert zij diensten of verricht zij activiteiten in de Europese Unie?",
@@ -436,6 +441,40 @@
     }
   },
   "uiSchema": {
+    "intro": {
+      "ui:id": "start",
+      "ui:widget": "OutcomeIntroWidget",
+      "ui:options": {
+        "label": false,
+        "introText": "Met deze vragenlijst bepaalt u of uw organisatie onder de NIS2-richtlijn (EU) 2022/2555 valt, in Nederland geïmplementeerd in de Cyberbeveiligingswet (Cbw), en zo ja, of zij een essentiële of een belangrijke entiteit is. De vragen gaan over aanwezigheid in de EU, categorieën die ongeacht hun omvang onder NIS2 vallen, de sector (bijlage I of II) en de omvang van de organisatie volgens de Europese mkb-definitie. De uitkomst is een indicatie. Mogelijke uitkomsten:",
+        "outcomes": [
+          {
+            "label": "Essentiële entiteit",
+            "color": "#dc3545",
+            "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX%3A02022L2555-20221227",
+            "description": "Strengste regime: zorgplicht, meldplicht en proactief (ex ante) toezicht (art. 3, lid 1 NIS2)."
+          },
+          {
+            "label": "Belangrijke entiteit",
+            "color": "#d97706",
+            "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX%3A02022L2555-20221227",
+            "description": "Dezelfde zorgplicht en meldplicht, met reactief (ex post) toezicht (art. 3, lid 2 NIS2)."
+          },
+          {
+            "label": "Domeinnaamregistratie",
+            "color": "#6f42c1",
+            "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX%3A02022L2555-20221227",
+            "description": "Aanbieder van domeinnaamregistratiediensten: alleen specifieke verplichtingen, zoals registratie en het bijhouden van registratiegegevens (art. 2, lid 4 en art. 28 NIS2)."
+          },
+          {
+            "label": "Valt niet onder NIS2",
+            "color": "#6c757d",
+            "url": "https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX%3A02022L2555-20221227",
+            "description": "De organisatie is niet actief in de EU, is te klein of valt niet in een sector uit bijlage I of II. Klanten kunnen wel eisen stellen aan de beveiliging van hun toeleveringsketen (art. 21, lid 2, onder d NIS2)."
+          }
+        ]
+      }
+    },
     "q1": {
       "ui:widget": "radio",
       "ui:id": "Q1",

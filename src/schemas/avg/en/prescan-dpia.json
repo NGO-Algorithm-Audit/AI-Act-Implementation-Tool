@@ -11,6 +11,11 @@
       }
     },
     "properties": {
+      "intro": {
+        "type": "string",
+        "title": "",
+        "default": ""
+      },
       "q1": {
         "type": "string",
         "title": "Does the scope of the processing concern new legislation or regulations?",
@@ -219,10 +224,37 @@
     }
   },
   "uiSchema": {
+    "intro": {
+      "ui:id": "start",
+      "ui:widget": "OutcomeIntroWidget",
+      "ui:options": {
+        "label": false,
+        "introText": "With this pre-scan you assess whether the intended processing of personal data is likely to result in a high risk to the rights and freedoms of data subjects, as described in the GDPR. If so, the organisation is required to carry out a DPIA. The questions and the decision logic are taken from the Pre-scan DPIA of the Dutch Ministry of the Interior and Kingdom Relations (BZK) (PAR Assessments).\n\nThe questions cover the personal data and data subjects, the scale, frequency and retention period of the processing, transfers outside the EEA, and processing operations on the list of the Dutch Data Protection Authority (AP) or of the EDPB. Possible outcomes:",
+        "outcomes": [
+          {
+            "label": "DPIA required",
+            "color": "#dc3545",
+            "url": "https://gdpr-info.eu/art-35-gdpr/",
+            "description": "The processing concerns new legislation or regulations, the sum of the risk scores is greater than 4, at least 1 processing operation on the AP list applies, or at least 2 EDPB criteria apply (Art. 35 GDPR)."
+          },
+          {
+            "label": "DPIA recommended",
+            "color": "#0d9488",
+            "url": "https://ec.europa.eu/newsroom/article29/items/611236/en",
+            "description": "Exactly 1 EDPB criterion applies. A DPIA is then not required, but advisable (EDPB DPIA Guidelines, WP248 rev.01)."
+          },
+          {
+            "label": "No DPIA advice",
+            "color": "#6c757d",
+            "url": "https://gdpr-info.eu/art-5-gdpr/",
+            "description": "None of the situations above applies. Record why you do not carry out a DPIA (Art. 5(2) GDPR)."
+          }
+        ]
+      }
+    },
     "q1": {
       "ui:widget": "radio",
-      "ui:id": "Q1",
-      "ui:alertDescription": "With this pre-scan you assess whether the intended processing of personal data is likely to result in a high risk to the rights and freedoms of data subjects, as described in the GDPR. If so, the organisation is required to carry out a DPIA. The questions and the decision logic are taken from the Pre-scan DPIA of the Dutch Ministry of the Interior and Kingdom Relations (BZK) (PAR Assessments)."
+      "ui:id": "Q1"
     },
     "q2": {
       "ui:widget": "checkboxes",
