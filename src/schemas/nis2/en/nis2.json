@@ -45,6 +45,11 @@
       }
     },
     "properties": {
+      "intro": {
+        "type": "string",
+        "title": "",
+        "default": ""
+      },
       "q1": {
         "type": "string",
         "title": "Is your organisation established in the European Union, or does it provide services or carry out activities in the European Union?",
@@ -436,6 +441,40 @@
     }
   },
   "uiSchema": {
+    "intro": {
+      "ui:id": "start",
+      "ui:widget": "OutcomeIntroWidget",
+      "ui:options": {
+        "label": false,
+        "introText": "With this questionnaire you determine whether your organisation falls under the NIS2 Directive (EU) 2022/2555, implemented in the Netherlands in the Cyberbeveiligingswet (Cbw, Cybersecurity Act), and if so, whether it is an essential or an important entity. The questions cover presence in the EU, categories that fall under NIS2 regardless of size, the sector (Annex I or II) and the size of the organisation according to the EU SME definition. The outcome is indicative. Possible outcomes:",
+        "outcomes": [
+          {
+            "label": "Essential entity",
+            "color": "#dc3545",
+            "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02022L2555-20221227",
+            "description": "Strictest regime: duty of care, reporting obligation and proactive (ex ante) supervision (Art. 3(1) NIS2)."
+          },
+          {
+            "label": "Important entity",
+            "color": "#d97706",
+            "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02022L2555-20221227",
+            "description": "Same duty of care and reporting obligation, with reactive (ex post) supervision (Art. 3(2) NIS2)."
+          },
+          {
+            "label": "Domain name registration",
+            "color": "#6f42c1",
+            "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02022L2555-20221227",
+            "description": "Provider of domain name registration services: specific obligations only, such as registration and keeping registration data (Art. 2(4) and Art. 28 NIS2)."
+          },
+          {
+            "label": "Not in scope",
+            "color": "#6c757d",
+            "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02022L2555-20221227",
+            "description": "The organisation is not active in the EU, is too small, or is not in an Annex I or II sector. Customers may still impose requirements on the security of their supply chain (Art. 21(2)(d) NIS2)."
+          }
+        ]
+      }
+    },
     "q1": {
       "ui:widget": "radio",
       "ui:id": "Q1",

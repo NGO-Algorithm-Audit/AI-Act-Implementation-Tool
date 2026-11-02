@@ -28,6 +28,7 @@ import IntroWidget from "./widgets/IntroWidget";
 import RoleStatusIntroWidget from "./widgets/RoleStatusIntroWidget";
 import RiskClassificationIntroWidget from "./widgets/RiskClassificationIntroWidget";
 import NtaIntroWidget from "./widgets/NtaIntroWidget";
+import OutcomeIntroWidget from "./widgets/OutcomeIntroWidget";
 import {
   ArrayFieldTemplate,
   ArrayFieldItemTemplate,
@@ -214,6 +215,7 @@ const tooltipWidgets = {
   RoleStatusIntroWidget,
   RiskClassificationIntroWidget,
   NtaIntroWidget,
+  OutcomeIntroWidget,
 };
 
 const WizardForm = ({
