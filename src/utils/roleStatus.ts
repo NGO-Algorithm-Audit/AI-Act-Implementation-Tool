@@ -17,7 +17,8 @@ type Q12bKey = "m1" | "m2" | "m3" | "m4";
 // Maps each Role-and-status q12 answer to the role(s) it implies. The a6
 // branch ("We use an externally developed AI system") is refined by q12b:
 // "None of the above" keeps the user a pure deployer, any modification
-// scenario turns them into a provider (Art. 25 value-chain responsibilities).
+// scenario also makes them a provider (Art. 25 value-chain responsibilities)
+// while they remain a deployer, since they still use the system.
 const Q12_MAP: { key: Q12Key; i18n: string; roles: Role[] }[] = [
   { key: "a3", i18n: "aiact2 q12 a3", roles: ["provider", "deployer"] },
   { key: "a1", i18n: "aiact2 q12 a1", roles: ["provider"] },
@@ -57,7 +58,7 @@ export function deriveRolesAndStatus(
     q12Match?.key === "a6"
       ? q12bMatch?.key === "m4"
         ? ["deployer"]
-        : ["provider"]
+        : ["provider", "deployer"]
       : q12Match?.roles ?? [];
 
   const status: Status | null =

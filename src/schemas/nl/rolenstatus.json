@@ -173,11 +173,13 @@
       "ui:widget": "RoleStatusIntroWidget",
       "ui:options": { "label": false },
       "ui:descriptionStyle": "plain",
-      "ui:alertDescription": "In deze vragenlijst:\n- Een 'Aanbieder verder in de AI-waardeketen' is gelijk aan een 'Aanbieder'. Alleen wanneer een AI-model wordt gebruikt, is dit onderscheid relevant (zie [Art. 3(68) AI-verordening](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3)). Of er een AI-model wordt gebruikt, wordt bepaald in vragenlijst Risicocategorie.\n- Een 'Productfabrikant' is gelijk aan een 'Aanbieder'. Productfabrikant zijn is alleen relevant indien: (i) het AI-systeem met een hoog risico betrekking heeft op producten waarop de wetgeving in Bijlage I, sectie A van toepassing is; (ii) het systeem samen met het product in de handel wordt gebracht of in gebruik wordt gesteld; en (iii) onder de naam of het merk van de productfabrikant. In dit geval wordt de productfabrikant beschouwd als de aanbieder van het hoog-risico AI-systeem (zie [art. 25(3) AI-verordening](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-25))."
+      "ui:alertDescription": "In deze vragenlijst:\n- Een 'Aanbieder verder in de AI-waardeketen' is gelijk aan een 'Aanbieder': een aanbieder van wie het AI-systeem een AI-model bevat, zoals een AI-model voor algemene doeleinden van een andere partij (zie [Art. 3(68) AI-verordening](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3)). De verplichtingen zijn dezelfde als voor een aanbieder.\n- Een 'Productfabrikant' is gelijk aan een 'Aanbieder'. Productfabrikant zijn is alleen relevant indien: (i) het AI-systeem met een hoog risico betrekking heeft op producten waarop de wetgeving in Bijlage I, sectie A van toepassing is; (ii) het systeem samen met het product in de handel wordt gebracht of in gebruik wordt gesteld; en (iii) onder de naam of het merk van de productfabrikant. In dit geval wordt de productfabrikant beschouwd als de aanbieder van het hoog-risico AI-systeem (zie [art. 25(3) AI-verordening](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-25))."
     },
     "q12": {
       "ui:widget": "radio",
       "ui:id": "Q1",
+      "ui:description": "Bepalend is wie het AI-systeem heeft gebouwd dat u gebruikt, niet wie het AI-model daarin heeft gebouwd. Bouwt uw organisatie een eigen toepassing op een AI-model van een andere partij (bijvoorbeeld via een API), dan heeft uw organisatie het AI-systeem ontwikkeld.",
+      "ui:enumTooltips": ["Dit geldt ook als u een eigen toepassing bouwt op een bestaand AI-model, bijvoorbeeld een taalmodel dat via een API wordt aangeroepen.", null, null, null, null, null, null, null],
       "ui:badges": [
         { "label": "Art. 2 AI-verordening - Reikwijdte", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-2" },
         { "label": "Art. 3 AI-verordening - Definities", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3" }
@@ -186,6 +188,8 @@
     "q12b": {
       "ui:widget": "radio",
       "ui:id": "Q2",
+      "ui:description": "Deze scenario's maken uw organisatie alleen aanbieder als het AI-systeem een hoog risico heeft, of daardoor een hoog risico krijgt. Uw organisatie blijft dan ook gebruiksverantwoordelijke, omdat zij het AI-systeem gebruikt.",
+      "ui:enumTooltips": [null, "‘Substantiële wijziging’: een verandering van een AI-systeem nadat dit in de handel is gebracht of in gebruik is gesteld, die door de aanbieder niet is voorzien of gepland in de initiële conformiteitsbeoordeling en als gevolg waarvan de overeenstemming van het AI-systeem met de voorschriften van hoofdstuk III, afdeling 2, wordt beïnvloed, of die leidt tot een wijziging van het beoogde doel waarvoor het AI-systeem is beoordeeld.", "‘Beoogd doel’: het gebruik waarvoor een AI-systeem door de aanbieder is bedoeld, met inbegrip van de specifieke context en voorwaarden van het gebruik, zoals gespecificeerd in de informatie die door de aanbieder in de gebruiksinstructies, reclame- of verkoopmaterialen en verklaringen, alsook in de technische documentatie is verstrekt.\n\nDit kan bijvoorbeeld het geval zijn als u een AI-systeem voor algemene doeleinden, zoals een chatbot, gebruikt om sollicitanten te beoordelen.", null],
       "ui:badges": [
         { "label": "Art. 3(23) AI-verordening - Definities", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3" },
         { "label": "Art. 25 AI-verordening - Verantwoordelijkheden in de AI-waardeketen", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-25" },
