@@ -173,11 +173,13 @@
       "ui:widget": "RoleStatusIntroWidget",
       "ui:options": { "label": false },
       "ui:descriptionStyle": "plain",
-      "ui:alertDescription": "In this questionnaire:\n- A 'Downstream provider' equals a 'Provider'. Only in case an AI model is used, this distinction is relevant (see [Art. 3(68) AI Act](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3)). Whether an AI model is used, is determined in questionnaire Risk category.\n- A 'Product manufacturer' equals a 'Provider'. Being a product manufacturer is only relevant if: (i) the high-risk AI system relates to products for which the laws in Annex I Section A apply; (ii) the system is placed on the market or put into service together with the product; and (iii) under the name or trademark of the product manufacturer. In this case the product manufacturer is considered to be the provider of the high-risk AI system (see [Art. 25(3) AI Act](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-25))."
+      "ui:alertDescription": "In this questionnaire:\n- A 'Downstream provider' equals a 'Provider': a provider whose AI system includes an AI model, such as a GPAI model from another party (see [Art. 3(68) AI Act](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3)). The obligations are the same as for a provider.\n- A 'Product manufacturer' equals a 'Provider'. Being a product manufacturer is only relevant if: (i) the high-risk AI system relates to products for which the laws in Annex I Section A apply; (ii) the system is placed on the market or put into service together with the product; and (iii) under the name or trademark of the product manufacturer. In this case the product manufacturer is considered to be the provider of the high-risk AI system (see [Art. 25(3) AI Act](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-25))."
     },
     "q12": {
       "ui:widget": "radio",
       "ui:id": "Q1",
+      "ui:description": "What matters is who built the AI system you use, not who built the AI model inside it. If your organisation builds its own application on top of an AI model from another party (for example via an API), your organisation has developed the AI system.",
+      "ui:enumTooltips": ["This also applies when you build your own application on top of an existing AI model, e.g. a language model called via an API.", null, null, null, null, null, null, null],
       "ui:badges": [
         { "label": "Art. 2 AI Act - Scope", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-2" },
         { "label": "Art. 3 AI Act - Definitions", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3" }
@@ -186,6 +188,8 @@
     "q12b": {
       "ui:widget": "radio",
       "ui:id": "Q2",
+      "ui:description": "These scenarios only make your organisation a provider if the AI system is high-risk, or becomes high-risk as a result. Your organisation then also remains a deployer, because it uses the AI system.",
+      "ui:enumTooltips": [null, "‘Substantial modification’ means a change to an AI system after its placing on the market or putting into service which is not foreseen or planned in the initial conformity assessment carried out by the provider and as a result of which the compliance of the AI system with the requirements set out in Chapter III, Section 2 is affected or results in a modification to the intended purpose for which the AI system has been assessed.", "‘Intended purpose’ means the use for which an AI system is intended by the provider, including the specific context and conditions of use, as specified in the information supplied by the provider in the instructions for use, promotional or sales materials and statements, as well as in the technical documentation.\n\nThis can be the case, for example, when you use a general-purpose AI system, such as a chatbot, to assess job applicants.", null],
       "ui:badges": [
         { "label": "Art. 3(23) AI Act - Definitions", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-3" },
         { "label": "Art. 25 AI Act - Responsibilities along the AI value chain", "color": "#F37962", "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-25" },
